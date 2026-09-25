@@ -1,0 +1,14 @@
+{
+  "users": [
+    { "id": "u1", "username": "1", "password": "1", "role": "رئيسي" }
+  ],
+  "orders": [],
+  "ready": [],
+  "log": [],
+  "customers": [
+    { "id": "c1", "code": "001", "name": "أحمد محمد", "location": "الحوبان", "phone": "777000001" },
+    { "id": "c2", "code": "002", "name": "محمد علي", "location": "شارع جمال", "phone": "733000002" }
+  ],
+  "drivers": ["الموصل 1", "الموصل 2", "الموصل 3", "الموصل 4"],
+  "lastUpdate": ""
+}
