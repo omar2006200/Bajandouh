@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>نظام إدارة الطلبات</title>
+<title> v 2نظام إدارة الطلبات</title>
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#718096;--primary:#2563eb;--border:#e2e8f0;--danger:#dc2626;--ok:#16a34a}
 *{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
 button,input,select,textarea{font:inherit}input,select,textarea{text-align:right}button{cursor:pointer}.hidden{display:none!important}
 .login{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(480px,100%);background:#fff;padding:32px;border-radius:22px;box-shadow:0 20px 60px #0f172a18}
 .logo{font-size:27px;font-weight:850}.muted{color:var(--muted)}.field{margin:13px 0}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;outline:none;background:#fff}.field textarea{min-height:80px;resize:vertical}
-.btn{border:0;border-radius:10px;padding:11px 16px;background:var(--primary);color:#fff;font-weight:750}.btn.secondary{background:#eef4ff;color:#1d4ed8}.btn.danger{background:#fee2e2;color:#b91c1c}.btn.gray{background:#eef2f7;color:#334155}
-.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#101827;color:#fff;padding:20px;position:fixed;inset:0 0 0 auto}.brand{font-size:20px;font-weight:850;margin:5px 0 25px} .nav button{display:block;width:100%;text-align:right;background:transparent;color:#cbd5e1;border:0;padding:12px;border-radius:9px;margin:4px 0}.nav button.active,.nav button:hover{background:#253247;color:#fff}
- .main{margin-right:245px;width:calc(100% - 245px);padding:24px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:15px}.title{font-size:27px;font-weight:850} .actions{display:flex;gap:8px;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:#fff;border:1px solid var(--border);border-radius:15px;padding:18px}.metric{font-size:30px;font-weight:850;margin-top:7px}
+.btn{border:0;border-radius:10px;padding:11px 16px;background:var(--primary);color:#fff;font-weight:750}.btn:disabled{opacity:.6;cursor:not-allowed}.btn.secondary{background:#eef4ff;color:#1d4ed8}.btn.danger{background:#fee2e2;color:#b91c1c}.btn.gray{background:#eef2f7;color:#334155}
+.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#101827;color:#fff;padding:20px;position:fixed;inset:0 0 0 auto}.brand{font-size:20px;font-weight:850;margin:5px 0 25px}.nav button{display:block;width:100%;text-align:right;background:transparent;color:#cbd5e1;border:0;padding:12px;border-radius:9px;margin:4px 0}.nav button.active,.nav button:hover{background:#253247;color:#fff}
+.main{margin-right:245px;width:calc(100% - 245px);padding:24px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:15px}.title{font-size:27px;font-weight:850}.actions{display:flex;gap:8px;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:#fff;border:1px solid var(--border);border-radius:15px;padding:18px}.metric{font-size:30px;font-weight:850;margin-top:7px}
 .panel{background:#fff;border:1px solid var(--border);border-radius:15px;padding:18px;margin-top:18px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.toolbar input,.toolbar select{padding:10px;border:1px solid var(--border);border-radius:9px}
 .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:right;padding:12px;border-bottom:1px solid var(--border);white-space:nowrap}th{font-size:12px;color:var(--muted);text-transform:uppercase}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef2f7;font-size:12px;font-weight:750}.badge.ok{background:#dcfce7;color:#166534}.badge.warn{background:#fef3c7;color:#92400e}
-.modal{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:20px;z-index:10}.modal-card{width:min(700px,100%);background:#fff;border-radius:18px;padding:22px;max-height:90vh;overflow:auto}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px} .toast{position:fixed;left:20px;bottom:20px;background:#111827;color:#fff;padding:13px 16px;border-radius:10px;z-index:30;max-width:420px}
+.modal{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:20px;z-index:10}.modal-card{width:min(700px,100%);background:#fff;border-radius:18px;padding:22px;max-height:90vh;overflow:auto}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.toast{position:fixed;left:20px;bottom:20px;background:#111827;color:#fff;padding:13px 16px;border-radius:10px;z-index:30;max-width:420px}
 .status{font-size:12px;font-weight:700}.status.ok{color:#15803d}.status.err{color:#b91c1c}.status.wait{color:#a16207}
 @media(max-width:850px){.sidebar{width:70px;padding:12px}.brand{font-size:0}.brand:after{content:"OM";font-size:18px}.nav button{font-size:0;text-align:center}.nav button:before{content:"•";font-size:20px}.main{margin-right:70px;width:calc(100% - 70px);padding:15px}.cards{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
 @media(max-width:520px){.cards{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
@@ -29,7 +29,7 @@ button,input,select,textarea{font:inherit}input,select,textarea{text-align:right
   <div class="field"><label>اسم مستخدم GitHub</label><input id="ghUser" autocomplete="username"></div>
   <div class="field"><label>رمز الوصول الشخصي لـ GitHub</label><input id="ghToken" type="password" autocomplete="off"></div>
   <div class="field"><label>المستودع (Repository)</label><input id="ghRepo" placeholder="order-management-db"></div>
-  <button class="btn" style="width:100%" onclick="connectGitHub()">الاتصال بـ GitHub</button>
+  <button class="btn" id="connectBtn" style="width:100%" onclick="connectGitHub()">الاتصال بـ GitHub</button>
   <p class="muted" style="font-size:12px;margin-top:12px">استخدم رمز وصول بصلاحية محدودة لهذا المستودع فقط مع صلاحية قراءة وكتابة Contents. يتم الاحتفاظ بالرمز في جلسة المتصفح ولا يتم حفظه داخل GitHub.</p>
   <div id="loginError" class="status err"></div>
  </div>
@@ -57,83 +57,551 @@ button,input,select,textarea{font:inherit}input,select,textarea{text-align:right
 </main></div>
 <div id="modal" class="modal hidden"><div class="modal-card" id="modalBody"></div></div><div id="toast" class="toast hidden"></div>
 
-<script src="config.js"></script>
 <script>
-const API='https://api.github.com';
-const defaultDB={version:1,orders:[],customers:[],logs:[]};
-let cfg={},db=structuredClone(defaultDB),gh={owner:'',repo:'',token:'',branch:'main'},fileSha=null,user=null,currentPage='dashboard',saving=false;
+/* ============================================================
+   الإعدادات الافتراضية (يمكن تجاوزها بـ window.OMS_CONFIG قبل هذا السكربت)
+   ============================================================ */
+const DEFAULT_CONFIG = {
+  appName: 'Order Management System',
+  companyName: 'Order Management',
+  databaseFile: 'database.json',
+  branch: 'main',
+  currency: 'SAR',
+  statuses: ['قيد المعالجة','جاهز','معتمد'],
+  payments: ['مدفوع','غير مدفوع','VIP'],
+  drivers: ['المندوب 1','المندوب 2','المندوب 3','المندوب 4']
+};
 
-async function init(){
- cfg=Object.assign({appName:'Order Management System',companyName:'Order Management',databaseFile:'database.json',branch:'main',currency:'SAR',statuses:['قيد المعالجة','جاهز','معتمد'],payments:['مدفوع','غير مدفوع','VIP'],drivers:['المندوب 1','المندوب 2','المندوب 3','المندوب 4']},window.OMS_CONFIG||{});
- document.title=cfg.appName; document.getElementById('loginTitle').textContent=cfg.appName; document.getElementById('brand').textContent=cfg.companyName;
- const saved=sessionStorage.getItem('gh_connection');
- if(saved){try{gh=JSON.parse(saved);await connect(true)}catch{}}
+const API = 'https://api.github.com';
+const defaultDB = { version: 1, orders: [], customers: [], logs: [] };
+
+let cfg = {};
+let db = structuredClone(defaultDB);
+let gh = { owner:'', repo:'', token:'', branch:'main', login:'' };
+let fileSha = null;
+let currentPage = 'dashboard';
+let saving = false;
+
+/* ============================================================
+   التهيئة
+   ============================================================ */
+function init(){
+  cfg = Object.assign({}, DEFAULT_CONFIG, window.OMS_CONFIG || {});
+  document.title = cfg.appName;
+  document.getElementById('loginTitle').textContent = cfg.appName;
+  document.getElementById('brand').textContent = cfg.companyName;
+
+  // استرجاع جلسة سابقة إن وجدت
+  const saved = sessionStorage.getItem('gh_connection');
+  if(saved){
+    try{
+      const s = JSON.parse(saved);
+      if(s && s.owner && s.repo && s.token){
+        gh = Object.assign(gh, s);
+        connect(true);
+      }
+    }catch{ sessionStorage.removeItem('gh_connection'); }
+  }
 }
-function headers(){return {'Accept':'application/vnd.github+json','Authorization':'Bearer '+gh.token,'X-GitHub-Api-Version':'2026-03-10','Content-Type':'application/json'}}
-async function api(path,opts={}){const r=await fetch(API+path,{...opts,headers:{...headers(),...(opts.headers||{})}});let j={};try{j=await r.json()}catch{}if(!r.ok)throw new Error(j.message||('GitHub API error '+r.status));return j}
-async function connect(silent=false){
- if(!silent){gh.owner=document.getElementById('ghUser').value.trim();gh.token=document.getElementById('ghToken').value.trim();gh.repo=document.getElementById('ghRepo').value.trim()||cfg.repo||'';gh.branch=cfg.branch||'main'}
- if(!gh.owner||!gh.repo||!gh.token){if(!silent)err('أدخل اسم مستخدم GitHub ورمز الوصول واسم المستودع');return}
- try{
-  const me=await api('/user'); gh.login=me.login;
-  const info=await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}`);
-  gh.branch=gh.branch||info.default_branch;
-  await loadDatabase();
-  sessionStorage.setItem('gh_connection',JSON.stringify(gh));
-  enterApp();
- }catch(e){if(!silent)err(e.message);else sessionStorage.removeItem('gh_connection')}
+
+/* ============================================================
+   طبقة الاتصال بـ GitHub API
+   ============================================================ */
+function headers(){
+  return {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': 'Bearer ' + gh.token,
+    'X-GitHub-Api-Version': '2022-11-28',
+    'Content-Type': 'application/json'
+  };
 }
+
+async function api(path, opts){
+  opts = opts || {};
+  const r = await fetch(API + path, { ...opts, headers: { ...headers(), ...(opts.headers || {}) } });
+  let j = {};
+  try { j = await r.json(); } catch{}
+  if(!r.ok) throw new Error(j.message || ('GitHub API error ' + r.status));
+  return j;
+}
+
+/* ============================================================
+   الاتصال بـ GitHub
+   ============================================================ */
+async function connectGitHub(){ connect(false); }
+
+async function connect(silent){
+  silent = !!silent;
+  const btn = document.getElementById('connectBtn');
+
+  if(!silent){
+    gh.owner = document.getElementById('ghUser').value.trim();
+    gh.token = document.getElementById('ghToken').value.trim();
+    gh.repo  = document.getElementById('ghRepo').value.trim();
+    gh.branch = cfg.branch || 'main';
+  }
+
+  err('');
+  if(!gh.owner || !gh.repo || !gh.token){
+    if(!silent) err('أدخل اسم مستخدم GitHub ورمز الوصول واسم المستودع');
+    return;
+  }
+
+  try{
+    if(btn){ btn.disabled = true; btn.textContent = 'جارٍ الاتصال...'; }
+
+    const me = await api('/user');
+    gh.login = me.login;
+
+    const info = await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}`);
+    gh.branch = gh.branch || info.default_branch || 'main';
+
+    await loadDatabase();
+
+    sessionStorage.setItem('gh_connection', JSON.stringify(gh));
+    enterApp();
+  }catch(e){
+    console.error(e);
+    if(!silent) err('فشل الاتصال: ' + e.message);
+    else sessionStorage.removeItem('gh_connection');
+  }finally{
+    if(btn){ btn.disabled = false; btn.textContent = 'الاتصال بـ GitHub'; }
+  }
+}
+
+/* ============================================================
+   تحميل وحفظ قاعدة البيانات
+   ============================================================ */
 async function loadDatabase(){
- try{
-  const j=await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}?ref=${encodeURIComponent(gh.branch)}`);
-  fileSha=j.sha; const raw=decodeBase64(j.content); db=JSON.parse(raw);
- }catch(e){
-  if(!/404|Not Found/i.test(e.message))throw e;
-  db=structuredClone(defaultDB); fileSha=null; await saveDatabase('Initialize order management database');
- }
+  const url = `/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}?ref=${encodeURIComponent(gh.branch)}`;
+  try{
+    const j = await api(url);
+    fileSha = j.sha;
+    const raw = decodeBase64(j.content);
+    const parsed = JSON.parse(raw);
+    db = Object.assign(structuredClone(defaultDB), parsed);
+    if(!Array.isArray(db.orders)) db.orders = [];
+    if(!Array.isArray(db.customers)) db.customers = [];
+    if(!Array.isArray(db.logs)) db.logs = [];
+  }catch(e){
+    if(/404|Not Found|empty/i.test(e.message)){
+      // الملف غير موجود → أنشئ قاعدة بيانات جديدة
+      db = structuredClone(defaultDB);
+      fileSha = null;
+      await saveDatabase('Initialize order management database');
+    } else {
+      throw e;
+    }
+  }
 }
-function decodeBase64(s){const bin=atob(s.replace(/\n/g,''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
-function encodeBase64(s){const bytes=new TextEncoder().encode(s);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
-async function saveDatabase(message='Update database'){
- if(saving)return; saving=true; setStatus('جارٍ الحفظ...','wait');
- try{
-  // Reload the current SHA immediately before writing to reduce conflicts.
-  const latest=await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}?ref=${encodeURIComponent(gh.branch)}`);
-  fileSha=latest.sha;
-  const payload={message,content:encodeBase64(JSON.stringify(db,null,2)+'\n'),branch:gh.branch,sha:fileSha};
-  const r=await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}`,{method:'PUT',body:JSON.stringify(payload)});
-  fileSha=r.content.sha; setStatus('Saved to GitHub','ok'); toast('Saved to GitHub');
- }catch(e){setStatus('فشل الحفظ: '+e.message,'err');toast('فشل الحفظ في GitHub: '+e.message)}
- finally{saving=false}
+
+async function saveDatabase(message){
+  message = message || 'Update database';
+  if(saving) return;
+  saving = true;
+  setStatus('جارٍ الحفظ...', 'wait');
+
+  try{
+    // جلب SHA الحالي (أو null إن كان الملف غير موجود)
+    let sha = null;
+    try{
+      const latest = await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}?ref=${encodeURIComponent(gh.branch)}`);
+      sha = latest.sha;
+    }catch(e){
+      if(!/404|Not Found|empty/i.test(e.message)) throw e;
+      sha = null;
+    }
+    fileSha = sha;
+
+    const payload = {
+      message: message,
+      content: encodeBase64(JSON.stringify(db, null, 2) + '\n'),
+      branch: gh.branch
+    };
+    if(sha) payload.sha = sha;
+
+    const r = await api(`/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${encodeURIComponent(cfg.databaseFile)}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    });
+
+    fileSha = r.content.sha;
+    setStatus('Saved to GitHub', 'ok');
+    toast('Saved to GitHub');
+  }catch(e){
+    console.error(e);
+    setStatus('فشل الحفظ: ' + e.message, 'err');
+    toast('فشل الحفظ في GitHub: ' + e.message);
+  }finally{
+    saving = false;
+  }
 }
-function enterApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');document.getElementById('connectionInfo').textContent=`GitHub: ${gh.owner}/${gh.repo} • ${gh.login||gh.owner}`;showPage('dashboard')}
-function disconnect(){sessionStorage.removeItem('gh_connection');location.reload()}
-async function refresh(){try{await loadDatabase();render();toast('تم تحديث البيانات من GitHub')}catch(e){toast(e.message)}}
-function showPage(p){currentPage=p;['dashboard','orders','ready','customers','logs','settings'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==p));document.querySelectorAll('.nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.getElementById('pageTitle').textContent={dashboard:'لوحة التحكم',orders:'الطلبات',ready:'الطلبات الجاهزة',customers:'العملاء',logs:'سجل الطلبات',settings:'الإعدادات'}[p];render()}
-function render(){if(currentPage==='dashboard')renderDashboard();if(currentPage==='orders')renderOrders(false);if(currentPage==='ready')renderOrders(true);if(currentPage==='customers')renderCustomers();if(currentPage==='logs')renderLogs();if(currentPage==='settings')renderSettings()}
-function renderDashboard(){let c={total:db.orders.length,processing:db.orders.filter(x=>x.status==='قيد المعالجة').length,ready:db.orders.filter(x=>x.status==='جاهز').length,approved:db.orders.filter(x=>x.status==='معتمد').length};document.getElementById('dashboard').innerHTML=`<div class="cards">${metric('إجمالي الطلبات',c.total)}${metric('قيد المعالجة',c.processing)}${metric('جاهز',c.ready)}${metric('معتمد',c.approved)}</div><div class="panel"><h3>أحدث الطلبات</h3>${orderTable(db.orders.slice().reverse().slice(0,10),false)}</div>`}
-function metric(a,b){return `<div class="card"><div class="muted">${a}</div><div class="metric">${b}</div></div>`}
-function renderOrders(ready){document.getElementById(ready?'ready':'orders').innerHTML=`<div class="panel"><div class="toolbar"><input id="orderSearch" placeholder="بحث..." oninput="filterOrders(${ready})"><button class="btn" onclick="openOrder()">+ طلب جديد</button></div><div id="orderResults">${orderTable(db.orders.filter(o=>!ready||o.status==='جاهز'),true)}</div></div>`}
-function filterOrders(ready){let q=document.getElementById('orderSearch').value.toLowerCase();let rows=db.orders.filter(o=>(!ready||o.status==='جاهز')&&JSON.stringify(o).toLowerCase().includes(q));document.getElementById('orderResults').innerHTML=orderTable(rows,true)}
-function orderTable(rows,actions){return `<div class="table-wrap"><table><thead><tr><th>رقم الطلب</th><th>العميل</th><th>الهاتف</th><th>الحالة</th><th>الدفع</th><th>المندوب</th><th>الإجمالي</th><th>التاريخ</th>${actions?'<th>الإجراءات</th>':''}</tr></thead><tbody>${rows.map(o=>`<tr><td>${esc(o.id)}</td><td>${esc(o.customer)}</td><td>${esc(o.phone)}</td><td><span class="badge ${o.status==='جاهز'?'ok':o.status==='قيد المعالجة'?'warn':''}">${esc(o.status)}</span></td><td>${esc(o.payment)}</td><td>${esc(o.driver)}</td><td>${esc(o.total)}</td><td>${esc(o.date)}</td>${actions?`<td><button class="btn secondary" onclick="openOrder('${esc(o.id)}')">Edit</button> <button class="btn danger" onclick="deleteOrder('${esc(o.id)}')">Delete</button></td>`:''}</tr>`).join('')||`<tr><td colspan="${actions?9:8}">لا توجد طلبات.</td></tr>`}</tbody></table></div>`}
-function openOrder(id=''){let o=db.orders.find(x=>x.id===id)||{id:'',date:new Date().toISOString().slice(0,10),customer:'',phone:'',status:cfg.statuses[0],payment:cfg.payments[0],driver:cfg.drivers[0],total:'',notes:''};document.getElementById('modalBody').innerHTML=`<h2>${id?'تعديل':'طلب جديد'}</h2><div class="grid2">${field('f_id','رقم الطلب',o.id)}${field('f_date','التاريخ',o.date,'date')}${field('f_customer','العميل',o.customer)}${field('f_phone','الهاتف',o.phone)}${selectField('f_status','الحالة',cfg.statuses,o.status)}${selectField('f_payment','الدفع',cfg.payments,o.payment)}${selectField('f_driver','المندوب',cfg.drivers,o.driver)}${field('f_total','الإجمالي',o.total,'number')}</div>${field('f_notes','ملاحظات',o.notes)}<div class="actions"><button class="btn gray" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveOrder('${esc(id)}')">حفظ الطلب</button></div>`;openModal()}
-function field(id,label,val,type='text'){return `<div class="field"><label>${label}</label><input id="${id}" type="${type}" value="${esc(val)}"></div>`}
-function selectField(id,label,items,val){return `<div class="field"><label>${label}</label><select id="${id}">${items.map(x=>`<option ${x===val?'selected':''}>${esc(x)}</option>`).join('')}</select></div>`}
-async function saveOrder(oldId){let o={id:v('f_id'),date:v('f_date'),customer:v('f_customer'),phone:v('f_phone'),status:v('f_status'),payment:v('f_payment'),driver:v('f_driver'),total:v('f_total'),notes:v('f_notes'),modifiedAt:new Date().toISOString(),modifiedBy:gh.login};if(!o.id||!o.customer){toast('رقم الطلب والعميل مطلوبان');return}let i=db.orders.findIndex(x=>x.id===oldId);if(i>=0)db.orders[i]=o;else db.orders.push(o);log((oldId?'Updated ':'Created ')+`order ${o.id}`);closeModal();render();await saveDatabase((oldId?'Update ':'Create ')+'order '+o.id)}
-async function deleteOrder(id){if(!confirm('هل تريد حذف هذا الطلب؟'))return;db.orders=db.orders.filter(o=>o.id!==id);log('تم حذف الطلب '+id);render();await saveDatabase('Delete order '+id)}
-function renderCustomers(){document.getElementById('customers').innerHTML=`<div class="panel"><div class="toolbar"><input id="customerSearch" placeholder="البحث عن العملاء..." oninput="filterCustomers()"><button class="btn" onclick="openCustomer()">+ عميل جديد</button></div><div id="customerResults">${customerTable(db.customers)}</div></div>`}
-function customerTable(rows){return `<div class="table-wrap"><table><thead><tr><th>الاسم</th><th>الهاتف</th><th>العنوان</th><th>ملاحظات</th><th>الإجراءات</th></tr></thead><tbody>${rows.map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(c.phone)}</td><td>${esc(c.address)}</td><td>${esc(c.notes)}</td><td><button class="btn secondary" onclick="openCustomer('${esc(c.id)}')">Edit</button> <button class="btn danger" onclick="deleteCustomer('${esc(c.id)}')">Delete</button></td></tr>`).join('')||'<tr><td colspan="5">لا يوجد عملاء.</td></tr>'}</tbody></table></div>`}
-function filterCustomers(){let q=document.getElementById('customerSearch').value.toLowerCase();document.getElementById('customerResults').innerHTML=customerTable(db.customers.filter(c=>JSON.stringify(c).toLowerCase().includes(q)))}
-function openCustomer(id=''){let c=db.customers.find(x=>x.id===id)||{id:crypto.randomUUID(),name:'',phone:'',address:'',notes:''};document.getElementById('modalBody').innerHTML=`<h2>${id?'تعديل':'عميل جديد'}</h2>${field('c_name','الاسم',c.name)}${field('c_phone','الهاتف',c.phone)}${field('c_address','العنوان',c.address)}${field('c_notes','ملاحظات',c.notes)}<div class="actions"><button class="btn gray" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveCustomer('${c.id}')">حفظ</button></div>`;openModal()}
-async function saveCustomer(id){let c={id,name:v('c_name'),phone:v('c_phone'),address:v('c_address'),notes:v('c_notes')};if(!c.name){toast('اسم العميل مطلوب');return}let i=db.customers.findIndex(x=>x.id===id);if(i>=0)db.customers[i]=c;else db.customers.push(c);log('Saved customer '+c.name);closeModal();render();await saveDatabase('Save customer '+c.name)}
-async function deleteCustomer(id){if(!confirm('هل تريد حذف هذا العميل؟'))return;db.customers=db.customers.filter(x=>x.id!==id);render();await saveDatabase('Delete customer')}
-function renderLogs(){document.getElementById('logs').innerHTML=`<div class="panel"><div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>المستخدم</th><th>الإجراء</th></tr></thead><tbody>${db.logs.slice().reverse().map(l=>`<tr><td>${esc(l.date)}</td><td>${esc(l.user)}</td><td>${esc(l.action)}</td></tr>`).join('')||'<tr><td colspan="3">لا يوجد نشاط.</td></tr>'}</tbody></table></div></div>`}
-function renderSettings(){document.getElementById('settings').innerHTML=`<div class="panel"><h3>قاعدة بيانات GitHub</h3><p><b>المستودع:</b> ${esc(gh.owner)}/${esc(gh.repo)}</p><p><b>ملف قاعدة البيانات:</b> ${esc(cfg.databaseFile)}</p><p class="muted">يتم التحكم في إعدادات التطبيق من خلال config.js، ويتم حفظ تغييرات قاعدة البيانات في GitHub تلقائيًا.</p><button class="btn secondary" onclick="loadDatabase().then(render)">إعادة تحميل قاعدة البيانات</button></div>`}
-function log(action){db.logs.push({date:new Date().toISOString(),user:gh.login||gh.owner,action})}
-function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='order-management-backup-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';a.click()}
-function openModal(){document.getElementById('modal').classList.remove('hidden')}function closeModal(){document.getElementById('modal').classList.add('hidden')}
-function v(id){return document.getElementById(id).value.trim()}function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function err(s){document.getElementById('loginError').textContent=s}function setStatus(s,c){document.getElementById('connectionInfo').innerHTML=`<span class="status ${c}">${esc(s)}</span> • ${gh.owner}/${gh.repo}`}function toast(s){let t=document.getElementById('toast');t.textContent=s;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2200)}
+
+/* ============================================================
+   أدوات Base64 آمنة مع UTF-8
+   ============================================================ */
+function decodeBase64(s){
+  const bin = atob(String(s).replace(/\s/g, ''));
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+function encodeBase64(s){
+  const bytes = new TextEncoder().encode(s);
+  let bin = '';
+  bytes.forEach(b => { bin += String.fromCharCode(b); });
+  return btoa(bin);
+}
+
+/* ============================================================
+   التنقل بين الصفحات
+   ============================================================ */
+function enterApp(){
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('connectionInfo').textContent = `GitHub: ${gh.owner}/${gh.repo} • ${gh.login || gh.owner}`;
+  showPage('dashboard');
+}
+
+function disconnect(){
+  sessionStorage.removeItem('gh_connection');
+  location.reload();
+}
+
+async function refresh(){
+  try{
+    await loadDatabase();
+    render();
+    toast('تم تحديث البيانات من GitHub');
+  }catch(e){
+    toast(e.message);
+  }
+}
+
+function showPage(p){
+  currentPage = p;
+  ['dashboard','orders','ready','customers','logs','settings'].forEach(x => {
+    document.getElementById(x).classList.toggle('hidden', x !== p);
+  });
+  document.querySelectorAll('.nav button[data-page]').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === p);
+  });
+  document.getElementById('pageTitle').textContent = ({
+    dashboard: 'لوحة التحكم',
+    orders: 'الطلبات',
+    ready: 'الطلبات الجاهزة',
+    customers: 'العملاء',
+    logs: 'سجل الطلبات',
+    settings: 'الإعدادات'
+  })[p];
+  render();
+}
+
+function render(){
+  if(currentPage === 'dashboard') renderDashboard();
+  if(currentPage === 'orders') renderOrders(false);
+  if(currentPage === 'ready') renderOrders(true);
+  if(currentPage === 'customers') renderCustomers();
+  if(currentPage === 'logs') renderLogs();
+  if(currentPage === 'settings') renderSettings();
+}
+
+/* ============================================================
+   لوحة التحكم
+   ============================================================ */
+function renderDashboard(){
+  const c = {
+    total: db.orders.length,
+    processing: db.orders.filter(x => x.status === 'قيد المعالجة').length,
+    ready: db.orders.filter(x => x.status === 'جاهز').length,
+    approved: db.orders.filter(x => x.status === 'معتمد').length
+  };
+  document.getElementById('dashboard').innerHTML =
+    `<div class="cards">${metric('إجمالي الطلبات', c.total)}${metric('قيد المعالجة', c.processing)}${metric('جاهز', c.ready)}${metric('معتمد', c.approved)}</div>
+     <div class="panel"><h3>أحدث الطلبات</h3>${orderTable(db.orders.slice().reverse().slice(0, 10), false)}</div>`;
+}
+function metric(a, b){
+  return `<div class="card"><div class="muted">${a}</div><div class="metric">${b}</div></div>`;
+}
+
+/* ============================================================
+   الطلبات
+   ============================================================ */
+function renderOrders(ready){
+  document.getElementById(ready ? 'ready' : 'orders').innerHTML =
+    `<div class="panel">
+       <div class="toolbar">
+         <input id="orderSearch" placeholder="بحث..." oninput="filterOrders(${ready})">
+         <button class="btn" onclick="openOrder()">+ طلب جديد</button>
+       </div>
+       <div id="orderResults">${orderTable(db.orders.filter(o => !ready || o.status === 'جاهز'), true)}</div>
+     </div>`;
+}
+function filterOrders(ready){
+  const q = document.getElementById('orderSearch').value.toLowerCase();
+  const rows = db.orders.filter(o => (!ready || o.status === 'جاهز') && JSON.stringify(o).toLowerCase().includes(q));
+  document.getElementById('orderResults').innerHTML = orderTable(rows, true);
+}
+function orderTable(rows, actions){
+  const body = rows.map(o => {
+    const idAttr = escAttr(o.id);
+    return `<tr>
+      <td>${esc(o.id)}</td>
+      <td>${esc(o.customer)}</td>
+      <td>${esc(o.phone)}</td>
+      <td><span class="badge ${o.status === 'جاهز' ? 'ok' : o.status === 'قيد المعالجة' ? 'warn' : ''}">${esc(o.status)}</span></td>
+      <td>${esc(o.payment)}</td>
+      <td>${esc(o.driver)}</td>
+      <td>${esc(o.total)}</td>
+      <td>${esc(o.date)}</td>
+      ${actions ? `<td>
+        <button class="btn secondary" onclick="openOrder('${idAttr}')">Edit</button>
+        <button class="btn danger" onclick="deleteOrder('${idAttr}')">Delete</button>
+      </td>` : ''}
+    </tr>`;
+  }).join('') || `<tr><td colspan="${actions ? 9 : 8}">لا توجد طلبات.</td></tr>`;
+
+  return `<div class="table-wrap"><table><thead><tr>
+    <th>رقم الطلب</th><th>العميل</th><th>الهاتف</th><th>الحالة</th><th>الدفع</th><th>المندوب</th><th>الإجمالي</th><th>التاريخ</th>${actions ? '<th>الإجراءات</th>' : ''}
+  </tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
+function openOrder(id){
+  id = id || '';
+  const o = db.orders.find(x => x.id === id) || {
+    id: '',
+    date: new Date().toISOString().slice(0, 10),
+    customer: '',
+    phone: '',
+    status: cfg.statuses[0] || '',
+    payment: cfg.payments[0] || '',
+    driver: cfg.drivers[0] || '',
+    total: '',
+    notes: ''
+  };
+  document.getElementById('modalBody').innerHTML =
+    `<h2>${id ? 'تعديل' : 'طلب جديد'}</h2>
+     <div class="grid2">
+       ${field('f_id', 'رقم الطلب', o.id)}
+       ${field('f_date', 'التاريخ', o.date, 'date')}
+       ${field('f_customer', 'العميل', o.customer)}
+       ${field('f_phone', 'الهاتف', o.phone)}
+       ${selectField('f_status', 'الحالة', cfg.statuses, o.status)}
+       ${selectField('f_payment', 'الدفع', cfg.payments, o.payment)}
+       ${selectField('f_driver', 'المندوب', cfg.drivers, o.driver)}
+       ${field('f_total', 'الإجمالي', o.total, 'number')}
+     </div>
+     ${field('f_notes', 'ملاحظات', o.notes)}
+     <div class="actions">
+       <button class="btn gray" onclick="closeModal()">إلغاء</button>
+       <button class="btn" onclick="saveOrder('${escAttr(id)}')">حفظ الطلب</button>
+     </div>`;
+  openModal();
+}
+
+function field(id, label, val, type){
+  type = type || 'text';
+  return `<div class="field"><label>${label}</label><input id="${id}" type="${type}" value="${escAttr(val)}"></div>`;
+}
+function selectField(id, label, items, val){
+  items = items || [];
+  return `<div class="field"><label>${label}</label><select id="${id}">${
+    items.map(x => `<option ${x === val ? 'selected' : ''}>${esc(x)}</option>`).join('')
+  }</select></div>`;
+}
+
+async function saveOrder(oldId){
+  oldId = oldId || '';
+  const o = {
+    id: v('f_id'),
+    date: v('f_date'),
+    customer: v('f_customer'),
+    phone: v('f_phone'),
+    status: v('f_status'),
+    payment: v('f_payment'),
+    driver: v('f_driver'),
+    total: v('f_total'),
+    notes: v('f_notes'),
+    modifiedAt: new Date().toISOString(),
+    modifiedBy: gh.login || gh.owner
+  };
+  if(!o.id || !o.customer){ toast('رقم الطلب والعميل مطلوبان'); return; }
+
+  const i = db.orders.findIndex(x => x.id === oldId);
+  if(i >= 0) db.orders[i] = o;
+  else db.orders.push(o);
+
+  log((oldId ? 'Updated ' : 'Created ') + `order ${o.id}`);
+  closeModal();
+  render();
+  await saveDatabase((oldId ? 'Update ' : 'Create ') + 'order ' + o.id);
+}
+
+async function deleteOrder(id){
+  if(!confirm('هل تريد حذف هذا الطلب؟')) return;
+  db.orders = db.orders.filter(o => o.id !== id);
+  log('تم حذف الطلب ' + id);
+  render();
+  await saveDatabase('Delete order ' + id);
+}
+
+/* ============================================================
+   العملاء
+   ============================================================ */
+function renderCustomers(){
+  document.getElementById('customers').innerHTML =
+    `<div class="panel">
+       <div class="toolbar">
+         <input id="customerSearch" placeholder="البحث عن العملاء..." oninput="filterCustomers()">
+         <button class="btn" onclick="openCustomer()">+ عميل جديد</button>
+       </div>
+       <div id="customerResults">${customerTable(db.customers)}</div>
+     </div>`;
+}
+function customerTable(rows){
+  const body = rows.map(c => {
+    const idAttr = escAttr(c.id);
+    return `<tr>
+      <td>${esc(c.name)}</td>
+      <td>${esc(c.phone)}</td>
+      <td>${esc(c.address)}</td>
+      <td>${esc(c.notes)}</td>
+      <td>
+        <button class="btn secondary" onclick="openCustomer('${idAttr}')">Edit</button>
+        <button class="btn danger" onclick="deleteCustomer('${idAttr}')">Delete</button>
+      </td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="5">لا يوجد عملاء.</td></tr>';
+
+  return `<div class="table-wrap"><table><thead><tr>
+    <th>الاسم</th><th>الهاتف</th><th>العنوان</th><th>ملاحظات</th><th>الإجراءات</th>
+  </tr></thead><tbody>${body}</tbody></table></div>`;
+}
+function filterCustomers(){
+  const q = document.getElementById('customerSearch').value.toLowerCase();
+  document.getElementById('customerResults').innerHTML =
+    customerTable(db.customers.filter(c => JSON.stringify(c).toLowerCase().includes(q)));
+}
+function openCustomer(id){
+  id = id || '';
+  const c = db.customers.find(x => x.id === id) || {
+    id: (crypto.randomUUID ? crypto.randomUUID() : 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2)),
+    name: '', phone: '', address: '', notes: ''
+  };
+  document.getElementById('modalBody').innerHTML =
+    `<h2>${id ? 'تعديل' : 'عميل جديد'}</h2>
+     ${field('c_name', 'الاسم', c.name)}
+     ${field('c_phone', 'الهاتف', c.phone)}
+     ${field('c_address', 'العنوان', c.address)}
+     ${field('c_notes', 'ملاحظات', c.notes)}
+     <div class="actions">
+       <button class="btn gray" onclick="closeModal()">إلغاء</button>
+       <button class="btn" onclick="saveCustomer('${escAttr(c.id)}')">حفظ</button>
+     </div>`;
+  openModal();
+}
+async function saveCustomer(id){
+  id = id || '';
+  const c = { id: id, name: v('c_name'), phone: v('c_phone'), address: v('c_address'), notes: v('c_notes') };
+  if(!c.name){ toast('اسم العميل مطلوب'); return; }
+
+  const i = db.customers.findIndex(x => x.id === id);
+  if(i >= 0) db.customers[i] = c;
+  else db.customers.push(c);
+
+  log('Saved customer ' + c.name);
+  closeModal();
+  render();
+  await saveDatabase('Save customer ' + c.name);
+}
+async function deleteCustomer(id){
+  if(!confirm('هل تريد حذف هذا العميل؟')) return;
+  db.customers = db.customers.filter(x => x.id !== id);
+  render();
+  await saveDatabase('Delete customer');
+}
+
+/* ============================================================
+   السجل والإعدادات
+   ============================================================ */
+function renderLogs(){
+  const body = db.logs.slice().reverse().map(l =>
+    `<tr><td>${esc(l.date)}</td><td>${esc(l.user)}</td><td>${esc(l.action)}</td></tr>`
+  ).join('') || '<tr><td colspan="3">لا يوجد نشاط.</td></tr>';
+
+  document.getElementById('logs').innerHTML =
+    `<div class="panel"><div class="table-wrap"><table><thead><tr>
+      <th>التاريخ</th><th>المستخدم</th><th>الإجراء</th>
+    </tr></thead><tbody>${body}</tbody></table></div></div>`;
+}
+
+function renderSettings(){
+  document.getElementById('settings').innerHTML =
+    `<div class="panel">
+       <h3>قاعدة بيانات GitHub</h3>
+       <p><b>المستودع:</b> ${esc(gh.owner)}/${esc(gh.repo)}</p>
+       <p><b>الفرع:</b> ${esc(gh.branch)}</p>
+       <p><b>ملف قاعدة البيانات:</b> ${esc(cfg.databaseFile)}</p>
+       <p class="muted">يتم حفظ تغييرات قاعدة البيانات في GitHub تلقائيًا.</p>
+       <button class="btn secondary" onclick="refresh()">إعادة تحميل قاعدة البيانات</button>
+     </div>`;
+}
+
+/* ============================================================
+   أدوات مساعدة
+   ============================================================ */
+function log(action){
+  db.logs.push({ date: new Date().toISOString(), user: gh.login || gh.owner, action: action });
+}
+
+function backup(){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' }));
+  a.download = 'order-management-backup-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function openModal(){ document.getElementById('modal').classList.remove('hidden'); }
+function closeModal(){ document.getElementById('modal').classList.add('hidden'); }
+
+function v(id){ return document.getElementById(id).value.trim(); }
+
+// تهريب النصوص لعرضها كـ HTML
+function esc(x){
+  return String(x == null ? '' : x).replace(/[&<>"']/g, m => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+  }[m]));
+}
+// تهريب النصوص لاستخدامها داخل خصائص onclick بين علامتي اقتباس مفردتين
+function escAttr(x){
+  return String(x == null ? '' : x)
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/&/g, '&amp;');
+}
+
+function err(s){ document.getElementById('loginError').textContent = s || ''; }
+
+function setStatus(s, c){
+  document.getElementById('connectionInfo').innerHTML =
+    `<span class="status ${c}">${esc(s)}</span> • ${esc(gh.owner)}/${esc(gh.repo)}`;
+}
+
+let toastTimer = null;
+function toast(s){
+  const t = document.getElementById('toast');
+  t.textContent = s;
+  t.classList.remove('hidden');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.add('hidden'), 2200);
+}
+
+/* ============================================================
+   تشغيل
+   ============================================================ */
 init();
 </script>
 </body>
