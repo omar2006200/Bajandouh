@@ -28,5 +28,12 @@
       "reset": false,
       "editTemplates": false
     }
+  },
+  {
+    "id": "muizxbljpgice",
+    "username": "0",
+    "password": "1234",
+    "role": "رئيسي",
+    "permissions": {}
   }
 ]
