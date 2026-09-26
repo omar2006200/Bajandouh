@@ -1,1 +1,25 @@
-
+{
+  "ready": {
+    "title": "📦 قائمة الطلبات الجاهزة للنقل",
+    "subtitle": "التاريخ: {date} — العدد: {count} — المستخدم: {user}",
+    "footer": "توقيع الموظف: __________    توقيع الموصل: __________",
+    "showNotes": true,
+    "showApprovalDate": true,
+    "showDriverPhone": true,
+    "showPay": true,
+    "fontSize": 12,
+    "orientation": "landscape"
+  },
+  "log": {
+    "title": "🗃️ سجل الطلبات",
+    "subtitle": "من {from} إلى {to} — العدد: {count} — المستخدم: {user}",
+    "footer": "تم الطباعة بواسطة: {user}",
+    "showNotes": true,
+    "showApprovalDate": true,
+    "showDriverPhone": true,
+    "showPay": true,
+    "showArchivedAt": true,
+    "fontSize": 11,
+    "orientation": "landscape"
+  }
+}
