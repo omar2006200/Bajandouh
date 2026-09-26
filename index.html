@@ -174,13 +174,45 @@
   .modal-bg.active { display: flex; }
   .modal {
     background: #fff; padding: 28px; border-radius: 12px;
-    width: 90%; max-width: 540px; max-height: 92vh; overflow-y: auto;
+    width: 90%; max-width: 600px; max-height: 92vh; overflow-y: auto;
   }
   .modal h3 { color: var(--dark-blue); margin-bottom: 18px; }
   .modal label { display: block; margin: 10px 0 4px; font-size: 13px; color: #444; }
   .modal input, .modal select { width: 100%; }
   .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
   .modal-actions .btn { min-width: 100px; justify-content: center; }
+
+  /* Permissions Grid */
+  .perm-section {
+    margin-top: 20px; padding-top: 18px;
+    border-top: 2px dashed #e0e0e0;
+  }
+  .perm-section h4 {
+    color: var(--dark-blue); font-size: 14px;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .perm-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .perm-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; background: #f8f9fa;
+    border-radius: 6px; cursor: pointer;
+    font-size: 12.5px; transition: .15s;
+    user-select: none;
+    border: 1px solid transparent;
+  }
+  .perm-item:hover { background: var(--light-blue); }
+  .perm-item.checked { background: #d4edda; border-color: #c3e6cb; }
+  .perm-item input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--green); flex-shrink: 0; }
+  .perm-item.disabled { opacity: .5; cursor: not-allowed; }
+  .perm-item.disabled:hover { background: #f8f9fa; }
+  .perm-note {
+    background: #fff3cd; border: 1px solid #ffc107;
+    padding: 10px 14px; border-radius: 8px;
+    font-size: 12px; color: #856404; margin-top: 12px;
+  }
 
   .customer-search { position: relative; }
   .customer-dropdown {
@@ -251,6 +283,7 @@
     nav { top: 0; }
     main { padding: 12px; }
     .dash-grid { grid-template-columns: 1fr; }
+    .perm-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -306,8 +339,8 @@
     <button data-page="entry"     onclick="go('entry')"     title="Alt+2">📋 إدخال الطلبات</button>
     <button data-page="ready"     onclick="go('ready')"     title="Alt+3">📦 الطلبات الجاهزة</button>
     <button data-page="log"       onclick="go('log')"       title="Alt+4">🗃️ سجل الطلبات</button>
-    <button data-page="customers" onclick="go('customers')" class="admin-only" title="Alt+5">👥 العملاء</button>
-    <button data-page="settings"  onclick="go('settings')"  class="admin-only">⚙️ الإعدادات</button>
+    <button data-page="customers" onclick="go('customers')" class="perm-accessCustomers" title="Alt+5">👥 العملاء</button>
+    <button data-page="settings"  onclick="go('settings')"  class="perm-accessSettings">⚙️ الإعدادات</button>
   </nav>
 
   <main>
@@ -319,7 +352,7 @@
           <div class="icon">📦</div><h3>الطلبات الجاهزة</h3><p>جاهزة للنقل للفرع</p></div>
         <div class="dash-card purple" onclick="go('log')">
           <div class="icon">🗃️</div><h3>سجل الطلبات</h3><p>الأرشيف النهائي</p></div>
-        <div class="dash-card orange admin-only" onclick="go('customers')">
+        <div class="dash-card orange perm-accessCustomers" onclick="go('customers')">
           <div class="icon">👥</div><h3>العملاء</h3><p>قاعدة بيانات العملاء</p></div>
       </div>
       <h3 style="color:var(--dark-blue);margin-bottom:12px;">📊 إحصائيات مباشرة</h3>
@@ -338,8 +371,8 @@
         <span class="hint">💡 <kbd>Ctrl+K</kbd> بحث • <kbd>Alt+N</kbd> جديد • <kbd>Alt+T</kbd> تحويل</span>
       </div>
       <div class="toolbar no-print">
-        <button class="btn btn-primary" onclick="addOrder()">➕ طلب جديد <kbd>Alt+N</kbd></button>
-        <button class="btn btn-success" onclick="bulkTransfer()">🚚 تحويل المستوفية <kbd>Alt+B</kbd></button>
+        <button class="btn btn-primary perm-addOrder" onclick="addOrder()">➕ طلب جديد <kbd>Alt+N</kbd></button>
+        <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">🚚 تحويل المستوفية <kbd>Alt+B</kbd></button>
         <input id="searchEntry" type="text" placeholder="🔍 بحث... (Ctrl+K)" oninput="renderEntry()" style="margin-right:auto;max-width:280px;">
       </div>
       <div class="table-wrap"><table>
@@ -358,8 +391,8 @@
         <span class="hint">💡 <kbd>Ctrl+P</kbd> طباعة • <kbd>Alt+M</kbd> ترحيل</span>
       </div>
       <div class="toolbar no-print">
-        <button class="btn btn-primary" onclick="printReady()">🖨️ طباعة القائمة <kbd>Ctrl+P</kbd></button>
-        <button class="btn btn-purple" onclick="moveReadyToLog()">📥 ترحيل إلى السجل <kbd>Alt+M</kbd></button>
+        <button class="btn btn-primary perm-print" onclick="printReady()">🖨️ طباعة القائمة <kbd>Ctrl+P</kbd></button>
+        <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">📥 ترحيل إلى السجل <kbd>Alt+M</kbd></button>
       </div>
       <div class="table-wrap"><table>
         <thead><tr>
@@ -385,7 +418,7 @@
           <th>#</th><th>رقم الفاتورة</th><th>العميل</th><th>الموقع</th>
           <th>حالة الطلب</th><th>تاريخ الاعتماد</th><th>الدفع</th>
           <th>الموصل</th><th>رقم الموصل</th><th>آخر تعديل</th><th>تاريخ الترحيل</th>
-          <th class="admin-only">إجراءات</th>
+          <th>إجراءات</th>
         </tr></thead>
         <tbody id="logBody"></tbody>
       </table></div>
@@ -398,7 +431,7 @@
       </div>
       <div class="toolbar no-print">
         <input id="searchCustomers" type="text" placeholder="🔍 بحث..." oninput="renderCustomers()" style="max-width:280px;">
-        <button class="btn btn-primary" onclick="openCustomerModal()">➕ عميل جديد</button>
+        <button class="btn btn-primary perm-manageCustomers" onclick="openCustomerModal()">➕ عميل جديد</button>
       </div>
       <div class="table-wrap"><table>
         <thead><tr><th>#</th><th>رقم العميل</th><th>الاسم</th><th>الموقع</th><th>الهاتف</th><th>إجراءات</th></tr></thead>
@@ -420,23 +453,28 @@
       <div class="toolbar">
         <input id="newDriverName" placeholder="اسم الموصل" style="max-width:200px;">
         <input id="newDriverPhone" placeholder="رقم الهاتف" style="max-width:200px;">
-        <button class="btn btn-success" onclick="addDriver()">➕ إضافة</button>
+        <button class="btn btn-success perm-manageDrivers" onclick="addDriver()">➕ إضافة</button>
       </div>
       <div id="driverList" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;"></div>
 
-      <h3 style="color:var(--dark-blue);margin:16px 0 8px;">👤 المستخدمون</h3>
+      <h3 style="color:var(--dark-blue);margin:16px 0 8px;">👤 المستخدمون والصلاحيات</h3>
       <div class="toolbar">
-        <button class="btn btn-primary" onclick="openUserModal()">➕ مستخدم جديد</button>
+        <button class="btn btn-primary perm-manageUsers" onclick="openUserModal()">➕ مستخدم جديد</button>
       </div>
-      <div class="table-wrap" style="max-width:700px;"><table style="min-width:auto;">
-        <thead><tr><th>اسم المستخدم</th><th>الصلاحية</th><th>إجراءات</th></tr></thead>
+      <div class="table-wrap" style="max-width:900px;"><table style="min-width:auto;">
+        <thead><tr>
+          <th>اسم المستخدم</th>
+          <th>الصلاحية</th>
+          <th>الصلاحيات المخصصة</th>
+          <th>إجراءات</th>
+        </tr></thead>
         <tbody id="userBody"></tbody>
       </table></div>
 
       <h3 style="color:var(--dark-blue);margin:24px 0 8px;">💾 النسخ الاحتياطي</h3>
       <div class="toolbar">
         <button class="btn btn-gray" onclick="exportBackup()">⬇️ تصدير JSON</button>
-        <button class="btn btn-danger" onclick="resetAll()">🗑️ تصفير النظام</button>
+        <button class="btn btn-danger perm-reset" onclick="resetAll()">🗑️ تصفير النظام</button>
       </div>
     </section>
   </main>
@@ -447,6 +485,7 @@
   <h3 id="orderModalTitle">➕ طلب جديد</h3>
   <input type="hidden" id="orderId">
   <input type="hidden" id="orderCustomerId">
+  <input type="hidden" id="orderLogMode" value="">
   <label>رقم الفاتورة *</label><input id="orderInvoice" autocomplete="off">
   <label>العميل (اكتب للبحث أو أنشئ جديد)</label>
   <div class="customer-search">
@@ -479,12 +518,26 @@
   </div>
 </div></div>
 
+<!-- ===== USER MODAL (مع الصلاحيات) ===== -->
 <div id="userModal" class="modal-bg"><div class="modal">
-  <h3>👤 مستخدم جديد</h3>
+  <h3 id="userModalTitle">👤 مستخدم جديد</h3>
+  <input type="hidden" id="userId">
   <label>اسم المستخدم</label><input id="userName" autocomplete="off">
   <label>كلمة المرور</label><input id="userPass" type="text" autocomplete="off">
-  <label>الصلاحية</label>
-  <select id="userRole"><option value="عادي">عادي</option><option value="رئيسي">رئيسي</option></select>
+  <label>الصلاحية الأساسية</label>
+  <select id="userRole" onchange="onUserRoleChange()">
+    <option value="عادي">👤 عادي</option>
+    <option value="رئيسي">👑 رئيسي (كل الصلاحيات تلقائياً)</option>
+  </select>
+
+  <div id="permissionsSection" class="perm-section">
+    <h4>🔐 الصلاحيات المخصصة</h4>
+    <div class="perm-grid" id="permissionsGrid"></div>
+    <div class="perm-note" id="permAdminNote" style="display:none;">
+      👑 <b>المستخدم الرئيسي يمتلك جميع الصلاحيات تلقائياً</b> ولا يمكن تقييده.
+    </div>
+  </div>
+
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('userModal')">إلغاء</button>
     <button class="btn btn-primary" onclick="saveUser()">💾 حفظ</button>
@@ -561,14 +614,11 @@
 /* ==============================================================
    ⚙️ الإعدادات
    ============================================================== */
-const GITHUB_OWNER  = 'YOUR_USERNAME';
-const GITHUB_REPO   = 'orders-system';
+const GITHUB_OWNER  = 'omar2006200';
+const GITHUB_REPO   = 'Bajandouh';
 const GITHUB_BRANCH = 'main';
 const SYNC_INTERVAL = 5000;
 
-/* ==============================================================
-   ملفات البيانات المنفصلة
-   ============================================================== */
 const FILES = {
   users:     'data/users.json',
   orders:    'data/orders.json',
@@ -581,26 +631,104 @@ const FILES = {
 
 const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers'];
 
+/* ==============================================================
+   🔐 نظام الصلاحيات
+   ============================================================== */
+const PERMISSIONS = {
+  accessCustomers: { label: 'فتح صفحة العملاء', icon: '👥' },
+  accessSettings:  { label: 'فتح صفحة الإعدادات', icon: '⚙️' },
+  addOrder:        { label: 'إضافة طلب جديد', icon: '➕' },
+  editOrder:       { label: 'تعديل طلب', icon: '✏️' },
+  deleteOrder:     { label: 'حذف طلب', icon: '🗑️' },
+  transferSingle:  { label: 'تحويل فردي للجاهزة', icon: '➡️' },
+  bulkTransfer:    { label: 'تحويل جماعي', icon: '🚚' },
+  moveToLog:       { label: 'ترحيل إلى السجل', icon: '📥' },
+  print:           { label: 'طباعة القوائم', icon: '🖨️' },
+  editLog:         { label: 'تعديل السجل (للمدير افتراضياً)', icon: '📝' },
+  deleteLog:       { label: 'حذف من السجل', icon: '❌' },
+  manageCustomers: { label: 'إدارة العملاء (إضافة/حذف)', icon: '👤' },
+  manageDrivers:   { label: 'إدارة الموصلين', icon: '🚚' },
+  manageUsers:     { label: 'إدارة المستخدمين', icon: '🔑' },
+  reset:           { label: 'تصفير النظام', icon: '⚠️' }
+};
+
+const DEFAULT_PERMS = {
+  accessCustomers: false,
+  accessSettings:  false,
+  addOrder:        true,
+  editOrder:       true,
+  deleteOrder:     false,
+  transferSingle:  true,
+  bulkTransfer:    false,
+  moveToLog:       false,
+  print:           true,
+  editLog:         false,
+  deleteLog:       false,
+  manageCustomers: false,
+  manageDrivers:   false,
+  manageUsers:     false,
+  reset:           false
+};
+
+function hasPerm(perm) {
+  if (!currentUser) return false;
+  if (currentUser.role === 'رئيسي') return true;
+  return currentUser.permissions?.[perm] === true;
+}
+
+function normalizeUser(u) {
+  if (!u) return u;
+  if (u.role === 'رئيسي') return u;
+  if (!u.permissions) {
+    u.permissions = { ...DEFAULT_PERMS };
+  } else {
+    // ضمان وجود كل المفاتيح
+    Object.keys(DEFAULT_PERMS).forEach(k => {
+      if (typeof u.permissions[k] !== 'boolean') u.permissions[k] = DEFAULT_PERMS[k];
+    });
+  }
+  return u;
+}
+
+function applyPermissionsUI() {
+  // إخفاء العناصر حسب الصلاحيات
+  document.querySelectorAll('[class*="perm-"]').forEach(el => {
+    const classes = el.className.split(' ');
+    let allowed = true;
+    classes.forEach(c => {
+      if (c.startsWith('perm-')) {
+        const perm = c.replace('perm-', '');
+        if (PERMISSIONS[perm] && !hasPerm(perm)) allowed = false;
+      }
+    });
+    el.style.display = allowed ? '' : 'none';
+  });
+}
+
+/* ==============================================================
+   المتغيرات
+   ============================================================== */
 const TOKEN_KEY = 'oms_github_token';
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 
 let currentUser = null;
 let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [] };
-let SHAs = {};          // SHA لكل ملف
-let localMeta = null;   // آخر meta معروف
+let SHAs = {};
+let localMeta = null;
 let pollTimer = null;
 let syncing = false;
 let selectedOrderId = null;
 let zoomLevel = 1;
+let tempPerms = {};   // صلاحيات مؤقتة داخل userModal
 
 /* ==============================================================
-   Base64 Helpers
+   Base64
    ============================================================== */
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
 /* ==============================================================
-   التوكن
+   Token
    ============================================================== */
 function getStoredToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
 function saveToken(t) { localStorage.setItem(TOKEN_KEY, t.trim()); }
@@ -616,15 +744,12 @@ function updateTokenStatus() {
   const statusEl = document.getElementById('tokenStatus');
   const fieldEl = document.getElementById('tokenField');
   const token = getStoredToken();
-
   if (token) {
     const masked = token.length > 25 ? token.substring(0, 20) + '…' + token.slice(-4) : token;
     statusEl.className = 'token-status saved';
-    statusEl.innerHTML = `
-      <span>✅ التوكن محفوظ</span>
+    statusEl.innerHTML = `<span>✅ التوكن محفوظ</span>
       <span style="font-family:monospace;font-size:11px;opacity:.7;">${masked}</span>
-      <button onclick="showTokenField()">🔄 تغيير</button>
-    `;
+      <button onclick="showTokenField()">🔄 تغيير</button>`;
     fieldEl.style.display = 'none';
   } else {
     statusEl.className = 'token-status missing';
@@ -643,11 +768,8 @@ function updateCurrentTokenInfo() {
   const el = document.getElementById('currentTokenInfo');
   if (!el) return;
   const token = getStoredToken();
-  if (token) {
-    el.textContent = `✅ محفوظ: ${token.substring(0, 20)}…${token.slice(-4)}\nالطول: ${token.length} حرف`;
-  } else {
-    el.textContent = '❌ لا يوجد توكن';
-  }
+  if (token) el.textContent = `✅ محفوظ: ${token.substring(0, 20)}…${token.slice(-4)}\nالطول: ${token.length} حرف`;
+  else el.textContent = '❌ لا يوجد توكن';
 }
 
 function changeToken() {
@@ -668,7 +790,7 @@ function saveNewToken() {
 }
 
 /* ==============================================================
-   GitHub API — ملف واحد
+   GitHub API
    ============================================================== */
 function apiHeaders(json = false) {
   const h = {
@@ -684,24 +806,17 @@ async function ghReadFile(key) {
   const path = FILES[key];
   const url = `${API_BASE}/${path}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   let res;
-  try {
-    res = await fetch(url, { headers: apiHeaders() });
-  } catch (e) {
-    throw new Error('فشل الاتصال بالشبكة');
-  }
+  try { res = await fetch(url, { headers: apiHeaders() }); }
+  catch (e) { throw new Error('فشل الاتصال بالشبكة'); }
   if (!res.ok) {
     if (res.status === 401) throw new Error('التوكن غير صالح');
-    if (res.status === 403) throw new Error('صلاحية التوكن غير كافية');
+    if (res.status === 403) throw new Error('صلاحية غير كافية');
     if (res.status === 404) throw new Error(`الملف غير موجود: ${path}`);
     throw new Error(`فشل القراءة (${path}): ${res.status}`);
   }
   const json = await res.json();
   SHAs[key] = json.sha;
-  try {
-    return JSON.parse(decodeBase64(json.content));
-  } catch (e) {
-    return null;
-  }
+  try { return JSON.parse(decodeBase64(json.content)); } catch { return null; }
 }
 
 async function ghWriteFile(key, data) {
@@ -714,15 +829,8 @@ async function ghWriteFile(key, data) {
     sha: SHAs[key]
   };
   let res;
-  try {
-    res = await fetch(url, {
-      method: 'PUT',
-      headers: apiHeaders(true),
-      body: JSON.stringify(body)
-    });
-  } catch (e) {
-    throw new Error(`فشل الاتصال أثناء حفظ ${key}`);
-  }
+  try { res = await fetch(url, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
+  catch (e) { throw new Error(`فشل الاتصال أثناء حفظ ${key}`); }
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     if (res.status === 409) throw new Error('CONFLICT');
@@ -733,88 +841,57 @@ async function ghWriteFile(key, data) {
   return json;
 }
 
-/* ==============================================================
-   قراءة كل الملفات / كتابة ملف واحد + meta
-   ============================================================== */
 async function readAll() {
-  // نستخدم Promise.all لقراءة متوازية
   const results = await Promise.all(DATA_KEYS.map(k => ghReadFile(k).catch(() => null)));
-  DATA_KEYS.forEach((k, i) => {
-    cache[k] = Array.isArray(results[i]) ? results[i] : [];
-  });
-  // migration للـ drivers القديمة (نص بدل object)
+  DATA_KEYS.forEach((k, i) => { cache[k] = Array.isArray(results[i]) ? results[i] : []; });
   cache.drivers = cache.drivers.map(d => {
     if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
     return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' };
   });
+  cache.users = cache.users.map(normalizeUser);
 }
 
 async function readMeta() {
-  try {
-    const m = await ghReadFile('meta');
-    return m || { lastUpdate: '', version: 1 };
-  } catch (e) {
-    return { lastUpdate: '', version: 1 };
-  }
+  try { const m = await ghReadFile('meta'); return m || { lastUpdate: '', version: 1 }; }
+  catch { return { lastUpdate: '', version: 1 }; }
 }
 
 async function writeMeta() {
   const meta = { lastUpdate: new Date().toISOString(), version: 1 };
-  try {
-    await ghWriteFile('meta', meta);
-    localMeta = meta;
-  } catch (e) {
-    // قد يحدث 409 إذا كان ملف meta لم يُقرأ بعد، جرّب قراءته أولاً
-    if (e.message === 'CONFLICT') {
-      await readMeta();
-      await ghWriteFile('meta', meta);
-      localMeta = meta;
-    } else {
-      throw e;
-    }
+  try { await ghWriteFile('meta', meta); localMeta = meta; }
+  catch (e) {
+    if (e.message === 'CONFLICT') { await readMeta(); await ghWriteFile('meta', meta); localMeta = meta; }
+    else throw e;
   }
 }
 
-/* حفظ مجموعة محددة + تحديث meta */
 async function persistKeys(keys) {
   setSyncing(true);
   try {
-    for (const k of keys) {
-      if (!FILES[k]) continue;
-      await ghWriteFile(k, cache[k]);
-    }
+    for (const k of keys) { if (FILES[k]) await ghWriteFile(k, cache[k]); }
     await writeMeta();
-  } finally {
-    setSyncing(false);
-  }
+  } finally { setSyncing(false); }
 }
 
 /* ==============================================================
-   المزامنة
+   Sync
    ============================================================== */
 async function syncPull() {
   if (syncing || !currentUser) return;
   syncing = true;
   try {
     const meta = await readMeta();
-    // إذا لم يتغير meta → لا حاجة لجلب البيانات
-    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) {
-      setOnline(true);
-      syncing = false;
-      return;
-    }
+    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) { setOnline(true); syncing = false; return; }
     localMeta = meta;
-
-    // meta تغيّر → اقرأ كل الملفات
     await readAll();
+    // تحديث currentUser من النسخة الجديدة (قد تكون صلاحياته تغيرت)
+    const me = cache.users.find(u => u.username === currentUser.username);
+    if (me) currentUser = me;
+    applyPermissionsUI();
     renderActive();
     setOnline(true);
-  } catch (e) {
-    console.warn('Sync error:', e.message);
-    setOnline(false);
-  } finally {
-    syncing = false;
-  }
+  } catch (e) { console.warn('Sync error:', e.message); setOnline(false); }
+  finally { syncing = false; }
 }
 
 function renderActive() {
@@ -829,7 +906,6 @@ function renderActive() {
 
 function startPolling() { stopPolling(); pollTimer = setInterval(syncPull, SYNC_INTERVAL); }
 function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
-
 function setOnline(ok) {
   const dot = document.getElementById('connDot');
   if (dot) { dot.className = 'status-dot' + (ok ? ' online' : ''); dot.title = ok ? 'متصل' : 'غير متصل'; }
@@ -840,40 +916,28 @@ function setSyncing(on) {
 }
 
 /* ==============================================================
-   أدوات
+   Utilities
    ============================================================== */
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
-
 function fmtDate(d = new Date()) {
   const p = n => String(n).padStart(2, '0');
   let h = d.getHours(); const ampm = h >= 12 ? 'PM' : 'AM';
   h = h % 12 || 12;
   return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(h)}:${p(d.getMinutes())} ${ampm}`;
 }
-
-function esc(s) {
-  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function toast(msg, type = '') {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + type;
+  t.textContent = msg; t.className = 'toast show ' + type;
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => t.className = 'toast ' + type, 2600);
 }
-
 function badge(val) {
-  const map = {
-    'جاهز':'badge-ready','قيد التجهيز':'badge-progress','معتمد':'badge-approved',
-    'مدفوع':'badge-paid','غير مدفوع':'badge-unpaid','VIP':'badge-vip'
-  };
+  const map = { 'جاهز':'badge-ready','قيد التجهيز':'badge-progress','معتمد':'badge-approved',
+    'مدفوع':'badge-paid','غير مدفوع':'badge-unpaid','VIP':'badge-vip' };
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
 
-/* ==============================================================
-   Zoom
-   ============================================================== */
 function applyZoom() { document.body.style.zoom = zoomLevel; localStorage.setItem('oms_zoom', zoomLevel); }
 function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
@@ -898,48 +962,38 @@ window.doLogin = async function () {
         errEl.textContent = '⚠️ التوكن لا يبدأ بـ github_pat_';
         return;
       }
-      saveToken(t);
-      updateTokenStatus();
+      saveToken(t); updateTokenStatus();
     }
   }
 
   if (!getStoredToken()) { errEl.textContent = '❌ أدخل GitHub Token أولاً'; return; }
   if (!u || !p) { errEl.textContent = '❌ املأ اسم المستخدم وكلمة المرور'; return; }
   if (GITHUB_OWNER === 'YOUR_USERNAME') { errEl.textContent = '❌ لم تعدّل GITHUB_OWNER'; return; }
-  if (location.protocol === 'file:') { errEl.textContent = '❌ افتح من GitHub Pages (https://)'; return; }
+  if (location.protocol === 'file:') { errEl.textContent = '❌ افتح من GitHub Pages'; return; }
 
   btn.disabled = true;
-  loadEl.textContent = '⏳ جاري تحميل البيانات (7 ملفات)...';
+  loadEl.textContent = '⏳ جاري التحميل...';
 
   try {
     await readAll();
     localMeta = await readMeta();
 
     const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) {
-      errEl.textContent = '❌ بيانات الدخول غير صحيحة';
-      btn.disabled = false; loadEl.textContent = '';
-      return;
-    }
+    if (!found) { errEl.textContent = '❌ بيانات الدخول غير صحيحة'; btn.disabled = false; loadEl.textContent = ''; return; }
 
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
 
     loadEl.textContent = '✅ تم الدخول';
     startApp();
-  } catch (e) {
-    console.error('Login error:', e);
-    errEl.textContent = '❌ ' + e.message;
-  } finally {
-    btn.disabled = false;
-  }
+  } catch (e) { console.error(e); errEl.textContent = '❌ ' + e.message; }
+  finally { btn.disabled = false; }
 };
 
 window.logout = function () {
   if (!confirm('تسجيل الخروج؟')) return;
   stopPolling();
-  currentUser = null;
-  selectedOrderId = null;
+  currentUser = null; selectedOrderId = null;
   SHAs = {}; localMeta = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
@@ -963,10 +1017,7 @@ function startApp() {
   document.getElementById('currentUserName').textContent = currentUser.username;
   document.getElementById('currentUserRole').textContent = `(${currentUser.role})`;
 
-  document.querySelectorAll('.admin-only').forEach(el => {
-    el.style.display = currentUser.role === 'رئيسي' ? '' : 'none';
-  });
-
+  applyPermissionsUI();
   loadDriversIntoSelects();
   go('dashboard');
   startPolling();
@@ -976,9 +1027,9 @@ function startApp() {
    Navigation
    ============================================================== */
 window.go = function (page) {
-  if ((page === 'settings' || page === 'customers') && currentUser.role !== 'رئيسي') {
-    toast('غير مصرح', 'error'); return;
-  }
+  if (page === 'settings' && !hasPerm('accessSettings')) { toast('غير مصرح', 'error'); return; }
+  if (page === 'customers' && !hasPerm('accessCustomers')) { toast('غير مصرح', 'error'); return; }
+
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
@@ -1014,23 +1065,28 @@ function renderEntry() {
 
   const body = document.getElementById('entryBody');
   if (!data.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="11">${q ? 'لا توجد نتائج' : 'لا توجد طلبات — اضغط "طلب جديد"'}</td></tr>`;
+    body.innerHTML = `<tr class="empty-row"><td colspan="11">${q ? 'لا توجد نتائج' : 'لا توجد طلبات'}</td></tr>`;
     return;
   }
+  const canEdit   = hasPerm('editOrder');
+  const canDelete = hasPerm('deleteOrder');
+  const canTrans  = hasPerm('transferSingle');
+
   body.innerHTML = data.map((o, i) => {
     const cls = o.status === 'جاهز' ? 'status-ready' : o.status === 'قيد التجهيز' ? 'status-progress' : '';
     const sel = selectedOrderId === o.id ? ' selected' : '';
-    return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="editOrder('${o.id}')">
+    const buttons = `
+      ${canEdit   ? `<button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')" title="تعديل">✏️</button>` : ''}
+      ${canTrans  ? `<button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل">➡️</button>` : ''}
+      ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')" title="حذف">🗑️</button>` : ''}
+    `;
+    return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="${canEdit ? `editOrder('${o.id}')` : ''}">
       <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
       <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
-      <td class="no-print" style="white-space:nowrap;" onclick="event.stopPropagation()">
-        <button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')" title="تعديل">✏️</button>
-        <button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل">➡️</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')" title="حذف">🗑️</button>
-      </td>
+      <td class="no-print" style="white-space:nowrap;" onclick="event.stopPropagation()">${buttons || '—'}</td>
     </tr>`;
   }).join('');
 }
@@ -1048,10 +1104,7 @@ window.selectRow = function (id, event) {
    ============================================================== */
 function renderReady() {
   const body = document.getElementById('readyBody');
-  if (!cache.ready.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="10">لا توجد طلبات جاهزة</td></tr>`;
-    return;
-  }
+  if (!cache.ready.length) { body.innerHTML = `<tr class="empty-row"><td colspan="10">لا توجد طلبات جاهزة</td></tr>`; return; }
   body.innerHTML = cache.ready.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
     <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
     <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
@@ -1062,7 +1115,7 @@ function renderReady() {
 }
 
 /* ==============================================================
-   Render Log
+   Render Log (مع صلاحية التعديل والحذف)
    ============================================================== */
 function renderLog() {
   const q = (document.getElementById('searchLog').value || '').trim().toLowerCase();
@@ -1070,23 +1123,30 @@ function renderLog() {
     `${o.invoice} ${o.customer} ${o.location} ${o.driver}`.toLowerCase().includes(q)
   ) : cache.log;
 
-  const isAdmin = currentUser && currentUser.role === 'رئيسي';
+  const canEdit   = hasPerm('editLog');
+  const canDelete = hasPerm('deleteLog');
+  const showActions = canEdit || canDelete;
+
   const body = document.getElementById('logBody');
   if (!data.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="${isAdmin ? 12 : 11}">${q ? 'لا توجد نتائج' : 'السجل فارغ'}</td></tr>`;
+    body.innerHTML = `<tr class="empty-row"><td colspan="12">${q ? 'لا توجد نتائج' : 'السجل فارغ'}</td></tr>`;
     return;
   }
-  body.innerHTML = data.map((o, i) => `<tr>
-    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
-    <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
-    <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
-    <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
-    <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
-    <td style="font-size:12px;color:#888;">${esc(o.archivedAt || '—')}</td>
-    ${isAdmin ? `<td class="no-print" style="white-space:nowrap;">
-      <button class="btn btn-danger btn-sm" onclick="deleteFromLog('${o.id}')" title="حذف من السجل">🗑️</button>
-    </td>` : ''}
-  </tr>`).join('');
+  body.innerHTML = data.map((o, i) => {
+    const buttons = `
+      ${canEdit   ? `<button class="btn btn-primary btn-sm" onclick="editFromLog('${o.id}')" title="تعديل">✏️</button>` : ''}
+      ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="deleteFromLog('${o.id}')" title="حذف نهائي">🗑️</button>` : ''}
+    `;
+    return `<tr>
+      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+      <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
+      <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
+      <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
+      <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
+      <td style="font-size:12px;color:#888;">${esc(o.archivedAt || '—')}</td>
+      <td class="no-print" style="white-space:nowrap;">${showActions ? buttons : '—'}</td>
+    </tr>`;
+  }).join('');
 }
 
 /* ==============================================================
@@ -1095,20 +1155,16 @@ function renderLog() {
 function renderCustomers() {
   const q = (document.getElementById('searchCustomers')?.value || '').trim().toLowerCase();
   const all = cache.customers;
-  const data = q ? all.filter(c =>
-    `${c.code} ${c.name} ${c.location} ${c.phone}`.toLowerCase().includes(q)
-  ) : all;
+  const data = q ? all.filter(c => `${c.code} ${c.name} ${c.location} ${c.phone}`.toLowerCase().includes(q)) : all;
 
   document.getElementById('custCount').textContent = `الإجمالي: ${all.length}`;
+  const canManage = hasPerm('manageCustomers');
   const body = document.getElementById('custBody');
-  if (!data.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="6">${q ? 'لا توجد نتائج' : 'لا يوجد عملاء'}</td></tr>`;
-    return;
-  }
+  if (!data.length) { body.innerHTML = `<tr class="empty-row"><td colspan="6">${q ? 'لا توجد نتائج' : 'لا يوجد عملاء'}</td></tr>`; return; }
   body.innerHTML = data.map((c, i) => `<tr>
     <td>${i+1}</td><td>${esc(c.code)}</td><td>${esc(c.name)}</td>
     <td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
-    <td><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">🗑️</button></td>
+    <td>${canManage ? `<button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">🗑️</button>` : '—'}</td>
   </tr>`).join('');
 }
 
@@ -1118,34 +1174,46 @@ function renderCustomers() {
 function renderSettings() { renderDriversList(); renderUsers(); }
 
 function renderDriversList() {
+  const canManage = hasPerm('manageDrivers');
   document.getElementById('driverList').innerHTML = cache.drivers.length
     ? cache.drivers.map(d => `<span style="background:#eef3fa;padding:8px 14px;border-radius:16px;font-size:13px;display:inline-flex;align-items:center;gap:8px;">
         <span>🚚 <b>${esc(d.name)}</b>${d.phone ? ` <span style="color:#666;font-size:11px;">(${esc(d.phone)})</span>` : ''}</span>
-        <button onclick="deleteDriver('${d.id}')" style="border:none;background:none;color:var(--red);cursor:pointer;font-size:14px;">✕</button>
+        ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:none;color:var(--red);cursor:pointer;font-size:14px;">✕</button>` : ''}
       </span>`).join('')
     : '<span style="color:var(--gray);">لا يوجد موصلون</span>';
 }
 
 function renderUsers() {
-  document.getElementById('userBody').innerHTML = cache.users.map(u => `<tr>
-    <td>${esc(u.username)}</td>
-    <td>${u.role === 'رئيسي' ? '👑 رئيسي' : '👤 عادي'}</td>
-    <td>${u.username === currentUser.username
+  const canManage = hasPerm('manageUsers');
+  document.getElementById('userBody').innerHTML = cache.users.map(u => {
+    const permCount = u.role === 'رئيسي' ? '👑 كل الصلاحيات'
+      : `${Object.values(u.permissions || {}).filter(v => v).length} / ${Object.keys(DEFAULT_PERMS).length}`;
+    const actions = u.username === currentUser.username
       ? '<span style="color:var(--gray);font-size:12px;">(أنت)</span>'
-      : `<button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">🗑️</button>`}</td>
-  </tr>`).join('');
+      : (canManage
+        ? `<button class="btn btn-primary btn-sm" onclick="editUser('${u.id}')" title="تعديل">✏️</button>
+           <button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')" title="حذف">🗑️</button>`
+        : '—');
+    return `<tr>
+      <td>${esc(u.username)}</td>
+      <td>${u.role === 'رئيسي' ? '👑 رئيسي' : '👤 عادي'}</td>
+      <td style="font-size:12px;color:#555;">${permCount}</td>
+      <td style="white-space:nowrap;">${actions}</td>
+    </tr>`;
+  }).join('');
 }
 
 /* ==============================================================
    Order CRUD
    ============================================================== */
 window.addOrder = function () {
-  if (!currentUser) return;
+  if (!hasPerm('addOrder')) { toast('غير مصرح', 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
 
   document.getElementById('orderModalTitle').textContent = '➕ طلب جديد';
   document.getElementById('orderId').value = '';
   document.getElementById('orderCustomerId').value = '';
+  document.getElementById('orderLogMode').value = '';
   ['orderInvoice','orderLocation','orderDate','orderDriverPhone'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('orderCustomer').value = '';
   document.getElementById('orderStatus').value = 'قيد التجهيز';
@@ -1157,10 +1225,33 @@ window.addOrder = function () {
 };
 
 window.editOrder = function (id) {
+  if (!hasPerm('editOrder')) { toast('غير مصرح', 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
   if (!o) return;
   document.getElementById('orderModalTitle').textContent = '✏️ تعديل الطلب';
   document.getElementById('orderId').value = id;
+  document.getElementById('orderLogMode').value = '';
+  document.getElementById('orderInvoice').value = o.invoice || '';
+  document.getElementById('orderCustomer').value = o.customer || '';
+  document.getElementById('orderLocation').value = o.location || '';
+  document.getElementById('orderStatus').value = o.status || 'قيد التجهيز';
+  document.getElementById('orderDate').value = o.approvalDate || '';
+  document.getElementById('orderPay').value = o.pay || 'مدفوع';
+  document.getElementById('orderDriver').value = o.driver || '';
+  document.getElementById('orderDriverPhone').value = o.driverPhone || '';
+  document.getElementById('orderCustomerId').value = o.customerId || '';
+  openModal('orderModal');
+  setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
+};
+
+/* ⭐ تعديل من السجل (للمدير فقط افتراضياً) */
+window.editFromLog = function (id) {
+  if (!hasPerm('editLog')) { toast('غير مصرح بتعديل السجل', 'error'); return; }
+  const o = cache.log.find(x => x.id === id);
+  if (!o) return;
+  document.getElementById('orderModalTitle').textContent = '📝 تعديل طلب في السجل';
+  document.getElementById('orderId').value = id;
+  document.getElementById('orderLogMode').value = '1';  // علم بأننا نعدل في السجل
   document.getElementById('orderInvoice').value = o.invoice || '';
   document.getElementById('orderCustomer').value = o.customer || '';
   document.getElementById('orderLocation').value = o.location || '';
@@ -1176,6 +1267,7 @@ window.editOrder = function (id) {
 
 window.saveOrder = async function () {
   const id = document.getElementById('orderId').value;
+  const isLogEdit = document.getElementById('orderLogMode').value === '1';
   const invoice = document.getElementById('orderInvoice').value.trim();
   if (!invoice) { toast('رقم الفاتورة مطلوب', 'error'); return; }
 
@@ -1192,28 +1284,47 @@ window.saveOrder = async function () {
     updatedAt:   fmtDate()
   };
 
-  const existing = id ? cache.orders.find(x => x.id === id) : null;
-  let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
-  if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
-  data.approvalDate = approvalDate;
-
   try {
-    if (id) {
-      const idx = cache.orders.findIndex(x => x.id === id);
-      cache.orders[idx] = { ...cache.orders[idx], ...data };
+    if (isLogEdit) {
+      // تعديل في السجل
+      const idx = cache.log.findIndex(x => x.id === id);
+      if (idx === -1) { toast('الطلب غير موجود', 'error'); return; }
+      // الحفاظ على تاريخ الاعتماد الأصلي إذا وُجد
+      let approvalDate = cache.log[idx].approvalDate || '';
+      if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
+      data.approvalDate = approvalDate;
+      data.archivedAt = cache.log[idx].archivedAt;
+      data.archivedBy = cache.log[idx].archivedBy;
+      cache.log[idx] = { ...cache.log[idx], ...data };
+      await persistKeys(['log']);
+      closeModal('orderModal');
+      renderLog();
+      toast('✅ تم تحديث السجل', 'success');
     } else {
-      data.id = uid();
-      data.createdAt = fmtDate();
-      cache.orders.push(data);
+      // تعديل عادي في الطلبات
+      const existing = id ? cache.orders.find(x => x.id === id) : null;
+      let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
+      if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
+      data.approvalDate = approvalDate;
+
+      if (id) {
+        const idx = cache.orders.findIndex(x => x.id === id);
+        cache.orders[idx] = { ...cache.orders[idx], ...data };
+      } else {
+        data.id = uid();
+        data.createdAt = fmtDate();
+        cache.orders.push(data);
+      }
+      await persistKeys(['orders']);
+      closeModal('orderModal');
+      renderEntry();
+      toast('✅ تم الحفظ', 'success');
     }
-    await persistKeys(['orders']);
-    closeModal('orderModal');
-    renderEntry();
-    toast('✅ تم الحفظ', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteOrder = async function (id) {
+  if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
   if (!confirm('حذف هذا الطلب؟')) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
@@ -1222,13 +1333,13 @@ window.deleteOrder = async function (id) {
 };
 
 window.deleteFromLog = async function (id) {
-  if (!currentUser || currentUser.role !== 'رئيسي') { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id);
   if (!o) return;
   if (!confirm(`⚠️ حذف الطلب "${o.invoice}" من السجل نهائياً؟`)) return;
   if (!confirm('تأكيد أخير؟')) return;
   cache.log = cache.log.filter(x => x.id !== id);
-  try { await persistKeys(['log']); renderLog(); toast('✅ تم الحذف من السجل', 'success'); }
+  try { await persistKeys(['log']); renderLog(); toast('✅ تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
@@ -1238,26 +1349,18 @@ window.deleteFromLog = async function (id) {
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
   const dropdown = document.getElementById('customerDropdown');
-
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     document.getElementById('orderCustomerId').value = '';
     if (!q) { dropdown.classList.remove('show'); return; }
 
-    const matches = cache.customers.filter(c =>
-      `${c.code} ${c.name} ${c.phone} ${c.location}`.toLowerCase().includes(q)
-    ).slice(0, 8);
-
+    const matches = cache.customers.filter(c => `${c.code} ${c.name} ${c.phone} ${c.location}`.toLowerCase().includes(q)).slice(0, 8);
     let html = matches.length
       ? matches.map(c => `<div class="customer-option" data-id="${c.id}" data-name="${esc(c.name)}" data-loc="${esc(c.location)}">
-          <span class="loc">📍 ${esc(c.location)}</span><b>${esc(c.name)}</b> <span class="code">${esc(c.code || '')}</span>
-        </div>`).join('')
+          <span class="loc">📍 ${esc(c.location)}</span><b>${esc(c.name)}</b> <span class="code">${esc(c.code || '')}</span></div>`).join('')
       : '';
-
     const exact = cache.customers.some(c => c.name.toLowerCase() === q);
-    if (!exact && q.length >= 2) {
-      html += `<div class="customer-option create" data-create="1">➕ إنشاء عميل جديد: "${esc(input.value)}"</div>`;
-    }
+    if (!exact && q.length >= 2) html += `<div class="customer-option create" data-create="1">➕ إنشاء عميل جديد: "${esc(input.value)}"</div>`;
     if (!html) html = '<div class="customer-option empty">لا توجد نتائج</div>';
 
     dropdown.innerHTML = html;
@@ -1280,7 +1383,6 @@ function initCustomerSearch() {
       });
     });
   });
-
   input.addEventListener('focus', () => { if (input.value.trim()) input.dispatchEvent(new Event('input')); });
   input.addEventListener('blur', () => setTimeout(() => dropdown.classList.remove('show'), 150));
 }
@@ -1305,6 +1407,7 @@ window.onDriverSelect = function () {
 };
 
 window.addDriver = async function () {
+  if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
   const name = document.getElementById('newDriverName').value.trim();
   const phone = document.getElementById('newDriverPhone').value.trim();
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
@@ -1314,13 +1417,13 @@ window.addDriver = async function () {
     await persistKeys(['drivers']);
     document.getElementById('newDriverName').value = '';
     document.getElementById('newDriverPhone').value = '';
-    renderDriversList();
-    loadDriversIntoSelects();
+    renderDriversList(); loadDriversIntoSelects();
     toast('✅ تم الإضافة', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteDriver = async function (id) {
+  if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
   if (!confirm('حذف هذا الموصل؟')) return;
   cache.drivers = cache.drivers.filter(d => d.id !== id);
   try { await persistKeys(['drivers']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
@@ -1331,6 +1434,7 @@ window.deleteDriver = async function (id) {
    Transfers
    ============================================================== */
 window.transferSingle = async function (id) {
+  if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; }
   const order = cache.orders.find(x => x.id === id);
   if (!order) { toast('اختر طلباً أولاً', 'error'); return; }
   if (!confirm(`تحويل الطلب ${order.invoice} إلى الجاهزة؟`)) return;
@@ -1345,6 +1449,7 @@ window.transferSingle = async function (id) {
 };
 
 window.bulkTransfer = async function () {
+  if (!hasPerm('bulkTransfer')) { toast('غير مصرح', 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
   if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
   if (!confirm(`تحويل ${eligible.length} طلب؟`)) return;
@@ -1359,6 +1464,7 @@ window.bulkTransfer = async function () {
 };
 
 window.moveReadyToLog = async function () {
+  if (!hasPerm('moveToLog')) { toast('غير مصرح', 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
   if (!confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`)) return;
   try {
@@ -1374,6 +1480,7 @@ window.moveReadyToLog = async function () {
    Print
    ============================================================== */
 window.printReady = function () {
+  if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
   const rows = cache.ready.map((o, i) => `<tr>
     <td>${i+1}</td><td>${esc(o.invoice)}</td><td>${esc(o.customer)}</td>
@@ -1404,12 +1511,14 @@ window.printReady = function () {
    Customers
    ============================================================== */
 window.openCustomerModal = function () {
+  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
   ['custCode','custName','custLocation','custPhone'].forEach(id => document.getElementById(id).value = '');
   openModal('customerModal');
   setTimeout(() => document.getElementById('custCode').focus(), 100);
 };
 
 window.saveCustomer = async function () {
+  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
   const name = document.getElementById('custName').value.trim();
   if (!name) { toast('اسم العميل مطلوب', 'error'); return; }
   const newCust = {
@@ -1424,17 +1533,17 @@ window.saveCustomer = async function () {
     await persistKeys(['customers']);
     closeModal('customerModal');
     renderCustomers();
-    const orderModalOpen = document.getElementById('orderModal').classList.contains('active');
-    if (orderModalOpen) {
+    if (document.getElementById('orderModal').classList.contains('active')) {
       document.getElementById('orderCustomerId').value = newCust.id;
       document.getElementById('orderCustomer').value = newCust.name;
       document.getElementById('orderLocation').value = newCust.location;
     }
-    toast('✅ تم إضافة العميل', 'success');
+    toast('✅ تم الإضافة', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteCustomer = async function (id) {
+  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
   if (!confirm('حذف العميل؟')) return;
   cache.customers = cache.customers.filter(c => c.id !== id);
   try { await persistKeys(['customers']); renderCustomers(); toast('تم الحذف', 'success'); }
@@ -1442,29 +1551,137 @@ window.deleteCustomer = async function (id) {
 };
 
 /* ==============================================================
-   Users
+   ⭐ Users & Permissions
    ============================================================== */
 window.openUserModal = function () {
-  ['userName','userPass'].forEach(id => document.getElementById(id).value = '');
+  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  document.getElementById('userModalTitle').textContent = '👤 مستخدم جديد';
+  document.getElementById('userId').value = '';
+  document.getElementById('userName').value = '';
+  document.getElementById('userPass').value = '';
+  document.getElementById('userName').disabled = false;
   document.getElementById('userRole').value = 'عادي';
+  tempPerms = { ...DEFAULT_PERMS };
+  renderPermissionsGrid();
+  onUserRoleChange();
   openModal('userModal');
   setTimeout(() => document.getElementById('userName').focus(), 100);
 };
 
+window.editUser = function (id) {
+  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  const u = cache.users.find(x => x.id === id);
+  if (!u) return;
+  document.getElementById('userModalTitle').textContent = '✏️ تعديل المستخدم';
+  document.getElementById('userId').value = id;
+  document.getElementById('userName').value = u.username;
+  document.getElementById('userName').disabled = false;  // اسمح بالتعديل
+  document.getElementById('userPass').value = u.password;
+  document.getElementById('userRole').value = u.role;
+  tempPerms = u.role === 'رئيسي' ? { ...DEFAULT_PERMS } : { ...(u.permissions || DEFAULT_PERMS) };
+  renderPermissionsGrid();
+  onUserRoleChange();
+  openModal('userModal');
+};
+
+function renderPermissionsGrid() {
+  const grid = document.getElementById('permissionsGrid');
+  grid.innerHTML = Object.entries(PERMISSIONS).map(([key, def]) => {
+    const checked = tempPerms[key] === true ? 'checked' : '';
+    const checkedClass = tempPerms[key] === true ? 'checked' : '';
+    return `<label class="perm-item ${checkedClass}" data-perm="${key}">
+      <input type="checkbox" ${checked} onchange="togglePerm('${key}', this.checked)">
+      <span>${def.icon} ${def.label}</span>
+    </label>`;
+  }).join('');
+}
+
+window.togglePerm = function (key, checked) {
+  tempPerms[key] = checked;
+  // تحديث فوري للفئة
+  const item = document.querySelector(`.perm-item[data-perm="${key}"]`);
+  if (item) {
+    if (checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+};
+
+window.onUserRoleChange = function () {
+  const role = document.getElementById('userRole').value;
+  const isAdmin = role === 'رئيسي';
+  const grid = document.getElementById('permissionsGrid');
+  const note = document.getElementById('permAdminNote');
+
+  if (isAdmin) {
+    grid.style.display = 'none';
+    note.style.display = 'block';
+  } else {
+    grid.style.display = 'grid';
+    note.style.display = 'none';
+    // إعادة بناء الشبكة للتأكد من أنها محدثة
+    if (!grid.innerHTML.trim()) renderPermissionsGrid();
+  }
+};
+
 window.saveUser = async function () {
+  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
-  if (!username || !password) { toast('املأ الحقول', 'error'); return; }
-  if (cache.users.find(u => u.username === username)) { toast('الاسم موجود', 'error'); return; }
-  cache.users.push({ id: uid(), username, password, role });
-  try { await persistKeys(['users']); closeModal('userModal'); renderUsers(); toast('✅ تم الإضافة', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+
+  if (!username || !password) { toast('املأ اسم المستخدم وكلمة المرور', 'error'); return; }
+
+  // تحقق من عدم تكرار الاسم
+  const duplicate = cache.users.find(u => u.username === username && u.id !== id);
+  if (duplicate) { toast('اسم المستخدم موجود مسبقاً', 'error'); return; }
+
+  // لا تدع المستخدم يعدّل نفسه إلى "عادي" إن كان الوحيد الرئيسي
+  if (currentUser.username === username && role !== 'رئيسي') {
+    const adminCount = cache.users.filter(u => u.role === 'رئيسي').length;
+    if (adminCount <= 1) { toast('لا يمكن تغيير دورك — أنت الرئيسي الوحيد', 'error'); return; }
+  }
+
+  const userData = {
+    id: id || uid(),
+    username,
+    password,
+    role,
+    permissions: role === 'رئيسي' ? {} : { ...tempPerms }  // الرئيسي بدون قيود
+  };
+
+  if (id) {
+    const idx = cache.users.findIndex(u => u.id === id);
+    if (idx === -1) { toast('المستخدم غير موجود', 'error'); return; }
+    cache.users[idx] = userData;
+  } else {
+    cache.users.push(userData);
+  }
+
+  try {
+    await persistKeys(['users']);
+    // إذا عدّل نفسه، حدّث currentUser
+    if (currentUser.username === username) {
+      currentUser = normalizeUser(userData);
+      applyPermissionsUI();
+    }
+    closeModal('userModal');
+    renderUsers();
+    toast('✅ تم الحفظ', 'success');
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteUser = async function (id) {
-  if (!confirm('حذف هذا المستخدم؟')) return;
-  cache.users = cache.users.filter(u => u.id !== id);
+  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  const u = cache.users.find(x => x.id === id);
+  if (!u) return;
+  if (u.username === currentUser.username) { toast('لا يمكن حذف نفسك', 'error'); return; }
+  if (u.role === 'رئيسي') {
+    const adminCount = cache.users.filter(x => x.role === 'رئيسي').length;
+    if (adminCount <= 1) { toast('لا يمكن حذف الرئيسي الوحيد', 'error'); return; }
+  }
+  if (!confirm(`حذف المستخدم "${u.username}"؟`)) return;
+  cache.users = cache.users.filter(x => x.id !== id);
   try { await persistKeys(['users']); renderUsers(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
@@ -1482,7 +1699,7 @@ window.exportBackup = function () {
 };
 
 window.resetAll = async function () {
-  if (currentUser.role !== 'رئيسي') { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
   if (!confirm('⚠️ حذف كل الطلبات (وليس المستخدمين)؟')) return;
   if (!confirm('تأكيد أخير؟')) return;
   cache.orders = []; cache.ready = []; cache.log = [];
@@ -1579,7 +1796,7 @@ window.addEventListener('keydown', (e) => {
       if (k === '2') { e.preventDefault(); go('entry'); return; }
       if (k === '3') { e.preventDefault(); go('ready'); return; }
       if (k === '4') { e.preventDefault(); go('log'); return; }
-      if (k === '5') { e.preventDefault(); if (currentUser.role === 'رئيسي') go('customers'); return; }
+      if (k === '5') { e.preventDefault(); if (hasPerm('accessCustomers')) go('customers'); return; }
       if (k === 'n') { e.preventDefault(); addOrder(); return; }
       if (k === 't') {
         e.preventDefault();
@@ -1609,7 +1826,6 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-/* Enter to save */
 ['orderModal','customerModal','userModal','tokenModal'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey && e.target.tagName !== 'BUTTON') {
@@ -1642,9 +1858,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   console.log('%c✅ النظام جاهز', 'color:#28a745;font-weight:bold;font-size:14px');
   console.log('📦 المستودع:', GITHUB_OWNER + '/' + GITHUB_REPO);
-  console.log('📂 الملفات:', Object.values(FILES).join(', '));
-  console.log('🔑 التوكن:', getStoredToken() ? 'محفوظ' : 'غير موجود');
-  console.log('⌨️ اضغط F1 للاختصارات');
+  console.log('🔐 نظام الصلاحيات: مفعّل');
+  console.log('📝 تعديل السجل: للمدير أو من لديه صلاحية editLog');
 });
 </script>
 </body>
