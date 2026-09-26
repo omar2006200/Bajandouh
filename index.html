@@ -17,10 +17,11 @@
     display: flex; align-items: center; justify-content: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #1f4e79, #2e75b6);
+    padding: 20px;
   }
   .login-box {
     background: #fff; padding: 40px; border-radius: 14px;
-    width: 420px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    width: 440px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.3);
   }
   .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 22px; text-align: center; }
   .login-box p  { color: var(--gray); margin-bottom: 24px; font-size: 13px; text-align: center; }
@@ -38,6 +39,30 @@
   }
   .login-box button:hover { background: var(--blue); }
   .login-box button:disabled { background: #999; cursor: not-allowed; }
+
+  .token-status {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 8px; font-size: 13px;
+    margin-top: 8px;
+  }
+  .token-status.saved {
+    background: #d4edda; color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .token-status.missing {
+    background: #fff3cd; color: #856404;
+    border: 1px solid #ffc107;
+  }
+  .token-status button {
+    margin-top: 0; margin-right: auto; padding: 4px 10px;
+    font-size: 11px; width: auto;
+  }
+  .token-help {
+    font-size: 11px; color: #666; margin-top: 6px; line-height: 1.6;
+  }
+  .token-help a { color: var(--blue); text-decoration: none; }
+  .token-help a:hover { text-decoration: underline; }
+
   .login-error {
     color: var(--red); font-size: 13px; margin-top: 10px;
     text-align: center; white-space: pre-line; line-height: 1.6;
@@ -215,6 +240,21 @@
     <h1>📦 نظام إدارة الطلبات</h1>
     <p>قاعدة بيانات مشتركة عبر GitHub</p>
 
+    <!-- حالة التوكن -->
+    <div id="tokenStatus"></div>
+
+    <!-- حقل التوكن (يظهر فقط عند عدم وجوده) -->
+    <div id="tokenField" style="display:none;">
+      <label>🔑 GitHub Token (يُحفظ في متصفحك)</label>
+      <input id="loginToken" type="password" placeholder="github_pat_..." autocomplete="off">
+      <div class="token-help">
+        💡 أنشئ توكن من:
+        <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings → Tokens</a>
+        <br>
+        الصلاحية المطلوبة: <b>Contents: Read and write</b>
+      </div>
+    </div>
+
     <label>اسم المستخدم</label>
     <input id="loginUser" type="text" placeholder="1" autocomplete="username">
 
@@ -346,7 +386,15 @@
 
     <section id="page-settings" class="page">
       <div class="section-header"><h2>⚙️ الإعدادات</h2></div>
-      <h3 style="color:var(--dark-blue);margin:16px 0 8px;">🚚 الموصلون</h3>
+
+      <h3 style="color:var(--dark-blue);margin:16px 0 8px;">🔑 التوكن الحالي</h3>
+      <div class="toolbar">
+        <button class="btn btn-warning" onclick="changeToken()">🔄 تغيير التوكن</button>
+        <button class="btn btn-danger" onclick="clearToken()">🗑️ حذف التوكن</button>
+      </div>
+      <div id="currentTokenInfo" style="padding:12px;background:#f8f9fa;border-radius:8px;font-family:monospace;font-size:12px;color:#555;"></div>
+
+      <h3 style="color:var(--dark-blue);margin:24px 0 8px;">🚚 الموصلون</h3>
       <div class="toolbar">
         <input id="newDriver" placeholder="اسم الموصل">
         <button class="btn btn-success" onclick="addDriver()">➕ إضافة</button>
@@ -416,11 +464,28 @@
   </div>
 </div></div>
 
+<!-- Token Modal -->
+<div id="tokenModal" class="modal-bg"><div class="modal">
+  <h3>🔑 تحديث التوكن</h3>
+  <label>GitHub Token الجديد</label>
+  <input id="newTokenInput" type="password" placeholder="github_pat_..." autocomplete="off">
+  <div class="token-help" style="margin-top:10px;">
+    أنشئ توكن من:
+    <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings</a>
+    <br>
+    الصلاحية: <b>Contents: Read and write</b>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gray" onclick="closeModal('tokenModal')">إلغاء</button>
+    <button class="btn btn-primary" onclick="saveNewToken()">💾 حفظ</button>
+  </div>
+</div></div>
+
 <div id="toast" class="toast"></div>
 
 <script>
 /* ==============================================================
-   ⚙️ الإعدادات — عدّل هذه القيم الأربعة فقط
+   ⚙️ إعدادات المستودع (بدون توكن)
    ============================================================== */
 
 const GITHUB_OWNER  = 'omar2006200';   // ← اسمك في GitHub
@@ -428,14 +493,13 @@ const GITHUB_REPO   = 'Bajandouh';   // ← اسم المستودع
 const GITHUB_BRANCH = 'main';            // ← main أو master
 const GITHUB_FILE   = 'data.json';       // ← لا تغيّره
 
-const GITHUB_TOKEN  = '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';   // ← التوكن مباشرة بدون تشفير
-
-const SYNC_INTERVAL = 5000;   // ← فترة المزامنة بالمللي ثانية (5 ثوانٍ)
+const SYNC_INTERVAL = 5000;   // فترة المزامنة (5 ثوانٍ)
 
 /* ==============================================================
    لا تعدّل ما تحت هذا السطر
    ============================================================== */
 
+const TOKEN_KEY = 'oms_github_token';
 const API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
 let currentUser = null;
@@ -444,9 +508,89 @@ let lastSHA = null;
 let pollTimer = null;
 let syncing = false;
 
+/* ========== التوكن: قراءة/حفظ/حذف ========== */
+
+function getStoredToken() {
+  return localStorage.getItem(TOKEN_KEY) || '';
+}
+
+function saveToken(t) {
+  localStorage.setItem(TOKEN_KEY, t.trim());
+}
+
+function clearToken() {
+  if (!confirm('⚠️ حذف التوكن؟ ستحتاج لإدخاله مرة أخرى عند الدخول.')) return;
+  localStorage.removeItem(TOKEN_KEY);
+  toast('✅ تم حذف التوكن', 'success');
+  updateTokenStatus();
+  updateCurrentTokenInfo();
+}
+
+function updateTokenStatus() {
+  const statusEl = document.getElementById('tokenStatus');
+  const fieldEl = document.getElementById('tokenField');
+  const token = getStoredToken();
+
+  if (token) {
+    const masked = token.substring(0, 20) + '…' + token.slice(-4);
+    statusEl.className = 'token-status saved';
+    statusEl.innerHTML = `
+      <span>✅ التوكن محفوظ</span>
+      <span style="font-family:monospace;font-size:11px;opacity:.7;">${masked}</span>
+      <button onclick="showTokenField()">🔄 تغيير</button>
+    `;
+    fieldEl.style.display = 'none';
+  } else {
+    statusEl.className = 'token-status missing';
+    statusEl.innerHTML = '<span>⚠️ لم يتم إدخال التوكن بعد</span>';
+    fieldEl.style.display = 'block';
+  }
+}
+
+function showTokenField() {
+  document.getElementById('tokenField').style.display = 'block';
+  document.getElementById('tokenStatus').style.display = 'none';
+  document.getElementById('loginToken').focus();
+}
+
+function updateCurrentTokenInfo() {
+  const el = document.getElementById('currentTokenInfo');
+  if (!el) return;
+  const token = getStoredToken();
+  if (token) {
+    const masked = token.substring(0, 20) + '…' + token.slice(-4);
+    el.textContent = `✅ محفوظ: ${masked}\nالطول: ${token.length} حرف`;
+  } else {
+    el.textContent = '❌ لا يوجد توكن';
+  }
+}
+
+function changeToken() {
+  document.getElementById('newTokenInput').value = '';
+  openModal('tokenModal');
+}
+
+function saveNewToken() {
+  const t = document.getElementById('newTokenInput').value.trim();
+  if (!t) { toast('أدخل التوكن', 'error'); return; }
+  if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
+    if (!confirm('التوكن لا يبدأ بـ github_pat_ أو ghp_. متابعة؟')) return;
+  }
+  saveToken(t);
+  closeModal('tokenModal');
+  toast('✅ تم حفظ التوكن الجديد', 'success');
+  updateCurrentTokenInfo();
+  // إعادة المزامنة
+  lastSHA = null;
+  syncPull();
+}
+
 /* ========== GitHub API ========== */
 
 async function ghRead() {
+  const token = getStoredToken();
+  if (!token) throw new Error('لم يتم إدخال التوكن');
+
   const url = `${API_URL}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   console.log('📡 GET:', url);
 
@@ -455,7 +599,7 @@ async function ghRead() {
     res = await fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28'
       }
@@ -466,8 +610,8 @@ async function ghRead() {
       'فشل الاتصال بالشبكة.\n' +
       'تحقق من:\n' +
       '• اتصالك بالإنترنت\n' +
-      '• أن الصفحة تعمل عبر https:// أو http://localhost\n' +
-      '• عدم وجود مانع إعلانات يحجب api.github.com'
+      '• أن الصفحة تعمل عبر https://\n' +
+      '• عدم وجود مانع إعلانات'
     );
   }
 
@@ -475,14 +619,13 @@ async function ghRead() {
 
   if (!res.ok) {
     if (res.status === 401) throw new Error('التوكن غير صالح أو منتهي');
-    if (res.status === 403) throw new Error('التوكن لا يملك صلاحية Contents: Read/Write');
+    if (res.status === 403) throw new Error('التوكن لا يملك صلاحية Contents');
     if (res.status === 404) throw new Error(
       `المستودع أو الملف غير موجود.\n` +
-      `تأكد من:\n` +
-      `• owner = ${GITHUB_OWNER}\n` +
-      `• repo = ${GITHUB_REPO}\n` +
-      `• file = ${GITHUB_FILE}\n` +
-      `• branch = ${GITHUB_BRANCH}`
+      `owner = ${GITHUB_OWNER}\n` +
+      `repo = ${GITHUB_REPO}\n` +
+      `file = ${GITHUB_FILE}\n` +
+      `branch = ${GITHUB_BRANCH}`
     );
     throw new Error(`فشل القراءة: HTTP ${res.status}`);
   }
@@ -495,16 +638,19 @@ async function ghRead() {
     const text = decodeURIComponent(escape(raw));
     return JSON.parse(text);
   } catch (e) {
-    throw new Error('ملف data.json تالف — تحقق من صحة JSON');
+    throw new Error('ملف data.json تالف');
   }
 }
 
 async function ghWrite(data) {
+  const token = getStoredToken();
+  if (!token) throw new Error('لم يتم إدخال التوكن');
+
   const jsonStr = JSON.stringify(data, null, 2);
   const content = btoa(unescape(encodeURIComponent(jsonStr)));
 
   const body = {
-    message: `تحديث - ${new Date().toISOString()}`,
+    message: `update - ${new Date().toISOString()}`,
     content: content,
     branch: GITHUB_BRANCH,
     sha: lastSHA
@@ -515,7 +661,7 @@ async function ghWrite(data) {
     res = await fetch(API_URL, {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json'
@@ -523,14 +669,14 @@ async function ghWrite(data) {
       body: JSON.stringify(body)
     });
   } catch (e) {
-    throw new Error('فشل الاتصال بالشبكة أثناء الحفظ');
+    throw new Error('فشل الاتصال أثناء الحفظ');
   }
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     if (res.status === 409) {
       await syncPull();
-      throw new Error('تعارض في البيانات — حاول مرة أخرى');
+      throw new Error('تعارض — حاول مرة أخرى');
     }
     throw new Error(`فشل الحفظ: ${res.status} - ${err.message || ''}`);
   }
@@ -584,7 +730,7 @@ function setOnline(ok) {
   const dot = document.getElementById('connDot');
   if (!dot) return;
   dot.className = 'status-dot' + (ok ? ' online' : '');
-  dot.title = ok ? 'متصل بـ GitHub' : 'غير متصل';
+  dot.title = ok ? 'متصل' : 'غير متصل';
 }
 
 function setSyncing(on) {
@@ -593,7 +739,7 @@ function setSyncing(on) {
   dot.className = 'status-dot' + (on ? ' sync' : ' online');
 }
 
-/* ========== أدوات مساعدة ========== */
+/* ========== أدوات ========== */
 
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
@@ -632,27 +778,39 @@ window.doLogin = async function () {
   const btn = document.getElementById('loginBtn');
   errEl.textContent = ''; loadEl.textContent = '';
 
-  // تشخيصات أولية
-  if (!u || !p) { errEl.textContent = '❌ املأ اسم المستخدم وكلمة المرور'; return; }
+  // إذا كان حقل التوكن ظاهراً، احفظه أولاً
+  const tokenFieldEl = document.getElementById('tokenField');
+  if (tokenFieldEl.style.display !== 'none') {
+    const t = document.getElementById('loginToken').value.trim();
+    if (t) {
+      if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
+        errEl.textContent = '⚠️ التوكن لا يبدو صحيحاً (يجب أن يبدأ بـ github_pat_)';
+        return;
+      }
+      saveToken(t);
+      updateTokenStatus();
+    }
+  }
 
-  if (!GITHUB_TOKEN || GITHUB_TOKEN === 'PASTE_YOUR_TOKEN_HERE') {
-    errEl.textContent = '❌ التوكن غير مُعدّ في الكود\nعدّل قيمة GITHUB_TOKEN في الأعلى';
+  if (!getStoredToken()) {
+    errEl.textContent = '❌ يرجى إدخال GitHub Token أولاً';
     return;
   }
 
+  if (!u || !p) { errEl.textContent = '❌ املأ اسم المستخدم وكلمة المرور'; return; }
+
   if (GITHUB_OWNER === 'YOUR_USERNAME') {
-    errEl.textContent = '❌ لم تعدّل قيمة GITHUB_OWNER\nضع اسمك في GitHub';
+    errEl.textContent = '❌ لم تعدّل GITHUB_OWNER في الكود';
     return;
   }
 
   if (location.protocol === 'file:') {
-    errEl.textContent = '❌ لا يمكن فتح الملف محلياً (file://)\n' +
-      'افتحه من GitHub Pages أو استخدم سيرفر محلي';
+    errEl.textContent = '❌ لا يمكن الفتح محلياً (file://)\nافتح من GitHub Pages';
     return;
   }
 
   btn.disabled = true;
-  loadEl.textContent = '⏳ جاري الاتصال بـ GitHub...';
+  loadEl.textContent = '⏳ جاري الاتصال...';
 
   try {
     const data = await ghRead();
@@ -660,7 +818,7 @@ window.doLogin = async function () {
     const found = users.find(x => x.username === u && x.password === p);
 
     if (!found) {
-      errEl.textContent = '❌ اسم المستخدم أو كلمة المرور غير صحيحة';
+      errEl.textContent = '❌ بيانات الدخول غير صحيحة';
       btn.disabled = false; loadEl.textContent = '';
       return;
     }
@@ -674,7 +832,7 @@ window.doLogin = async function () {
     cache.drivers   = data.drivers   || [];
     cache.users     = data.users     || [];
 
-    loadEl.textContent = '✅ تم الدخول بنجاح';
+    loadEl.textContent = '✅ تم الدخول';
     startApp();
   } catch (e) {
     console.error('Login error:', e);
@@ -692,6 +850,7 @@ window.logout = function () {
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = '';
   document.getElementById('loginLoading').textContent = '';
+  updateTokenStatus();
   loadLastUser();
 };
 
@@ -702,8 +861,6 @@ function loadLastUser() {
     setTimeout(() => document.getElementById('loginPass').focus(), 100);
   }
 }
-
-/* ========== بدء التطبيق ========== */
 
 function startApp() {
   document.getElementById('loginScreen').style.display = 'none';
@@ -721,8 +878,6 @@ function startApp() {
   startPolling();
 }
 
-/* ========== التنقل ========== */
-
 window.go = function (page) {
   if ((page === 'settings' || page === 'customers') && currentUser.role !== 'رئيسي') {
     toast('غير مصرح', 'error'); return;
@@ -737,10 +892,10 @@ window.go = function (page) {
   if (page === 'ready')     renderReady();
   if (page === 'log')       renderLog();
   if (page === 'customers') renderCustomers();
-  if (page === 'settings')  renderSettings();
+  if (page === 'settings')  { renderSettings(); updateCurrentTokenInfo(); }
 };
 
-/* ========== واجهات العرض ========== */
+/* ========== العرض ========== */
 
 function renderDashboard() {
   document.getElementById('statEntry').textContent  = cache.orders.length;
@@ -759,7 +914,7 @@ function renderEntry() {
   document.getElementById('entryCount').textContent = `الإجمالي: ${cache.orders.length}`;
   const body = document.getElementById('entryBody');
   if (!data.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="11">لا توجد طلبات — اضغط "طلب جديد" للبدء</td></tr>`;
+    body.innerHTML = `<tr class="empty-row"><td colspan="11">لا توجد طلبات</td></tr>`;
     return;
   }
   body.innerHTML = data.map((o, i) => {
@@ -776,9 +931,9 @@ function renderEntry() {
       <td>${esc(o.driverPhone)}</td>
       <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
       <td class="no-print" style="white-space:nowrap;">
-        <button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')" title="تعديل">✏️</button>
-        <button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل للجاهزة">➡️</button>
-        <button class="btn btn-danger btn-sm"  onclick="deleteOrder('${o.id}')" title="حذف">🗑️</button>
+        <button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')">✏️</button>
+        <button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')">➡️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')">🗑️</button>
       </td>
     </tr>`;
   }).join('');
@@ -788,7 +943,7 @@ function renderReady() {
   document.getElementById('readyCount').textContent = `الإجمالي: ${cache.ready.length}`;
   const body = document.getElementById('readyBody');
   if (!cache.ready.length) {
-    body.innerHTML = `<tr class="empty-row"><td colspan="10">لا توجد طلبات جاهزة — قم بتحويل طلبات من واجهة الإدخال</td></tr>`;
+    body.innerHTML = `<tr class="empty-row"><td colspan="10">لا توجد طلبات جاهزة</td></tr>`;
     return;
   }
   body.innerHTML = cache.ready.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
@@ -873,7 +1028,7 @@ function renderUsers() {
   </tr>`).join('');
 }
 
-/* ========== عمليات الطلبات ========== */
+/* ========== CRUD ========== */
 
 window.addOrder = function () {
   document.getElementById('orderModalTitle').textContent = '➕ طلب جديد';
@@ -937,9 +1092,7 @@ window.saveOrder = async function () {
     await persist();
     closeModal('orderModal');
     toast('✅ تم الحفظ', 'success');
-  } catch (e) {
-    toast('❌ ' + e.message, 'error');
-  }
+  } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteOrder = async function (id) {
@@ -967,8 +1120,8 @@ window.bulkTransfer = async function () {
   const eligible = cache.orders.filter(o =>
     o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')
   );
-  if (!eligible.length) { toast('لا توجد طلبات مستوفية للشروط', 'error'); return; }
-  if (!confirm(`سيتم تحويل ${eligible.length} طلب (جاهز + مدفوع/VIP). متابعة؟`)) return;
+  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
+  if (!confirm(`تحويل ${eligible.length} طلب؟`)) return;
 
   try {
     eligible.forEach(o => cache.ready.push({
@@ -983,8 +1136,8 @@ window.bulkTransfer = async function () {
 };
 
 window.moveReadyToLog = async function () {
-  if (!cache.ready.length) { toast('لا توجد طلبات للترحيل', 'error'); return; }
-  if (!confirm(`سيتم ترحيل ${cache.ready.length} طلب إلى السجل وتفريغ الواجهة. متابعة؟`)) return;
+  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
+  if (!confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`)) return;
 
   try {
     cache.ready.forEach(o => cache.log.push({
@@ -992,11 +1145,9 @@ window.moveReadyToLog = async function () {
     }));
     cache.ready = [];
     await persist();
-    toast('✅ تم الترحيل إلى السجل', 'success');
+    toast('✅ تم الترحيل', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
-
-/* ========== الحفظ إلى GitHub ========== */
 
 async function persist() {
   const data = {
@@ -1026,45 +1177,29 @@ async function persist() {
 /* ========== الطباعة ========== */
 
 window.printReady = function () {
-  if (!cache.ready.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
-
+  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
   const rows = cache.ready.map((o, i) => `<tr>
-    <td>${i+1}</td>
-    <td>${esc(o.invoice)}</td>
-    <td>${esc(o.customer)}</td>
-    <td>${esc(o.location)}</td>
-    <td>${esc(o.status)}</td>
-    <td>${esc(o.approvalDate)}</td>
-    <td>${esc(o.pay)}</td>
-    <td>${esc(o.driver)}</td>
-    <td>${esc(o.driverPhone)}</td>
-  </tr>`).join('');
+    <td>${i+1}</td><td>${esc(o.invoice)}</td><td>${esc(o.customer)}</td>
+    <td>${esc(o.location)}</td><td>${esc(o.status)}</td><td>${esc(o.approvalDate)}</td>
+    <td>${esc(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td></tr>`).join('');
 
   const win = window.open('', '_blank');
   win.document.write(`<html dir="rtl"><head><meta charset="utf-8"><title>قائمة الطلبات</title>
-    <style>
-      body{font-family:Tahoma,Arial;padding:20px;}
-      h1{color:#1f4e79;text-align:center;margin-bottom:6px;}
-      .meta{text-align:center;color:#555;margin-bottom:20px;font-size:13px;}
-      table{width:100%;border-collapse:collapse;font-size:12px;}
-      th,td{border:1px solid #999;padding:7px;text-align:right;}
-      th{background:#1f4e79;color:#fff;}
-      tfoot td{padding:20px;border:none;font-size:13px;}
-    </style></head><body>
+    <style>body{font-family:Tahoma,Arial;padding:20px;}
+    h1{color:#1f4e79;text-align:center;margin-bottom:6px;}
+    .meta{text-align:center;color:#555;margin-bottom:20px;font-size:13px;}
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th,td{border:1px solid #999;padding:7px;text-align:right;}
+    th{background:#1f4e79;color:#fff;}
+    tfoot td{padding:20px;border:none;font-size:13px;}</style></head><body>
     <h1>📦 قائمة الطلبات الجاهزة للنقل</h1>
     <div class="meta">التاريخ: ${fmtDate()} — العدد: ${cache.ready.length} — المستخدم: ${esc(currentUser.username)}</div>
-    <table>
-      <thead><tr>
-        <th>#</th><th>الفاتورة</th><th>العميل</th><th>الموقع</th>
-        <th>الحالة</th><th>الاعتماد</th><th>الدفع</th><th>الموصل</th><th>الهاتف</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-      <tfoot><tr><td colspan="9" style="border:none;padding-top:30px;">
-        توقيع الموظف: ________________    توقيع الموصل: ________________
-      </td></tr></tfoot>
-    </table>
-    <script>window.onload=()=>window.print();<\/script>
-    </body></html>`);
+    <table><thead><tr><th>#</th><th>الفاتورة</th><th>العميل</th><th>الموقع</th>
+    <th>الحالة</th><th>الاعتماد</th><th>الدفع</th><th>الموصل</th><th>الهاتف</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr><td colspan="9" style="border:none;padding-top:30px;">
+      توقيع الموظف: __________    توقيع الموصل: __________</td></tr></tfoot>
+    </table><script>window.onload=()=>window.print();<\/script></body></html>`);
   win.document.close();
 };
 
@@ -1104,18 +1239,15 @@ window.saveCustomer = async function () {
     await persist();
     closeModal('customerModal');
     loadCustomersIntoSelect();
-    toast('✅ تم إضافة العميل', 'success');
+    toast('✅ تم الإضافة', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteCustomer = async function (id) {
   if (!confirm('حذف العميل؟')) return;
   cache.customers = cache.customers.filter(c => c.id !== id);
-  try {
-    await persist();
-    loadCustomersIntoSelect();
-    toast('تم الحذف', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persist(); loadCustomersIntoSelect(); toast('تم الحذف', 'success'); }
+  catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 /* ========== الموصلون ========== */
@@ -1132,24 +1264,21 @@ function loadDriversIntoSelects() {
 window.addDriver = async function () {
   const name = document.getElementById('newDriver').value.trim();
   if (!name) return;
-  if (cache.drivers.includes(name)) { toast('الموصل موجود مسبقاً', 'error'); return; }
+  if (cache.drivers.includes(name)) { toast('موجود مسبقاً', 'error'); return; }
   cache.drivers.push(name);
   try {
     await persist();
     document.getElementById('newDriver').value = '';
     loadDriversIntoSelects();
-    toast('✅ تم إضافة الموصل', 'success');
+    toast('✅ تم الإضافة', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteDriver = async function (i) {
   if (!confirm('حذف هذا الموصل؟')) return;
   cache.drivers.splice(i, 1);
-  try {
-    await persist();
-    loadDriversIntoSelects();
-    toast('تم الحذف', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persist(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
+  catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 /* ========== المستخدمون ========== */
@@ -1164,18 +1293,15 @@ window.saveUser = async function () {
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
-  if (!username || !password) { toast('املأ جميع الحقول', 'error'); return; }
-  if (cache.users.find(u => u.username === username)) { toast('اسم المستخدم موجود', 'error'); return; }
+  if (!username || !password) { toast('املأ الحقول', 'error'); return; }
+  if (cache.users.find(u => u.username === username)) { toast('الاسم موجود', 'error'); return; }
   cache.users.push({ id: uid(), username, password, role });
-  try {
-    await persist();
-    closeModal('userModal');
-    toast('✅ تم إضافة المستخدم', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persist(); closeModal('userModal'); toast('✅ تم الإضافة', 'success'); }
+  catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteUser = async function (id) {
-  if (!confirm('حذف هذا المستخدم؟')) return;
+  if (!confirm('حذف المستخدم؟')) return;
   cache.users = cache.users.filter(u => u.id !== id);
   try { await persist(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
@@ -1193,7 +1319,7 @@ window.exportBackup = function () {
 };
 
 window.resetAll = async function () {
-  if (!confirm('⚠️ سيتم حذف كل الطلبات (وليس المستخدمين). متابعة؟')) return;
+  if (!confirm('⚠️ حذف كل الطلبات؟')) return;
   if (!confirm('تأكيد أخير؟')) return;
   cache.orders = []; cache.ready = []; cache.log = [];
   try { await persist(); toast('✅ تم التصفير', 'success'); }
@@ -1212,7 +1338,7 @@ window.exportLogCSV = function () {
   a.click();
 };
 
-/* ========== النوافذ المنبثقة ========== */
+/* ========== النوافذ ========== */
 
 window.openModal  = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
@@ -1224,13 +1350,17 @@ document.querySelectorAll('.modal-bg').forEach(m => {
 /* ========== التهيئة ========== */
 
 window.addEventListener('DOMContentLoaded', () => {
+  updateTokenStatus();
   loadLastUser();
+
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+  document.getElementById('loginToken').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
+  document.getElementById('newTokenInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveNewToken(); });
 
   console.log('✅ النظام جاهز');
   console.log('📦 المستودع:', GITHUB_OWNER + '/' + GITHUB_REPO);
-  console.log('🔑 التوكن:', GITHUB_TOKEN ? 'موجود (' + GITHUB_TOKEN.length + ' حرف)' : '❌ فارغ');
+  console.log('🔑 التوكن:', getStoredToken() ? 'محفوظ' : 'غير موجود');
 });
 </script>
 </body>
