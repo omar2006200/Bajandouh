@@ -8,7 +8,6 @@
 <meta name="robots" content="noindex, nofollow">
 <title>نظام إدارة الطلبات</title>
 <style>
-  /* ============ RESET ============ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   *:not(input):not(textarea):not(select) {
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
@@ -47,35 +46,23 @@
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
   }
 
-  /* ============ ICON ============ */
   .ico {
-    display: inline-block;
-    flex-shrink: 0;
-    vertical-align: middle;
-    pointer-events: none;
-    outline: none;
+    display: inline-block; flex-shrink: 0; vertical-align: middle;
+    pointer-events: none; outline: none;
   }
 
-  /* ============ BUTTONS ============ */
   .btn {
-    height: var(--btn-h);
-    padding: 0 16px;
+    height: var(--btn-h); padding: 0 16px;
     border: none; border-radius: 8px;
     cursor: pointer; font-size: 13px; font-weight: 600;
     transition: var(--transition);
     display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-    letter-spacing: .2px;
-    white-space: nowrap; flex-wrap: nowrap;
-    font-family: inherit; line-height: 1;
-    text-decoration: none;
+    letter-spacing: .2px; white-space: nowrap; flex-wrap: nowrap;
+    font-family: inherit; line-height: 1; text-decoration: none;
   }
   .btn > * { display: inline-flex; align-items: center; line-height: 1; }
   .btn .ico { width: 15px; height: 15px; }
-  .btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    filter: brightness(1.05);
-  }
+  .btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.15); filter: brightness(1.05); }
   .btn:active:not(:disabled) { transform: translateY(0); filter: brightness(.95); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
   .btn-primary { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; }
@@ -86,15 +73,11 @@
   .btn-gray    { background: linear-gradient(135deg, #6c757d, #8a9299); color: #fff; }
   .btn-ghost   { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover:not(:disabled) { background: var(--light-blue); border-color: var(--blue); color: var(--dark-blue); }
-  .btn-sm {
-    height: 30px; padding: 0 10px; font-size: 12px; border-radius: 7px;
-    min-width: 30px;
-  }
+  .btn-sm { height: 30px; padding: 0 10px; font-size: 12px; border-radius: 7px; min-width: 30px; }
   .btn-sm .ico { width: 13px; height: 13px; }
   .btn-icon {
     width: var(--btn-h); height: var(--btn-h); padding: 0;
-    border-radius: 50%;
-    background: rgba(255,255,255,.15); color: #fff;
+    border-radius: 50%; background: rgba(255,255,255,.15); color: #fff;
     border: none; cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center;
     transition: var(--transition);
@@ -110,7 +93,6 @@
   }
   .btn-warning kbd { background: rgba(0,0,0,.15); }
 
-  /* ============ LOADING ============ */
   #loadingOverlay {
     display: none; position: fixed; inset: 0;
     background: rgba(31,78,121,.92); z-index: 9999;
@@ -126,7 +108,6 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { font-size: 15px; font-weight: 500; letter-spacing: .3px; }
 
-  /* ============ LOGIN ============ */
   #loginScreen {
     display: flex; align-items: center; justify-content: center;
     min-height: 100vh;
@@ -141,8 +122,7 @@
   }
   .login-logo {
     text-align: center; margin-bottom: 8px;
-    display: flex; justify-content: center;
-    color: var(--dark-blue);
+    display: flex; justify-content: center; color: var(--dark-blue);
   }
   .login-logo svg { width: 54px; height: 54px; display: block; }
   .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 24px; text-align: center; font-weight: 700; }
@@ -169,14 +149,12 @@
 
   .token-status {
     display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px; border-radius: 10px; font-size: 13px;
-    margin-top: 10px;
+    padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-top: 10px;
   }
   .token-status.saved { background: #d4edda; color: #155724; }
   .token-status.missing { background: #fff3cd; color: #856404; }
   .token-status button {
-    margin-right: auto; padding: 5px 12px;
-    font-size: 11px; border-radius: 6px;
+    margin-right: auto; padding: 5px 12px; font-size: 11px; border-radius: 6px;
     background: rgba(0,0,0,.1); border: none; cursor: pointer; color: inherit;
     font-weight: 600; font-family: inherit;
   }
@@ -185,14 +163,12 @@
   .login-error {
     color: var(--red); font-size: 13px; margin-top: 12px;
     text-align: center; white-space: pre-line; line-height: 1.6;
-    background: #f8d7da; padding: 12px 16px; border-radius: 10px;
-    display: none;
+    background: #f8d7da; padding: 12px 16px; border-radius: 10px; display: none;
   }
   .login-error.show { display: block; animation: shake .3s ease; }
   @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
   .login-loading { color: var(--blue); font-size: 12px; margin-top: 8px; text-align: center; }
 
-  /* ============ APP SHELL ============ */
   #app { display: none; }
   header {
     background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
@@ -221,10 +197,7 @@
     border-radius: 16px; font-size: 11px; font-weight: 600;
     display: inline-flex !important; align-items: center; gap: 7px;
   }
-  .rate-limit-chip .bar {
-    width: 36px; height: 4px; background: rgba(255,255,255,.25);
-    border-radius: 3px; overflow: hidden;
-  }
+  .rate-limit-chip .bar { width: 36px; height: 4px; background: rgba(255,255,255,.25); border-radius: 3px; overflow: hidden; }
   .rate-limit-chip .fill { height: 100%; background: #4caf50; transition: width .3s; }
   .rate-limit-chip .fill.warning { background: #ffc107; }
   .rate-limit-chip .fill.danger { background: #dc3545; }
@@ -255,11 +228,7 @@
 
   main { padding: 22px; max-width: 1700px; margin: 0 auto; }
 
-  /* ============ DASHBOARD ============ */
-  .dash-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 16px; margin-bottom: 22px;
-  }
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 22px; }
   .dash-card {
     background: var(--card-bg); padding: 22px; border-radius: 14px;
     box-shadow: var(--shadow-sm); cursor: pointer;
@@ -276,8 +245,7 @@
     margin-bottom: 10px;
     display: inline-flex !important; align-items: center; justify-content: center;
     width: 56px; height: 56px; border-radius: 14px;
-    background: linear-gradient(135deg, #e8f2fb, #d0e4f5);
-    color: var(--dark-blue);
+    background: linear-gradient(135deg, #e8f2fb, #d0e4f5); color: var(--dark-blue);
   }
   [data-theme="dark"] .dash-card .icon { background: linear-gradient(135deg, #1e3a52, #0d1e2e); }
   .dash-card .icon svg { width: 26px; height: 26px; }
@@ -293,11 +261,7 @@
   .dash-card.orange .icon { background: linear-gradient(135deg, #ffead6, #ffd0a8); color: #fd7e14; }
   [data-theme="dark"] .dash-card.orange .icon { background: linear-gradient(135deg, #4d2f10, #2e1a05); }
 
-  /* ============ STATS GRID ============ */
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px; margin-bottom: 22px;
-  }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 22px; }
   .stat {
     background: var(--card-bg); padding: 20px 18px; border-radius: 12px;
     box-shadow: var(--shadow-sm); transition: var(--transition);
@@ -305,10 +269,7 @@
     border-right: 4px solid var(--blue);
   }
   .stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .stat .stat-head {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 10px;
-  }
+  .stat .stat-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
   .stat .stat-icon {
     width: 38px; height: 38px; border-radius: 10px;
     display: inline-flex !important; align-items: center; justify-content: center;
@@ -335,16 +296,9 @@
   .stat.purple { border-right-color: var(--purple); }
   .stat.purple .stat-icon { background: rgba(111,66,193,.12); color: var(--purple); }
 
-  /* ============ ANALYTICS ============ */
-  .analytics-row {
-    display: grid; grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 16px; margin-bottom: 22px;
-  }
+  .analytics-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; margin-bottom: 22px; }
   @media (max-width: 1100px) { .analytics-row { grid-template-columns: 1fr; } }
-  .analytics-card {
-    background: var(--card-bg); padding: 20px 22px; border-radius: 14px;
-    box-shadow: var(--shadow-sm);
-  }
+  .analytics-card { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
   .analytics-card h4 {
     color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
     display: flex !important; align-items: center; gap: 8px;
@@ -355,10 +309,7 @@
   .donut { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
   .donut svg { transform: rotate(-90deg); }
   .donut circle { fill: none; stroke-width: 16; transition: stroke-dashoffset .8s ease; }
-  .donut .center {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
+  .donut .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .donut .center .big { font-size: 24px; font-weight: 800; color: var(--dark-blue); }
   .donut .center .small { font-size: 10.5px; color: var(--text-muted); }
   .donut-legend { flex: 1; display: flex; flex-direction: column; gap: 8px; }
@@ -378,8 +329,7 @@
   .top-item .rank {
     width: 22px; height: 22px; border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    background: var(--blue); color: #fff; font-size: 11px; font-weight: 700;
-    flex-shrink: 0;
+    background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; flex-shrink: 0;
   }
   .top-item .rank.gold   { background: linear-gradient(135deg,#f5b800,#ffc107); color:#333; }
   .top-item .rank.silver { background: linear-gradient(135deg,#adb5bd,#dee2e6); color:#333; }
@@ -388,10 +338,7 @@
   .top-item .count { font-weight: 700; color: var(--dark-blue); }
   .empty-top { color: var(--text-muted); text-align: center; padding: 18px 0; font-size: 12.5px; }
 
-  .sparkline {
-    background: var(--card-bg); padding: 20px 22px; border-radius: 14px;
-    box-shadow: var(--shadow-sm);
-  }
+  .sparkline { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
   .sparkline h4 {
     color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
     display: flex !important; align-items: center; gap: 8px;
@@ -399,7 +346,6 @@
   .sparkline h4 .ico { width: 16px; height: 16px; }
   .sparkline svg { width: 100%; height: 90px; }
 
-  /* ============ TOOLBAR ============ */
   .toolbar { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
   .filter-bar {
     display: flex !important; gap: 11px; flex-wrap: wrap; align-items: center;
@@ -412,42 +358,29 @@
   .filter-bar input, .filter-bar select { width: auto; padding: 7px 11px; font-size: 12.5px; height: 34px; }
   .filter-bar .btn { height: 34px; padding: 0 13px; font-size: 12.5px; }
 
-  /* ============ INPUTS ============ */
   input, select, textarea {
     padding: 10px 13px; border: 2px solid var(--border); border-radius: 9px;
     font-size: 13.5px; font-family: inherit; width: 100%;
     transition: var(--transition); background: var(--card-bg); color: var(--text);
   }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--blue);
-    box-shadow: 0 0 0 4px rgba(46,117,182,.1);
-  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(46,117,182,.1); }
   textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
 
-  /* ============ VALIDATION ============ */
   .field-error {
     border-color: var(--red) !important;
     box-shadow: 0 0 0 4px rgba(220,53,69,.12) !important;
     animation: shake .3s ease;
   }
-  .field-error-msg {
-    color: var(--red); font-size: 11.5px; margin-top: 5px;
-    display: none; font-weight: 600;
-  }
+  .field-error-msg { color: var(--red); font-size: 11.5px; margin-top: 5px; display: none; font-weight: 600; }
   .field-error-msg.show { display: block; }
   .field-required::after { content: ' *'; color: var(--red); font-weight: 700; }
 
-  /* ============ TABLES ============ */
-  .table-wrap {
-    background: var(--card-bg); border-radius: 12px; overflow: auto;
-    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-  }
+  .table-wrap { background: var(--card-bg); border-radius: 12px; overflow: auto; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
   table { width: 100%; border-collapse: collapse; min-width: 1300px; }
   th {
     background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
     color: #fff; padding: 13px 11px; text-align: right;
-    font-size: 12px; font-weight: 600; position: sticky; top: 0; z-index: 1;
-    white-space: nowrap;
+    font-size: 12px; font-weight: 600; position: sticky; top: 0; z-index: 1; white-space: nowrap;
   }
   td { padding: 11px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: top; }
   tbody tr { cursor: pointer; transition: var(--transition); }
@@ -477,14 +410,8 @@
     line-height: 1.5; vertical-align: top;
     padding-top: 11px; padding-bottom: 11px;
   }
-  .note-cell .note-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .note-cell .note-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-  /* ============ BADGES ============ */
   .badge {
     display: inline-flex; align-items: center; gap: 4px;
     padding: 4px 10px; border-radius: 12px;
@@ -496,7 +423,6 @@
   .badge-unpaid   { background: linear-gradient(135deg,#dc3545,#e4606d); color: #fff; }
   .badge-vip      { background: linear-gradient(135deg,#6f42c1,#8a5cd4); color: #fff; }
 
-  /* ============ SECTION HEADER ============ */
   .section-header {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 16px; padding-bottom: 13px;
@@ -516,19 +442,16 @@
   [data-theme="dark"] .section-header .hint { background: rgba(255,255,255,.05); }
   .section-header .hint kbd { background: rgba(0,0,0,.1); }
 
-  /* ============ PAGES ============ */
   .page { display: none; }
   .page.active { display: block; animation: fadeSlide .25s ease; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ============ MODALS ============ */
   .modal-bg {
     display: none; position: fixed; inset: 0; background: rgba(10,20,35,.65);
     z-index: 1000; align-items: center; justify-content: center;
-    padding: 20px; overflow-y: auto;
-    backdrop-filter: blur(3px);
+    padding: 20px; overflow-y: auto; backdrop-filter: blur(3px);
   }
   .modal-bg.active { display: flex; animation: fadeIn .15s; }
   .modal {
@@ -546,7 +469,6 @@
   .modal-actions { display: flex; gap: 9px; margin-top: 22px; justify-content: flex-end; flex-wrap: wrap; }
   .modal-actions .btn { min-width: 105px; }
 
-  /* ============ DIALOG ============ */
   .dialog-bg {
     display: none; position: fixed; inset: 0;
     background: rgba(10,20,35,.7); z-index: 2000;
@@ -575,7 +497,6 @@
   .dialog-actions { display: flex; gap: 9px; justify-content: center; }
   .dialog-actions .btn { min-width: 105px; }
 
-  /* ============ TOAST ============ */
   .toast-container {
     position: fixed; bottom: 22px; left: 22px;
     z-index: 3000; display: flex; flex-direction: column; gap: 9px;
@@ -605,11 +526,7 @@
   .toast.error   { border-right-color: var(--red); }
   .toast.warning { border-right-color: var(--yellow); }
 
-  /* ============ TABS ============ */
-  .tabs {
-    display: flex; gap: 3px; border-bottom: 2px solid var(--light-blue);
-    margin-bottom: 20px; flex-wrap: wrap;
-  }
+  .tabs { display: flex; gap: 3px; border-bottom: 2px solid var(--light-blue); margin-bottom: 20px; flex-wrap: wrap; }
   .tab-btn {
     padding: 11px 18px; background: transparent; border: none;
     cursor: pointer; font-size: 13px; color: var(--text-muted);
@@ -623,7 +540,6 @@
   .tab-btn:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
   .tab-btn.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); background: rgba(46,117,182,.08); }
 
-  /* ============ PERMISSIONS ============ */
   .perm-section { margin-top: 20px; padding-top: 18px; border-top: 2px dashed var(--border); }
   .perm-section h4 { color: var(--dark-blue); font-size: 13.5px; margin-bottom: 13px; font-weight: 700; }
   .perm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
@@ -641,12 +557,10 @@
   .perm-note {
     background: #fff3cd; border: 1px solid #ffc107;
     padding: 11px 14px; border-radius: 10px;
-    font-size: 12px; color: #856404; margin-top: 13px;
-    line-height: 1.6;
+    font-size: 12px; color: #856404; margin-top: 13px; line-height: 1.6;
   }
   [data-theme="dark"] .perm-note { background: #4d3a10; border-color: #8a6914; color: #ffd54f; }
 
-  /* ============ CUSTOMER SEARCH ============ */
   .customer-search { position: relative; }
   .customer-dropdown {
     position: absolute; top: calc(100% + 6px); left: 0; right: 0;
@@ -668,7 +582,6 @@
   .customer-option.create:hover { background: #d4edda; }
   [data-theme="dark"] .customer-option.create:hover { background: #1a4a2a; }
 
-  /* ============ TEMPLATES ============ */
   .template-card {
     background: var(--card-bg); border: 2px solid var(--border);
     border-radius: 12px; padding: 20px; margin-bottom: 15px;
@@ -681,10 +594,7 @@
     padding-bottom: 10px; border-bottom: 2px solid var(--light-blue);
   }
   .template-card h4 .ico { width: 17px; height: 17px; }
-  .template-row {
-    display: grid; grid-template-columns: 170px 1fr;
-    gap: 11px; align-items: center; margin-bottom: 11px;
-  }
+  .template-row { display: grid; grid-template-columns: 170px 1fr; gap: 11px; align-items: center; margin-bottom: 11px; }
   .template-row label { font-size: 12.5px; color: var(--text); font-weight: 600; }
   .template-row input, .template-row textarea, .template-row select { font-size: 12.5px; }
   .toggle-row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; padding: 7px 0; cursor: pointer; }
@@ -701,11 +611,7 @@
   .logo-preview img { max-width: 100%; max-height: 120px; border-radius: 6px; pointer-events: none; }
   .logo-preview .empty-logo { color: var(--text-muted); font-size: 12.5px; }
 
-  /* ============ SHORTCUTS ============ */
-  .shortcuts-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
-  }
+  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
   .shortcut-group h4 {
     color: var(--dark-blue); margin-bottom: 11px;
     padding-bottom: 7px; border-bottom: 2px solid var(--light-blue);
@@ -713,14 +619,10 @@
     display: flex !important; align-items: center; gap: 7px;
   }
   .shortcut-group h4 .ico { width: 15px; height: 15px; }
-  .shortcut-row {
-    display: flex; justify-content: space-between;
-    padding: 7px 0; font-size: 12.5px; align-items: center;
-  }
+  .shortcut-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 12.5px; align-items: center; }
   .shortcut-row .keys { display: flex; gap: 4px; }
   .shortcut-row .desc { color: var(--text); font-weight: 500; }
 
-  /* ============ CONNECTION BANNER ============ */
   .connection-banner {
     position: fixed; top: 0; left: 0; right: 0;
     background: var(--red); color: #fff; padding: 8px 16px;
@@ -732,7 +634,6 @@
   .connection-banner.show { transform: translateY(0); }
   .connection-banner .ico { width: 14px; height: 14px; }
 
-  /* ============ DRAFT BADGE ============ */
   .draft-badge {
     position: fixed; bottom: 22px; right: 22px;
     background: linear-gradient(135deg, #ffc107, #ffb300); color: #333;
@@ -747,7 +648,6 @@
   .draft-badge .ico { width: 14px; height: 14px; }
   @keyframes slideInRight { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-  /* ============ PRINT ============ */
   @media print {
     body { background: #fff !important; color: #000 !important; }
     header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .tabs,
@@ -760,7 +660,6 @@
     @page { size: A4 landscape; margin: 12mm; }
   }
 
-  /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
     header { padding: 10px 14px; height: auto; flex-direction: column; gap: 9px; }
     header h1 { font-size: 14px; }
@@ -784,24 +683,20 @@
 </head>
 <body oncontextmenu="return false">
 
-<!-- Connection Banner -->
 <div id="connectionBanner" class="connection-banner">
   <span id="connBannerIcon"></span><span>لا يوجد اتصال — سيُعاد المحاولة تلقائياً</span>
 </div>
 
-<!-- Draft Badge -->
 <div id="draftBadge" class="draft-badge" onclick="restoreDraft()">
   <span id="draftIcon"></span><span>مسودة محفوظة</span>
   <span onclick="event.stopPropagation();discardDraft()" style="background:rgba(0,0,0,.15);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:700;">×</span>
 </div>
 
-<!-- Loading -->
 <div id="loadingOverlay">
   <div class="spinner"></div>
   <div class="loading-text" id="loadingText">جاري التحميل...</div>
 </div>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
@@ -830,7 +725,6 @@
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <header>
     <div class="brand">
@@ -857,7 +751,6 @@
   <nav id="navBar"></nav>
 
   <main>
-    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid" id="dashGrid"></div>
       <div id="statsTitle" style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;"></div>
@@ -885,7 +778,6 @@
       </div>
     </section>
 
-    <!-- ENTRY -->
     <section id="page-entry" class="page">
       <div class="section-header">
         <h2 id="entryTitle"></h2>
@@ -898,7 +790,6 @@
       </table></div>
     </section>
 
-    <!-- READY -->
     <section id="page-ready" class="page">
       <div class="section-header">
         <h2 id="readyTitle"></h2>
@@ -911,7 +802,6 @@
       </table></div>
     </section>
 
-    <!-- LOG -->
     <section id="page-log" class="page">
       <div class="section-header">
         <h2 id="logTitle"></h2>
@@ -925,7 +815,6 @@
       </table></div>
     </section>
 
-    <!-- CUSTOMERS -->
     <section id="page-customers" class="page">
       <div class="section-header">
         <h2 id="custTitle"></h2>
@@ -938,7 +827,6 @@
       </table></div>
     </section>
 
-    <!-- SETTINGS -->
     <section id="page-settings" class="page">
       <div class="section-header"><h2 id="settingsTitle"></h2></div>
       <div class="tabs" id="settingsTabs"></div>
@@ -951,7 +839,6 @@
   </main>
 </div>
 
-<!-- MODALS -->
 <div id="orderModal" class="modal-bg"><div class="modal">
   <h3 id="orderModalTitle"></h3>
   <input type="hidden" id="orderId">
@@ -962,7 +849,7 @@
   <div class="field-error-msg" id="err-orderInvoice"></div>
   <label class="field-required">العميل</label>
   <div class="customer-search">
-    <input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث...">
+    <input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث أو اختر من القائمة...">
     <div class="customer-dropdown" id="customerDropdown"></div>
   </div>
   <div class="field-error-msg" id="err-orderCustomer"></div>
@@ -1067,7 +954,7 @@
 
 <script>
 /* ==============================================================
-   ICONS — SVG paths (فقط path content، بدون <path>)
+   ICONS
    ============================================================== */
 const I = {
   home: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10',
@@ -1124,9 +1011,6 @@ const I = {
   bell: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 01-3.46 0'
 };
 
-/* ==============================================================
-   ⭐ دالة الأيقونة المُصحّحة
-   ============================================================== */
 function ico(name, size = 16) {
   const p = I[name] || '';
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
@@ -1340,26 +1224,37 @@ function focusFirstError(modalId) {
 }
 
 /* ==============================================================
-   Base64 + Crypto
+   Base64 + Simple Crypto (XOR + Base64 — works without HTTPS)
    ============================================================== */
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
-async function encryptData(text, password) {
-  const enc = new TextEncoder();
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
-  const key = await crypto.subtle.deriveKey(
-    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-    keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt']
-  );
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(text));
-  const combined = new Uint8Array(salt.length + iv.length + ct.byteLength);
-  combined.set(salt, 0);
-  combined.set(iv, salt.length);
-  combined.set(new Uint8Array(ct), salt.length + iv.length);
-  return btoa(String.fromCharCode(...combined));
+function encryptData(text, password) {
+  const encoder = new TextEncoder();
+  const dataBytes = encoder.encode(text);
+  const keyBytes = encoder.encode(password || 'key');
+  const result = new Uint8Array(dataBytes.length);
+  for (let i = 0; i < dataBytes.length; i++) {
+    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
+  }
+  let binary = '';
+  const chunk = 8192;
+  for (let i = 0; i < result.length; i += chunk) {
+    binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+function decryptData(b64, password) {
+  const binary = atob(b64);
+  const dataBytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) dataBytes[i] = binary.charCodeAt(i);
+  const keyBytes = new TextEncoder().encode(password || 'key');
+  const result = new Uint8Array(dataBytes.length);
+  for (let i = 0; i < dataBytes.length; i++) {
+    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
+  }
+  return new TextDecoder().decode(result);
 }
 
 /* ==============================================================
@@ -1463,7 +1358,7 @@ async function ghReadFile(key) {
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
     if (res.status === 401) throw new Error('الرمز غير صالح');
-    if (res.status === 403) throw new Error('انتهت حصة الوصول — يُعاد التعيين قريباً');
+    if (res.status === 403) throw new Error('انتهت حصة الوصول');
     if (res.status === 404) return { notModified: false, data: null };
     throw new Error('فشل تحميل البيانات');
   }
@@ -1833,7 +1728,10 @@ function buildUI() {
 
   document.getElementById('tab-backup').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي والصيانة</span></div>
-    <div class="perm-note" style="margin-bottom:14px;">سيتم إنشاء ملف ZIP مشفّر يحتوي على كل ملف بيانات منفصلاً — اسم الملف = اسم المستودع، والتشفير بنفس الاسم</div>
+    <div class="perm-note" style="margin-bottom:14px;">
+      سيتم إنشاء ملف ZIP مشفّر يحتوي على كل ملف بيانات منفصلاً.<br>
+      <b>كلمة السر = اسم المستودع (${GITHUB_REPO})</b>
+    </div>
     <div class="toolbar">
       <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة مشفّرة ZIP</span></button>
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
@@ -1958,15 +1856,17 @@ function renderDonut(active, ready, archived) {
   legend.innerHTML = segments.map(s => `<div class="legend-item"><span class="dot" style="background:${s.color};"></span><span class="name">${s.label}</span><span class="val">${s.value}</span></div>`).join('');
 }
 
+/* ⭐ إصلاح: المخطط RTL (اليوم على اليمين) */
 function renderTrend7Days() {
   const days = [];
   const today = new Date();
-  for (let i = 6; i >= 0; i--) {
+  today.setHours(0, 0, 0, 0);
+  for (let i = 0; i <= 6; i++) {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
-    d.setHours(0, 0, 0, 0);
     days.push(d);
   }
+
   const counts = days.map(day => {
     const nextDay = new Date(day);
     nextDay.setDate(nextDay.getDate() + 1);
@@ -1975,19 +1875,22 @@ function renderTrend7Days() {
       return cd && cd >= day && cd < nextDay;
     }).length;
   });
+
   const max = Math.max(...counts, 1);
   const w = 100, h = 40;
+
+  // RTL: days[0] (اليوم) على اليمين → x = w
   const points = counts.map((c, i) => {
-    const x = (i / 6) * w;
+    const x = w - (i / 6) * w;
     const y = h - (c / max) * (h - 6) - 3;
     return [x, y];
   });
-  const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
-  const areaPath = path + ` L${w} ${h} L0 ${h} Z`;
+  const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
+  const areaPath = path + ` L0 ${h} L${w} ${h} Z`;
   const dayNames = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
   document.getElementById('trendChart').innerHTML = `
-    <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:90px;">
+    <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:90px;direction:ltr;">
       <defs>
         <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#2e75b6" stop-opacity="0.35"/>
@@ -1998,8 +1901,8 @@ function renderTrend7Days() {
       <path d="${path}" fill="none" stroke="#2e75b6" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
       ${points.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="0.7" fill="#2e75b6" vector-effect="non-scaling-stroke" />`).join('')}
     </svg>
-    <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10.5px;color:var(--text-muted);font-weight:600;">
-      ${days.map((d, i) => `<span>${dayNames[d.getDay()]}<br><b style="color:var(--dark-blue);">${counts[i]}</b></span>`).join('')}
+    <div style="display:flex;margin-top:6px;font-size:10.5px;color:var(--text-muted);font-weight:600;gap:4px;">
+      ${days.map((d, i) => `<span style="text-align:center;flex:1;">${dayNames[d.getDay()]}<br><b style="color:var(--dark-blue);">${counts[i]}</b></span>`).join('')}
     </div>`;
 }
 
@@ -2339,16 +2242,48 @@ window.editFromLog = function (id) {
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
 
+/* ⭐ التحقق: العميل يجب أن يكون من قاعدة العملاء */
 function validateOrderForm() {
   clearAllErrors('orderModal');
   let valid = true;
   const invoice = document.getElementById('orderInvoice').value.trim();
   const customer = document.getElementById('orderCustomer').value.trim();
+  const customerId = document.getElementById('orderCustomerId').value;
   const id = document.getElementById('orderId').value;
-  if (!invoice) { setFieldError('orderInvoice', 'رقم الفاتورة مطلوب'); valid = false; }
-  else if (!id && cache.orders.find(o => o.invoice === invoice)) { setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً'); valid = false; }
-  if (!customer) { setFieldError('orderCustomer', 'اسم العميل مطلوب'); valid = false; }
-  if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
+
+  if (!invoice) {
+    setFieldError('orderInvoice', 'رقم الفاتورة مطلوب');
+    valid = false;
+  } else if (!id && cache.orders.find(o => o.invoice === invoice)) {
+    setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً');
+    valid = false;
+  }
+
+  if (!customer) {
+    setFieldError('orderCustomer', 'اسم العميل مطلوب');
+    valid = false;
+  } else {
+    let matched = customerId ? cache.customers.find(c => c.id === customerId) : null;
+    if (!matched) {
+      matched = cache.customers.find(c => c.name.toLowerCase() === customer.toLowerCase());
+    }
+
+    if (!matched) {
+      setFieldError('orderCustomer', 'اختر العميل من القائمة أو أنشئ عميلاً جديداً أولاً');
+      valid = false;
+    } else {
+      document.getElementById('orderCustomerId').value = matched.id;
+      document.getElementById('orderCustomer').value = matched.name;
+      if (!document.getElementById('orderLocation').value.trim() && matched.location) {
+        document.getElementById('orderLocation').value = matched.location;
+      }
+    }
+  }
+
+  if (!valid) {
+    focusFirstError('orderModal');
+    toast('يرجى تصحيح الحقول المطلوبة', 'error');
+  }
   return valid;
 }
 
@@ -2900,51 +2835,55 @@ window.deleteUser = async function (id) {
 };
 
 /* ==============================================================
-   Backup — ZIP مشفّر
+   ⭐ Backup — ZIP مشفّر (بسيط، بدون crypto.subtle)
    ============================================================== */
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
 window.exportBackup = async function () {
   try {
-    showLoading('جاري إنشاء النسخة الاحتياطية...');
-    const zip = new JSZip();
     const repoKey = GITHUB_REPO;
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    const dataFolder = zip.folder('data');
 
+    const files = {};
     for (const key of DATA_KEYS) {
       const content = JSON.stringify(cache[key] || [], null, 2);
-      const encrypted = await encryptData(content, repoKey);
-      dataFolder.file(`${key}.json`, encrypted);
+      files[`${key}.json`] = encryptData(content, repoKey);
     }
-
     const metaContent = JSON.stringify({ lastUpdate: new Date().toISOString(), version: 1 }, null, 2);
-    dataFolder.file('meta.json', await encryptData(metaContent, repoKey));
+    files['meta.json'] = encryptData(metaContent, repoKey);
 
-    const info = {
-      name: `${GITHUB_REPO}_backup`,
-      createdAt: stamp.toISOString(),
-      filesCount: DATA_KEYS.length + 1,
-      encryption: 'AES-256-GCM',
-      hint: 'كلمة فك التشفير هي اسم المستودع'
-    };
-    zip.file('backup-info.json', JSON.stringify(info, null, 2));
+    files['backup-info.txt'] =
+      `اسم المستودع: ${GITHUB_REPO}\n` +
+      `تاريخ الإنشاء: ${stamp.toLocaleString('ar-SA')}\n` +
+      `عدد الملفات: ${DATA_KEYS.length + 1}\n` +
+      `كلمة السر: ${repoKey}\n` +
+      `طريقة فك التشفير: XOR + Base64 بكلمة السر أعلاه\n`;
 
-    const blob = await zip.generateAsync({
-      type: 'blob',
-      compression: 'DEFLATE',
-      compressionOptions: { level: 9 }
-    });
-
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${GITHUB_REPO}_backup_${dateStr}.zip`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-
-    hideLoading();
-    toast('تم إنشاء النسخة الاحتياطية بنجاح', 'success');
+    if (typeof JSZip !== 'undefined') {
+      showLoading('جاري إنشاء النسخة...');
+      const zip = new JSZip();
+      Object.entries(files).forEach(([name, content]) => zip.file(name, content));
+      const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
+      downloadBlob(blob, `${GITHUB_REPO}_backup_${dateStr}.zip`);
+      hideLoading();
+      toast('تم إنشاء النسخة الاحتياطية بنجاح', 'success');
+    } else {
+      toast('مكتبة ZIP غير متوفرة — يتم تحميل الملفات منفصلة', 'warning');
+      for (const [name, content] of Object.entries(files)) {
+        const blob = new Blob([content], { type: 'text/plain' });
+        downloadBlob(blob, name);
+        await new Promise(r => setTimeout(r, 200));
+      }
+    }
   } catch (e) {
     hideLoading();
     toast('فشل إنشاء النسخة: ' + e.message, 'error');
@@ -2985,9 +2924,6 @@ window.getActiveModal = () => document.querySelector('.modal-bg.active');
 document.querySelectorAll('.modal-bg').forEach(m => { m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }); });
 window.showShortcuts = () => openModal('shortcutsModal');
 
-/* ==============================================================
-   Enter Navigation
-   ============================================================== */
 function handleEnterNavigation(e) {
   if (e.key !== 'Enter') return;
   const el = e.target;
@@ -3035,9 +2971,6 @@ function handleEnterNavigation(e) {
   if (m) m.addEventListener('keydown', handleEnterNavigation);
 });
 
-/* ==============================================================
-   Keyboard Shortcuts — Arabic-compatible (using e.code)
-   ============================================================== */
 function isInInput() {
   const t = document.activeElement?.tagName;
   return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT';
@@ -3117,16 +3050,12 @@ window.addEventListener('keydown', e => {
   }
 });
 
-/* Draft listeners */
 ['orderInvoice','orderCustomer','orderLocation','orderStatus','orderPay','orderDriver','orderDriverPhone','orderNotes'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => { clearTimeout(el._t); el._t = setTimeout(saveDraft, 1500); });
 });
 document.getElementById('orderModal')?.addEventListener('click', e => { if (e.target.tagName === 'INPUT') e.target.classList.remove('field-error'); });
 
-/* ==============================================================
-   Init
-   ============================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   buildUI();
   initTheme();
