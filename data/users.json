@@ -20,12 +20,13 @@
       "bulkTransfer": true,
       "moveToLog": true,
       "print": true,
-      "editLog": false,
+      "editLog": true,
       "deleteLog": false,
       "manageCustomers": true,
       "manageDrivers": true,
       "manageUsers": false,
-      "reset": false
+      "reset": false,
+      "editTemplates": false
     }
   }
 ]
