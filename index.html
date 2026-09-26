@@ -8,10 +8,15 @@
 <meta name="robots" content="noindex, nofollow">
 <title>نظام إدارة الطلبات</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
-  *:not(input):not(textarea):not(select) { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  /* ============ RESET ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *:not(input):not(textarea):not(select) {
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
+    -webkit-touch-callout: none;
+  }
   input, textarea, select { -webkit-user-select: text; user-select: text; }
-  img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
+  img { -webkit-user-drag: none; pointer-events: none; }
+  html, body { height: 100%; }
 
   :root {
     --dark-blue: #1f4e79; --blue: #2e75b6; --light-blue: #dbe5f1;
@@ -35,13 +40,23 @@
     --shadow-lg: 0 10px 40px rgba(0,0,0,.5);
   }
 
-  html, body { height: 100%; }
-  body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; transition: background .3s, color .3s; }
+  body {
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; overflow-x: hidden;
+    transition: background .3s, color .3s;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  }
 
   /* ============ ICON ============ */
-  .ico { flex-shrink: 0; display: inline-block; vertical-align: middle; }
+  .ico {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+    pointer-events: none;
+    outline: none;
+  }
 
-  /* ============ BUTTONS (موحّد) ============ */
+  /* ============ BUTTONS ============ */
   .btn {
     height: var(--btn-h);
     padding: 0 16px;
@@ -50,12 +65,17 @@
     transition: var(--transition);
     display: inline-flex; align-items: center; justify-content: center; gap: 7px;
     letter-spacing: .2px;
-    white-space: nowrap;
-    font-family: inherit;
-    line-height: 1;
+    white-space: nowrap; flex-wrap: nowrap;
+    font-family: inherit; line-height: 1;
+    text-decoration: none;
   }
+  .btn > * { display: inline-flex; align-items: center; line-height: 1; }
   .btn .ico { width: 15px; height: 15px; }
-  .btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.15); filter: brightness(1.05); }
+  .btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    filter: brightness(1.05);
+  }
   .btn:active:not(:disabled) { transform: translateY(0); filter: brightness(.95); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
   .btn-primary { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; }
@@ -67,7 +87,8 @@
   .btn-ghost   { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover:not(:disabled) { background: var(--light-blue); border-color: var(--blue); color: var(--dark-blue); }
   .btn-sm {
-    height: 30px; padding: 0 11px; font-size: 12px; border-radius: 7px;
+    height: 30px; padding: 0 10px; font-size: 12px; border-radius: 7px;
+    min-width: 30px;
   }
   .btn-sm .ico { width: 13px; height: 13px; }
   .btn-icon {
@@ -80,11 +101,12 @@
   }
   .btn-icon:hover { background: rgba(255,255,255,.28); transform: scale(1.06); }
   .btn-icon .ico { width: 17px; height: 17px; }
+
   kbd {
     background: rgba(0,0,0,.12); padding: 2px 6px;
     border-radius: 4px; font-size: 10px;
     font-family: 'Consolas', monospace; font-weight: 500;
-    display: inline-block; line-height: 1;
+    display: inline-block; line-height: 1; pointer-events: none;
   }
   .btn-warning kbd { background: rgba(0,0,0,.15); }
 
@@ -122,7 +144,7 @@
     display: flex; justify-content: center;
     color: var(--dark-blue);
   }
-  .login-logo svg { width: 54px; height: 54px; }
+  .login-logo svg { width: 54px; height: 54px; display: block; }
   .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 24px; text-align: center; font-weight: 700; }
   .login-box .subtitle { color: var(--text-muted); margin-bottom: 28px; font-size: 13px; text-align: center; }
   .login-box label { display: block; font-size: 13px; color: var(--text); margin-bottom: 6px; margin-top: 14px; font-weight: 600; }
@@ -140,6 +162,7 @@
     font-size: 15px; font-weight: 600; cursor: pointer;
     transition: var(--transition); letter-spacing: .5px;
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: inherit;
   }
   .login-box button.primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(31,78,121,.35); }
   .login-box button.primary:disabled { opacity: .6; cursor: not-allowed; }
@@ -180,12 +203,15 @@
   }
   [data-theme="dark"] header { background: linear-gradient(135deg, #0d1e2e, #1a3550); }
   header .brand { display: flex; align-items: center; gap: 11px; }
-  header .brand-logo { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(255,255,255,.15); border-radius: 9px; }
-  header .brand-logo svg { width: 20px; height: 20px; }
+  header .brand-logo {
+    display: inline-flex !important; align-items: center; justify-content: center;
+    width: 34px; height: 34px; background: rgba(255,255,255,.15); border-radius: 9px;
+  }
+  header .brand-logo svg { width: 20px; height: 20px; display: block; }
   header h1 { font-size: 16px; font-weight: 600; letter-spacing: .3px; }
   .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; }
   .user-chip {
-    display: flex; align-items: center; gap: 8px;
+    display: inline-flex !important; align-items: center; gap: 8px;
     background: rgba(255,255,255,.12); padding: 6px 13px;
     border-radius: 20px; font-size: 12.5px;
   }
@@ -193,15 +219,13 @@
   .rate-limit-chip {
     background: rgba(255,255,255,.1); padding: 5px 11px;
     border-radius: 16px; font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; gap: 7px;
+    display: inline-flex !important; align-items: center; gap: 7px;
   }
   .rate-limit-chip .bar {
     width: 36px; height: 4px; background: rgba(255,255,255,.25);
     border-radius: 3px; overflow: hidden;
   }
-  .rate-limit-chip .fill {
-    height: 100%; background: #4caf50; transition: width .3s;
-  }
+  .rate-limit-chip .fill { height: 100%; background: #4caf50; transition: width .3s; }
   .rate-limit-chip .fill.warning { background: #ffc107; }
   .rate-limit-chip .fill.danger { background: #dc3545; }
   .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #888; }
@@ -220,9 +244,11 @@
     background: transparent; color: var(--text-muted); border: none;
     padding: 15px 20px; cursor: pointer; font-size: 13.5px; font-weight: 500;
     border-bottom: 3px solid transparent; white-space: nowrap;
-    transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
-    font-family: inherit;
+    transition: var(--transition);
+    display: inline-flex !important; align-items: center; gap: 8px;
+    font-family: inherit; flex-wrap: nowrap;
   }
+  nav button > * { display: inline-flex; align-items: center; line-height: 1; }
   nav button .ico { width: 16px; height: 16px; }
   nav button:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
   nav button.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); font-weight: 700; background: rgba(46,117,182,.08); }
@@ -248,7 +274,7 @@
   .dash-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue); }
   .dash-card .icon {
     margin-bottom: 10px;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex !important; align-items: center; justify-content: center;
     width: 56px; height: 56px; border-radius: 14px;
     background: linear-gradient(135deg, #e8f2fb, #d0e4f5);
     color: var(--dark-blue);
@@ -267,8 +293,11 @@
   .dash-card.orange .icon { background: linear-gradient(135deg, #ffead6, #ffd0a8); color: #fd7e14; }
   [data-theme="dark"] .dash-card.orange .icon { background: linear-gradient(135deg, #4d2f10, #2e1a05); }
 
-  /* ============ STATS GRID (احترافي) ============ */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  /* ============ STATS GRID ============ */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-bottom: 22px;
+  }
   .stat {
     background: var(--card-bg); padding: 20px 18px; border-radius: 12px;
     box-shadow: var(--shadow-sm); transition: var(--transition);
@@ -276,10 +305,13 @@
     border-right: 4px solid var(--blue);
   }
   .stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .stat .stat-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .stat .stat-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 10px;
+  }
   .stat .stat-icon {
     width: 38px; height: 38px; border-radius: 10px;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex !important; align-items: center; justify-content: center;
     background: rgba(46,117,182,.12); color: var(--blue);
   }
   .stat .stat-icon svg { width: 18px; height: 18px; }
@@ -296,14 +328,14 @@
   [data-theme="dark"] .stat .trend.flat { background: #2c3e50; color: #adb5bd; }
   .stat .num { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1.1; }
   .stat .lbl { color: var(--text-muted); font-size: 12px; margin-top: 4px; font-weight: 500; }
-  .stat.red    { border-right-color: var(--red); }
-  .stat.red .stat-icon    { background: rgba(220,53,69,.12); color: var(--red); }
-  .stat.green  { border-right-color: var(--green); }
-  .stat.green .stat-icon  { background: rgba(40,167,69,.12); color: var(--green); }
+  .stat.red { border-right-color: var(--red); }
+  .stat.red .stat-icon { background: rgba(220,53,69,.12); color: var(--red); }
+  .stat.green { border-right-color: var(--green); }
+  .stat.green .stat-icon { background: rgba(40,167,69,.12); color: var(--green); }
   .stat.purple { border-right-color: var(--purple); }
   .stat.purple .stat-icon { background: rgba(111,66,193,.12); color: var(--purple); }
 
-  /* ============ ANALYTICS ROW ============ */
+  /* ============ ANALYTICS ============ */
   .analytics-row {
     display: grid; grid-template-columns: 1.2fr 1fr 1fr;
     gap: 16px; margin-bottom: 22px;
@@ -315,17 +347,12 @@
   }
   .analytics-card h4 {
     color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
-    display: flex; align-items: center; gap: 8px;
+    display: flex !important; align-items: center; gap: 8px;
   }
   .analytics-card h4 .ico { width: 16px; height: 16px; }
 
-  /* Donut */
   .donut-wrap { display: flex; align-items: center; gap: 22px; }
-  .donut {
-    position: relative;
-    width: 140px; height: 140px;
-    flex-shrink: 0;
-  }
+  .donut { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
   .donut svg { transform: rotate(-90deg); }
   .donut circle { fill: none; stroke-width: 16; transition: stroke-dashoffset .8s ease; }
   .donut .center {
@@ -335,22 +362,16 @@
   .donut .center .big { font-size: 24px; font-weight: 800; color: var(--dark-blue); }
   .donut .center .small { font-size: 10.5px; color: var(--text-muted); }
   .donut-legend { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-  .legend-item {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 12.5px; padding: 4px 0;
-  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 4px 0; }
   .legend-item .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .legend-item .name { flex: 1; color: var(--text); }
   .legend-item .val { font-weight: 700; color: var(--text); }
 
-  /* Top list */
   .top-list { display: flex; flex-direction: column; gap: 8px; }
   .top-item {
     display: flex; align-items: center; gap: 10px;
     padding: 8px 10px; border-radius: 8px;
-    background: rgba(0,0,0,.03);
-    font-size: 12.5px;
-    transition: var(--transition);
+    background: rgba(0,0,0,.03); font-size: 12.5px; transition: var(--transition);
   }
   [data-theme="dark"] .top-item { background: rgba(255,255,255,.04); }
   .top-item:hover { background: rgba(46,117,182,.08); }
@@ -367,22 +388,26 @@
   .top-item .count { font-weight: 700; color: var(--dark-blue); }
   .empty-top { color: var(--text-muted); text-align: center; padding: 18px 0; font-size: 12.5px; }
 
-  /* Sparkline */
   .sparkline {
     background: var(--card-bg); padding: 20px 22px; border-radius: 14px;
     box-shadow: var(--shadow-sm);
   }
-  .sparkline h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .sparkline h4 {
+    color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
+    display: flex !important; align-items: center; gap: 8px;
+  }
+  .sparkline h4 .ico { width: 16px; height: 16px; }
   .sparkline svg { width: 100%; height: 90px; }
 
   /* ============ TOOLBAR ============ */
   .toolbar { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
   .filter-bar {
-    display: flex; gap: 11px; flex-wrap: wrap; align-items: center;
+    display: flex !important; gap: 11px; flex-wrap: wrap; align-items: center;
     padding: 13px 16px; background: var(--card-bg); border-radius: 12px;
     margin-bottom: 14px; box-shadow: var(--shadow-sm);
     border-right: 4px solid var(--blue);
   }
+  .filter-bar > span { display: inline-flex; align-items: center; gap: 5px; }
   .filter-bar label { font-size: 12px; color: var(--text); font-weight: 600; }
   .filter-bar input, .filter-bar select { width: auto; padding: 7px 11px; font-size: 12.5px; height: 34px; }
   .filter-bar .btn { height: 34px; padding: 0 13px; font-size: 12.5px; }
@@ -438,7 +463,7 @@
   .empty-state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 20px; }
   .empty-state .icon {
     width: 60px; height: 60px; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex !important; align-items: center; justify-content: center;
     background: rgba(46,117,182,.1); color: var(--blue);
   }
   .empty-state .icon svg { width: 26px; height: 26px; }
@@ -479,14 +504,14 @@
   }
   .section-header h2 {
     color: var(--dark-blue); font-size: 19px; font-weight: 700;
-    display: inline-flex; align-items: center; gap: 9px;
+    display: inline-flex !important; align-items: center; gap: 9px;
   }
-  .section-header h2 .ico { width: 20px; height: 20px; }
+  .section-header h2 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
   .section-header .hint {
     font-size: 11px; color: var(--text-muted);
     background: rgba(0,0,0,.05); padding: 7px 13px; border-radius: 20px;
     border: 1px solid var(--border);
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex !important; align-items: center; gap: 6px;
   }
   [data-theme="dark"] .section-header .hint { background: rgba(255,255,255,.05); }
   .section-header .hint kbd { background: rgba(0,0,0,.1); }
@@ -514,9 +539,9 @@
   }
   .modal h3 {
     color: var(--dark-blue); margin-bottom: 18px; font-size: 18px; font-weight: 700;
-    display: flex; align-items: center; gap: 10px;
+    display: flex !important; align-items: center; gap: 10px; line-height: 1.4;
   }
-  .modal h3 .ico { width: 20px; height: 20px; }
+  .modal h3 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
   .modal label { display: block; margin: 13px 0 6px; font-size: 12.5px; color: var(--text); font-weight: 600; }
   .modal-actions { display: flex; gap: 9px; margin-top: 22px; justify-content: flex-end; flex-wrap: wrap; }
   .modal-actions .btn { min-width: 105px; }
@@ -537,7 +562,7 @@
   }
   .dialog-icon {
     margin-bottom: 14px;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex !important; align-items: center; justify-content: center;
     width: 76px; height: 76px; border-radius: 50%;
   }
   .dialog-icon svg { width: 34px; height: 34px; }
@@ -562,13 +587,13 @@
     box-shadow: 0 10px 30px rgba(0,0,0,.2);
     border-right: 4px solid var(--blue);
     opacity: 0; transform: translateX(-30px); transition: .3s;
-    pointer-events: auto; display: flex; align-items: center; gap: 10px;
+    pointer-events: auto; display: flex !important; align-items: center; gap: 10px;
     font-weight: 500;
   }
   .toast.show { opacity: 1; transform: translateX(0); }
   .toast .toast-icon {
     width: 24px; height: 24px; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex !important; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
   .toast.success .toast-icon { background: rgba(40,167,69,.15); color: var(--green); }
@@ -591,8 +616,9 @@
     border-bottom: 3px solid transparent; transition: var(--transition);
     font-weight: 600; border-radius: 6px 6px 0 0;
     font-family: inherit;
-    display: inline-flex; align-items: center; gap: 7px;
+    display: inline-flex !important; align-items: center; gap: 7px;
   }
+  .tab-btn > * { display: inline-flex; align-items: center; line-height: 1; }
   .tab-btn .ico { width: 15px; height: 15px; }
   .tab-btn:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
   .tab-btn.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); background: rgba(46,117,182,.08); }
@@ -651,7 +677,7 @@
   .template-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); }
   .template-card h4 {
     color: var(--dark-blue); margin-bottom: 15px; font-size: 14px;
-    display: flex; align-items: center; gap: 8px;
+    display: flex !important; align-items: center; gap: 8px;
     padding-bottom: 10px; border-bottom: 2px solid var(--light-blue);
   }
   .template-card h4 .ico { width: 17px; height: 17px; }
@@ -684,7 +710,7 @@
     color: var(--dark-blue); margin-bottom: 11px;
     padding-bottom: 7px; border-bottom: 2px solid var(--light-blue);
     font-size: 13.5px; font-weight: 700;
-    display: flex; align-items: center; gap: 7px;
+    display: flex !important; align-items: center; gap: 7px;
   }
   .shortcut-group h4 .ico { width: 15px; height: 15px; }
   .shortcut-row {
@@ -701,7 +727,7 @@
     text-align: center; font-size: 12.5px; font-weight: 600;
     z-index: 9999; transform: translateY(-100%);
     transition: transform .3s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
+    display: flex !important; align-items: center; justify-content: center; gap: 8px;
   }
   .connection-banner.show { transform: translateY(0); }
   .connection-banner .ico { width: 14px; height: 14px; }
@@ -713,11 +739,11 @@
     padding: 10px 15px; border-radius: 24px;
     font-size: 12px; font-weight: 700;
     box-shadow: 0 6px 20px rgba(0,0,0,.2);
-    display: none; align-items: center; gap: 8px;
+    display: none !important; align-items: center; gap: 8px;
     cursor: pointer; z-index: 2500;
     animation: slideInRight .3s ease;
   }
-  .draft-badge.show { display: flex; }
+  .draft-badge.show { display: inline-flex !important; }
   .draft-badge .ico { width: 14px; height: 14px; }
   @keyframes slideInRight { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
@@ -756,7 +782,7 @@
   ::-webkit-scrollbar-thumb:hover { background: #8fa2b3; }
 </style>
 </head>
-<body oncontextmenu="return false" onselectstart="return false">
+<body oncontextmenu="return false">
 
 <!-- Connection Banner -->
 <div id="connectionBanner" class="connection-banner">
@@ -813,7 +839,7 @@
     </div>
     <div class="user-info">
       <div class="rate-limit-chip" id="rateLimitChip">
-        <span id="rateLimitText">--</span>
+        <span id="rateLimitText">…</span>
         <div class="bar"><div class="fill" id="rateLimitFill" style="width:100%;"></div></div>
       </div>
       <div class="user-chip">
@@ -821,10 +847,10 @@
         <span id="userChipIcon"></span>
         <b id="currentUserName"></b>
       </div>
-      <button class="btn-icon" onclick="toggleTheme()" id="themeBtn"></button>
-      <button class="btn-icon" onclick="manualSync()" id="syncBtn"></button>
-      <button class="btn-icon" onclick="showShortcuts()" id="kbBtn"></button>
-      <button class="btn-icon" onclick="logout()" id="logoutBtn"></button>
+      <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع"></button>
+      <button class="btn-icon" onclick="manualSync()" id="syncBtn" title="مزامنة"></button>
+      <button class="btn-icon" onclick="showShortcuts()" id="kbBtn" title="الاختصارات"></button>
+      <button class="btn-icon" onclick="logout()" id="logoutBtn" title="خروج"></button>
     </div>
   </header>
 
@@ -834,10 +860,8 @@
     <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid" id="dashGrid"></div>
-
-      <div class="section-title" style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;" id="statsTitle"></div>
+      <div id="statsTitle" style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;"></div>
       <div class="stats-grid" id="statsGrid"></div>
-
       <div class="analytics-row">
         <div class="analytics-card">
           <h4 id="donutTitle"></h4>
@@ -855,7 +879,6 @@
           <div class="top-list" id="topDrivers"></div>
         </div>
       </div>
-
       <div class="sparkline">
         <h4 id="trendTitle"></h4>
         <div id="trendChart"></div>
@@ -1044,64 +1067,69 @@
 
 <script>
 /* ==============================================================
-   ICONS — SVG programmatic
+   ICONS — SVG paths (فقط path content، بدون <path>)
    ============================================================== */
 const I = {
-  home: 'M3 9l9-7 9 7v11a2 2 0 01-2 2h-4v-7h-6v7H5a2 2 0 01-2-2z',
-  list: 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
+  home: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10',
+  list: 'M8 6h13 M8 12h13 M8 18h13 M3 6h0 M3 12h0 M3 18h0',
   box: 'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
-  archive: 'M21 8v13H3V8M1 3h22v5H1zM10 12h4',
-  users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
+  archive: 'M21 8v13H3V8 M1 3h22v5H1z M10 12h4',
+  users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
+  user: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z',
   cog: 'M12 15a3 3 0 100-6 3 3 0 000 6z M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z',
-  plus: 'M12 5v14M5 12h14',
+  plus: 'M12 5v14 M5 12h14',
   edit: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z',
-  trash: 'M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14zM10 11v6M14 11v6',
-  arrowRight: 'M5 12h14M12 5l7 7-7 7',
-  truck: 'M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',
-  printer: 'M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z',
-  download: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3',
-  upload: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12',
-  sync: 'M23 4v6h-6M1 20v-6h6 M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15',
+  trash: 'M3 6h18 M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z M10 11v6 M14 11v6',
+  arrowRight: 'M5 12h14 M12 5l7 7-7 7',
+  truck: 'M1 3h15v13H1z M16 8h4l3 3v5h-7V8 M5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z M18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',
+  printer: 'M6 9V2h12v7 M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2 M6 14h12v8H6z',
+  download: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3',
+  upload: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M17 8l-5-5-5 5 M12 3v12',
+  sync: 'M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0114.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0020.49 15',
   moon: 'M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z',
-  sun: 'M12 17a5 5 0 100-10 5 5 0 000 10zM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42',
-  logout: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9',
-  keyboard: 'M20 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2zM6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 13h.01M18 13h.01M9 13h6',
-  search: 'M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35',
+  sun: 'M12 17a5 5 0 100-10 5 5 0 000 10z M12 1v2 M12 21v2 M4.22 4.22l1.42 1.42 M18.36 18.36l1.42 1.42 M1 12h2 M21 12h2 M4.22 19.78l1.42-1.42 M18.36 5.64l1.42-1.42',
+  logout: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9',
+  keyboard: 'M20 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z M6 9h0 M10 9h0 M14 9h0 M18 9h0 M6 13h0 M18 13h0 M9 13h6',
+  search: 'M11 19a8 8 0 100-16 8 8 0 000 16z M21 21l-4.35-4.35',
   filter: 'M22 3H2l8 9.46V19l4 2v-8.54L22 3z',
   check: 'M20 6L9 17l-5-5',
-  x: 'M18 6L6 18M6 6l12 12',
-  warning: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01',
-  info: 'M12 22a10 10 0 100-20 10 10 0 000 20zM12 16v-4M12 8h.01',
-  key: 'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4',
-  lock: 'M5 11h14v11H5zM7 11V7a5 5 0 0110 0v4',
-  money: 'M1 4h22v16H1zM12 15a3 3 0 100-6 3 3 0 000 6z',
-  crown: 'M3 17l2-10 4 4 3-6 3 6 4-4 2 10zM3 21h18',
-  save: 'M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2zM17 21v-8H7v8M7 3v5h8',
-  image: 'M3 3h18v18H3zM8.5 10.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM21 15l-5-5L5 21',
-  file: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6',
-  chart: 'M18 20V10M12 20V4M6 20v-6',
-  calendar: 'M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM16 2v4M8 2v4M3 10h18',
-  refresh: 'M23 4v6h-6M1 20v-6h6M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15',
-  user: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z',
+  x: 'M18 6L6 18 M6 6l12 12',
+  warning: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h0',
+  info: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 16v-4 M12 8h0',
+  key: 'M21 2l-2 2 M15.5 8.5l3 3L22 7l-3-3 M11.39 11.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777z',
+  lock: 'M5 11h14v11H5z M7 11V7a5 5 0 0110 0v4',
+  money: 'M1 4h22v16H1z M12 15a3 3 0 100-6 3 3 0 000 6z',
+  crown: 'M3 17l2-10 4 4 3-6 3 6 4-4 2 10z M3 21h18',
+  save: 'M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z M17 21v-8H7v8 M7 3v5h8',
+  image: 'M3 3h18v18H3z M8.5 10.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M21 15l-5-5L5 21',
+  file: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6',
+  chart: 'M18 20V10 M12 20V4 M6 20v-6',
+  calendar: 'M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z M16 2v4 M8 2v4 M3 10h18',
+  refresh: 'M23 4v6h-6 M1 20v-6h6 M20.49 9A9 9 0 005.64 5.64L1 10 M23 14l-4.64 4.36A9 9 0 013.51 15',
   folder: 'M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z',
-  tag: 'M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01',
-  clock: 'M12 22a10 10 0 100-20 10 10 0 000 20zM12 6v6l4 2',
+  tag: 'M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z M7 7h0',
+  clock: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 6v6l4 2',
   pin: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z M12 13a3 3 0 100-6 3 3 0 000 6z',
   phone: 'M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z',
   shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
   eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 15a3 3 0 100-6 3 3 0 000 6z',
-  trendUp: 'M23 6l-9.5 9.5-5-5L1 18M17 6h6v6',
-  trendDown: 'M23 18l-9.5-9.5-5 5L1 6M17 18h6v-6',
-  fileJson: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6',
-  zip: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M10 12h4v2h-4zM10 16h4v2h-4z',
-  stats: 'M18 20V10M12 20V4M6 20v-6',
-  package: 'M16.5 9.4L7.55 4.24M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
-  award: 'M12 15a7 7 0 100-14 7 7 0 000 14zM8.21 13.89L7 23l5-3 5 3-1.21-9.12'
+  trendUp: 'M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6',
+  trendDown: 'M23 18l-9.5-9.5-5 5L1 6 M17 18h6v-6',
+  zip: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M10 12h4v2h-4z M10 16h4v2h-4z',
+  stats: 'M18 20V10 M12 20V4 M6 20v-6',
+  package: 'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
+  award: 'M12 15a7 7 0 100-14 7 7 0 000 14z M8.21 13.89L7 23l5-3 5 3-1.21-9.12',
+  grid: 'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
+  layers: 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
+  bell: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 01-3.46 0'
 };
 
+/* ==============================================================
+   ⭐ دالة الأيقونة المُصحّحة
+   ============================================================== */
 function ico(name, size = 16) {
   const p = I[name] || '';
-  return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
 }
 
 /* ==============================================================
@@ -1171,7 +1199,7 @@ let rateLimitInfo = null, apiCallCount = 0, apiCachedCount = 0;
 let prevStats = { orders: 0, ready: 0, log: 0 };
 
 /* ==============================================================
-   Security — منع الضغط المطول والنسخ
+   Security
    ============================================================== */
 document.addEventListener('contextmenu', e => {
   const t = e.target;
@@ -1205,12 +1233,6 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.shiftKey && (e.code === 'KeyI' || e.code === 'KeyJ' || e.code === 'KeyC')) { e.preventDefault(); return false; }
   if (e.ctrlKey && e.code === 'KeyU') { e.preventDefault(); return false; }
 });
-
-// Disable console (best effort)
-try {
-  const noop = () => {};
-  window.console = { log: noop, warn: noop, error: noop, info: noop, debug: noop, trace: noop, table: noop };
-} catch(e) {}
 
 /* ==============================================================
    Theme
@@ -1318,14 +1340,11 @@ function focusFirstError(modalId) {
 }
 
 /* ==============================================================
-   Base64
+   Base64 + Crypto
    ============================================================== */
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
-/* ==============================================================
-   Crypto — تشفير النسخة الاحتياطية
-   ============================================================== */
 async function encryptData(text, password) {
   const enc = new TextEncoder();
   const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -1698,10 +1717,9 @@ window.restoreDraft = function () {
 };
 
 /* ==============================================================
-   UI Builder — كل الواجهة تُبنى برمجياً
+   UI Builder
    ============================================================== */
 function buildUI() {
-  // Login logo
   document.getElementById('loginLogo').innerHTML = ico('package', 54);
   document.getElementById('brandLogo').innerHTML = ico('package', 20);
   document.getElementById('userChipIcon').innerHTML = ico('user', 14);
@@ -1710,8 +1728,8 @@ function buildUI() {
   document.getElementById('logoutBtn').innerHTML = ico('logout', 17);
   document.getElementById('draftIcon').innerHTML = ico('file', 14);
   document.getElementById('connBannerIcon').innerHTML = ico('warning', 14);
+  updateThemeBtn();
 
-  // Nav
   document.getElementById('navBar').innerHTML = [
     { page: 'dashboard', icon: 'home', label: 'الرئيسية' },
     { page: 'entry', icon: 'list', label: 'إدخال الطلبات' },
@@ -1721,7 +1739,6 @@ function buildUI() {
     { page: 'settings', icon: 'cog', label: 'الإعدادات', cls: 'perm-accessSettings' }
   ].map(x => `<button data-page="${x.page}" class="${x.page === 'dashboard' ? 'active' : ''} ${x.cls || ''}" onclick="go('${x.page}')">${ico(x.icon, 16)}<span>${x.label}</span></button>`).join('');
 
-  // Dashboard cards
   document.getElementById('dashGrid').innerHTML = [
     { page: 'entry', cls: '', icon: 'list', title: 'إدخال الطلبات', desc: 'تسجيل ومتابعة الطلبات اليومية' },
     { page: 'ready', cls: 'green', icon: 'box', title: 'الطلبات الجاهزة', desc: 'جاهزة للنقل إلى الفرع' },
@@ -1735,7 +1752,6 @@ function buildUI() {
   document.getElementById('topDrvTitle').innerHTML = ico('truck', 16) + '<span>أكثر الموصلين</span>';
   document.getElementById('trendTitle').innerHTML = ico('trendUp', 16) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
 
-  // Entry page
   document.getElementById('entryTitle').innerHTML = ico('list', 20) + '<span>إدخال الطلبات</span>';
   document.getElementById('entryHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>K</kbd> بحث • <kbd>Alt</kbd>+<kbd>N</kbd> جديد • <kbd>Alt</kbd>+<kbd>T</kbd> تحويل`;
   document.getElementById('entryToolbar').innerHTML = `
@@ -1744,7 +1760,6 @@ function buildUI() {
     <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="margin-right:auto;max-width:300px;">`;
   document.getElementById('entryHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
 
-  // Ready page
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
@@ -1753,7 +1768,6 @@ function buildUI() {
     <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل إلى السجل</span><kbd>Alt+M</kbd></button>`;
   document.getElementById('readyHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل'].map(h => `<th>${h}</th>`).join('');
 
-  // Log page
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
     <span style="color:var(--dark-blue);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;">${ico('filter', 14)}<span>فلترة:</span></span>
@@ -1769,14 +1783,12 @@ function buildUI() {
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
   document.getElementById('logHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'تاريخ الترحيل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
 
-  // Customers
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
   document.getElementById('custToolbar').innerHTML = `
     <input id="searchCustomers" type="text" placeholder="بحث..." oninput="renderCustomers()" style="max-width:300px;">
     <button class="btn btn-primary perm-manageCustomers" onclick="openCustomerModal()">${ico('plus', 15)}<span>عميل جديد</span></button>`;
   document.getElementById('custHead').innerHTML = ['#', 'رقم العميل', 'الاسم', 'الموقع', 'الهاتف', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
 
-  // Settings
   document.getElementById('settingsTitle').innerHTML = ico('cog', 20) + '<span>الإعدادات</span>';
   document.getElementById('settingsTabs').innerHTML = [
     { id: 'token', icon: 'key', label: 'الرمز', active: true },
@@ -1827,14 +1839,12 @@ function buildUI() {
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
     </div>`;
 
-  // Modal titles with icons
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('userModalTitle').innerHTML = ico('user', 20) + '<span>مستخدم جديد</span>';
   document.getElementById('tokenModalTitle').innerHTML = ico('key', 20) + '<span>تحديث الرمز</span>';
   document.getElementById('shortcutsTitle').innerHTML = ico('keyboard', 20) + '<span>الاختصارات</span>';
 
-  // Shortcuts
   document.getElementById('shortcutsGrid').innerHTML = [
     { title: 'التنقل', icon: 'home', items: [
       ['الرئيسية', ['Alt', '1']], ['إدخال الطلبات', ['Alt', '2']],
@@ -1858,27 +1868,23 @@ function buildUI() {
 }
 
 /* ==============================================================
-   Statistics — احترافي
+   Statistics
    ============================================================== */
 function renderStats() {
-  const total = cache.orders.length + cache.ready.length + cache.log.length;
   const unpaid = cache.orders.filter(o => o.pay === 'غير مدفوع').length;
   const vip = cache.orders.filter(o => o.pay === 'VIP').length;
-  const paid = cache.orders.filter(o => o.pay === 'مدفوع').length;
 
-  // حساب الفرق مع الفحص السابق
   const diff = (curr, prev) => {
     if (prev === 0 && curr === 0) return { dir: 'flat', pct: 0 };
     if (prev === 0) return { dir: 'up', pct: 100 };
     const pct = Math.round(((curr - prev) / prev) * 100);
     return { dir: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat', pct: Math.abs(pct) };
   };
-
   const trendIcon = (dir) => dir === 'up' ? ico('trendUp', 11) : dir === 'down' ? ico('trendDown', 11) : '';
 
   const items = [
     { icon: 'list', label: 'قيد الإدخال', value: cache.orders.length, cls: '', trend: diff(cache.orders.length, prevStats.orders) },
-    { icon: 'box', label: 'جاهزة للنقل', value: cache.ready.length, cls: 'green', trend: diff(cache.ready.length, 0) },
+    { icon: 'box', label: 'جاهزة للنقل', value: cache.ready.length, cls: 'green', trend: diff(cache.ready.length, prevStats.ready) },
     { icon: 'x', label: 'غير مدفوعة', value: unpaid, cls: 'red', trend: { dir: 'flat', pct: 0 } },
     { icon: 'crown', label: 'طلبات VIP', value: vip, cls: 'purple', trend: { dir: 'flat', pct: 0 } },
     { icon: 'archive', label: 'في السجل', value: cache.log.length, cls: '', trend: diff(cache.log.length, prevStats.log) }
@@ -1895,10 +1901,8 @@ function renderStats() {
     </div>
   `).join('');
 
-  // Donut
   renderDonut(cache.orders.length, cache.ready.length, cache.log.length);
 
-  // Top customers
   const custCount = {};
   [...cache.orders, ...cache.ready, ...cache.log].forEach(o => {
     if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1;
@@ -1908,7 +1912,6 @@ function renderStats() {
     ? topC.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
 
-  // Top drivers
   const drvCount = {};
   [...cache.orders, ...cache.ready, ...cache.log].forEach(o => {
     if (o.driver) drvCount[o.driver] = (drvCount[o.driver] || 0) + 1;
@@ -1918,9 +1921,7 @@ function renderStats() {
     ? topD.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
 
-  // 7-day trend
   renderTrend7Days();
-
   prevStats = { orders: cache.orders.length, ready: cache.ready.length, log: cache.log.length };
 }
 
@@ -1947,7 +1948,6 @@ function renderDonut(active, ready, archived) {
     offset += dash;
     return el;
   }).join('');
-
   donut.innerHTML = `
     <svg width="140" height="140" viewBox="0 0 140 140">
       <circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="16" fill="none"/>
@@ -2003,9 +2003,6 @@ function renderTrend7Days() {
     </div>`;
 }
 
-/* ==============================================================
-   Dashboard
-   ============================================================== */
 function renderDashboard() { renderStats(); }
 
 /* ==============================================================
@@ -2182,7 +2179,7 @@ window.go = function (page) {
 window.switchTab = function (evt, tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
-  evt.target.closest('.tab-btn').classList.add('active');
+  evt.target.closest('.tab-btn')?.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
   if (tab === 'token') renderApiStats();
@@ -2447,6 +2444,7 @@ window.deleteFromLog = async function (id) {
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
   const dropdown = document.getElementById('customerDropdown');
+  if (!input || !dropdown) return;
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     document.getElementById('orderCustomerId').value = '';
@@ -2902,7 +2900,7 @@ window.deleteUser = async function (id) {
 };
 
 /* ==============================================================
-   ⭐ Backup — ZIP مشفّر
+   Backup — ZIP مشفّر
    ============================================================== */
 window.exportBackup = async function () {
   try {
@@ -2913,18 +2911,15 @@ window.exportBackup = async function () {
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const dataFolder = zip.folder('data');
 
-    // كل ملف منفصل ومشفّر
     for (const key of DATA_KEYS) {
       const content = JSON.stringify(cache[key] || [], null, 2);
       const encrypted = await encryptData(content, repoKey);
       dataFolder.file(`${key}.json`, encrypted);
     }
 
-    // meta
     const metaContent = JSON.stringify({ lastUpdate: new Date().toISOString(), version: 1 }, null, 2);
     dataFolder.file('meta.json', await encryptData(metaContent, repoKey));
 
-    // معلومات النسخة (غير مشفرة — للقراءة فقط)
     const info = {
       name: `${GITHUB_REPO}_backup`,
       createdAt: stamp.toISOString(),
@@ -2982,7 +2977,7 @@ window.exportLogCSV = function () {
 };
 
 /* ==============================================================
-   Modals & Shortcuts
+   Modals
    ============================================================== */
 window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
@@ -2990,6 +2985,9 @@ window.getActiveModal = () => document.querySelector('.modal-bg.active');
 document.querySelectorAll('.modal-bg').forEach(m => { m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }); });
 window.showShortcuts = () => openModal('shortcutsModal');
 
+/* ==============================================================
+   Enter Navigation
+   ============================================================== */
 function handleEnterNavigation(e) {
   if (e.key !== 'Enter') return;
   const el = e.target;
@@ -3037,6 +3035,9 @@ function handleEnterNavigation(e) {
   if (m) m.addEventListener('keydown', handleEnterNavigation);
 });
 
+/* ==============================================================
+   Keyboard Shortcuts — Arabic-compatible (using e.code)
+   ============================================================== */
 function isInInput() {
   const t = document.activeElement?.tagName;
   return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT';
