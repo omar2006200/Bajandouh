@@ -1,4 +1,31 @@
 [
-  { "id": "u1", "username": "7", "password": "7399", "role": "رئيسي" },
-  { "id": "u2", "username": "6", "password": "6", "role": "عامل" }
+  {
+    "id": "u1",
+    "username": "7",
+    "password": "7399",
+    "role": "رئيسي"
+  },
+  {
+    "id": "u2",
+    "username": "6",
+    "password": "6",
+    "role": "عادي",
+    "permissions": {
+      "accessCustomers": true,
+      "accessSettings": true,
+      "addOrder": true,
+      "editOrder": true,
+      "deleteOrder": true,
+      "transferSingle": true,
+      "bulkTransfer": true,
+      "moveToLog": true,
+      "print": true,
+      "editLog": false,
+      "deleteLog": false,
+      "manageCustomers": true,
+      "manageDrivers": true,
+      "manageUsers": false,
+      "reset": false
+    }
+  }
 ]
