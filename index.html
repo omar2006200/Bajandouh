@@ -13,7 +13,6 @@
   }
   body { background: var(--light-gray); color: #222; min-height: 100vh; }
 
-  /* ========== LOGIN ========== */
   #loginScreen {
     display: flex; align-items: center; justify-content: center;
     min-height: 100vh;
@@ -48,21 +47,13 @@
   }
   .token-status.saved { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
   .token-status.missing { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
-  .token-status button {
-    margin-top: 0; margin-right: auto; padding: 4px 10px;
-    font-size: 11px; width: auto;
-  }
+  .token-status button { margin-top: 0; margin-right: auto; padding: 4px 10px; font-size: 11px; width: auto; }
   .token-help { font-size: 11px; color: #666; margin-top: 6px; line-height: 1.6; }
   .token-help a { color: var(--blue); text-decoration: none; }
   .token-help a:hover { text-decoration: underline; }
-
-  .login-error {
-    color: var(--red); font-size: 13px; margin-top: 10px;
-    text-align: center; white-space: pre-line; line-height: 1.6;
-  }
+  .login-error { color: var(--red); font-size: 13px; margin-top: 10px; text-align: center; white-space: pre-line; line-height: 1.6; }
   .login-loading { color: #888; font-size: 12px; margin-top: 8px; text-align: center; }
 
-  /* ========== APP ========== */
   #app { display: none; }
   header {
     background: var(--dark-blue); color: #fff; padding: 14px 26px;
@@ -78,34 +69,23 @@
     padding: 6px 14px; border-radius: 6px; cursor: pointer;
   }
   .user-info button:hover { background: rgba(255,255,255,.25); }
-  .status-dot {
-    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-    background: #888; margin-left: 6px;
-  }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #888; margin-left: 6px; }
   .status-dot.online { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
   .status-dot.sync   { background: #2196f3; animation: pulse 1s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-  nav {
-    background: var(--blue); padding: 0 20px; display: flex; gap: 4px;
-    overflow-x: auto;
-    position: sticky; top: 62px; z-index: 99;
-  }
+  nav { background: var(--blue); padding: 0 20px; display: flex; gap: 4px; overflow-x: auto; position: sticky; top: 62px; z-index: 99; }
   nav button {
     background: transparent; color: #fff; border: none;
     padding: 14px 20px; cursor: pointer; font-size: 14px;
-    border-bottom: 3px solid transparent; white-space: nowrap;
-    transition: .2s;
+    border-bottom: 3px solid transparent; white-space: nowrap; transition: .2s;
   }
   nav button:hover { background: rgba(255,255,255,.1); }
   nav button.active { border-bottom-color: #fff; background: rgba(255,255,255,.15); font-weight: 600; }
 
   main { padding: 22px; max-width: 1600px; margin: 0 auto; }
 
-  .dash-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px; margin-bottom: 24px;
-  }
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 24px; }
   .dash-card {
     background: #fff; padding: 26px; border-radius: 12px;
     box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: pointer;
@@ -119,61 +99,43 @@
   .dash-card.purple { border-right-color: var(--purple); }
   .dash-card.orange { border-right-color: #fd7e14; }
 
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 14px;
-  }
-  .stat {
-    background: #fff; padding: 20px; border-radius: 10px; text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.05);
-  }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .stat { background: #fff; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
   .stat .num { font-size: 32px; font-weight: 700; color: var(--dark-blue); }
   .stat .lbl { color: var(--gray); font-size: 13px; margin-top: 4px; }
-  .stat.red .num    { color: var(--red); }
-  .stat.green .num  { color: var(--green); }
+  .stat.red .num { color: var(--red); }
+  .stat.green .num { color: var(--green); }
   .stat.purple .num { color: var(--purple); }
 
-  .toolbar {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
-    align-items: center;
-  }
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
   .btn {
     padding: 10px 18px; border: none; border-radius: 8px;
     cursor: pointer; font-size: 14px; font-weight: 500;
     transition: .2s; display: inline-flex; align-items: center; gap: 6px;
   }
   .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.12); }
-  .btn:active { transform: translateY(0); }
-  .btn-primary  { background: var(--dark-blue); color: #fff; }
-  .btn-success  { background: var(--green); color: #fff; }
-  .btn-warning  { background: var(--yellow); color: #222; }
-  .btn-danger   { background: var(--red); color: #fff; }
-  .btn-purple   { background: var(--purple); color: #fff; }
-  .btn-gray     { background: var(--gray); color: #fff; }
-  .btn-sm       { padding: 6px 12px; font-size: 12px; }
+  .btn-primary { background: var(--dark-blue); color: #fff; }
+  .btn-success { background: var(--green); color: #fff; }
+  .btn-warning { background: var(--yellow); color: #222; }
+  .btn-danger  { background: var(--red); color: #fff; }
+  .btn-purple  { background: var(--purple); color: #fff; }
+  .btn-gray    { background: var(--gray); color: #fff; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
   .btn kbd {
     background: rgba(255,255,255,.25); padding: 2px 6px;
     border-radius: 4px; font-size: 10px; margin-right: 4px;
     font-family: monospace;
   }
-  .btn-primary kbd, .btn-success kbd, .btn-danger kbd, .btn-purple kbd, .btn-gray kbd {
-    background: rgba(255,255,255,.25); color: #fff;
-  }
 
   input, select {
     padding: 9px 12px; border: 1px solid #ccc; border-radius: 7px;
-    font-size: 14px; font-family: inherit;
-    width: 100%;
+    font-size: 14px; font-family: inherit; width: 100%;
   }
   input:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(46,117,182,.1); }
 
   .table-wrap { background: #fff; border-radius: 10px; overflow: auto; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
   table { width: 100%; border-collapse: collapse; min-width: 1100px; }
-  th {
-    background: var(--dark-blue); color: #fff; padding: 12px 10px;
-    text-align: right; font-size: 13px; position: sticky; top: 0;
-    z-index: 1;
-  }
+  th { background: var(--dark-blue); color: #fff; padding: 12px 10px; text-align: right; font-size: 13px; position: sticky; top: 0; z-index: 1; }
   td { padding: 10px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: middle; }
   tbody tr { cursor: pointer; transition: .15s; }
   tbody tr:hover { background: #f9fbfe; }
@@ -182,10 +144,7 @@
   tbody tr.selected { outline: 2px solid var(--blue); outline-offset: -2px; background: #e7f1fa !important; }
   .empty-row td { text-align: center; color: var(--gray); padding: 30px; }
 
-  .badge {
-    display: inline-block; padding: 4px 10px; border-radius: 12px;
-    font-size: 12px; font-weight: 600;
-  }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
   .badge-ready    { background: var(--green); color: #fff; }
   .badge-progress { background: var(--yellow); color: #222; }
   .badge-approved { background: var(--blue); color: #fff; }
@@ -207,7 +166,6 @@
   .page.active { display: block; animation: fadeIn .2s; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  /* ========== MODAL ========== */
   .modal-bg {
     display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5);
     z-index: 1000; align-items: center; justify-content: center;
@@ -218,13 +176,12 @@
     background: #fff; padding: 28px; border-radius: 12px;
     width: 90%; max-width: 540px; max-height: 92vh; overflow-y: auto;
   }
-  .modal h3 { color: var(--dark-blue); margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .modal h3 { color: var(--dark-blue); margin-bottom: 18px; }
   .modal label { display: block; margin: 10px 0 4px; font-size: 13px; color: #444; }
   .modal input, .modal select { width: 100%; }
   .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
   .modal-actions .btn { min-width: 100px; justify-content: center; }
 
-  /* ========== CUSTOMER SEARCH ========== */
   .customer-search { position: relative; }
   .customer-dropdown {
     position: absolute; top: calc(100% + 4px); left: 0; right: 0;
@@ -247,7 +204,6 @@
   .customer-option.create { color: var(--green); font-weight: 600; }
   .customer-option.create:hover { background: #d4edda; }
 
-  /* ========== TOAST ========== */
   .toast {
     position: fixed; bottom: 24px; left: 24px;
     background: var(--dark-blue); color: #fff;
@@ -261,21 +217,13 @@
   .toast.error   { background: var(--red); }
   .toast.info    { background: var(--blue); }
 
-  /* ========== SHORTCUTS HELP ========== */
-  .shortcuts-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 22px;
-  }
+  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
   .shortcut-group h4 {
     color: var(--dark-blue); margin-bottom: 10px;
     padding-bottom: 6px; border-bottom: 1px solid var(--light-blue);
     font-size: 14px;
   }
-  .shortcut-row {
-    display: flex; justify-content: space-between;
-    padding: 6px 0; font-size: 13px;
-    align-items: center;
-  }
+  .shortcut-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; align-items: center; }
   .shortcut-row .keys { display: flex; gap: 4px; }
   kbd {
     background: #f0f0f0; border: 1px solid #ccc;
@@ -322,8 +270,7 @@
       <div class="token-help">
         💡 أنشئ توكن من:
         <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings → Tokens</a>
-        <br>
-        الصلاحية المطلوبة: <b>Contents: Read and write</b>
+        <br>الصلاحية المطلوبة: <b>Contents: Read and write</b>
       </div>
     </div>
 
@@ -364,7 +311,6 @@
   </nav>
 
   <main>
-    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid">
         <div class="dash-card" onclick="go('entry')">
@@ -386,16 +332,15 @@
       </div>
     </section>
 
-    <!-- ENTRY -->
     <section id="page-entry" class="page">
       <div class="section-header">
         <h2>📋 إدخال الطلبات</h2>
-        <span class="hint">💡 <kbd>Ctrl+K</kbd> للبحث • <kbd>Alt+N</kbd> طلب جديد • <kbd>Alt+T</kbd> تحويل المحدد</span>
+        <span class="hint">💡 <kbd>Ctrl+K</kbd> بحث • <kbd>Alt+N</kbd> جديد • <kbd>Alt+T</kbd> تحويل</span>
       </div>
       <div class="toolbar no-print">
         <button class="btn btn-primary" onclick="addOrder()">➕ طلب جديد <kbd>Alt+N</kbd></button>
         <button class="btn btn-success" onclick="bulkTransfer()">🚚 تحويل المستوفية <kbd>Alt+B</kbd></button>
-        <input id="searchEntry" type="text" placeholder="🔍 بحث سريع... (Ctrl+K)" oninput="renderEntry()" style="margin-right:auto;max-width:280px;">
+        <input id="searchEntry" type="text" placeholder="🔍 بحث... (Ctrl+K)" oninput="renderEntry()" style="margin-right:auto;max-width:280px;">
       </div>
       <div class="table-wrap"><table>
         <thead><tr>
@@ -407,11 +352,10 @@
       </table></div>
     </section>
 
-    <!-- READY -->
     <section id="page-ready" class="page">
       <div class="section-header">
         <h2>📦 الطلبات الجاهزة للنقل</h2>
-        <span class="hint">💡 <kbd>Ctrl+P</kbd> طباعة • <kbd>Alt+M</kbd> ترحيل للسجل</span>
+        <span class="hint">💡 <kbd>Ctrl+P</kbd> طباعة • <kbd>Alt+M</kbd> ترحيل</span>
       </div>
       <div class="toolbar no-print">
         <button class="btn btn-primary" onclick="printReady()">🖨️ طباعة القائمة <kbd>Ctrl+P</kbd></button>
@@ -427,14 +371,13 @@
       </table></div>
     </section>
 
-    <!-- LOG -->
     <section id="page-log" class="page">
       <div class="section-header">
         <h2>🗃️ سجل الطلبات (الأرشيف)</h2>
         <span id="logCount" style="color:var(--gray);font-size:13px;"></span>
       </div>
       <div class="toolbar no-print">
-        <input id="searchLog" type="text" placeholder="🔍 بحث في السجل... (Ctrl+K)" oninput="renderLog()" style="max-width:320px;">
+        <input id="searchLog" type="text" placeholder="🔍 بحث... (Ctrl+K)" oninput="renderLog()" style="max-width:320px;">
         <button class="btn btn-gray" onclick="exportLogCSV()">📤 تصدير CSV</button>
       </div>
       <div class="table-wrap"><table>
@@ -448,7 +391,6 @@
       </table></div>
     </section>
 
-    <!-- CUSTOMERS -->
     <section id="page-customers" class="page">
       <div class="section-header">
         <h2>👥 قاعدة بيانات العملاء</h2>
@@ -464,7 +406,6 @@
       </table></div>
     </section>
 
-    <!-- SETTINGS -->
     <section id="page-settings" class="page">
       <div class="section-header"><h2>⚙️ الإعدادات</h2></div>
 
@@ -475,7 +416,7 @@
       </div>
       <div id="currentTokenInfo" style="padding:12px;background:#f8f9fa;border-radius:8px;font-family:monospace;font-size:12px;color:#555;white-space:pre-line;"></div>
 
-      <h3 style="color:var(--dark-blue);margin:24px 0 8px;">🚚 الموصلون (مع أرقامهم)</h3>
+      <h3 style="color:var(--dark-blue);margin:24px 0 8px;">🚚 الموصلون</h3>
       <div class="toolbar">
         <input id="newDriverName" placeholder="اسم الموصل" style="max-width:200px;">
         <input id="newDriverPhone" placeholder="رقم الهاتف" style="max-width:200px;">
@@ -502,51 +443,30 @@
 </div>
 
 <!-- ================= MODALS ================= -->
-
-<!-- Order Modal -->
 <div id="orderModal" class="modal-bg"><div class="modal">
   <h3 id="orderModalTitle">➕ طلب جديد</h3>
   <input type="hidden" id="orderId">
   <input type="hidden" id="orderCustomerId">
-
-  <label>رقم الفاتورة *</label>
-  <input id="orderInvoice" type="text" autocomplete="off">
-
+  <label>رقم الفاتورة *</label><input id="orderInvoice" autocomplete="off">
   <label>العميل (اكتب للبحث أو أنشئ جديد)</label>
   <div class="customer-search">
-    <input id="orderCustomer" type="text" autocomplete="off" placeholder="اكتب اسم العميل أو رقمه...">
+    <input id="orderCustomer" autocomplete="off" placeholder="اكتب اسم العميل أو رقمه...">
     <div class="customer-dropdown" id="customerDropdown"></div>
   </div>
-
-  <label>الموقع</label>
-  <input id="orderLocation" type="text" autocomplete="off">
-
+  <label>الموقع</label><input id="orderLocation" autocomplete="off">
   <label>حالة الطلب</label>
-  <select id="orderStatus">
-    <option>قيد التجهيز</option><option>جاهز</option><option>معتمد</option>
-  </select>
-
-  <label>تاريخ الاعتماد</label>
-  <input id="orderDate" type="text" readonly placeholder="تلقائي عند الحالة جاهز">
-
+  <select id="orderStatus"><option>قيد التجهيز</option><option>جاهز</option><option>معتمد</option></select>
+  <label>تاريخ الاعتماد</label><input id="orderDate" readonly placeholder="تلقائي عند الحالة جاهز">
   <label>حالة الدفع</label>
-  <select id="orderPay">
-    <option>مدفوع</option><option>غير مدفوع</option><option>VIP</option>
-  </select>
-
-  <label>الموصل</label>
-  <select id="orderDriver" onchange="onDriverSelect()"></select>
-
-  <label>رقم الموصل (تلقائي)</label>
-  <input id="orderDriverPhone" type="text" placeholder="يُملأ تلقائياً">
-
+  <select id="orderPay"><option>مدفوع</option><option>غير مدفوع</option><option>VIP</option></select>
+  <label>الموصل</label><select id="orderDriver" onchange="onDriverSelect()"></select>
+  <label>رقم الموصل (تلقائي)</label><input id="orderDriverPhone" placeholder="يُملأ تلقائياً">
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('orderModal')">إلغاء <kbd>Esc</kbd></button>
     <button class="btn btn-primary" onclick="saveOrder()">💾 حفظ <kbd>Ctrl+S</kbd></button>
   </div>
 </div></div>
 
-<!-- Customer Modal -->
 <div id="customerModal" class="modal-bg"><div class="modal">
   <h3>👤 عميل جديد</h3>
   <label>رقم العميل</label><input id="custCode" autocomplete="off">
@@ -559,7 +479,6 @@
   </div>
 </div></div>
 
-<!-- User Modal -->
 <div id="userModal" class="modal-bg"><div class="modal">
   <h3>👤 مستخدم جديد</h3>
   <label>اسم المستخدم</label><input id="userName" autocomplete="off">
@@ -572,7 +491,6 @@
   </div>
 </div></div>
 
-<!-- Token Modal -->
 <div id="tokenModal" class="modal-bg"><div class="modal">
   <h3>🔑 تحديث التوكن</h3>
   <label>GitHub Token الجديد</label>
@@ -588,49 +506,48 @@
   </div>
 </div></div>
 
-<!-- Shortcuts Modal -->
 <div id="shortcutsModal" class="modal-bg"><div class="modal" style="max-width:800px;">
   <h3>⌨️ اختصارات لوحة المفاتيح</h3>
   <div class="shortcuts-grid">
     <div class="shortcut-group">
-      <h4>🧭 التنقل بين الواجهات</h4>
+      <h4>🧭 التنقل</h4>
       <div class="shortcut-row"><span class="desc">الرئيسية</span><span class="keys"><kbd>Alt</kbd>+<kbd>1</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">إدخال الطلبات</span><span class="keys"><kbd>Alt</kbd>+<kbd>2</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">الطلبات الجاهزة</span><span class="keys"><kbd>Alt</kbd>+<kbd>3</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">سجل الطلبات</span><span class="keys"><kbd>Alt</kbd>+<kbd>4</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">إدخال</span><span class="keys"><kbd>Alt</kbd>+<kbd>2</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">جاهزة</span><span class="keys"><kbd>Alt</kbd>+<kbd>3</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">السجل</span><span class="keys"><kbd>Alt</kbd>+<kbd>4</kbd></span></div>
       <div class="shortcut-row"><span class="desc">العملاء</span><span class="keys"><kbd>Alt</kbd>+<kbd>5</kbd></span></div>
     </div>
     <div class="shortcut-group">
-      <h4>⚡ العمليات السريعة</h4>
+      <h4>⚡ العمليات</h4>
       <div class="shortcut-row"><span class="desc">بحث سريع</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></span></div>
       <div class="shortcut-row"><span class="desc">طلب جديد</span><span class="keys"><kbd>Alt</kbd>+<kbd>N</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حفظ النموذج</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>S</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">طباعة القائمة</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>P</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">تحويل الطلب المحدد</span><span class="keys"><kbd>Alt</kbd>+<kbd>T</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">تحويل المستوفية جماعياً</span><span class="keys"><kbd>Alt</kbd>+<kbd>B</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">ترحيل إلى السجل</span><span class="keys"><kbd>Alt</kbd>+<kbd>M</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>S</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">طباعة</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>P</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">تحويل المحدد</span><span class="keys"><kbd>Alt</kbd>+<kbd>T</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">تحويل جماعي</span><span class="keys"><kbd>Alt</kbd>+<kbd>B</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">ترحيل للسجل</span><span class="keys"><kbd>Alt</kbd>+<kbd>M</kbd></span></div>
     </div>
     <div class="shortcut-group">
-      <h4>🔍 التكبير والتصغير</h4>
+      <h4>🔍 العرض</h4>
       <div class="shortcut-row"><span class="desc">تكبير</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>=</kbd></span></div>
       <div class="shortcut-row"><span class="desc">تصغير</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>-</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">إعادة تعيين</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>0</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">100%</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>0</kbd></span></div>
     </div>
     <div class="shortcut-group">
-      <h4>📝 داخل نموذج الطلب</h4>
-      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>S</kbd> أو <kbd>Enter</kbd></span></div>
+      <h4>📝 داخل النموذج</h4>
+      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Enter</kbd></span></div>
       <div class="shortcut-row"><span class="desc">إغلاق</span><span class="keys"><kbd>Esc</kbd></span></div>
       <div class="shortcut-row"><span class="desc">مدفوع</span><span class="keys"><kbd>Alt</kbd>+<kbd>P</kbd></span></div>
       <div class="shortcut-row"><span class="desc">غير مدفوع</span><span class="keys"><kbd>Alt</kbd>+<kbd>U</kbd></span></div>
       <div class="shortcut-row"><span class="desc">VIP</span><span class="keys"><kbd>Alt</kbd>+<kbd>V</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حالة: جاهز</span><span class="keys"><kbd>Alt</kbd>+<kbd>G</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حالة: قيد التجهيز</span><span class="keys"><kbd>Alt</kbd>+<kbd>W</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حالة: معتمد</span><span class="keys"><kbd>Alt</kbd>+<kbd>A</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">جاهز</span><span class="keys"><kbd>Alt</kbd>+<kbd>G</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">قيد التجهيز</span><span class="keys"><kbd>Alt</kbd>+<kbd>W</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">معتمد</span><span class="keys"><kbd>Alt</kbd>+<kbd>A</kbd></span></div>
     </div>
     <div class="shortcut-group">
       <h4>🛠️ أدوات</h4>
-      <div class="shortcut-row"><span class="desc">عرض الاختصارات</span><span class="keys"><kbd>F1</kbd> أو <kbd>?</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حذف السطر المحدد</span><span class="keys"><kbd>Delete</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">الاختصارات</span><span class="keys"><kbd>F1</kbd> أو <kbd>?</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">حذف المحدد</span><span class="keys"><kbd>Delete</kbd></span></div>
     </div>
   </div>
   <div class="modal-actions">
@@ -647,22 +564,40 @@
 const GITHUB_OWNER  = 'YOUR_USERNAME';
 const GITHUB_REPO   = 'orders-system';
 const GITHUB_BRANCH = 'main';
-const GITHUB_FILE   = 'data.json';
 const SYNC_INTERVAL = 5000;
 
 /* ==============================================================
-   المتغيرات
+   ملفات البيانات المنفصلة
    ============================================================== */
+const FILES = {
+  users:     'data/users.json',
+  orders:    'data/orders.json',
+  ready:     'data/ready.json',
+  log:       'data/log.json',
+  customers: 'data/customers.json',
+  drivers:   'data/drivers.json',
+  meta:      'data/meta.json'
+};
+
+const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers'];
+
 const TOKEN_KEY = 'oms_github_token';
-const API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 
 let currentUser = null;
-let cache = { orders: [], ready: [], log: [], customers: [], drivers: [], users: [] };
-let lastSHA = null;
+let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [] };
+let SHAs = {};          // SHA لكل ملف
+let localMeta = null;   // آخر meta معروف
 let pollTimer = null;
 let syncing = false;
 let selectedOrderId = null;
 let zoomLevel = 1;
+
+/* ==============================================================
+   Base64 Helpers
+   ============================================================== */
+function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
 /* ==============================================================
    التوكن
@@ -683,9 +618,7 @@ function updateTokenStatus() {
   const token = getStoredToken();
 
   if (token) {
-    const masked = token.length > 25
-      ? token.substring(0, 20) + '…' + token.slice(-4)
-      : token;
+    const masked = token.length > 25 ? token.substring(0, 20) + '…' + token.slice(-4) : token;
     statusEl.className = 'token-status saved';
     statusEl.innerHTML = `
       <span>✅ التوكن محفوظ</span>
@@ -711,8 +644,7 @@ function updateCurrentTokenInfo() {
   if (!el) return;
   const token = getStoredToken();
   if (token) {
-    const masked = token.substring(0, 20) + '…' + token.slice(-4);
-    el.textContent = `✅ محفوظ: ${masked}\nالطول: ${token.length} حرف`;
+    el.textContent = `✅ محفوظ: ${token.substring(0, 20)}…${token.slice(-4)}\nالطول: ${token.length} حرف`;
   } else {
     el.textContent = '❌ لا يوجد توكن';
   }
@@ -727,100 +659,134 @@ function changeToken() {
 function saveNewToken() {
   const t = document.getElementById('newTokenInput').value.trim();
   if (!t) { toast('أدخل التوكن', 'error'); return; }
-  if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
-    if (!confirm('التوكن لا يبدأ بـ github_pat_. متابعة؟')) return;
-  }
   saveToken(t);
   closeModal('tokenModal');
   toast('✅ تم حفظ التوكن', 'success');
   updateCurrentTokenInfo();
-  lastSHA = null;
+  SHAs = {}; localMeta = null;
   syncPull();
 }
 
 /* ==============================================================
-   GitHub API
+   GitHub API — ملف واحد
    ============================================================== */
-async function ghRead() {
-  const token = getStoredToken();
-  if (!token) throw new Error('لم يتم إدخال التوكن');
+function apiHeaders(json = false) {
+  const h = {
+    'Authorization': `Bearer ${getStoredToken()}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+  if (json) h['Content-Type'] = 'application/json';
+  return h;
+}
 
-  const url = `${API_URL}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
+async function ghReadFile(key) {
+  const path = FILES[key];
+  const url = `${API_BASE}/${path}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   let res;
   try {
-    res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
+    res = await fetch(url, { headers: apiHeaders() });
   } catch (e) {
-    throw new Error('فشل الاتصال بالشبكة. تحقق من الإنترنت وافتح الصفحة عبر https://');
+    throw new Error('فشل الاتصال بالشبكة');
   }
-
   if (!res.ok) {
-    if (res.status === 401) throw new Error('التوكن غير صالح أو منتهي');
-    if (res.status === 403) throw new Error('التوكن لا يملك صلاحية Contents');
-    if (res.status === 404) throw new Error(`المستودع أو الملف غير موجود.\nowner=${GITHUB_OWNER} repo=${GITHUB_REPO}`);
-    throw new Error(`فشل القراءة: HTTP ${res.status}`);
+    if (res.status === 401) throw new Error('التوكن غير صالح');
+    if (res.status === 403) throw new Error('صلاحية التوكن غير كافية');
+    if (res.status === 404) throw new Error(`الملف غير موجود: ${path}`);
+    throw new Error(`فشل القراءة (${path}): ${res.status}`);
   }
-
   const json = await res.json();
-  lastSHA = json.sha;
-
+  SHAs[key] = json.sha;
   try {
-    const raw = atob(json.content.replace(/\s/g, ''));
-    const text = decodeURIComponent(escape(raw));
-    return JSON.parse(text);
+    return JSON.parse(decodeBase64(json.content));
   } catch (e) {
-    throw new Error('ملف data.json تالف');
+    return null;
   }
 }
 
-async function ghWrite(data) {
-  const token = getStoredToken();
-  if (!token) throw new Error('لم يتم إدخال التوكن');
-
-  const jsonStr = JSON.stringify(data, null, 2);
-  const content = btoa(unescape(encodeURIComponent(jsonStr)));
-
+async function ghWriteFile(key, data) {
+  const path = FILES[key];
+  const url = `${API_BASE}/${path}`;
   const body = {
-    message: `update - ${new Date().toISOString()}`,
-    content: content,
+    message: `update ${key} - ${new Date().toISOString()}`,
+    content: encodeBase64(JSON.stringify(data, null, 2)),
     branch: GITHUB_BRANCH,
-    sha: lastSHA
+    sha: SHAs[key]
   };
-
   let res;
   try {
-    res = await fetch(API_URL, {
+    res = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
+      headers: apiHeaders(true),
       body: JSON.stringify(body)
     });
   } catch (e) {
-    throw new Error('فشل الاتصال أثناء الحفظ');
+    throw new Error(`فشل الاتصال أثناء حفظ ${key}`);
   }
-
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    if (res.status === 409) {
-      await syncPull();
-      throw new Error('تعارض — أُعيدت المزامنة، حاول مجدداً');
-    }
-    throw new Error(`فشل الحفظ: ${res.status} - ${err.message || ''}`);
+    if (res.status === 409) throw new Error('CONFLICT');
+    throw new Error(`فشل حفظ ${key}: ${res.status} - ${err.message || ''}`);
   }
-
   const json = await res.json();
-  lastSHA = json.content.sha;
+  SHAs[key] = json.content.sha;
   return json;
+}
+
+/* ==============================================================
+   قراءة كل الملفات / كتابة ملف واحد + meta
+   ============================================================== */
+async function readAll() {
+  // نستخدم Promise.all لقراءة متوازية
+  const results = await Promise.all(DATA_KEYS.map(k => ghReadFile(k).catch(() => null)));
+  DATA_KEYS.forEach((k, i) => {
+    cache[k] = Array.isArray(results[i]) ? results[i] : [];
+  });
+  // migration للـ drivers القديمة (نص بدل object)
+  cache.drivers = cache.drivers.map(d => {
+    if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
+    return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' };
+  });
+}
+
+async function readMeta() {
+  try {
+    const m = await ghReadFile('meta');
+    return m || { lastUpdate: '', version: 1 };
+  } catch (e) {
+    return { lastUpdate: '', version: 1 };
+  }
+}
+
+async function writeMeta() {
+  const meta = { lastUpdate: new Date().toISOString(), version: 1 };
+  try {
+    await ghWriteFile('meta', meta);
+    localMeta = meta;
+  } catch (e) {
+    // قد يحدث 409 إذا كان ملف meta لم يُقرأ بعد، جرّب قراءته أولاً
+    if (e.message === 'CONFLICT') {
+      await readMeta();
+      await ghWriteFile('meta', meta);
+      localMeta = meta;
+    } else {
+      throw e;
+    }
+  }
+}
+
+/* حفظ مجموعة محددة + تحديث meta */
+async function persistKeys(keys) {
+  setSyncing(true);
+  try {
+    for (const k of keys) {
+      if (!FILES[k]) continue;
+      await ghWriteFile(k, cache[k]);
+    }
+    await writeMeta();
+  } finally {
+    setSyncing(false);
+  }
 }
 
 /* ==============================================================
@@ -830,15 +796,18 @@ async function syncPull() {
   if (syncing || !currentUser) return;
   syncing = true;
   try {
-    const data = await ghRead();
-    normalizeData(data);
-    const active = document.querySelector('.page.active')?.id?.replace('page-', '');
-    if (active === 'dashboard') renderDashboard();
-    if (active === 'entry')     renderEntry();
-    if (active === 'ready')     renderReady();
-    if (active === 'log')       renderLog();
-    if (active === 'customers') renderCustomers();
-    if (active === 'settings')  renderSettings();
+    const meta = await readMeta();
+    // إذا لم يتغير meta → لا حاجة لجلب البيانات
+    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) {
+      setOnline(true);
+      syncing = false;
+      return;
+    }
+    localMeta = meta;
+
+    // meta تغيّر → اقرأ كل الملفات
+    await readAll();
+    renderActive();
     setOnline(true);
   } catch (e) {
     console.warn('Sync error:', e.message);
@@ -848,32 +817,22 @@ async function syncPull() {
   }
 }
 
-function normalizeData(data) {
-  cache.orders    = Array.isArray(data.orders)    ? data.orders    : [];
-  cache.ready     = Array.isArray(data.ready)     ? data.ready     : [];
-  cache.log       = Array.isArray(data.log)       ? data.log       : [];
-  cache.customers = Array.isArray(data.customers) ? data.customers : [];
-  cache.drivers   = Array.isArray(data.drivers)   ? data.drivers   : [];
-  cache.users     = Array.isArray(data.users)     ? data.users     : [];
-  // migration: convert string drivers to objects
-  cache.drivers = cache.drivers.map(d => {
-    if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
-    return {
-      id: d.id || uid(),
-      name: d.name || '',
-      phone: d.phone || ''
-    };
-  });
+function renderActive() {
+  const active = document.querySelector('.page.active')?.id?.replace('page-', '');
+  if (active === 'dashboard') renderDashboard();
+  if (active === 'entry')     renderEntry();
+  if (active === 'ready')     renderReady();
+  if (active === 'log')       renderLog();
+  if (active === 'customers') renderCustomers();
+  if (active === 'settings')  renderSettings();
 }
 
 function startPolling() { stopPolling(); pollTimer = setInterval(syncPull, SYNC_INTERVAL); }
 function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
+
 function setOnline(ok) {
   const dot = document.getElementById('connDot');
-  if (dot) {
-    dot.className = 'status-dot' + (ok ? ' online' : '');
-    dot.title = ok ? 'متصل' : 'غير متصل';
-  }
+  if (dot) { dot.className = 'status-dot' + (ok ? ' online' : ''); dot.title = ok ? 'متصل' : 'غير متصل'; }
 }
 function setSyncing(on) {
   const dot = document.getElementById('connDot');
@@ -915,21 +874,10 @@ function badge(val) {
 /* ==============================================================
    Zoom
    ============================================================== */
-function applyZoom() {
-  document.body.style.zoom = zoomLevel;
-  localStorage.setItem('oms_zoom', zoomLevel);
-}
-function zoomIn() {
-  zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2));
-  applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info');
-}
-function zoomOut() {
-  zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2));
-  applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info');
-}
-function zoomReset() {
-  zoomLevel = 1; applyZoom(); toast('🔍 100%', 'info');
-}
+function applyZoom() { document.body.style.zoom = zoomLevel; localStorage.setItem('oms_zoom', zoomLevel); }
+function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
+function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
+function zoomReset() { zoomLevel = 1; applyZoom(); toast('🔍 100%', 'info'); }
 
 /* ==============================================================
    Login
@@ -961,11 +909,11 @@ window.doLogin = async function () {
   if (location.protocol === 'file:') { errEl.textContent = '❌ افتح من GitHub Pages (https://)'; return; }
 
   btn.disabled = true;
-  loadEl.textContent = '⏳ جاري الاتصال...';
+  loadEl.textContent = '⏳ جاري تحميل البيانات (7 ملفات)...';
 
   try {
-    const data = await ghRead();
-    normalizeData(data);
+    await readAll();
+    localMeta = await readMeta();
 
     const found = cache.users.find(x => x.username === u && x.password === p);
     if (!found) {
@@ -992,6 +940,7 @@ window.logout = function () {
   stopPolling();
   currentUser = null;
   selectedOrderId = null;
+  SHAs = {}; localMeta = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = '';
@@ -1072,19 +1021,14 @@ function renderEntry() {
     const cls = o.status === 'جاهز' ? 'status-ready' : o.status === 'قيد التجهيز' ? 'status-progress' : '';
     const sel = selectedOrderId === o.id ? ' selected' : '';
     return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="editOrder('${o.id}')">
-      <td>${i+1}</td>
-      <td><b>${esc(o.invoice)}</b></td>
-      <td>${esc(o.customer)}</td>
-      <td>${esc(o.location)}</td>
-      <td>${badge(o.status)}</td>
+      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+      <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
-      <td>${badge(o.pay)}</td>
-      <td>${esc(o.driver)}</td>
-      <td>${esc(o.driverPhone)}</td>
+      <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
       <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
       <td class="no-print" style="white-space:nowrap;" onclick="event.stopPropagation()">
         <button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')" title="تعديل">✏️</button>
-        <button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل للجاهزة">➡️</button>
+        <button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل">➡️</button>
         <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')" title="حذف">🗑️</button>
       </td>
     </tr>`;
@@ -1109,15 +1053,10 @@ function renderReady() {
     return;
   }
   body.innerHTML = cache.ready.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
-    <td>${i+1}</td>
-    <td><b>${esc(o.invoice)}</b></td>
-    <td>${esc(o.customer)}</td>
-    <td>${esc(o.location)}</td>
-    <td>${badge(o.status)}</td>
+    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+    <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
     <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
-    <td>${badge(o.pay)}</td>
-    <td>${esc(o.driver)}</td>
-    <td>${esc(o.driverPhone)}</td>
+    <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
     <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
   </tr>`).join('');
 }
@@ -1138,15 +1077,10 @@ function renderLog() {
     return;
   }
   body.innerHTML = data.map((o, i) => `<tr>
-    <td>${i+1}</td>
-    <td><b>${esc(o.invoice)}</b></td>
-    <td>${esc(o.customer)}</td>
-    <td>${esc(o.location)}</td>
-    <td>${badge(o.status)}</td>
+    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+    <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
     <td style="font-size:12px;color:#555;">${esc(o.approvalDate || '—')}</td>
-    <td>${badge(o.pay)}</td>
-    <td>${esc(o.driver)}</td>
-    <td>${esc(o.driverPhone)}</td>
+    <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
     <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
     <td style="font-size:12px;color:#888;">${esc(o.archivedAt || '—')}</td>
     ${isAdmin ? `<td class="no-print" style="white-space:nowrap;">
@@ -1172,11 +1106,8 @@ function renderCustomers() {
     return;
   }
   body.innerHTML = data.map((c, i) => `<tr>
-    <td>${i+1}</td>
-    <td>${esc(c.code)}</td>
-    <td>${esc(c.name)}</td>
-    <td>${esc(c.location)}</td>
-    <td>${esc(c.phone)}</td>
+    <td>${i+1}</td><td>${esc(c.code)}</td><td>${esc(c.name)}</td>
+    <td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
     <td><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">🗑️</button></td>
   </tr>`).join('');
 }
@@ -1184,10 +1115,7 @@ function renderCustomers() {
 /* ==============================================================
    Render Settings
    ============================================================== */
-function renderSettings() {
-  renderDriversList();
-  renderUsers();
-}
+function renderSettings() { renderDriversList(); renderUsers(); }
 
 function renderDriversList() {
   document.getElementById('driverList').innerHTML = cache.drivers.length
@@ -1209,7 +1137,7 @@ function renderUsers() {
 }
 
 /* ==============================================================
-   Order Modal & CRUD
+   Order CRUD
    ============================================================== */
 window.addOrder = function () {
   if (!currentUser) return;
@@ -1218,8 +1146,7 @@ window.addOrder = function () {
   document.getElementById('orderModalTitle').textContent = '➕ طلب جديد';
   document.getElementById('orderId').value = '';
   document.getElementById('orderCustomerId').value = '';
-  ['orderInvoice','orderLocation','orderDate','orderDriverPhone'].forEach(id =>
-    document.getElementById(id).value = '');
+  ['orderInvoice','orderLocation','orderDate','orderDriverPhone'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('orderCustomer').value = '';
   document.getElementById('orderStatus').value = 'قيد التجهيز';
   document.getElementById('orderPay').value = 'مدفوع';
@@ -1279,8 +1206,9 @@ window.saveOrder = async function () {
       data.createdAt = fmtDate();
       cache.orders.push(data);
     }
-    await persist();
+    await persistKeys(['orders']);
     closeModal('orderModal');
+    renderEntry();
     toast('✅ تم الحفظ', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
@@ -1289,26 +1217,23 @@ window.deleteOrder = async function (id) {
   if (!confirm('حذف هذا الطلب؟')) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
-  try { await persist(); toast('تم الحذف', 'success'); }
+  try { await persistKeys(['orders']); renderEntry(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteFromLog = async function (id) {
-  if (!currentUser || currentUser.role !== 'رئيسي') {
-    toast('غير مصرح — للمدير فقط', 'error'); return;
-  }
+  if (!currentUser || currentUser.role !== 'رئيسي') { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id);
   if (!o) return;
-  if (!confirm(`⚠️ حذف الطلب "${o.invoice}" من السجل نهائياً؟\nلا يمكن التراجع.`)) return;
-  if (!confirm('تأكيد أخير: حذف نهائي؟')) return;
-
+  if (!confirm(`⚠️ حذف الطلب "${o.invoice}" من السجل نهائياً؟`)) return;
+  if (!confirm('تأكيد أخير؟')) return;
   cache.log = cache.log.filter(x => x.id !== id);
-  try { await persist(); toast('✅ تم الحذف من السجل', 'success'); }
+  try { await persistKeys(['log']); renderLog(); toast('✅ تم الحذف من السجل', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 /* ==============================================================
-   Customer Search (Autocomplete)
+   Customer Search
    ============================================================== */
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
@@ -1323,29 +1248,21 @@ function initCustomerSearch() {
       `${c.code} ${c.name} ${c.phone} ${c.location}`.toLowerCase().includes(q)
     ).slice(0, 8);
 
-    let html = '';
-    if (matches.length) {
-      html = matches.map(c =>
-        `<div class="customer-option" data-id="${c.id}" data-name="${esc(c.name)}" data-loc="${esc(c.location)}">
-          <span class="loc">📍 ${esc(c.location)}</span>
-          <b>${esc(c.name)}</b>
-          <span class="code">${esc(c.code || '')}</span>
-        </div>`
-      ).join('');
-    }
+    let html = matches.length
+      ? matches.map(c => `<div class="customer-option" data-id="${c.id}" data-name="${esc(c.name)}" data-loc="${esc(c.location)}">
+          <span class="loc">📍 ${esc(c.location)}</span><b>${esc(c.name)}</b> <span class="code">${esc(c.code || '')}</span>
+        </div>`).join('')
+      : '';
 
-    // خيار إنشاء عميل جديد إذا لم يكن موجوداً بالضبط
     const exact = cache.customers.some(c => c.name.toLowerCase() === q);
     if (!exact && q.length >= 2) {
       html += `<div class="customer-option create" data-create="1">➕ إنشاء عميل جديد: "${esc(input.value)}"</div>`;
     }
-
     if (!html) html = '<div class="customer-option empty">لا توجد نتائج</div>';
 
     dropdown.innerHTML = html;
     dropdown.classList.add('show');
 
-    // Event listeners
     dropdown.querySelectorAll('.customer-option').forEach(opt => {
       opt.addEventListener('mousedown', (e) => {
         e.preventDefault();
@@ -1364,19 +1281,8 @@ function initCustomerSearch() {
     });
   });
 
-  input.addEventListener('focus', () => {
-    if (input.value.trim()) input.dispatchEvent(new Event('input'));
-  });
-
-  input.addEventListener('blur', () => {
-    setTimeout(() => dropdown.classList.remove('show'), 150);
-  });
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      dropdown.classList.remove('show');
-    }
-  });
+  input.addEventListener('focus', () => { if (input.value.trim()) input.dispatchEvent(new Event('input')); });
+  input.addEventListener('blur', () => setTimeout(() => dropdown.classList.remove('show'), 150));
 }
 
 /* ==============================================================
@@ -1395,9 +1301,7 @@ window.onDriverSelect = function () {
   const sel = document.getElementById('orderDriver');
   const opt = sel.options[sel.selectedIndex];
   const phone = opt.dataset.phone || '';
-  if (phone) {
-    document.getElementById('orderDriverPhone').value = phone;
-  }
+  if (phone) document.getElementById('orderDriverPhone').value = phone;
 };
 
 window.addDriver = async function () {
@@ -1405,12 +1309,12 @@ window.addDriver = async function () {
   const phone = document.getElementById('newDriverPhone').value.trim();
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
   if (cache.drivers.find(d => d.name === name)) { toast('الموصل موجود', 'error'); return; }
-
   cache.drivers.push({ id: uid(), name, phone });
   try {
-    await persist();
+    await persistKeys(['drivers']);
     document.getElementById('newDriverName').value = '';
     document.getElementById('newDriverPhone').value = '';
+    renderDriversList();
     loadDriversIntoSelects();
     toast('✅ تم الإضافة', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
@@ -1419,7 +1323,7 @@ window.addDriver = async function () {
 window.deleteDriver = async function (id) {
   if (!confirm('حذف هذا الموصل؟')) return;
   cache.drivers = cache.drivers.filter(d => d.id !== id);
-  try { await persist(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
+  try { await persistKeys(['drivers']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
@@ -1430,83 +1334,47 @@ window.transferSingle = async function (id) {
   const order = cache.orders.find(x => x.id === id);
   if (!order) { toast('اختر طلباً أولاً', 'error'); return; }
   if (!confirm(`تحويل الطلب ${order.invoice} إلى الجاهزة؟`)) return;
-
   try {
     cache.ready.push({ ...order, transferredAt: fmtDate(), transferredBy: currentUser.username });
     cache.orders = cache.orders.filter(x => x.id !== id);
     if (selectedOrderId === id) selectedOrderId = null;
-    await persist();
+    await persistKeys(['orders', 'ready']);
+    renderEntry(); renderDashboard();
     toast('✅ تم التحويل', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.bulkTransfer = async function () {
-  const eligible = cache.orders.filter(o =>
-    o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')
-  );
-  if (!eligible.length) { toast('لا توجد طلبات مستوفية (جاهز + مدفوع/VIP)', 'error'); return; }
+  const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
+  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
   if (!confirm(`تحويل ${eligible.length} طلب؟`)) return;
-
   try {
-    eligible.forEach(o => cache.ready.push({
-      ...o, transferredAt: fmtDate(), transferredBy: currentUser.username
-    }));
-    cache.orders = cache.orders.filter(o =>
-      !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'))
-    );
+    eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
+    cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
     selectedOrderId = null;
-    await persist();
+    await persistKeys(['orders', 'ready']);
+    renderEntry(); renderDashboard();
     toast(`✅ تم تحويل ${eligible.length} طلب`, 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.moveReadyToLog = async function () {
-  if (!cache.ready.length) { toast('لا توجد طلبات للترحيل', 'error'); return; }
+  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
   if (!confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`)) return;
-
   try {
-    cache.ready.forEach(o => cache.log.push({
-      ...o, archivedAt: fmtDate(), archivedBy: currentUser.username
-    }));
+    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username }));
     cache.ready = [];
-    await persist();
+    await persistKeys(['ready', 'log']);
+    renderReady(); renderDashboard();
     toast('✅ تم الترحيل', 'success');
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 /* ==============================================================
-   Persist
-   ============================================================== */
-async function persist() {
-  const data = {
-    users:      cache.users,
-    orders:     cache.orders,
-    ready:      cache.ready,
-    log:        cache.log,
-    customers:  cache.customers,
-    drivers:    cache.drivers,
-    lastUpdate: fmtDate()
-  };
-  setSyncing(true);
-  try {
-    await ghWrite(data);
-    const active = document.querySelector('.page.active')?.id?.replace('page-', '');
-    if (active === 'dashboard') renderDashboard();
-    if (active === 'entry')     renderEntry();
-    if (active === 'ready')     renderReady();
-    if (active === 'log')       renderLog();
-    if (active === 'customers') renderCustomers();
-    if (active === 'settings')  renderSettings();
-  } finally {
-    setSyncing(false);
-  }
-}
-
-/* ==============================================================
    Print
    ============================================================== */
 window.printReady = function () {
-  if (!cache.ready.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
+  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
   const rows = cache.ready.map((o, i) => `<tr>
     <td>${i+1}</td><td>${esc(o.invoice)}</td><td>${esc(o.customer)}</td>
     <td>${esc(o.location)}</td><td>${esc(o.status)}</td><td>${esc(o.approvalDate)}</td>
@@ -1536,8 +1404,7 @@ window.printReady = function () {
    Customers
    ============================================================== */
 window.openCustomerModal = function () {
-  ['custCode','custName','custLocation','custPhone'].forEach(id =>
-    document.getElementById(id).value = '');
+  ['custCode','custName','custLocation','custPhone'].forEach(id => document.getElementById(id).value = '');
   openModal('customerModal');
   setTimeout(() => document.getElementById('custCode').focus(), 100);
 };
@@ -1547,21 +1414,20 @@ window.saveCustomer = async function () {
   if (!name) { toast('اسم العميل مطلوب', 'error'); return; }
   const newCust = {
     id: uid(),
-    code:     document.getElementById('custCode').value.trim(),
+    code: document.getElementById('custCode').value.trim(),
     name,
     location: document.getElementById('custLocation').value.trim(),
     phone:    document.getElementById('custPhone').value.trim()
   };
   cache.customers.push(newCust);
   try {
-    await persist();
+    await persistKeys(['customers']);
     closeModal('customerModal');
-    // تحديث حقل البحث إن كان مفتوحاً
-    const orderCustInput = document.getElementById('orderCustomer');
+    renderCustomers();
     const orderModalOpen = document.getElementById('orderModal').classList.contains('active');
     if (orderModalOpen) {
       document.getElementById('orderCustomerId').value = newCust.id;
-      orderCustInput.value = newCust.name;
+      document.getElementById('orderCustomer').value = newCust.name;
       document.getElementById('orderLocation').value = newCust.location;
     }
     toast('✅ تم إضافة العميل', 'success');
@@ -1571,7 +1437,7 @@ window.saveCustomer = async function () {
 window.deleteCustomer = async function (id) {
   if (!confirm('حذف العميل؟')) return;
   cache.customers = cache.customers.filter(c => c.id !== id);
-  try { await persist(); toast('تم الحذف', 'success'); }
+  try { await persistKeys(['customers']); renderCustomers(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
@@ -1592,14 +1458,14 @@ window.saveUser = async function () {
   if (!username || !password) { toast('املأ الحقول', 'error'); return; }
   if (cache.users.find(u => u.username === username)) { toast('الاسم موجود', 'error'); return; }
   cache.users.push({ id: uid(), username, password, role });
-  try { await persist(); closeModal('userModal'); toast('✅ تم الإضافة', 'success'); }
+  try { await persistKeys(['users']); closeModal('userModal'); renderUsers(); toast('✅ تم الإضافة', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
 window.deleteUser = async function (id) {
   if (!confirm('حذف هذا المستخدم؟')) return;
   cache.users = cache.users.filter(u => u.id !== id);
-  try { await persist(); toast('تم الحذف', 'success'); }
+  try { await persistKeys(['users']); renderUsers(); toast('تم الحذف', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
@@ -1620,7 +1486,7 @@ window.resetAll = async function () {
   if (!confirm('⚠️ حذف كل الطلبات (وليس المستخدمين)؟')) return;
   if (!confirm('تأكيد أخير؟')) return;
   cache.orders = []; cache.ready = []; cache.log = [];
-  try { await persist(); toast('✅ تم التصفير', 'success'); }
+  try { await persistKeys(['orders', 'ready', 'log']); renderDashboard(); toast('✅ تم التصفير', 'success'); }
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
@@ -1639,7 +1505,7 @@ window.exportLogCSV = function () {
 /* ==============================================================
    Modals
    ============================================================== */
-window.openModal  = id => document.getElementById(id).classList.add('active');
+window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
 window.getActiveModal = () => document.querySelector('.modal-bg.active');
 
@@ -1647,15 +1513,10 @@ document.querySelectorAll('.modal-bg').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
 });
 
-/* ==============================================================
-   Shortcuts Help
-   ============================================================== */
-window.showShortcuts = function () {
-  openModal('shortcutsModal');
-};
+window.showShortcuts = () => openModal('shortcutsModal');
 
 /* ==============================================================
-   Keyboard Shortcuts
+   Shortcuts
    ============================================================== */
 function isInInput() {
   const t = document.activeElement?.tagName;
@@ -1666,35 +1527,15 @@ window.addEventListener('keydown', (e) => {
   const inInput = isInInput();
   const activeModal = getActiveModal();
 
-  // Escape always closes modal
-  if (e.key === 'Escape') {
-    if (activeModal) { activeModal.classList.remove('active'); return; }
-  }
+  if (e.key === 'Escape' && activeModal) { activeModal.classList.remove('active'); return; }
+  if (e.key === 'F1') { e.preventDefault(); showShortcuts(); return; }
+  if (e.key === '?' && !inInput && !activeModal) { e.preventDefault(); showShortcuts(); return; }
 
-  // F1 shows help
-  if (e.key === 'F1') {
-    e.preventDefault();
-    showShortcuts();
-    return;
-  }
-
-  // ? when not in input
-  if (e.key === '?' && !inInput && !activeModal) {
-    e.preventDefault();
-    showShortcuts();
-    return;
-  }
-
-  // ============== Ctrl shortcuts ==============
   if (e.ctrlKey || e.metaKey) {
     const k = e.key.toLowerCase();
-
-    // Zoom works everywhere
     if (k === '=' || k === '+') { e.preventDefault(); zoomIn(); return; }
     if (k === '-' || k === '_') { e.preventDefault(); zoomOut(); return; }
     if (k === '0') { e.preventDefault(); zoomReset(); return; }
-
-    // Ctrl+S = save (if modal open)
     if (k === 's') {
       e.preventDefault();
       if (activeModal) {
@@ -1705,33 +1546,25 @@ window.addEventListener('keydown', (e) => {
       }
       return;
     }
-
-    // Ctrl+K = search
     if (k === 'k' || k === 'f') {
       e.preventDefault();
-      const activePage = document.querySelector('.page.active')?.id?.replace('page-', '');
-      if (activePage === 'entry')     { document.getElementById('searchEntry').focus(); document.getElementById('searchEntry').select(); }
-      if (activePage === 'log')       { document.getElementById('searchLog').focus(); document.getElementById('searchLog').select(); }
-      if (activePage === 'customers') { document.getElementById('searchCustomers')?.focus(); document.getElementById('searchCustomers')?.select(); }
+      const p = document.querySelector('.page.active')?.id?.replace('page-', '');
+      if (p === 'entry') document.getElementById('searchEntry').focus();
+      if (p === 'log') document.getElementById('searchLog').focus();
+      if (p === 'customers') document.getElementById('searchCustomers')?.focus();
       return;
     }
-
-    // Ctrl+P = print
     if (k === 'p') {
       e.preventDefault();
       if (document.getElementById('page-ready').classList.contains('active')) printReady();
       else window.print();
       return;
     }
-
     return;
   }
 
-  // ============== Alt shortcuts ==============
   if (e.altKey) {
     const k = e.key.toLowerCase();
-
-    // Inside order modal: payment & status
     if (activeModal && activeModal.id === 'orderModal') {
       if (k === 'p') { e.preventDefault(); document.getElementById('orderPay').value = 'مدفوع'; toast('💰 مدفوع', 'info'); return; }
       if (k === 'u') { e.preventDefault(); document.getElementById('orderPay').value = 'غير مدفوع'; toast('❌ غير مدفوع', 'info'); return; }
@@ -1741,107 +1574,77 @@ window.addEventListener('keydown', (e) => {
       if (k === 'a') { e.preventDefault(); document.getElementById('orderStatus').value = 'معتمد'; toast('✔️ معتمد', 'info'); return; }
     }
 
-    // Navigation & actions (only if no modal)
     if (!activeModal) {
-      // Alt+1..5 = navigation
       if (k === '1') { e.preventDefault(); go('dashboard'); return; }
       if (k === '2') { e.preventDefault(); go('entry'); return; }
       if (k === '3') { e.preventDefault(); go('ready'); return; }
       if (k === '4') { e.preventDefault(); go('log'); return; }
       if (k === '5') { e.preventDefault(); if (currentUser.role === 'رئيسي') go('customers'); return; }
-
-      // Alt+N = new order
       if (k === 'n') { e.preventDefault(); addOrder(); return; }
-
-      // Alt+T = transfer single (needs selection)
       if (k === 't') {
         e.preventDefault();
         if (document.getElementById('page-entry').classList.contains('active')) {
-          if (!selectedOrderId) { toast('اختر طلباً أولاً (اضغط على الصف)', 'error'); return; }
+          if (!selectedOrderId) { toast('اختر طلباً أولاً', 'error'); return; }
           transferSingle(selectedOrderId);
-        } else {
-          toast('التحويل الفردي متاح في صفحة الإدخال', 'info');
         }
         return;
       }
-
-      // Alt+B = bulk transfer
       if (k === 'b') {
         e.preventDefault();
         if (document.getElementById('page-entry').classList.contains('active')) bulkTransfer();
-        else toast('افتح صفحة إدخال الطلبات أولاً', 'info');
         return;
       }
-
-      // Alt+M = move to log
       if (k === 'm') {
         e.preventDefault();
         if (document.getElementById('page-ready').classList.contains('active')) moveReadyToLog();
-        else toast('افتح صفحة الطلبات الجاهزة أولاً', 'info');
         return;
       }
     }
-
     return;
   }
 
-  // ============== Plain keys ==============
-  if (!inInput && !activeModal) {
-    // Delete = delete selected
-    if (e.key === 'Delete') {
-      const activePage = document.querySelector('.page.active')?.id?.replace('page-', '');
-      if (activePage === 'entry' && selectedOrderId) {
-        e.preventDefault();
-        deleteOrder(selectedOrderId);
-      }
-    }
+  if (!inInput && !activeModal && e.key === 'Delete') {
+    const p = document.querySelector('.page.active')?.id?.replace('page-', '');
+    if (p === 'entry' && selectedOrderId) { e.preventDefault(); deleteOrder(selectedOrderId); }
   }
 });
 
-/* Enter to save inside order modal */
-document.getElementById('orderModal').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    const tag = e.target.tagName.toUpperCase();
-    if (tag === 'INPUT' || tag === 'SELECT') {
-      e.preventDefault();
-      saveOrder();
+/* Enter to save */
+['orderModal','customerModal','userModal','tokenModal'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey && e.target.tagName !== 'BUTTON') {
+      const tag = e.target.tagName.toUpperCase();
+      if (tag === 'INPUT' || tag === 'SELECT') {
+        e.preventDefault();
+        if (id === 'orderModal') saveOrder();
+        else if (id === 'customerModal') saveCustomer();
+        else if (id === 'userModal') saveUser();
+        else if (id === 'tokenModal') saveNewToken();
+      }
     }
-  }
-});
-document.getElementById('customerModal').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); saveCustomer(); }
-});
-document.getElementById('userModal').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); saveUser(); }
-});
-document.getElementById('tokenModal').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); saveNewToken(); }
+  });
 });
 
 /* ==============================================================
    Init
    ============================================================== */
 window.addEventListener('DOMContentLoaded', () => {
-  // Restore zoom
   const savedZoom = parseFloat(localStorage.getItem('oms_zoom'));
-  if (!isNaN(savedZoom) && savedZoom >= 0.5 && savedZoom <= 2) {
-    zoomLevel = savedZoom;
-    applyZoom();
-  }
+  if (!isNaN(savedZoom) && savedZoom >= 0.5 && savedZoom <= 2) { zoomLevel = savedZoom; applyZoom(); }
 
   updateTokenStatus();
   loadLastUser();
   initCustomerSearch();
 
-  // Login enter keys
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginToken').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
 
   console.log('%c✅ النظام جاهز', 'color:#28a745;font-weight:bold;font-size:14px');
   console.log('📦 المستودع:', GITHUB_OWNER + '/' + GITHUB_REPO);
+  console.log('📂 الملفات:', Object.values(FILES).join(', '));
   console.log('🔑 التوكن:', getStoredToken() ? 'محفوظ' : 'غير موجود');
-  console.log('⌨️ اضغط F1 لعرض الاختصارات');
+  console.log('⌨️ اضغط F1 للاختصارات');
 });
 </script>
 </body>
