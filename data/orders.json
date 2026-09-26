@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "invoice": "23",
+    "customerId": "",
+    "customer": "",
+    "location": "",
+    "status": "قيد التجهيز",
+    "pay": "غير مدفوع",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "",
+    "lastEditBy": "7",
+    "updatedAt": "26/09/2026 09:09 PM",
+    "approvalDate": "",
+    "id": "muipfk5e3p0sy",
+    "createdAt": "26/09/2026 09:09 PM"
+  }
+]
