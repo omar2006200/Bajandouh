@@ -13,7 +13,6 @@
   }
   body { background: var(--light-gray); color: #222; min-height: 100vh; }
 
-  /* ============ LOGIN ============ */
   #loginScreen {
     display: flex; align-items: center; justify-content: center;
     min-height: 100vh;
@@ -39,10 +38,12 @@
   }
   .login-box button:hover { background: var(--blue); }
   .login-box button:disabled { background: #999; cursor: not-allowed; }
-  .login-error { color: var(--red); font-size: 13px; margin-top: 10px; text-align: center; }
+  .login-error {
+    color: var(--red); font-size: 13px; margin-top: 10px;
+    text-align: center; white-space: pre-line; line-height: 1.6;
+  }
   .login-loading { color: #888; font-size: 12px; margin-top: 8px; text-align: center; }
 
-  /* ============ APP ============ */
   #app { display: none; }
   header {
     background: var(--dark-blue); color: #fff; padding: 14px 26px;
@@ -250,7 +251,6 @@
   </nav>
 
   <main>
-    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid">
         <div class="dash-card" onclick="go('entry')">
@@ -272,7 +272,6 @@
       </div>
     </section>
 
-    <!-- ENTRY -->
     <section id="page-entry" class="page">
       <div class="section-header">
         <h2>📋 إدخال الطلبات</h2>
@@ -293,7 +292,6 @@
       </table></div>
     </section>
 
-    <!-- READY -->
     <section id="page-ready" class="page">
       <div class="section-header">
         <h2>📦 الطلبات الجاهزة للنقل</h2>
@@ -313,7 +311,6 @@
       </table></div>
     </section>
 
-    <!-- LOG -->
     <section id="page-log" class="page">
       <div class="section-header">
         <h2>🗃️ سجل الطلبات (الأرشيف)</h2>
@@ -333,7 +330,6 @@
       </table></div>
     </section>
 
-    <!-- CUSTOMERS -->
     <section id="page-customers" class="page">
       <div class="section-header">
         <h2>👥 قاعدة بيانات العملاء</h2>
@@ -348,7 +344,6 @@
       </table></div>
     </section>
 
-    <!-- SETTINGS -->
     <section id="page-settings" class="page">
       <div class="section-header"><h2>⚙️ الإعدادات</h2></div>
       <h3 style="color:var(--dark-blue);margin:16px 0 8px;">🚚 الموصلون</h3>
@@ -425,96 +420,127 @@
 
 <script>
 /* ==============================================================
-   ⚙️ إعدادات النظام — عدّل هذه القيم فقط
+   ⚙️ الإعدادات — عدّل هذه القيم الأربعة فقط
    ============================================================== */
 
-// ── 1) بيانات المستودع ──
-const GITHUB = {
-  owner:  'omar2006200',       // ← ✏️ اسم المستخدم في GitHub
-  repo:   'Bajandouh',       // ← ✏️ اسم المستودع
-  branch: 'main',                // ← ✏️ الفرع (عادة main أو master)
-  path:   'data.json'            // ← ✏️ ملف البيانات (لا تغيّره)
-};
+const GITHUB_OWNER  = 'omar2006200';   // ← اسمك في GitHub
+const GITHUB_REPO   = 'Bajandouh';   // ← اسم المستودع
+const GITHUB_BRANCH = 'main';            // ← main أو master
+const GITHUB_FILE   = 'data.json';       // ← لا تغيّره
 
-// ── 2) التوكن الموحد (مُموّه بـ Base64) ──
-//    ⚠️ شفّر توكنك على https://www.base64encode.org والصق الناتج هنا
-const TOKEN_B64 = 'Z2l0aHViX3BhdF8xMUJKMzI1VFkwSUhFenRrTzFiTDJvX2RTaUZIZ2pTeHdRNWdVY2VoblFlcDJTdTAwYXVoUHNLQ3pmWndEYW9ocnhZVVdIRzdENUwzcWNodnhD';
+const GITHUB_TOKEN  = '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';   // ← التوكن مباشرة بدون تشفير
 
-// ── 3) فترة المزامنة (بالمللي ثانية) ──
-//    5000 = 5 ثوانٍ | 10000 = 10 ثوانٍ | 30000 = 30 ثانية
-const SYNC_INTERVAL = 5000;
+const SYNC_INTERVAL = 5000;   // ← فترة المزامنة بالمللي ثانية (5 ثوانٍ)
 
 /* ==============================================================
-   لا تعدّل ما تحت هذا السطر إلا إذا كنت تعرف ما تفعله
+   لا تعدّل ما تحت هذا السطر
    ============================================================== */
 
-/* ========== استرجاع التوكن ========== */
-function getToken() {
-  try { return atob(TOKEN_B64); }
-  catch { return ''; }
-}
+const API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
-const API_BASE = `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.path}`;
-
-/* ========== المتغيرات العامة ========== */
 let currentUser = null;
 let cache = { orders: [], ready: [], log: [], customers: [], drivers: [], users: [] };
 let lastSHA = null;
 let pollTimer = null;
 let syncing = false;
 
-/* ==============================================================
-   GitHub API — القراءة والكتابة
-   ============================================================== */
+/* ========== GitHub API ========== */
 
 async function ghRead() {
-  const res = await fetch(`${API_BASE}?ref=${GITHUB.branch}&t=${Date.now()}`, {
-    headers: {
-      'Authorization': `token ${getToken()}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Cache-Control': 'no-cache'
-    }
-  });
+  const url = `${API_URL}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
+  console.log('📡 GET:', url);
+
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+  } catch (e) {
+    console.error('Network error:', e);
+    throw new Error(
+      'فشل الاتصال بالشبكة.\n' +
+      'تحقق من:\n' +
+      '• اتصالك بالإنترنت\n' +
+      '• أن الصفحة تعمل عبر https:// أو http://localhost\n' +
+      '• عدم وجود مانع إعلانات يحجب api.github.com'
+    );
+  }
+
+  console.log('📥 Status:', res.status);
+
   if (!res.ok) {
     if (res.status === 401) throw new Error('التوكن غير صالح أو منتهي');
-    if (res.status === 404) throw new Error('المستودع أو الملف غير موجود');
-    throw new Error(`فشل القراءة: ${res.status}`);
+    if (res.status === 403) throw new Error('التوكن لا يملك صلاحية Contents: Read/Write');
+    if (res.status === 404) throw new Error(
+      `المستودع أو الملف غير موجود.\n` +
+      `تأكد من:\n` +
+      `• owner = ${GITHUB_OWNER}\n` +
+      `• repo = ${GITHUB_REPO}\n` +
+      `• file = ${GITHUB_FILE}\n` +
+      `• branch = ${GITHUB_BRANCH}`
+    );
+    throw new Error(`فشل القراءة: HTTP ${res.status}`);
   }
+
   const json = await res.json();
   lastSHA = json.sha;
-  const decoded = decodeURIComponent(escape(atob(json.content.replace(/\s/g, ''))));
-  return JSON.parse(decoded);
+
+  try {
+    const raw = atob(json.content.replace(/\s/g, ''));
+    const text = decodeURIComponent(escape(raw));
+    return JSON.parse(text);
+  } catch (e) {
+    throw new Error('ملف data.json تالف — تحقق من صحة JSON');
+  }
 }
 
 async function ghWrite(data) {
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+  const jsonStr = JSON.stringify(data, null, 2);
+  const content = btoa(unescape(encodeURIComponent(jsonStr)));
+
   const body = {
-    message: `تحديث تلقائي - ${new Date().toISOString()}`,
-    content,
-    branch: GITHUB.branch,
+    message: `تحديث - ${new Date().toISOString()}`,
+    content: content,
+    branch: GITHUB_BRANCH,
     sha: lastSHA
   };
-  const res = await fetch(API_BASE, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${getToken()}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
+
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+  } catch (e) {
+    throw new Error('فشل الاتصال بالشبكة أثناء الحفظ');
+  }
+
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(`فشل الكتابة: ${res.status} - ${err.message || ''}`);
+    if (res.status === 409) {
+      await syncPull();
+      throw new Error('تعارض في البيانات — حاول مرة أخرى');
+    }
+    throw new Error(`فشل الحفظ: ${res.status} - ${err.message || ''}`);
   }
+
   const json = await res.json();
   lastSHA = json.content.sha;
   return json;
 }
 
-/* ==============================================================
-   المزامنة الدورية
-   ============================================================== */
+/* ========== المزامنة ========== */
 
 async function syncPull() {
   if (syncing || !currentUser) return;
@@ -567,9 +593,7 @@ function setSyncing(on) {
   dot.className = 'status-dot' + (on ? ' sync' : ' online');
 }
 
-/* ==============================================================
-   أدوات مساعدة
-   ============================================================== */
+/* ========== أدوات مساعدة ========== */
 
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
@@ -598,9 +622,7 @@ function badge(val) {
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
 
-/* ==============================================================
-   تسجيل الدخول
-   ============================================================== */
+/* ========== تسجيل الدخول ========== */
 
 window.doLogin = async function () {
   const u = document.getElementById('loginUser').value.trim();
@@ -610,10 +632,27 @@ window.doLogin = async function () {
   const btn = document.getElementById('loginBtn');
   errEl.textContent = ''; loadEl.textContent = '';
 
-  if (!u || !p) { errEl.textContent = '❌ املأ الحقول'; return; }
-  if (!getToken()) { errEl.textContent = '❌ التوكن غير مُعدّ في الكود'; return; }
+  // تشخيصات أولية
+  if (!u || !p) { errEl.textContent = '❌ املأ اسم المستخدم وكلمة المرور'; return; }
 
-  btn.disabled = true; loadEl.textContent = '⏳ جاري الاتصال بـ GitHub...';
+  if (!GITHUB_TOKEN || GITHUB_TOKEN === 'PASTE_YOUR_TOKEN_HERE') {
+    errEl.textContent = '❌ التوكن غير مُعدّ في الكود\nعدّل قيمة GITHUB_TOKEN في الأعلى';
+    return;
+  }
+
+  if (GITHUB_OWNER === 'YOUR_USERNAME') {
+    errEl.textContent = '❌ لم تعدّل قيمة GITHUB_OWNER\nضع اسمك في GitHub';
+    return;
+  }
+
+  if (location.protocol === 'file:') {
+    errEl.textContent = '❌ لا يمكن فتح الملف محلياً (file://)\n' +
+      'افتحه من GitHub Pages أو استخدم سيرفر محلي';
+    return;
+  }
+
+  btn.disabled = true;
+  loadEl.textContent = '⏳ جاري الاتصال بـ GitHub...';
 
   try {
     const data = await ghRead();
@@ -621,7 +660,7 @@ window.doLogin = async function () {
     const found = users.find(x => x.username === u && x.password === p);
 
     if (!found) {
-      errEl.textContent = '❌ بيانات الدخول غير صحيحة';
+      errEl.textContent = '❌ اسم المستخدم أو كلمة المرور غير صحيحة';
       btn.disabled = false; loadEl.textContent = '';
       return;
     }
@@ -635,11 +674,13 @@ window.doLogin = async function () {
     cache.drivers   = data.drivers   || [];
     cache.users     = data.users     || [];
 
+    loadEl.textContent = '✅ تم الدخول بنجاح';
     startApp();
   } catch (e) {
+    console.error('Login error:', e);
     errEl.textContent = '❌ ' + e.message;
   } finally {
-    btn.disabled = false; loadEl.textContent = '';
+    btn.disabled = false;
   }
 };
 
@@ -650,6 +691,7 @@ window.logout = function () {
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = '';
+  document.getElementById('loginLoading').textContent = '';
   loadLastUser();
 };
 
@@ -661,9 +703,7 @@ function loadLastUser() {
   }
 }
 
-/* ==============================================================
-   بدء التطبيق
-   ============================================================== */
+/* ========== بدء التطبيق ========== */
 
 function startApp() {
   document.getElementById('loginScreen').style.display = 'none';
@@ -681,9 +721,7 @@ function startApp() {
   startPolling();
 }
 
-/* ==============================================================
-   التنقل
-   ============================================================== */
+/* ========== التنقل ========== */
 
 window.go = function (page) {
   if ((page === 'settings' || page === 'customers') && currentUser.role !== 'رئيسي') {
@@ -702,9 +740,7 @@ window.go = function (page) {
   if (page === 'settings')  renderSettings();
 };
 
-/* ==============================================================
-   واجهات العرض
-   ============================================================== */
+/* ========== واجهات العرض ========== */
 
 function renderDashboard() {
   document.getElementById('statEntry').textContent  = cache.orders.length;
@@ -837,9 +873,7 @@ function renderUsers() {
   </tr>`).join('');
 }
 
-/* ==============================================================
-   عمليات الطلبات (CRUD)
-   ============================================================== */
+/* ========== عمليات الطلبات ========== */
 
 window.addOrder = function () {
   document.getElementById('orderModalTitle').textContent = '➕ طلب جديد';
@@ -915,9 +949,7 @@ window.deleteOrder = async function (id) {
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ==============================================================
-   التحويلات
-   ============================================================== */
+/* ========== التحويلات ========== */
 
 window.transferSingle = async function (id) {
   const order = cache.orders.find(x => x.id === id);
@@ -940,9 +972,7 @@ window.bulkTransfer = async function () {
 
   try {
     eligible.forEach(o => cache.ready.push({
-      ...o,
-      transferredAt: fmtDate(),
-      transferredBy: currentUser.username
+      ...o, transferredAt: fmtDate(), transferredBy: currentUser.username
     }));
     cache.orders = cache.orders.filter(o =>
       !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'))
@@ -958,9 +988,7 @@ window.moveReadyToLog = async function () {
 
   try {
     cache.ready.forEach(o => cache.log.push({
-      ...o,
-      archivedAt: fmtDate(),
-      archivedBy: currentUser.username
+      ...o, archivedAt: fmtDate(), archivedBy: currentUser.username
     }));
     cache.ready = [];
     await persist();
@@ -968,9 +996,7 @@ window.moveReadyToLog = async function () {
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ==============================================================
-   الحفظ إلى GitHub
-   ============================================================== */
+/* ========== الحفظ إلى GitHub ========== */
 
 async function persist() {
   const data = {
@@ -997,9 +1023,7 @@ async function persist() {
   }
 }
 
-/* ==============================================================
-   الطباعة
-   ============================================================== */
+/* ========== الطباعة ========== */
 
 window.printReady = function () {
   if (!cache.ready.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
@@ -1044,9 +1068,7 @@ window.printReady = function () {
   win.document.close();
 };
 
-/* ==============================================================
-   العملاء
-   ============================================================== */
+/* ========== العملاء ========== */
 
 function loadCustomersIntoSelect() {
   const sel = document.getElementById('orderCustomer');
@@ -1096,9 +1118,7 @@ window.deleteCustomer = async function (id) {
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ==============================================================
-   الموصلون
-   ============================================================== */
+/* ========== الموصلون ========== */
 
 function loadDriversIntoSelects() {
   const sel = document.getElementById('orderDriver');
@@ -1132,9 +1152,7 @@ window.deleteDriver = async function (i) {
   } catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ==============================================================
-   المستخدمون
-   ============================================================== */
+/* ========== المستخدمون ========== */
 
 window.openUserModal = function () {
   ['userName','userPass'].forEach(id => document.getElementById(id).value = '');
@@ -1163,9 +1181,7 @@ window.deleteUser = async function (id) {
   catch (e) { toast('❌ ' + e.message, 'error'); }
 };
 
-/* ==============================================================
-   النسخ الاحتياطي والتصفير
-   ============================================================== */
+/* ========== النسخ الاحتياطي ========== */
 
 window.exportBackup = function () {
   const data = JSON.stringify(cache, null, 2);
@@ -1196,9 +1212,7 @@ window.exportLogCSV = function () {
   a.click();
 };
 
-/* ==============================================================
-   النوافذ المنبثقة
-   ============================================================== */
+/* ========== النوافذ المنبثقة ========== */
 
 window.openModal  = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
@@ -1207,14 +1221,16 @@ document.querySelectorAll('.modal-bg').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
 });
 
-/* ==============================================================
-   التهيئة الأولية
-   ============================================================== */
+/* ========== التهيئة ========== */
 
 window.addEventListener('DOMContentLoaded', () => {
   loadLastUser();
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+
+  console.log('✅ النظام جاهز');
+  console.log('📦 المستودع:', GITHUB_OWNER + '/' + GITHUB_REPO);
+  console.log('🔑 التوكن:', GITHUB_TOKEN ? 'موجود (' + GITHUB_TOKEN.length + ' حرف)' : '❌ فارغ');
 });
 </script>
 </body>
