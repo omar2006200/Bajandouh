@@ -12,13 +12,13 @@
       "invoice": "2929",
       "customer": "محمد علي",
       "location": "شارع جمال",
-      "status": "قيد التجهيز",
+      "status": "جاهز",
       "pay": "غير مدفوع",
       "driver": "الموصل 3",
       "driverPhone": "",
       "lastEditBy": "1",
-      "updatedAt": "26/09/2026 03:28 AM",
-      "approvalDate": "",
+      "updatedAt": "26/09/2026 03:29 AM",
+      "approvalDate": "26/09/2026 03:29 AM",
       "id": "muhniodygghnu",
       "createdAt": "26/09/2026 03:28 AM"
     }
@@ -47,5 +47,5 @@
     "الموصل 3",
     "الموصل 4"
   ],
-  "lastUpdate": "26/09/2026 03:28 AM"
+  "lastUpdate": "26/09/2026 03:29 AM"
 }
