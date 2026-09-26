@@ -4,13 +4,13 @@
     "customerId": "c2",
     "customer": "محمد علي",
     "location": "شارع جمال",
-    "status": "قيد التجهيز",
+    "status": "جاهز",
     "pay": "مدفوع",
     "driver": "سامي حيدر",
     "driverPhone": "770000001",
     "lastEditBy": "7",
     "updatedAt": "26/09/2026 05:18 PM",
-    "approvalDate": "",
+    "approvalDate": "26/09/2026 05:18 PM",
     "id": "muih665vgq4mx",
     "createdAt": "26/09/2026 05:18 PM"
   }
