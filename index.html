@@ -10,232 +10,586 @@
     --dark-blue: #1f4e79; --blue: #2e75b6; --light-blue: #dbe5f1;
     --green: #28a745; --yellow: #ffc107; --red: #dc3545;
     --purple: #6f42c1; --gray: #6c757d; --light-gray: #f4f6f9;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+    --shadow-md: 0 4px 14px rgba(0,0,0,.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,.18);
+    --radius: 10px;
   }
-  body { background: var(--light-gray); color: #222; min-height: 100vh; }
+  html, body { height: 100%; }
+  body { background: var(--light-gray); color: #222; min-height: 100vh; overflow-x: hidden; }
 
+  /* ============ LOADING OVERLAY ============ */
+  #loadingOverlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(31,78,121,.9); z-index: 9999;
+    align-items: center; justify-content: center; flex-direction: column; gap: 20px;
+    color: #fff; backdrop-filter: blur(4px);
+  }
+  #loadingOverlay.show { display: flex; }
+  .spinner {
+    width: 60px; height: 60px; border: 4px solid rgba(255,255,255,.3);
+    border-top-color: #fff; border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 16px; font-weight: 500; }
+
+  /* ============ LOGIN ============ */
   #loginScreen {
     display: flex; align-items: center; justify-content: center;
-    min-height: 100vh; background: linear-gradient(135deg, #1f4e79, #2e75b6); padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 50%, #4a90c2 100%);
+    padding: 20px; position: relative; overflow: hidden;
   }
-  .login-box { background: #fff; padding: 40px; border-radius: 14px; width: 440px; max-width: 92vw; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
-  .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 22px; text-align: center; }
-  .login-box p  { color: var(--gray); margin-bottom: 24px; font-size: 13px; text-align: center; }
-  .login-box label { display: block; font-size: 13px; color: #444; margin-bottom: 4px; margin-top: 10px; }
-  .login-box input { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; font-family: inherit; }
-  .login-box input:focus { outline: none; border-color: var(--blue); }
-  .login-box button { width: 100%; padding: 12px; background: var(--dark-blue); color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 18px; }
-  .login-box button:hover { background: var(--blue); }
-  .login-box button:disabled { background: #999; cursor: not-allowed; }
-  .token-status { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-top: 8px; }
+  #loginScreen::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.1), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,.08), transparent 50%);
+  }
+  .login-box {
+    background: #fff; padding: 44px 40px; border-radius: 16px;
+    width: 460px; max-width: 92vw;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    position: relative; z-index: 1;
+  }
+  .login-logo {
+    text-align: center; margin-bottom: 8px;
+    font-size: 42px;
+  }
+  .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 24px; text-align: center; font-weight: 700; }
+  .login-box .subtitle { color: var(--gray); margin-bottom: 28px; font-size: 13px; text-align: center; }
+  .login-box label { display: block; font-size: 13px; color: #444; margin-bottom: 6px; margin-top: 14px; font-weight: 500; }
+  .login-box input {
+    width: 100%; padding: 13px 16px;
+    border: 2px solid #e0e0e0; border-radius: 10px;
+    font-size: 14px; font-family: inherit;
+    transition: .2s;
+  }
+  .login-box input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(46,117,182,.12); }
+  .login-box button.primary {
+    width: 100%; padding: 14px; margin-top: 22px;
+    background: linear-gradient(135deg, var(--dark-blue), var(--blue));
+    color: #fff; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: 600; cursor: pointer;
+    transition: .2s; letter-spacing: .5px;
+  }
+  .login-box button.primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(31,78,121,.35); }
+  .login-box button.primary:disabled { opacity: .6; cursor: not-allowed; }
+
+  .token-status {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 10px; font-size: 13px;
+    margin-top: 10px;
+  }
   .token-status.saved { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
   .token-status.missing { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
-  .token-status button { margin-top: 0; margin-right: auto; padding: 4px 10px; font-size: 11px; width: auto; }
-  .token-help { font-size: 11px; color: #666; margin-top: 6px; line-height: 1.6; }
+  .token-status button {
+    margin-top: 0; margin-right: auto; padding: 5px 12px;
+    font-size: 11px; width: auto; border-radius: 6px;
+    background: rgba(0,0,0,.1); border: none; cursor: pointer; color: inherit;
+  }
+  .token-help { font-size: 11px; color: #666; margin-top: 8px; line-height: 1.7; }
   .token-help a { color: var(--blue); text-decoration: none; }
-  .login-error { color: var(--red); font-size: 13px; margin-top: 10px; text-align: center; white-space: pre-line; line-height: 1.6; }
-  .login-loading { color: #888; font-size: 12px; margin-top: 8px; text-align: center; }
+  .token-help a:hover { text-decoration: underline; }
+  .login-error {
+    color: var(--red); font-size: 13px; margin-top: 12px;
+    text-align: center; white-space: pre-line; line-height: 1.6;
+    background: #f8d7da; padding: 10px; border-radius: 8px;
+    display: none;
+  }
+  .login-error.show { display: block; }
+  .login-loading { color: var(--blue); font-size: 12px; margin-top: 8px; text-align: center; }
 
+  /* ============ APP ============ */
   #app { display: none; }
-  header { background: var(--dark-blue); color: #fff; padding: 14px 26px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.15); position: sticky; top: 0; z-index: 100; }
-  header h1 { font-size: 18px; }
-  .user-info { display: flex; align-items: center; gap: 14px; font-size: 14px; }
-  .user-info button { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.3); padding: 6px 14px; border-radius: 6px; cursor: pointer; }
-  .user-info button:hover { background: rgba(255,255,255,.25); }
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #888; margin-left: 6px; }
-  .status-dot.online { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
-  .status-dot.sync   { background: #2196f3; animation: pulse 1s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  header {
+    background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
+    color: #fff; padding: 0 26px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    position: sticky; top: 0; z-index: 100; height: 64px;
+  }
+  header .brand { display: flex; align-items: center; gap: 12px; }
+  header .brand-logo { font-size: 26px; }
+  header h1 { font-size: 17px; font-weight: 600; }
+  .user-info { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+  .user-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.12); padding: 6px 14px;
+    border-radius: 20px;
+  }
+  .btn-icon {
+    background: rgba(255,255,255,.15); color: #fff; border: none;
+    width: 36px; height: 36px; border-radius: 50%;
+    cursor: pointer; font-size: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: .2s;
+  }
+  .btn-icon:hover { background: rgba(255,255,255,.3); transform: scale(1.05); }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #888; }
+  .status-dot.online { background: #4caf50; box-shadow: 0 0 8px #4caf50; animation: pulse-green 2s infinite; }
+  .status-dot.sync { background: #2196f3; animation: pulse-blue 1s infinite; }
+  @keyframes pulse-green { 0%,100%{box-shadow: 0 0 8px #4caf50;} 50%{box-shadow: 0 0 14px #4caf50;} }
+  @keyframes pulse-blue { 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-  nav { background: var(--blue); padding: 0 20px; display: flex; gap: 4px; overflow-x: auto; position: sticky; top: 62px; z-index: 99; }
-  nav button { background: transparent; color: #fff; border: none; padding: 14px 20px; cursor: pointer; font-size: 14px; border-bottom: 3px solid transparent; white-space: nowrap; transition: .2s; }
-  nav button:hover { background: rgba(255,255,255,.1); }
-  nav button.active { border-bottom-color: #fff; background: rgba(255,255,255,.15); font-weight: 600; }
+  nav {
+    background: #fff; padding: 0 26px; display: flex; gap: 2px;
+    overflow-x: auto; position: sticky; top: 64px; z-index: 99;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    border-bottom: 2px solid #e8ecf1;
+  }
+  nav button {
+    background: transparent; color: var(--gray); border: none;
+    padding: 16px 22px; cursor: pointer; font-size: 14px; font-weight: 500;
+    border-bottom: 3px solid transparent; white-space: nowrap;
+    transition: .2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  nav button:hover { color: var(--dark-blue); background: #f5f9fd; }
+  nav button.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); font-weight: 600; background: #f5f9fd; }
 
-  main { padding: 22px; max-width: 1700px; margin: 0 auto; }
+  main { padding: 24px; max-width: 1700px; margin: 0 auto; }
 
-  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 24px; }
-  .dash-card { background: #fff; padding: 26px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: pointer; transition: .25s; border-right: 5px solid var(--blue); }
-  .dash-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
-  .dash-card .icon { font-size: 34px; margin-bottom: 8px; }
-  .dash-card h3 { color: var(--dark-blue); font-size: 17px; margin-bottom: 4px; }
-  .dash-card p  { color: var(--gray); font-size: 13px; }
-  .dash-card.green  { border-right-color: var(--green); }
-  .dash-card.purple { border-right-color: var(--purple); }
-  .dash-card.orange { border-right-color: #fd7e14; }
+  /* ============ DASHBOARD ============ */
+  .dash-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px; margin-bottom: 26px;
+  }
+  .dash-card {
+    background: #fff; padding: 24px; border-radius: 14px;
+    box-shadow: var(--shadow-sm); cursor: pointer;
+    transition: .25s; border: 2px solid transparent;
+    position: relative; overflow: hidden;
+  }
+  .dash-card::before {
+    content: ''; position: absolute; top: 0; right: 0; bottom: 0;
+    width: 5px; background: var(--blue);
+  }
+  .dash-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue); }
+  .dash-card .icon {
+    font-size: 36px; margin-bottom: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; border-radius: 14px;
+    background: linear-gradient(135deg, #e8f2fb, #d0e4f5);
+  }
+  .dash-card h3 { color: var(--dark-blue); font-size: 16px; margin-bottom: 4px; font-weight: 700; }
+  .dash-card p { color: var(--gray); font-size: 12.5px; }
+  .dash-card.green::before { background: var(--green); }
+  .dash-card.green .icon { background: linear-gradient(135deg, #e8f7ec, #c8ebd2); }
+  .dash-card.purple::before { background: var(--purple); }
+  .dash-card.purple .icon { background: linear-gradient(135deg, #efe7fa, #dcc9f3); }
+  .dash-card.orange::before { background: #fd7e14; }
+  .dash-card.orange .icon { background: linear-gradient(135deg, #ffead6, #ffd0a8); }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
-  .stat { background: #fff; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
-  .stat .num { font-size: 32px; font-weight: 700; color: var(--dark-blue); }
-  .stat .lbl { color: var(--gray); font-size: 13px; margin-top: 4px; }
+  .section-title {
+    color: var(--dark-blue); font-size: 17px; font-weight: 700;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+  .stat {
+    background: #fff; padding: 22px 18px; border-radius: 12px; text-align: center;
+    box-shadow: var(--shadow-sm); border-top: 3px solid var(--blue);
+    transition: .2s;
+  }
+  .stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .stat .num { font-size: 34px; font-weight: 800; color: var(--dark-blue); line-height: 1.1; }
+  .stat .lbl { color: var(--gray); font-size: 12.5px; margin-top: 6px; font-weight: 500; }
+  .stat.red { border-top-color: var(--red); }
   .stat.red .num { color: var(--red); }
+  .stat.green { border-top-color: var(--green); }
   .stat.green .num { color: var(--green); }
+  .stat.purple { border-top-color: var(--purple); }
   .stat.purple .num { color: var(--purple); }
 
+  /* ============ TOOLBAR ============ */
   .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
-  .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 12px 16px; background: #fff; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
-  .filter-bar label { font-size: 13px; color: #444; font-weight: 500; margin-left: 6px; }
-  .filter-bar input, .filter-bar select { width: auto; padding: 7px 10px; font-size: 13px; }
-  .filter-bar .btn { padding: 7px 14px; font-size: 13px; }
-  .btn { padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: .2s; display: inline-flex; align-items: center; gap: 6px; }
-  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.12); }
+  .filter-bar {
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    padding: 14px 18px; background: #fff; border-radius: 12px;
+    margin-bottom: 14px; box-shadow: var(--shadow-sm);
+    border-right: 4px solid var(--blue);
+  }
+  .filter-bar label { font-size: 12.5px; color: #444; font-weight: 600; }
+  .filter-bar input, .filter-bar select { width: auto; padding: 8px 12px; font-size: 13px; }
+  .filter-bar .btn { padding: 8px 14px; font-size: 12.5px; }
+
+  .btn {
+    padding: 10px 20px; border: none; border-radius: 9px;
+    cursor: pointer; font-size: 13.5px; font-weight: 600;
+    transition: .2s; display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: .2px; position: relative;
+  }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.15); }
+  .btn:active:not(:disabled) { transform: translateY(0); }
   .btn:disabled { opacity: .5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-  .btn-primary { background: var(--dark-blue); color: #fff; }
-  .btn-success { background: var(--green); color: #fff; }
-  .btn-warning { background: var(--yellow); color: #222; }
-  .btn-danger  { background: var(--red); color: #fff; }
-  .btn-purple  { background: var(--purple); color: #fff; }
-  .btn-gray    { background: var(--gray); color: #fff; }
-  .btn-sm { padding: 6px 12px; font-size: 12px; }
-  .btn kbd { background: rgba(255,255,255,.25); padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-right: 4px; font-family: monospace; }
+  .btn-primary { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; }
+  .btn-success { background: linear-gradient(135deg, #28a745, #4bc760); color: #fff; }
+  .btn-warning { background: linear-gradient(135deg, #f5b800, #ffc107); color: #333; }
+  .btn-danger  { background: linear-gradient(135deg, #dc3545, #e4606d); color: #fff; }
+  .btn-purple  { background: linear-gradient(135deg, #6f42c1, #8a5cd4); color: #fff; }
+  .btn-gray    { background: linear-gradient(135deg, #6c757d, #8a9299); color: #fff; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 7px; }
+  .btn kbd {
+    background: rgba(255,255,255,.3); padding: 2px 7px;
+    border-radius: 4px; font-size: 10px; margin-right: 4px;
+    font-family: 'Consolas', monospace; font-weight: 500;
+  }
+  .btn-warning kbd { background: rgba(0,0,0,.15); }
 
-  input, select, textarea { padding: 9px 12px; border: 1px solid #ccc; border-radius: 7px; font-size: 14px; font-family: inherit; width: 100%; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(46,117,182,.1); }
-  textarea { min-height: 70px; resize: vertical; }
+  /* ============ INPUTS ============ */
+  input, select, textarea {
+    padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 9px;
+    font-size: 14px; font-family: inherit; width: 100%;
+    transition: .2s; background: #fff;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(46,117,182,.1);
+  }
+  textarea { min-height: 80px; resize: vertical; line-height: 1.6; }
 
-  .table-wrap { background: #fff; border-radius: 10px; overflow: auto; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+  /* ============ TABLES ============ */
+  .table-wrap {
+    background: #fff; border-radius: 12px; overflow: auto;
+    box-shadow: var(--shadow-sm); border: 1px solid #eaeff5;
+  }
   table { width: 100%; border-collapse: collapse; min-width: 1300px; }
-  th { background: var(--dark-blue); color: #fff; padding: 12px 10px; text-align: right; font-size: 13px; position: sticky; top: 0; z-index: 1; }
-  td { padding: 10px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: middle; }
+  th {
+    background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
+    color: #fff; padding: 14px 12px; text-align: right;
+    font-size: 12.5px; font-weight: 600; position: sticky; top: 0; z-index: 1;
+    white-space: nowrap;
+  }
+  td { padding: 12px; border-bottom: 1px solid #f0f3f7; font-size: 13px; vertical-align: middle; }
   tbody tr { cursor: pointer; transition: .15s; }
-  tbody tr:hover { background: #f9fbfe; }
-  tbody tr.status-ready    { background: #d4edda; }
-  tbody tr.status-progress { background: #fff3cd; }
-  tbody tr.selected { outline: 2px solid var(--blue); outline-offset: -2px; background: #e7f1fa !important; }
-  .empty-row td { text-align: center; color: var(--gray); padding: 30px; }
-  .note-cell { max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: #666; }
+  tbody tr:nth-child(even) { background: #fafbfd; }
+  tbody tr:hover { background: #eef5fb; }
+  tbody tr.status-ready    { background: #e4f5e8 !important; }
+  tbody tr.status-progress { background: #fff8e1 !important; }
+  tbody tr.selected { outline: 2px solid var(--blue); outline-offset: -2px; background: #e0eefa !important; }
+  .empty-row td {
+    text-align: center; color: var(--gray); padding: 50px 20px;
+    font-size: 14px;
+  }
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 12px; padding: 40px 20px; color: var(--gray);
+  }
+  .empty-state .icon { font-size: 56px; opacity: .4; }
+  .empty-state .title { font-size: 15px; font-weight: 600; color: #555; }
+  .empty-state .desc { font-size: 13px; color: #999; }
+  .note-cell { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: #666; }
 
-  .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-  .badge-ready    { background: var(--green); color: #fff; }
-  .badge-progress { background: var(--yellow); color: #222; }
-  .badge-paid     { background: var(--green); color: #fff; }
-  .badge-unpaid   { background: var(--red); color: #fff; }
-  .badge-vip      { background: var(--purple); color: #fff; }
+  /* ============ BADGES ============ */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 11px; border-radius: 14px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .3px;
+  }
+  .badge-ready    { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
+  .badge-progress { background: linear-gradient(135deg,#f5b800,#ffc107); color: #333; }
+  .badge-paid     { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
+  .badge-unpaid   { background: linear-gradient(135deg,#dc3545,#e4606d); color: #fff; }
+  .badge-vip      { background: linear-gradient(135deg,#6f42c1,#8a5cd4); color: #fff; }
 
-  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--light-blue); }
-  .section-header h2 { color: var(--dark-blue); font-size: 20px; }
-  .section-header .hint { font-size: 12px; color: var(--gray); background: #f0f0f0; padding: 6px 12px; border-radius: 20px; }
+  /* ============ SECTION HEADER ============ */
+  .section-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--light-blue);
+  }
+  .section-header h2 { color: var(--dark-blue); font-size: 21px; font-weight: 700; }
+  .section-header .hint {
+    font-size: 11.5px; color: var(--gray);
+    background: #f0f4f8; padding: 8px 14px; border-radius: 22px;
+    border: 1px solid #e0e6ed;
+  }
 
+  /* ============ PAGES ============ */
   .page { display: none; }
-  .page.active { display: block; animation: fadeIn .2s; }
+  .page.active { display: block; animation: fadeSlide .25s ease; }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ MODALS ============ */
+  .modal-bg {
+    display: none; position: fixed; inset: 0; background: rgba(10,20,35,.65);
+    z-index: 1000; align-items: center; justify-content: center;
+    padding: 20px; overflow-y: auto;
+    backdrop-filter: blur(3px);
+  }
+  .modal-bg.active { display: flex; animation: fadeIn .15s; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: #fff; padding: 30px; border-radius: 16px;
+    width: 90%; max-width: 640px; max-height: 92vh; overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    animation: slideUp .25s ease;
+  }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .modal h3 { color: var(--dark-blue); margin-bottom: 20px; font-size: 19px; font-weight: 700; }
+  .modal label { display: block; margin: 14px 0 6px; font-size: 13px; color: #444; font-weight: 600; }
+  .modal input, .modal select, .modal textarea { width: 100%; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 24px; justify-content: flex-end; flex-wrap: wrap; }
+  .modal-actions .btn { min-width: 110px; justify-content: center; }
 
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
-  .modal-bg.active { display: flex; }
-  .modal { background: #fff; padding: 28px; border-radius: 12px; width: 90%; max-width: 640px; max-height: 92vh; overflow-y: auto; }
-  .modal h3 { color: var(--dark-blue); margin-bottom: 18px; }
-  .modal label { display: block; margin: 10px 0 4px; font-size: 13px; color: #444; }
-  .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
-  .modal-actions .btn { min-width: 100px; justify-content: center; }
+  /* ============ DIALOG (Custom Confirm/Alert) ============ */
+  .dialog-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,20,35,.7); z-index: 2000;
+    align-items: center; justify-content: center; padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .dialog-bg.active { display: flex; animation: fadeIn .15s; }
+  .dialog {
+    background: #fff; padding: 32px 28px; border-radius: 16px;
+    width: 100%; max-width: 480px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    animation: slideUp .25s ease; text-align: center;
+  }
+  .dialog-icon {
+    font-size: 52px; margin-bottom: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 16px;
+  }
+  .dialog-icon.info    { background: linear-gradient(135deg,#e8f2fb,#d0e4f5); }
+  .dialog-icon.warning { background: linear-gradient(135deg,#fff8e1,#ffe082); }
+  .dialog-icon.danger  { background: linear-gradient(135deg,#fde8ea,#f8c9ce); }
+  .dialog-icon.success { background: linear-gradient(135deg,#e8f7ec,#c8ebd2); }
+  .dialog-title { font-size: 20px; font-weight: 700; color: var(--dark-blue); margin-bottom: 10px; }
+  .dialog-message { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 24px; white-space: pre-line; }
+  .dialog-input {
+    width: 100%; padding: 12px 14px; border: 2px solid #e0e0e0;
+    border-radius: 9px; font-size: 14px; margin-bottom: 20px;
+    text-align: right;
+  }
+  .dialog-actions { display: flex; gap: 10px; justify-content: center; }
+  .dialog-actions .btn { min-width: 110px; justify-content: center; padding: 11px 20px; }
 
-  .perm-section { margin-top: 20px; padding-top: 18px; border-top: 2px dashed #e0e0e0; }
-  .perm-section h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 12px; }
+  /* ============ TOAST ============ */
+  .toast-container {
+    position: fixed; bottom: 24px; left: 24px;
+    z-index: 3000; display: flex; flex-direction: column; gap: 10px;
+    pointer-events: none; max-width: 380px;
+  }
+  .toast {
+    background: #fff; color: #222;
+    padding: 14px 18px; border-radius: 12px; font-size: 13.5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    border-right: 4px solid var(--blue);
+    opacity: 0; transform: translateX(-30px); transition: .3s;
+    pointer-events: auto; display: flex; align-items: center; gap: 12px;
+    font-weight: 500; min-width: 280px;
+  }
+  .toast.show { opacity: 1; transform: translateX(0); }
+  .toast .toast-icon { font-size: 20px; flex-shrink: 0; }
+  .toast .toast-msg { flex: 1; }
+  .toast.success { border-right-color: var(--green); }
+  .toast.error   { border-right-color: var(--red); }
+  .toast.info    { border-right-color: var(--blue); }
+  .toast.warning { border-right-color: var(--yellow); }
+
+  /* ============ TABS ============ */
+  .tabs {
+    display: flex; gap: 4px; border-bottom: 2px solid var(--light-blue);
+    margin-bottom: 22px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 12px 22px; background: transparent; border: none;
+    cursor: pointer; font-size: 14px; color: var(--gray);
+    border-bottom: 3px solid transparent; transition: .2s;
+    font-weight: 600; border-radius: 6px 6px 0 0;
+  }
+  .tab-btn:hover { color: var(--dark-blue); background: #f5f9fd; }
+  .tab-btn.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); background: #f5f9fd; }
+
+  /* ============ PERMISSIONS ============ */
+  .perm-section { margin-top: 22px; padding-top: 20px; border-top: 2px dashed #e0e0e0; }
+  .perm-section h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 14px; font-weight: 700; }
   .perm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .perm-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; cursor: pointer; font-size: 12.5px; transition: .15s; user-select: none; border: 1px solid transparent; }
+  .perm-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; background: #f8f9fa; border-radius: 8px;
+    cursor: pointer; font-size: 12.5px; transition: .15s;
+    user-select: none; border: 2px solid transparent; font-weight: 500;
+  }
   .perm-item:hover { background: var(--light-blue); }
-  .perm-item.checked { background: #d4edda; border-color: #c3e6cb; }
+  .perm-item.checked { background: #d4edda; border-color: #7ec98d; }
   .perm-item input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--green); flex-shrink: 0; }
-  .perm-note { background: #fff3cd; border: 1px solid #ffc107; padding: 10px 14px; border-radius: 8px; font-size: 12px; color: #856404; margin-top: 12px; }
+  .perm-note {
+    background: #fff3cd; border: 1px solid #ffc107;
+    padding: 12px 16px; border-radius: 10px;
+    font-size: 12.5px; color: #856404; margin-top: 14px;
+    line-height: 1.6;
+  }
 
+  /* ============ CUSTOMER SEARCH ============ */
   .customer-search { position: relative; }
-  .customer-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 8px; max-height: 240px; overflow-y: auto; display: none; box-shadow: 0 8px 24px rgba(0,0,0,.15); z-index: 200; }
+  .customer-dropdown {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    max-height: 260px; overflow-y: auto; display: none;
+    box-shadow: 0 12px 32px rgba(0,0,0,.18); z-index: 200;
+  }
   .customer-dropdown.show { display: block; }
-  .customer-option { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #f0f0f0; font-size: 13px; transition: .15s; }
+  .customer-option {
+    padding: 12px 16px; cursor: pointer;
+    border-bottom: 1px solid #f0f0f0; font-size: 13px; transition: .15s;
+  }
   .customer-option:last-child { border-bottom: none; }
   .customer-option:hover { background: var(--light-blue); }
-  .customer-option .code { color: var(--gray); font-size: 11px; margin-left: 6px; }
+  .customer-option .code { color: var(--gray); font-size: 11px; margin-right: 6px; }
   .customer-option .loc { color: var(--gray); font-size: 11px; float: left; }
-  .customer-option.empty { color: var(--gray); text-align: center; cursor: default; }
-  .customer-option.create { color: var(--green); font-weight: 600; }
+  .customer-option.empty { color: var(--gray); text-align: center; cursor: default; padding: 20px; }
+  .customer-option.create { color: var(--green); font-weight: 700; }
   .customer-option.create:hover { background: #d4edda; }
 
-  .toast { position: fixed; bottom: 24px; left: 24px; background: var(--dark-blue); color: #fff; padding: 14px 22px; border-radius: 8px; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.3); opacity: 0; transform: translateY(20px); transition: .3s; z-index: 2000; pointer-events: none; }
-  .toast.show { opacity: 1; transform: translateY(0); }
-  .toast.success { background: var(--green); }
-  .toast.error   { background: var(--red); }
-  .toast.info    { background: var(--blue); }
+  /* ============ TEMPLATES ============ */
+  .template-card {
+    background: #fff; border: 2px solid #e8ecf1;
+    border-radius: 12px; padding: 22px; margin-bottom: 16px;
+    transition: .2s;
+  }
+  .template-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); }
+  .template-card h4 {
+    color: var(--dark-blue); margin-bottom: 16px; font-size: 15px;
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--light-blue);
+  }
+  .template-row {
+    display: grid; grid-template-columns: 170px 1fr;
+    gap: 12px; align-items: center; margin-bottom: 12px;
+  }
+  .template-row label { font-size: 13px; color: #444; font-weight: 600; }
+  .template-row input, .template-row textarea, .template-row select { font-size: 13px; }
+  .toggle-row {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; padding: 8px 0; cursor: pointer;
+  }
+  .toggle-row input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--green); }
+  .toggle-row label { cursor: pointer; user-select: none; }
 
-  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
-  .shortcut-group h4 { color: var(--dark-blue); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--light-blue); font-size: 14px; }
-  .shortcut-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; align-items: center; }
-  .shortcut-row .keys { display: flex; gap: 4px; }
-  kbd { background: #f0f0f0; border: 1px solid #ccc; border-bottom-width: 2px; border-radius: 4px; padding: 3px 8px; font-size: 11px; font-family: 'Consolas', monospace; color: #222; min-width: 26px; text-align: center; }
-  .shortcut-row .desc { color: #444; }
+  .logo-preview {
+    margin-top: 12px; padding: 12px; background: #f8f9fa;
+    border-radius: 10px; border: 2px dashed #d0d0d0;
+    text-align: center; min-height: 80px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-preview img {
+    max-width: 100%; max-height: 120px;
+    border-radius: 6px; box-shadow: var(--shadow-sm);
+  }
+  .logo-preview .empty-logo { color: var(--gray); font-size: 13px; }
 
-  .tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--light-blue); margin-bottom: 18px; flex-wrap: wrap; }
-  .tab-btn { padding: 10px 20px; background: transparent; border: none; cursor: pointer; font-size: 14px; color: var(--gray); border-bottom: 3px solid transparent; transition: .2s; font-weight: 500; }
-  .tab-btn:hover { color: var(--dark-blue); background: #f5f8fb; }
-  .tab-btn.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); font-weight: 600; }
+  /* ============ SHORTCUTS ============ */
+  .shortcuts-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .shortcut-group h4 {
+    color: var(--dark-blue); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--light-blue);
+    font-size: 14px; font-weight: 700;
+  }
+  .shortcut-row {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; font-size: 13px; align-items: center;
+  }
+  .shortcut-row .keys { display: flex; gap: 5px; }
+  kbd {
+    background: linear-gradient(180deg, #fff, #f0f0f0);
+    border: 1px solid #ccc; border-bottom-width: 2px;
+    border-radius: 5px; padding: 4px 9px; font-size: 11px;
+    font-family: 'Consolas', monospace; color: #222;
+    min-width: 28px; text-align: center; font-weight: 600;
+    box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  }
+  .shortcut-row .desc { color: #444; font-weight: 500; }
 
-  .template-card { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
-  .template-card h4 { color: var(--dark-blue); margin-bottom: 12px; }
-  .template-row { display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 10px; }
-  .template-row label { font-size: 13px; color: #444; }
-  .template-row input, .template-row textarea { font-size: 13px; }
-  .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 6px 0; }
-  .toggle-row input { width: auto; }
-
+  /* ============ PRINT ============ */
   @media print {
     body { background: #fff; }
-    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar { display: none !important; }
+    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .tabs { display: none !important; }
     main { padding: 0; max-width: 100%; }
     table { min-width: auto; font-size: 10px; }
     th { background: #ddd !important; color: #000 !important; position: static; }
-    .table-wrap { box-shadow: none; }
+    .table-wrap { box-shadow: none; border-radius: 0; }
     .badge { border: 1px solid #666; }
     @page { size: A4 landscape; margin: 12mm; }
   }
 
-  @media (max-width: 700px) {
-    header { flex-direction: column; gap: 8px; padding: 12px; }
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    header { padding: 12px 16px; height: auto; flex-direction: column; gap: 10px; }
     header h1 { font-size: 15px; }
-    nav { top: 0; }
-    main { padding: 12px; }
+    nav { top: 0; padding: 0 12px; }
+    nav button { padding: 14px 14px; font-size: 13px; }
+    main { padding: 14px; }
     .dash-grid { grid-template-columns: 1fr; }
     .perm-grid { grid-template-columns: 1fr; }
     .template-row { grid-template-columns: 1fr; }
   }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #f0f0f0; }
+  ::-webkit-scrollbar-thumb { background: #b8c5d1; border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: #8fa2b3; }
 </style>
 </head>
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- ============ LOADING OVERLAY ============ -->
+<div id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">جاري التحميل...</div>
+</div>
+
+<!-- ============ LOGIN ============ -->
 <div id="loginScreen">
   <div class="login-box">
-    <h1>📦 نظام إدارة الطلبات</h1>
-    <p>قاعدة بيانات مشتركة عبر GitHub</p>
+    <div class="login-logo">📦</div>
+    <h1>نظام إدارة الطلبات</h1>
+    <p class="subtitle">قاعدة بيانات مشتركة عبر GitHub</p>
+
     <div id="tokenStatus"></div>
+
     <div id="tokenField" style="display:none;">
-      <label>🔑 GitHub Token (يُحفظ في متصفحك)</label>
+      <label>🔑 رمز الوصول (GitHub Token)</label>
       <input id="loginToken" type="password" placeholder="github_pat_..." autocomplete="off">
       <div class="token-help">
-        💡 أنشئ توكن من:
+        💡 أنشئ رمزاً من:
         <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Settings</a>
-        <br>الصلاحية: <b>Contents: Read and write</b>
+        <br>الصلاحية المطلوبة: <b>Contents: Read and write</b>
       </div>
     </div>
-    <label>اسم المستخدم</label>
-    <input id="loginUser" type="text" placeholder="1" autocomplete="username">
-    <label>كلمة المرور</label>
-    <input id="loginPass" type="password" placeholder="••••" autocomplete="current-password">
-    <button id="loginBtn" onclick="doLogin()">🔓 دخول</button>
+
+    <label>👤 اسم المستخدم</label>
+    <input id="loginUser" type="text" placeholder="أدخل اسمك" autocomplete="username">
+
+    <label>🔒 كلمة المرور</label>
+    <input id="loginPass" type="password" placeholder="••••••" autocomplete="current-password">
+
+    <button class="primary" id="loginBtn" onclick="doLogin()">🔓 تسجيل الدخول</button>
     <div id="loginError" class="login-error"></div>
     <div id="loginLoading" class="login-loading"></div>
   </div>
 </div>
 
-<!-- ================= APP ================= -->
+<!-- ============ APP ============ -->
 <div id="app">
   <header>
-    <h1>📦 نظام إدارة وتجهيز وترحيل الطلبات</h1>
+    <div class="brand">
+      <span class="brand-logo">📦</span>
+      <h1>نظام إدارة الطلبات</h1>
+    </div>
     <div class="user-info">
-      <span>
+      <div class="user-chip">
         <span id="connDot" class="status-dot"></span>
-        👤 <b id="currentUserName"></b>
-        <span id="currentUserRole" style="opacity:.8"></span>
-      </span>
-      <button onclick="manualSync()" title="مزامنة">🔄</button>
-      <button onclick="showShortcuts()" title="F1">⌨️</button>
-      <button onclick="logout()">🚪 خروج</button>
+        <span>👤 <b id="currentUserName"></b></span>
+        <span id="currentUserRole" style="opacity:.75;font-size:12px;"></span>
+      </div>
+      <button class="btn-icon" onclick="manualSync()" title="مزامنة الآن">🔄</button>
+      <button class="btn-icon" onclick="showShortcuts()" title="الاختصارات (F1)">⌨️</button>
+      <button class="btn-icon" onclick="logout()" title="تسجيل الخروج">🚪</button>
     </div>
   </header>
 
@@ -249,19 +603,32 @@
   </nav>
 
   <main>
-    <!-- DASHBOARD -->
+    <!-- ============ DASHBOARD ============ -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid">
         <div class="dash-card" onclick="go('entry')">
-          <div class="icon">📋</div><h3>إدخال الطلبات</h3><p>تسجيل ومتابعة الطلبات</p></div>
+          <div class="icon">📋</div>
+          <h3>إدخال الطلبات</h3>
+          <p>تسجيل ومتابعة الطلبات اليومية</p>
+        </div>
         <div class="dash-card green" onclick="go('ready')">
-          <div class="icon">📦</div><h3>الطلبات الجاهزة</h3><p>جاهزة للنقل للفرع</p></div>
+          <div class="icon">📦</div>
+          <h3>الطلبات الجاهزة</h3>
+          <p>جاهزة للنقل إلى الفرع</p>
+        </div>
         <div class="dash-card purple" onclick="go('log')">
-          <div class="icon">🗃️</div><h3>سجل الطلبات</h3><p>الأرشيف النهائي</p></div>
+          <div class="icon">🗃️</div>
+          <h3>سجل الطلبات</h3>
+          <p>الأرشيف النهائي الكامل</p>
+        </div>
         <div class="dash-card orange perm-accessCustomers" onclick="go('customers')">
-          <div class="icon">👥</div><h3>العملاء</h3><p>قاعدة بيانات العملاء</p></div>
+          <div class="icon">👥</div>
+          <h3>العملاء</h3>
+          <p>قاعدة بيانات العملاء</p>
+        </div>
       </div>
-      <h3 style="color:var(--dark-blue);margin-bottom:12px;">📊 إحصائيات مباشرة</h3>
+
+      <div class="section-title">📊 إحصائيات مباشرة</div>
       <div class="stats-grid">
         <div class="stat"><div class="num" id="statEntry">0</div><div class="lbl">قيد الإدخال</div></div>
         <div class="stat green"><div class="num" id="statReady">0</div><div class="lbl">جاهزة للنقل</div></div>
@@ -271,7 +638,7 @@
       </div>
     </section>
 
-    <!-- ENTRY -->
+    <!-- ============ ENTRY ============ -->
     <section id="page-entry" class="page">
       <div class="section-header">
         <h2>📋 إدخال الطلبات</h2>
@@ -280,7 +647,7 @@
       <div class="toolbar no-print">
         <button class="btn btn-primary perm-addOrder" onclick="addOrder()">➕ طلب جديد <kbd>Alt+N</kbd></button>
         <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">🚚 تحويل المستوفية <kbd>Alt+B</kbd></button>
-        <input id="searchEntry" type="text" placeholder="🔍 بحث... (Ctrl+K)" oninput="renderEntry()" style="margin-right:auto;max-width:280px;">
+        <input id="searchEntry" type="text" placeholder="🔍 بحث سريع..." oninput="renderEntry()" style="margin-right:auto;max-width:300px;">
       </div>
       <div class="table-wrap"><table>
         <thead><tr>
@@ -292,7 +659,7 @@
       </table></div>
     </section>
 
-    <!-- READY -->
+    <!-- ============ READY ============ -->
     <section id="page-ready" class="page">
       <div class="section-header">
         <h2>📦 الطلبات الجاهزة للنقل</h2>
@@ -313,23 +680,22 @@
       </table></div>
     </section>
 
-    <!-- LOG -->
+    <!-- ============ LOG ============ -->
     <section id="page-log" class="page">
       <div class="section-header">
-        <h2>🗃️ سجل الطلبات (الأرشيف)</h2>
-        <span id="logCount" style="color:var(--gray);font-size:13px;"></span>
+        <h2>🗃️ سجل الطلبات</h2>
+        <span id="logCount" style="color:var(--gray);font-size:13px;font-weight:600;"></span>
       </div>
 
-      <!-- ⭐ فلترة السجل -->
       <div class="filter-bar no-print">
-        <span style="color:var(--dark-blue);font-weight:600;font-size:13px;">🔍 فلترة:</span>
-        <label>من تاريخ:</label>
+        <span style="color:var(--dark-blue);font-weight:700;font-size:13px;">🔍 فلترة:</span>
+        <label>من:</label>
         <input id="filterLogFrom" type="date" onchange="renderLog()">
         <label>إلى:</label>
         <input id="filterLogTo" type="date" onchange="renderLog()">
         <label>الاسم:</label>
         <input id="filterLogName" type="text" placeholder="اسم العميل" oninput="renderLog()" style="width:180px;">
-        <label>الحالة:</label>
+        <label>الدفع:</label>
         <select id="filterLogPay" onchange="renderLog()" style="width:130px;">
           <option value="">الكل</option>
           <option>مدفوع</option>
@@ -340,10 +706,10 @@
       </div>
 
       <div class="toolbar no-print">
-        <button class="btn btn-primary perm-print" onclick="printLog()">🖨️ طباعة السجل المُفلتر</button>
+        <button class="btn btn-primary perm-print" onclick="printLog()">🖨️ طباعة المُفلتر</button>
         <button class="btn btn-warning perm-print" onclick="exportLogPDF()">📄 تصدير PDF</button>
         <button class="btn btn-gray" onclick="exportLogCSV()">📤 تصدير CSV</button>
-        <span id="logFilteredCount" style="margin-right:auto;font-size:13px;color:var(--gray);"></span>
+        <span id="logFilteredCount" style="margin-right:auto;font-size:13px;color:var(--gray);font-weight:600;"></span>
       </div>
       <div class="table-wrap"><table>
         <thead><tr>
@@ -356,14 +722,14 @@
       </table></div>
     </section>
 
-    <!-- CUSTOMERS -->
+    <!-- ============ CUSTOMERS ============ -->
     <section id="page-customers" class="page">
       <div class="section-header">
         <h2>👥 قاعدة بيانات العملاء</h2>
-        <span id="custCount" style="color:var(--gray);font-size:13px;"></span>
+        <span id="custCount" style="color:var(--gray);font-size:13px;font-weight:600;"></span>
       </div>
       <div class="toolbar no-print">
-        <input id="searchCustomers" type="text" placeholder="🔍 بحث..." oninput="renderCustomers()" style="max-width:280px;">
+        <input id="searchCustomers" type="text" placeholder="🔍 بحث..." oninput="renderCustomers()" style="max-width:300px;">
         <button class="btn btn-primary perm-manageCustomers" onclick="openCustomerModal()">➕ عميل جديد</button>
       </div>
       <div class="table-wrap"><table>
@@ -372,51 +738,49 @@
       </table></div>
     </section>
 
-    <!-- SETTINGS -->
+    <!-- ============ SETTINGS ============ -->
     <section id="page-settings" class="page">
       <div class="section-header"><h2>⚙️ الإعدادات</h2></div>
 
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('token')">🔑 التوكن</button>
-        <button class="tab-btn" onclick="switchTab('drivers')">🚚 الموصلون</button>
-        <button class="tab-btn" onclick="switchTab('users')">👤 المستخدمون</button>
-        <button class="tab-btn" onclick="switchTab('templates')">🖨️ قوالب الطباعة</button>
-        <button class="tab-btn" onclick="switchTab('backup')">💾 نسخ احتياطي</button>
+        <button class="tab-btn active" onclick="switchTab(event,'token')">🔑 الرمز</button>
+        <button class="tab-btn" onclick="switchTab(event,'drivers')">🚚 الموصلون</button>
+        <button class="tab-btn" onclick="switchTab(event,'users')">👤 المستخدمون</button>
+        <button class="tab-btn" onclick="switchTab(event,'templates')">🖨️ قوالب الطباعة</button>
+        <button class="tab-btn" onclick="switchTab(event,'backup')">💾 نسخ احتياطي</button>
       </div>
 
-      <!-- Token -->
       <div id="tab-token" class="tab-panel">
         <div class="toolbar">
-          <button class="btn btn-warning" onclick="changeToken()">🔄 تغيير التوكن</button>
-          <button class="btn btn-danger" onclick="clearToken()">🗑️ حذف التوكن</button>
+          <button class="btn btn-warning" onclick="changeToken()">🔄 تغيير الرمز</button>
+          <button class="btn btn-danger" onclick="clearToken()">🗑️ حذف الرمز</button>
         </div>
-        <div id="currentTokenInfo" style="padding:12px;background:#f8f9fa;border-radius:8px;font-family:monospace;font-size:12px;color:#555;white-space:pre-line;"></div>
+        <div id="currentTokenInfo" style="padding:14px;background:#f8f9fa;border-radius:10px;font-family:'Consolas',monospace;font-size:12px;color:#555;white-space:pre-line;line-height:1.7;border:1px solid #e0e0e0;"></div>
       </div>
 
-      <!-- Drivers -->
       <div id="tab-drivers" class="tab-panel" style="display:none;">
-        <h3 style="color:var(--dark-blue);margin-bottom:12px;">🚚 الموصلون</h3>
+        <div class="section-title" style="margin-top:0;">🚚 إدارة الموصلين</div>
         <div class="toolbar">
-          <input id="newDriverName" placeholder="اسم الموصل" style="max-width:200px;">
-          <input id="newDriverPhone" placeholder="رقم الهاتف" style="max-width:200px;">
+          <input id="newDriverName" placeholder="اسم الموصل" style="max-width:220px;">
+          <input id="newDriverPhone" placeholder="رقم الهاتف" style="max-width:220px;">
           <button class="btn btn-success perm-manageDrivers" onclick="addDriver()">➕ إضافة</button>
         </div>
-        <div id="driverList" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+        <div id="driverList" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;"></div>
       </div>
 
-      <!-- Users -->
       <div id="tab-users" class="tab-panel" style="display:none;">
-        <h3 style="color:var(--dark-blue);margin-bottom:12px;">👤 المستخدمون والصلاحيات</h3>
+        <div class="section-title" style="margin-top:0;">👤 المستخدمون والصلاحيات</div>
         <div class="toolbar">
           <button class="btn btn-primary perm-manageUsers" onclick="openUserModal()">➕ مستخدم جديد</button>
         </div>
-        <div class="table-wrap" style="max-width:900px;"><table style="min-width:auto;">
-          <thead><tr><th>اسم المستخدم</th><th>الصلاحية</th><th>الصلاحيات</th><th>إجراءات</th></tr></thead>
-          <tbody id="userBody"></tbody>
-        </table></div>
+        <div class="table-wrap" style="max-width:950px;">
+          <table style="min-width:auto;">
+            <thead><tr><th>اسم المستخدم</th><th>الصلاحية</th><th>الصلاحيات</th><th>إجراءات</th></tr></thead>
+            <tbody id="userBody"></tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- Templates -->
       <div id="tab-templates" class="tab-panel" style="display:none;">
         <div class="perm-note" style="margin-bottom:16px;">
           👑 <b>المالك فقط</b> يمكنه تعديل القوالب. التغييرات تُحفظ في <code>data/templates.json</code>.
@@ -428,11 +792,10 @@
         </div>
       </div>
 
-      <!-- Backup -->
       <div id="tab-backup" class="tab-panel" style="display:none;">
-        <h3 style="color:var(--dark-blue);margin-bottom:12px;">💾 النسخ الاحتياطي</h3>
+        <div class="section-title" style="margin-top:0;">💾 النسخ الاحتياطي والصيانة</div>
         <div class="toolbar">
-          <button class="btn btn-gray" onclick="exportBackup()">⬇️ تصدير JSON</button>
+          <button class="btn btn-gray" onclick="exportBackup()">⬇️ تصدير نسخة JSON</button>
           <button class="btn btn-danger perm-reset" onclick="resetAll()">🗑️ تصفير النظام</button>
         </div>
       </div>
@@ -440,60 +803,74 @@
   </main>
 </div>
 
-<!-- ================= MODALS ================= -->
+<!-- ============ MODALS ============ -->
 
+<!-- Order Modal -->
 <div id="orderModal" class="modal-bg"><div class="modal">
   <h3 id="orderModalTitle">➕ طلب جديد</h3>
   <input type="hidden" id="orderId">
   <input type="hidden" id="orderCustomerId">
   <input type="hidden" id="orderLogMode" value="">
-  <label>رقم الفاتورة *</label><input id="orderInvoice" autocomplete="off">
-  <label>العميل (اكتب للبحث أو أنشئ جديد)</label>
+  <label>رقم الفاتورة *</label>
+  <input id="orderInvoice" autocomplete="off" data-next="orderCustomer">
+  <label>العميل</label>
   <div class="customer-search">
-    <input id="orderCustomer" autocomplete="off" placeholder="اكتب اسم العميل...">
+    <input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث..." data-next="orderLocation">
     <div class="customer-dropdown" id="customerDropdown"></div>
   </div>
-  <label>الموقع</label><input id="orderLocation" autocomplete="off">
+  <label>الموقع</label>
+  <input id="orderLocation" autocomplete="off" data-next="orderStatus">
   <label>حالة الطلب</label>
-  <select id="orderStatus">
+  <select id="orderStatus" data-next="orderPay">
     <option>قيد التجهيز</option>
     <option>جاهز</option>
   </select>
-  <label>تاريخ الاعتماد</label><input id="orderDate" readonly placeholder="تلقائي عند الحالة جاهز">
+  <label>تاريخ الاعتماد</label>
+  <input id="orderDate" readonly placeholder="تلقائي" data-next="orderPay">
   <label>حالة الدفع</label>
-  <select id="orderPay">
+  <select id="orderPay" data-next="orderDriver">
     <option>غير مدفوع</option>
     <option>مدفوع</option>
     <option>VIP</option>
   </select>
-  <label>الموصل</label><select id="orderDriver" onchange="onDriverSelect()"></select>
-  <label>رقم الموصل (تلقائي)</label><input id="orderDriverPhone" placeholder="يُملأ تلقائياً">
+  <label>الموصل</label>
+  <select id="orderDriver" onchange="onDriverSelect()" data-next="orderDriverPhone"></select>
+  <label>رقم الموصل</label>
+  <input id="orderDriverPhone" placeholder="تلقائي" data-next="orderNotes">
   <label>📝 ملاحظات</label>
-  <textarea id="orderNotes" placeholder="أي ملاحظات إضافية..." rows="3"></textarea>
+  <textarea id="orderNotes" rows="3" placeholder="أي ملاحظات إضافية..."></textarea>
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('orderModal')">إلغاء</button>
-    <button class="btn btn-primary" id="saveOrderBtn" onclick="saveOrder()">💾 حفظ</button>
+    <button class="btn btn-primary" id="saveOrderBtn" onclick="saveOrder()">💾 حفظ <kbd>Ctrl+Enter</kbd></button>
   </div>
 </div></div>
 
+<!-- Customer Modal -->
 <div id="customerModal" class="modal-bg"><div class="modal">
   <h3 id="custModalTitle">👤 عميل جديد</h3>
   <input type="hidden" id="custId">
-  <label>رقم العميل</label><input id="custCode" autocomplete="off">
-  <label>الاسم</label><input id="custName" autocomplete="off">
-  <label>الموقع</label><input id="custLocation" autocomplete="off">
-  <label>الهاتف</label><input id="custPhone" autocomplete="off">
+  <label>رقم العميل</label>
+  <input id="custCode" autocomplete="off" data-next="custName">
+  <label>الاسم *</label>
+  <input id="custName" autocomplete="off" data-next="custLocation">
+  <label>الموقع</label>
+  <input id="custLocation" autocomplete="off" data-next="custPhone">
+  <label>الهاتف</label>
+  <input id="custPhone" autocomplete="off">
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('customerModal')">إلغاء</button>
     <button class="btn btn-primary" onclick="saveCustomer()">💾 حفظ</button>
   </div>
 </div></div>
 
+<!-- User Modal -->
 <div id="userModal" class="modal-bg"><div class="modal">
   <h3 id="userModalTitle">👤 مستخدم جديد</h3>
   <input type="hidden" id="userId">
-  <label>اسم المستخدم</label><input id="userName" autocomplete="off">
-  <label>كلمة المرور</label><input id="userPass" type="text" autocomplete="off">
+  <label>اسم المستخدم *</label>
+  <input id="userName" autocomplete="off" data-next="userPass">
+  <label>كلمة المرور *</label>
+  <input id="userPass" type="text" autocomplete="off" data-next="userRole">
   <label>الصلاحية الأساسية</label>
   <select id="userRole" onchange="onUserRoleChange()">
     <option value="عادي">👤 عادي</option>
@@ -512,9 +889,10 @@
   </div>
 </div></div>
 
+<!-- Token Modal -->
 <div id="tokenModal" class="modal-bg"><div class="modal">
-  <h3>🔑 تحديث التوكن</h3>
-  <label>GitHub Token</label>
+  <h3>🔑 تحديث الرمز</h3>
+  <label>GitHub Token الجديد</label>
   <input id="newTokenInput" type="password" placeholder="github_pat_..." autocomplete="off">
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('tokenModal')">إلغاء</button>
@@ -522,31 +900,45 @@
   </div>
 </div></div>
 
-<div id="shortcutsModal" class="modal-bg"><div class="modal" style="max-width:800px;">
-  <h3>⌨️ الاختصارات</h3>
+<!-- Shortcuts Modal -->
+<div id="shortcutsModal" class="modal-bg"><div class="modal" style="max-width:820px;">
+  <h3>⌨️ اختصارات لوحة المفاتيح</h3>
   <div class="shortcuts-grid">
     <div class="shortcut-group">
       <h4>🧭 التنقل</h4>
       <div class="shortcut-row"><span class="desc">الرئيسية</span><span class="keys"><kbd>Alt</kbd>+<kbd>1</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">إدخال</span><span class="keys"><kbd>Alt</kbd>+<kbd>2</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">جاهزة</span><span class="keys"><kbd>Alt</kbd>+<kbd>3</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">السجل</span><span class="keys"><kbd>Alt</kbd>+<kbd>4</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">إدخال الطلبات</span><span class="keys"><kbd>Alt</kbd>+<kbd>2</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">الطلبات الجاهزة</span><span class="keys"><kbd>Alt</kbd>+<kbd>3</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">سجل الطلبات</span><span class="keys"><kbd>Alt</kbd>+<kbd>4</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">العملاء</span><span class="keys"><kbd>Alt</kbd>+<kbd>5</kbd></span></div>
     </div>
     <div class="shortcut-group">
       <h4>⚡ العمليات</h4>
-      <div class="shortcut-row"><span class="desc">بحث</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">بحث سريع</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></span></div>
       <div class="shortcut-row"><span class="desc">طلب جديد</span><span class="keys"><kbd>Alt</kbd>+<kbd>N</kbd></span></div>
-      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>S</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">حفظ النموذج</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd></span></div>
       <div class="shortcut-row"><span class="desc">طباعة</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>P</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">تحويل المحدد</span><span class="keys"><kbd>Alt</kbd>+<kbd>T</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">تحويل جماعي</span><span class="keys"><kbd>Alt</kbd>+<kbd>B</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">ترحيل للسجل</span><span class="keys"><kbd>Alt</kbd>+<kbd>M</kbd></span></div>
     </div>
     <div class="shortcut-group">
       <h4>📝 داخل النموذج</h4>
-      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Enter</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">الحقل التالي</span><span class="keys"><kbd>Enter</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">الحقل السابق</span><span class="keys"><kbd>Shift</kbd>+<kbd>Enter</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">حفظ</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd></span></div>
       <div class="shortcut-row"><span class="desc">إغلاق</span><span class="keys"><kbd>Esc</kbd></span></div>
       <div class="shortcut-row"><span class="desc">مدفوع</span><span class="keys"><kbd>Alt</kbd>+<kbd>P</kbd></span></div>
       <div class="shortcut-row"><span class="desc">غير مدفوع</span><span class="keys"><kbd>Alt</kbd>+<kbd>U</kbd></span></div>
       <div class="shortcut-row"><span class="desc">VIP</span><span class="keys"><kbd>Alt</kbd>+<kbd>V</kbd></span></div>
       <div class="shortcut-row"><span class="desc">جاهز</span><span class="keys"><kbd>Alt</kbd>+<kbd>G</kbd></span></div>
+    </div>
+    <div class="shortcut-group">
+      <h4>🔍 العرض</h4>
+      <div class="shortcut-row"><span class="desc">تكبير</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>=</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">تصغير</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>-</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">100%</span><span class="keys"><kbd>Ctrl</kbd>+<kbd>0</kbd></span></div>
+      <div class="shortcut-row"><span class="desc">حذف المحدد</span><span class="keys"><kbd>Delete</kbd></span></div>
     </div>
   </div>
   <div class="modal-actions">
@@ -554,17 +946,32 @@
   </div>
 </div></div>
 
-<div id="toast" class="toast"></div>
+<!-- ============ DIALOG (Custom Confirm/Alert) ============ -->
+<div id="dialogBg" class="dialog-bg">
+  <div class="dialog">
+    <div id="dialogIcon" class="dialog-icon info">ℹ️</div>
+    <div id="dialogTitle" class="dialog-title">تنبيه</div>
+    <div id="dialogMessage" class="dialog-message"></div>
+    <input id="dialogInput" class="dialog-input" type="text" style="display:none;">
+    <div class="dialog-actions">
+      <button id="dialogCancelBtn" class="btn btn-gray" onclick="dialogResolve(false)">إلغاء</button>
+      <button id="dialogOkBtn" class="btn btn-primary" onclick="dialogResolve(true)">موافق</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOASTS ============ -->
+<div id="toastContainer" class="toast-container"></div>
 
 <script>
 /* ==============================================================
-   الإعدادات
+   الإعدادات العامة
    ============================================================== */
 const GITHUB_OWNER  = 'omar2006200';
 const GITHUB_REPO   = 'Bajandouh';
 const GITHUB_BRANCH = 'main';
-const SYNC_INTERVAL = 10000;   // ⭐ 10 ثوانٍ (تم رفعه من 5)
-const SAVE_COOLDOWN = 10000;   // ⭐ 10 ثوانٍ بين الحفظ و الحفظ
+const SYNC_INTERVAL = 10000;
+const SAVE_COOLDOWN = 10000;
 
 const FILES = {
   users:     'data/users.json',
@@ -576,16 +983,15 @@ const FILES = {
   templates: 'data/templates.json',
   meta:      'data/meta.json'
 };
-
 const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers', 'templates'];
 
 /* ==============================================================
    الصلاحيات
    ============================================================== */
 const PERMISSIONS = {
-  accessCustomers: { label: 'فتح العملاء', icon: '👥' },
+  accessCustomers: { label: 'فتح صفحة العملاء', icon: '👥' },
   accessSettings:  { label: 'فتح الإعدادات', icon: '⚙️' },
-  addOrder:        { label: 'إضافة طلب', icon: '➕' },
+  addOrder:        { label: 'إضافة طلب جديد', icon: '➕' },
   editOrder:       { label: 'تعديل طلب', icon: '✏️' },
   deleteOrder:     { label: 'حذف طلب', icon: '🗑️' },
   transferSingle:  { label: 'تحويل فردي', icon: '➡️' },
@@ -608,75 +1014,36 @@ const DEFAULT_PERMS = {
   manageDrivers: false, manageUsers: false, editTemplates: false, reset: false
 };
 
-function hasPerm(perm) {
-  if (!currentUser) return false;
-  if (currentUser.role === 'رئيسي') return true;
-  return currentUser.permissions?.[perm] === true;
-}
-
-function normalizeUser(u) {
-  if (!u) return u;
-  if (u.role === 'رئيسي') return u;
-  if (!u.permissions) u.permissions = { ...DEFAULT_PERMS };
-  else Object.keys(DEFAULT_PERMS).forEach(k => {
-    if (typeof u.permissions[k] !== 'boolean') u.permissions[k] = DEFAULT_PERMS[k];
-  });
-  return u;
-}
-
-function applyPermissionsUI() {
-  document.querySelectorAll('[class*="perm-"]').forEach(el => {
-    const classes = el.className.split(' ');
-    let allowed = true;
-    classes.forEach(c => {
-      if (c.startsWith('perm-')) {
-        const perm = c.replace('perm-', '');
-        if (PERMISSIONS[perm] && !hasPerm(perm)) allowed = false;
-      }
-    });
-    el.style.display = allowed ? '' : 'none';
-  });
-}
-
 /* ==============================================================
-   قوالب الطباعة الافتراضية
+   قوالب افتراضية
    ============================================================== */
 const DEFAULT_TEMPLATES = {
+  logo: '',   // ⭐ صورة الكليشه Base64
   ready: {
     title: '📦 قائمة الطلبات الجاهزة للنقل',
     subtitle: 'التاريخ: {date} — العدد: {count} — المستخدم: {user}',
     footer: 'توقيع الموظف: __________    توقيع الموصل: __________',
-    showNotes: true,
-    showApprovalDate: true,
-    showDriverPhone: true,
-    showPay: true,
-    fontSize: 12,
-    orientation: 'landscape'
+    showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
+    fontSize: 12, orientation: 'landscape'
   },
   log: {
     title: '🗃️ سجل الطلبات',
     subtitle: 'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',
     footer: 'تم الطباعة بواسطة: {user}',
-    showNotes: true,
-    showApprovalDate: true,
-    showDriverPhone: true,
-    showPay: true,
-    showArchivedAt: true,
-    fontSize: 11,
-    orientation: 'landscape'
+    showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
+    showArchivedAt: true, fontSize: 11, orientation: 'landscape'
   }
 };
 
-let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-
 /* ==============================================================
-   المتغيرات
+   الحالة العامة
    ============================================================== */
 const TOKEN_KEY = 'oms_github_token';
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 
 let currentUser = null;
 let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [], templates: {} };
+let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {};
 let localMeta = null;
 let pollTimer = null;
@@ -684,8 +1051,91 @@ let syncing = false;
 let selectedOrderId = null;
 let zoomLevel = 1;
 let tempPerms = {};
-let lastSaveTime = 0;        // ⭐ لتطبيق cooldown
-let saveInProgress = false;   // ⭐ منع النقر المزدوج
+let lastSaveTime = 0;
+let saveInProgress = false;
+
+/* ==============================================================
+   ⭐ Dialog System (بدل alert/confirm)
+   ============================================================== */
+let dialogCallback = null;
+
+function showDialog(options) {
+  return new Promise((resolve) => {
+    dialogCallback = resolve;
+    const { type = 'info', title, message, okText, cancelText, showCancel = true, showInput = false, inputValue = '' } = options;
+
+    const iconMap = { info: 'ℹ️', warning: '⚠️', danger: '🗑️', success: '✅', question: '❓' };
+    const titleMap = { info: 'تنبيه', warning: 'تحذير', danger: 'تأكيد الحذف', success: 'تم بنجاح', question: 'تأكيد' };
+
+    const iconEl = document.getElementById('dialogIcon');
+    iconEl.className = 'dialog-icon ' + (type === 'danger' ? 'danger' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info');
+    iconEl.textContent = iconMap[type] || 'ℹ️';
+
+    document.getElementById('dialogTitle').textContent = title || titleMap[type] || 'تنبيه';
+    document.getElementById('dialogMessage').textContent = message || '';
+
+    const inputEl = document.getElementById('dialogInput');
+    if (showInput) { inputEl.style.display = 'block'; inputEl.value = inputValue; setTimeout(() => inputEl.focus(), 100); }
+    else inputEl.style.display = 'none';
+
+    document.getElementById('dialogOkBtn').textContent = okText || 'موافق';
+    document.getElementById('dialogOkBtn').className = 'btn ' + (type === 'danger' ? 'btn-danger' : 'btn-primary');
+
+    const cancelBtn = document.getElementById('dialogCancelBtn');
+    cancelBtn.textContent = cancelText || 'إلغاء';
+    cancelBtn.style.display = showCancel ? '' : 'none';
+
+    document.getElementById('dialogBg').classList.add('active');
+  });
+}
+
+window.dialogResolve = function (result) {
+  document.getElementById('dialogBg').classList.remove('active');
+  const inputEl = document.getElementById('dialogInput');
+  const value = result && inputEl.style.display !== 'none' ? inputEl.value : null;
+  if (dialogCallback) dialogCallback(result ? { ok: true, value } : { ok: false });
+  dialogCallback = null;
+};
+
+const dialog = {
+  alert: (msg, opts = {}) => showDialog({ type: opts.type || 'info', title: opts.title, message: msg, showCancel: false, okText: opts.okText || 'حسناً' }),
+  confirm: async (msg, opts = {}) => {
+    const r = await showDialog({ type: opts.type || 'question', title: opts.title, message: msg, okText: opts.okText || 'تأكيد', cancelText: opts.cancelText || 'إلغاء', showCancel: true });
+    return r.ok;
+  },
+  danger: async (msg, opts = {}) => {
+    const r = await showDialog({ type: 'danger', title: opts.title || 'تأكيد الحذف', message: msg, okText: opts.okText || 'نعم، احذف', cancelText: 'إلغاء', showCancel: true });
+    return r.ok;
+  }
+};
+
+/* ==============================================================
+   ⭐ Toast System
+   ============================================================== */
+function toast(msg, type = 'info') {
+  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span class="toast-msg">${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => el.classList.add('show'), 10);
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 400);
+  }, 3200);
+}
+
+/* ==============================================================
+   Loading Overlay
+   ============================================================== */
+function showLoading(text = 'جاري التحميل...') {
+  document.getElementById('loadingText').textContent = text;
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
 
 /* ==============================================================
    Base64
@@ -698,10 +1148,12 @@ function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/
    ============================================================== */
 function getStoredToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
 function saveToken(t) { localStorage.setItem(TOKEN_KEY, t.trim()); }
-function clearToken() {
-  if (!confirm('⚠️ حذف التوكن؟')) return;
+
+async function clearToken() {
+  const ok = await dialog.confirm('سيتم حذف رمز الوصول من هذا المتصفح. ستحتاج لإدخاله مرة أخرى.', { type: 'warning', title: 'حذف الرمز' });
+  if (!ok) return;
   localStorage.removeItem(TOKEN_KEY);
-  toast('✅ تم الحذف', 'success');
+  toast('تم حذف الرمز', 'success');
   updateTokenStatus();
   updateCurrentTokenInfo();
 }
@@ -713,13 +1165,13 @@ function updateTokenStatus() {
   if (token) {
     const masked = token.length > 25 ? token.substring(0, 20) + '…' + token.slice(-4) : token;
     statusEl.className = 'token-status saved';
-    statusEl.innerHTML = `<span>✅ التوكن محفوظ</span>
+    statusEl.innerHTML = `<span>✅ الرمز محفوظ</span>
       <span style="font-family:monospace;font-size:11px;opacity:.7;">${masked}</span>
-      <button onclick="showTokenField()">🔄 تغيير</button>`;
+      <button onclick="showTokenField()">تغيير</button>`;
     fieldEl.style.display = 'none';
   } else {
     statusEl.className = 'token-status missing';
-    statusEl.innerHTML = '<span>⚠️ لم يتم إدخال التوكن</span>';
+    statusEl.innerHTML = '<span>⚠️ لم يتم إدخال الرمز بعد</span>';
     fieldEl.style.display = 'block';
   }
 }
@@ -734,7 +1186,7 @@ function updateCurrentTokenInfo() {
   const el = document.getElementById('currentTokenInfo');
   if (!el) return;
   const token = getStoredToken();
-  el.textContent = token ? `✅ محفوظ: ${token.substring(0, 20)}…${token.slice(-4)}\nالطول: ${token.length} حرف` : '❌ لا يوجد توكن';
+  el.textContent = token ? `✅ محفوظ: ${token.substring(0, 20)}…${token.slice(-4)}\nالطول: ${token.length} حرف` : '❌ لا يوجد رمز';
 }
 
 function changeToken() {
@@ -745,10 +1197,10 @@ function changeToken() {
 
 function saveNewToken() {
   const t = document.getElementById('newTokenInput').value.trim();
-  if (!t) { toast('أدخل التوكن', 'error'); return; }
+  if (!t) { toast('أدخل الرمز', 'error'); return; }
   saveToken(t);
   closeModal('tokenModal');
-  toast('✅ تم حفظ التوكن', 'success');
+  toast('تم حفظ الرمز الجديد', 'success');
   updateCurrentTokenInfo();
   SHAs = {}; localMeta = null;
   syncPull();
@@ -772,12 +1224,12 @@ async function ghReadFile(key) {
   const url = `${API_BASE}/${path}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   let res;
   try { res = await fetch(url, { headers: apiHeaders() }); }
-  catch (e) { throw new Error('فشل الاتصال بالشبكة'); }
+  catch { throw new Error('فشل الاتصال بالشبكة'); }
   if (!res.ok) {
-    if (res.status === 401) throw new Error('التوكن غير صالح');
-    if (res.status === 403) throw new Error('صلاحية غير كافية');
+    if (res.status === 401) throw new Error('الرمز غير صالح');
+    if (res.status === 403) throw new Error('الصلاحية غير كافية');
     if (res.status === 404) return null;
-    throw new Error(`فشل القراءة (${path}): ${res.status}`);
+    throw new Error(`فشل القراءة: ${res.status}`);
   }
   const json = await res.json();
   SHAs[key] = json.sha;
@@ -788,18 +1240,18 @@ async function ghWriteFile(key, data) {
   const path = FILES[key];
   const url = `${API_BASE}/${path}`;
   const body = {
-    message: `update ${key} - ${new Date().toISOString()}`,
+    message: `تحديث ${key} - ${new Date().toISOString()}`,
     content: encodeBase64(JSON.stringify(data, null, 2)),
     branch: GITHUB_BRANCH,
     sha: SHAs[key]
   };
   let res;
   try { res = await fetch(url, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
-  catch (e) { throw new Error(`فشل الاتصال أثناء حفظ ${key}`); }
+  catch { throw new Error(`فشل الاتصال أثناء حفظ ${key}`); }
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     if (res.status === 409) throw new Error('CONFLICT');
-    throw new Error(`فشل حفظ ${key}: ${res.status} - ${err.message || ''}`);
+    throw new Error(`فشل الحفظ: ${res.status}`);
   }
   const json = await res.json();
   SHAs[key] = json.content.sha;
@@ -807,16 +1259,15 @@ async function ghWriteFile(key, data) {
 }
 
 async function ghCreateFile(key, data) {
-  // إنشاء ملف جديد إن لم يكن موجوداً
   const path = FILES[key];
   const url = `${API_BASE}/${path}`;
   const body = {
-    message: `create ${key}`,
+    message: `إنشاء ${key}`,
     content: encodeBase64(JSON.stringify(data, null, 2)),
     branch: GITHUB_BRANCH
   };
   const res = await fetch(url, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
-  if (!res.ok) throw new Error(`فشل إنشاء ${key}`);
+  if (!res.ok) throw new Error(`فشل الإنشاء`);
   const json = await res.json();
   SHAs[key] = json.content.sha;
   return json;
@@ -828,10 +1279,12 @@ async function readAll() {
     const r = results[i];
     if (k === 'templates') {
       cache.templates = r || null;
-      templates = r ? { ...DEFAULT_TEMPLATES, ...r } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-    } else {
-      cache[k] = Array.isArray(r) ? r : [];
-    }
+      const merged = r ? { ...DEFAULT_TEMPLATES, ...r } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
+      // merge nested
+      if (r?.ready) merged.ready = { ...DEFAULT_TEMPLATES.ready, ...r.ready };
+      if (r?.log) merged.log = { ...DEFAULT_TEMPLATES.log, ...r.log };
+      templates = merged;
+    } else cache[k] = Array.isArray(r) ? r : [];
   });
   cache.drivers = cache.drivers.map(d => {
     if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
@@ -859,12 +1312,8 @@ async function persistKeys(keys) {
   try {
     for (const k of keys) {
       if (!FILES[k]) continue;
-      if (!SHAs[k] && cache[k]) {
-        // ملف جديد
-        await ghCreateFile(k, cache[k]);
-      } else {
-        await ghWriteFile(k, cache[k]);
-      }
+      if (!SHAs[k] && cache[k]) await ghCreateFile(k, cache[k]);
+      else await ghWriteFile(k, cache[k]);
     }
     await writeMeta();
   } finally { setSyncing(false); }
@@ -874,8 +1323,7 @@ async function persistKeys(keys) {
    Sync
    ============================================================== */
 async function syncPull() {
-  if (syncing || !currentUser) return;
-  if (document.hidden) return;
+  if (syncing || !currentUser || document.hidden) return;
   syncing = true;
   try {
     const meta = await readMeta();
@@ -887,34 +1335,35 @@ async function syncPull() {
     applyPermissionsUI();
     renderActive();
     setOnline(true);
-  } catch (e) { console.warn('Sync error:', e.message); setOnline(false); }
+  } catch (e) { console.warn('Sync:', e.message); setOnline(false); }
   finally { syncing = false; }
 }
 
 function renderActive() {
-  const active = document.querySelector('.page.active')?.id?.replace('page-', '');
-  if (active === 'dashboard') renderDashboard();
-  if (active === 'entry')     renderEntry();
-  if (active === 'ready')     renderReady();
-  if (active === 'log')       renderLog();
-  if (active === 'customers') renderCustomers();
-  if (active === 'settings')  renderSettings();
+  const a = document.querySelector('.page.active')?.id?.replace('page-', '');
+  if (a === 'dashboard') renderDashboard();
+  if (a === 'entry')     renderEntry();
+  if (a === 'ready')     renderReady();
+  if (a === 'log')       renderLog();
+  if (a === 'customers') renderCustomers();
+  if (a === 'settings')  renderSettings();
 }
 
 function startPolling() { stopPolling(); pollTimer = setInterval(syncPull, SYNC_INTERVAL); }
 function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
 function setOnline(ok) {
   const dot = document.getElementById('connDot');
-  if (dot) { dot.className = 'status-dot' + (ok ? ' online' : ''); dot.title = ok ? 'متصل' : 'غير متصل'; }
+  if (dot) dot.className = 'status-dot' + (ok ? ' online' : '');
 }
 function setSyncing(on) {
   const dot = document.getElementById('connDot');
   if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online');
 }
 
-window.manualSync = function () {
-  toast('🔄 جاري المزامنة...', 'info');
-  syncPull();
+window.manualSync = async function () {
+  toast('جاري المزامنة...', 'info');
+  lastSaveTime = 0;
+  await syncPull();
 };
 
 /* ==============================================================
@@ -928,34 +1377,64 @@ function fmtDate(d = new Date()) {
   return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(h)}:${p(d.getMinutes())} ${ampm}`;
 }
 function parseDate(str) {
-  // من dd/mm/yyyy hh:mm AM/PM
   if (!str) return null;
   const m = str.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
   if (!m) return null;
   return new Date(parseInt(m[3]), parseInt(m[2])-1, parseInt(m[1]));
 }
 function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function toast(msg, type = '') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast show ' + type;
-  clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => t.className = 'toast ' + type, 2600);
-}
 function badge(val) {
   const map = { 'جاهز':'badge-ready','قيد التجهيز':'badge-progress',
     'مدفوع':'badge-paid','غير مدفوع':'badge-unpaid','VIP':'badge-vip' };
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
-function truncate(s, n = 30) {
-  s = String(s || '');
-  return s.length > n ? s.substring(0, n) + '…' : s;
+function truncate(s, n = 30) { s = String(s || ''); return s.length > n ? s.substring(0, n) + '…' : s; }
+
+function emptyState(icon, title, desc, cols) {
+  return `<tr class="empty-row"><td colspan="${cols}">
+    <div class="empty-state">
+      <div class="icon">${icon}</div>
+      <div class="title">${title}</div>
+      <div class="desc">${desc}</div>
+    </div>
+  </td></tr>`;
 }
 
-/* Zoom */
 function applyZoom() { document.body.style.zoom = zoomLevel; localStorage.setItem('oms_zoom', zoomLevel); }
-function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
-function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); toast(`🔍 ${Math.round(zoomLevel*100)}%`, 'info'); }
-function zoomReset() { zoomLevel = 1; applyZoom(); toast('🔍 100%', 'info'); }
+function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); toast(`${Math.round(zoomLevel*100)}%`, 'info'); }
+function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); toast(`${Math.round(zoomLevel*100)}%`, 'info'); }
+function zoomReset() { zoomLevel = 1; applyZoom(); toast('100%', 'info'); }
+
+/* ==============================================================
+   Permissions
+   ============================================================== */
+function hasPerm(perm) {
+  if (!currentUser) return false;
+  if (currentUser.role === 'رئيسي') return true;
+  return currentUser.permissions?.[perm] === true;
+}
+function normalizeUser(u) {
+  if (!u) return u;
+  if (u.role === 'رئيسي') return u;
+  if (!u.permissions) u.permissions = { ...DEFAULT_PERMS };
+  else Object.keys(DEFAULT_PERMS).forEach(k => {
+    if (typeof u.permissions[k] !== 'boolean') u.permissions[k] = DEFAULT_PERMS[k];
+  });
+  return u;
+}
+function applyPermissionsUI() {
+  document.querySelectorAll('[class*="perm-"]').forEach(el => {
+    const classes = el.className.split(' ');
+    let allowed = true;
+    classes.forEach(c => {
+      if (c.startsWith('perm-')) {
+        const perm = c.replace('perm-', '');
+        if (PERMISSIONS[perm] && !hasPerm(perm)) allowed = false;
+      }
+    });
+    el.style.display = allowed ? '' : 'none';
+  });
+}
 
 /* ==============================================================
    Login
@@ -966,6 +1445,8 @@ window.doLogin = async function () {
   const errEl = document.getElementById('loginError');
   const loadEl = document.getElementById('loginLoading');
   const btn = document.getElementById('loginBtn');
+
+  errEl.classList.remove('show');
   errEl.textContent = ''; loadEl.textContent = '';
 
   const tokenFieldEl = document.getElementById('tokenField');
@@ -973,37 +1454,49 @@ window.doLogin = async function () {
     const t = document.getElementById('loginToken').value.trim();
     if (t) {
       if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
-        errEl.textContent = '⚠️ التوكن لا يبدأ بـ github_pat_'; return;
+        errEl.textContent = 'الرمز لا يبدو صحيحاً — يجب أن يبدأ بـ github_pat_';
+        errEl.classList.add('show');
+        return;
       }
       saveToken(t); updateTokenStatus();
     }
   }
 
-  if (!getStoredToken()) { errEl.textContent = '❌ أدخل GitHub Token'; return; }
-  if (!u || !p) { errEl.textContent = '❌ املأ الحقول'; return; }
-  if (GITHUB_OWNER === 'YOUR_USERNAME') { errEl.textContent = '❌ لم تعدّل GITHUB_OWNER'; return; }
-  if (location.protocol === 'file:') { errEl.textContent = '❌ افتح من GitHub Pages'; return; }
+  if (!getStoredToken()) { errEl.textContent = 'الرجاء إدخال رمز الوصول أولاً'; errEl.classList.add('show'); return; }
+  if (!u || !p) { errEl.textContent = 'الرجاء إدخال اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
+  if (GITHUB_OWNER === 'YOUR_USERNAME') { errEl.textContent = 'لم يتم ضبط النظام بعد — راجع المسؤول'; errEl.classList.add('show'); return; }
+  if (location.protocol === 'file:') { errEl.textContent = 'افتح النظام من GitHub Pages وليس محلياً'; errEl.classList.add('show'); return; }
 
   btn.disabled = true;
-  loadEl.textContent = '⏳ جاري التحميل...';
+  loadEl.textContent = 'جاري التحقق...';
+  showLoading('جاري تحميل البيانات...');
 
   try {
     await readAll();
     localMeta = await readMeta();
-
     const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) { errEl.textContent = '❌ بيانات غير صحيحة'; btn.disabled = false; loadEl.textContent = ''; return; }
-
+    if (!found) {
+      errEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+      errEl.classList.add('show');
+      btn.disabled = false; loadEl.textContent = '';
+      hideLoading();
+      return;
+    }
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
-    loadEl.textContent = '✅ تم الدخول';
+    loadEl.textContent = 'تم الدخول بنجاح';
+    hideLoading();
     startApp();
-  } catch (e) { console.error(e); errEl.textContent = '❌ ' + e.message; }
-  finally { btn.disabled = false; }
+  } catch (e) {
+    errEl.textContent = e.message || 'حدث خطأ غير متوقع';
+    errEl.classList.add('show');
+    hideLoading();
+  } finally { btn.disabled = false; }
 };
 
-window.logout = function () {
-  if (!confirm('تسجيل الخروج؟')) return;
+window.logout = async function () {
+  const ok = await dialog.confirm('هل تريد تسجيل الخروج من النظام؟', { title: 'تسجيل الخروج' });
+  if (!ok) return;
   stopPolling();
   currentUser = null; selectedOrderId = null;
   SHAs = {}; localMeta = null;
@@ -1013,13 +1506,14 @@ window.logout = function () {
   document.getElementById('loginLoading').textContent = '';
   updateTokenStatus();
   loadLastUser();
+  toast('تم تسجيل الخروج بنجاح', 'success');
 };
 
 function loadLastUser() {
   const last = localStorage.getItem('oms_lastUser');
   if (last) {
     document.getElementById('loginUser').value = last;
-    setTimeout(() => document.getElementById('loginPass').focus(), 100);
+    setTimeout(() => document.getElementById('loginPass').focus(), 150);
   }
 }
 
@@ -1032,14 +1526,15 @@ function startApp() {
   loadDriversIntoSelects();
   go('dashboard');
   startPolling();
+  toast(`أهلاً بك، ${currentUser.username}`, 'success');
 }
 
 /* ==============================================================
    Navigation
    ============================================================== */
 window.go = function (page) {
-  if (page === 'settings' && !hasPerm('accessSettings')) { toast('غير مصرح', 'error'); return; }
-  if (page === 'customers' && !hasPerm('accessCustomers')) { toast('غير مصرح', 'error'); return; }
+  if (page === 'settings' && !hasPerm('accessSettings')) { toast('غير مصرح بالدخول', 'error'); return; }
+  if (page === 'customers' && !hasPerm('accessCustomers')) { toast('غير مصرح بالدخول', 'error'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
@@ -1052,16 +1547,16 @@ window.go = function (page) {
   if (page === 'settings')  { renderSettings(); updateCurrentTokenInfo(); }
 };
 
-window.switchTab = function (tab) {
+window.switchTab = function (evt, tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
-  event.target.classList.add('active');
+  evt.target.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
 };
 
 /* ==============================================================
-   Render Dashboard
+   Dashboard
    ============================================================== */
 function renderDashboard() {
   document.getElementById('statEntry').textContent  = cache.orders.length;
@@ -1072,7 +1567,7 @@ function renderDashboard() {
 }
 
 /* ==============================================================
-   Render Entry
+   Entry
    ============================================================== */
 function renderEntry() {
   const q = (document.getElementById('searchEntry').value || '').trim().toLowerCase();
@@ -1081,17 +1576,22 @@ function renderEntry() {
   ) : cache.orders;
 
   const body = document.getElementById('entryBody');
-  if (!data.length) { body.innerHTML = `<tr class="empty-row"><td colspan="12">${q ? 'لا توجد نتائج' : 'لا توجد طلبات'}</td></tr>`; return; }
+  if (!data.length) {
+    body.innerHTML = q
+      ? emptyState('🔍', 'لا توجد نتائج', 'جرّب كلمات بحث مختلفة', 12)
+      : emptyState('📋', 'لا توجد طلبات', 'ابدأ بإضافة طلب جديد', 12);
+    return;
+  }
 
   const canEdit = hasPerm('editOrder'), canDelete = hasPerm('deleteOrder'), canTrans = hasPerm('transferSingle');
 
   body.innerHTML = data.map((o, i) => {
-    const cls = o.status === 'جاهز' ? 'status-ready' : o.status === 'قيد التجهيز' ? 'status-progress' : '';
+    const cls = o.status === 'جاهز' ? 'status-ready' : 'status-progress';
     const sel = selectedOrderId === o.id ? ' selected' : '';
     const buttons = `
-      ${canEdit   ? `<button class="btn btn-primary btn-sm" onclick="editOrder('${o.id}')" title="تعديل">✏️</button>` : ''}
-      ${canTrans  ? `<button class="btn btn-success btn-sm" onclick="transferSingle('${o.id}')" title="تحويل">➡️</button>` : ''}
-      ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')" title="حذف">🗑️</button>` : ''}
+      ${canEdit   ? `<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();editOrder('${o.id}')" title="تعديل">✏️</button>` : ''}
+      ${canTrans  ? `<button class="btn btn-success btn-sm" onclick="event.stopPropagation();transferSingle('${o.id}')" title="تحويل">➡️</button>` : ''}
+      ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteOrder('${o.id}')" title="حذف">🗑️</button>` : ''}
     `;
     return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="${canEdit ? `editOrder('${o.id}')` : ''}">
       <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
@@ -1100,7 +1600,7 @@ function renderEntry() {
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
       <td class="note-cell" title="${esc(o.notes)}">${esc(truncate(o.notes, 25)) || '—'}</td>
       <td style="font-size:12px;color:#666;">${esc(o.lastEditBy || '—')}</td>
-      <td class="no-print" style="white-space:nowrap;" onclick="event.stopPropagation()">${buttons || '—'}</td>
+      <td class="no-print" style="white-space:nowrap;">${buttons || '—'}</td>
     </tr>`;
   }).join('');
 }
@@ -1114,11 +1614,14 @@ window.selectRow = function (id, event) {
 };
 
 /* ==============================================================
-   Render Ready
+   Ready
    ============================================================== */
 function renderReady() {
   const body = document.getElementById('readyBody');
-  if (!cache.ready.length) { body.innerHTML = `<tr class="empty-row"><td colspan="11">لا توجد طلبات جاهزة</td></tr>`; return; }
+  if (!cache.ready.length) {
+    body.innerHTML = emptyState('📦', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات من واجهة الإدخال', 11);
+    return;
+  }
   body.innerHTML = cache.ready.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
     <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
     <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
@@ -1130,21 +1633,19 @@ function renderReady() {
 }
 
 /* ==============================================================
-   ⭐ Render Log with Filters
+   Log
    ============================================================== */
 function getLogFilteredData() {
   const fromVal = document.getElementById('filterLogFrom').value;
   const toVal   = document.getElementById('filterLogTo').value;
   const nameVal = (document.getElementById('filterLogName').value || '').trim().toLowerCase();
   const payVal  = document.getElementById('filterLogPay').value;
-
   const fromDate = fromVal ? new Date(fromVal) : null;
   const toDate   = toVal   ? new Date(toVal + 'T23:59:59') : null;
 
   return cache.log.filter(o => {
     if (nameVal && !`${o.customer} ${o.invoice}`.toLowerCase().includes(nameVal)) return false;
     if (payVal && o.pay !== payVal) return false;
-    // فلترة بالتاريخ (بناءً على تاريخ الاعتماد أو الترحيل)
     const d = parseDate(o.approvalDate) || parseDate(o.archivedAt);
     if (fromDate && d && d < fromDate) return false;
     if (toDate && d && d > toDate) return false;
@@ -1162,7 +1663,10 @@ function renderLog() {
   document.getElementById('logFilteredCount').textContent = `المُفلتر: ${data.length}`;
 
   const body = document.getElementById('logBody');
-  if (!data.length) { body.innerHTML = `<tr class="empty-row"><td colspan="13">لا توجد نتائج</td></tr>`; return; }
+  if (!data.length) {
+    body.innerHTML = emptyState('🗃️', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل أي طلب بعد', 13);
+    return;
+  }
 
   body.innerHTML = data.map((o, i) => {
     const buttons = `
@@ -1188,10 +1692,11 @@ window.resetLogFilters = function () {
   document.getElementById('filterLogName').value = '';
   document.getElementById('filterLogPay').value = '';
   renderLog();
+  toast('تم مسح الفلاتر', 'info');
 };
 
 /* ==============================================================
-   Render Customers
+   Customers
    ============================================================== */
 function renderCustomers() {
   const q = (document.getElementById('searchCustomers')?.value || '').trim().toLowerCase();
@@ -1199,7 +1704,12 @@ function renderCustomers() {
   document.getElementById('custCount').textContent = `الإجمالي: ${cache.customers.length}`;
   const canManage = hasPerm('manageCustomers');
   const body = document.getElementById('custBody');
-  if (!data.length) { body.innerHTML = `<tr class="empty-row"><td colspan="6">لا يوجد عملاء</td></tr>`; return; }
+  if (!data.length) {
+    body.innerHTML = q
+      ? emptyState('🔍', 'لا توجد نتائج', 'جرّب كلمات أخرى', 6)
+      : emptyState('👥', 'لا يوجد عملاء', 'ابدأ بإضافة عميل', 6);
+    return;
+  }
   body.innerHTML = data.map((c, i) => `<tr>
     <td>${i+1}</td><td>${esc(c.code)}</td><td>${esc(c.name)}</td>
     <td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
@@ -1211,18 +1721,18 @@ function renderCustomers() {
 }
 
 /* ==============================================================
-   Render Settings
+   Settings
    ============================================================== */
 function renderSettings() { renderDriversList(); renderUsers(); }
 
 function renderDriversList() {
   const canManage = hasPerm('manageDrivers');
   document.getElementById('driverList').innerHTML = cache.drivers.length
-    ? cache.drivers.map(d => `<span style="background:#eef3fa;padding:8px 14px;border-radius:16px;font-size:13px;display:inline-flex;align-items:center;gap:8px;">
+    ? cache.drivers.map(d => `<span style="background:linear-gradient(135deg,#eef3fa,#e0ebf5);padding:10px 16px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:10px;border:1px solid #d4e0ec;">
         <span>🚚 <b>${esc(d.name)}</b>${d.phone ? ` <span style="color:#666;font-size:11px;">(${esc(d.phone)})</span>` : ''}</span>
-        ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:none;color:var(--red);cursor:pointer;font-size:14px;">✕</button>` : ''}
+        ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;font-size:14px;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">✕</button>` : ''}
       </span>`).join('')
-    : '<span style="color:var(--gray);">لا يوجد موصلون</span>';
+    : '<span style="color:var(--gray);padding:20px;">لا يوجد موصلون بعد</span>';
 }
 
 function renderUsers() {
@@ -1253,13 +1763,11 @@ window.addOrder = function () {
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
 
   document.getElementById('orderModalTitle').textContent = '➕ طلب جديد';
-  document.getElementById('orderId').value = '';
-  document.getElementById('orderCustomerId').value = '';
+  ['orderId','orderCustomerId','orderInvoice','orderLocation','orderDate','orderDriverPhone','orderNotes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('orderLogMode').value = '';
-  ['orderInvoice','orderLocation','orderDate','orderDriverPhone','orderNotes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('orderCustomer').value = '';
   document.getElementById('orderStatus').value = 'قيد التجهيز';
-  document.getElementById('orderPay').value = 'غير مدفوع';  // ⭐ افتراضي
+  document.getElementById('orderPay').value = 'غير مدفوع';
   document.getElementById('orderDriver').value = '';
   document.getElementById('customerDropdown').classList.remove('show');
   openModal('orderModal');
@@ -1309,15 +1817,14 @@ window.editFromLog = function (id) {
 };
 
 window.saveOrder = async function () {
-  // ⭐ cooldown
   const now = Date.now();
   const diff = now - lastSaveTime;
   if (diff < SAVE_COOLDOWN) {
     const wait = Math.ceil((SAVE_COOLDOWN - diff) / 1000);
-    toast(`⏳ انتظر ${wait} ثانية`, 'error');
+    toast(`انتظر ${wait} ثانية قبل الحفظ التالي`, 'warning');
     return;
   }
-  if (saveInProgress) { toast('⏳ جاري الحفظ...', 'info'); return; }
+  if (saveInProgress) { toast('جاري الحفظ...', 'info'); return; }
 
   const id = document.getElementById('orderId').value;
   const isLogEdit = document.getElementById('orderLogMode').value === '1';
@@ -1326,7 +1833,7 @@ window.saveOrder = async function () {
 
   saveInProgress = true;
   const btn = document.getElementById('saveOrderBtn');
-  if (btn) btn.disabled = true;
+  if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ...'; }
 
   const data = {
     invoice,
@@ -1355,7 +1862,7 @@ window.saveOrder = async function () {
       await persistKeys(['log']);
       closeModal('orderModal');
       renderLog();
-      toast('✅ تم تحديث السجل', 'success');
+      toast('تم تحديث السجل بنجاح', 'success');
     } else {
       const existing = id ? cache.orders.find(x => x.id === id) : null;
       let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
@@ -1373,34 +1880,37 @@ window.saveOrder = async function () {
       await persistKeys(['orders']);
       closeModal('orderModal');
       renderEntry();
-      toast('✅ تم الحفظ', 'success');
+      toast('تم حفظ الطلب بنجاح', 'success');
     }
     lastSaveTime = Date.now();
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
-  finally {
+  } catch (e) {
+    toast(e.message.includes('CONFLICT') ? 'تعارض في البيانات — أعد المحاولة' : e.message, 'error');
+  } finally {
     saveInProgress = false;
-    if (btn) btn.disabled = false;
+    if (btn) { btn.disabled = false; btn.innerHTML = '💾 حفظ <kbd>Ctrl+Enter</kbd>'; }
   }
 };
 
 window.deleteOrder = async function (id) {
   if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
-  if (!confirm('حذف هذا الطلب؟')) return;
+  const o = cache.orders.find(x => x.id === id);
+  const ok = await dialog.danger(`سيتم حذف الطلب "${o?.invoice || ''}" نهائياً. لا يمكن التراجع عن هذه العملية.`);
+  if (!ok) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
-  try { await persistKeys(['orders']); renderEntry(); toast('تم الحذف', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persistKeys(['orders']); renderEntry(); toast('تم حذف الطلب', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 window.deleteFromLog = async function (id) {
   if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id);
   if (!o) return;
-  if (!confirm(`⚠️ حذف الطلب "${o.invoice}" من السجل نهائياً؟`)) return;
-  if (!confirm('تأكيد أخير؟')) return;
+  const ok = await dialog.danger(`سيتم حذف الطلب "${o.invoice}" من السجل نهائياً. هذا الإجراء لا يمكن التراجع عنه.`, { title: 'حذف نهائي من السجل' });
+  if (!ok) return;
   cache.log = cache.log.filter(x => x.id !== id);
-  try { await persistKeys(['log']); renderLog(); toast('✅ تم الحذف', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persistKeys(['log']); renderLog(); toast('تم الحذف من السجل', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -1428,6 +1938,9 @@ function initCustomerSearch() {
         e.preventDefault();
         if (opt.dataset.create) {
           document.getElementById('custName').value = input.value.trim();
+          document.getElementById('custId').value = '';
+          document.getElementById('custModalTitle').textContent = '👤 عميل جديد';
+          ['custCode','custLocation','custPhone'].forEach(id => document.getElementById(id).value = '');
           openModal('customerModal');
           setTimeout(() => document.getElementById('custCode').focus(), 100);
           dropdown.classList.remove('show');
@@ -1468,23 +1981,25 @@ window.addDriver = async function () {
   const name = document.getElementById('newDriverName').value.trim();
   const phone = document.getElementById('newDriverPhone').value.trim();
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
-  if (cache.drivers.find(d => d.name === name)) { toast('الموصل موجود', 'error'); return; }
+  if (cache.drivers.find(d => d.name === name)) { toast('الموصل موجود مسبقاً', 'error'); return; }
   cache.drivers.push({ id: uid(), name, phone });
   try {
     await persistKeys(['drivers']);
     document.getElementById('newDriverName').value = '';
     document.getElementById('newDriverPhone').value = '';
     renderDriversList(); loadDriversIntoSelects();
-    toast('✅ تم الإضافة', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast('تم إضافة الموصل', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 window.deleteDriver = async function (id) {
   if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
-  if (!confirm('حذف هذا الموصل؟')) return;
-  cache.drivers = cache.drivers.filter(d => d.id !== id);
+  const d = cache.drivers.find(x => x.id === id);
+  const ok = await dialog.danger(`حذف الموصل "${d?.name || ''}"؟`);
+  if (!ok) return;
+  cache.drivers = cache.drivers.filter(x => x.id !== id);
   try { await persistKeys(['drivers']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -1494,47 +2009,50 @@ window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; }
   const order = cache.orders.find(x => x.id === id);
   if (!order) return;
-  if (!confirm(`تحويل الطلب ${order.invoice}؟`)) return;
+  const ok = await dialog.confirm(`تحويل الطلب "${order.invoice}" إلى قائمة الطلبات الجاهزة؟`, { title: 'تحويل الطلب' });
+  if (!ok) return;
   try {
     cache.ready.push({ ...order, transferredAt: fmtDate(), transferredBy: currentUser.username });
     cache.orders = cache.orders.filter(x => x.id !== id);
     if (selectedOrderId === id) selectedOrderId = null;
     await persistKeys(['orders', 'ready']);
     renderEntry(); renderDashboard();
-    toast('✅ تم التحويل', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast('تم التحويل بنجاح', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 window.bulkTransfer = async function () {
   if (!hasPerm('bulkTransfer')) { toast('غير مصرح', 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
-  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
-  if (!confirm(`تحويل ${eligible.length} طلب؟`)) return;
+  if (!eligible.length) { toast('لا توجد طلبات مستوفية للشروط', 'error'); return; }
+  const ok = await dialog.confirm(`سيتم تحويل ${eligible.length} طلب مستوفي (جاهز + مدفوع/VIP).`, { title: 'تحويل جماعي' });
+  if (!ok) return;
   try {
     eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
     cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
     selectedOrderId = null;
     await persistKeys(['orders', 'ready']);
     renderEntry(); renderDashboard();
-    toast(`✅ تم تحويل ${eligible.length} طلب`, 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast(`تم تحويل ${eligible.length} طلب بنجاح`, 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 window.moveReadyToLog = async function () {
   if (!hasPerm('moveToLog')) { toast('غير مصرح', 'error'); return; }
-  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
-  if (!confirm(`ترحيل ${cache.ready.length} طلب؟`)) return;
+  if (!cache.ready.length) { toast('لا توجد طلبات للترحيل', 'error'); return; }
+  const ok = await dialog.confirm(`سيتم ترحيل ${cache.ready.length} طلب إلى السجل النهائي.`, { title: 'ترحيل إلى السجل' });
+  if (!ok) return;
   try {
     cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username }));
     cache.ready = [];
     await persistKeys(['ready', 'log']);
     renderReady(); renderDashboard();
-    toast('✅ تم الترحيل', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast('تم الترحيل بنجاح', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
-   ⭐ Print & PDF (يقوم على القوالب)
+   Print & Templates
    ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
@@ -1549,7 +2067,7 @@ function buildPrintHTML(items, template, extra = {}) {
     .replace(/{count}/g, items.length)
     .replace(/{user}/g, esc(currentUser.username))
     .replace(/{from}/g, extra.from || 'البداية')
-    .replace(/{to}/g, extra.to || 'النهاية');
+    .replace(/{to}/g, extra.to || 'اليوم');
 
   let headers = ['#', 'الفاتورة', 'العميل', 'الموقع', 'الحالة'];
   if (showApproval) headers.push('الاعتماد');
@@ -1560,9 +2078,7 @@ function buildPrintHTML(items, template, extra = {}) {
   if (showArchived) headers.push('تاريخ الترحيل');
 
   const rows = items.map((o, i) => {
-    let cells = [
-      i+1, esc(o.invoice), esc(o.customer), esc(o.location), esc(o.status)
-    ];
+    let cells = [i+1, esc(o.invoice), esc(o.customer), esc(o.location), esc(o.status)];
     if (showApproval) cells.push(esc(o.approvalDate || '—'));
     if (showPay) cells.push(esc(o.pay || '—'));
     cells.push(esc(o.driver || '—'));
@@ -1574,18 +2090,35 @@ function buildPrintHTML(items, template, extra = {}) {
 
   const orientation = tpl.orientation === 'portrait' ? 'portrait' : 'landscape';
   const fontSize = tpl.fontSize || 12;
+  const logoHTML = templates.logo
+    ? `<div class="print-logo"><img src="${templates.logo}" alt="logo"></div>`
+    : '';
 
-  return `<html dir="rtl"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
+  return `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
     <style>
-      body{font-family:Tahoma,Arial;padding:20px;}
-      h1{color:#1f4e79;text-align:center;margin-bottom:6px;font-size:20px;}
-      .meta{text-align:center;color:#555;margin-bottom:20px;font-size:13px;}
+      * { box-sizing: border-box; }
+      body{font-family:Tahoma,Arial;padding:20px;margin:0;color:#222;}
+      .print-logo {
+        width: 100%; margin-bottom: 16px;
+        display: flex; justify-content: center;
+      }
+      .print-logo img {
+        width: 100%; max-height: 110px;
+        object-fit: cover;
+        display: block;
+        border-radius: 6px;
+      }
+      h1{color:#1f4e79;text-align:center;margin:0 0 8px 0;font-size:20px;font-weight:700;}
+      .meta{text-align:center;color:#555;margin-bottom:18px;font-size:12.5px;}
       table{width:100%;border-collapse:collapse;font-size:${fontSize}px;}
-      th,td{border:1px solid #999;padding:7px;text-align:right;vertical-align:top;}
-      th{background:#1f4e79;color:#fff;}
-      tfoot td{padding:20px;border:none;font-size:13px;text-align:center;}
-      @page { size: A4 ${orientation}; margin: 12mm; }
+      th,td{border:1px solid #999;padding:7px 6px;text-align:right;vertical-align:top;word-break:break-word;}
+      th{background:#1f4e79;color:#fff;font-weight:600;}
+      tbody tr:nth-child(even){background:#f8f9fa;}
+      tfoot td{padding:24px 10px;border:none;font-size:12.5px;text-align:center;color:#333;}
+      @page { size: A4 ${orientation}; margin: 10mm 12mm; }
+      @media print { body{padding:0;} }
     </style></head><body>
+    ${logoHTML}
     <h1>${esc(replaceVars(tpl.title))}</h1>
     <div class="meta">${esc(replaceVars(tpl.subtitle))}</div>
     <table>
@@ -1593,13 +2126,13 @@ function buildPrintHTML(items, template, extra = {}) {
       <tbody>${rows}</tbody>
       ${tpl.footer ? `<tfoot><tr><td colspan="${headers.length}">${esc(replaceVars(tpl.footer))}</td></tr></tfoot>` : ''}
     </table>
-    <script>window.onload=()=>window.print();<\/script>
+    <script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
     </body></html>`;
 }
 
 window.printReady = function () {
   if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
-  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
+  if (!cache.ready.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
   const html = buildPrintHTML(cache.ready, templates.ready || DEFAULT_TEMPLATES.ready);
   const win = window.open('', '_blank');
   win.document.write(html); win.document.close();
@@ -1611,13 +2144,13 @@ window.exportReadyPDF = function () {
   const html = buildPrintHTML(cache.ready, templates.ready || DEFAULT_TEMPLATES.ready);
   const win = window.open('', '_blank');
   win.document.write(html); win.document.close();
-  toast('💡 اختر "حفظ كـ PDF" من نافذة الطباعة', 'info');
+  toast('اختر "حفظ كـ PDF" من نافذة الطباعة', 'info');
 };
 
 window.printLog = function () {
   if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
   const data = getLogFilteredData();
-  if (!data.length) { toast('لا توجد نتائج', 'error'); return; }
+  if (!data.length) { toast('لا توجد نتائج للطباعة', 'error'); return; }
   const fromVal = document.getElementById('filterLogFrom').value;
   const toVal = document.getElementById('filterLogTo').value;
   const html = buildPrintHTML(data, templates.log || DEFAULT_TEMPLATES.log, { from: fromVal || 'البداية', to: toVal || 'اليوم' });
@@ -1634,11 +2167,62 @@ window.exportLogPDF = function () {
   const html = buildPrintHTML(data, templates.log || DEFAULT_TEMPLATES.log, { from: fromVal || 'البداية', to: toVal || 'اليوم' });
   const win = window.open('', '_blank');
   win.document.write(html); win.document.close();
-  toast('💡 اختر "حفظ كـ PDF"', 'info');
+  toast('اختر "حفظ كـ PDF" من نافذة الطباعة', 'info');
 };
 
 /* ==============================================================
-   ⭐ Templates
+   ⭐ Logo (كليشه)
+   ============================================================== */
+async function resizeImage(file, maxWidth = 1400) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ratio = Math.min(1, maxWidth / img.width);
+        canvas.width = Math.round(img.width * ratio);
+        canvas.height = Math.round(img.height * ratio);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+window.handleLogoUpload = async function (evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
+  if (!file.type.startsWith('image/')) { toast('الرجاء اختيار صورة', 'error'); return; }
+  if (file.size > 5 * 1024 * 1024) { toast('حجم الصورة كبير جداً (الحد 5MB)', 'error'); return; }
+
+  try {
+    toast('جاري معالجة الصورة...', 'info');
+    const resized = await resizeImage(file, 1400);
+    templates.logo = resized;
+    renderTemplates();
+    toast('تم رفع الصورة — اضغط "حفظ القوالب"', 'success');
+  } catch (e) {
+    toast('فشل معالجة الصورة', 'error');
+  }
+  evt.target.value = '';
+};
+
+window.removeLogo = function () {
+  if (!hasPerm('editTemplates')) return;
+  templates.logo = '';
+  renderTemplates();
+  toast('تم حذف الصورة — اضغط "حفظ القوالب"', 'info');
+};
+
+/* ==============================================================
+   Templates
    ============================================================== */
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
@@ -1646,7 +2230,23 @@ function renderTemplates() {
     container.innerHTML = `<div class="perm-note">🔒 غير مصرح لك بتعديل القوالب. تواصل مع المالك.</div>`;
     return;
   }
-  container.innerHTML = ['ready', 'log'].map(key => {
+  const logoHTML = templates.logo
+    ? `<div class="logo-preview"><img src="${templates.logo}" alt="logo"></div>
+       <div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">🗑️ حذف الصورة</button></div>`
+    : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة بعد</span></div>`;
+
+  const logoSection = `
+    <div class="template-card">
+      <h4>🖼️ صورة الكليشه (اختياري)</h4>
+      <p style="font-size:12px;color:#666;margin-bottom:12px;">
+        ستظهر أعلى كل ورقة طباعة وتملأ عرض الورقة. تُضغط تلقائياً لتقليل الحجم.
+      </p>
+      <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
+      ${logoHTML}
+    </div>
+  `;
+
+  const bodyHTML = ['ready', 'log'].map(key => {
     const t = templates[key] || DEFAULT_TEMPLATES[key];
     const label = key === 'ready' ? '📦 قائمة الطلبات الجاهزة' : '🗃️ سجل الطلبات';
     return `
@@ -1658,9 +2258,11 @@ function renderTemplates() {
         </div>
         <div class="template-row">
           <label>السطر الفرعي</label>
-          <input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)">
-          <div style="grid-column:2;font-size:11px;color:#888;margin-top:-4px;">
-            المتغيرات: {date} {count} {user} {from} {to}
+          <div>
+            <input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)">
+            <div style="font-size:11px;color:#888;margin-top:4px;">
+              المتغيرات المتاحة: <code>{date}</code> <code>{count}</code> <code>{user}</code> <code>{from}</code> <code>{to}</code>
+            </div>
           </div>
         </div>
         <div class="template-row">
@@ -1672,13 +2274,13 @@ function renderTemplates() {
           <input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)">
         </div>
         <div class="template-row">
-          <label>الاتجاه</label>
+          <label>اتجاه الصفحة</label>
           <select onchange="updateTemplate('${key}', 'orientation', this.value)">
-            <option value="landscape" ${t.orientation==='landscape'?'selected':''}>أفقي (Landscape)</option>
-            <option value="portrait" ${t.orientation==='portrait'?'selected':''}>عمودي (Portrait)</option>
+            <option value="landscape" ${t.orientation==='landscape'?'selected':''}>أفقي</option>
+            <option value="portrait" ${t.orientation==='portrait'?'selected':''}>عمودي</option>
           </select>
         </div>
-        <div style="margin-top:12px;">
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid #e8ecf1;">
           <div class="toggle-row">
             <input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)">
             <label for="tpl-${key}-notes">إظهار عمود الملاحظات</label>
@@ -1704,6 +2306,8 @@ function renderTemplates() {
       </div>
     `;
   }).join('');
+
+  container.innerHTML = logoSection + bodyHTML;
 }
 
 window.updateTemplate = function (key, field, value) {
@@ -1716,16 +2320,17 @@ window.saveTemplates = async function () {
   cache.templates = templates;
   try {
     await persistKeys(['templates']);
-    toast('✅ تم حفظ القوالب', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast('تم حفظ القوالب بنجاح', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
-window.resetTemplates = function () {
+window.resetTemplates = async function () {
   if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
-  if (!confirm('استعادة القوالب الافتراضية؟')) return;
+  const ok = await dialog.confirm('استعادة القوالب الافتراضية؟ سيتم فقدان تخصيصاتك الحالية.', { type: 'warning', title: 'استعادة القوالب' });
+  if (!ok) return;
   templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
   renderTemplates();
-  toast('🔄 تم الاستعادة (لم يُحفظ بعد)', 'info');
+  toast('تمت الاستعادة — لم يتم الحفظ بعد', 'info');
 };
 
 /* ==============================================================
@@ -1772,9 +2377,7 @@ window.saveCustomer = async function () {
     if (id) {
       const idx = cache.customers.findIndex(x => x.id === id);
       if (idx > -1) cache.customers[idx] = custData;
-    } else {
-      cache.customers.push(custData);
-    }
+    } else cache.customers.push(custData);
     await persistKeys(['customers']);
     closeModal('customerModal');
     renderCustomers();
@@ -1783,20 +2386,22 @@ window.saveCustomer = async function () {
       document.getElementById('orderCustomer').value = custData.name;
       document.getElementById('orderLocation').value = custData.location;
     }
-    toast('✅ تم الحفظ', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast(id ? 'تم تعديل العميل' : 'تم إضافة العميل', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 window.deleteCustomer = async function (id) {
   if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
-  if (!confirm('حذف العميل؟')) return;
-  cache.customers = cache.customers.filter(c => c.id !== id);
+  const c = cache.customers.find(x => x.id === id);
+  const ok = await dialog.danger(`حذف العميل "${c?.name || ''}"؟`);
+  if (!ok) return;
+  cache.customers = cache.customers.filter(x => x.id !== id);
   try { await persistKeys(['customers']); renderCustomers(); toast('تم الحذف', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
-   Users & Permissions
+   Users
    ============================================================== */
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
@@ -1804,7 +2409,6 @@ window.openUserModal = function () {
   document.getElementById('userId').value = '';
   document.getElementById('userName').value = '';
   document.getElementById('userPass').value = '';
-  document.getElementById('userName').disabled = false;
   document.getElementById('userRole').value = 'عادي';
   tempPerms = { ...DEFAULT_PERMS };
   renderPermissionsGrid();
@@ -1820,7 +2424,6 @@ window.editUser = function (id) {
   document.getElementById('userModalTitle').textContent = '✏️ تعديل المستخدم';
   document.getElementById('userId').value = id;
   document.getElementById('userName').value = u.username;
-  document.getElementById('userName').disabled = false;
   document.getElementById('userPass').value = u.password;
   document.getElementById('userRole').value = u.role;
   tempPerms = u.role === 'رئيسي' ? { ...DEFAULT_PERMS } : { ...(u.permissions || DEFAULT_PERMS) };
@@ -1859,12 +2462,12 @@ window.saveUser = async function () {
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
-  if (!username || !password) { toast('املأ الحقول', 'error'); return; }
+  if (!username || !password) { toast('املأ جميع الحقول', 'error'); return; }
   const dup = cache.users.find(u => u.username === username && u.id !== id);
-  if (dup) { toast('اسم المستخدم موجود', 'error'); return; }
+  if (dup) { toast('اسم المستخدم موجود مسبقاً', 'error'); return; }
   if (currentUser.username === username && role !== 'رئيسي') {
     const adminCount = cache.users.filter(u => u.role === 'رئيسي').length;
-    if (adminCount <= 1) { toast('أنت الرئيسي الوحيد', 'error'); return; }
+    if (adminCount <= 1) { toast('أنت الرئيسي الوحيد — لا يمكن تغيير دورك', 'error'); return; }
   }
   const userData = {
     id: id || uid(), username, password, role,
@@ -1882,22 +2485,23 @@ window.saveUser = async function () {
     }
     closeModal('userModal');
     renderUsers();
-    toast('✅ تم الحفظ', 'success');
-  } catch (e) { toast('❌ ' + e.message, 'error'); }
+    toast(id ? 'تم تعديل المستخدم' : 'تم إضافة المستخدم', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 window.deleteUser = async function (id) {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
   const u = cache.users.find(x => x.id === id);
   if (!u) return;
-  if (u.username === currentUser.username) { toast('لا يمكن حذف نفسك', 'error'); return; }
+  if (u.username === currentUser.username) { toast('لا يمكنك حذف حسابك الخاص', 'error'); return; }
   if (u.role === 'رئيسي' && cache.users.filter(x => x.role === 'رئيسي').length <= 1) {
     toast('لا يمكن حذف الرئيسي الوحيد', 'error'); return;
   }
-  if (!confirm(`حذف "${u.username}"؟`)) return;
+  const ok = await dialog.danger(`حذف المستخدم "${u.username}"؟`);
+  if (!ok) return;
   cache.users = cache.users.filter(x => x.id !== id);
   try { await persistKeys(['users']); renderUsers(); toast('تم الحذف', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -1909,15 +2513,18 @@ window.exportBackup = function () {
   a.href = URL.createObjectURL(blob);
   a.download = `backup_${new Date().toISOString().slice(0,10)}.json`;
   a.click();
+  toast('تم تصدير النسخة الاحتياطية', 'success');
 };
 
 window.resetAll = async function () {
   if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
-  if (!confirm('⚠️ حذف كل الطلبات؟')) return;
-  if (!confirm('تأكيد أخير؟')) return;
+  const ok = await dialog.danger('سيتم حذف جميع الطلبات والسجل نهائياً. لن يتم حذف المستخدمين والعملاء والموصلين.', { title: 'تصفير النظام' });
+  if (!ok) return;
+  const ok2 = await dialog.confirm('تأكيد نهائي؟ لا يمكن التراجع.', { type: 'warning', title: 'تأكيد أخير' });
+  if (!ok2) return;
   cache.orders = []; cache.ready = []; cache.log = [];
-  try { await persistKeys(['orders', 'ready', 'log']); renderDashboard(); toast('✅ تم التصفير', 'success'); }
-  catch (e) { toast('❌ ' + e.message, 'error'); }
+  try { await persistKeys(['orders', 'ready', 'log']); renderDashboard(); toast('تم تصفير النظام', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 
 window.exportLogCSV = function () {
@@ -1931,6 +2538,7 @@ window.exportLogCSV = function () {
   a.href = URL.createObjectURL(blob);
   a.download = `log_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
+  toast('تم تصدير CSV', 'success');
 };
 
 /* ==============================================================
@@ -1939,13 +2547,82 @@ window.exportLogCSV = function () {
 window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
 window.getActiveModal = () => document.querySelector('.modal-bg.active');
+
 document.querySelectorAll('.modal-bg').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
 });
+
 window.showShortcuts = () => openModal('shortcutsModal');
 
 /* ==============================================================
-   Shortcuts
+   ⭐ Enter = Next Field (بدل الحفظ)
+   ============================================================== */
+function handleEnterNavigation(e) {
+  if (e.key !== 'Enter') return;
+
+  const el = e.target;
+
+  // داخل textarea → Enter عادي
+  if (el.tagName === 'TEXTAREA') {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const modalId = el.closest('.modal-bg')?.id;
+      if (modalId === 'orderModal') saveOrder();
+      else if (modalId === 'customerModal') saveCustomer();
+      else if (modalId === 'userModal') saveUser();
+    }
+    return;
+  }
+
+  if (el.tagName !== 'INPUT' && el.tagName !== 'SELECT') return;
+
+  // Ctrl+Enter أو Shift+Enter في نهاية الحقول → حفظ
+  if (e.ctrlKey || e.metaKey) {
+    e.preventDefault();
+    const modalId = el.closest('.modal-bg')?.id;
+    if (modalId === 'orderModal') saveOrder();
+    else if (modalId === 'customerModal') saveCustomer();
+    else if (modalId === 'userModal') saveUser();
+    else if (modalId === 'tokenModal') saveNewToken();
+    return;
+  }
+
+  e.preventDefault();
+
+  // التنقل
+  const modal = el.closest('.modal');
+  if (!modal) return;
+  const fields = Array.from(modal.querySelectorAll('input:not([type=hidden]):not([disabled]), select, textarea'))
+    .filter(f => f.offsetParent !== null && !f.readOnly);
+
+  const idx = fields.indexOf(el);
+  if (idx === -1) return;
+
+  // Shift+Enter = الحقل السابق
+  const nextIdx = e.shiftKey ? idx - 1 : idx + 1;
+  if (nextIdx >= 0 && nextIdx < fields.length) {
+    fields[nextIdx].focus();
+    if (fields[nextIdx].select) fields[nextIdx].select();
+  } else if (!e.shiftKey) {
+    // آخر حقل → حفظ تلقائي
+    const modalId = modal.parentElement.id;
+    if (modalId === 'orderModal') saveOrder();
+    else if (modalId === 'customerModal') saveCustomer();
+    else if (modalId === 'userModal') saveUser();
+    else if (modalId === 'tokenModal') saveNewToken();
+  }
+}
+
+// ربط بمستمعي الأحداث
+['orderModal','customerModal','userModal','tokenModal'].forEach(id => {
+  const modal = document.getElementById(id);
+  if (modal) modal.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleEnterNavigation(e);
+  });
+});
+
+/* ==============================================================
+   Keyboard Shortcuts
    ============================================================== */
 function isInInput() {
   const t = document.activeElement?.tagName;
@@ -1955,6 +2632,15 @@ function isInInput() {
 window.addEventListener('keydown', (e) => {
   const inInput = isInInput();
   const activeModal = getActiveModal();
+  const dialogActive = document.getElementById('dialogBg').classList.contains('active');
+
+  // Dialog handling
+  if (dialogActive) {
+    if (e.key === 'Enter') { e.preventDefault(); dialogResolve(true); }
+    if (e.key === 'Escape') { e.preventDefault(); dialogResolve(false); }
+    return;
+  }
+
   if (e.key === 'Escape' && activeModal) { activeModal.classList.remove('active'); return; }
   if (e.key === 'F1') { e.preventDefault(); showShortcuts(); return; }
 
@@ -1992,11 +2678,11 @@ window.addEventListener('keydown', (e) => {
   if (e.altKey) {
     const k = e.key.toLowerCase();
     if (activeModal?.id === 'orderModal') {
-      if (k === 'p') { e.preventDefault(); document.getElementById('orderPay').value = 'مدفوع'; toast('💰 مدفوع', 'info'); return; }
-      if (k === 'u') { e.preventDefault(); document.getElementById('orderPay').value = 'غير مدفوع'; toast('❌ غير مدفوع', 'info'); return; }
-      if (k === 'v') { e.preventDefault(); document.getElementById('orderPay').value = 'VIP'; toast('👑 VIP', 'info'); return; }
-      if (k === 'g') { e.preventDefault(); document.getElementById('orderStatus').value = 'جاهز'; toast('✅ جاهز', 'info'); return; }
-      if (k === 'w') { e.preventDefault(); document.getElementById('orderStatus').value = 'قيد التجهيز'; toast('⏳ قيد التجهيز', 'info'); return; }
+      if (k === 'p') { e.preventDefault(); document.getElementById('orderPay').value = 'مدفوع'; toast('مدفوع', 'info'); return; }
+      if (k === 'u') { e.preventDefault(); document.getElementById('orderPay').value = 'غير مدفوع'; toast('غير مدفوع', 'info'); return; }
+      if (k === 'v') { e.preventDefault(); document.getElementById('orderPay').value = 'VIP'; toast('VIP', 'info'); return; }
+      if (k === 'g') { e.preventDefault(); document.getElementById('orderStatus').value = 'جاهز'; toast('جاهز', 'info'); return; }
+      if (k === 'w') { e.preventDefault(); document.getElementById('orderStatus').value = 'قيد التجهيز'; toast('قيد التجهيز', 'info'); return; }
     }
     if (!activeModal) {
       if (k === '1') { e.preventDefault(); go('dashboard'); return; }
@@ -2007,7 +2693,7 @@ window.addEventListener('keydown', (e) => {
       if (k === 'n') { e.preventDefault(); addOrder(); return; }
       if (k === 't' && document.getElementById('page-entry').classList.contains('active')) {
         e.preventDefault();
-        if (!selectedOrderId) { toast('اختر طلباً', 'error'); return; }
+        if (!selectedOrderId) { toast('اختر طلباً أولاً', 'warning'); return; }
         transferSingle(selectedOrderId);
         return;
       }
@@ -2021,22 +2707,6 @@ window.addEventListener('keydown', (e) => {
     const p = document.querySelector('.page.active')?.id?.replace('page-', '');
     if (p === 'entry' && selectedOrderId) { e.preventDefault(); deleteOrder(selectedOrderId); }
   }
-});
-
-/* Enter = save in modals (except in textarea) */
-['orderModal','customerModal','userModal','tokenModal'].forEach(id => {
-  document.getElementById(id).addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'TEXTAREA') {
-      const tag = e.target.tagName.toUpperCase();
-      if (tag === 'INPUT' || tag === 'SELECT') {
-        e.preventDefault();
-        if (id === 'orderModal') saveOrder();
-        else if (id === 'customerModal') saveCustomer();
-        else if (id === 'userModal') saveUser();
-        else if (id === 'tokenModal') saveNewToken();
-      }
-    }
-  });
 });
 
 /* ==============================================================
@@ -2053,11 +2723,9 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginToken').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
 
-  console.log('%c✅ النظام جاهز', 'color:#28a745;font-weight:bold;font-size:14px');
-  console.log('⏱️ Cooldown بين الحفظ: ' + (SAVE_COOLDOWN/1000) + ' ثوانٍ');
-  console.log('🔄 فاصل المزامنة: ' + (SYNC_INTERVAL/1000) + ' ثوانٍ');
-  console.log('🔐 الصلاحيات: مفعّلة');
-  console.log('🎨 القوالب: من الإعدادات');
+  console.log('%c✅ نظام إدارة الطلبات جاهز', 'color:#28a745;font-weight:bold;font-size:14px');
+  console.log('⏱️ Cooldown: ' + (SAVE_COOLDOWN/1000) + 's | Sync: ' + (SYNC_INTERVAL/1000) + 's');
+  console.log('⌨️ Enter = التالي | Shift+Enter = السابق | Ctrl+Enter = حفظ');
 });
 </script>
 </body>
