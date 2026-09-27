@@ -1216,7 +1216,7 @@ function updateCurrentKeyInfo() {
   if (token) {
     el.innerHTML = `<div style="color:#28a745;font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div>
       <div>الطول: ${token.length} حرف</div>
-      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔒 بياناتك محمية بتشفير ثابت</div>`;
+      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔒 بياناتك محمية</div>`;
   } else el.textContent = 'لا يوجد مفتاح';
 }
 function changeKeyModal() {
@@ -2043,7 +2043,7 @@ function buildUI() {
   rebuildSettingsTabs();
 
   document.getElementById('tab-token').innerHTML = `
-    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔒 بياناتك محمية بتشفير ثابت داخلي.</div>
+    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔒 بياناتك محمية .</div>
     <div class="toolbar">
       <button class="btn btn-warning" onclick="changeKeyModal()">${ico('refresh', 15)}<span>تحديث المفتاح</span></button>
       <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>حذف المفتاح</span></button>
