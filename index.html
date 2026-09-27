@@ -6,14 +6,18 @@
 <meta name="theme-color" content="#1f4e79">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 <title>نظام إدارة الطلبات</title>
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22%D9%86%D8%B8%D8%A7%D9%85%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%D8%A7%D8%AA%22%2C%22short_name%22%3A%22%D8%A7%D9%84%D8%B7%D9%84%D8%A8%D8%A7%D8%AA%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231f4e79%22%2C%22theme_color%22%3A%22%231f4e79%22%7D">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 *:not(input):not(textarea):not(select){-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
 img{-webkit-user-drag:none;pointer-events:none}
 html,body{height:100%}
-:root{--dark-blue:#1f4e79;--blue:#2e75b6;--light-blue:#dbe5f1;--green:#28a745;--yellow:#ffc107;--red:#dc3545;--purple:#6f42c1;--gray:#6c757d;--bg:#f4f6f9;--card-bg:#fff;--text:#222;--text-muted:#6c757d;--border:#e0e0e0;--shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 14px rgba(0,0,0,.08);--shadow-lg:0 10px 40px rgba(0,0,0,.18);--btn-h:38px;--radius:10px;--transition:.2s ease}
+:root{--dark-blue:#1f4e79;--blue:#2e75b6;--light-blue:#dbe5f1;--green:#28a745;--yellow:#ffc107;--red:#dc3545;--purple:#6f42c1;--orange:#fd7e14;--teal:#17a2b8;--pink:#e83e8c;--gray:#6c757d;--bg:#f4f6f9;--card-bg:#fff;--text:#222;--text-muted:#6c757d;--border:#e0e0e0;--shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 14px rgba(0,0,0,.08);--shadow-lg:0 10px 40px rgba(0,0,0,.18);--btn-h:38px;--transition:.2s ease}
 [data-theme="dark"]{--dark-blue:#4a8bc7;--blue:#5fa3db;--light-blue:#1e3a52;--bg:#0f1825;--card-bg:#1a2634;--text:#e8edf2;--text-muted:#8ea2b5;--border:#2c3e50;--shadow-sm:0 1px 3px rgba(0,0,0,.3);--shadow-md:0 4px 14px rgba(0,0,0,.3);--shadow-lg:0 10px 40px rgba(0,0,0,.5)}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
 .ico{display:inline-block;flex-shrink:0;vertical-align:middle;pointer-events:none;outline:none}
@@ -33,9 +37,10 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;t
 .btn-ghost:hover:not(:disabled){background:var(--light-blue);border-color:var(--blue);color:var(--dark-blue)}
 .btn-sm{height:30px;padding:0 10px;font-size:12px;border-radius:7px;min-width:30px}
 .btn-sm .ico{width:13px;height:13px}
-.btn-icon{width:var(--btn-h);height:var(--btn-h);padding:0;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition)}
+.btn-icon{width:var(--btn-h);height:var(--btn-h);padding:0;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);position:relative}
 .btn-icon:hover{background:rgba(255,255,255,.28);transform:scale(1.06)}
 .btn-icon .ico{width:17px;height:17px}
+.btn-icon .badge-num{position:absolute;top:-4px;left:-4px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
 kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'Consolas',monospace;font-weight:500;display:inline-block;line-height:1;pointer-events:none}
 .btn-warning kbd{background:rgba(0,0,0,.15)}
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(31,78,121,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(6px)}
@@ -63,12 +68,12 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .admin-token-section .admin-header{display:flex;align-items:center;gap:8px;color:var(--dark-blue);font-weight:700;font-size:14px;margin-bottom:12px;padding:10px 14px;background:rgba(46,117,182,.08);border-radius:10px;border-right:3px solid var(--blue)}
 .admin-warning{background:#fff3cd;border:1px solid #ffc107;padding:10px 14px;border-radius:10px;font-size:11.5px;color:#856404;margin-bottom:12px;line-height:1.6}
 [data-theme="dark"] .admin-warning{background:#4d3a10;border-color:#8a6914;color:#ffd54f}
-.token-status{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px;margin-top:10px}
-.token-status.saved{background:#d4edda;color:#155724}
-.token-status.missing{background:#fff3cd;color:#856404}
-.token-status button{margin-right:auto;padding:5px 12px;font-size:11px;border-radius:6px;background:rgba(0,0,0,.1);border:none;cursor:pointer;color:inherit;font-weight:600;font-family:inherit}
-.token-help{font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.7}
-.token-help a{color:var(--blue);text-decoration:none;font-weight:600}
+.key-status{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px;margin-top:10px}
+.key-status.saved{background:#d4edda;color:#155724}
+.key-status.missing{background:#fff3cd;color:#856404}
+.key-status button{margin-right:auto;padding:5px 12px;font-size:11px;border-radius:6px;background:rgba(0,0,0,.1);border:none;cursor:pointer;color:inherit;font-weight:600;font-family:inherit}
+.key-help{font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.7}
+.key-help a{color:var(--blue);text-decoration:none;font-weight:600}
 .login-error{color:var(--red);font-size:13px;margin-top:12px;text-align:center;white-space:pre-line;line-height:1.6;background:#f8d7da;padding:12px 16px;border-radius:10px;display:none}
 .login-error.show{display:block;animation:shake .3s ease}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -83,11 +88,10 @@ header h1{font-size:16px;font-weight:600;letter-spacing:.3px}
 .user-info{display:flex;align-items:center;gap:8px;font-size:13px}
 .user-chip{display:inline-flex!important;align-items:center;gap:8px;background:rgba(255,255,255,.12);padding:6px 13px;border-radius:20px;font-size:12.5px}
 .user-chip .ico{width:14px;height:14px;opacity:.9}
-.rate-limit-chip{background:rgba(255,255,255,.1);padding:5px 11px;border-radius:16px;font-size:11px;font-weight:600;display:inline-flex!important;align-items:center;gap:7px}
-.rate-limit-chip .bar{width:36px;height:4px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden}
-.rate-limit-chip .fill{height:100%;background:#4caf50;transition:width .3s}
-.rate-limit-chip .fill.warning{background:#ffc107}
-.rate-limit-chip .fill.danger{background:#dc3545}
+.session-timer{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);padding:5px 10px;border-radius:14px;font-size:11px;font-weight:600}
+.session-timer.warning{background:rgba(255,193,7,.25);color:#333}
+.session-timer.danger{background:rgba(220,53,69,.3);animation:pulseRed 1s infinite}
+@keyframes pulseRed{0%,100%{opacity:1}50%{opacity:.7}}
 .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#888}
 .status-dot.online{background:#4caf50;box-shadow:0 0 8px #4caf50;animation:pulseGreen 2s infinite}
 .status-dot.sync{background:#2196f3;animation:pulseBlue 1s infinite}
@@ -100,6 +104,8 @@ nav button .ico{width:16px;height:16px}
 nav button:hover{color:var(--dark-blue);background:rgba(46,117,182,.06)}
 nav button.active{color:var(--dark-blue);border-bottom-color:var(--dark-blue);font-weight:700;background:rgba(46,117,182,.08)}
 main{padding:22px;max-width:1700px;margin:0 auto}
+
+/* Dashboard */
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:22px}
 .dash-card{background:var(--card-bg);padding:22px;border-radius:14px;box-shadow:var(--shadow-sm);cursor:pointer;transition:var(--transition);border:2px solid transparent;position:relative;overflow:hidden}
 .dash-card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:5px;background:var(--blue);transition:width .25s}
@@ -119,46 +125,78 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .dash-card.orange::before{background:#fd7e14}
 .dash-card.orange .icon{background:linear-gradient(135deg,#ffead6,#ffd0a8);color:#fd7e14}
 [data-theme="dark"] .dash-card.orange .icon{background:linear-gradient(135deg,#4d2f10,#2e1a05)}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
-.stat{background:var(--card-bg);padding:20px 18px;border-radius:12px;box-shadow:var(--shadow-sm);transition:var(--transition);position:relative;overflow:hidden;border-right:4px solid var(--blue)}
+
+/* Section Title */
+.section-title-dash{color:var(--dark-blue);font-size:15px;font-weight:700;margin:22px 0 12px;display:flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:2px solid var(--light-blue)}
+.section-title-dash .ico{width:17px;height:17px}
+
+/* Stats Grid (KPI cards) */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
+.stats-grid.wide{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.stat{background:var(--card-bg);padding:18px 16px;border-radius:12px;box-shadow:var(--shadow-sm);transition:var(--transition);position:relative;overflow:hidden;border-right:4px solid var(--blue)}
 .stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
 .stat .stat-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.stat .stat-icon{width:38px;height:38px;border-radius:10px;display:inline-flex!important;align-items:center;justify-content:center;background:rgba(46,117,182,.12);color:var(--blue)}
-.stat .stat-icon svg{width:18px;height:18px}
-.stat .trend{font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:10px}
+.stat .stat-icon{width:36px;height:36px;border-radius:10px;display:inline-flex!important;align-items:center;justify-content:center;background:rgba(46,117,182,.12);color:var(--blue);flex-shrink:0}
+.stat .stat-icon svg{width:17px;height:17px}
+.stat .trend{font-size:10px;font-weight:700;display:inline-flex;align-items:center;gap:2px;padding:3px 7px;border-radius:10px;white-space:nowrap}
 .stat .trend.up{color:#1a7f37;background:#d4f5dd}
 .stat .trend.down{color:#a42029;background:#fbdde0}
 .stat .trend.flat{color:#6c757d;background:#e9ecef}
 [data-theme="dark"] .stat .trend.up{background:#1a4a2a;color:#6ee7a5}
 [data-theme="dark"] .stat .trend.down{background:#4d1a20;color:#f89da7}
 [data-theme="dark"] .stat .trend.flat{background:#2c3e50;color:#adb5bd}
-.stat .num{font-size:30px;font-weight:800;color:var(--text);line-height:1.1}
-.stat .lbl{color:var(--text-muted);font-size:12px;margin-top:4px;font-weight:500}
+.stat .num{font-size:28px;font-weight:800;color:var(--text);line-height:1.1}
+.stat .num.small{font-size:22px}
+.stat .lbl{color:var(--text-muted);font-size:11.5px;margin-top:4px;font-weight:500}
+.stat .sub{font-size:10.5px;color:var(--text-muted);margin-top:6px;opacity:.85}
 .stat.red{border-right-color:var(--red)}
 .stat.red .stat-icon{background:rgba(220,53,69,.12);color:var(--red)}
 .stat.green{border-right-color:var(--green)}
 .stat.green .stat-icon{background:rgba(40,167,69,.12);color:var(--green)}
 .stat.purple{border-right-color:var(--purple)}
 .stat.purple .stat-icon{background:rgba(111,66,193,.12);color:var(--purple)}
-.analytics-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:22px}
-@media(max-width:1100px){.analytics-row{grid-template-columns:1fr}}
-.analytics-card{background:var(--card-bg);padding:20px 22px;border-radius:14px;box-shadow:var(--shadow-sm)}
-.analytics-card h4{color:var(--dark-blue);font-size:14px;margin-bottom:16px;font-weight:700;display:flex!important;align-items:center;gap:8px}
-.analytics-card h4 .ico{width:16px;height:16px}
-.donut-wrap{display:flex;align-items:center;gap:22px}
-.donut{position:relative;width:140px;height:140px;flex-shrink:0}
+.stat.orange{border-right-color:#fd7e14}
+.stat.orange .stat-icon{background:rgba(253,126,20,.12);color:#fd7e14}
+.stat.teal{border-right-color:#17a2b8}
+.stat.teal .stat-icon{background:rgba(23,162,184,.12);color:#17a2b8}
+.stat.pink{border-right-color:#e83e8c}
+.stat.pink .stat-icon{background:rgba(232,62,140,.12);color:#e83e8c}
+.stat.dark{border-right-color:#343a40}
+.stat.dark .stat-icon{background:rgba(52,58,64,.12);color:#343a40}
+[data-theme="dark"] .stat.dark .stat-icon{background:rgba(200,200,200,.12);color:#e8edf2}
+.stat .progress-bar{width:100%;height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;margin-top:8px}
+[data-theme="dark"] .stat .progress-bar{background:rgba(255,255,255,.1)}
+.stat .progress-bar .fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),#4a90c2);transition:width .6s ease}
+.stat .progress-bar .fill.green{background:linear-gradient(90deg,var(--green),#4bc760)}
+.stat .progress-bar .fill.red{background:linear-gradient(90deg,var(--red),#e4606d)}
+.stat .progress-bar .fill.purple{background:linear-gradient(90deg,var(--purple),#8a5cd4)}
+.stat .progress-bar .fill.orange{background:linear-gradient(90deg,#fd7e14,#ffb26b)}
+
+/* Analytics Grid */
+.analytics-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;margin-bottom:22px}
+.analytics-row.cols-2{grid-template-columns:1fr 1fr}
+.analytics-row.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+@media(max-width:1200px){.analytics-row{grid-template-columns:1fr 1fr}.analytics-row.cols-4{grid-template-columns:1fr 1fr}}
+@media(max-width:750px){.analytics-row,.analytics-row.cols-2,.analytics-row.cols-4{grid-template-columns:1fr}}
+.analytics-card{background:var(--card-bg);padding:18px 20px;border-radius:14px;box-shadow:var(--shadow-sm)}
+.analytics-card h4{color:var(--dark-blue);font-size:13.5px;margin-bottom:14px;font-weight:700;display:flex!important;align-items:center;gap:8px}
+.analytics-card h4 .ico{width:15px;height:15px}
+.analytics-card h4 .badge-sm{margin-right:auto;background:rgba(46,117,182,.12);color:var(--dark-blue);font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700}
+.donut-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.donut{position:relative;width:130px;height:130px;flex-shrink:0}
 .donut svg{transform:rotate(-90deg)}
-.donut circle{fill:none;stroke-width:16;transition:stroke-dashoffset .8s ease}
+.donut circle{fill:none;stroke-width:15;transition:stroke-dashoffset .8s ease}
 .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.donut .center .big{font-size:24px;font-weight:800;color:var(--dark-blue)}
-.donut .center .small{font-size:10.5px;color:var(--text-muted)}
-.donut-legend{flex:1;display:flex;flex-direction:column;gap:8px}
-.legend-item{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:4px 0}
+.donut .center .big{font-size:22px;font-weight:800;color:var(--dark-blue);line-height:1}
+.donut .center .small{font-size:10px;color:var(--text-muted);margin-top:3px}
+.donut-legend{flex:1;display:flex;flex-direction:column;gap:7px;min-width:130px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0}
 .legend-item .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .legend-item .name{flex:1;color:var(--text)}
 .legend-item .val{font-weight:700;color:var(--text)}
-.top-list{display:flex;flex-direction:column;gap:8px}
-.top-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,.03);font-size:12.5px;transition:var(--transition)}
+.legend-item .pct{font-size:10.5px;color:var(--text-muted);font-weight:500;margin-right:6px}
+.top-list{display:flex;flex-direction:column;gap:7px}
+.top-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,.03);font-size:12px;transition:var(--transition)}
 [data-theme="dark"] .top-item{background:rgba(255,255,255,.04)}
 .top-item:hover{background:rgba(46,117,182,.08)}
 .top-item .rank{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:11px;font-weight:700;flex-shrink:0}
@@ -167,11 +205,46 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .top-item .rank.bronze{background:linear-gradient(135deg,#a0522d,#cd7f32);color:#fff}
 .top-item .name{flex:1;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .top-item .count{font-weight:700;color:var(--dark-blue)}
-.empty-top{color:var(--text-muted);text-align:center;padding:18px 0;font-size:12.5px}
-.sparkline{background:var(--card-bg);padding:20px 22px;border-radius:14px;box-shadow:var(--shadow-sm)}
-.sparkline h4{color:var(--dark-blue);font-size:14px;margin-bottom:16px;font-weight:700;display:flex!important;align-items:center;gap:8px}
-.sparkline h4 .ico{width:16px;height:16px}
-.sparkline svg{width:100%;height:90px}
+.top-item .bar-mini{width:50px;height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;flex-shrink:0}
+[data-theme="dark"] .top-item .bar-mini{background:rgba(255,255,255,.1)}
+.top-item .bar-mini .fill{height:100%;background:linear-gradient(90deg,var(--blue),#4a90c2);border-radius:3px;transition:width .5s ease}
+.empty-top{color:var(--text-muted);text-align:center;padding:18px 0;font-size:12px}
+.sparkline{background:var(--card-bg);padding:18px 20px;border-radius:14px;box-shadow:var(--shadow-sm);margin-bottom:22px}
+.sparkline h4{color:var(--dark-blue);font-size:13.5px;margin-bottom:14px;font-weight:700;display:flex!important;align-items:center;gap:8px}
+.sparkline h4 .ico{width:15px;height:15px}
+.sparkline svg{width:100%;height:100px}
+
+/* Bar Chart */
+.bar-chart{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.bar-row .bl{flex:0 0 80px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-row .bt{flex:1;height:22px;background:rgba(0,0,0,.05);border-radius:6px;overflow:hidden;position:relative}
+[data-theme="dark"] .bar-row .bt{background:rgba(255,255,255,.05)}
+.bar-row .bf{height:100%;border-radius:6px;transition:width .6s ease;min-width:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;color:#fff;font-size:11px;font-weight:700}
+.bar-row .bf.blue{background:linear-gradient(90deg,#2e75b6,#4a90c2)}
+.bar-row .bf.green{background:linear-gradient(90deg,#28a745,#4bc760)}
+.bar-row .bf.red{background:linear-gradient(90deg,#dc3545,#e4606d)}
+.bar-row .bf.purple{background:linear-gradient(90deg,#6f42c1,#8a5cd4)}
+.bar-row .bf.orange{background:linear-gradient(90deg,#fd7e14,#ffb26b)}
+.bar-row .bf.teal{background:linear-gradient(90deg,#17a2b8,#4ec5d8)}
+
+/* Performance Metrics */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:6px}
+.metric-box{background:rgba(0,0,0,.03);border-radius:10px;padding:14px 12px;text-align:center;border:1px solid var(--border)}
+[data-theme="dark"] .metric-box{background:rgba(255,255,255,.04)}
+.metric-box .mv{font-size:22px;font-weight:800;color:var(--dark-blue);line-height:1}
+.metric-box .mv.green{color:var(--green)}
+.metric-box .mv.red{color:var(--red)}
+.metric-box .mv.purple{color:var(--purple)}
+.metric-box .ml{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:500}
+
+/* Time Stats */
+.time-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+.time-stat{background:linear-gradient(135deg,rgba(46,117,182,.08),rgba(46,117,182,.03));border-radius:10px;padding:14px;text-align:center;border:1px solid rgba(46,117,182,.15)}
+.time-stat .tv{font-size:26px;font-weight:800;color:var(--dark-blue);line-height:1}
+.time-stat .tl{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:600}
+
+/* Rest of UI */
 .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
 .filter-bar{display:flex!important;gap:11px;flex-wrap:wrap;align-items:center;padding:13px 16px;background:var(--card-bg);border-radius:12px;margin-bottom:14px;box-shadow:var(--shadow-sm);border-right:4px solid var(--blue)}
 .filter-bar>span{display:inline-flex;align-items:center;gap:5px}
@@ -313,12 +386,78 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .connection-banner{position:fixed;top:0;left:0;right:0;background:var(--red);color:#fff;padding:8px 16px;text-align:center;font-size:12.5px;font-weight:600;z-index:9999;transform:translateY(-100%);transition:transform .3s;display:flex!important;align-items:center;justify-content:center;gap:8px}
 .connection-banner.show{transform:translateY(0)}
 .connection-banner .ico{width:14px;height:14px}
-.draft-badge{position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,#ffc107,#ffb300);color:#333;padding:10px 15px;border-radius:24px;font-size:12px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.2);display:none!important;align-items:center;gap:8px;cursor:pointer;z-index:2500;animation:slideInRight .3s ease}
+.draft-badge{position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,#ffc107,#ffb300);color:#333;padding:10px 15px;border-radius:24px;font-size:12px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.2);display:none!important;align-items:center;gap:8px;cursor:pointer;z-index:2500}
 .draft-badge.show{display:inline-flex!important}
 .draft-badge .ico{width:14px;height:14px}
-@keyframes slideInRight{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
-@media(max-width:900px){header{padding:10px 14px;height:auto;flex-direction:column;gap:9px}header h1{font-size:14px}nav{top:0;padding:0 10px}nav button{padding:12px 12px;font-size:12.5px}main{padding:12px}.dash-grid{grid-template-columns:1fr}.perm-grid{grid-template-columns:1fr}.template-row{grid-template-columns:1fr}.user-info{flex-wrap:wrap;justify-content:center}.rate-limit-chip{display:none}.analytics-row{grid-template-columns:1fr}.donut-wrap{flex-direction:column}}
+.notif-panel{position:fixed;top:60px;left:22px;width:360px;max-width:92vw;max-height:70vh;background:var(--card-bg);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.3);z-index:500;overflow:hidden;display:none;flex-direction:column}
+.notif-panel.show{display:flex;animation:slideUp .25s ease}
+.notif-header{padding:14px 18px;background:linear-gradient(135deg,var(--dark-blue),#2a5d8f);color:#fff;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.notif-header button{background:transparent;color:#fff;border:none;cursor:pointer;padding:4px;border-radius:4px;font-family:inherit}
+.notif-header button:hover{background:rgba(255,255,255,.2)}
+.notif-list{overflow-y:auto;flex:1;padding:8px}
+.notif-item{padding:12px 14px;border-radius:10px;background:rgba(0,0,0,.02);margin-bottom:6px;transition:var(--transition);border-right:3px solid transparent;cursor:pointer}
+[data-theme="dark"] .notif-item{background:rgba(255,255,255,.03)}
+.notif-item:hover{background:rgba(46,117,182,.08)}
+.notif-item.info{border-right-color:var(--blue)}
+.notif-item.success{border-right-color:var(--green)}
+.notif-item.warning{border-right-color:var(--yellow)}
+.notif-item.danger{border-right-color:var(--red)}
+.notif-item .nt{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.notif-item .nm{font-size:11.5px;color:var(--text-muted);line-height:1.5}
+.notif-item .nd{font-size:10px;color:var(--text-muted);opacity:.8;margin-top:5px}
+.notif-empty{padding:40px 20px;text-align:center;color:var(--text-muted);font-size:13px}
+.activity-list{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow-sm);padding:8px;border:1px solid var(--border)}
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:10px;transition:var(--transition);border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-item:hover{background:rgba(46,117,182,.05)}
+.activity-item .activity-icon{width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(46,117,182,.12);color:var(--blue)}
+.activity-item .activity-icon.success{background:rgba(40,167,69,.12);color:var(--green)}
+.activity-item .activity-icon.danger{background:rgba(220,53,69,.12);color:var(--red)}
+.activity-item .activity-icon.warning{background:rgba(255,193,7,.15);color:#b38600}
+.activity-item .activity-body{flex:1;min-width:0}
+.activity-item .activity-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.activity-item .activity-desc{font-size:11.5px;color:var(--text-muted);line-height:1.5;word-break:break-word}
+.activity-item .activity-meta{font-size:10.5px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
+.activity-item .activity-meta span{display:inline-flex;align-items:center;gap:3px}
+
+@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
+@media(max-width:700px){
+  .modal{max-width:96vw;padding:20px 16px}
+  .admin-token-section .admin-header{font-size:13px;padding:8px 12px}
+  .login-box{padding:32px 24px}
+  .login-box h1{font-size:20px}
+  .user-info{gap:4px}
+  .user-chip{padding:4px 10px;font-size:11px}
+  .session-timer{padding:4px 8px;font-size:10px}
+  header{height:auto;padding:8px 12px}
+  header h1{font-size:13px}
+  nav{padding:0 8px}
+  nav button{padding:11px 10px;font-size:12px;gap:5px}
+  nav button .ico{width:14px;height:14px}
+  main{padding:10px}
+  .dash-grid{gap:10px;margin-bottom:14px}
+  .dash-card{padding:16px}
+  .dash-card .icon{width:44px;height:44px}
+  .dash-card .icon svg{width:22px;height:22px}
+  .dash-card h3{font-size:14px}
+  .stat .num{font-size:22px}
+  .stat .num.small{font-size:18px}
+  .analytics-row{gap:10px;margin-bottom:14px}
+  .analytics-card{padding:14px}
+  .donut{width:110px;height:110px}
+  .donut .center .big{font-size:20px}
+  .notif-panel{left:8px;right:8px;width:auto;top:56px}
+  .toast-container{left:8px;right:8px;bottom:12px;max-width:none}
+  .activity-item{padding:10px}
+  .activity-item .activity-icon{width:30px;height:30px}
+  .filter-bar{gap:6px;padding:10px}
+  .filter-bar label{font-size:11px}
+  .filter-bar input,.filter-bar select{font-size:11.5px;height:30px}
+  .section-header h2{font-size:16px}
+  .section-header .hint{font-size:10px;padding:5px 9px}
+  .bar-row .bl{flex:0 0 60px;font-size:11px}
+  .bar-row .bf{font-size:10px}
+}
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:rgba(0,0,0,.05)}
 ::-webkit-scrollbar-thumb{background:#b8c5d1;border-radius:5px}
@@ -341,70 +480,64 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <div class="loading-text" id="loadingText">جاري التحميل...</div>
 </div>
 
-<!-- ==============================================================
-     شاشة تسجيل الدخول — مع خيار إدارة الرمز للمدير
-     ============================================================== -->
+<div id="notifPanel" class="notif-panel">
+  <div class="notif-header">
+    <span id="notifHeaderTitle"></span>
+    <div style="display:flex;gap:6px;">
+      <button onclick="clearAllNotifications()" id="notifClearBtn" title="مسح الكل"></button>
+      <button onclick="toggleNotifPanel()" id="notifCloseBtn" title="إغلاق"></button>
+    </div>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
     <h1>نظام إدارة الطلبات</h1>
-    <p class="subtitle">قاعدة بيانات مشتركة مشفّرة عبر GitHub</p>
-
-    <div id="tokenStatus"></div>
-
-    <div id="tokenField" style="display:none;">
-      <label>رمز الوصول</label>
-      <input id="loginToken" type="password" placeholder="أدخل الرمز هنا" autocomplete="off">
-      <div class="token-help">
-        احصل على الرمز من إعدادات GitHub — الصلاحية: <b>Contents: Read and write</b>
-      </div>
+    <p class="subtitle">منصة احترافية آمنة لإدارة الطلبات</p>
+    <div id="keyStatus"></div>
+    <div id="keyField" style="display:none;">
+      <label>مفتاح الاتصال</label>
+      <input id="loginKey" type="password" placeholder="أدخل مفتاح الاتصال" autocomplete="off">
+      <div class="key-help">💡 يمكنك الحصول على المفتاح من مسؤول النظام</div>
     </div>
-
     <label>اسم المستخدم</label>
     <input id="loginUser" type="text" placeholder="أدخل اسمك" autocomplete="username">
-
     <label>كلمة المرور</label>
     <input id="loginPass" type="password" placeholder="••••••" autocomplete="current-password">
-
     <button class="primary" id="loginBtn" onclick="doLogin()">تسجيل الدخول</button>
-
     <div id="loginError" class="login-error"></div>
     <div id="loginLoading" class="login-loading"></div>
-
-    <!-- ⭐ رابط المدير لتغيير الرمز -->
     <div class="admin-toggle-link">
       <a onclick="toggleAdminPanel()">
         <span id="adminToggleIcon"></span>
-        <span>🔐 إدارة الرمز (للمدير)</span>
+        <span>⚙️ إدارة مفتاح الاتصال</span>
       </a>
     </div>
-
-    <!-- ⭐ قسم إدارة الرمز للمدير -->
     <div id="adminTokenSection" class="admin-token-section">
       <div class="admin-header">
         <span id="adminHeaderIcon"></span>
-        <span>إدارة الرمز — صلاحية المدير</span>
+        <span>تحديث مفتاح الاتصال</span>
       </div>
-      <div class="admin-warning">
-        ⚠️ <b>مهم:</b> سيتم إعادة تشفير <b>جميع</b> ملفات البيانات بالرمز الجديد.
-        هذه العملية تتطلب صلاحيات المدير (رئيسي).
-      </div>
+      <div class="admin-warning">ℹ️ أدخل المفتاح الجديد مباشرة — لا تحتاج للمفتاح القديم.</div>
       <label>اسم المستخدم (مدير)</label>
       <input id="adminUser" type="text" placeholder="اسم المستخدم الرئيسي" autocomplete="username">
       <label>كلمة المرور</label>
       <input id="adminPass" type="password" placeholder="••••••" autocomplete="current-password">
-      <label>الرمز الجديد (GitHub Token)</label>
-      <input id="adminNewToken" type="password" placeholder="github_pat_..." autocomplete="off">
-      <div class="token-help">يجب أن يبدأ بـ <code>github_pat_</code> أو <code>ghp_</code></div>
-      <button class="primary" id="adminChangeBtn" onclick="adminChangeToken()" style="margin-top:16px;">
+      <label>مفتاح الاتصال الجديد</label>
+      <input id="adminNewKey" type="password" placeholder="أدخل المفتاح الجديد" autocomplete="off">
+      <button class="primary" id="adminChangeBtn" onclick="adminChangeKey()" style="margin-top:16px;">
         <span id="adminBtnIcon"></span>
-        <span>تغيير الرمز وإعادة التشفير</span>
+        <span>تحديث المفتاح الآن</span>
       </button>
       <div id="adminError" class="login-error"></div>
     </div>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <header>
     <div class="brand">
@@ -412,15 +545,19 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
-      <div class="rate-limit-chip" id="rateLimitChip">
-        <span id="rateLimitText">…</span>
-        <div class="bar"><div class="fill" id="rateLimitFill" style="width:100%;"></div></div>
+      <div class="session-timer" id="sessionTimer">
+        <span id="sessionTimerIcon"></span>
+        <span id="sessionTimerText">—</span>
       </div>
       <div class="user-chip">
         <span id="connDot" class="status-dot"></span>
         <span id="userChipIcon"></span>
         <b id="currentUserName"></b>
       </div>
+      <button class="btn-icon" onclick="toggleNotifPanel()" id="notifBtn" title="الإشعارات">
+        <span id="notifBtnIcon"></span>
+        <span class="badge-num" id="notifBadge" style="display:none;">0</span>
+      </button>
       <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع"></button>
       <button class="btn-icon" onclick="manualSync()" id="syncBtn" title="مزامنة"></button>
       <button class="btn-icon" onclick="showShortcuts()" id="kbBtn" title="الاختصارات"></button>
@@ -431,10 +568,19 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <nav id="navBar"></nav>
 
   <main>
+    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid" id="dashGrid"></div>
-      <div id="statsTitle" style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;"></div>
-      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="section-title-dash" id="title-overview"></div>
+      <div class="stats-grid" id="statsOverview"></div>
+
+      <div class="section-title-dash" id="title-payments"></div>
+      <div class="stats-grid" id="statsPayments"></div>
+
+      <div class="section-title-dash" id="title-time"></div>
+      <div id="timeStatsContainer"></div>
+
       <div class="analytics-row">
         <div class="analytics-card">
           <h4 id="donutTitle"></h4>
@@ -444,6 +590,23 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
           </div>
         </div>
         <div class="analytics-card">
+          <h4 id="payDonutTitle"></h4>
+          <div class="donut-wrap">
+            <div class="donut" id="payDonutChart"></div>
+            <div class="donut-legend" id="payDonutLegend"></div>
+          </div>
+        </div>
+        <div class="analytics-card">
+          <h4 id="branchDonutTitle"></h4>
+          <div class="donut-wrap">
+            <div class="donut" id="branchDonutChart"></div>
+            <div class="donut-legend" id="branchDonutLegend"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics-row cols-2">
+        <div class="analytics-card">
           <h4 id="topCustTitle"></h4>
           <div class="top-list" id="topCustomers"></div>
         </div>
@@ -452,6 +615,23 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
           <div class="top-list" id="topBranches"></div>
         </div>
       </div>
+
+      <div class="analytics-row cols-2">
+        <div class="analytics-card">
+          <h4 id="topDrvTitle"></h4>
+          <div class="top-list" id="topDrivers"></div>
+        </div>
+        <div class="analytics-card">
+          <h4 id="topUserTitle"></h4>
+          <div class="top-list" id="topUsers"></div>
+        </div>
+      </div>
+
+      <div class="section-title-dash" id="title-performance"></div>
+      <div class="analytics-card" style="margin-bottom:22px;">
+        <div class="metric-grid" id="performanceMetrics"></div>
+      </div>
+
       <div class="sparkline">
         <h4 id="trendTitle"></h4>
         <div id="trendChart"></div>
@@ -487,6 +667,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
       <div class="section-header"><h2 id="settingsTitle"></h2></div>
       <div class="tabs" id="settingsTabs"></div>
       <div id="tab-token" class="tab-panel"></div>
+      <div id="tab-activity" class="tab-panel" style="display:none;"></div>
       <div id="tab-branches" class="tab-panel" style="display:none;"></div>
       <div id="tab-drivers" class="tab-panel" style="display:none;"></div>
       <div id="tab-users" class="tab-panel" style="display:none;"></div>
@@ -496,6 +677,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   </main>
 </div>
 
+<!-- MODALS -->
 <div id="orderModal" class="modal-bg"><div class="modal">
   <h3 id="orderModalTitle"></h3>
   <input type="hidden" id="orderId"><input type="hidden" id="orderCustomerId"><input type="hidden" id="orderLogMode" value="">
@@ -554,13 +736,13 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   </div>
 </div></div>
 
-<div id="tokenModal" class="modal-bg"><div class="modal">
-  <h3 id="tokenModalTitle"></h3>
-  <div class="perm-note" style="margin-bottom:14px;">⚠️ سيتم <b>إعادة تشفير جميع البيانات</b> بالرمز الجديد تلقائياً.</div>
-  <label>الرمز الجديد</label><input id="newTokenInput" type="password" autocomplete="off">
+<div id="keyModal" class="modal-bg"><div class="modal">
+  <h3 id="keyModalTitle"></h3>
+  <div class="perm-note" style="margin-bottom:14px;">💡 يمكنك التحديث بدون الحاجة للمفتاح القديم.</div>
+  <label>مفتاح الاتصال الجديد</label><input id="newKeyInput" type="password" autocomplete="off">
   <div class="modal-actions">
-    <button class="btn btn-gray" onclick="closeModal('tokenModal')">إلغاء</button>
-    <button class="btn btn-primary" onclick="saveNewToken()">حفظ وإعادة تشفير</button>
+    <button class="btn btn-gray" onclick="closeModal('keyModal')">إلغاء</button>
+    <button class="btn btn-primary" onclick="saveNewKey()">تحديث المفتاح</button>
   </div>
 </div></div>
 
@@ -632,7 +814,14 @@ const I = {
   award:'M12 15a7 7 0 100-14 7 7 0 000 14z M8.21 13.89L7 23l5-3 5 3-1.21-9.12',
   building:'M3 21h18 M5 21V7l8-4v18 M19 21V11l-6-4 M9 9h0 M9 12h0 M9 15h0 M9 18h0',
   grid:'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
-  shield2:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4'
+  shield2:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4',
+  bell:'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 01-3.46 0',
+  activity:'M22 12h-4l-3 9L9 3l-3 9H2',
+  clock:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 6v6l4 2',
+  money:'M1 4h22v16H1z M12 15a3 3 0 100-6 3 3 0 000 6z',
+  layers:'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
+  target:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
+  pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -642,21 +831,26 @@ function ico(name, size = 16) {
 /* ==============================================================
    Config
    ============================================================== */
-const GITHUB_OWNER  = 'omar2006200';
-const GITHUB_REPO   = 'Bajandouh';
-const GITHUB_BRANCH = 'main';
+const APP_ID       = 'Bajandouh';
+const APP_BRANCH   = 'main';
 const SYNC_INTERVAL = 15000;
 const SAVE_COOLDOWN = 10000;
+const SESSION_TIMEOUT = 60 * 60 * 1000;    // ⭐ ساعة كاملة
+const SESSION_WARNING = 5 * 60 * 1000;      // تحذير قبل 5 دقائق
 const DRAFT_KEY = 'oms_draft_order';
 const THEME_KEY = 'oms_theme';
-const TOKEN_KEY = 'oms_github_token';
-const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
-const FILES = {
+const ACCESS_KEY = 'oms_access_key';
+const NOTIF_KEY = 'oms_notifications';
+const ACTIVITY_LIMIT = 200;
+
+const API_BASE = `https://api.github.com/repos/${APP_ID}/${APP_ID}/contents`;
+const DATA_FILES = {
   users:'data/users.json', orders:'data/orders.json', ready:'data/ready.json',
   log:'data/log.json', customers:'data/customers.json', drivers:'data/drivers.json',
-  branches:'data/branches.json', templates:'data/templates.json', meta:'data/meta.json'
+  branches:'data/branches.json', templates:'data/templates.json',
+  activity:'data/activity.json', meta:'data/meta.json'
 };
-const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates'];
+const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 const PERMISSIONS = {
@@ -675,7 +869,8 @@ const PERMISSIONS = {
   moveToLog:{label:'زر: ترحيل للسجل',cat:'ready',icon:'arrowRight'},
   editLog:{label:'زر: تعديل السجل',cat:'log',icon:'edit'},
   deleteLog:{label:'زر: حذف من السجل',cat:'log',icon:'trash'},
-  tabToken:{label:'الرمز والتشفير',cat:'settingsTabs',icon:'key'},
+  tabToken:{label:'مفتاح الاتصال',cat:'settingsTabs',icon:'key'},
+  tabActivity:{label:'سجل النشاط',cat:'settingsTabs',icon:'activity'},
   tabBranches:{label:'الفروع',cat:'settingsTabs',icon:'building'},
   tabDrivers:{label:'الموصلون',cat:'settingsTabs',icon:'truck'},
   tabUsers:{label:'المستخدمون',cat:'settingsTabs',icon:'user'},
@@ -686,6 +881,7 @@ const PERMISSIONS = {
   manageBranches:{label:'إدارة الفروع',cat:'manage',icon:'building'},
   manageUsers:{label:'إدارة المستخدمين',cat:'manage',icon:'user'},
   editTemplates:{label:'تعديل القوالب',cat:'manage',icon:'image'},
+  viewActivity:{label:'عرض سجل النشاط',cat:'manage',icon:'activity'},
   reset:{label:'تصفير النظام',cat:'manage',icon:'warning'}
 };
 const PERM_CATEGORIES = {
@@ -701,9 +897,9 @@ const DEFAULT_PERMS = {
   accessCustomers:false,accessSettings:false,
   addOrder:true,editOrder:true,deleteOrder:false,transferSingle:true,bulkTransfer:false,
   print:true,moveToLog:false,editLog:false,deleteLog:false,
-  tabToken:false,tabBranches:false,tabDrivers:false,tabUsers:false,tabTemplates:false,tabBackup:false,
+  tabToken:false,tabActivity:false,tabBranches:false,tabDrivers:false,tabUsers:false,tabTemplates:false,tabBackup:false,
   manageCustomers:false,manageDrivers:false,manageBranches:false,manageUsers:false,
-  editTemplates:false,reset:false
+  editTemplates:false,viewActivity:false,reset:false
 };
 const DEFAULT_TEMPLATES = {
   logo:'',
@@ -712,14 +908,15 @@ const DEFAULT_TEMPLATES = {
 };
 
 let currentUser = null;
-let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{} };
+let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{},activity:[] };
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {},ETags = {},localMeta = null;
 let pollTimer = null,syncing = false,selectedOrderId = null;
 let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
 let rateLimitInfo = null,apiCallCount = 0,apiCachedCount = 0;
-let prevStats = { orders:0,ready:0,log:0 };
+let prevStats = { orders:0,ready:0,log:0,total:0 };
 let hasUnencryptedFiles = false;
+let sessionTimer = null, sessionWarningTimer = null, sessionExpireAt = 0;
 
 /* ==============================================================
    Security
@@ -740,48 +937,37 @@ document.addEventListener('keydown', e => {
 });
 
 /* ==============================================================
-   Encryption
+   Encryption (Fixed key — independent of access key)
    ============================================================== */
-function tokenSig(token) {
-  let h = 0; const s = String(token || '');
-  for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h = h & 0x7fffffff; }
-  return h.toString(16).padStart(8, '0');
-}
-function deriveKeyBytes(token) {
-  const s = String(token || 'x');
+function deriveFixedKey() {
+  const s = APP_ID + '|secure|fixed|v3|schema';
   const bytes = new TextEncoder().encode(s);
-  if (!bytes.length) return new Uint8Array([0x4f,0x4d,0x53,0x4b,0x45,0x59,0x31,0x32]);
   const out = new Uint8Array(bytes.length);
-  for (let i = 0; i < bytes.length; i++) out[i] = (bytes[i] ^ ((i * 31 + 17) & 0xFF)) & 0xFF;
+  for (let i = 0; i < bytes.length; i++) out[i] = (bytes[i] ^ ((i * 37 + 13) & 0xFF)) & 0xFF;
   return out;
 }
-function encryptText(text, token) {
-  const sig = tokenSig(token);
-  const payload = sig + '|' + text;
-  const keyBytes = deriveKeyBytes(token);
-  const dataBytes = new TextEncoder().encode(payload);
+function encryptText(text) {
+  const keyBytes = deriveFixedKey();
+  const dataBytes = new TextEncoder().encode(text);
   const result = new Uint8Array(dataBytes.length);
   for (let i = 0; i < dataBytes.length; i++) result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
   let binary = ''; const chunk = 8192;
   for (let i = 0; i < result.length; i += chunk) binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
-  return 'ENC:v1:' + btoa(binary);
+  return 'DAT:v3:' + btoa(binary);
 }
-function decryptText(encoded, token) {
-  if (!encoded || !encoded.startsWith('ENC:v1:')) return null;
+function decryptText(encoded) {
+  if (!encoded || !encoded.startsWith('DAT:v3:')) return null;
   try {
     const binary = atob(encoded.substring(7));
     const dataBytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) dataBytes[i] = binary.charCodeAt(i);
-    const keyBytes = deriveKeyBytes(token);
+    const keyBytes = deriveFixedKey();
     const result = new Uint8Array(dataBytes.length);
     for (let i = 0; i < dataBytes.length; i++) result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-    const payload = new TextDecoder().decode(result);
-    const expectedSig = tokenSig(token);
-    if (!payload.startsWith(expectedSig + '|')) return null;
-    return payload.substring(expectedSig.length + 1);
+    return new TextDecoder().decode(result);
   } catch { return null; }
 }
-function isEncrypted(text) { return typeof text === 'string' && text.startsWith('ENC:v1:'); }
+function isEncrypted(text) { return typeof text === 'string' && text.startsWith('DAT:v3:'); }
 
 /* ==============================================================
    Theme
@@ -800,15 +986,13 @@ function toggleTheme() {
   toast(next === 'dark' ? 'الوضع الليلي مفعّل' : 'الوضع النهاري مفعّل', 'info');
 }
 function updateThemeBtn() {
-  const btn = document.getElementById('themeBtn');
-  if (!btn) return;
+  const btn = document.getElementById('themeBtn'); if (!btn) return;
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   btn.innerHTML = isDark ? ico('sun', 17) : ico('moon', 17);
-  btn.title = isDark ? 'الوضع النهاري' : 'الوضع الليلي';
 }
 
 /* ==============================================================
-   Dialog
+   Dialog + Toast
    ============================================================== */
 let dialogCallback = null;
 function showDialog(opts) {
@@ -841,9 +1025,6 @@ const dialog = {
   danger: (msg, o = {}) => showDialog({ type: 'danger', title: o.title || 'تأكيد الحذف', message: msg, okText: o.okText || 'نعم، احذف', showCancel: true })
 };
 
-/* ==============================================================
-   Toast
-   ============================================================== */
 function toast(msg, type = 'info') {
   const icons = { success:'check', error:'x', info:'info', warning:'warning' };
   const container = document.getElementById('toastContainer');
@@ -859,27 +1040,21 @@ function showLoading(t = 'جاري التحميل...') { document.getElementById
 function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
 function setFieldError(fieldId, message) {
-  const field = document.getElementById(fieldId);
-  const err = document.getElementById('err-' + fieldId);
-  if (field) field.classList.add('field-error');
-  if (err) { err.textContent = message; err.classList.add('show'); }
+  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
+  if (f) f.classList.add('field-error'); if (e) { e.textContent = message; e.classList.add('show'); }
 }
 function clearFieldError(fieldId) {
-  const field = document.getElementById(fieldId);
-  const err = document.getElementById('err-' + fieldId);
-  if (field) field.classList.remove('field-error');
-  if (err) { err.textContent = ''; err.classList.remove('show'); }
+  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
+  if (f) f.classList.remove('field-error'); if (e) { e.textContent = ''; e.classList.remove('show'); }
 }
 function clearAllErrors(modalId) {
-  const modal = document.getElementById(modalId);
-  if (!modal) return;
+  const modal = document.getElementById(modalId); if (!modal) return;
   modal.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
   modal.querySelectorAll('.field-error-msg').forEach(el => { el.textContent = ''; el.classList.remove('show'); });
 }
 function focusFirstError(modalId) {
   const modal = document.getElementById(modalId);
-  const first = modal?.querySelector('.field-error');
-  if (first) first.focus();
+  const first = modal?.querySelector('.field-error'); if (first) first.focus();
 }
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
@@ -899,200 +1074,129 @@ async function ensureJSZip() {
 }
 
 /* ==============================================================
-   Token
+   Access Key
    ============================================================== */
-function getStoredToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
-function saveToken(t) { localStorage.setItem(TOKEN_KEY, t.trim()); }
-async function clearToken() {
-  const ok = await dialog.confirm('سيتم حذف رمز الوصول من هذا المتصفح.', { type: 'warning', title: 'حذف الرمز' });
+function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
+function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
+async function clearKey() {
+  const ok = await dialog.confirm('سيتم حذف مفتاح الاتصال من هذا المتصفح.', { type: 'warning', title: 'حذف المفتاح' });
   if (!ok) return;
-  localStorage.removeItem(TOKEN_KEY);
-  toast('تم حذف الرمز', 'success');
-  updateTokenStatus(); updateCurrentTokenInfo();
+  localStorage.removeItem(ACCESS_KEY);
+  toast('تم حذف المفتاح', 'success');
+  updateKeyStatus(); updateCurrentKeyInfo();
 }
-function updateTokenStatus() {
-  const statusEl = document.getElementById('tokenStatus');
-  const fieldEl = document.getElementById('tokenField');
-  const token = getStoredToken();
+function updateKeyStatus() {
+  const statusEl = document.getElementById('keyStatus');
+  const fieldEl = document.getElementById('keyField');
+  const token = getStoredKey();
   if (token) {
-    const masked = token.length > 25 ? token.substring(0, 12) + '…' + token.slice(-4) : token;
-    statusEl.className = 'token-status saved';
-    statusEl.innerHTML = `<span>${ico('lock', 14)} الرمز محفوظ (مشفّر)</span>
+    const masked = token.length > 25 ? token.substring(0, 8) + '…' + token.slice(-4) : token;
+    statusEl.className = 'key-status saved';
+    statusEl.innerHTML = `<span>${ico('lock', 14)} مفتاح الاتصال نشط</span>
       <span style="font-family:monospace;font-size:10px;opacity:.7;">${masked}</span>
-      <button onclick="showTokenField()">تغيير</button>`;
+      <button onclick="showKeyField()">تغيير</button>`;
     fieldEl.style.display = 'none';
   } else {
-    statusEl.className = 'token-status missing';
-    statusEl.innerHTML = `<span>${ico('warning', 14)} لم يتم إدخال الرمز</span>`;
+    statusEl.className = 'key-status missing';
+    statusEl.innerHTML = `<span>${ico('warning', 14)} لم يتم إدخال المفتاح</span>`;
     fieldEl.style.display = 'block';
   }
 }
-function showTokenField() {
-  document.getElementById('tokenField').style.display = 'block';
-  document.getElementById('tokenStatus').style.display = 'none';
-  document.getElementById('loginToken').focus();
+function showKeyField() {
+  document.getElementById('keyField').style.display = 'block';
+  document.getElementById('keyStatus').style.display = 'none';
+  document.getElementById('loginKey').focus();
 }
-function updateCurrentTokenInfo() {
-  const el = document.getElementById('currentTokenInfo');
-  if (!el) return;
-  const token = getStoredToken();
+function updateCurrentKeyInfo() {
+  const el = document.getElementById('currentKeyInfo'); if (!el) return;
+  const token = getStoredKey();
   if (token) {
-    el.innerHTML = `<div style="color:#28a745;font-weight:700;margin-bottom:6px;">${ico('lock', 13)} مشفّر</div>
+    el.innerHTML = `<div style="color:#28a745;font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div>
       <div>الطول: ${token.length} حرف</div>
-      <div>بصمة التشفير: <code>${tokenSig(token)}</code></div>
-      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔐 جميع ملفات JSON مشفّرة بهذا الرمز</div>`;
-  } else el.textContent = 'لا يوجد رمز';
+      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔒 بياناتك محمية بتشفير ثابت</div>`;
+  } else el.textContent = 'لا يوجد مفتاح';
 }
-function changeToken() {
-  document.getElementById('newTokenInput').value = '';
-  openModal('tokenModal');
-  setTimeout(() => document.getElementById('newTokenInput').focus(), 100);
+function changeKeyModal() {
+  document.getElementById('newKeyInput').value = '';
+  openModal('keyModal');
+  setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
 }
 
-/* ==============================================================
-   ⭐⭐⭐ Admin Token Change من صفحة الدخول ⭐⭐⭐
-   ============================================================== */
-window.toggleAdminPanel = function() {
-  const panel = document.getElementById('adminTokenSection');
-  if (panel.classList.contains('show')) {
-    panel.classList.remove('show');
-  } else {
-    panel.classList.add('show');
-    setTimeout(() => document.getElementById('adminUser').focus(), 100);
-  }
-};
-
-window.adminChangeToken = async function() {
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value;
-  const newToken = document.getElementById('adminNewToken').value.trim();
-  const errEl = document.getElementById('adminError');
-  const btn = document.getElementById('adminChangeBtn');
-  
-  errEl.classList.remove('show');
-  errEl.textContent = '';
-  
-  // ============ 1) التحقق من المدخلات ============
-  if (!u || !p) {
-    errEl.textContent = 'أدخل اسم المستخدم وكلمة المرور';
-    errEl.classList.add('show');
-    return;
-  }
-  if (!newToken) {
-    errEl.textContent = 'أدخل الرمز الجديد';
-    errEl.classList.add('show');
-    return;
-  }
-  if (!newToken.startsWith('github_pat_') && !newToken.startsWith('ghp_')) {
-    errEl.textContent = 'الرمز الجديد يجب أن يبدأ بـ github_pat_ أو ghp_';
-    errEl.classList.add('show');
-    return;
-  }
-  
-  // ============ 2) التحقق من وجود رمز محفوظ ============
-  const oldToken = getStoredToken();
-  if (!oldToken) {
-    errEl.textContent = 'لا يوجد رمز محفوظ في المتصفح.\nالرجاء استخدام حقل "رمز الوصول" الأساسي لتسجيل الدخول أولاً.';
-    errEl.classList.add('show');
-    return;
-  }
-  
-  // ============ 3) تأكيد العملية ============
-  const confirmed = await dialog.confirm(
-    '⚠️ تأكيد عملية تغيير الرمز:\n\n' +
-    '• سيتم إعادة تشفير جميع ملفات البيانات\n' +
-    '• المستخدم: ' + u + '\n' +
-    '• الرمز الجديد سيحل محل القديم\n\n' +
-    'هل تريد المتابعة؟',
-    { title: '🔐 تأكيد تغيير الرمز', okText: 'نعم، تابع', cancelText: 'إلغاء' }
-  );
-  if (!confirmed) return;
-  
-  btn.disabled = true;
-  showLoading('جاري التحقق من الصلاحيات...');
-  
+async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
+  if (!adminUser || !adminPass) { errorEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errorEl.classList.add('show'); return false; }
+  if (!newKey) { errorEl.textContent = 'أدخل مفتاح الاتصال الجديد'; errorEl.classList.add('show'); return false; }
+  if (newKey.length < 20) { errorEl.textContent = 'المفتاح الجديد قصير جداً'; errorEl.classList.add('show'); return false; }
+  const oldKey = getStoredKey();
+  if (!oldKey) { errorEl.textContent = 'لا يوجد مفتاح حالي — استخدم "مفتاح الاتصال" الأساسي أولاً'; errorEl.classList.add('show'); return false; }
+  if (btn) btn.disabled = true;
   try {
-    // ============ 4) قراءة البيانات بالرمز الحالي ============
-    await readAll();
-    localMeta = await readMeta();
-    
-    // ============ 5) التحقق من صلاحية المدير ============
-    const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) {
-      throw new Error('❌ بيانات الدخول غير صحيحة');
+    showLoading('جاري التحقق من الصلاحيات...');
+    await readAll(); localMeta = await readMeta();
+    const found = cache.users.find(x => x.username === adminUser && x.password === adminPass);
+    if (!found) throw new Error('❌ بيانات الدخول غير صحيحة');
+    if (found.role !== 'رئيسي') throw new Error('❌ هذا الخيار للمدير فقط');
+    showLoading('جاري اختبار المفتاح الجديد...');
+    const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
+    const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
+    if (!testRes.ok) {
+      if (testRes.status === 401) throw new Error('المفتاح الجديد غير صالح');
+      if (testRes.status === 403) throw new Error('المفتاح الجديد لا يملك الصلاحيات');
+      throw new Error('فشل الاتصال بالمفتاح الجديد');
     }
-    if (found.role !== 'رئيسي') {
-      throw new Error('❌ هذا الخيار للمدير (المستخدم الرئيسي) فقط');
-    }
-    
-    // ============ 6) اختبار الرمز الجديد قبل الاعتماد عليه ============
-    showLoading('جاري التحقق من الرمز الجديد...');
-    try {
-      const testRes = await fetch(`${API_BASE}/${FILES.meta}?ref=${GITHUB_BRANCH}&_=${Date.now()}`, {
-        headers: { 'Authorization': `Bearer ${newToken}`, 'Accept': 'application/vnd.github+json' }
-      });
-      if (!testRes.ok) {
-        if (testRes.status === 401) throw new Error('الرمز الجديد غير صالح');
-        if (testRes.status === 403) throw new Error('الرمز الجديد لا يملك الصلاحيات الكافية');
-        throw new Error(`فشل الاتصال بالرمز الجديد (HTTP ${testRes.status})`);
-      }
-    } catch (e) {
-      throw new Error('فشل اختبار الرمز الجديد: ' + e.message);
-    }
-    
-    // ============ 7) حفظ الرمز الجديد ============
-    saveToken(newToken);
-    
-    // ============ 8) إعادة تشفير جميع الملفات بالرمز الجديد ============
-    showLoading('جاري إعادة تشفير جميع الملفات بالرمز الجديد...');
-    
-    // نستخدم SHA الموجود من القراءة السابقة (نفس المستودع والملفات)
-    await persistKeys(DATA_KEYS);
-    
-    // ============ 9) التحقق النهائي ============
-    showLoading('جاري التحقق من نجاح التشفير...');
-    // نمسح الذاكرة المؤقتة لنجبر قراءة جديدة
+    saveKey(newKey);
     SHAs = {}; ETags = {}; localMeta = null;
     await readAll();
-    
     hideLoading();
-    
-    // ============ 10) النجاح ============
+    logActivity('key-change', 'تحديث مفتاح الاتصال', `بواسطة ${adminUser}`, 'success');
+    toast('✅ تم تحديث مفتاح الاتصال', 'success');
+    updateKeyStatus(); updateCurrentKeyInfo();
+    return true;
+  } catch (e) {
+    if (oldKey) saveKey(oldKey);
+    hideLoading();
+    errorEl.textContent = '❌ ' + e.message;
+    errorEl.classList.add('show');
+    return false;
+  } finally { if (btn) btn.disabled = false; }
+}
+
+window.toggleAdminPanel = function() {
+  const panel = document.getElementById('adminTokenSection');
+  panel.classList.toggle('show');
+  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminUser').focus(), 100);
+};
+window.adminChangeKey = async function() {
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  const newKey = document.getElementById('adminNewKey').value.trim();
+  const errEl = document.getElementById('adminError');
+  const btn = document.getElementById('adminChangeBtn');
+  errEl.classList.remove('show'); errEl.textContent = '';
+  const ok = await performKeyChange(newKey, u, p, errEl, btn);
+  if (ok) {
     document.getElementById('adminUser').value = '';
     document.getElementById('adminPass').value = '';
-    document.getElementById('adminNewToken').value = '';
+    document.getElementById('adminNewKey').value = '';
     document.getElementById('adminTokenSection').classList.remove('show');
-    errEl.textContent = '';
-    
-    updateTokenStatus();
-    toast('✅ تم تغيير الرمز وإعادة تشفير البيانات بنجاح', 'success');
-    
-    // عرض رسالة نجاح
-    await dialog.alert(
-      '✅ تمت العملية بنجاح!\n\n' +
-      '• تم إعادة تشفير جميع الملفات بالرمز الجديد\n' +
-      '• الرمز الجديد: ' + newToken.substring(0, 20) + '…' + newToken.slice(-4) + '\n' +
-      '• بصمة التشفير: ' + tokenSig(newToken) + '\n\n' +
-      'يمكنك الآن تسجيل الدخول بالمستخدمين العاديين.',
-      { type: 'success', title: '🔐 نجحت العملية' }
-    );
-    
-  } catch (e) {
-    // استرجاع الرمز القديم في حال الفشل
-    if (oldToken) saveToken(oldToken);
-    hideLoading();
-    errEl.textContent = '❌ ' + e.message;
-    errEl.classList.add('show');
-  } finally {
-    btn.disabled = false;
+    await dialog.alert('✅ تم تحديث المفتاح بنجاح!', { type: 'success', title: 'تم التحديث' });
   }
 };
+async function saveNewKey() {
+  const newKey = document.getElementById('newKeyInput').value.trim();
+  const errEl = document.createElement('div');
+  if (!currentUser || currentUser.role !== 'رئيسي') { toast('غير مصرح', 'error'); return; }
+  errEl.className = 'login-error';
+  const ok = await performKeyChange(newKey, currentUser.username, currentUser.password, errEl, null);
+  if (ok) closeModal('keyModal');
+  else toast(errEl.textContent || 'فشل التحديث', 'error');
+}
+window.saveNewKey = saveNewKey;
 
 /* ==============================================================
-   GitHub API
+   API
    ============================================================== */
 function apiHeaders(json = false, key = null) {
-  const h = { 'Authorization': `Bearer ${getStoredToken()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
   if (json) h['Content-Type'] = 'application/json';
   if (key && ETags[key]) h['If-None-Match'] = ETags[key];
   return h;
@@ -1103,28 +1207,18 @@ function updateRateLimit(headers) {
   const reset = headers.get('X-RateLimit-Reset');
   if (remaining !== null && limit !== null) {
     rateLimitInfo = { remaining: parseInt(remaining), limit: parseInt(limit), reset: reset ? new Date(parseInt(reset) * 1000) : null };
-    renderRateLimitChip();
   }
 }
-function renderRateLimitChip() {
-  const chip = document.getElementById('rateLimitChip');
-  if (!chip || !rateLimitInfo) return;
-  const pct = Math.round((rateLimitInfo.remaining / rateLimitInfo.limit) * 100);
-  document.getElementById('rateLimitText').textContent = rateLimitInfo.remaining.toLocaleString();
-  const fill = document.getElementById('rateLimitFill');
-  fill.style.width = pct + '%';
-  fill.className = 'fill' + (pct < 20 ? ' danger' : pct < 50 ? ' warning' : '');
-}
-async function ghReadFile(key) {
-  const url = `${API_BASE}/${FILES[key]}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
+async function apiReadFile(key) {
+  const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
   let res;
   try { res = await fetch(url, { headers: apiHeaders(false, key) }); }
-  catch { setOnline(false); throw new Error('فشل الاتصال بالشبكة'); }
+  catch { setOnline(false); throw new Error('فشل الاتصال'); }
   updateRateLimit(res.headers);
   apiCallCount++;
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
-    if (res.status === 401) throw new Error('الرمز غير صالح');
+    if (res.status === 401) throw new Error('المفتاح غير صالح');
     if (res.status === 403) throw new Error('انتهت حصة الوصول');
     if (res.status === 404) return { notModified: false, data: null };
     throw new Error('فشل تحميل البيانات');
@@ -1135,24 +1229,21 @@ async function ghReadFile(key) {
   if (etag) ETags[key] = etag;
   const raw = decodeBase64(json.content);
   if (key === 'meta') {
-    try { return { notModified: false, data: JSON.parse(raw) }; }
-    catch { return { notModified: false, data: null }; }
+    try { return { notModified: false, data: JSON.parse(raw) }; } catch { return { notModified: false, data: null }; }
   }
   if (isEncrypted(raw)) {
-    const decrypted = decryptText(raw, getStoredToken());
-    if (decrypted === null) throw new Error('TOKEN_MISMATCH');
-    try { return { notModified: false, data: JSON.parse(decrypted) }; }
-    catch { throw new Error('فشل قراءة البيانات'); }
+    const decrypted = decryptText(raw);
+    if (decrypted === null) throw new Error('فشل قراءة البيانات');
+    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error('فشل قراءة البيانات'); }
   }
-  try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; }
-  catch { return { notModified: false, data: null }; }
+  try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
 }
-async function ghWriteFile(key, data) {
+async function apiWriteFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
-  const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
-  const body = { message: `تحديث ${key} - ${new Date().toISOString()}`, content: encodeBase64(content), branch: GITHUB_BRANCH, sha: SHAs[key] };
+  const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
+  const body = { message: `تحديث ${key}`, content: encodeBase64(content), branch: APP_BRANCH, sha: SHAs[key] };
   let res;
-  try { res = await fetch(`${API_BASE}/${FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
+  try { res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
   catch { setOnline(false); throw new Error('فشل الاتصال أثناء الحفظ'); }
   updateRateLimit(res.headers);
   apiCallCount++;
@@ -1165,11 +1256,11 @@ async function ghWriteFile(key, data) {
   delete ETags[key];
   return json;
 }
-async function ghCreateFile(key, data) {
+async function apiCreateFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
-  const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
-  const body = { message: `إنشاء ${key}`, content: encodeBase64(content), branch: GITHUB_BRANCH };
-  const res = await fetch(`${API_BASE}/${FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
+  const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
+  const body = { message: `إنشاء ${key}`, content: encodeBase64(content), branch: APP_BRANCH };
+  const res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
   updateRateLimit(res.headers);
   apiCallCount++;
   if (!res.ok) throw new Error('فشل الإنشاء');
@@ -1180,8 +1271,7 @@ async function ghCreateFile(key, data) {
 async function readAll() {
   hasUnencryptedFiles = false;
   const results = await Promise.all(DATA_KEYS.map(async (k) => {
-    try { return await ghReadFile(k); }
-    catch (e) { if (e.message === 'TOKEN_MISMATCH') throw e; return { notModified: false, data: null }; }
+    try { return await apiReadFile(k); } catch (e) { return { notModified: false, data: null }; }
   }));
   DATA_KEYS.forEach((k, i) => {
     const r = results[i];
@@ -1201,35 +1291,35 @@ async function readAll() {
   cache.users = cache.users.map(normalizeUser);
 }
 async function readMeta() {
-  try { const r = await ghReadFile('meta'); if (r.notModified) return localMeta || { lastUpdate: '', version: 2 }; return r.data || { lastUpdate: '', version: 2 }; }
-  catch { return { lastUpdate: '', version: 2 }; }
+  try { const r = await apiReadFile('meta'); if (r.notModified) return localMeta || { lastUpdate: '', version: 3 }; return r.data || { lastUpdate: '', version: 3 }; }
+  catch { return { lastUpdate: '', version: 3 }; }
 }
 async function writeMeta() {
-  const meta = { lastUpdate: new Date().toISOString(), version: 2, tokenSig: tokenSig(getStoredToken()), encrypted: true };
-  try { await ghWriteFile('meta', meta); localMeta = meta; }
-  catch (e) { if (e.message === 'CONFLICT') { await readMeta(); await ghWriteFile('meta', meta); localMeta = meta; } else throw e; }
+  const meta = { lastUpdate: new Date().toISOString(), version: 3 };
+  try { await apiWriteFile('meta', meta); localMeta = meta; }
+  catch (e) { if (e.message === 'CONFLICT') { await readMeta(); await apiWriteFile('meta', meta); localMeta = meta; } else throw e; }
 }
 async function persistKeys(keys) {
   setSyncing(true);
   try {
     for (const k of keys) {
-      if (!FILES[k]) continue;
-      if (!SHAs[k] && cache[k]) await ghCreateFile(k, cache[k]);
-      else await ghWriteFile(k, cache[k]);
+      if (!DATA_FILES[k]) continue;
+      if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
+      else await apiWriteFile(k, cache[k]);
     }
     await writeMeta();
   } finally { setSyncing(false); }
 }
 async function encryptAllNow() {
-  const ok = await dialog.confirm('سيتم تشفير جميع ملفات البيانات في GitHub بالرمز الحالي.\n\nمتابعة؟', { title: '🔐 تشفير جميع الملفات', okText: 'تشفير الآن' });
+  const ok = await dialog.confirm('سيتم تفعيل الحماية على جميع البيانات.', { title: '🔒 تفعيل الحماية', okText: 'تفعيل الآن' });
   if (!ok) return;
   try {
-    showLoading('جاري تشفير جميع الملفات...');
+    showLoading('جاري تفعيل الحماية...');
     await persistKeys(DATA_KEYS);
     hideLoading();
     hasUnencryptedFiles = false;
-    toast('✅ تم تشفير جميع الملفات بنجاح', 'success');
-  } catch (e) { hideLoading(); toast('فشل التشفير: ' + e.message, 'error'); }
+    toast('✅ تم تفعيل الحماية', 'success');
+  } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
 }
 window.encryptAllNow = encryptAllNow;
 
@@ -1247,10 +1337,8 @@ async function syncPull() {
     const me = cache.users.find(u => u.username === currentUser.username);
     if (me) currentUser = me;
     applyPermissionsUI(); renderActive(); setOnline(true);
-  } catch (e) {
-    if (e.message === 'TOKEN_MISMATCH') { toast('تم تغيير الرمز في جهاز آخر — سيتم تسجيل خروجك', 'warning'); setTimeout(() => logout(true), 1500); }
-    setOnline(false);
-  } finally { syncing = false; }
+  } catch (e) { setOnline(false); }
+  finally { syncing = false; }
 }
 function renderActive() {
   const a = document.querySelector('.page.active')?.id?.replace('page-', '');
@@ -1296,6 +1384,124 @@ function applyZoom() { document.body.style.zoom = zoomLevel; }
 function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); }
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
+function pct(a, b) { return b > 0 ? Math.round((a / b) * 100) : 0; }
+
+/* ==============================================================
+   Notifications
+   ============================================================== */
+let notifications = JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]');
+function addNotification(title, message, type = 'info') {
+  notifications.unshift({ id: uid(), title, message, type, time: fmtDate(), read: false });
+  if (notifications.length > 50) notifications = notifications.slice(0, 50);
+  localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
+  renderNotifications();
+}
+function renderNotifications() {
+  const list = document.getElementById('notifList'); if (!list) return;
+  const unread = notifications.filter(n => !n.read).length;
+  const badge = document.getElementById('notifBadge');
+  if (badge) { if (unread > 0) { badge.textContent = unread; badge.style.display = ''; } else badge.style.display = 'none'; }
+  if (!notifications.length) {
+    list.innerHTML = `<div class="notif-empty">${ico('bell', 40)}<div style="margin-top:10px;">لا توجد إشعارات</div></div>`;
+    return;
+  }
+  list.innerHTML = notifications.slice(0, 30).map(n => `
+    <div class="notif-item ${n.type}">
+      <div class="nt">${esc(n.title)}</div>
+      <div class="nm">${esc(n.message)}</div>
+      <div class="nd">${esc(n.time)}</div>
+    </div>
+  `).join('');
+}
+window.toggleNotifPanel = function() {
+  const panel = document.getElementById('notifPanel');
+  panel.classList.toggle('show');
+  if (panel.classList.contains('show')) {
+    notifications.forEach(n => n.read = true);
+    localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
+    renderNotifications();
+  }
+};
+window.clearAllNotifications = function() {
+  notifications = [];
+  localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
+  renderNotifications();
+};
+
+/* ==============================================================
+   Activity
+   ============================================================== */
+function logActivity(action, title, description, type = 'info') {
+  const entry = { id: uid(), action, title, description, type, user: currentUser?.username || 'system', time: fmtDate(), ts: Date.now() };
+  cache.activity.unshift(entry);
+  if (cache.activity.length > ACTIVITY_LIMIT) cache.activity = cache.activity.slice(0, ACTIVITY_LIMIT);
+}
+function renderActivity() {
+  const el = document.getElementById('activityList'); if (!el) return;
+  if (!cache.activity.length) {
+    el.innerHTML = `<div class="empty-state"><div class="icon">${ico('activity', 26)}</div><div class="title">لا يوجد نشاط</div><div class="desc">ستظهر جميع العمليات هنا</div></div>`;
+    return;
+  }
+  el.innerHTML = cache.activity.slice(0, 100).map(a => {
+    const typeClass = a.type === 'success' ? 'success' : a.type === 'danger' ? 'danger' : a.type === 'warning' ? 'warning' : '';
+    const icon = a.type === 'danger' ? 'trash' : a.type === 'success' ? 'check' : a.type === 'warning' ? 'warning' : 'info';
+    return `
+      <div class="activity-item">
+        <div class="activity-icon ${typeClass}">${ico(icon, 15)}</div>
+        <div class="activity-body">
+          <div class="activity-title">${esc(a.title)}</div>
+          <div class="activity-desc">${esc(a.description || '')}</div>
+          <div class="activity-meta">
+            <span>${ico('user', 11)} ${esc(a.user)}</span>
+            <span>${ico('clock', 11)} ${esc(a.time)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ==============================================================
+   Session Timer — 1 hour
+   ============================================================== */
+function startSessionTimer() {
+  stopSessionTimer();
+  sessionExpireAt = Date.now() + SESSION_TIMEOUT;
+  updateSessionTimer();
+  sessionTimer = setInterval(updateSessionTimer, 1000);
+  sessionWarningTimer = setInterval(checkSessionWarning, 1000);
+}
+function stopSessionTimer() {
+  if (sessionTimer) { clearInterval(sessionTimer); sessionTimer = null; }
+  if (sessionWarningTimer) { clearInterval(sessionWarningTimer); sessionWarningTimer = null; }
+}
+function resetSessionTimer() { if (currentUser) sessionExpireAt = Date.now() + SESSION_TIMEOUT; }
+function updateSessionTimer() {
+  if (!currentUser) return;
+  const el = document.getElementById('sessionTimer');
+  const txt = document.getElementById('sessionTimerText');
+  if (!el || !txt) return;
+  const remaining = sessionExpireAt - Date.now();
+  if (remaining <= 0) { txt.textContent = 'منتهية'; el.className = 'session-timer danger'; return; }
+  const mins = Math.floor(remaining / 60000);
+  const secs = Math.floor((remaining % 60000) / 1000);
+  txt.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
+  if (remaining < 2 * 60 * 1000) el.className = 'session-timer danger';
+  else if (remaining < SESSION_WARNING) el.className = 'session-timer warning';
+  else el.className = 'session-timer';
+}
+function checkSessionWarning() {
+  if (!currentUser) return;
+  const remaining = sessionExpireAt - Date.now();
+  if (remaining <= 0) { stopSessionTimer(); logout(true); toast('انتهت الجلسة', 'warning'); return; }
+  if (remaining <= SESSION_WARNING && remaining > SESSION_WARNING - 1000) {
+    addNotification('تحذير', 'ستنتهي الجلسة قريباً', 'warning');
+    toast('⚠️ ستنتهي جلستك قريباً', 'warning');
+  }
+}
+['mousemove','keydown','click','scroll','touchstart'].forEach(evt => {
+  document.addEventListener(evt, () => { if (currentUser) resetSessionTimer(); }, { passive: true });
+});
 
 /* ==============================================================
    Permissions
@@ -1328,8 +1534,7 @@ function applyPermissionsUI() {
   rebuildSettingsTabs();
 }
 function rebuildNav() {
-  const navBar = document.getElementById('navBar');
-  if (!navBar) return;
+  const navBar = document.getElementById('navBar'); if (!navBar) return;
   const items = [
     { page:'dashboard', icon:'home', label:'الرئيسية', perm:'accessDashboard' },
     { page:'entry', icon:'list', label:'إدخال الطلبات', perm:'accessEntry' },
@@ -1342,10 +1547,10 @@ function rebuildNav() {
   navBar.innerHTML = items.map(x => `<button data-page="${x.page}" class="${x.page === active ? 'active' : ''}" onclick="go('${x.page}')">${ico(x.icon, 16)}<span>${x.label}</span></button>`).join('');
 }
 function rebuildSettingsTabs() {
-  const tabsEl = document.getElementById('settingsTabs');
-  if (!tabsEl) return;
+  const tabsEl = document.getElementById('settingsTabs'); if (!tabsEl) return;
   const tabs = [
-    { id:'token', icon:'key', label:'الرمز والتشفير', perm:'tabToken' },
+    { id:'token', icon:'key', label:'مفتاح الاتصال', perm:'tabToken' },
+    { id:'activity', icon:'activity', label:'سجل النشاط', perm:'tabActivity' },
     { id:'branches', icon:'building', label:'الفروع', perm:'tabBranches' },
     { id:'drivers', icon:'truck', label:'الموصلون', perm:'tabDrivers' },
     { id:'users', icon:'user', label:'المستخدمون', perm:'tabUsers' },
@@ -1367,16 +1572,12 @@ function rebuildSettingsTabs() {
 function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
   const draft = { invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value, customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value, location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value, pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value, driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value };
-  if (draft.invoice || draft.customer) {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-    document.getElementById('draftBadge').classList.add('show');
-  }
+  if (draft.invoice || draft.customer) { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); document.getElementById('draftBadge').classList.add('show'); }
 }
 function clearDraft() { localStorage.removeItem(DRAFT_KEY); document.getElementById('draftBadge').classList.remove('show'); }
 window.discardDraft = function () { clearDraft(); toast('تم حذف المسودة', 'info'); };
 window.restoreDraft = function () {
-  const raw = localStorage.getItem(DRAFT_KEY);
-  if (!raw) return;
+  const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return;
   try {
     const d = JSON.parse(raw);
     addOrder();
@@ -1399,6 +1600,9 @@ window.restoreDraft = function () {
    ============================================================== */
 function buildUI() {
   document.getElementById('loginLogo').innerHTML = ico('package', 54);
+  document.getElementById('adminToggleIcon').innerHTML = ico('shield2', 13);
+  document.getElementById('adminHeaderIcon').innerHTML = ico('key', 16);
+  document.getElementById('adminBtnIcon').innerHTML = ico('check', 16);
   document.getElementById('brandLogo').innerHTML = ico('package', 20);
   document.getElementById('userChipIcon').innerHTML = ico('user', 14);
   document.getElementById('kbBtn').innerHTML = ico('keyboard', 17);
@@ -1406,26 +1610,34 @@ function buildUI() {
   document.getElementById('logoutBtn').innerHTML = ico('logout', 17);
   document.getElementById('draftIcon').innerHTML = ico('file', 14);
   document.getElementById('connBannerIcon').innerHTML = ico('warning', 14);
-  // ⭐ أيقونات صفحة الدخول
-  const adminToggleIcon = document.getElementById('adminToggleIcon');
-  if (adminToggleIcon) adminToggleIcon.innerHTML = ico('shield2', 13);
-  const adminHeaderIcon = document.getElementById('adminHeaderIcon');
-  if (adminHeaderIcon) adminHeaderIcon.innerHTML = ico('lock', 16);
-  const adminBtnIcon = document.getElementById('adminBtnIcon');
-  if (adminBtnIcon) adminBtnIcon.innerHTML = ico('key', 16);
+  document.getElementById('notifBtnIcon').innerHTML = ico('bell', 17);
+  document.getElementById('notifHeaderTitle').innerHTML = ico('bell', 15) + '<span style="margin-right:6px;">الإشعارات</span>';
+  document.getElementById('notifClearBtn').innerHTML = ico('trash', 15);
+  document.getElementById('notifCloseBtn').innerHTML = ico('x', 15);
+  document.getElementById('sessionTimerIcon').innerHTML = ico('clock', 12);
   updateThemeBtn();
   rebuildNav();
+
   document.getElementById('dashGrid').innerHTML = [
     { page:'entry', cls:'', icon:'list', title:'إدخال الطلبات', desc:'تسجيل ومتابعة الطلبات اليومية', perm:'accessEntry' },
     { page:'ready', cls:'green', icon:'box', title:'الطلبات الجاهزة', desc:'جاهزة للنقل إلى الفرع', perm:'accessReady' },
     { page:'log', cls:'purple', icon:'archive', title:'سجل الطلبات', desc:'الأرشيف النهائي الكامل', perm:'accessLog' },
     { page:'customers', cls:'orange', icon:'users', title:'العملاء', desc:'قاعدة بيانات العملاء', perm:'accessCustomers' }
   ].filter(x => hasPerm(x.perm)).map(x => `<div class="dash-card ${x.cls}" onclick="go('${x.page}')"><div class="icon">${ico(x.icon, 26)}</div><h3>${x.title}</h3><p>${x.desc}</p></div>`).join('');
-  document.getElementById('statsTitle').innerHTML = ico('chart', 16) + '<span>إحصائيات مباشرة</span>';
-  document.getElementById('donutTitle').innerHTML = ico('stats', 16) + '<span>توزيع الطلبات</span>';
-  document.getElementById('topCustTitle').innerHTML = ico('award', 16) + '<span>أكثر العملاء</span>';
-  document.getElementById('topBranchTitle').innerHTML = ico('building', 16) + '<span>أكثر الفروع</span>';
-  document.getElementById('trendTitle').innerHTML = ico('trendUp', 16) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
+
+  document.getElementById('title-overview').innerHTML = ico('stats', 17) + '<span>النظرة العامة</span>';
+  document.getElementById('title-payments').innerHTML = ico('money', 17) + '<span>حالة الدفع</span>';
+  document.getElementById('title-time').innerHTML = ico('clock', 17) + '<span>الإحصائيات الزمنية</span>';
+  document.getElementById('title-performance').innerHTML = ico('target', 17) + '<span>مؤشرات الأداء الرئيسية</span>';
+  document.getElementById('donutTitle').innerHTML = ico('pieChart', 15) + '<span>توزيع الطلبات</span>';
+  document.getElementById('payDonutTitle').innerHTML = ico('money', 15) + '<span>تحليل الدفع</span>';
+  document.getElementById('branchDonutTitle').innerHTML = ico('building', 15) + '<span>توزيع الفروع</span>';
+  document.getElementById('topCustTitle').innerHTML = ico('award', 15) + '<span>أكثر العملاء</span>';
+  document.getElementById('topBranchTitle').innerHTML = ico('building', 15) + '<span>أكثر الفروع</span>';
+  document.getElementById('topDrvTitle').innerHTML = ico('truck', 15) + '<span>أكثر الموصلين</span>';
+  document.getElementById('topUserTitle').innerHTML = ico('users', 15) + '<span>أكثر الموظفين نشاطاً</span>';
+  document.getElementById('trendTitle').innerHTML = ico('trendUp', 15) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
+
   document.getElementById('entryTitle').innerHTML = ico('list', 20) + '<span>إدخال الطلبات</span>';
   document.getElementById('entryHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>K</kbd> بحث • <kbd>Alt</kbd>+<kbd>N</kbd> جديد • <kbd>Alt</kbd>+<kbd>T</kbd> تحويل`;
   document.getElementById('entryToolbar').innerHTML = `
@@ -1465,13 +1677,17 @@ function buildUI() {
   document.getElementById('settingsTitle').innerHTML = ico('cog', 20) + '<span>الإعدادات</span>';
   rebuildSettingsTabs();
   document.getElementById('tab-token').innerHTML = `
-    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔐 <b>جميع ملفات JSON مشفّرة تلقائياً</b> بنفس رمز الوصول.</div>
+    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔒 بياناتك محمية بتشفير ثابت داخلي.</div>
     <div class="toolbar">
-      <button class="btn btn-warning" onclick="changeToken()">${ico('refresh', 15)}<span>تغيير الرمز (إعادة تشفير)</span></button>
-      <button class="btn btn-danger" onclick="clearToken()">${ico('trash', 15)}<span>حذف الرمز</span></button>
+      <button class="btn btn-warning" onclick="changeKeyModal()">${ico('refresh', 15)}<span>تحديث المفتاح</span></button>
+      <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>حذف المفتاح</span></button>
     </div>
-    <div id="currentTokenInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>
+    <div id="currentKeyInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>
     <div id="apiStats" style="margin-top:13px;padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-size:12px;line-height:1.8;border:1px solid var(--border);"></div>`;
+  document.getElementById('tab-activity').innerHTML = `
+    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('activity', 18)}<span>سجل النشاط</span></div>
+    <div class="perm-note" style="margin-bottom:14px;">آخر ${ACTIVITY_LIMIT} عملية</div>
+    <div id="activityList" class="activity-list"></div>`;
   document.getElementById('tab-branches').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('building', 18)}<span>إدارة الفروع</span></div>
     <div class="perm-note" style="margin-bottom:14px;">الفرع الافتراضي: <b>${DEFAULT_BRANCH_NAME}</b></div>
@@ -1491,110 +1707,327 @@ function buildUI() {
     <div class="toolbar" style="margin-top:16px;"><button class="btn btn-success" onclick="saveTemplates()">${ico('save', 15)}<span>حفظ القوالب</span></button><button class="btn btn-gray" onclick="resetTemplates()">${ico('refresh', 15)}<span>استعادة الافتراضي</span></button></div>`;
   document.getElementById('tab-backup').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي والصيانة</span></div>
-    <div class="perm-note" style="margin-bottom:14px;">سيتم إنشاء ملف ZIP يحتوي على كل ملف بيانات منفصلاً بصيغة <b>JSON عادي</b> (بدون تشفير).</div>
+    <div class="perm-note" style="margin-bottom:14px;">ZIP يحتوي على جميع البيانات بصيغة JSON.</div>
     <div class="toolbar">
       <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة ZIP</span></button>
-      <button class="btn btn-success" onclick="encryptAllNow()">${ico('lock', 15)}<span>🔐 تشفير كل الملفات الآن</span></button>
+      <button class="btn btn-success" onclick="encryptAllNow()">${ico('lock', 15)}<span>🔒 تفعيل الحماية</span></button>
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
     </div>`;
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('userModalTitle').innerHTML = ico('user', 20) + '<span>مستخدم جديد</span>';
-  document.getElementById('tokenModalTitle').innerHTML = ico('lock', 20) + '<span>تحديث الرمز وإعادة التشفير</span>';
+  document.getElementById('keyModalTitle').innerHTML = ico('lock', 20) + '<span>تحديث المفتاح</span>';
   document.getElementById('shortcutsTitle').innerHTML = ico('keyboard', 20) + '<span>الاختصارات</span>';
   document.getElementById('shortcutsGrid').innerHTML = [
     { title:'التنقل', icon:'home', items: [['الرئيسية',['Alt','1']],['إدخال الطلبات',['Alt','2']],['الطلبات الجاهزة',['Alt','3']],['سجل الطلبات',['Alt','4']],['العملاء',['Alt','5']]]},
     { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل المحدد',['Alt','T']],['تحويل جماعي',['Alt','B']],['ترحيل للسجل',['Alt','M']]]},
     { title:'داخل النموذج', icon:'list', items: [['الحقل التالي',['Enter']],['الحقل السابق',['Shift','Enter']],['حفظ',['Ctrl','Enter']],['إغلاق',['Esc']],['مدفوع',['Alt','P']],['غير مدفوع',['Alt','U']],['VIP',['Alt','V']],['جاهز',['Alt','G']]]},
-    { title:'العرض', icon:'eye', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف المحدد',['Delete']],['الوضع الليلي',['Alt','D']]]}
+    { title:'العرض', icon:'items', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف المحدد',['Delete']],['الوضع الليلي',['Alt','D']],['الإشعارات',['Alt','I']]]}
   ].map(g => `<div class="shortcut-group"><h4>${ico(g.icon, 15)}<span>${g.title}</span></h4>${g.items.map(([d, keys]) => `<div class="shortcut-row"><span class="desc">${d}</span><span class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</span></div>`).join('')}</div>`).join('');
 }
 
 /* ==============================================================
-   Statistics
+   Statistics — PROFESSIONAL DASHBOARD
    ============================================================== */
-function renderStats() {
-  const unpaid = cache.orders.filter(o => o.pay === 'غير مدفوع').length;
-  const vip = cache.orders.filter(o => o.pay === 'VIP').length;
+function computeAnalytics() {
+  const allOrders = [...cache.orders, ...cache.ready, ...cache.log];
+
+  // -- Core counts --
+  const active = cache.orders.length;
+  const ready = cache.ready.length;
+  const archived = cache.log.length;
+  const total = active + ready + archived;
+
+  // -- Payment breakdown (all orders) --
+  const payPaid = allOrders.filter(o => o.pay === 'مدفوع').length;
+  const payUnpaid = allOrders.filter(o => o.pay === 'غير مدفوع').length;
+  const payVip = allOrders.filter(o => o.pay === 'VIP').length;
+  const payTotalPaid = payPaid + payVip;
+
+  // -- Current state breakdown (orders only) --
+  const unpaidActive = cache.orders.filter(o => o.pay === 'غير مدفوع').length;
+  const paidActive = cache.orders.filter(o => o.pay === 'مدفوع').length;
+  const vipActive = cache.orders.filter(o => o.pay === 'VIP').length;
+  const readyActive = cache.orders.filter(o => o.status === 'جاهز').length;
+  const progressActive = cache.orders.filter(o => o.status === 'قيد التجهيز').length;
+
+  // -- Rates --
+  const completionRate = total > 0 ? Math.round(((ready + archived) / total) * 100) : 0;
+  const payRate = total > 0 ? Math.round((payTotalPaid / total) * 100) : 0;
+  const unpaidRate = total > 0 ? Math.round((payUnpaid / total) * 100) : 0;
+  const vipRate = total > 0 ? Math.round((payVip / total) * 100) : 0;
+  const readyRate = active > 0 ? Math.round((readyActive / active) * 100) : 0;
+
+  // -- Time-based --
+  const today = new Date(); today.setHours(0,0,0,0);
+  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
+  const weekAgo = new Date(today); weekAgo.setDate(weekAgo.getDate()-7);
+  const monthAgo = new Date(today); monthAgo.setDate(monthAgo.getDate()-30);
+
+  const getOrderDate = (o) => parseDate(o.createdAt) || parseDate(o.transferredAt) || parseDate(o.archivedAt);
+
+  const todayCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= today && d < tomorrow; }).length;
+  const weekCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= weekAgo; }).length;
+  const monthCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= monthAgo; }).length;
+  const avgDaily = Math.round((weekCount / 7) * 10) / 10;
+  const avgMonthly = Math.round(monthCount / 30 * 10) / 10;
+
+  // -- Aggregations --
+  const custCount = {};
+  allOrders.forEach(o => { if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1; });
+  const topCustomers = Object.entries(custCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+
+  const branchCount = {};
+  allOrders.forEach(o => { const b = o.branch || DEFAULT_BRANCH_NAME; branchCount[b] = (branchCount[b] || 0) + 1; });
+  const topBranches = Object.entries(branchCount).sort((a,b) => b[1] - a[1]);
+
+  const driverCount = {};
+  allOrders.forEach(o => { if (o.driver) driverCount[o.driver] = (driverCount[o.driver] || 0) + 1; });
+  const topDrivers = Object.entries(driverCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+
+  const userCount = {};
+  allOrders.forEach(o => { if (o.lastEditBy) userCount[o.lastEditBy] = (userCount[o.lastEditBy] || 0) + 1; });
+  const topUsers = Object.entries(userCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+
+  // -- Trends --
   const diff = (curr, prev) => {
     if (prev === 0 && curr === 0) return { dir:'flat', pct:0 };
     if (prev === 0) return { dir:'up', pct:100 };
     const pct = Math.round(((curr - prev) / prev) * 100);
     return { dir: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat', pct: Math.abs(pct) };
   };
-  const trendIcon = (dir) => dir === 'up' ? ico('trendUp', 11) : dir === 'down' ? ico('trendDown', 11) : '';
-  const items = [
-    { icon:'list', label:'قيد الإدخال', value: cache.orders.length, cls:'', trend: diff(cache.orders.length, prevStats.orders) },
-    { icon:'box', label:'جاهزة للنقل', value: cache.ready.length, cls:'green', trend: diff(cache.ready.length, prevStats.ready) },
-    { icon:'x', label:'غير مدفوعة', value: unpaid, cls:'red', trend:{ dir:'flat', pct:0 } },
-    { icon:'crown', label:'طلبات VIP', value: vip, cls:'purple', trend:{ dir:'flat', pct:0 } },
-    { icon:'archive', label:'في السجل', value: cache.log.length, cls:'', trend: diff(cache.log.length, prevStats.log) }
-  ];
-  document.getElementById('statsGrid').innerHTML = items.map(s => `
-    <div class="stat ${s.cls}">
-      <div class="stat-head"><div class="stat-icon">${ico(s.icon, 18)}</div>${s.trend.dir !== 'flat' ? `<span class="trend ${s.trend.dir}">${trendIcon(s.trend.dir)}<span>${s.trend.pct}%</span></span>` : ''}</div>
-      <div class="num">${s.value.toLocaleString()}</div>
-      <div class="lbl">${s.label}</div>
-    </div>`).join('');
-  renderDonut(cache.orders.length, cache.ready.length, cache.log.length);
-  const custCount = {};
-  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => { if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1; });
-  const topC = Object.entries(custCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  document.getElementById('topCustomers').innerHTML = topC.length ? topC.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('') : '<div class="empty-top">لا توجد بيانات بعد</div>';
-  const branchCount = {};
-  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => { const b = o.branch || DEFAULT_BRANCH_NAME; branchCount[b] = (branchCount[b] || 0) + 1; });
-  const topB = Object.entries(branchCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  document.getElementById('topBranches').innerHTML = topB.length ? topB.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('') : '<div class="empty-top">لا توجد بيانات بعد</div>';
-  renderTrend7Days();
-  prevStats = { orders: cache.orders.length, ready: cache.ready.length, log: cache.log.length };
+
+  return {
+    active, ready, archived, total,
+    payPaid, payUnpaid, payVip, payTotalPaid,
+    unpaidActive, paidActive, vipActive, readyActive, progressActive,
+    completionRate, payRate, unpaidRate, vipRate, readyRate,
+    todayCount, weekCount, monthCount, avgDaily, avgMonthly,
+    topCustomers, topBranches, topDrivers, topUsers,
+    custCount, branchCount, driverCount, userCount,
+    diff, allOrders, getOrderDate
+  };
 }
-function renderDonut(active, ready, archived) {
-  const total = active + ready + archived;
-  const donut = document.getElementById('donutChart');
-  const legend = document.getElementById('donutLegend');
+
+function renderTrendBadge(t) {
+  if (!t || t.dir === 'flat') return '';
+  const icon = t.dir === 'up' ? ico('trendUp', 10) : ico('trendDown', 10);
+  return `<span class="trend ${t.dir}">${icon}<span>${t.pct}%</span></span>`;
+}
+
+function renderStats() {
+  const a = computeAnalytics();
+
+  // ===== Section 1: Overview KPI cards =====
+  document.getElementById('statsOverview').innerHTML = `
+    <div class="stat">
+      <div class="stat-head">
+        <div class="stat-icon">${ico('layers', 17)}</div>
+        ${renderTrendBadge(a.diff(a.total, prevStats.total))}
+      </div>
+      <div class="num">${a.total.toLocaleString()}</div>
+      <div class="lbl">إجمالي الطلبات</div>
+      <div class="sub">عبر النظام بأكمله</div>
+    </div>
+    <div class="stat orange">
+      <div class="stat-head"><div class="stat-icon">${ico('list', 17)}</div>${renderTrendBadge(a.diff(a.active, prevStats.orders))}</div>
+      <div class="num">${a.active.toLocaleString()}</div>
+      <div class="lbl">قيد الإدخال</div>
+      <div class="sub">${a.progressActive} قيد التجهيز • ${a.readyActive} جاهز</div>
+    </div>
+    <div class="stat green">
+      <div class="stat-head"><div class="stat-icon">${ico('box', 17)}</div>${renderTrendBadge(a.diff(a.ready, prevStats.ready))}</div>
+      <div class="num">${a.ready.toLocaleString()}</div>
+      <div class="lbl">جاهزة للنقل</div>
+      <div class="sub">${a.readyRate}% من الطلبات النشطة</div>
+      <div class="progress-bar"><div class="fill green" style="width:${a.readyRate}%"></div></div>
+    </div>
+    <div class="stat purple">
+      <div class="stat-head"><div class="stat-icon">${ico('archive', 17)}</div>${renderTrendBadge(a.diff(a.archived, prevStats.log))}</div>
+      <div class="num">${a.archived.toLocaleString()}</div>
+      <div class="lbl">في السجل</div>
+      <div class="sub">أرشيف نهائي</div>
+    </div>
+    <div class="stat teal">
+      <div class="stat-head"><div class="stat-icon">${ico('target', 17)}</div></div>
+      <div class="num">${a.completionRate}%</div>
+      <div class="lbl">نسبة الإنجاز</div>
+      <div class="sub">(جاهزة + سجل) ÷ الإجمالي</div>
+      <div class="progress-bar"><div class="fill" style="width:${a.completionRate}%"></div></div>
+    </div>
+  `;
+
+  // ===== Section 2: Payments =====
+  document.getElementById('statsPayments').innerHTML = `
+    <div class="stat green">
+      <div class="stat-head"><div class="stat-icon">${ico('money', 17)}</div></div>
+      <div class="num small">${a.payTotalPaid.toLocaleString()}</div>
+      <div class="lbl">مدفوع + VIP</div>
+      <div class="sub">${a.payRate}% من الإجمالي</div>
+      <div class="progress-bar"><div class="fill green" style="width:${a.payRate}%"></div></div>
+    </div>
+    <div class="stat red">
+      <div class="stat-head"><div class="stat-icon">${ico('warning', 17)}</div></div>
+      <div class="num small">${a.payUnpaid.toLocaleString()}</div>
+      <div class="lbl">غير مدفوع</div>
+      <div class="sub">${a.unpaidRate}% من الإجمالي</div>
+      <div class="progress-bar"><div class="fill red" style="width:${a.unpaidRate}%"></div></div>
+    </div>
+    <div class="stat purple">
+      <div class="stat-head"><div class="stat-icon">${ico('crown', 17)}</div></div>
+      <div class="num small">${a.payVip.toLocaleString()}</div>
+      <div class="lbl">طلبات VIP</div>
+      <div class="sub">${a.vipRate}% من الإجمالي</div>
+      <div class="progress-bar"><div class="fill purple" style="width:${a.vipRate}%"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-head"><div class="stat-icon">${ico('check', 17)}</div></div>
+      <div class="num small">${a.payPaid.toLocaleString()}</div>
+      <div class="lbl">مدفوع فقط</div>
+      <div class="sub">بدون VIP</div>
+    </div>
+  `;
+
+  // ===== Section 3: Time =====
+  document.getElementById('timeStatsContainer').innerHTML = `
+    <div class="time-stats">
+      <div class="time-stat"><div class="tv">${a.todayCount}</div><div class="tl">اليوم</div></div>
+      <div class="time-stat"><div class="tv">${a.weekCount}</div><div class="tl">آخر 7 أيام</div></div>
+      <div class="time-stat"><div class="tv">${a.monthCount}</div><div class="tl">آخر 30 يوم</div></div>
+      <div class="time-stat"><div class="tv">${a.avgDaily}</div><div class="tl">متوسط يومي</div></div>
+      <div class="time-stat"><div class="tv">${a.avgMonthly}</div><div class="tl">متوسط شهري</div></div>
+      <div class="time-stat"><div class="tv">${a.allOrders.length > 0 ? Math.round(a.allOrders.length / Math.max(1, Math.ceil((Date.now() - new Date(a.allOrders[a.allOrders.length-1]?.createdAt || Date.now()).getTime()) / 86400000))) : 0}</div><div class="tl">معدل عام</div></div>
+    </div>
+  `;
+
+  // ===== Section 4: Donut - Distribution =====
+  renderDonut('donutChart', 'donutLegend', [
+    { value: a.active, color: '#2e75b6', label: 'قيد الإدخال' },
+    { value: a.ready, color: '#28a745', label: 'جاهزة' },
+    { value: a.archived, color: '#6f42c1', label: 'في السجل' }
+  ]);
+
+  // ===== Section 5: Donut - Payment =====
+  renderDonut('payDonutChart', 'payDonutLegend', [
+    { value: a.payPaid, color: '#28a745', label: 'مدفوع' },
+    { value: a.payUnpaid, color: '#dc3545', label: 'غير مدفوع' },
+    { value: a.payVip, color: '#6f42c1', label: 'VIP' }
+  ]);
+
+  // ===== Section 6: Donut - Branch =====
+  const branchColors = ['#2e75b6','#28a745','#6f42c1','#fd7e14','#17a2b8','#e83e8c','#ffc107','#dc3545'];
+  const branchSegments = a.topBranches.slice(0, 6).map((b, i) => ({ value: b[1], color: branchColors[i], label: b[0] }));
+  renderDonut('branchDonutChart', 'branchDonutLegend', branchSegments);
+
+  // ===== Section 7: Top lists =====
+  renderTopList('topCustomers', a.topCustomers, a.topCustomers[0]?.[1] || 1);
+  renderTopList('topBranches', a.topBranches, a.topBranches[0]?.[1] || 1);
+  renderTopList('topDrivers', a.topDrivers, a.topDrivers[0]?.[1] || 1);
+  renderTopList('topUsers', a.topUsers, a.topUsers[0]?.[1] || 1);
+
+  // ===== Section 8: Performance metrics =====
+  document.getElementById('performanceMetrics').innerHTML = `
+    <div class="metric-box"><div class="mv">${a.total}</div><div class="ml">إجمالي الطلبات</div></div>
+    <div class="metric-box"><div class="mv">${a.todayCount}</div><div class="ml">الطلبات اليوم</div></div>
+    <div class="metric-box"><div class="mv green">${a.payTotalPaid}</div><div class="ml">طلبات مدفوعة</div></div>
+    <div class="metric-box"><div class="mv red">${a.payUnpaid}</div><div class="ml">غير مدفوعة</div></div>
+    <div class="metric-box"><div class="mv purple">${a.payVip}</div><div class="ml">طلبات VIP</div></div>
+    <div class="metric-box"><div class="mv">${a.completionRate}%</div><div class="ml">نسبة الإنجاز</div></div>
+    <div class="metric-box"><div class="mv green">${a.payRate}%</div><div class="ml">نسبة الدفع</div></div>
+    <div class="metric-box"><div class="mv">${a.avgDaily}</div><div class="ml">متوسط يومي</div></div>
+  `;
+
+  // ===== Section 9: Trend chart =====
+  renderTrend7Days();
+
+  // ===== Save for next comparison =====
+  prevStats = { orders: a.active, ready: a.ready, log: a.archived, total: a.total };
+}
+
+function renderDonut(chartId, legendId, segments) {
+  const total = segments.reduce((s, x) => s + x.value, 0);
+  const donut = document.getElementById(chartId);
+  const legend = document.getElementById(legendId);
+  if (!donut || !legend) return;
   if (total === 0) {
-    donut.innerHTML = `<div class="center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div class="big" style="color:var(--text-muted);">0</div><div class="small">لا بيانات</div></div>`;
-    legend.innerHTML = '<div class="empty-top">ابدأ بإضافة طلبات</div>';
+    donut.innerHTML = `<div class="center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div class="big" style="color:var(--text-muted);font-size:20px;">0</div><div class="small">لا بيانات</div></div>`;
+    legend.innerHTML = '<div class="empty-top">لا توجد بيانات</div>';
     return;
   }
-  const radius = 60, cx = 70, cy = 70, circumference = 2 * Math.PI * radius;
-  const segments = [{ value: active, color:'#2e75b6', label:'قيد الإدخال' }, { value: ready, color:'#28a745', label:'جاهزة' }, { value: archived, color:'#6f42c1', label:'في السجل' }];
+  const radius = 55, cx = 65, cy = 65, circumference = 2 * Math.PI * radius;
   let offset = 0;
   const circles = segments.map(s => {
-    const pct = s.value / total; const dash = pct * circumference;
+    const pctVal = s.value / total;
+    const dash = pctVal * circumference;
     const el = `<circle cx="${cx}" cy="${cy}" r="${radius}" stroke="${s.color}" stroke-dasharray="${dash} ${circumference - dash}" stroke-dashoffset="${-offset}" />`;
-    offset += dash; return el;
+    offset += dash;
+    return el;
   }).join('');
-  donut.innerHTML = `<svg width="140" height="140" viewBox="0 0 140 140"><circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="16" fill="none"/>${circles}</svg><div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>`;
-  legend.innerHTML = segments.map(s => `<div class="legend-item"><span class="dot" style="background:${s.color};"></span><span class="name">${s.label}</span><span class="val">${s.value}</span></div>`).join('');
+  donut.innerHTML = `
+    <svg width="130" height="130" viewBox="0 0 130 130">
+      <circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="15" fill="none"/>
+      ${circles}
+    </svg>
+    <div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>
+  `;
+  legend.innerHTML = segments.filter(s => s.value > 0).map(s => {
+    const p = total > 0 ? Math.round((s.value / total) * 100) : 0;
+    return `<div class="legend-item">
+      <span class="dot" style="background:${s.color};"></span>
+      <span class="name">${esc(s.label)}</span>
+      <span class="pct">${p}%</span>
+      <span class="val">${s.value}</span>
+    </div>`;
+  }).join('');
 }
+
+function renderTopList(elId, entries, maxVal) {
+  const el = document.getElementById(elId); if (!el) return;
+  if (!entries || !entries.length) { el.innerHTML = '<div class="empty-top">لا توجد بيانات بعد</div>'; return; }
+  el.innerHTML = entries.map(([name, count], i) => {
+    const pctVal = maxVal > 0 ? Math.round((count / maxVal) * 100) : 0;
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    return `<div class="top-item">
+      <span class="rank ${rankClass}">${i+1}</span>
+      <span class="name" title="${esc(name)}">${esc(name)}</span>
+      <span class="bar-mini"><span class="fill" style="width:${pctVal}%"></span></span>
+      <span class="count">${count}</span>
+    </div>`;
+  }).join('');
+}
+
 function renderTrend7Days() {
   const days = [];
   const today = new Date(); today.setHours(0, 0, 0, 0);
   for (let i = 0; i <= 6; i++) { const d = new Date(today); d.setDate(d.getDate() - i); days.push(d); }
+  const allOrders = [...cache.orders, ...cache.ready, ...cache.log];
   const counts = days.map(day => {
     const nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
-    return [...cache.orders, ...cache.ready, ...cache.log].filter(o => {
+    return allOrders.filter(o => {
       const cd = parseDate(o.createdAt) || parseDate(o.transferredAt) || parseDate(o.archivedAt);
       return cd && cd >= day && cd < nextDay;
     }).length;
   });
-  const max = Math.max(...counts, 1); const w = 100, h = 40;
+  const max = Math.max(...counts, 1);
+  const w = 100, h = 40;
   const points = counts.map((c, i) => { const x = w - (i / 6) * w; const y = h - (c / max) * (h - 6) - 3; return [x, y]; });
   const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
   const areaPath = path + ` L0 ${h} L${w} ${h} Z`;
   const dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  document.getElementById('trendChart').innerHTML = `
-    <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:90px;direction:ltr;">
+  const el = document.getElementById('trendChart');
+  if (!el) return;
+  el.innerHTML = `
+    <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:100px;direction:ltr;">
       <defs><linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2e75b6" stop-opacity="0.35"/><stop offset="100%" stop-color="#2e75b6" stop-opacity="0"/></linearGradient></defs>
       <path d="${areaPath}" fill="url(#trendGrad)"/>
       <path d="${path}" fill="none" stroke="#2e75b6" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      ${points.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="0.7" fill="#2e75b6" vector-effect="non-scaling-stroke" />`).join('')}
+      ${points.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="0.8" fill="#2e75b6" vector-effect="non-scaling-stroke" />`).join('')}
     </svg>
     <div style="display:flex;margin-top:6px;font-size:10.5px;color:var(--text-muted);font-weight:600;gap:4px;">
       ${days.map((d, i) => `<span style="text-align:center;flex:1;">${dayNames[d.getDay()]}<br><b style="color:var(--dark-blue);">${counts[i]}</b></span>`).join('')}
     </div>`;
 }
+
 function renderDashboard() { renderStats(); }
 
 /* ==============================================================
@@ -1714,11 +2147,10 @@ function renderCustomers() {
     <td>${canManage ? `<button class="btn btn-primary btn-sm" onclick="editCustomer('${c.id}')" title="تعديل">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')" title="حذف">${ico('trash', 13)}</button>` : '—'}</td>
   </tr>`).join('');
 }
-function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); }
+function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); renderActivity(); }
 function renderBranchesList() {
   const canManage = hasPerm('manageBranches');
-  const el = document.getElementById('branchList');
-  if (!el) return;
+  const el = document.getElementById('branchList'); if (!el) return;
   el.innerHTML = cache.branches.length ? cache.branches.map(b => {
     const isDefault = b.name === DEFAULT_BRANCH_NAME;
     return `<span style="background:linear-gradient(135deg,#eef7ff,#dceaf7);padding:10px 16px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:10px;border:1px solid #cddcf0;color:#1f4e79;${isDefault ? 'box-shadow:0 0 0 2px rgba(46,117,182,.3);' : ''}">
@@ -1729,8 +2161,7 @@ function renderBranchesList() {
 }
 function renderDriversList() {
   const canManage = hasPerm('manageDrivers');
-  const el = document.getElementById('driverList');
-  if (!el) return;
+  const el = document.getElementById('driverList'); if (!el) return;
   el.innerHTML = cache.drivers.length ? cache.drivers.map(d => `<span style="background:linear-gradient(135deg,#eef3fa,#e0ebf5);padding:9px 14px;border-radius:20px;font-size:12.5px;display:inline-flex;align-items:center;gap:9px;border:1px solid #d4e0ec;color:#1f4e79;">
     ${ico('truck', 14)}<b>${esc(d.name)}</b>${d.phone ? `<span style="opacity:.7;font-size:11px;">(${esc(d.phone)})</span>` : ''}
     ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
@@ -1738,8 +2169,7 @@ function renderDriversList() {
 }
 function renderUsers() {
   const canManage = hasPerm('manageUsers');
-  const body = document.getElementById('userBody');
-  if (!body) return;
+  const body = document.getElementById('userBody'); if (!body) return;
   body.innerHTML = cache.users.map(u => {
     const permCount = u.role === 'رئيسي' ? 'الكل' : `${Object.values(u.permissions || {}).filter(v => v).length}/${Object.keys(DEFAULT_PERMS).length}`;
     const actions = u.username === currentUser.username ? '<span style="color:var(--text-muted);font-size:11.5px;">(أنت)</span>' : (canManage ? `<button class="btn btn-primary btn-sm" onclick="editUser('${u.id}')">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">${ico('trash', 13)}</button>` : '—');
@@ -1773,23 +2203,19 @@ window.go = function (page) {
   if (page === 'ready') { populateBranchSelects(); renderReady(); }
   if (page === 'log') { populateBranchSelects(); renderLog(); }
   if (page === 'customers') renderCustomers();
-  if (page === 'settings') { rebuildSettingsTabs(); renderSettings(); updateCurrentTokenInfo(); renderApiStats(); }
+  if (page === 'settings') { rebuildSettingsTabs(); renderSettings(); updateCurrentKeyInfo(); }
 };
 window.switchTab = function (evt, tab) {
-  const tabPerm = { token:'tabToken', branches:'tabBranches', drivers:'tabDrivers', users:'tabUsers', templates:'tabTemplates', backup:'tabBackup' };
+  const tabPerm = { token:'tabToken', activity:'tabActivity', branches:'tabBranches', drivers:'tabDrivers', users:'tabUsers', templates:'tabTemplates', backup:'tabBackup' };
   if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast('غير مصرح بالدخول', 'error'); return; }
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
   const btn = evt.target.closest('.tab-btn'); if (btn) btn.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
-  if (tab === 'token') { renderApiStats(); updateCurrentTokenInfo(); }
+  if (tab === 'token') updateCurrentKeyInfo();
+  if (tab === 'activity') renderActivity();
 };
-function renderApiStats() {
-  const el = document.getElementById('apiStats');
-  if (!el) return;
-  el.innerHTML = `<b>إحصائيات الاتصال:</b><br>• طلبات فعلية: <b>${apiCallCount}</b><br>• طلبات مخزّنة: <b>${apiCachedCount}</b><br>${rateLimitInfo ? `• المتبقي من الحصة: <b>${rateLimitInfo.remaining.toLocaleString()} / ${rateLimitInfo.limit.toLocaleString()}</b>` : ''}`;
-}
 
 /* ==============================================================
    Login
@@ -1802,77 +2228,48 @@ window.doLogin = async function () {
   const btn = document.getElementById('loginBtn');
   errEl.classList.remove('show'); errEl.textContent = ''; loadEl.textContent = '';
 
-  const oldToken = getStoredToken();
-  let tokenChanged = false;
-  let newTokenCandidate = null;
-
-  const tokenFieldEl = document.getElementById('tokenField');
-  if (tokenFieldEl.style.display !== 'none') {
-    const t = document.getElementById('loginToken').value.trim();
-    if (t) {
-      if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) { errEl.textContent = 'الرمز لا يبدو صحيحاً — يجب أن يبدأ بـ github_pat_'; errEl.classList.add('show'); return; }
-      if (t !== oldToken) { tokenChanged = true; newTokenCandidate = t; }
-      saveToken(t); updateTokenStatus();
-    }
+  const keyFieldEl = document.getElementById('keyField');
+  if (keyFieldEl.style.display !== 'none') {
+    const t = document.getElementById('loginKey').value.trim();
+    if (t) { saveKey(t); updateKeyStatus(); }
   }
-  if (!getStoredToken()) { errEl.textContent = 'الرجاء إدخال رمز الوصول أولاً'; errEl.classList.add('show'); return; }
+  if (!getStoredKey()) { errEl.textContent = 'الرجاء إدخال مفتاح الاتصال'; errEl.classList.add('show'); return; }
   if (!u || !p) { errEl.textContent = 'الرجاء إدخال اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
-  if (GITHUB_OWNER === 'YOUR_USERNAME') { errEl.textContent = 'لم يتم ضبط النظام بعد'; errEl.classList.add('show'); return; }
   if (location.protocol === 'file:') { errEl.textContent = 'افتح النظام من الرابط المنشور'; errEl.classList.add('show'); return; }
 
-  btn.disabled = true; loadEl.textContent = 'جاري التحقق...'; showLoading('جاري تحميل البيانات المشفّرة...');
+  btn.disabled = true;
+  loadEl.textContent = 'جاري التحقق...';
+  showLoading('جاري تحميل البيانات...');
   try {
     await readAll(); localMeta = await readMeta();
     const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) {
-      errEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة'; errEl.classList.add('show');
-      if (tokenChanged && oldToken) saveToken(oldToken);
-      btn.disabled = false; loadEl.textContent = ''; hideLoading(); return;
-    }
-    if (tokenChanged && hasUnencryptedFiles) {
+    if (!found) { errEl.textContent = 'بيانات الدخول غير صحيحة'; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
+    if (hasUnencryptedFiles && found.role === 'رئيسي') {
       hideLoading();
-      const ok = await dialog.confirm('تم تسجيل الدخول بنجاح.\n\nاكتشف النظام ملفات غير مشفّرة على GitHub.\nهل تريد تشفيرها الآن؟', { title: '🔐 تشفير البيانات', okText: 'تشفير الآن', cancelText: 'لاحقاً' });
-      if (ok) { try { showLoading('جاري التشفير...'); await persistKeys(DATA_KEYS); hideLoading(); hasUnencryptedFiles = false; toast('تم تشفير جميع الملفات', 'success'); } catch (e2) { hideLoading(); toast('فشل التشفير: ' + e2.message, 'error'); } }
+      const ok = await dialog.confirm('هل تريد تفعيل الحماية الكاملة على البيانات؟', { title: '🔒 تفعيل الحماية', okText: 'تفعيل الآن', cancelText: 'لاحقاً' });
+      if (ok) { try { showLoading('جاري التفعيل...'); await persistKeys(DATA_KEYS); hideLoading(); hasUnencryptedFiles = false; toast('✅ تم التفعيل', 'success'); } catch (e2) { hideLoading(); } }
     }
-    localStorage.setItem('oms_lastUser', u); currentUser = found; loadEl.textContent = 'تم الدخول بنجاح'; hideLoading(); startApp();
-  } catch (e) {
-    if (e.message === 'TOKEN_MISMATCH' && tokenChanged && oldToken) {
-      saveToken(oldToken);
-      try {
-        await readAll(); localMeta = await readMeta();
-        hideLoading();
-        const useNew = await dialog.confirm('⚠️ تنبيه:\n\nالرمز الجديد لا يطابق تشفير البيانات.\n\n✅ "استخدم الجديد" — إعادة تشفير كامل\n❌ "احتفظ بالقديم" — الاستمرار بالقديم', { title: '🔐 تعارض في الرمز', okText: 'استخدم الجديد', cancelText: 'احتفظ بالقديم' });
-        if (useNew) {
-          saveToken(newTokenCandidate);
-          try { showLoading('جاري إعادة التشفير...'); await persistKeys(DATA_KEYS); await readAll(); hideLoading(); toast('✅ تم تبديل الرمز وإعادة التشفير', 'success'); }
-          catch (e3) { saveToken(oldToken); hideLoading(); errEl.textContent = 'فشل التبديل: ' + e3.message; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; return; }
-        } else toast('تم الاحتفاظ بالرمز القديم', 'info');
-        const found = cache.users.find(x => x.username === u && x.password === p);
-        if (!found) { errEl.textContent = 'بيانات الدخول غير صحيحة'; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
-        localStorage.setItem('oms_lastUser', u); currentUser = found; loadEl.textContent = 'تم الدخول'; hideLoading(); startApp(); return;
-      } catch (e2) {
-        saveToken(newTokenCandidate || oldToken);
-        errEl.textContent = 'فشل الاتصال بكل من الرمز القديم والجديد.\n\nتأكد من صحة الرمز وصلاحيته.';
-        errEl.classList.add('show'); hideLoading(); return;
-      }
-    }
-    if (e.message === 'TOKEN_MISMATCH') errEl.textContent = 'الرمز لا يطابق تشفير البيانات.\n\n💡 الحل:\n• أدخل الرمز الصحيح، أو\n• استخدم "إدارة الرمز (للمدير)"';
-    else errEl.textContent = e.message || 'حدث خطأ غير متوقع';
-    errEl.classList.add('show'); hideLoading();
-  } finally { btn.disabled = false; }
+    localStorage.setItem('oms_lastUser', u);
+    currentUser = found;
+    logActivity('login', `تسجيل دخول: ${u}`, `الدور: ${found.role}`, 'success');
+    loadEl.textContent = 'تم الدخول بنجاح';
+    hideLoading();
+    startApp();
+  } catch (e) { errEl.textContent = e.message || 'حدث خطأ'; errEl.classList.add('show'); hideLoading(); }
+  finally { btn.disabled = false; }
 };
 
 window.logout = async function (silent = false) {
   if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
-  stopPolling(); currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
+  if (currentUser) logActivity('logout', `تسجيل خروج: ${currentUser.username}`, '', 'info');
+  stopPolling(); stopSessionTimer();
+  currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = ''; document.getElementById('loginLoading').textContent = '';
-  // تنظيف قسم المدير
-  const adminSection = document.getElementById('adminTokenSection');
-  if (adminSection) adminSection.classList.remove('show');
-  updateTokenStatus(); loadLastUser();
-  if (!silent) toast('تم تسجيل الخروج بنجاح', 'success');
+  const adminSection = document.getElementById('adminTokenSection'); if (adminSection) adminSection.classList.remove('show');
+  updateKeyStatus(); loadLastUser();
+  if (!silent) toast('تم تسجيل الخروج', 'success');
 };
 
 function loadLastUser() {
@@ -1886,17 +2283,13 @@ function startApp() {
   document.getElementById('currentUserName').textContent = currentUser.username;
   buildUI(); applyPermissionsUI(); populateBranchSelects(); loadDriversIntoSelects();
   const firstAvailable = ['dashboard','entry','ready','log','customers','settings'].find(p => {
-    const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
-    return hasPerm(pagePerm[p]);
+    const pp = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
+    return hasPerm(pp[p]);
   }) || 'dashboard';
-  go(firstAvailable); startPolling();
+  go(firstAvailable); startPolling(); startSessionTimer();
+  renderNotifications();
+  addNotification('مرحباً', `أهلاً بك ${currentUser.username}`, 'info');
   toast(`أهلاً بك، ${currentUser.username}`, 'success');
-  if (hasUnencryptedFiles && hasPerm('tabToken')) {
-    setTimeout(async () => {
-      const ok = await dialog.confirm('اكتشف النظام ملفات غير مشفّرة على GitHub.\n\nهل تريد تشفيرها الآن؟', { title: '🔐 تشفير البيانات', okText: 'تشفير الآن', cancelText: 'لاحقاً' });
-      if (ok) await encryptAllNow();
-    }, 1500);
-  }
 }
 
 /* ==============================================================
@@ -1942,7 +2335,7 @@ window.editOrder = function (id) {
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
 window.editFromLog = function (id) {
-  if (!hasPerm('editLog')) { toast('غير مصرح بتعديل السجل', 'error'); return; }
+  if (!hasPerm('editLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id); if (!o) return;
   clearAllErrors('orderModal');
   document.getElementById('orderModalTitle').innerHTML = ico('edit', 20) + '<span>تعديل في السجل</span>';
@@ -1985,19 +2378,19 @@ function validateOrderForm() {
       if (!document.getElementById('orderLocation').value.trim() && matched.location) document.getElementById('orderLocation').value = matched.location;
     }
   }
-  if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
+  if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول', 'error'); }
   return valid;
 }
 window.saveOrder = async function () {
   const now = Date.now();
-  if (now - lastSaveTime < SAVE_COOLDOWN) { const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000); toast(`انتظر ${wait} ثانية قبل الحفظ التالي`, 'warning'); return; }
+  if (now - lastSaveTime < SAVE_COOLDOWN) { const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000); toast(`انتظر ${wait} ثانية`, 'warning'); return; }
   if (saveInProgress) { toast('جاري الحفظ...', 'info'); return; }
   if (!validateOrderForm()) return;
   const id = document.getElementById('orderId').value;
   const isLogEdit = document.getElementById('orderLogMode').value === '1';
   saveInProgress = true;
   const btn = document.getElementById('saveOrderBtn');
-  if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ والتشفير...'; }
+  if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ...'; }
   const data = {
     invoice: document.getElementById('orderInvoice').value.trim(),
     branch: document.getElementById('orderBranch').value || DEFAULT_BRANCH_NAME,
@@ -2023,6 +2416,7 @@ window.saveOrder = async function () {
       data.archivedBy = cache.log[idx].archivedBy;
       cache.log[idx] = { ...cache.log[idx], ...data };
       await persistKeys(['log']);
+      logActivity('edit-log', `تعديل في السجل: ${data.invoice}`, '', 'warning');
       closeModal('orderModal'); clearDraft(); renderLog();
       toast('تم تحديث السجل', 'success');
     } else {
@@ -2030,30 +2424,39 @@ window.saveOrder = async function () {
       let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
       if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
       data.approvalDate = approvalDate;
-      if (id) { const idx = cache.orders.findIndex(x => x.id === id); cache.orders[idx] = { ...cache.orders[idx], ...data }; }
-      else { data.id = uid(); data.createdAt = fmtDate(); cache.orders.push(data); }
-      await persistKeys(['orders']);
+      if (id) {
+        const idx = cache.orders.findIndex(x => x.id === id);
+        cache.orders[idx] = { ...cache.orders[idx], ...data };
+        logActivity('edit-order', `تعديل طلب: ${data.invoice}`, '', 'warning');
+      } else {
+        data.id = uid(); data.createdAt = fmtDate();
+        cache.orders.push(data);
+        logActivity('add-order', `طلب جديد: ${data.invoice}`, `العميل: ${data.customer}`, 'success');
+      }
+      await persistKeys(['orders', 'activity']);
       closeModal('orderModal'); clearDraft(); renderEntry();
-      toast('تم حفظ الطلب بنجاح', 'success');
+      toast('تم الحفظ', 'success');
     }
     lastSaveTime = Date.now();
-  } catch (e) { toast(e.message.includes('CONFLICT') ? 'تعارض — أعد المحاولة' : e.message, 'error'); }
+  } catch (e) { toast(e.message, 'error'); }
   finally { saveInProgress = false; if (btn) { btn.disabled = false; btn.innerHTML = ico('save', 15) + '<span>حفظ</span><kbd>Ctrl+Enter</kbd>'; } }
 };
 window.deleteOrder = async function (id) {
   if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
-  const ok = await dialog.danger(`سيتم حذف الطلب "${o?.invoice || ''}" نهائياً.`); if (!ok) return;
+  const ok = await dialog.danger(`حذف الطلب "${o?.invoice || ''}"؟`); if (!ok) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
-  try { await persistKeys(['orders']); renderEntry(); toast('تم حذف الطلب', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-order', `حذف طلب: ${o?.invoice || ''}`, '', 'danger');
+  try { await persistKeys(['orders', 'activity']); renderEntry(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteFromLog = async function (id) {
   if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id); if (!o) return;
-  const ok = await dialog.danger(`سيتم حذف الطلب "${o.invoice}" من السجل نهائياً.`, { title: 'حذف من السجل' }); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${o.invoice}" من السجل؟`, { title: 'حذف نهائي' }); if (!ok) return;
   cache.log = cache.log.filter(x => x.id !== id);
-  try { await persistKeys(['log']); renderLog(); toast('تم الحذف من السجل', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-log', `حذف من السجل: ${o.invoice}`, '', 'danger');
+  try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -2118,18 +2521,18 @@ window.addDriver = async function () {
   const name = document.getElementById('newDriverName').value.trim();
   const phone = document.getElementById('newDriverPhone').value.trim();
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
-  if (cache.drivers.find(d => d.name === name)) { toast('الموصل موجود مسبقاً', 'error'); return; }
+  if (cache.drivers.find(d => d.name === name)) { toast('موجود مسبقاً', 'error'); return; }
   cache.drivers.push({ id: uid(), name, phone });
-  try { await persistKeys(['drivers']); document.getElementById('newDriverName').value = ''; document.getElementById('newDriverPhone').value = ''; renderDriversList(); loadDriversIntoSelects(); toast('تم إضافة الموصل', 'success'); }
-  catch (e) { toast(e.message, 'error'); }
+  logActivity('add-driver', `إضافة موصل: ${name}`, '', 'success');
+  try { await persistKeys(['drivers', 'activity']); document.getElementById('newDriverName').value = ''; document.getElementById('newDriverPhone').value = ''; renderDriversList(); loadDriversIntoSelects(); toast('تم الإضافة', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteDriver = async function (id) {
   if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
   const d = cache.drivers.find(x => x.id === id);
-  const ok = await dialog.danger(`حذف الموصل "${d?.name || ''}"؟`); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${d?.name || ''}"؟`); if (!ok) return;
   cache.drivers = cache.drivers.filter(x => x.id !== id);
-  try { await persistKeys(['drivers']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); }
-  catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-driver', `حذف موصل: ${d?.name || ''}`, '', 'danger');
+  try { await persistKeys(['drivers', 'activity']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -2139,21 +2542,21 @@ window.addBranch = async function () {
   if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
   const name = document.getElementById('newBranchName').value.trim();
   if (!name) { toast('اسم الفرع مطلوب', 'error'); return; }
-  if (cache.branches.find(b => b.name === name)) { toast('الفرع موجود مسبقاً', 'error'); return; }
+  if (cache.branches.find(b => b.name === name)) { toast('موجود مسبقاً', 'error'); return; }
   cache.branches.push({ id: uid(), name });
-  try { await persistKeys(['branches']); document.getElementById('newBranchName').value = ''; renderBranchesList(); populateBranchSelects(); toast('تم إضافة الفرع', 'success'); }
-  catch (e) { toast(e.message, 'error'); }
+  logActivity('add-branch', `إضافة فرع: ${name}`, '', 'success');
+  try { await persistKeys(['branches', 'activity']); document.getElementById('newBranchName').value = ''; renderBranchesList(); populateBranchSelects(); toast('تم الإضافة', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteBranch = async function (id) {
   if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
   const b = cache.branches.find(x => x.id === id); if (!b) return;
-  if (b.name === DEFAULT_BRANCH_NAME) { toast('لا يمكن حذف الفرع الافتراضي', 'error'); return; }
+  if (b.name === DEFAULT_BRANCH_NAME) { toast('لا يمكن حذف الافتراضي', 'error'); return; }
   const used = [...cache.orders, ...cache.ready, ...cache.log].some(o => (o.branch || DEFAULT_BRANCH_NAME) === b.name);
-  if (used) { toast('لا يمكن حذف فرع مستخدم في طلبات', 'error'); return; }
-  const ok = await dialog.danger(`حذف الفرع "${b.name}"؟`); if (!ok) return;
+  if (used) { toast('مستخدم في طلبات', 'error'); return; }
+  const ok = await dialog.danger(`حذف "${b.name}"؟`); if (!ok) return;
   cache.branches = cache.branches.filter(x => x.id !== id);
-  try { await persistKeys(['branches']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف', 'success'); }
-  catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-branch', `حذف فرع: ${b.name}`, '', 'danger');
+  try { await persistKeys(['branches', 'activity']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -2162,37 +2565,44 @@ window.deleteBranch = async function (id) {
 window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; }
   const order = cache.orders.find(x => x.id === id); if (!order) return;
-  const ok = await dialog.confirm(`تحويل الطلب "${order.invoice}" إلى الجاهزة؟`, { title: 'تحويل الطلب' }); if (!ok) return;
+  const ok = await dialog.confirm(`تحويل "${order.invoice}"؟`, { title: 'تحويل' }); if (!ok) return;
   try {
     cache.ready.push({ ...order, transferredAt: fmtDate(), transferredBy: currentUser.username });
     cache.orders = cache.orders.filter(x => x.id !== id);
     if (selectedOrderId === id) selectedOrderId = null;
-    await persistKeys(['orders', 'ready']); renderEntry(); renderDashboard();
-    toast('تم التحويل بنجاح', 'success');
+    logActivity('transfer-single', `تحويل: ${order.invoice}`, '', 'success');
+    await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
+    addNotification('تحويل طلب', `تم تحويل ${order.invoice}`, 'success');
+    toast('تم التحويل', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.bulkTransfer = async function () {
   if (!hasPerm('bulkTransfer')) { toast('غير مصرح', 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
-  if (!eligible.length) { toast('لا توجد طلبات مستوفية للشروط', 'error'); return; }
-  const ok = await dialog.confirm(`سيتم تحويل ${eligible.length} طلب مستوفي.`, { title: 'تحويل جماعي' }); if (!ok) return;
+  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
+  const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'تحويل جماعي' }); if (!ok) return;
   try {
     eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
     cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
     selectedOrderId = null;
-    await persistKeys(['orders', 'ready']); renderEntry(); renderDashboard();
-    toast(`تم تحويل ${eligible.length} طلب`, 'success');
+    logActivity('bulk-transfer', `تحويل جماعي: ${eligible.length}`, '', 'success');
+    await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
+    addNotification('تحويل جماعي', `${eligible.length} طلب`, 'success');
+    toast(`تم تحويل ${eligible.length}`, 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.moveReadyToLog = async function () {
   if (!hasPerm('moveToLog')) { toast('غير مصرح', 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
-  const ok = await dialog.confirm(`سيتم ترحيل ${cache.ready.length} طلب إلى السجل.`, { title: 'ترحيل إلى السجل' }); if (!ok) return;
+  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب؟`, { title: 'ترحيل' }); if (!ok) return;
   try {
+    const count = cache.ready.length;
     cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username }));
     cache.ready = [];
-    await persistKeys(['ready', 'log']); renderReady(); renderDashboard();
-    toast('تم الترحيل بنجاح', 'success');
+    logActivity('move-log', `ترحيل ${count}`, '', 'success');
+    await persistKeys(['ready', 'log', 'activity']); renderReady(); renderDashboard();
+    addNotification('ترحيل', `${count} طلب`, 'success');
+    toast('تم الترحيل', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 
@@ -2262,6 +2672,7 @@ window.printReady = function () {
   const win = window.open('', '_blank');
   win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
   win.document.close();
+  logActivity('print-ready', `طباعة ${data.length}`, '', 'info');
 };
 window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
 window.printLog = function () {
@@ -2273,6 +2684,7 @@ window.printLog = function () {
   const win = window.open('', '_blank');
   win.document.write(buildPrintHTML(data, templates.log || DEFAULT_TEMPLATES.log, { from: fromVal || 'البداية', to: toVal || 'اليوم' }));
   win.document.close();
+  logActivity('print-log', `طباعة ${data.length}`, '', 'info');
 };
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
@@ -2301,18 +2713,18 @@ window.handleLogoUpload = async function (evt) {
   const file = evt.target.files[0]; if (!file) return;
   if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
   if (!file.type.startsWith('image/')) { toast('الرجاء اختيار صورة', 'error'); return; }
-  if (file.size > 5 * 1024 * 1024) { toast('حجم الصورة كبير', 'error'); return; }
-  try { toast('جاري معالجة الصورة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم رفع الصورة — اضغط "حفظ القوالب"', 'success'); }
-  catch { toast('فشل معالجة الصورة', 'error'); }
+  if (file.size > 5 * 1024 * 1024) { toast('حجم كبير', 'error'); return; }
+  try { toast('جاري المعالجة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم الرفع', 'success'); }
+  catch { toast('فشل', 'error'); }
   evt.target.value = '';
 };
-window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم حذف الصورة', 'info'); };
+window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم الحذف', 'info'); };
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
-  if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح بتعديل القوالب</div>`; return; }
-  const logoHTML = templates.logo ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف الصورة</span></button></div>` : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة بعد</span></div>`;
-  const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>صورة الكليشه (اختياري)</span></h4>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">ستظهر أعلى كل ورقة طباعة وتملأ عرض الورقة.</p>
+  if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
+  const logoHTML = templates.logo ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف الصورة</span></button></div>` : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
+  const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>صورة الكليشه</span></h4>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
     ${logoHTML}</div>`;
   const bodyHTML = ['ready','log'].map(key => {
@@ -2326,7 +2738,7 @@ function renderTemplates() {
       <div class="template-row"><label>اتجاه الصفحة</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-branch" ${t.showBranch !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showBranch', this.checked)"><label for="tpl-${key}-branch">إظهار عمود الفرع</label></div>
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)"><label for="tpl-${key}-notes">إظهار عمود الملاحظات</label></div>
+        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)"><label for="tpl-${key}-notes">إظهار الملاحظات</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-approval" ${t.showApprovalDate !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showApprovalDate', this.checked)"><label for="tpl-${key}-approval">إظهار تاريخ الاعتماد</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-dphone" ${t.showDriverPhone !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showDriverPhone', this.checked)"><label for="tpl-${key}-dphone">إظهار هاتف الموصل</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-pay" ${t.showPay !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showPay', this.checked)"><label for="tpl-${key}-pay">إظهار حالة الدفع</label></div>
@@ -2336,8 +2748,8 @@ function renderTemplates() {
   container.innerHTML = logoSection + bodyHTML;
 }
 window.updateTemplate = function (key, field, value) { if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] }; templates[key][field] = value; };
-window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم حفظ القوالب', 'success'); } catch (e) { toast(e.message, 'error'); } };
-window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة — لم يتم الحفظ', 'info'); };
+window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ', 'success'); } catch (e) { toast(e.message, 'error'); } };
+window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } const ok = await dialog.confirm('استعادة القوالب؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة', 'info'); };
 
 /* ==============================================================
    Customers & Users
@@ -2370,7 +2782,7 @@ function validateCustomerForm() {
   const name = document.getElementById('custName').value.trim();
   const phone = document.getElementById('custPhone').value.trim();
   if (!name) { setFieldError('custName', 'اسم العميل مطلوب'); valid = false; }
-  if (phone && !/^[0-9+\-\s]{6,20}$/.test(phone)) { setFieldError('custPhone', 'رقم هاتف غير صالح'); valid = false; }
+  if (phone && !/^[0-9+\-\s]{6,20}$/.test(phone)) { setFieldError('custPhone', 'رقم غير صالح'); valid = false; }
   if (!valid) { focusFirstError('customerModal'); toast('يرجى تصحيح الحقول', 'error'); }
   return valid;
 }
@@ -2380,24 +2792,25 @@ window.saveCustomer = async function () {
   const id = document.getElementById('custId').value;
   const custData = { id: id || uid(), code: document.getElementById('custCode').value.trim(), name: document.getElementById('custName').value.trim(), location: document.getElementById('custLocation').value.trim(), phone: document.getElementById('custPhone').value.trim() };
   try {
-    if (id) { const idx = cache.customers.findIndex(x => x.id === id); if (idx > -1) cache.customers[idx] = custData; }
-    else cache.customers.push(custData);
-    await persistKeys(['customers']);
+    if (id) { const idx = cache.customers.findIndex(x => x.id === id); if (idx > -1) cache.customers[idx] = custData; logActivity('edit-customer', `تعديل عميل: ${custData.name}`, '', 'warning'); }
+    else { cache.customers.push(custData); logActivity('add-customer', `إضافة عميل: ${custData.name}`, '', 'success'); }
+    await persistKeys(['customers', 'activity']);
     closeModal('customerModal'); renderCustomers();
     if (document.getElementById('orderModal').classList.contains('active')) {
       document.getElementById('orderCustomerId').value = custData.id;
       document.getElementById('orderCustomer').value = custData.name;
       document.getElementById('orderLocation').value = custData.location;
     }
-    toast(id ? 'تم تعديل العميل' : 'تم إضافة العميل', 'success');
+    toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteCustomer = async function (id) {
   if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
   const c = cache.customers.find(x => x.id === id);
-  const ok = await dialog.danger(`حذف العميل "${c?.name || ''}"؟`); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${c?.name || ''}"؟`); if (!ok) return;
   cache.customers = cache.customers.filter(x => x.id !== id);
-  try { await persistKeys(['customers']); renderCustomers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-customer', `حذف عميل: ${c?.name || ''}`, '', 'danger');
+  try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
@@ -2449,10 +2862,10 @@ function validateUserForm() {
   const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
-  if (!username) { setFieldError('userName', 'اسم المستخدم مطلوب'); valid = false; }
-  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'الاسم موجود مسبقاً'); valid = false; }
+  if (!username) { setFieldError('userName', 'الاسم مطلوب'); valid = false; }
+  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'موجود مسبقاً'); valid = false; }
   if (!password) { setFieldError('userPass', 'كلمة المرور مطلوبة'); valid = false; }
-  else if (password.length < 4) { setFieldError('userPass', 'على الأقل 4 أحرف'); valid = false; }
+  else if (password.length < 4) { setFieldError('userPass', '4 أحرف على الأقل'); valid = false; }
   if (!valid) { focusFirstError('userModal'); toast('يرجى تصحيح الحقول', 'error'); }
   return valid;
 }
@@ -2465,12 +2878,13 @@ window.saveUser = async function () {
   const role = document.getElementById('userRole').value;
   if (currentUser.username === username && role !== 'رئيسي') { if (cache.users.filter(u => u.role === 'رئيسي').length <= 1) { toast('أنت الرئيسي الوحيد', 'error'); return; } }
   const userData = { id: id || uid(), username, password, role, permissions: role === 'رئيسي' ? {} : { ...tempPerms } };
-  if (id) { const idx = cache.users.findIndex(u => u.id === id); if (idx > -1) cache.users[idx] = userData; } else cache.users.push(userData);
+  if (id) { const idx = cache.users.findIndex(u => u.id === id); if (idx > -1) cache.users[idx] = userData; logActivity('edit-user', `تعديل: ${username}`, '', 'warning'); }
+  else { cache.users.push(userData); logActivity('add-user', `إضافة: ${username}`, '', 'success'); }
   try {
-    await persistKeys(['users']);
+    await persistKeys(['users', 'activity']);
     if (currentUser.username === username) { currentUser = normalizeUser(userData); applyPermissionsUI(); }
     closeModal('userModal'); renderUsers();
-    toast(id ? 'تم تعديل المستخدم' : 'تم إضافة المستخدم', 'success');
+    toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteUser = async function (id) {
@@ -2478,80 +2892,56 @@ window.deleteUser = async function (id) {
   const u = cache.users.find(x => x.id === id); if (!u) return;
   if (u.username === currentUser.username) { toast('لا يمكنك حذف حسابك', 'error'); return; }
   if (u.role === 'رئيسي' && cache.users.filter(x => x.role === 'رئيسي').length <= 1) { toast('لا يمكن حذف الرئيسي الوحيد', 'error'); return; }
-  const ok = await dialog.danger(`حذف المستخدم "${u.username}"؟`); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${u.username}"؟`); if (!ok) return;
   cache.users = cache.users.filter(x => x.id !== id);
-  try { await persistKeys(['users']); renderUsers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('delete-user', `حذف: ${u.username}`, '', 'danger');
+  try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
-
-/* ==============================================================
-   Save Token (من الإعدادات)
-   ============================================================== */
-async function saveNewToken() {
-  const t = document.getElementById('newTokenInput').value.trim();
-  if (!t) { toast('أدخل الرمز', 'error'); return; }
-  if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) { const ok = await dialog.confirm('الرمز لا يبدو صحيحاً. متابعة؟', { type: 'warning' }); if (!ok) return; }
-  const oldToken = getStoredToken();
-  saveToken(t);
-  try {
-    showLoading('جاري التحقق من الرمز الجديد...');
-    await ghReadFile('meta');
-    showLoading('جاري إعادة تشفير البيانات بالرمز الجديد...');
-    await persistKeys(DATA_KEYS);
-    hideLoading();
-    closeModal('tokenModal');
-    toast('تم تحديث الرمز وإعادة تشفير جميع البيانات', 'success');
-    updateCurrentTokenInfo();
-  } catch (e) {
-    saveToken(oldToken);
-    hideLoading();
-    toast('فشل تحديث الرمز: ' + (e.message === 'TOKEN_MISMATCH' ? 'تعارض في البيانات' : e.message), 'error');
-  }
-}
-window.saveNewToken = saveNewToken;
 
 /* ==============================================================
    ZIP Backup
    ============================================================== */
 function downloadBlob(blob, filename) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = filename;
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 }
 window.exportBackup = async function () {
   try {
-    const ok = await ensureJSZip(); if (!ok) { toast('فشل تحميل مكتبة ZIP', 'error'); return; }
-    showLoading('جاري تجهيز النسخة الاحتياطية...');
+    const ok = await ensureJSZip(); if (!ok) { toast('فشل تحميل ZIP', 'error'); return; }
+    showLoading('جاري التجهيز...');
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const zip = new JSZip();
     const dataFolder = zip.folder('data');
     for (const key of DATA_KEYS) { const content = JSON.stringify(cache[key] || [], null, 2); dataFolder.file(`${key}.json`, content); }
-    dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 2 }, null, 2));
-    const info = { repo: GITHUB_REPO, owner: GITHUB_OWNER, branch: GITHUB_BRANCH, createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`), note: 'هذه النسخة غير مشفرة' };
+    dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 3 }, null, 2));
+    const info = { name: 'نظام إدارة الطلبات', createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`) };
     zip.file('backup-info.json', JSON.stringify(info, null, 2));
-    zip.file('README.txt', `نسخة احتياطية من نظام إدارة الطلبات\n=====================================\nالمستودع: ${GITHUB_OWNER}/${GITHUB_REPO}\nالفرع: ${GITHUB_BRANCH}\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n⚠️ تحذير: هذه النسخة غير مشفرة\n\nالمحتوى:\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n  - data/meta.json\n  - backup-info.json\n`);
+    zip.file('README.txt', `نسخة احتياطية من نظام إدارة الطلبات\n=====================================\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\nالمحتوى:\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n  - data/meta.json\n  - backup-info.json\n`);
     const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 9 } });
-    downloadBlob(blob, `${GITHUB_REPO}_backup_${dateStr}.zip`);
+    downloadBlob(blob, `backup_${dateStr}.zip`);
     hideLoading();
-    toast(`تم إنشاء النسخة (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
-  } catch (e) { hideLoading(); toast('فشل إنشاء النسخة: ' + e.message, 'error'); }
+    logActivity('backup', `تصدير نسخة`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
+    toast(`تم (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
+  } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
 };
 window.resetAll = async function () {
   if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
-  const ok = await dialog.danger('سيتم حذف جميع الطلبات والسجل نهائياً.'); if (!ok) return;
+  const ok = await dialog.danger('حذف جميع الطلبات والسجل؟'); if (!ok) return;
   const ok2 = await dialog.confirm('تأكيد نهائي؟', { type: 'warning' }); if (!ok2) return;
   cache.orders = []; cache.ready = []; cache.log = [];
-  try { await persistKeys(['orders', 'ready', 'log']); renderDashboard(); toast('تم التصفير', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('reset', 'تصفير', '', 'danger');
+  try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم التصفير', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.exportLogCSV = function () {
-  const data = getLogFilteredData(); if (!data.length) { toast('السجل فارغ', 'error'); return; }
+  const data = getLogFilteredData(); if (!data.length) { toast('فارغ', 'error'); return; }
   const headers = ['رقم الفاتورة','الفرع','العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
   const rows = data.map(o => [o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
   const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `log_${new Date().toISOString().slice(0,10)}.csv`; a.click();
-  toast('تم تصدير CSV', 'success');
+  toast('تم CSV', 'success');
 };
 
 /* ==============================================================
@@ -2567,16 +2957,16 @@ function handleEnterNavigation(e) {
   const el = e.target;
   if (el.tagName === 'TEXTAREA') { if (e.ctrlKey || e.metaKey) { e.preventDefault(); const mid = el.closest('.modal-bg')?.id; if (mid === 'orderModal') saveOrder(); else if (mid === 'customerModal') saveCustomer(); else if (mid === 'userModal') saveUser(); } return; }
   if (el.tagName !== 'INPUT' && el.tagName !== 'SELECT') return;
-  if (e.ctrlKey || e.metaKey) { e.preventDefault(); const mid = el.closest('.modal-bg')?.id; if (mid === 'orderModal') saveOrder(); else if (mid === 'customerModal') saveCustomer(); else if (mid === 'userModal') saveUser(); else if (mid === 'tokenModal') saveNewToken(); return; }
+  if (e.ctrlKey || e.metaKey) { e.preventDefault(); const mid = el.closest('.modal-bg')?.id; if (mid === 'orderModal') saveOrder(); else if (mid === 'customerModal') saveCustomer(); else if (mid === 'userModal') saveUser(); else if (mid === 'keyModal') saveNewKey(); return; }
   e.preventDefault();
   const modal = el.closest('.modal'); if (!modal) return;
   const fields = Array.from(modal.querySelectorAll('input:not([type=hidden]):not([disabled]), select, textarea')).filter(f => f.offsetParent !== null && !f.readOnly);
   const idx = fields.indexOf(el); if (idx === -1) return;
   const nextIdx = e.shiftKey ? idx - 1 : idx + 1;
   if (nextIdx >= 0 && nextIdx < fields.length) { fields[nextIdx].focus(); if (fields[nextIdx].select) fields[nextIdx].select(); }
-  else if (!e.shiftKey) { const mid = modal.parentElement.id; if (mid === 'orderModal') saveOrder(); else if (mid === 'customerModal') saveCustomer(); else if (mid === 'userModal') saveUser(); else if (mid === 'tokenModal') saveNewToken(); }
+  else if (!e.shiftKey) { const mid = modal.parentElement.id; if (mid === 'orderModal') saveOrder(); else if (mid === 'customerModal') saveCustomer(); else if (mid === 'userModal') saveUser(); else if (mid === 'keyModal') saveNewKey(); }
 }
-['orderModal','customerModal','userModal','tokenModal'].forEach(id => { const m = document.getElementById(id); if (m) m.addEventListener('keydown', handleEnterNavigation); });
+['orderModal','customerModal','userModal','keyModal'].forEach(id => { const m = document.getElementById(id); if (m) m.addEventListener('keydown', handleEnterNavigation); });
 function isInInput() { const t = document.activeElement?.tagName; return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT'; }
 window.addEventListener('keydown', e => {
   const inInput = isInInput(); const activeModal = getActiveModal(); const dialogActive = document.getElementById('dialogBg').classList.contains('active');
@@ -2588,7 +2978,7 @@ window.addEventListener('keydown', e => {
     if (c === 'Equal' || c === 'NumpadAdd') { e.preventDefault(); zoomIn(); return; }
     if (c === 'Minus' || c === 'NumpadSubtract') { e.preventDefault(); zoomOut(); return; }
     if (c === 'Digit0' || c === 'Numpad0') { e.preventDefault(); zoomReset(); return; }
-    if (c === 'KeyS') { e.preventDefault(); if (activeModal?.id === 'orderModal') saveOrder(); else if (activeModal?.id === 'customerModal') saveCustomer(); else if (activeModal?.id === 'userModal') saveUser(); else if (activeModal?.id === 'tokenModal') saveNewToken(); return; }
+    if (c === 'KeyS') { e.preventDefault(); if (activeModal?.id === 'orderModal') saveOrder(); else if (activeModal?.id === 'customerModal') saveCustomer(); else if (activeModal?.id === 'userModal') saveUser(); else if (activeModal?.id === 'keyModal') saveNewKey(); return; }
     if (c === 'KeyK') { e.preventDefault(); const p = document.querySelector('.page.active')?.id?.replace('page-', ''); if (p === 'entry') document.getElementById('searchEntry')?.focus(); if (p === 'log') document.getElementById('filterLogName')?.focus(); if (p === 'customers') document.getElementById('searchCustomers')?.focus(); return; }
     if (c === 'KeyP') { e.preventDefault(); if (document.getElementById('page-ready').classList.contains('active')) printReady(); else if (document.getElementById('page-log').classList.contains('active')) printLog(); else window.print(); return; }
     return;
@@ -2609,10 +2999,11 @@ window.addEventListener('keydown', e => {
       if (c === 'Digit4' || c === 'Numpad4') { e.preventDefault(); if (hasPerm('accessLog')) go('log'); return; }
       if (c === 'Digit5' || c === 'Numpad5') { e.preventDefault(); if (hasPerm('accessCustomers')) go('customers'); return; }
       if (c === 'KeyN') { e.preventDefault(); if (hasPerm('addOrder')) addOrder(); return; }
-      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; } if (!selectedOrderId) { toast('اختر طلباً أولاً', 'warning'); return; } transferSingle(selectedOrderId); return; }
+      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; } if (!selectedOrderId) { toast('اختر طلباً', 'warning'); return; } transferSingle(selectedOrderId); return; }
       if (c === 'KeyB' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); bulkTransfer(); return; }
       if (c === 'KeyM' && document.getElementById('page-ready').classList.contains('active')) { e.preventDefault(); moveReadyToLog(); return; }
       if (c === 'KeyD') { e.preventDefault(); toggleTheme(); return; }
+      if (c === 'KeyI') { e.preventDefault(); toggleNotifPanel(); return; }
     }
     return;
   }
@@ -2629,23 +3020,25 @@ document.getElementById('orderModal')?.addEventListener('click', e => { if (e.ta
 
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
-  updateTokenStatus();
+  updateKeyStatus();
   loadLastUser();
   initCustomerSearch();
-  // أيقونات شاشة الدخول
-  const lt = document.getElementById('loginLogo'); if (lt) lt.innerHTML = ico('package', 54);
-  const ai = document.getElementById('adminToggleIcon'); if (ai) ai.innerHTML = ico('shield2', 13);
-  const ah = document.getElementById('adminHeaderIcon'); if (ah) ah.innerHTML = ico('lock', 16);
-  const ab = document.getElementById('adminBtnIcon'); if (ab) ab.innerHTML = ico('key', 16);
+  document.getElementById('loginLogo').innerHTML = ico('package', 54);
+  document.getElementById('adminToggleIcon').innerHTML = ico('shield2', 13);
+  document.getElementById('adminHeaderIcon').innerHTML = ico('key', 16);
+  document.getElementById('adminBtnIcon').innerHTML = ico('check', 16);
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
-  document.getElementById('loginToken').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
-  // Enter في حقول المدير
-  ['adminUser','adminPass','adminNewToken'].forEach(id => {
+  document.getElementById('loginKey').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
+  ['adminUser','adminPass','adminNewKey'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); adminChangeToken(); } });
+    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); adminChangeKey(); } });
   });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:text/javascript,self.addEventListener("fetch",()=>{});').catch(()=>{});
+  }
   setTimeout(() => { if (localStorage.getItem(DRAFT_KEY)) document.getElementById('draftBadge').classList.add('show'); }, 500);
+  renderNotifications();
 });
 </script>
 </body>
