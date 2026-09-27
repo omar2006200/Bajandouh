@@ -43,6 +43,36 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;t
 .btn-icon .badge-num{position:absolute;top:-4px;left:-4px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
 kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'Consolas',monospace;font-weight:500;display:inline-block;line-height:1;pointer-events:none}
 .btn-warning kbd{background:rgba(0,0,0,.15)}
+
+/* ═══ Rate Limit Widget ═══ */
+.rate-widget{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.13);padding:5px 10px;border-radius:14px;font-size:10.5px;font-weight:600;cursor:help;position:relative;min-width:135px;transition:var(--transition)}
+.rate-widget:hover{background:rgba(255,255,255,.22)}
+.rate-widget .rate-ico{display:inline-flex;align-items:center;justify-content:center;opacity:.9}
+.rate-widget .rate-bar{width:64px;height:5px;background:rgba(255,255,255,.22);border-radius:3px;overflow:hidden;flex-shrink:0;position:relative}
+.rate-widget .rate-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#4caf50,#66bb6a);transition:width .5s ease,background .5s ease;width:0%}
+.rate-widget.warn .rate-fill{background:linear-gradient(90deg,#ffc107,#ffca28)}
+.rate-widget.danger .rate-fill{background:linear-gradient(90deg,#dc3545,#e4606d);animation:pulseRed 1.5s infinite}
+.rate-widget .rate-text{font-family:'Consolas',monospace;letter-spacing:.3px;white-space:nowrap;font-size:10px;opacity:.95;direction:ltr}
+@media(max-width:1000px){.rate-widget .rate-text{display:none}.rate-widget{min-width:auto;padding:5px 8px}}
+@media(max-width:700px){.rate-widget .rate-bar{width:36px}.rate-widget{min-width:auto;padding:4px 7px;font-size:9.5px}}
+
+/* ═══ Column Toggle Chips ═══ */
+.col-toggles{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.col-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;background:rgba(0,0,0,.04);border:2px solid var(--border);cursor:pointer;font-size:11.5px;font-weight:600;transition:var(--transition);color:var(--text-muted);font-family:inherit;user-select:none;line-height:1}
+.col-chip:hover{border-color:var(--blue);background:rgba(46,117,182,.08);color:var(--text);transform:translateY(-1px)}
+.col-chip.active{background:linear-gradient(135deg,#d4edda,#c1e8cd);border-color:#7ec98d;color:#155724;box-shadow:0 2px 6px rgba(40,167,69,.15)}
+[data-theme="dark"] .col-chip.active{background:linear-gradient(135deg,#1a4a2a,#0d2e1a);border-color:#4caf50;color:#6ee7a5}
+[data-theme="dark"] .col-chip{background:rgba(255,255,255,.04)}
+.col-chip .ico{width:12px;height:12px;opacity:.75}
+.col-chip.active .ico{opacity:1}
+.col-chip .col-chip-status{font-size:9px;font-weight:700;opacity:.7;padding:1px 5px;border-radius:6px;background:rgba(0,0,0,.08)}
+[data-theme="dark"] .col-chip .col-chip-status{background:rgba(255,255,255,.1)}
+.col-chip.active .col-chip-status{background:rgba(40,167,69,.25);color:#155724}
+[data-theme="dark"] .col-chip.active .col-chip-status{background:rgba(110,231,165,.2);color:#6ee7a5}
+.col-toggles-actions{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.col-toggles-actions button{padding:5px 11px;font-size:11px;border-radius:14px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);cursor:pointer;font-family:inherit;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
+.col-toggles-actions button:hover{border-color:var(--blue);color:var(--dark-blue);background:rgba(46,117,182,.08)}
+
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(31,78,121,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(6px)}
 #loadingOverlay.show{display:flex}
 .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
@@ -252,6 +282,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .badge-unpaid{background:linear-gradient(135deg,#dc3545,#e4606d);color:#fff}
 .badge-vip{background:linear-gradient(135deg,#6f42c1,#8a5cd4);color:#fff}
 .badge-branch{background:rgba(46,117,182,.12);color:var(--dark-blue);border:1px solid rgba(46,117,182,.25)}
+.badge-code{background:rgba(108,117,125,.12);color:var(--text-muted);border:1px solid rgba(108,117,125,.25);font-family:'Consolas',monospace;font-size:10.5px}
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:13px;border-bottom:2px solid var(--light-blue);flex-wrap:wrap;gap:11px}
 .section-header h2{color:var(--dark-blue);font-size:19px;font-weight:700;display:inline-flex!important;align-items:center;gap:9px}
 .section-header h2 .ico{width:20px;height:20px;color:var(--dark-blue)}
@@ -336,9 +367,9 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .template-row{display:grid;grid-template-columns:170px 1fr;gap:11px;align-items:center;margin-bottom:11px}
 .template-row label{font-size:12.5px;color:var(--text);font-weight:600}
 .template-row input,.template-row textarea,.template-row select{font-size:12.5px}
-.toggle-row{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:7px 0;cursor:pointer}
-.toggle-row input{width:17px;height:17px;cursor:pointer;accent-color:var(--green)}
-.toggle-row label{cursor:pointer}
+.template-columns-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.template-columns-section .tcs-title{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--dark-blue);margin-bottom:10px}
+.template-columns-section .tcs-title .ico{width:14px;height:14px}
 .logo-preview{margin-top:11px;padding:11px;background:rgba(0,0,0,.03);border-radius:10px;border:2px dashed var(--border);text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center}
 [data-theme="dark"] .logo-preview{background:rgba(255,255,255,.03)}
 .logo-preview img{max-width:100%;max-height:120px;border-radius:6px;pointer-events:none}
@@ -407,7 +438,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .pg-dots{padding:0 6px;color:var(--text-muted);font-weight:700;user-select:none}
 .pg-info{font-size:11.5px;color:var(--text-muted);font-weight:600;padding:0 8px}
 .pg-info b{color:var(--dark-blue);font-weight:700}
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
+@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination,.rate-widget{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
 @media(max-width:700px){
   .modal{max-width:96vw;padding:20px 16px}
   .admin-token-section .admin-header{font-size:13px;padding:8px 12px}
@@ -448,6 +479,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   .pg-btn,.pg-num{min-width:32px;height:32px;font-size:12px}
   .pg-info{font-size:10.5px;padding:0 4px}
   .activity-stats{font-size:11px;gap:10px;padding:8px 10px}
+  .col-chip{padding:6px 10px;font-size:11px}
 }
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:rgba(0,0,0,.05)}
@@ -534,6 +566,11 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
+      <div class="rate-widget" id="rateWidget" title="استهلاك GitHub API">
+        <span class="rate-ico" id="rateIcon"></span>
+        <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
+        <span class="rate-text" id="rateText">— / —</span>
+      </div>
       <div class="session-timer" id="sessionTimer">
         <span id="sessionTimerIcon"></span>
         <span id="sessionTimerText">—</span>
@@ -667,7 +704,16 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <label class="field-required">العميل</label>
   <div class="customer-search"><input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث أو اختر..."><div class="customer-dropdown" id="customerDropdown"></div></div>
   <div class="field-error-msg" id="err-orderCustomer"></div>
-  <label>الموقع</label><input id="orderLocation" autocomplete="off">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:11px;">
+    <div>
+      <label>رقم العميل</label>
+      <input id="orderCustomerCode" readonly placeholder="تلقائي" style="background:rgba(0,0,0,.04);cursor:not-allowed;font-family:'Consolas',monospace;letter-spacing:.5px;">
+    </div>
+    <div>
+      <label>الموقع</label>
+      <input id="orderLocation" autocomplete="off">
+    </div>
+  </div>
   <label>حالة الطلب</label><select id="orderStatus"><option>قيد التجهيز</option><option>جاهز</option></select>
   <label>تاريخ الاعتماد</label><input id="orderDate" readonly placeholder="تلقائي">
   <label>حالة الدفع</label><select id="orderPay"><option>غير مدفوع</option><option>مدفوع</option><option>VIP</option></select>
@@ -785,6 +831,7 @@ const I = {
   chart:'M18 20V10 M12 20V4 M6 20v-6',
   refresh:'M23 4v6h-6 M1 20v-6h6 M20.49 9A9 9 0 005.64 5.64L1 10 M23 14l-4.64 4.36A9 9 0 013.51 15',
   eye:'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 15a3 3 0 100-6 3 3 0 000 6z',
+  eyeOff:'M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24 M1 1l22 22',
   trendUp:'M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6',
   trendDown:'M23 18l-9.5-9.5-5 5L1 6 M17 18h6v-6',
   zip:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M10 12h4v2h-4z M10 16h4v2h-4z',
@@ -802,20 +849,23 @@ const I = {
   target:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
   pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z',
   chevronsRight:'M13 17l5-5-5-5 M6 17l5-5-5-5',
-  chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5'
+  chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5',
+  zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
 }
 
-
-// ═══════════════════════════════════════════════════════════════
-const GITHUB_OWNER = 'omar2006200'; 
-const GITHUB_REPO  = 'Bajandouh';     
+/* ==============================================================
+   Config  ⚙️
+   ============================================================== */
+const GITHUB_OWNER = 'omar2006200';
+const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
-const SYNC_INTERVAL = 15000;
+const SYNC_INTERVAL = 30000;        
+const MIN_SYNC_INTERVAL = 15000;   
 const SAVE_COOLDOWN = 10000;
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
@@ -826,6 +876,17 @@ const NOTIF_KEY = 'oms_notifications';
 const ACTIVITY_PER_PAGE = 30;
 const ACTIVITY_WARN_THRESHOLD = 5000;
 const ACTIVITY_TOTAL_LIMIT = 0;
+// حد أدنى للفاصل بين مزامنتين (لمنع التكرار عند visibilitychange)
+const SYNC_THROTTLE_MS = 5000;
+// نسبة الحصة التي تحدد تخفيف المزامنة
+const RATE_LEVELS = [
+  { min: 3000, interval: 15000, label: 'مرتفعة' },
+  { min: 1500, interval: 30000, label: 'جيدة' },
+  { min: 800,  interval: 60000, label: 'متوسطة' },
+  { min: 300,  interval: 120000, label: 'منخفضة' },
+  { min: 100,  interval: 300000, label: 'منخفضة جداً' },
+  { min: 0,    interval: 0,      label: 'حرجة — موقوفة' }
+];
 
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 const DATA_FILES = {
@@ -837,7 +898,6 @@ const DATA_FILES = {
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
-// تحقق من صحة الإعدادات عند التحميل
 if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
   console.error('⚠️ يجب تعديل GITHUB_OWNER في أعلى الملف!');
 }
@@ -890,10 +950,54 @@ const DEFAULT_PERMS = {
   manageCustomers:false,manageDrivers:false,manageBranches:false,manageUsers:false,
   editTemplates:false,viewActivity:false,reset:false
 };
+// تعريف أعمدة الطباعة القابلة للإظهار/الإخفاء
+const PRINT_COLUMNS = {
+  ready: [
+    { key:'showInvoice',      label:'رقم الفاتورة' },
+    { key:'showBranch',       label:'الفرع' },
+    { key:'showCustomer',     label:'العميل' },
+    { key:'showLocation',     label:'الموقع' },
+    { key:'showStatus',       label:'حالة الطلب' },
+    { key:'showApprovalDate', label:'تاريخ الاعتماد' },
+    { key:'showPay',          label:'حالة الدفع' },
+    { key:'showDriver',       label:'الموصل' },
+    { key:'showDriverPhone',  label:'هاتف الموصل' },
+    { key:'showNotes',        label:'ملاحظات' }
+  ],
+  log: [
+    { key:'showInvoice',      label:'رقم الفاتورة' },
+    { key:'showBranch',       label:'الفرع' },
+    { key:'showCustomer',     label:'العميل' },
+    { key:'showLocation',     label:'الموقع' },
+    { key:'showStatus',       label:'حالة الطلب' },
+    { key:'showApprovalDate', label:'تاريخ الاعتماد' },
+    { key:'showPay',          label:'حالة الدفع' },
+    { key:'showDriver',       label:'الموصل' },
+    { key:'showDriverPhone',  label:'هاتف الموصل' },
+    { key:'showNotes',        label:'ملاحظات' },
+    { key:'showArchivedAt',   label:'تاريخ الترحيل' }
+  ]
+};
 const DEFAULT_TEMPLATES = {
   logo:'',
-  ready:{title:'قائمة الطلبات الجاهزة للنقل',subtitle:'التاريخ: {date} — العدد: {count} — المستخدم: {user}',footer:'توقيع الموظف: __________    توقيع الموصل: __________',showNotes:true,showApprovalDate:true,showDriverPhone:true,showPay:true,showBranch:true,fontSize:12,orientation:'landscape'},
-  log:{title:'سجل الطلبات',subtitle:'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',footer:'تم الطباعة بواسطة: {user}',showNotes:true,showApprovalDate:true,showDriverPhone:true,showPay:true,showBranch:true,showArchivedAt:true,fontSize:11,orientation:'landscape'}
+  ready:{
+    title:'قائمة الطلبات الجاهزة للنقل',
+    subtitle:'التاريخ: {date} — العدد: {count} — المستخدم: {user}',
+    footer:'توقيع الموظف: __________    توقيع الموصل: __________',
+    showInvoice:true, showBranch:true, showCustomer:true, showLocation:true,
+    showStatus:true, showApprovalDate:true, showPay:true, showDriver:true,
+    showDriverPhone:true, showNotes:true,
+    fontSize:12, orientation:'landscape'
+  },
+  log:{
+    title:'سجل الطلبات',
+    subtitle:'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',
+    footer:'تم الطباعة بواسطة: {user}',
+    showInvoice:true, showBranch:true, showCustomer:true, showLocation:true,
+    showStatus:true, showApprovalDate:true, showPay:true, showDriver:true,
+    showDriverPhone:true, showNotes:true, showArchivedAt:true,
+    fontSize:11, orientation:'landscape'
+  }
 };
 
 let currentUser = null;
@@ -902,7 +1006,7 @@ let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {},ETags = {},localMeta = null;
 let pollTimer = null,syncing = false,selectedOrderId = null;
 let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
-let rateLimitInfo = null,apiCallCount = 0,apiCachedCount = 0;
+let rateLimitInfo = null, apiCallCount = 0, apiCachedCount = 0;
 let prevStats = { orders:0,ready:0,log:0,total:0 };
 let hasUnencryptedFiles = false;
 let sessionTimer = null, sessionWarningTimer = null, sessionExpireAt = 0;
@@ -910,6 +1014,12 @@ let activityCurrentPage = 1;
 let activityFilterUser = '';
 let activityFilterType = '';
 let activitySearchQuery = '';
+
+// Rate-limit & Sync state
+let currentSyncInterval = SYNC_INTERVAL;
+let lastSyncTime = 0;
+let visibilityHandlerAttached = false;
+let lastRateNotificationAt = 0;
 
 /* ==============================================================
    Security
@@ -930,7 +1040,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ==============================================================
-   Encryption (Fixed key)
+   Encryption
    ============================================================== */
 function deriveFixedKey() {
   const s = APP_ID + '|secure|fixed|v3|schema';
@@ -1184,6 +1294,101 @@ async function saveNewKey() {
 window.saveNewKey = saveNewKey;
 
 /* ==============================================================
+   ═══ Rate Limit Widget ═══
+   ============================================================== */
+function updateRateLimit(headers) {
+  const remaining = headers.get('X-RateLimit-Remaining');
+  const limit = headers.get('X-RateLimit-Limit');
+  const reset = headers.get('X-RateLimit-Reset');
+  if (remaining !== null && limit !== null) {
+    rateLimitInfo = {
+      remaining: parseInt(remaining),
+      limit: parseInt(limit),
+      reset: reset ? new Date(parseInt(reset) * 1000) : null
+    };
+    renderRateLimitWidget();
+    adjustSyncInterval();
+    maybeNotifyLowRate();
+  }
+}
+
+function renderRateLimitWidget() {
+  const widget = document.getElementById('rateWidget');
+  const fill = document.getElementById('rateFill');
+  const text = document.getElementById('rateText');
+  const icon = document.getElementById('rateIcon');
+  if (!widget || !fill || !text) return;
+  if (icon && !icon.innerHTML) icon.innerHTML = ico('zap', 12);
+
+  if (!rateLimitInfo) {
+    text.textContent = '— / —';
+    fill.style.width = '0%';
+    return;
+  }
+  const { remaining, limit, reset } = rateLimitInfo;
+  const pct = limit > 0 ? Math.max(0, Math.min(100, (remaining / limit) * 100)) : 0;
+  fill.style.width = pct + '%';
+  text.textContent = `${remaining.toLocaleString('en-US')} / ${limit.toLocaleString('en-US')}`;
+  widget.classList.remove('warn','danger');
+  if (pct < 10) widget.classList.add('danger');
+  else if (pct < 30) widget.classList.add('warn');
+
+  const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
+  const level = getRateLevel(remaining);
+  widget.title =
+`📊 استهلاك GitHub API
+━━━━━━━━━━━━━━━━━━━
+المتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}
+النسبة: ${pct.toFixed(1)}%
+المستوى: ${level.label}
+يتجدد الساعة: ${resetStr}
+
+⏱ فاصل المزامنة الحالي: ${currentSyncInterval > 0 ? (currentSyncInterval/1000) + ' ثانية' : 'متوقف'}
+💡 304 Not-Modified لا يُحسب من الحصة`;
+}
+
+function getRateLevel(remaining) {
+  for (const lvl of RATE_LEVELS) {
+    if (remaining >= lvl.min) return lvl;
+  }
+  return RATE_LEVELS[RATE_LEVELS.length - 1];
+}
+
+function adjustSyncInterval() {
+  if (!rateLimitInfo) return;
+  const level = getRateLevel(rateLimitInfo.remaining);
+  if (level.interval === currentSyncInterval) return;
+  const oldInterval = currentSyncInterval;
+  currentSyncInterval = level.interval;
+  if (!currentUser) return;
+  // إعادة تشغيل المزامنة بالفاصل الجديد
+  if (currentSyncInterval > 0) {
+    startPolling();
+    if (oldInterval !== currentSyncInterval) {
+      // toast خفيف عند تغيّر ملحوظ
+      if (oldInterval === 0 || currentSyncInterval === 0) {
+        toast(currentSyncInterval === 0
+          ? '⏸ تم إيقاف المزامنة مؤقتاً (حصة منخفضة)'
+          : '▶ تم استئناف المزامنة', currentSyncInterval === 0 ? 'warning' : 'success');
+      }
+    }
+  } else {
+    stopPolling();
+  }
+}
+
+function maybeNotifyLowRate() {
+  if (!rateLimitInfo) return;
+  const now = Date.now();
+  if (now - lastRateNotificationAt < 30 * 60 * 1000) return; // مرة كل 30 دقيقة
+  const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
+  if (pct < 10) {
+    lastRateNotificationAt = now;
+    addNotification('تحذير API', `استهلاك منخفض: ${rateLimitInfo.remaining} طلب متبقي`, 'warning');
+  }
+}
+
+/* ==============================================================
    API
    ============================================================== */
 function apiHeaders(json = false, key = null) {
@@ -1192,14 +1397,6 @@ function apiHeaders(json = false, key = null) {
   if (key && ETags[key]) h['If-None-Match'] = ETags[key];
   return h;
 }
-function updateRateLimit(headers) {
-  const remaining = headers.get('X-RateLimit-Remaining');
-  const limit = headers.get('X-RateLimit-Limit');
-  const reset = headers.get('X-RateLimit-Reset');
-  if (remaining !== null && limit !== null) {
-    rateLimitInfo = { remaining: parseInt(remaining), limit: parseInt(limit), reset: reset ? new Date(parseInt(reset) * 1000) : null };
-  }
-}
 async function apiReadFile(key) {
   const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
   let res;
@@ -1207,12 +1404,12 @@ async function apiReadFile(key) {
   catch { setOnline(false); throw new Error('فشل الاتصال بالشبكة'); }
   updateRateLimit(res.headers);
   apiCallCount++;
+  // ✅ 304 لا يُحسب من الحصة — تخفيض فعال للاستهلاك
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
     if (res.status === 401) throw new Error('مفتاح الاتصال غير صالح (401)');
     if (res.status === 403) throw new Error('الحصة منتهية أو لا صلاحيات (403)');
     if (res.status === 404) {
-      // ملف المستخدمين إلزامي — نُرجع خطأ صريح
       if (key === 'users') throw new Error(`ملف data/users.json غير موجود في المستودع (404).\nتأكد من:\n- صحة GITHUB_OWNER و GITHUB_REPO\n- وجود ملف data/users.json على فرع "${APP_BRANCH}"`);
       return { notModified: false, data: null };
     }
@@ -1322,14 +1519,24 @@ async function encryptAllNow() {
 window.encryptAllNow = encryptAllNow;
 
 /* ==============================================================
-   Sync
+   Sync  ⬅ (محسّن لتقليل الاستهلاك)
    ============================================================== */
 async function syncPull() {
   if (syncing || !currentUser || document.hidden) return;
+  // ⬅ Throttle: منع المزامنة المتكررة خلال 5 ثوان
+  const now = Date.now();
+  if (now - lastSyncTime < SYNC_THROTTLE_MS) return;
+  if (currentSyncInterval <= 0) return;
+  lastSyncTime = now;
   syncing = true;
   try {
+    // ⬅ قراءة meta فقط أولاً (طلب واحد)
     const meta = await readMeta();
-    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) { setOnline(true); syncing = false; return; }
+    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) {
+      setOnline(true);
+      syncing = false;
+      return;
+    }
     localMeta = meta;
     await readAll();
     const me = cache.users.find(u => u.username === currentUser.username);
@@ -1347,7 +1554,18 @@ function renderActive() {
   if (a === 'customers') renderCustomers();
   if (a === 'settings') renderSettings();
 }
-function startPolling() { stopPolling(); pollTimer = setInterval(syncPull, SYNC_INTERVAL); document.addEventListener('visibilitychange', () => { if (!document.hidden) syncPull(); }); }
+function startPolling() {
+  stopPolling();
+  const interval = currentSyncInterval || SYNC_INTERVAL;
+  if (interval <= 0) return;
+  pollTimer = setInterval(syncPull, interval);
+  if (!visibilityHandlerAttached) {
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && currentUser && currentSyncInterval > 0) syncPull();
+    });
+    visibilityHandlerAttached = true;
+  }
+}
 function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
 function setOnline(ok) {
   const dot = document.getElementById('connDot');
@@ -1356,7 +1574,12 @@ function setOnline(ok) {
   if (banner) banner.classList.toggle('show', !ok && !!currentUser);
 }
 function setSyncing(on) { const dot = document.getElementById('connDot'); if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online'); }
-window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; await syncPull(); };
+window.manualSync = async function () {
+  toast('جاري المزامنة...', 'info');
+  localMeta = null;
+  lastSyncTime = 0;
+  await syncPull();
+};
 
 /* ==============================================================
    Utilities
@@ -1375,6 +1598,7 @@ function badge(val) {
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
 function branchBadge(val) { return `<span class="badge badge-branch">${esc(val || DEFAULT_BRANCH_NAME)}</span>`; }
+function codeBadge(val) { return val ? `<span class="badge badge-code">${esc(val)}</span>` : '<span style="color:var(--text-muted);">—</span>'; }
 function emptyState(icon, title, desc, cols) {
   return `<tr class="empty-row"><td colspan="${cols}"><div class="empty-state"><div class="icon">${ico(icon, 26)}</div><div class="title">${title}</div><div class="desc">${desc}</div></div></td></tr>`;
 }
@@ -1517,7 +1741,6 @@ function renderActivity() {
   }).join('');
 
   if (!paginationEl) return;
-
   const pageButtons = buildPageNumbers(activityCurrentPage, totalPages);
 
   paginationEl.innerHTML = `
@@ -1601,7 +1824,7 @@ window.exportActivityLog = function() {
 };
 
 /* ==============================================================
-   Session Timer (1 hour)
+   Session Timer
    ============================================================== */
 function startSessionTimer() {
   stopSessionTimer();
@@ -1710,7 +1933,7 @@ function rebuildSettingsTabs() {
    ============================================================== */
 function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
-  const draft = { invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value, customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value, location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value, pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value, driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value };
+  const draft = { invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value, customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value, customerCode: document.getElementById('orderCustomerCode').value, location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value, pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value, driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value };
   if (draft.invoice || draft.customer) { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); document.getElementById('draftBadge').classList.add('show'); }
 }
 function clearDraft() { localStorage.removeItem(DRAFT_KEY); document.getElementById('draftBadge').classList.remove('show'); }
@@ -1724,6 +1947,7 @@ window.restoreDraft = function () {
     if (d.branch) document.getElementById('orderBranch').value = d.branch;
     document.getElementById('orderCustomer').value = d.customer || '';
     document.getElementById('orderCustomerId').value = d.customerId || '';
+    document.getElementById('orderCustomerCode').value = d.customerCode || '';
     document.getElementById('orderLocation').value = d.location || '';
     document.getElementById('orderStatus').value = d.status || 'قيد التجهيز';
     document.getElementById('orderPay').value = d.pay || 'غير مدفوع';
@@ -1754,7 +1978,9 @@ function buildUI() {
   document.getElementById('notifClearBtn').innerHTML = ico('trash', 15);
   document.getElementById('notifCloseBtn').innerHTML = ico('x', 15);
   document.getElementById('sessionTimerIcon').innerHTML = ico('clock', 12);
+  document.getElementById('rateIcon').innerHTML = ico('zap', 12);
   updateThemeBtn();
+  renderRateLimitWidget();
   rebuildNav();
 
   document.getElementById('dashGrid').innerHTML = [
@@ -1784,7 +2010,7 @@ function buildUI() {
     <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">${ico('truck', 15)}<span>تحويل المستوفية</span><kbd>Alt+B</kbd></button>
     <select id="entryBranchFilter" onchange="renderEntry()" style="width:auto;max-width:200px;margin-right:auto;"></select>
     <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="max-width:280px;">`;
-  document.getElementById('entryHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('entryHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','رقم العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
@@ -1792,7 +2018,7 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>PDF</span></button>
     <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل للسجل</span></button>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
-  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','رقم العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
     <span style="color:var(--dark-blue);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;">${ico('filter', 14)}<span>فلترة:</span></span>
@@ -1807,7 +2033,7 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>PDF</span></button>
     <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>CSV</span></button>
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
-  document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','رقم العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
   document.getElementById('custToolbar').innerHTML = `
     <input id="searchCustomers" type="text" placeholder="بحث..." oninput="renderCustomers()" style="max-width:300px;">
@@ -2131,16 +2357,16 @@ function renderTrend7Days() {
 function renderDashboard() { renderStats(); }
 
 /* ==============================================================
-   Renderers
+   Renderers  ⬅ (أضفنا عمود رقم العميل)
    ============================================================== */
 function renderEntry() {
   const q = (document.getElementById('searchEntry')?.value || '').trim().toLowerCase();
   const branchFilter = document.getElementById('entryBranchFilter')?.value || '';
   let data = cache.orders;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
-  if (q) data = data.filter(o => `${o.invoice} ${o.customer} ${o.location} ${o.driver} ${o.notes} ${o.branch}`.toLowerCase().includes(q));
+  if (q) data = data.filter(o => `${o.invoice} ${o.customer} ${o.customerCode || ''} ${o.location} ${o.driver} ${o.notes} ${o.branch}`.toLowerCase().includes(q));
   const body = document.getElementById('entryBody');
-  if (!data.length) { body.innerHTML = (q || branchFilter) ? emptyState('search', 'لا توجد نتائج', 'جرّب تعديل الفلاتر', 13) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب', 13); return; }
+  if (!data.length) { body.innerHTML = (q || branchFilter) ? emptyState('search', 'لا توجد نتائج', 'جرّب تعديل الفلاتر', 14) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب', 14); return; }
   const canEdit = hasPerm('editOrder'), canDelete = hasPerm('deleteOrder'), canTrans = hasPerm('transferSingle');
   body.innerHTML = data.map((o, i) => {
     const cls = o.status === 'جاهز' ? 'status-ready' : 'status-progress';
@@ -2152,6 +2378,7 @@ function renderEntry() {
     `;
     return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="${canEdit ? `editOrder('${o.id}')` : ''}">
       <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
+      <td>${codeBadge(o.customerCode)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -2172,9 +2399,10 @@ function renderReady() {
   let data = cache.ready;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
   const body = document.getElementById('readyBody');
-  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 12); return; }
+  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 13); return; }
   body.innerHTML = data.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
     <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
+    <td>${codeBadge(o.customerCode)}</td>
     <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
     <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
     <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -2191,7 +2419,7 @@ function getLogFilteredData() {
   const fromDate = fromVal ? new Date(fromVal) : null;
   const toDate = toVal ? new Date(toVal + 'T23:59:59') : null;
   return cache.log.filter(o => {
-    if (nameVal && !`${o.customer} ${o.invoice}`.toLowerCase().includes(nameVal)) return false;
+    if (nameVal && !`${o.customer} ${o.invoice} ${o.customerCode || ''}`.toLowerCase().includes(nameVal)) return false;
     if (payVal && o.pay !== payVal) return false;
     if (branchVal && (o.branch || DEFAULT_BRANCH_NAME) !== branchVal) return false;
     const d = parseDate(o.approvalDate) || parseDate(o.archivedAt);
@@ -2209,7 +2437,7 @@ function renderLog() {
   const fc = document.getElementById('logFilteredCount');
   if (fc) fc.textContent = `المُفلتر: ${data.length}`;
   const body = document.getElementById('logBody');
-  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل بعد', 14); return; }
+  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل بعد', 15); return; }
   body.innerHTML = data.map((o, i) => {
     const btns = `
       ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editFromLog('${o.id}')" title="تعديل">${ico('edit', 13)}</button>` : ''}
@@ -2217,6 +2445,7 @@ function renderLog() {
     `;
     return `<tr>
       <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
+      <td>${codeBadge(o.customerCode)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -2243,7 +2472,7 @@ function renderCustomers() {
   const body = document.getElementById('custBody');
   if (!data.length) { body.innerHTML = q ? emptyState('search', 'لا نتائج', 'جرّب كلمات أخرى', 6) : emptyState('users', 'لا يوجد عملاء', 'ابدأ بإضافة عميل', 6); return; }
   body.innerHTML = data.map((c, i) => `<tr>
-    <td>${i+1}</td><td>${esc(c.code)}</td><td>${esc(c.name)}</td><td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
+    <td>${i+1}</td><td>${codeBadge(c.code)}</td><td>${esc(c.name)}</td><td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
     <td>${canManage ? `<button class="btn btn-primary btn-sm" onclick="editCustomer('${c.id}')">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">${ico('trash', 13)}</button>` : '—'}</td>
   </tr>`).join('');
 }
@@ -2343,14 +2572,10 @@ window.doLogin = async function () {
   try {
     await readAll(); localMeta = await readMeta();
 
-    // إذا لم تصل بيانات المستخدمين → أظهر السبب الحقيقي
     if (!cache.users.length) {
       const errs = readAll.lastErrors || [];
-      if (errs.length) {
-        errEl.textContent = 'تعذر تحميل البيانات من GitHub:\n' + errs.join('\n');
-      } else {
-        errEl.textContent = 'لم يتم العثور على مستخدمين.\nتأكد من وجود ملف data/users.json في المستودع.';
-      }
+      if (errs.length) errEl.textContent = 'تعذر تحميل البيانات من GitHub:\n' + errs.join('\n');
+      else errEl.textContent = 'لم يتم العثور على مستخدمين.\nتأكد من وجود ملف data/users.json في المستودع.';
       errEl.classList.add('show');
       btn.disabled = false; loadEl.textContent = ''; hideLoading();
       return;
@@ -2388,6 +2613,8 @@ window.logout = async function (silent = false) {
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
+  currentSyncInterval = SYNC_INTERVAL;
+  lastSyncTime = 0;
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = ''; document.getElementById('loginLoading').textContent = '';
@@ -2406,6 +2633,7 @@ function startApp() {
   document.getElementById('app').style.display = 'block';
   document.getElementById('currentUserName').textContent = currentUser.username;
   buildUI(); applyPermissionsUI(); populateBranchSelects(); loadDriversIntoSelects();
+  renderRateLimitWidget();
   const firstAvailable = ['dashboard','entry','ready','log','customers','settings'].find(p => {
     const pp = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
     return hasPerm(pp[p]);
@@ -2417,14 +2645,14 @@ function startApp() {
 }
 
 /* ==============================================================
-   Order CRUD
+   Order CRUD  ⬅ (يدعم رقم العميل)
    ============================================================== */
 window.addOrder = function () {
   if (!hasPerm('addOrder')) { toast('غير مصرح', 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
   clearAllErrors('orderModal');
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
-  ['orderId','orderCustomerId','orderInvoice','orderLocation','orderDate','orderDriverPhone','orderNotes'].forEach(id => document.getElementById(id).value = '');
+  ['orderId','orderCustomerId','orderCustomerCode','orderInvoice','orderLocation','orderDate','orderDriverPhone','orderNotes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('orderLogMode').value = '';
   document.getElementById('orderCustomer').value = '';
   document.getElementById('orderStatus').value = 'قيد التجهيز';
@@ -2447,6 +2675,7 @@ window.editOrder = function (id) {
   populateBranchSelects();
   document.getElementById('orderBranch').value = o.branch || DEFAULT_BRANCH_NAME;
   document.getElementById('orderCustomer').value = o.customer || '';
+  document.getElementById('orderCustomerCode').value = o.customerCode || '';
   document.getElementById('orderLocation').value = o.location || '';
   document.getElementById('orderStatus').value = o.status || 'قيد التجهيز';
   document.getElementById('orderDate').value = o.approvalDate || '';
@@ -2469,6 +2698,7 @@ window.editFromLog = function (id) {
   populateBranchSelects();
   document.getElementById('orderBranch').value = o.branch || DEFAULT_BRANCH_NAME;
   document.getElementById('orderCustomer').value = o.customer || '';
+  document.getElementById('orderCustomerCode').value = o.customerCode || '';
   document.getElementById('orderLocation').value = o.location || '';
   document.getElementById('orderStatus').value = o.status || 'قيد التجهيز';
   document.getElementById('orderDate').value = o.approvalDate || '';
@@ -2499,6 +2729,7 @@ function validateOrderForm() {
     else {
       document.getElementById('orderCustomerId').value = matched.id;
       document.getElementById('orderCustomer').value = matched.name;
+      document.getElementById('orderCustomerCode').value = matched.code || '';
       if (!document.getElementById('orderLocation').value.trim() && matched.location) document.getElementById('orderLocation').value = matched.location;
     }
   }
@@ -2519,6 +2750,7 @@ window.saveOrder = async function () {
     invoice: document.getElementById('orderInvoice').value.trim(),
     branch: document.getElementById('orderBranch').value || DEFAULT_BRANCH_NAME,
     customerId: document.getElementById('orderCustomerId').value,
+    customerCode: document.getElementById('orderCustomerCode').value.trim(),
     customer: document.getElementById('orderCustomer').value.trim(),
     location: document.getElementById('orderLocation').value.trim(),
     status: document.getElementById('orderStatus').value,
@@ -2584,7 +2816,7 @@ window.deleteFromLog = async function (id) {
 };
 
 /* ==============================================================
-   Customer Search
+   Customer Search  ⬅ (يملأ رقم العميل تلقائياً)
    ============================================================== */
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
@@ -2592,10 +2824,12 @@ function initCustomerSearch() {
   if (!input || !dropdown) return;
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
-    document.getElementById('orderCustomerId').value = ''; clearFieldError('orderCustomer');
+    document.getElementById('orderCustomerId').value = '';
+    document.getElementById('orderCustomerCode').value = '';
+    clearFieldError('orderCustomer');
     if (!q) { dropdown.classList.remove('show'); return; }
     const matches = cache.customers.filter(c => `${c.code} ${c.name} ${c.phone} ${c.location}`.toLowerCase().includes(q)).slice(0, 8);
-    let html = matches.length ? matches.map(c => `<div class="customer-option" data-id="${c.id}" data-name="${esc(c.name)}" data-loc="${esc(c.location)}"><span class="loc">${esc(c.location)}</span><b>${esc(c.name)}</b> <span class="code">${esc(c.code || '')}</span></div>`).join('') : '';
+    let html = matches.length ? matches.map(c => `<div class="customer-option" data-id="${c.id}" data-name="${esc(c.name)}" data-loc="${esc(c.location)}" data-code="${esc(c.code || '')}"><span class="loc">${esc(c.location)}</span><b>${esc(c.name)}</b> <span class="code">${esc(c.code || '')}</span></div>`).join('') : '';
     const exact = cache.customers.some(c => c.name.toLowerCase() === q);
     if (!exact && q.length >= 2) html += `<div class="customer-option create" data-create="1">إنشاء عميل جديد: "${esc(input.value)}"</div>`;
     if (!html) html = '<div class="customer-option empty">لا توجد نتائج</div>';
@@ -2615,6 +2849,8 @@ function initCustomerSearch() {
         } else {
           document.getElementById('orderCustomerId').value = opt.dataset.id;
           input.value = opt.dataset.name;
+          // ✅ ملء رقم العميل تلقائياً
+          document.getElementById('orderCustomerCode').value = opt.dataset.code || '';
           document.getElementById('orderLocation').value = opt.dataset.loc || '';
           dropdown.classList.remove('show');
         }
@@ -2731,36 +2967,38 @@ window.moveReadyToLog = async function () {
 };
 
 /* ==============================================================
-   Print
+   Print  ⬅ (يدعم أعمدة ديناميكية)
    ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
-  const showNotes = tpl.showNotes !== false, showApproval = tpl.showApprovalDate !== false;
-  const showDriverPhone = tpl.showDriverPhone !== false, showPay = tpl.showPay !== false;
-  const showArchived = tpl.showArchivedAt;
-  const showBranch = tpl.showBranch !== false;
-  const replaceVars = (str) => String(str || '').replace(/{date}/g, fmtDate()).replace(/{count}/g, items.length).replace(/{user}/g, esc(currentUser.username)).replace(/{from}/g, extra.from || 'البداية').replace(/{to}/g, extra.to || 'اليوم');
-  let headers = ['#','الفاتورة'];
-  if (showBranch) headers.push('الفرع');
-  headers.push('العميل','الموقع','الحالة');
-  if (showApproval) headers.push('الاعتماد');
-  if (showPay) headers.push('الدفع');
-  headers.push('الموصل');
-  if (showDriverPhone) headers.push('هاتف الموصل');
-  if (showNotes) headers.push('ملاحظات');
-  if (showArchived) headers.push('تاريخ الترحيل');
+  const replaceVars = (str) => String(str || '')
+    .replace(/{date}/g, fmtDate())
+    .replace(/{count}/g, items.length)
+    .replace(/{user}/g, esc(currentUser.username))
+    .replace(/{from}/g, extra.from || 'البداية')
+    .replace(/{to}/g, extra.to || 'اليوم');
+
+  // ⬅ بناء الأعمدة ديناميكياً حسب إعدادات القالب
+  const cols = [];
+  if (tpl.showInvoice !== false)     cols.push({ key:'invoice',        header:'الفاتورة',        cell:o => esc(o.invoice) });
+  if (tpl.showBranch !== false)      cols.push({ key:'branch',         header:'الفرع',           cell:o => esc(o.branch || DEFAULT_BRANCH_NAME) });
+  if (tpl.showCustomer !== false)    cols.push({ key:'customer',       header:'العميل',          cell:o => esc(o.customer) });
+  if (tpl.showCustomerCode !== false)cols.push({ key:'customerCode',   header:'رقم العميل',      cell:o => esc(o.customerCode || '—') });
+  if (tpl.showLocation !== false)    cols.push({ key:'location',       header:'الموقع',          cell:o => esc(o.location) });
+  if (tpl.showStatus !== false)      cols.push({ key:'status',         header:'الحالة',          cell:o => esc(o.status) });
+  if (tpl.showApprovalDate !== false)cols.push({ key:'approvalDate',   header:'الاعتماد',        cell:o => esc(o.approvalDate || '—') });
+  if (tpl.showPay !== false)         cols.push({ key:'pay',            header:'الدفع',           cell:o => esc(o.pay || '—') });
+  if (tpl.showDriver !== false)      cols.push({ key:'driver',         header:'الموصل',          cell:o => esc(o.driver || '—') });
+  if (tpl.showDriverPhone !== false) cols.push({ key:'driverPhone',    header:'هاتف الموصل',     cell:o => esc(o.driverPhone || '—') });
+  if (tpl.showNotes !== false)       cols.push({ key:'notes',          header:'ملاحظات',         cell:o => `<div class="cell-notes">${esc(o.notes || '—')}</div>` });
+  if (tpl.showArchivedAt)            cols.push({ key:'archivedAt',     header:'تاريخ الترحيل',   cell:o => esc(o.archivedAt || '—') });
+
+  const headers = ['#'].concat(cols.map(c => c.header));
   const rows = items.map((o, i) => {
-    let cells = [i+1, esc(o.invoice)];
-    if (showBranch) cells.push(esc(o.branch || DEFAULT_BRANCH_NAME));
-    cells.push(esc(o.customer), esc(o.location), esc(o.status));
-    if (showApproval) cells.push(esc(o.approvalDate || '—'));
-    if (showPay) cells.push(esc(o.pay || '—'));
-    cells.push(esc(o.driver || '—'));
-    if (showDriverPhone) cells.push(esc(o.driverPhone || '—'));
-    if (showNotes) cells.push(`<div class="cell-notes">${esc(o.notes || '—')}</div>`);
-    if (showArchived) cells.push(esc(o.archivedAt || '—'));
+    const cells = [i+1].concat(cols.map(c => c.cell(o)));
     return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
   }).join('');
+
   const orientation = tpl.orientation === 'portrait' ? 'portrait' : 'landscape';
   const fontSize = tpl.fontSize || 12;
   const logoHTML = templates.logo ? `<div class="print-logo"><img src="${templates.logo}" alt=""></div>` : '';
@@ -2813,7 +3051,7 @@ window.printLog = function () {
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
 /* ==============================================================
-   Logo & Templates
+   Templates  ⬅ (أزرار إظهار/إخفاء احترافية)
    ============================================================== */
 async function resizeImage(file, maxWidth = 1400) {
   return new Promise((resolve, reject) => {
@@ -2843,35 +3081,69 @@ window.handleLogoUpload = async function (evt) {
   evt.target.value = '';
 };
 window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم الحذف', 'info'); };
+
+window.toggleCol = function(key, tplKey) {
+  if (!hasPerm('editTemplates')) return;
+  if (!templates[tplKey]) templates[tplKey] = { ...DEFAULT_TEMPLATES[tplKey] };
+  // القيم الافتراضية: true (ظاهر) ما لم تكن false صريحة
+  const cur = templates[tplKey][key] !== false;
+  templates[tplKey][key] = !cur;
+  renderTemplates();
+};
+window.setAllCols = function(tplKey, visible) {
+  if (!hasPerm('editTemplates')) return;
+  if (!templates[tplKey]) templates[tplKey] = { ...DEFAULT_TEMPLATES[tplKey] };
+  (PRINT_COLUMNS[tplKey] || []).forEach(c => { templates[tplKey][c.key] = visible; });
+  renderTemplates();
+};
+
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
   if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
-  const logoHTML = templates.logo ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف</span></button></div>` : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
+  const logoHTML = templates.logo
+    ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف</span></button></div>`
+    : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
   const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>صورة الكليشه</span></h4>
     <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
     ${logoHTML}</div>`;
+
   const bodyHTML = ['ready','log'].map(key => {
-    const t = templates[key] || DEFAULT_TEMPLATES[key];
+    const t = { ...DEFAULT_TEMPLATES[key], ...(templates[key] || {}) };
     const label = key === 'ready' ? 'قائمة الطلبات الجاهزة' : 'سجل الطلبات';
+    const cols = PRINT_COLUMNS[key] || [];
+    const chipsHTML = cols.map(c => {
+      const isVisible = t[c.key] !== false;
+      return `<button type="button" class="col-chip ${isVisible ? 'active' : ''}" onclick="toggleCol('${c.key}', '${key}')" title="${isVisible ? 'إخفاء' : 'إظهار'}">
+        ${ico(isVisible ? 'eye' : 'eyeOff', 12)}
+        <span>${c.label}</span>
+        <span class="col-chip-status">${isVisible ? 'ظاهر' : 'مخفي'}</span>
+      </button>`;
+    }).join('');
+
     return `<div class="template-card"><h4>${ico(key === 'ready' ? 'box' : 'archive', 17)}<span>${label}</span></h4>
       <div class="template-row"><label>العنوان</label><input value="${esc(t.title)}" onchange="updateTemplate('${key}', 'title', this.value)"></div>
       <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">{date} {count} {user} {from} {to}</div></div></div>
       <div class="template-row"><label>التذييل</label><input value="${esc(t.footer || '')}" onchange="updateTemplate('${key}', 'footer', this.value)"></div>
       <div class="template-row"><label>حجم الخط</label><input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)"></div>
       <div class="template-row"><label>الاتجاه</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
-      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-branch" ${t.showBranch !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showBranch', this.checked)"><label for="tpl-${key}-branch">إظهار الفرع</label></div>
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)"><label for="tpl-${key}-notes">إظهار الملاحظات</label></div>
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-approval" ${t.showApprovalDate !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showApprovalDate', this.checked)"><label for="tpl-${key}-approval">إظهار تاريخ الاعتماد</label></div>
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-dphone" ${t.showDriverPhone !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showDriverPhone', this.checked)"><label for="tpl-${key}-dphone">إظهار هاتف الموصل</label></div>
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-pay" ${t.showPay !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showPay', this.checked)"><label for="tpl-${key}-pay">إظهار حالة الدفع</label></div>
-        ${key === 'log' ? `<div class="toggle-row"><input type="checkbox" id="tpl-${key}-arch" ${t.showArchivedAt ? 'checked' : ''} onchange="updateTemplate('${key}', 'showArchivedAt', this.checked)"><label for="tpl-${key}-arch">إظهار تاريخ الترحيل</label></div>` : ''}
-      </div></div>`;
+
+      <div class="template-columns-section">
+        <div class="tcs-title">${ico('grid', 14)}<span>الأعمدة الظاهرة في الطباعة</span></div>
+        <div class="col-toggles-actions">
+          <button type="button" onclick="setAllCols('${key}', true)">${ico('eye', 11)}<span>إظهار الكل</span></button>
+          <button type="button" onclick="setAllCols('${key}', false)">${ico('eyeOff', 11)}<span>إخفاء الكل</span></button>
+        </div>
+        <div class="col-toggles">${chipsHTML}</div>
+      </div>
+    </div>`;
   }).join('');
   container.innerHTML = logoSection + bodyHTML;
 }
-window.updateTemplate = function (key, field, value) { if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] }; templates[key][field] = value; };
+window.updateTemplate = function (key, field, value) {
+  if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] };
+  templates[key][field] = value;
+};
 window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ', 'success'); } catch (e) { toast(e.message, 'error'); } };
 window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } const ok = await dialog.confirm('استعادة القوالب؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة', 'info'); };
 
@@ -2923,6 +3195,7 @@ window.saveCustomer = async function () {
     if (document.getElementById('orderModal').classList.contains('active')) {
       document.getElementById('orderCustomerId').value = custData.id;
       document.getElementById('orderCustomer').value = custData.name;
+      document.getElementById('orderCustomerCode').value = custData.code || '';
       document.getElementById('orderLocation').value = custData.location;
     }
     toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
@@ -3060,8 +3333,8 @@ window.resetAll = async function () {
 };
 window.exportLogCSV = function () {
   const data = getLogFilteredData(); if (!data.length) { toast('فارغ', 'error'); return; }
-  const headers = ['رقم الفاتورة','الفرع','العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
-  const rows = data.map(o => [o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
+  const headers = ['رقم الفاتورة','الفرع','العميل','رقم العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
+  const rows = data.map(o => [o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.customerCode || '', o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
   const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `log_${new Date().toISOString().slice(0,10)}.csv`; a.click();
@@ -3151,6 +3424,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('adminToggleIcon').innerHTML = ico('shield2', 13);
   document.getElementById('adminHeaderIcon').innerHTML = ico('key', 16);
   document.getElementById('adminBtnIcon').innerHTML = ico('check', 16);
+  document.getElementById('rateIcon').innerHTML = ico('zap', 12);
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginKey').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
@@ -3163,6 +3437,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   setTimeout(() => { if (localStorage.getItem(DRAFT_KEY)) document.getElementById('draftBadge').classList.add('show'); }, 500);
   renderNotifications();
+  renderRateLimitWidget();
 });
 </script>
 </body>
