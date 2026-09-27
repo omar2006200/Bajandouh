@@ -104,8 +104,6 @@ nav button .ico{width:16px;height:16px}
 nav button:hover{color:var(--dark-blue);background:rgba(46,117,182,.06)}
 nav button.active{color:var(--dark-blue);border-bottom-color:var(--dark-blue);font-weight:700;background:rgba(46,117,182,.08)}
 main{padding:22px;max-width:1700px;margin:0 auto}
-
-/* Dashboard */
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:22px}
 .dash-card{background:var(--card-bg);padding:22px;border-radius:14px;box-shadow:var(--shadow-sm);cursor:pointer;transition:var(--transition);border:2px solid transparent;position:relative;overflow:hidden}
 .dash-card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:5px;background:var(--blue);transition:width .25s}
@@ -125,12 +123,8 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .dash-card.orange::before{background:#fd7e14}
 .dash-card.orange .icon{background:linear-gradient(135deg,#ffead6,#ffd0a8);color:#fd7e14}
 [data-theme="dark"] .dash-card.orange .icon{background:linear-gradient(135deg,#4d2f10,#2e1a05)}
-
-/* Section Title */
 .section-title-dash{color:var(--dark-blue);font-size:15px;font-weight:700;margin:22px 0 12px;display:flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:2px solid var(--light-blue)}
 .section-title-dash .ico{width:17px;height:17px}
-
-/* Stats Grid (KPI cards) */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
 .stats-grid.wide{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .stat{background:var(--card-bg);padding:18px 16px;border-radius:12px;box-shadow:var(--shadow-sm);transition:var(--transition);position:relative;overflow:hidden;border-right:4px solid var(--blue)}
@@ -161,27 +155,19 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .stat.teal .stat-icon{background:rgba(23,162,184,.12);color:#17a2b8}
 .stat.pink{border-right-color:#e83e8c}
 .stat.pink .stat-icon{background:rgba(232,62,140,.12);color:#e83e8c}
-.stat.dark{border-right-color:#343a40}
-.stat.dark .stat-icon{background:rgba(52,58,64,.12);color:#343a40}
-[data-theme="dark"] .stat.dark .stat-icon{background:rgba(200,200,200,.12);color:#e8edf2}
 .stat .progress-bar{width:100%;height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;margin-top:8px}
 [data-theme="dark"] .stat .progress-bar{background:rgba(255,255,255,.1)}
 .stat .progress-bar .fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),#4a90c2);transition:width .6s ease}
 .stat .progress-bar .fill.green{background:linear-gradient(90deg,var(--green),#4bc760)}
 .stat .progress-bar .fill.red{background:linear-gradient(90deg,var(--red),#e4606d)}
 .stat .progress-bar .fill.purple{background:linear-gradient(90deg,var(--purple),#8a5cd4)}
-.stat .progress-bar .fill.orange{background:linear-gradient(90deg,#fd7e14,#ffb26b)}
-
-/* Analytics Grid */
 .analytics-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;margin-bottom:22px}
 .analytics-row.cols-2{grid-template-columns:1fr 1fr}
-.analytics-row.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
-@media(max-width:1200px){.analytics-row{grid-template-columns:1fr 1fr}.analytics-row.cols-4{grid-template-columns:1fr 1fr}}
-@media(max-width:750px){.analytics-row,.analytics-row.cols-2,.analytics-row.cols-4{grid-template-columns:1fr}}
+@media(max-width:1200px){.analytics-row{grid-template-columns:1fr 1fr}}
+@media(max-width:750px){.analytics-row,.analytics-row.cols-2{grid-template-columns:1fr}}
 .analytics-card{background:var(--card-bg);padding:18px 20px;border-radius:14px;box-shadow:var(--shadow-sm)}
 .analytics-card h4{color:var(--dark-blue);font-size:13.5px;margin-bottom:14px;font-weight:700;display:flex!important;align-items:center;gap:8px}
 .analytics-card h4 .ico{width:15px;height:15px}
-.analytics-card h4 .badge-sm{margin-right:auto;background:rgba(46,117,182,.12);color:var(--dark-blue);font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700}
 .donut-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .donut{position:relative;width:130px;height:130px;flex-shrink:0}
 .donut svg{transform:rotate(-90deg)}
@@ -213,22 +199,6 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .sparkline h4{color:var(--dark-blue);font-size:13.5px;margin-bottom:14px;font-weight:700;display:flex!important;align-items:center;gap:8px}
 .sparkline h4 .ico{width:15px;height:15px}
 .sparkline svg{width:100%;height:100px}
-
-/* Bar Chart */
-.bar-chart{display:flex;flex-direction:column;gap:10px}
-.bar-row{display:flex;align-items:center;gap:10px;font-size:12px}
-.bar-row .bl{flex:0 0 80px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar-row .bt{flex:1;height:22px;background:rgba(0,0,0,.05);border-radius:6px;overflow:hidden;position:relative}
-[data-theme="dark"] .bar-row .bt{background:rgba(255,255,255,.05)}
-.bar-row .bf{height:100%;border-radius:6px;transition:width .6s ease;min-width:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;color:#fff;font-size:11px;font-weight:700}
-.bar-row .bf.blue{background:linear-gradient(90deg,#2e75b6,#4a90c2)}
-.bar-row .bf.green{background:linear-gradient(90deg,#28a745,#4bc760)}
-.bar-row .bf.red{background:linear-gradient(90deg,#dc3545,#e4606d)}
-.bar-row .bf.purple{background:linear-gradient(90deg,#6f42c1,#8a5cd4)}
-.bar-row .bf.orange{background:linear-gradient(90deg,#fd7e14,#ffb26b)}
-.bar-row .bf.teal{background:linear-gradient(90deg,#17a2b8,#4ec5d8)}
-
-/* Performance Metrics */
 .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:6px}
 .metric-box{background:rgba(0,0,0,.03);border-radius:10px;padding:14px 12px;text-align:center;border:1px solid var(--border)}
 [data-theme="dark"] .metric-box{background:rgba(255,255,255,.04)}
@@ -237,14 +207,10 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .metric-box .mv.red{color:var(--red)}
 .metric-box .mv.purple{color:var(--purple)}
 .metric-box .ml{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:500}
-
-/* Time Stats */
 .time-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
 .time-stat{background:linear-gradient(135deg,rgba(46,117,182,.08),rgba(46,117,182,.03));border-radius:10px;padding:14px;text-align:center;border:1px solid rgba(46,117,182,.15)}
 .time-stat .tv{font-size:26px;font-weight:800;color:var(--dark-blue);line-height:1}
 .time-stat .tl{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:600}
-
-/* Rest of UI */
 .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
 .filter-bar{display:flex!important;gap:11px;flex-wrap:wrap;align-items:center;padding:13px 16px;background:var(--card-bg);border-radius:12px;margin-bottom:14px;box-shadow:var(--shadow-sm);border-right:4px solid var(--blue)}
 .filter-bar>span{display:inline-flex;align-items:center;gap:5px}
@@ -419,8 +385,30 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .activity-item .activity-desc{font-size:11.5px;color:var(--text-muted);line-height:1.5;word-break:break-word}
 .activity-item .activity-meta{font-size:10.5px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
 .activity-item .activity-meta span{display:inline-flex;align-items:center;gap:3px}
-
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
+/* Activity Pagination & Filters */
+.activity-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;padding:12px 14px;background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow-sm);border-right:3px solid var(--blue)}
+.activity-search-box{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.03);border:2px solid var(--border);border-radius:9px;padding:0 12px;transition:var(--transition)}
+[data-theme="dark"] .activity-search-box{background:rgba(255,255,255,.05)}
+.activity-search-box:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(46,117,182,.1)}
+.activity-search-box input{border:none;background:transparent;padding:9px 0;box-shadow:none!important;width:100%}
+.activity-search-box input:focus{box-shadow:none!important}
+.activity-filters select{width:auto;padding:8px 12px;font-size:12.5px;min-width:140px}
+.activity-stats{display:flex;gap:18px;flex-wrap:wrap;padding:10px 14px;margin-bottom:12px;background:linear-gradient(135deg,rgba(46,117,182,.08),rgba(46,117,182,.03));border-radius:10px;font-size:12.5px;color:var(--text-muted);border:1px solid rgba(46,117,182,.15)}
+.activity-stats span{display:inline-flex;align-items:center;gap:5px}
+.activity-stats b{color:var(--dark-blue);font-weight:700}
+.activity-pagination{margin-top:14px;padding:14px;background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.activity-pagination-inner{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pg-btn{width:36px;height:36px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);font-family:inherit}
+.pg-btn:hover:not(:disabled){background:var(--light-blue);border-color:var(--blue);color:var(--dark-blue);transform:translateY(-1px)}
+.pg-btn:disabled{opacity:.35;cursor:not-allowed}
+.pg-btn .ico{width:14px;height:14px}
+.pg-num{min-width:36px;height:36px;padding:0 10px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:var(--transition);font-family:inherit}
+.pg-num:hover{background:var(--light-blue);border-color:var(--blue);color:var(--dark-blue)}
+.pg-num.active{background:linear-gradient(135deg,var(--dark-blue),var(--blue));color:#fff;border-color:var(--dark-blue);font-weight:700;box-shadow:0 4px 10px rgba(31,78,121,.3)}
+.pg-dots{padding:0 6px;color:var(--text-muted);font-weight:700;user-select:none}
+.pg-info{font-size:11.5px;color:var(--text-muted);font-weight:600;padding:0 8px}
+.pg-info b{color:var(--dark-blue);font-weight:700}
+@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
 @media(max-width:700px){
   .modal{max-width:96vw;padding:20px 16px}
   .admin-token-section .admin-header{font-size:13px;padding:8px 12px}
@@ -455,8 +443,12 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   .filter-bar input,.filter-bar select{font-size:11.5px;height:30px}
   .section-header h2{font-size:16px}
   .section-header .hint{font-size:10px;padding:5px 9px}
-  .bar-row .bl{flex:0 0 60px;font-size:11px}
-  .bar-row .bf{font-size:10px}
+  .activity-filters{padding:10px;gap:6px}
+  .activity-filters select{min-width:110px;font-size:11.5px}
+  .activity-search-box{min-width:100%}
+  .pg-btn,.pg-num{min-width:32px;height:32px;font-size:12px}
+  .pg-info{font-size:10.5px;padding:0 4px}
+  .activity-stats{font-size:11px;gap:10px;padding:8px 10px}
 }
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:rgba(0,0,0,.05)}
@@ -491,7 +483,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <div class="notif-list" id="notifList"></div>
 </div>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
@@ -537,7 +528,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <header>
     <div class="brand">
@@ -568,19 +558,14 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <nav id="navBar"></nav>
 
   <main>
-    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
       <div class="dash-grid" id="dashGrid"></div>
-
       <div class="section-title-dash" id="title-overview"></div>
       <div class="stats-grid" id="statsOverview"></div>
-
       <div class="section-title-dash" id="title-payments"></div>
       <div class="stats-grid" id="statsPayments"></div>
-
       <div class="section-title-dash" id="title-time"></div>
       <div id="timeStatsContainer"></div>
-
       <div class="analytics-row">
         <div class="analytics-card">
           <h4 id="donutTitle"></h4>
@@ -604,7 +589,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
           </div>
         </div>
       </div>
-
       <div class="analytics-row cols-2">
         <div class="analytics-card">
           <h4 id="topCustTitle"></h4>
@@ -615,7 +599,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
           <div class="top-list" id="topBranches"></div>
         </div>
       </div>
-
       <div class="analytics-row cols-2">
         <div class="analytics-card">
           <h4 id="topDrvTitle"></h4>
@@ -626,12 +609,10 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
           <div class="top-list" id="topUsers"></div>
         </div>
       </div>
-
       <div class="section-title-dash" id="title-performance"></div>
       <div class="analytics-card" style="margin-bottom:22px;">
         <div class="metric-grid" id="performanceMetrics"></div>
       </div>
-
       <div class="sparkline">
         <h4 id="trendTitle"></h4>
         <div id="trendChart"></div>
@@ -677,7 +658,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   </main>
 </div>
 
-<!-- MODALS -->
 <div id="orderModal" class="modal-bg"><div class="modal">
   <h3 id="orderModalTitle"></h3>
   <input type="hidden" id="orderId"><input type="hidden" id="orderCustomerId"><input type="hidden" id="orderLogMode" value="">
@@ -686,7 +666,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <label class="field-required">الفرع</label><select id="orderBranch"></select>
   <div class="field-error-msg" id="err-orderBranch"></div>
   <label class="field-required">العميل</label>
-  <div class="customer-search"><input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث أو اختر من القائمة..."><div class="customer-dropdown" id="customerDropdown"></div></div>
+  <div class="customer-search"><input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث أو اختر..."><div class="customer-dropdown" id="customerDropdown"></div></div>
   <div class="field-error-msg" id="err-orderCustomer"></div>
   <label>الموقع</label><input id="orderLocation" autocomplete="off">
   <label>حالة الطلب</label><select id="orderStatus"><option>قيد التجهيز</option><option>جاهز</option></select>
@@ -821,7 +801,9 @@ const I = {
   money:'M1 4h22v16H1z M12 15a3 3 0 100-6 3 3 0 000 6z',
   layers:'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
   target:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
-  pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z'
+  pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z',
+  chevronsRight:'M13 17l5-5-5-5 M6 17l5-5-5-5',
+  chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -831,17 +813,19 @@ function ico(name, size = 16) {
 /* ==============================================================
    Config
    ============================================================== */
-const APP_ID       = 'Bajandouh';
+const APP_ID       = 'omar2006200/Bajandouh';
 const APP_BRANCH   = 'main';
 const SYNC_INTERVAL = 15000;
 const SAVE_COOLDOWN = 10000;
-const SESSION_TIMEOUT = 60 * 60 * 1000;    // ⭐ ساعة كاملة
-const SESSION_WARNING = 5 * 60 * 1000;      // تحذير قبل 5 دقائق
+const SESSION_TIMEOUT = 60 * 60 * 1000;
+const SESSION_WARNING = 5 * 60 * 1000;
 const DRAFT_KEY = 'oms_draft_order';
 const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
 const NOTIF_KEY = 'oms_notifications';
-const ACTIVITY_LIMIT = 200;
+const ACTIVITY_PER_PAGE = 30;
+const ACTIVITY_WARN_THRESHOLD = 5000;
+const ACTIVITY_TOTAL_LIMIT = 0;
 
 const API_BASE = `https://api.github.com/repos/${APP_ID}/${APP_ID}/contents`;
 const DATA_FILES = {
@@ -917,6 +901,10 @@ let rateLimitInfo = null,apiCallCount = 0,apiCachedCount = 0;
 let prevStats = { orders:0,ready:0,log:0,total:0 };
 let hasUnencryptedFiles = false;
 let sessionTimer = null, sessionWarningTimer = null, sessionExpireAt = 0;
+let activityCurrentPage = 1;
+let activityFilterUser = '';
+let activityFilterType = '';
+let activitySearchQuery = '';
 
 /* ==============================================================
    Security
@@ -937,7 +925,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ==============================================================
-   Encryption (Fixed key — independent of access key)
+   Encryption (Fixed key)
    ============================================================== */
 function deriveFixedKey() {
   const s = APP_ID + '|secure|fixed|v3|schema';
@@ -1121,34 +1109,33 @@ function changeKeyModal() {
   openModal('keyModal');
   setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
 }
-
 async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
   if (!adminUser || !adminPass) { errorEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errorEl.classList.add('show'); return false; }
   if (!newKey) { errorEl.textContent = 'أدخل مفتاح الاتصال الجديد'; errorEl.classList.add('show'); return false; }
   if (newKey.length < 20) { errorEl.textContent = 'المفتاح الجديد قصير جداً'; errorEl.classList.add('show'); return false; }
   const oldKey = getStoredKey();
-  if (!oldKey) { errorEl.textContent = 'لا يوجد مفتاح حالي — استخدم "مفتاح الاتصال" الأساسي أولاً'; errorEl.classList.add('show'); return false; }
+  if (!oldKey) { errorEl.textContent = 'لا يوجد مفتاح حالي'; errorEl.classList.add('show'); return false; }
   if (btn) btn.disabled = true;
   try {
-    showLoading('جاري التحقق من الصلاحيات...');
+    showLoading('جاري التحقق...');
     await readAll(); localMeta = await readMeta();
     const found = cache.users.find(x => x.username === adminUser && x.password === adminPass);
     if (!found) throw new Error('❌ بيانات الدخول غير صحيحة');
-    if (found.role !== 'رئيسي') throw new Error('❌ هذا الخيار للمدير فقط');
-    showLoading('جاري اختبار المفتاح الجديد...');
+    if (found.role !== 'رئيسي') throw new Error('❌ للمدير فقط');
+    showLoading('جاري اختبار المفتاح...');
     const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
     const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
     if (!testRes.ok) {
       if (testRes.status === 401) throw new Error('المفتاح الجديد غير صالح');
-      if (testRes.status === 403) throw new Error('المفتاح الجديد لا يملك الصلاحيات');
-      throw new Error('فشل الاتصال بالمفتاح الجديد');
+      if (testRes.status === 403) throw new Error('لا يملك الصلاحيات');
+      throw new Error('فشل الاتصال');
     }
     saveKey(newKey);
     SHAs = {}; ETags = {}; localMeta = null;
     await readAll();
     hideLoading();
     logActivity('key-change', 'تحديث مفتاح الاتصال', `بواسطة ${adminUser}`, 'success');
-    toast('✅ تم تحديث مفتاح الاتصال', 'success');
+    toast('✅ تم التحديث', 'success');
     updateKeyStatus(); updateCurrentKeyInfo();
     return true;
   } catch (e) {
@@ -1159,7 +1146,6 @@ async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
     return false;
   } finally { if (btn) btn.disabled = false; }
 }
-
 window.toggleAdminPanel = function() {
   const panel = document.getElementById('adminTokenSection');
   panel.classList.toggle('show');
@@ -1178,7 +1164,7 @@ window.adminChangeKey = async function() {
     document.getElementById('adminPass').value = '';
     document.getElementById('adminNewKey').value = '';
     document.getElementById('adminTokenSection').classList.remove('show');
-    await dialog.alert('✅ تم تحديث المفتاح بنجاح!', { type: 'success', title: 'تم التحديث' });
+    await dialog.alert('✅ تم تحديث المفتاح!', { type: 'success', title: 'تم' });
   }
 };
 async function saveNewKey() {
@@ -1188,7 +1174,7 @@ async function saveNewKey() {
   errEl.className = 'login-error';
   const ok = await performKeyChange(newKey, currentUser.username, currentUser.password, errEl, null);
   if (ok) closeModal('keyModal');
-  else toast(errEl.textContent || 'فشل التحديث', 'error');
+  else toast(errEl.textContent || 'فشل', 'error');
 }
 window.saveNewKey = saveNewKey;
 
@@ -1219,9 +1205,9 @@ async function apiReadFile(key) {
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
     if (res.status === 401) throw new Error('المفتاح غير صالح');
-    if (res.status === 403) throw new Error('انتهت حصة الوصول');
+    if (res.status === 403) throw new Error('انتهت الحصة');
     if (res.status === 404) return { notModified: false, data: null };
-    throw new Error('فشل تحميل البيانات');
+    throw new Error('فشل التحميل');
   }
   const json = await res.json();
   SHAs[key] = json.sha;
@@ -1233,8 +1219,8 @@ async function apiReadFile(key) {
   }
   if (isEncrypted(raw)) {
     const decrypted = decryptText(raw);
-    if (decrypted === null) throw new Error('فشل قراءة البيانات');
-    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error('فشل قراءة البيانات'); }
+    if (decrypted === null) throw new Error('فشل القراءة');
+    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error('فشل القراءة'); }
   }
   try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
 }
@@ -1244,12 +1230,12 @@ async function apiWriteFile(key, data) {
   const body = { message: `تحديث ${key}`, content: encodeBase64(content), branch: APP_BRANCH, sha: SHAs[key] };
   let res;
   try { res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
-  catch { setOnline(false); throw new Error('فشل الاتصال أثناء الحفظ'); }
+  catch { setOnline(false); throw new Error('فشل الاتصال'); }
   updateRateLimit(res.headers);
   apiCallCount++;
   if (!res.ok) {
     if (res.status === 409) throw new Error('CONFLICT');
-    throw new Error('فشل حفظ البيانات');
+    throw new Error('فشل الحفظ');
   }
   const json = await res.json();
   SHAs[key] = json.content.sha;
@@ -1311,14 +1297,14 @@ async function persistKeys(keys) {
   } finally { setSyncing(false); }
 }
 async function encryptAllNow() {
-  const ok = await dialog.confirm('سيتم تفعيل الحماية على جميع البيانات.', { title: '🔒 تفعيل الحماية', okText: 'تفعيل الآن' });
+  const ok = await dialog.confirm('تفعيل الحماية على جميع البيانات؟', { title: '🔒 تفعيل', okText: 'الآن' });
   if (!ok) return;
   try {
-    showLoading('جاري تفعيل الحماية...');
+    showLoading('جاري التفعيل...');
     await persistKeys(DATA_KEYS);
     hideLoading();
     hasUnencryptedFiles = false;
-    toast('✅ تم تفعيل الحماية', 'success');
+    toast('✅ تم التفعيل', 'success');
   } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
 }
 window.encryptAllNow = encryptAllNow;
@@ -1384,7 +1370,6 @@ function applyZoom() { document.body.style.zoom = zoomLevel; }
 function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); }
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
-function pct(a, b) { return b > 0 ? Math.round((a / b) * 100) : 0; }
 
 /* ==============================================================
    Notifications
@@ -1429,40 +1414,182 @@ window.clearAllNotifications = function() {
 };
 
 /* ==============================================================
-   Activity
+   Activity Log — UNLIMITED + PAGINATION
    ============================================================== */
 function logActivity(action, title, description, type = 'info') {
-  const entry = { id: uid(), action, title, description, type, user: currentUser?.username || 'system', time: fmtDate(), ts: Date.now() };
+  const entry = {
+    id: uid(),
+    action, title, description, type,
+    user: currentUser?.username || 'system',
+    time: fmtDate(),
+    ts: Date.now()
+  };
   cache.activity.unshift(entry);
-  if (cache.activity.length > ACTIVITY_LIMIT) cache.activity = cache.activity.slice(0, ACTIVITY_LIMIT);
+  if (ACTIVITY_TOTAL_LIMIT > 0 && cache.activity.length > ACTIVITY_TOTAL_LIMIT) {
+    cache.activity = cache.activity.slice(0, ACTIVITY_TOTAL_LIMIT);
+  }
+  if (cache.activity.length === ACTIVITY_WARN_THRESHOLD + 1) {
+    setTimeout(() => {
+      toast(`⚠️ السجل تجاوز ${ACTIVITY_WARN_THRESHOLD} عملية. يمكنك تصديره من الإعدادات.`, 'warning');
+    }, 1000);
+  }
 }
+
+function getFilteredActivity() {
+  let filtered = cache.activity;
+  if (activityFilterUser) filtered = filtered.filter(a => a.user === activityFilterUser);
+  if (activityFilterType) filtered = filtered.filter(a => a.type === activityFilterType);
+  if (activitySearchQuery) {
+    const q = activitySearchQuery.toLowerCase();
+    filtered = filtered.filter(a =>
+      (a.title || '').toLowerCase().includes(q) ||
+      (a.description || '').toLowerCase().includes(q) ||
+      (a.action || '').toLowerCase().includes(q)
+    );
+  }
+  return filtered;
+}
+
 function renderActivity() {
-  const el = document.getElementById('activityList'); if (!el) return;
-  if (!cache.activity.length) {
-    el.innerHTML = `<div class="empty-state"><div class="icon">${ico('activity', 26)}</div><div class="title">لا يوجد نشاط</div><div class="desc">ستظهر جميع العمليات هنا</div></div>`;
+  const el = document.getElementById('activityList');
+  const paginationEl = document.getElementById('activityPagination');
+  const statsEl = document.getElementById('activityStats');
+  if (!el) return;
+
+  const filtered = getFilteredActivity();
+
+  if (statsEl) {
+    const total = cache.activity.length;
+    const shown = filtered.length;
+    const pages = Math.max(1, Math.ceil(shown / ACTIVITY_PER_PAGE));
+    statsEl.innerHTML = `
+      <span>${ico('activity', 13)} إجمالي: <b>${total.toLocaleString()}</b></span>
+      ${shown !== total ? `<span>${ico('filter', 13)} مُفلتر: <b>${shown.toLocaleString()}</b></span>` : ''}
+      <span>${ico('chart', 13)} صفحة: <b>${pages}</b></span>
+    `;
+  }
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / ACTIVITY_PER_PAGE));
+  if (activityCurrentPage > totalPages) activityCurrentPage = totalPages;
+  if (activityCurrentPage < 1) activityCurrentPage = 1;
+
+  if (!total) {
+    el.innerHTML = `<div class="empty-state">
+      <div class="icon">${ico('activity', 26)}</div>
+      <div class="title">لا يوجد نشاط</div>
+      <div class="desc">${cache.activity.length ? 'جرّب تعديل الفلاتر' : 'ستظهر جميع العمليات هنا'}</div>
+    </div>`;
+    if (paginationEl) paginationEl.innerHTML = '';
     return;
   }
-  el.innerHTML = cache.activity.slice(0, 100).map(a => {
+
+  const start = (activityCurrentPage - 1) * ACTIVITY_PER_PAGE;
+  const end = Math.min(start + ACTIVITY_PER_PAGE, total);
+  const pageEntries = filtered.slice(start, end);
+
+  el.innerHTML = pageEntries.map(a => {
     const typeClass = a.type === 'success' ? 'success' : a.type === 'danger' ? 'danger' : a.type === 'warning' ? 'warning' : '';
-    const icon = a.type === 'danger' ? 'trash' : a.type === 'success' ? 'check' : a.type === 'warning' ? 'warning' : 'info';
-    return `
-      <div class="activity-item">
-        <div class="activity-icon ${typeClass}">${ico(icon, 15)}</div>
-        <div class="activity-body">
-          <div class="activity-title">${esc(a.title)}</div>
-          <div class="activity-desc">${esc(a.description || '')}</div>
-          <div class="activity-meta">
-            <span>${ico('user', 11)} ${esc(a.user)}</span>
-            <span>${ico('clock', 11)} ${esc(a.time)}</span>
-          </div>
+    const iconName = a.type === 'danger' ? 'trash' : a.type === 'success' ? 'check' : a.type === 'warning' ? 'warning' : 'info';
+    return `<div class="activity-item">
+      <div class="activity-icon ${typeClass}">${ico(iconName, 15)}</div>
+      <div class="activity-body">
+        <div class="activity-title">${esc(a.title)}</div>
+        <div class="activity-desc">${esc(a.description || '')}</div>
+        <div class="activity-meta">
+          <span>${ico('user', 11)} ${esc(a.user)}</span>
+          <span>${ico('clock', 11)} ${esc(a.time)}</span>
         </div>
       </div>
-    `;
+    </div>`;
+  }).join('');
+
+  if (!paginationEl) return;
+
+  const pageButtons = buildPageNumbers(activityCurrentPage, totalPages);
+
+  paginationEl.innerHTML = `
+    <div class="activity-pagination-inner">
+      <button class="pg-btn" onclick="activityGoFirst()" ${activityCurrentPage === 1 ? 'disabled' : ''} title="الأولى">${ico('chevronsRight', 14)}</button>
+      <button class="pg-btn" onclick="activityGoPrev()" ${activityCurrentPage === 1 ? 'disabled' : ''} title="السابقة">${ico('arrowRight', 14)}</button>
+      ${pageButtons}
+      <button class="pg-btn" onclick="activityGoNext()" ${activityCurrentPage === totalPages ? 'disabled' : ''} title="التالية">${ico('arrowRight', 14)}</button>
+      <button class="pg-btn" onclick="activityGoLast()" ${activityCurrentPage === totalPages ? 'disabled' : ''} title="الأخيرة">${ico('chevronsLeft', 14)}</button>
+      <span class="pg-info">صفحة <b>${activityCurrentPage}</b> / <b>${totalPages}</b></span>
+      <span class="pg-info">عرض ${start + 1}-${end} من ${total}</span>
+    </div>
+  `;
+}
+
+function buildPageNumbers(current, total) {
+  const buttons = [];
+  const maxButtons = 7;
+  if (total <= maxButtons) {
+    for (let i = 1; i <= total; i++) buttons.push(i);
+  } else {
+    buttons.push(1);
+    let start = Math.max(2, current - 2);
+    let end = Math.min(total - 1, current + 2);
+    if (start > 2) buttons.push('...');
+    for (let i = start; i <= end; i++) buttons.push(i);
+    if (end < total - 1) buttons.push('...');
+    buttons.push(total);
+  }
+  return buttons.map(n => {
+    if (n === '...') return `<span class="pg-dots">…</span>`;
+    const isActive = n === current;
+    return `<button class="pg-num ${isActive ? 'active' : ''}" onclick="activityGoPage(${n})">${n}</button>`;
   }).join('');
 }
 
+window.activityGoFirst = function() { activityCurrentPage = 1; renderActivity(); scrollActivityToTop(); };
+window.activityGoPrev  = function() { if (activityCurrentPage > 1) { activityCurrentPage--; renderActivity(); scrollActivityToTop(); } };
+window.activityGoNext  = function() {
+  const total = getFilteredActivity().length;
+  const totalPages = Math.max(1, Math.ceil(total / ACTIVITY_PER_PAGE));
+  if (activityCurrentPage < totalPages) { activityCurrentPage++; renderActivity(); scrollActivityToTop(); }
+};
+window.activityGoLast  = function() {
+  const total = getFilteredActivity().length;
+  activityCurrentPage = Math.max(1, Math.ceil(total / ACTIVITY_PER_PAGE));
+  renderActivity(); scrollActivityToTop();
+};
+window.activityGoPage  = function(page) { activityCurrentPage = page; renderActivity(); scrollActivityToTop(); };
+
+function scrollActivityToTop() {
+  const el = document.getElementById('activityList');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+window.activityFilterByUser = function(user) { activityFilterUser = user; activityCurrentPage = 1; renderActivity(); };
+window.activityFilterByType = function(type) { activityFilterType = type; activityCurrentPage = 1; renderActivity(); };
+window.activitySearch = function(query) { activitySearchQuery = query; activityCurrentPage = 1; renderActivity(); };
+window.activityResetFilters = function() {
+  activityFilterUser = '';
+  activityFilterType = '';
+  activitySearchQuery = '';
+  activityCurrentPage = 1;
+  const s = document.getElementById('activitySearchInput'); if (s) s.value = '';
+  const u = document.getElementById('activityUserFilter'); if (u) u.value = '';
+  const t = document.getElementById('activityTypeFilter'); if (t) t.value = '';
+  renderActivity();
+};
+
+window.exportActivityLog = function() {
+  if (!cache.activity.length) { toast('السجل فارغ', 'error'); return; }
+  const headers = ['التاريخ والوقت', 'المستخدم', 'الإجراء', 'العنوان', 'التفاصيل', 'النوع'];
+  const rows = cache.activity.map(a => [a.time || '', a.user || '', a.action || '', a.title || '', a.description || '', a.type || '']);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `activity_log_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  toast(`تم تصدير ${cache.activity.length} عملية`, 'success');
+};
+
 /* ==============================================================
-   Session Timer — 1 hour
+   Session Timer (1 hour)
    ============================================================== */
 function startSessionTimer() {
   stopSessionTimer();
@@ -1591,7 +1718,7 @@ window.restoreDraft = function () {
     document.getElementById('orderDriver').value = d.driver || '';
     document.getElementById('orderDriverPhone').value = d.driverPhone || '';
     document.getElementById('orderNotes').value = d.notes || '';
-    toast('تم استرجاع المسودة', 'success');
+    toast('تم الاسترجاع', 'success');
   } catch { clearDraft(); }
 };
 
@@ -1628,18 +1755,18 @@ function buildUI() {
   document.getElementById('title-overview').innerHTML = ico('stats', 17) + '<span>النظرة العامة</span>';
   document.getElementById('title-payments').innerHTML = ico('money', 17) + '<span>حالة الدفع</span>';
   document.getElementById('title-time').innerHTML = ico('clock', 17) + '<span>الإحصائيات الزمنية</span>';
-  document.getElementById('title-performance').innerHTML = ico('target', 17) + '<span>مؤشرات الأداء الرئيسية</span>';
+  document.getElementById('title-performance').innerHTML = ico('target', 17) + '<span>مؤشرات الأداء</span>';
   document.getElementById('donutTitle').innerHTML = ico('pieChart', 15) + '<span>توزيع الطلبات</span>';
   document.getElementById('payDonutTitle').innerHTML = ico('money', 15) + '<span>تحليل الدفع</span>';
   document.getElementById('branchDonutTitle').innerHTML = ico('building', 15) + '<span>توزيع الفروع</span>';
   document.getElementById('topCustTitle').innerHTML = ico('award', 15) + '<span>أكثر العملاء</span>';
   document.getElementById('topBranchTitle').innerHTML = ico('building', 15) + '<span>أكثر الفروع</span>';
   document.getElementById('topDrvTitle').innerHTML = ico('truck', 15) + '<span>أكثر الموصلين</span>';
-  document.getElementById('topUserTitle').innerHTML = ico('users', 15) + '<span>أكثر الموظفين نشاطاً</span>';
-  document.getElementById('trendTitle').innerHTML = ico('trendUp', 15) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
+  document.getElementById('topUserTitle').innerHTML = ico('users', 15) + '<span>أكثر الموظفين</span>';
+  document.getElementById('trendTitle').innerHTML = ico('trendUp', 15) + '<span>آخر 7 أيام</span>';
 
   document.getElementById('entryTitle').innerHTML = ico('list', 20) + '<span>إدخال الطلبات</span>';
-  document.getElementById('entryHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>K</kbd> بحث • <kbd>Alt</kbd>+<kbd>N</kbd> جديد • <kbd>Alt</kbd>+<kbd>T</kbd> تحويل`;
+  document.getElementById('entryHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>K</kbd> بحث • <kbd>Alt</kbd>+<kbd>N</kbd> جديد`;
   document.getElementById('entryToolbar').innerHTML = `
     <button class="btn btn-primary perm-addOrder" onclick="addOrder()">${ico('plus', 15)}<span>طلب جديد</span><kbd>Alt+N</kbd></button>
     <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">${ico('truck', 15)}<span>تحويل المستوفية</span><kbd>Alt+B</kbd></button>
@@ -1649,9 +1776,9 @@ function buildUI() {
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
-    <button class="btn btn-primary perm-print" onclick="printReady()">${ico('printer', 15)}<span>طباعة القائمة</span></button>
-    <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
-    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل إلى السجل</span><kbd>Alt+M</kbd></button>
+    <button class="btn btn-primary perm-print" onclick="printReady()">${ico('printer', 15)}<span>طباعة</span></button>
+    <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>PDF</span></button>
+    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل للسجل</span></button>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
   document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
@@ -1664,9 +1791,9 @@ function buildUI() {
     <label>الفرع:</label><select id="filterLogBranch" onchange="renderLog()" style="width:160px;"></select>
     <button class="btn btn-ghost btn-sm" onclick="resetLogFilters()">${ico('refresh', 13)}<span>مسح</span></button>`;
   document.getElementById('logToolbar').innerHTML = `
-    <button class="btn btn-primary perm-print" onclick="printLog()">${ico('printer', 15)}<span>طباعة المُفلتر</span></button>
-    <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
-    <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>تصدير CSV</span></button>
+    <button class="btn btn-primary perm-print" onclick="printLog()">${ico('printer', 15)}<span>طباعة</span></button>
+    <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>PDF</span></button>
+    <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>CSV</span></button>
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
   document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
@@ -1676,18 +1803,45 @@ function buildUI() {
   document.getElementById('custHead').innerHTML = ['#','رقم العميل','الاسم','الموقع','الهاتف','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('settingsTitle').innerHTML = ico('cog', 20) + '<span>الإعدادات</span>';
   rebuildSettingsTabs();
+
   document.getElementById('tab-token').innerHTML = `
     <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔒 بياناتك محمية بتشفير ثابت داخلي.</div>
     <div class="toolbar">
       <button class="btn btn-warning" onclick="changeKeyModal()">${ico('refresh', 15)}<span>تحديث المفتاح</span></button>
       <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>حذف المفتاح</span></button>
     </div>
-    <div id="currentKeyInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>
-    <div id="apiStats" style="margin-top:13px;padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-size:12px;line-height:1.8;border:1px solid var(--border);"></div>`;
+    <div id="currentKeyInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>`;
+
   document.getElementById('tab-activity').innerHTML = `
-    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('activity', 18)}<span>سجل النشاط</span></div>
-    <div class="perm-note" style="margin-bottom:14px;">آخر ${ACTIVITY_LIMIT} عملية</div>
-    <div id="activityList" class="activity-list"></div>`;
+    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      ${ico('activity', 18)}<span>سجل النشاط الكامل</span>
+    </div>
+    <div class="perm-note" style="margin-bottom:14px;">
+      🔓 السجل غير محدود — يعرض ${ACTIVITY_PER_PAGE} عملية لكل صفحة
+    </div>
+    <div class="activity-filters">
+      <div class="activity-search-box">
+        ${ico('search', 14)}
+        <input id="activitySearchInput" type="text" placeholder="🔍 بحث..." oninput="activitySearch(this.value)">
+      </div>
+      <select id="activityUserFilter" onchange="activityFilterByUser(this.value)">
+        <option value="">كل المستخدمين</option>
+        ${(cache.users || []).map(u => `<option value="${esc(u.username)}">${esc(u.username)}</option>`).join('')}
+      </select>
+      <select id="activityTypeFilter" onchange="activityFilterByType(this.value)">
+        <option value="">كل الأنواع</option>
+        <option value="success">✅ نجاح</option>
+        <option value="warning">⚠️ تحذير</option>
+        <option value="danger">❌ حذف</option>
+        <option value="info">ℹ️ معلومة</option>
+      </select>
+      <button class="btn btn-ghost btn-sm" onclick="activityResetFilters()">${ico('refresh', 13)}<span>مسح</span></button>
+      <button class="btn btn-primary btn-sm" onclick="exportActivityLog()">${ico('download', 13)}<span>تصدير</span></button>
+    </div>
+    <div id="activityStats" class="activity-stats"></div>
+    <div id="activityList" class="activity-list"></div>
+    <div id="activityPagination" class="activity-pagination"></div>`;
+
   document.getElementById('tab-branches').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('building', 18)}<span>إدارة الفروع</span></div>
     <div class="perm-note" style="margin-bottom:14px;">الفرع الافتراضي: <b>${DEFAULT_BRANCH_NAME}</b></div>
@@ -1706,73 +1860,64 @@ function buildUI() {
     <div id="templatesContainer"></div>
     <div class="toolbar" style="margin-top:16px;"><button class="btn btn-success" onclick="saveTemplates()">${ico('save', 15)}<span>حفظ القوالب</span></button><button class="btn btn-gray" onclick="resetTemplates()">${ico('refresh', 15)}<span>استعادة الافتراضي</span></button></div>`;
   document.getElementById('tab-backup').innerHTML = `
-    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي والصيانة</span></div>
+    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي</span></div>
     <div class="perm-note" style="margin-bottom:14px;">ZIP يحتوي على جميع البيانات بصيغة JSON.</div>
     <div class="toolbar">
-      <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة ZIP</span></button>
+      <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير ZIP</span></button>
       <button class="btn btn-success" onclick="encryptAllNow()">${ico('lock', 15)}<span>🔒 تفعيل الحماية</span></button>
-      <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
+      <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير</span></button>
     </div>`;
+
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('userModalTitle').innerHTML = ico('user', 20) + '<span>مستخدم جديد</span>';
   document.getElementById('keyModalTitle').innerHTML = ico('lock', 20) + '<span>تحديث المفتاح</span>';
   document.getElementById('shortcutsTitle').innerHTML = ico('keyboard', 20) + '<span>الاختصارات</span>';
+
   document.getElementById('shortcutsGrid').innerHTML = [
     { title:'التنقل', icon:'home', items: [['الرئيسية',['Alt','1']],['إدخال الطلبات',['Alt','2']],['الطلبات الجاهزة',['Alt','3']],['سجل الطلبات',['Alt','4']],['العملاء',['Alt','5']]]},
-    { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل المحدد',['Alt','T']],['تحويل جماعي',['Alt','B']],['ترحيل للسجل',['Alt','M']]]},
-    { title:'داخل النموذج', icon:'list', items: [['الحقل التالي',['Enter']],['الحقل السابق',['Shift','Enter']],['حفظ',['Ctrl','Enter']],['إغلاق',['Esc']],['مدفوع',['Alt','P']],['غير مدفوع',['Alt','U']],['VIP',['Alt','V']],['جاهز',['Alt','G']]]},
-    { title:'العرض', icon:'items', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف المحدد',['Delete']],['الوضع الليلي',['Alt','D']],['الإشعارات',['Alt','I']]]}
+    { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل',['Alt','T']],['جماعي',['Alt','B']],['ترحيل',['Alt','M']]]},
+    { title:'النموذج', icon:'list', items: [['التالي',['Enter']],['السابق',['Shift','Enter']],['حفظ',['Ctrl','Enter']],['إغلاق',['Esc']],['مدفوع',['Alt','P']],['غير مدفوع',['Alt','U']],['VIP',['Alt','V']],['جاهز',['Alt','G']]]},
+    { title:'العرض', icon:'eye', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف',['Delete']],['ليلي',['Alt','D']],['إشعارات',['Alt','I']]]}
   ].map(g => `<div class="shortcut-group"><h4>${ico(g.icon, 15)}<span>${g.title}</span></h4>${g.items.map(([d, keys]) => `<div class="shortcut-row"><span class="desc">${d}</span><span class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</span></div>`).join('')}</div>`).join('');
 }
 
 /* ==============================================================
-   Statistics — PROFESSIONAL DASHBOARD
+   Statistics
    ============================================================== */
-function computeAnalytics() {
+function renderStats() {
   const allOrders = [...cache.orders, ...cache.ready, ...cache.log];
-
-  // -- Core counts --
   const active = cache.orders.length;
   const ready = cache.ready.length;
   const archived = cache.log.length;
   const total = active + ready + archived;
 
-  // -- Payment breakdown (all orders) --
   const payPaid = allOrders.filter(o => o.pay === 'مدفوع').length;
   const payUnpaid = allOrders.filter(o => o.pay === 'غير مدفوع').length;
   const payVip = allOrders.filter(o => o.pay === 'VIP').length;
   const payTotalPaid = payPaid + payVip;
 
-  // -- Current state breakdown (orders only) --
-  const unpaidActive = cache.orders.filter(o => o.pay === 'غير مدفوع').length;
-  const paidActive = cache.orders.filter(o => o.pay === 'مدفوع').length;
-  const vipActive = cache.orders.filter(o => o.pay === 'VIP').length;
   const readyActive = cache.orders.filter(o => o.status === 'جاهز').length;
   const progressActive = cache.orders.filter(o => o.status === 'قيد التجهيز').length;
 
-  // -- Rates --
   const completionRate = total > 0 ? Math.round(((ready + archived) / total) * 100) : 0;
   const payRate = total > 0 ? Math.round((payTotalPaid / total) * 100) : 0;
   const unpaidRate = total > 0 ? Math.round((payUnpaid / total) * 100) : 0;
   const vipRate = total > 0 ? Math.round((payVip / total) * 100) : 0;
   const readyRate = active > 0 ? Math.round((readyActive / active) * 100) : 0;
 
-  // -- Time-based --
   const today = new Date(); today.setHours(0,0,0,0);
   const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
   const weekAgo = new Date(today); weekAgo.setDate(weekAgo.getDate()-7);
   const monthAgo = new Date(today); monthAgo.setDate(monthAgo.getDate()-30);
-
   const getOrderDate = (o) => parseDate(o.createdAt) || parseDate(o.transferredAt) || parseDate(o.archivedAt);
 
   const todayCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= today && d < tomorrow; }).length;
   const weekCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= weekAgo; }).length;
   const monthCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= monthAgo; }).length;
   const avgDaily = Math.round((weekCount / 7) * 10) / 10;
-  const avgMonthly = Math.round(monthCount / 30 * 10) / 10;
+  const avgMonthly = Math.round((monthCount / 30) * 10) / 10;
 
-  // -- Aggregations --
   const custCount = {};
   allOrders.forEach(o => { if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1; });
   const topCustomers = Object.entries(custCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
@@ -1789,161 +1934,124 @@ function computeAnalytics() {
   allOrders.forEach(o => { if (o.lastEditBy) userCount[o.lastEditBy] = (userCount[o.lastEditBy] || 0) + 1; });
   const topUsers = Object.entries(userCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
 
-  // -- Trends --
   const diff = (curr, prev) => {
     if (prev === 0 && curr === 0) return { dir:'flat', pct:0 };
     if (prev === 0) return { dir:'up', pct:100 };
     const pct = Math.round(((curr - prev) / prev) * 100);
     return { dir: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat', pct: Math.abs(pct) };
   };
+  const trendIcon = (dir) => dir === 'up' ? ico('trendUp', 10) : dir === 'down' ? ico('trendDown', 10) : '';
+  const badge = (t) => (t && t.dir !== 'flat') ? `<span class="trend ${t.dir}">${trendIcon(t.dir)}<span>${t.pct}%</span></span>` : '';
 
-  return {
-    active, ready, archived, total,
-    payPaid, payUnpaid, payVip, payTotalPaid,
-    unpaidActive, paidActive, vipActive, readyActive, progressActive,
-    completionRate, payRate, unpaidRate, vipRate, readyRate,
-    todayCount, weekCount, monthCount, avgDaily, avgMonthly,
-    topCustomers, topBranches, topDrivers, topUsers,
-    custCount, branchCount, driverCount, userCount,
-    diff, allOrders, getOrderDate
-  };
-}
-
-function renderTrendBadge(t) {
-  if (!t || t.dir === 'flat') return '';
-  const icon = t.dir === 'up' ? ico('trendUp', 10) : ico('trendDown', 10);
-  return `<span class="trend ${t.dir}">${icon}<span>${t.pct}%</span></span>`;
-}
-
-function renderStats() {
-  const a = computeAnalytics();
-
-  // ===== Section 1: Overview KPI cards =====
   document.getElementById('statsOverview').innerHTML = `
     <div class="stat">
-      <div class="stat-head">
-        <div class="stat-icon">${ico('layers', 17)}</div>
-        ${renderTrendBadge(a.diff(a.total, prevStats.total))}
-      </div>
-      <div class="num">${a.total.toLocaleString()}</div>
+      <div class="stat-head"><div class="stat-icon">${ico('layers', 17)}</div>${badge(diff(total, prevStats.total))}</div>
+      <div class="num">${total.toLocaleString()}</div>
       <div class="lbl">إجمالي الطلبات</div>
       <div class="sub">عبر النظام بأكمله</div>
     </div>
     <div class="stat orange">
-      <div class="stat-head"><div class="stat-icon">${ico('list', 17)}</div>${renderTrendBadge(a.diff(a.active, prevStats.orders))}</div>
-      <div class="num">${a.active.toLocaleString()}</div>
+      <div class="stat-head"><div class="stat-icon">${ico('list', 17)}</div>${badge(diff(active, prevStats.orders))}</div>
+      <div class="num">${active.toLocaleString()}</div>
       <div class="lbl">قيد الإدخال</div>
-      <div class="sub">${a.progressActive} قيد التجهيز • ${a.readyActive} جاهز</div>
+      <div class="sub">${progressActive} قيد • ${readyActive} جاهز</div>
     </div>
     <div class="stat green">
-      <div class="stat-head"><div class="stat-icon">${ico('box', 17)}</div>${renderTrendBadge(a.diff(a.ready, prevStats.ready))}</div>
-      <div class="num">${a.ready.toLocaleString()}</div>
+      <div class="stat-head"><div class="stat-icon">${ico('box', 17)}</div>${badge(diff(ready, prevStats.ready))}</div>
+      <div class="num">${ready.toLocaleString()}</div>
       <div class="lbl">جاهزة للنقل</div>
-      <div class="sub">${a.readyRate}% من الطلبات النشطة</div>
-      <div class="progress-bar"><div class="fill green" style="width:${a.readyRate}%"></div></div>
+      <div class="sub">${readyRate}% من النشطة</div>
+      <div class="progress-bar"><div class="fill green" style="width:${readyRate}%"></div></div>
     </div>
     <div class="stat purple">
-      <div class="stat-head"><div class="stat-icon">${ico('archive', 17)}</div>${renderTrendBadge(a.diff(a.archived, prevStats.log))}</div>
-      <div class="num">${a.archived.toLocaleString()}</div>
+      <div class="stat-head"><div class="stat-icon">${ico('archive', 17)}</div>${badge(diff(archived, prevStats.log))}</div>
+      <div class="num">${archived.toLocaleString()}</div>
       <div class="lbl">في السجل</div>
       <div class="sub">أرشيف نهائي</div>
     </div>
     <div class="stat teal">
       <div class="stat-head"><div class="stat-icon">${ico('target', 17)}</div></div>
-      <div class="num">${a.completionRate}%</div>
+      <div class="num">${completionRate}%</div>
       <div class="lbl">نسبة الإنجاز</div>
-      <div class="sub">(جاهزة + سجل) ÷ الإجمالي</div>
-      <div class="progress-bar"><div class="fill" style="width:${a.completionRate}%"></div></div>
+      <div class="progress-bar"><div class="fill" style="width:${completionRate}%"></div></div>
     </div>
   `;
 
-  // ===== Section 2: Payments =====
   document.getElementById('statsPayments').innerHTML = `
     <div class="stat green">
       <div class="stat-head"><div class="stat-icon">${ico('money', 17)}</div></div>
-      <div class="num small">${a.payTotalPaid.toLocaleString()}</div>
+      <div class="num small">${payTotalPaid.toLocaleString()}</div>
       <div class="lbl">مدفوع + VIP</div>
-      <div class="sub">${a.payRate}% من الإجمالي</div>
-      <div class="progress-bar"><div class="fill green" style="width:${a.payRate}%"></div></div>
+      <div class="sub">${payRate}% من الإجمالي</div>
+      <div class="progress-bar"><div class="fill green" style="width:${payRate}%"></div></div>
     </div>
     <div class="stat red">
       <div class="stat-head"><div class="stat-icon">${ico('warning', 17)}</div></div>
-      <div class="num small">${a.payUnpaid.toLocaleString()}</div>
+      <div class="num small">${payUnpaid.toLocaleString()}</div>
       <div class="lbl">غير مدفوع</div>
-      <div class="sub">${a.unpaidRate}% من الإجمالي</div>
-      <div class="progress-bar"><div class="fill red" style="width:${a.unpaidRate}%"></div></div>
+      <div class="sub">${unpaidRate}%</div>
+      <div class="progress-bar"><div class="fill red" style="width:${unpaidRate}%"></div></div>
     </div>
     <div class="stat purple">
       <div class="stat-head"><div class="stat-icon">${ico('crown', 17)}</div></div>
-      <div class="num small">${a.payVip.toLocaleString()}</div>
-      <div class="lbl">طلبات VIP</div>
-      <div class="sub">${a.vipRate}% من الإجمالي</div>
-      <div class="progress-bar"><div class="fill purple" style="width:${a.vipRate}%"></div></div>
+      <div class="num small">${payVip.toLocaleString()}</div>
+      <div class="lbl">VIP</div>
+      <div class="sub">${vipRate}%</div>
+      <div class="progress-bar"><div class="fill purple" style="width:${vipRate}%"></div></div>
     </div>
     <div class="stat">
       <div class="stat-head"><div class="stat-icon">${ico('check', 17)}</div></div>
-      <div class="num small">${a.payPaid.toLocaleString()}</div>
+      <div class="num small">${payPaid.toLocaleString()}</div>
       <div class="lbl">مدفوع فقط</div>
       <div class="sub">بدون VIP</div>
     </div>
   `;
 
-  // ===== Section 3: Time =====
   document.getElementById('timeStatsContainer').innerHTML = `
     <div class="time-stats">
-      <div class="time-stat"><div class="tv">${a.todayCount}</div><div class="tl">اليوم</div></div>
-      <div class="time-stat"><div class="tv">${a.weekCount}</div><div class="tl">آخر 7 أيام</div></div>
-      <div class="time-stat"><div class="tv">${a.monthCount}</div><div class="tl">آخر 30 يوم</div></div>
-      <div class="time-stat"><div class="tv">${a.avgDaily}</div><div class="tl">متوسط يومي</div></div>
-      <div class="time-stat"><div class="tv">${a.avgMonthly}</div><div class="tl">متوسط شهري</div></div>
-      <div class="time-stat"><div class="tv">${a.allOrders.length > 0 ? Math.round(a.allOrders.length / Math.max(1, Math.ceil((Date.now() - new Date(a.allOrders[a.allOrders.length-1]?.createdAt || Date.now()).getTime()) / 86400000))) : 0}</div><div class="tl">معدل عام</div></div>
+      <div class="time-stat"><div class="tv">${todayCount}</div><div class="tl">اليوم</div></div>
+      <div class="time-stat"><div class="tv">${weekCount}</div><div class="tl">آخر 7 أيام</div></div>
+      <div class="time-stat"><div class="tv">${monthCount}</div><div class="tl">آخر 30 يوم</div></div>
+      <div class="time-stat"><div class="tv">${avgDaily}</div><div class="tl">متوسط يومي</div></div>
+      <div class="time-stat"><div class="tv">${avgMonthly}</div><div class="tl">متوسط شهري</div></div>
     </div>
   `;
 
-  // ===== Section 4: Donut - Distribution =====
   renderDonut('donutChart', 'donutLegend', [
-    { value: a.active, color: '#2e75b6', label: 'قيد الإدخال' },
-    { value: a.ready, color: '#28a745', label: 'جاهزة' },
-    { value: a.archived, color: '#6f42c1', label: 'في السجل' }
+    { value: active, color: '#2e75b6', label: 'قيد الإدخال' },
+    { value: ready, color: '#28a745', label: 'جاهزة' },
+    { value: archived, color: '#6f42c1', label: 'في السجل' }
   ]);
 
-  // ===== Section 5: Donut - Payment =====
   renderDonut('payDonutChart', 'payDonutLegend', [
-    { value: a.payPaid, color: '#28a745', label: 'مدفوع' },
-    { value: a.payUnpaid, color: '#dc3545', label: 'غير مدفوع' },
-    { value: a.payVip, color: '#6f42c1', label: 'VIP' }
+    { value: payPaid, color: '#28a745', label: 'مدفوع' },
+    { value: payUnpaid, color: '#dc3545', label: 'غير مدفوع' },
+    { value: payVip, color: '#6f42c1', label: 'VIP' }
   ]);
 
-  // ===== Section 6: Donut - Branch =====
-  const branchColors = ['#2e75b6','#28a745','#6f42c1','#fd7e14','#17a2b8','#e83e8c','#ffc107','#dc3545'];
-  const branchSegments = a.topBranches.slice(0, 6).map((b, i) => ({ value: b[1], color: branchColors[i], label: b[0] }));
+  const branchColors = ['#2e75b6','#28a745','#6f42c1','#fd7e14','#17a2b8','#e83e8c'];
+  const branchSegments = topBranches.slice(0, 6).map((b, i) => ({ value: b[1], color: branchColors[i], label: b[0] }));
   renderDonut('branchDonutChart', 'branchDonutLegend', branchSegments);
 
-  // ===== Section 7: Top lists =====
-  renderTopList('topCustomers', a.topCustomers, a.topCustomers[0]?.[1] || 1);
-  renderTopList('topBranches', a.topBranches, a.topBranches[0]?.[1] || 1);
-  renderTopList('topDrivers', a.topDrivers, a.topDrivers[0]?.[1] || 1);
-  renderTopList('topUsers', a.topUsers, a.topUsers[0]?.[1] || 1);
+  renderTopList('topCustomers', topCustomers, topCustomers[0]?.[1] || 1);
+  renderTopList('topBranches', topBranches, topBranches[0]?.[1] || 1);
+  renderTopList('topDrivers', topDrivers, topDrivers[0]?.[1] || 1);
+  renderTopList('topUsers', topUsers, topUsers[0]?.[1] || 1);
 
-  // ===== Section 8: Performance metrics =====
   document.getElementById('performanceMetrics').innerHTML = `
-    <div class="metric-box"><div class="mv">${a.total}</div><div class="ml">إجمالي الطلبات</div></div>
-    <div class="metric-box"><div class="mv">${a.todayCount}</div><div class="ml">الطلبات اليوم</div></div>
-    <div class="metric-box"><div class="mv green">${a.payTotalPaid}</div><div class="ml">طلبات مدفوعة</div></div>
-    <div class="metric-box"><div class="mv red">${a.payUnpaid}</div><div class="ml">غير مدفوعة</div></div>
-    <div class="metric-box"><div class="mv purple">${a.payVip}</div><div class="ml">طلبات VIP</div></div>
-    <div class="metric-box"><div class="mv">${a.completionRate}%</div><div class="ml">نسبة الإنجاز</div></div>
-    <div class="metric-box"><div class="mv green">${a.payRate}%</div><div class="ml">نسبة الدفع</div></div>
-    <div class="metric-box"><div class="mv">${a.avgDaily}</div><div class="ml">متوسط يومي</div></div>
+    <div class="metric-box"><div class="mv">${total}</div><div class="ml">إجمالي الطلبات</div></div>
+    <div class="metric-box"><div class="mv">${todayCount}</div><div class="ml">اليوم</div></div>
+    <div class="metric-box"><div class="mv green">${payTotalPaid}</div><div class="ml">مدفوعة</div></div>
+    <div class="metric-box"><div class="mv red">${payUnpaid}</div><div class="ml">غير مدفوعة</div></div>
+    <div class="metric-box"><div class="mv purple">${payVip}</div><div class="ml">VIP</div></div>
+    <div class="metric-box"><div class="mv">${completionRate}%</div><div class="ml">الإنجاز</div></div>
+    <div class="metric-box"><div class="mv green">${payRate}%</div><div class="ml">الدفع</div></div>
+    <div class="metric-box"><div class="mv">${avgDaily}</div><div class="ml">متوسط يومي</div></div>
   `;
 
-  // ===== Section 9: Trend chart =====
   renderTrend7Days();
-
-  // ===== Save for next comparison =====
-  prevStats = { orders: a.active, ready: a.ready, log: a.archived, total: a.total };
+  prevStats = { orders: active, ready: ready, log: archived, total: total };
 }
-
 function renderDonut(chartId, legendId, segments) {
   const total = segments.reduce((s, x) => s + x.value, 0);
   const donut = document.getElementById(chartId);
@@ -1957,45 +2065,27 @@ function renderDonut(chartId, legendId, segments) {
   const radius = 55, cx = 65, cy = 65, circumference = 2 * Math.PI * radius;
   let offset = 0;
   const circles = segments.map(s => {
-    const pctVal = s.value / total;
-    const dash = pctVal * circumference;
+    const p = s.value / total;
+    const dash = p * circumference;
     const el = `<circle cx="${cx}" cy="${cy}" r="${radius}" stroke="${s.color}" stroke-dasharray="${dash} ${circumference - dash}" stroke-dashoffset="${-offset}" />`;
     offset += dash;
     return el;
   }).join('');
-  donut.innerHTML = `
-    <svg width="130" height="130" viewBox="0 0 130 130">
-      <circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="15" fill="none"/>
-      ${circles}
-    </svg>
-    <div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>
-  `;
+  donut.innerHTML = `<svg width="130" height="130" viewBox="0 0 130 130"><circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="15" fill="none"/>${circles}</svg><div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>`;
   legend.innerHTML = segments.filter(s => s.value > 0).map(s => {
     const p = total > 0 ? Math.round((s.value / total) * 100) : 0;
-    return `<div class="legend-item">
-      <span class="dot" style="background:${s.color};"></span>
-      <span class="name">${esc(s.label)}</span>
-      <span class="pct">${p}%</span>
-      <span class="val">${s.value}</span>
-    </div>`;
+    return `<div class="legend-item"><span class="dot" style="background:${s.color};"></span><span class="name">${esc(s.label)}</span><span class="pct">${p}%</span><span class="val">${s.value}</span></div>`;
   }).join('');
 }
-
 function renderTopList(elId, entries, maxVal) {
   const el = document.getElementById(elId); if (!el) return;
-  if (!entries || !entries.length) { el.innerHTML = '<div class="empty-top">لا توجد بيانات بعد</div>'; return; }
+  if (!entries || !entries.length) { el.innerHTML = '<div class="empty-top">لا توجد بيانات</div>'; return; }
   el.innerHTML = entries.map(([name, count], i) => {
-    const pctVal = maxVal > 0 ? Math.round((count / maxVal) * 100) : 0;
+    const p = maxVal > 0 ? Math.round((count / maxVal) * 100) : 0;
     const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-    return `<div class="top-item">
-      <span class="rank ${rankClass}">${i+1}</span>
-      <span class="name" title="${esc(name)}">${esc(name)}</span>
-      <span class="bar-mini"><span class="fill" style="width:${pctVal}%"></span></span>
-      <span class="count">${count}</span>
-    </div>`;
+    return `<div class="top-item"><span class="rank ${rankClass}">${i+1}</span><span class="name" title="${esc(name)}">${esc(name)}</span><span class="bar-mini"><span class="fill" style="width:${p}%"></span></span><span class="count">${count}</span></div>`;
   }).join('');
 }
-
 function renderTrend7Days() {
   const days = [];
   const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -2014,8 +2104,7 @@ function renderTrend7Days() {
   const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
   const areaPath = path + ` L0 ${h} L${w} ${h} Z`;
   const dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  const el = document.getElementById('trendChart');
-  if (!el) return;
+  const el = document.getElementById('trendChart'); if (!el) return;
   el.innerHTML = `
     <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:100px;direction:ltr;">
       <defs><linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2e75b6" stop-opacity="0.35"/><stop offset="100%" stop-color="#2e75b6" stop-opacity="0"/></linearGradient></defs>
@@ -2027,7 +2116,6 @@ function renderTrend7Days() {
       ${days.map((d, i) => `<span style="text-align:center;flex:1;">${dayNames[d.getDay()]}<br><b style="color:var(--dark-blue);">${counts[i]}</b></span>`).join('')}
     </div>`;
 }
-
 function renderDashboard() { renderStats(); }
 
 /* ==============================================================
@@ -2040,7 +2128,7 @@ function renderEntry() {
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
   if (q) data = data.filter(o => `${o.invoice} ${o.customer} ${o.location} ${o.driver} ${o.notes} ${o.branch}`.toLowerCase().includes(q));
   const body = document.getElementById('entryBody');
-  if (!data.length) { body.innerHTML = (q || branchFilter) ? emptyState('search', 'لا توجد نتائج', 'جرّب تعديل الفلاتر', 13) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب جديد', 13); return; }
+  if (!data.length) { body.innerHTML = (q || branchFilter) ? emptyState('search', 'لا توجد نتائج', 'جرّب تعديل الفلاتر', 13) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب', 13); return; }
   const canEdit = hasPerm('editOrder'), canDelete = hasPerm('deleteOrder'), canTrans = hasPerm('transferSingle');
   body.innerHTML = data.map((o, i) => {
     const cls = o.status === 'جاهز' ? 'status-ready' : 'status-progress';
@@ -2072,7 +2160,7 @@ function renderReady() {
   let data = cache.ready;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
   const body = document.getElementById('readyBody');
-  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات من واجهة الإدخال', 12); return; }
+  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 12); return; }
   body.innerHTML = data.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
     <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
     <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
@@ -2109,7 +2197,7 @@ function renderLog() {
   const fc = document.getElementById('logFilteredCount');
   if (fc) fc.textContent = `المُفلتر: ${data.length}`;
   const body = document.getElementById('logBody');
-  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل أي طلب بعد', 14); return; }
+  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل بعد', 14); return; }
   body.innerHTML = data.map((o, i) => {
     const btns = `
       ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editFromLog('${o.id}')" title="تعديل">${ico('edit', 13)}</button>` : ''}
@@ -2141,10 +2229,10 @@ function renderCustomers() {
   document.getElementById('custCount').textContent = `الإجمالي: ${cache.customers.length}`;
   const canManage = hasPerm('manageCustomers');
   const body = document.getElementById('custBody');
-  if (!data.length) { body.innerHTML = q ? emptyState('search', 'لا توجد نتائج', 'جرّب كلمات أخرى', 6) : emptyState('users', 'لا يوجد عملاء', 'ابدأ بإضافة عميل', 6); return; }
+  if (!data.length) { body.innerHTML = q ? emptyState('search', 'لا نتائج', 'جرّب كلمات أخرى', 6) : emptyState('users', 'لا يوجد عملاء', 'ابدأ بإضافة عميل', 6); return; }
   body.innerHTML = data.map((c, i) => `<tr>
     <td>${i+1}</td><td>${esc(c.code)}</td><td>${esc(c.name)}</td><td>${esc(c.location)}</td><td>${esc(c.phone)}</td>
-    <td>${canManage ? `<button class="btn btn-primary btn-sm" onclick="editCustomer('${c.id}')" title="تعديل">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')" title="حذف">${ico('trash', 13)}</button>` : '—'}</td>
+    <td>${canManage ? `<button class="btn btn-primary btn-sm" onclick="editCustomer('${c.id}')">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">${ico('trash', 13)}</button>` : '—'}</td>
   </tr>`).join('');
 }
 function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); renderActivity(); }
@@ -2165,7 +2253,7 @@ function renderDriversList() {
   el.innerHTML = cache.drivers.length ? cache.drivers.map(d => `<span style="background:linear-gradient(135deg,#eef3fa,#e0ebf5);padding:9px 14px;border-radius:20px;font-size:12.5px;display:inline-flex;align-items:center;gap:9px;border:1px solid #d4e0ec;color:#1f4e79;">
     ${ico('truck', 14)}<b>${esc(d.name)}</b>${d.phone ? `<span style="opacity:.7;font-size:11px;">(${esc(d.phone)})</span>` : ''}
     ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
-  </span>`).join('') : '<span style="color:var(--text-muted);padding:20px;">لا يوجد موصلون بعد</span>';
+  </span>`).join('') : '<span style="color:var(--text-muted);padding:20px;">لا يوجد موصلون</span>';
 }
 function renderUsers() {
   const canManage = hasPerm('manageUsers');
@@ -2193,7 +2281,7 @@ function populateBranchSelects() {
    ============================================================== */
 window.go = function (page) {
   const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
-  if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast('غير مصرح بالدخول', 'error'); return; }
+  if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast('غير مصرح', 'error'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
@@ -2207,14 +2295,14 @@ window.go = function (page) {
 };
 window.switchTab = function (evt, tab) {
   const tabPerm = { token:'tabToken', activity:'tabActivity', branches:'tabBranches', drivers:'tabDrivers', users:'tabUsers', templates:'tabTemplates', backup:'tabBackup' };
-  if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast('غير مصرح بالدخول', 'error'); return; }
+  if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast('غير مصرح', 'error'); return; }
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
   const btn = evt.target.closest('.tab-btn'); if (btn) btn.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
   if (tab === 'token') updateCurrentKeyInfo();
-  if (tab === 'activity') renderActivity();
+  if (tab === 'activity') { activityCurrentPage = 1; renderActivity(); }
 };
 
 /* ==============================================================
@@ -2233,35 +2321,35 @@ window.doLogin = async function () {
     const t = document.getElementById('loginKey').value.trim();
     if (t) { saveKey(t); updateKeyStatus(); }
   }
-  if (!getStoredKey()) { errEl.textContent = 'الرجاء إدخال مفتاح الاتصال'; errEl.classList.add('show'); return; }
-  if (!u || !p) { errEl.textContent = 'الرجاء إدخال اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
-  if (location.protocol === 'file:') { errEl.textContent = 'افتح النظام من الرابط المنشور'; errEl.classList.add('show'); return; }
+  if (!getStoredKey()) { errEl.textContent = 'أدخل مفتاح الاتصال'; errEl.classList.add('show'); return; }
+  if (!u || !p) { errEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
+  if (location.protocol === 'file:') { errEl.textContent = 'افتح من الرابط المنشور'; errEl.classList.add('show'); return; }
 
   btn.disabled = true;
   loadEl.textContent = 'جاري التحقق...';
-  showLoading('جاري تحميل البيانات...');
+  showLoading('جاري التحميل...');
   try {
     await readAll(); localMeta = await readMeta();
     const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) { errEl.textContent = 'بيانات الدخول غير صحيحة'; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
+    if (!found) { errEl.textContent = 'بيانات غير صحيحة'; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
     if (hasUnencryptedFiles && found.role === 'رئيسي') {
       hideLoading();
-      const ok = await dialog.confirm('هل تريد تفعيل الحماية الكاملة على البيانات؟', { title: '🔒 تفعيل الحماية', okText: 'تفعيل الآن', cancelText: 'لاحقاً' });
-      if (ok) { try { showLoading('جاري التفعيل...'); await persistKeys(DATA_KEYS); hideLoading(); hasUnencryptedFiles = false; toast('✅ تم التفعيل', 'success'); } catch (e2) { hideLoading(); } }
+      const ok = await dialog.confirm('تفعيل الحماية على البيانات؟', { title: '🔒 تفعيل', okText: 'الآن', cancelText: 'لاحقاً' });
+      if (ok) { try { showLoading('جاري التفعيل...'); await persistKeys(DATA_KEYS); hideLoading(); hasUnencryptedFiles = false; toast('✅ تم', 'success'); } catch (e2) { hideLoading(); } }
     }
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
     logActivity('login', `تسجيل دخول: ${u}`, `الدور: ${found.role}`, 'success');
-    loadEl.textContent = 'تم الدخول بنجاح';
+    loadEl.textContent = 'تم الدخول';
     hideLoading();
     startApp();
-  } catch (e) { errEl.textContent = e.message || 'حدث خطأ'; errEl.classList.add('show'); hideLoading(); }
+  } catch (e) { errEl.textContent = e.message || 'خطأ'; errEl.classList.add('show'); hideLoading(); }
   finally { btn.disabled = false; }
 };
 
 window.logout = async function (silent = false) {
-  if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
-  if (currentUser) logActivity('logout', `تسجيل خروج: ${currentUser.username}`, '', 'info');
+  if (!silent) { const ok = await dialog.confirm('تسجيل الخروج؟', { title: 'خروج' }); if (!ok) return; }
+  if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   document.getElementById('app').style.display = 'none';
@@ -2269,7 +2357,7 @@ window.logout = async function (silent = false) {
   document.getElementById('loginPass').value = ''; document.getElementById('loginLoading').textContent = '';
   const adminSection = document.getElementById('adminTokenSection'); if (adminSection) adminSection.classList.remove('show');
   updateKeyStatus(); loadLastUser();
-  if (!silent) toast('تم تسجيل الخروج', 'success');
+  if (!silent) toast('تم الخروج', 'success');
 };
 
 function loadLastUser() {
@@ -2288,8 +2376,8 @@ function startApp() {
   }) || 'dashboard';
   go(firstAvailable); startPolling(); startSessionTimer();
   renderNotifications();
-  addNotification('مرحباً', `أهلاً بك ${currentUser.username}`, 'info');
-  toast(`أهلاً بك، ${currentUser.username}`, 'success');
+  addNotification('مرحباً', `أهلاً ${currentUser.username}`, 'info');
+  toast(`أهلاً ${currentUser.username}`, 'success');
 }
 
 /* ==============================================================
@@ -2365,20 +2453,20 @@ function validateOrderForm() {
   const branch = document.getElementById('orderBranch').value;
   const id = document.getElementById('orderId').value;
   if (!invoice) { setFieldError('orderInvoice', 'رقم الفاتورة مطلوب'); valid = false; }
-  else if (!id && cache.orders.find(o => o.invoice === invoice)) { setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً'); valid = false; }
+  else if (!id && cache.orders.find(o => o.invoice === invoice)) { setFieldError('orderInvoice', 'موجود مسبقاً'); valid = false; }
   if (!branch) { setFieldError('orderBranch', 'الفرع مطلوب'); valid = false; }
-  if (!customer) { setFieldError('orderCustomer', 'اسم العميل مطلوب'); valid = false; }
+  if (!customer) { setFieldError('orderCustomer', 'العميل مطلوب'); valid = false; }
   else {
     let matched = customerId ? cache.customers.find(c => c.id === customerId) : null;
     if (!matched) matched = cache.customers.find(c => c.name.toLowerCase() === customer.toLowerCase());
-    if (!matched) { setFieldError('orderCustomer', 'اختر العميل من القائمة أو أنشئ عميلاً جديداً أولاً'); valid = false; }
+    if (!matched) { setFieldError('orderCustomer', 'اختر عميلاً من القائمة'); valid = false; }
     else {
       document.getElementById('orderCustomerId').value = matched.id;
       document.getElementById('orderCustomer').value = matched.name;
       if (!document.getElementById('orderLocation').value.trim() && matched.location) document.getElementById('orderLocation').value = matched.location;
     }
   }
-  if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول', 'error'); }
+  if (!valid) { focusFirstError('orderModal'); toast('صحّح الحقول', 'error'); }
   return valid;
 }
 window.saveOrder = async function () {
@@ -2408,7 +2496,7 @@ window.saveOrder = async function () {
   try {
     if (isLogEdit) {
       const idx = cache.log.findIndex(x => x.id === id);
-      if (idx === -1) { toast('الطلب غير موجود', 'error'); return; }
+      if (idx === -1) { toast('غير موجود', 'error'); return; }
       let approvalDate = cache.log[idx].approvalDate || '';
       if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
       data.approvalDate = approvalDate;
@@ -2418,7 +2506,7 @@ window.saveOrder = async function () {
       await persistKeys(['log']);
       logActivity('edit-log', `تعديل في السجل: ${data.invoice}`, '', 'warning');
       closeModal('orderModal'); clearDraft(); renderLog();
-      toast('تم تحديث السجل', 'success');
+      toast('تم التحديث', 'success');
     } else {
       const existing = id ? cache.orders.find(x => x.id === id) : null;
       let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
@@ -2444,16 +2532,16 @@ window.saveOrder = async function () {
 window.deleteOrder = async function (id) {
   if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
-  const ok = await dialog.danger(`حذف الطلب "${o?.invoice || ''}"؟`); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${o?.invoice || ''}"؟`); if (!ok) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
-  logActivity('delete-order', `حذف طلب: ${o?.invoice || ''}`, '', 'danger');
+  logActivity('delete-order', `حذف: ${o?.invoice || ''}`, '', 'danger');
   try { await persistKeys(['orders', 'activity']); renderEntry(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteFromLog = async function (id) {
   if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id); if (!o) return;
-  const ok = await dialog.danger(`حذف "${o.invoice}" من السجل؟`, { title: 'حذف نهائي' }); if (!ok) return;
+  const ok = await dialog.danger(`حذف "${o.invoice}" من السجل؟`); if (!ok) return;
   cache.log = cache.log.filter(x => x.id !== id);
   logActivity('delete-log', `حذف من السجل: ${o.invoice}`, '', 'danger');
   try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
@@ -2579,8 +2667,8 @@ window.transferSingle = async function (id) {
 window.bulkTransfer = async function () {
   if (!hasPerm('bulkTransfer')) { toast('غير مصرح', 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
-  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
-  const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'تحويل جماعي' }); if (!ok) return;
+  if (!eligible.length) { toast('لا يوجد طلبات مستوفية', 'error'); return; }
+  const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'جماعي' }); if (!ok) return;
   try {
     eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
     cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
@@ -2678,7 +2766,7 @@ window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ
 window.printLog = function () {
   if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
   const data = getLogFilteredData();
-  if (!data.length) { toast('لا توجد نتائج', 'error'); return; }
+  if (!data.length) { toast('لا نتائج', 'error'); return; }
   const fromVal = document.getElementById('filterLogFrom').value;
   const toVal = document.getElementById('filterLogTo').value;
   const win = window.open('', '_blank');
@@ -2712,9 +2800,9 @@ async function resizeImage(file, maxWidth = 1400) {
 window.handleLogoUpload = async function (evt) {
   const file = evt.target.files[0]; if (!file) return;
   if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
-  if (!file.type.startsWith('image/')) { toast('الرجاء اختيار صورة', 'error'); return; }
+  if (!file.type.startsWith('image/')) { toast('اختر صورة', 'error'); return; }
   if (file.size > 5 * 1024 * 1024) { toast('حجم كبير', 'error'); return; }
-  try { toast('جاري المعالجة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم الرفع', 'success'); }
+  try { toast('جاري المعالجة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم', 'success'); }
   catch { toast('فشل', 'error'); }
   evt.target.value = '';
 };
@@ -2722,7 +2810,7 @@ window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templat
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
   if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
-  const logoHTML = templates.logo ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف الصورة</span></button></div>` : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
+  const logoHTML = templates.logo ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف</span></button></div>` : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
   const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>صورة الكليشه</span></h4>
     <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
@@ -2731,13 +2819,13 @@ function renderTemplates() {
     const t = templates[key] || DEFAULT_TEMPLATES[key];
     const label = key === 'ready' ? 'قائمة الطلبات الجاهزة' : 'سجل الطلبات';
     return `<div class="template-card"><h4>${ico(key === 'ready' ? 'box' : 'archive', 17)}<span>${label}</span></h4>
-      <div class="template-row"><label>العنوان الرئيسي</label><input value="${esc(t.title)}" onchange="updateTemplate('${key}', 'title', this.value)"></div>
-      <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">المتغيرات: {date} {count} {user} {from} {to}</div></div></div>
+      <div class="template-row"><label>العنوان</label><input value="${esc(t.title)}" onchange="updateTemplate('${key}', 'title', this.value)"></div>
+      <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">{date} {count} {user} {from} {to}</div></div></div>
       <div class="template-row"><label>التذييل</label><input value="${esc(t.footer || '')}" onchange="updateTemplate('${key}', 'footer', this.value)"></div>
       <div class="template-row"><label>حجم الخط</label><input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)"></div>
-      <div class="template-row"><label>اتجاه الصفحة</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
+      <div class="template-row"><label>الاتجاه</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
-        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-branch" ${t.showBranch !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showBranch', this.checked)"><label for="tpl-${key}-branch">إظهار عمود الفرع</label></div>
+        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-branch" ${t.showBranch !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showBranch', this.checked)"><label for="tpl-${key}-branch">إظهار الفرع</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)"><label for="tpl-${key}-notes">إظهار الملاحظات</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-approval" ${t.showApprovalDate !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showApprovalDate', this.checked)"><label for="tpl-${key}-approval">إظهار تاريخ الاعتماد</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-dphone" ${t.showDriverPhone !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showDriverPhone', this.checked)"><label for="tpl-${key}-dphone">إظهار هاتف الموصل</label></div>
@@ -2781,9 +2869,9 @@ function validateCustomerForm() {
   let valid = true;
   const name = document.getElementById('custName').value.trim();
   const phone = document.getElementById('custPhone').value.trim();
-  if (!name) { setFieldError('custName', 'اسم العميل مطلوب'); valid = false; }
+  if (!name) { setFieldError('custName', 'الاسم مطلوب'); valid = false; }
   if (phone && !/^[0-9+\-\s]{6,20}$/.test(phone)) { setFieldError('custPhone', 'رقم غير صالح'); valid = false; }
-  if (!valid) { focusFirstError('customerModal'); toast('يرجى تصحيح الحقول', 'error'); }
+  if (!valid) { focusFirstError('customerModal'); toast('صحّح الحقول', 'error'); }
   return valid;
 }
 window.saveCustomer = async function () {
@@ -2792,8 +2880,8 @@ window.saveCustomer = async function () {
   const id = document.getElementById('custId').value;
   const custData = { id: id || uid(), code: document.getElementById('custCode').value.trim(), name: document.getElementById('custName').value.trim(), location: document.getElementById('custLocation').value.trim(), phone: document.getElementById('custPhone').value.trim() };
   try {
-    if (id) { const idx = cache.customers.findIndex(x => x.id === id); if (idx > -1) cache.customers[idx] = custData; logActivity('edit-customer', `تعديل عميل: ${custData.name}`, '', 'warning'); }
-    else { cache.customers.push(custData); logActivity('add-customer', `إضافة عميل: ${custData.name}`, '', 'success'); }
+    if (id) { const idx = cache.customers.findIndex(x => x.id === id); if (idx > -1) cache.customers[idx] = custData; logActivity('edit-customer', `تعديل: ${custData.name}`, '', 'warning'); }
+    else { cache.customers.push(custData); logActivity('add-customer', `إضافة: ${custData.name}`, '', 'success'); }
     await persistKeys(['customers', 'activity']);
     closeModal('customerModal'); renderCustomers();
     if (document.getElementById('orderModal').classList.contains('active')) {
@@ -2809,7 +2897,7 @@ window.deleteCustomer = async function (id) {
   const c = cache.customers.find(x => x.id === id);
   const ok = await dialog.danger(`حذف "${c?.name || ''}"؟`); if (!ok) return;
   cache.customers = cache.customers.filter(x => x.id !== id);
-  logActivity('delete-customer', `حذف عميل: ${c?.name || ''}`, '', 'danger');
+  logActivity('delete-customer', `حذف: ${c?.name || ''}`, '', 'danger');
   try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.openUserModal = function () {
@@ -2863,10 +2951,10 @@ function validateUserForm() {
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   if (!username) { setFieldError('userName', 'الاسم مطلوب'); valid = false; }
-  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'موجود مسبقاً'); valid = false; }
+  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'موجود'); valid = false; }
   if (!password) { setFieldError('userPass', 'كلمة المرور مطلوبة'); valid = false; }
-  else if (password.length < 4) { setFieldError('userPass', '4 أحرف على الأقل'); valid = false; }
-  if (!valid) { focusFirstError('userModal'); toast('يرجى تصحيح الحقول', 'error'); }
+  else if (password.length < 4) { setFieldError('userPass', '4+'); valid = false; }
+  if (!valid) { focusFirstError('userModal'); toast('صحّح', 'error'); }
   return valid;
 }
 window.saveUser = async function () {
@@ -2876,7 +2964,7 @@ window.saveUser = async function () {
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
-  if (currentUser.username === username && role !== 'رئيسي') { if (cache.users.filter(u => u.role === 'رئيسي').length <= 1) { toast('أنت الرئيسي الوحيد', 'error'); return; } }
+  if (currentUser.username === username && role !== 'رئيسي') { if (cache.users.filter(u => u.role === 'رئيسي').length <= 1) { toast('الرئيسي الوحيد', 'error'); return; } }
   const userData = { id: id || uid(), username, password, role, permissions: role === 'رئيسي' ? {} : { ...tempPerms } };
   if (id) { const idx = cache.users.findIndex(u => u.id === id); if (idx > -1) cache.users[idx] = userData; logActivity('edit-user', `تعديل: ${username}`, '', 'warning'); }
   else { cache.users.push(userData); logActivity('add-user', `إضافة: ${username}`, '', 'success'); }
@@ -2884,18 +2972,18 @@ window.saveUser = async function () {
     await persistKeys(['users', 'activity']);
     if (currentUser.username === username) { currentUser = normalizeUser(userData); applyPermissionsUI(); }
     closeModal('userModal'); renderUsers();
-    toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
+    toast(id ? 'تم' : 'تم', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteUser = async function (id) {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
   const u = cache.users.find(x => x.id === id); if (!u) return;
-  if (u.username === currentUser.username) { toast('لا يمكنك حذف حسابك', 'error'); return; }
+  if (u.username === currentUser.username) { toast('لا يمكنك حذف نفسك', 'error'); return; }
   if (u.role === 'رئيسي' && cache.users.filter(x => x.role === 'رئيسي').length <= 1) { toast('لا يمكن حذف الرئيسي الوحيد', 'error'); return; }
   const ok = await dialog.danger(`حذف "${u.username}"؟`); if (!ok) return;
   cache.users = cache.users.filter(x => x.id !== id);
   logActivity('delete-user', `حذف: ${u.username}`, '', 'danger');
-  try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -2908,7 +2996,7 @@ function downloadBlob(blob, filename) {
 }
 window.exportBackup = async function () {
   try {
-    const ok = await ensureJSZip(); if (!ok) { toast('فشل تحميل ZIP', 'error'); return; }
+    const ok = await ensureJSZip(); if (!ok) { toast('فشل ZIP', 'error'); return; }
     showLoading('جاري التجهيز...');
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
@@ -2918,21 +3006,21 @@ window.exportBackup = async function () {
     dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 3 }, null, 2));
     const info = { name: 'نظام إدارة الطلبات', createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`) };
     zip.file('backup-info.json', JSON.stringify(info, null, 2));
-    zip.file('README.txt', `نسخة احتياطية من نظام إدارة الطلبات\n=====================================\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\nالمحتوى:\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n  - data/meta.json\n  - backup-info.json\n`);
+    zip.file('README.txt', `نسخة احتياطية\n=====================================\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n`);
     const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 9 } });
     downloadBlob(blob, `backup_${dateStr}.zip`);
     hideLoading();
-    logActivity('backup', `تصدير نسخة`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
+    logActivity('backup', `تصدير ${DATA_KEYS.length + 1} ملف`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
     toast(`تم (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
   } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
 };
 window.resetAll = async function () {
   if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
-  const ok = await dialog.danger('حذف جميع الطلبات والسجل؟'); if (!ok) return;
-  const ok2 = await dialog.confirm('تأكيد نهائي؟', { type: 'warning' }); if (!ok2) return;
+  const ok = await dialog.danger('حذف جميع الطلبات؟'); if (!ok) return;
+  const ok2 = await dialog.confirm('تأكيد؟', { type: 'warning' }); if (!ok2) return;
   cache.orders = []; cache.ready = []; cache.log = [];
   logActivity('reset', 'تصفير', '', 'danger');
-  try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم التصفير', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.exportLogCSV = function () {
   const data = getLogFilteredData(); if (!data.length) { toast('فارغ', 'error'); return; }
