@@ -8,508 +8,313 @@
 <meta name="robots" content="noindex, nofollow">
 <title>نظام إدارة الطلبات</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  *:not(input):not(textarea):not(select) {
-    -webkit-user-select: none; -moz-user-select: none; user-select: none;
-    -webkit-touch-callout: none;
-  }
-  input, textarea, select { -webkit-user-select: text; user-select: text; }
-  img { -webkit-user-drag: none; pointer-events: none; }
-  html, body { height: 100%; }
-
-  :root {
-    --dark-blue: #1f4e79; --blue: #2e75b6; --light-blue: #dbe5f1;
-    --green: #28a745; --yellow: #ffc107; --red: #dc3545;
-    --purple: #6f42c1; --gray: #6c757d;
-    --bg: #f4f6f9; --card-bg: #fff; --text: #222; --text-muted: #6c757d;
-    --border: #e0e0e0;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
-    --shadow-md: 0 4px 14px rgba(0,0,0,.08);
-    --shadow-lg: 0 10px 40px rgba(0,0,0,.18);
-    --btn-h: 38px;
-    --radius: 10px;
-    --transition: .2s ease;
-  }
-  [data-theme="dark"] {
-    --dark-blue: #4a8bc7; --blue: #5fa3db; --light-blue: #1e3a52;
-    --bg: #0f1825; --card-bg: #1a2634; --text: #e8edf2; --text-muted: #8ea2b5;
-    --border: #2c3e50;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
-    --shadow-md: 0 4px 14px rgba(0,0,0,.3);
-    --shadow-lg: 0 10px 40px rgba(0,0,0,.5);
-  }
-
-  body {
-    background: var(--bg); color: var(--text);
-    min-height: 100vh; overflow-x: hidden;
-    transition: background .3s, color .3s;
-    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-  }
-
-  .ico { display: inline-block; flex-shrink: 0; vertical-align: middle; pointer-events: none; outline: none; }
-
-  .btn {
-    height: var(--btn-h); padding: 0 16px;
-    border: none; border-radius: 8px;
-    cursor: pointer; font-size: 13px; font-weight: 600;
-    transition: var(--transition);
-    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-    letter-spacing: .2px; white-space: nowrap; flex-wrap: nowrap;
-    font-family: inherit; line-height: 1; text-decoration: none;
-  }
-  .btn > * { display: inline-flex; align-items: center; line-height: 1; }
-  .btn .ico { width: 15px; height: 15px; }
-  .btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.15); filter: brightness(1.05); }
-  .btn:active:not(:disabled) { transform: translateY(0); filter: brightness(.95); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; }
-  .btn-primary { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; }
-  .btn-success { background: linear-gradient(135deg, #28a745, #4bc760); color: #fff; }
-  .btn-warning { background: linear-gradient(135deg, #f5b800, #ffc107); color: #2a2a2a; }
-  .btn-danger  { background: linear-gradient(135deg, #dc3545, #e4606d); color: #fff; }
-  .btn-purple  { background: linear-gradient(135deg, #6f42c1, #8a5cd4); color: #fff; }
-  .btn-gray    { background: linear-gradient(135deg, #6c757d, #8a9299); color: #fff; }
-  .btn-ghost   { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover:not(:disabled) { background: var(--light-blue); border-color: var(--blue); color: var(--dark-blue); }
-  .btn-sm { height: 30px; padding: 0 10px; font-size: 12px; border-radius: 7px; min-width: 30px; }
-  .btn-sm .ico { width: 13px; height: 13px; }
-  .btn-icon {
-    width: var(--btn-h); height: var(--btn-h); padding: 0;
-    border-radius: 50%; background: rgba(255,255,255,.15); color: #fff;
-    border: none; cursor: pointer;
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: var(--transition);
-  }
-  .btn-icon:hover { background: rgba(255,255,255,.28); transform: scale(1.06); }
-  .btn-icon .ico { width: 17px; height: 17px; }
-
-  kbd {
-    background: rgba(0,0,0,.12); padding: 2px 6px;
-    border-radius: 4px; font-size: 10px;
-    font-family: 'Consolas', monospace; font-weight: 500;
-    display: inline-block; line-height: 1; pointer-events: none;
-  }
-  .btn-warning kbd { background: rgba(0,0,0,.15); }
-
-  #loadingOverlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(31,78,121,.92); z-index: 9999;
-    align-items: center; justify-content: center; flex-direction: column; gap: 22px;
-    color: #fff; backdrop-filter: blur(6px);
-  }
-  #loadingOverlay.show { display: flex; }
-  .spinner {
-    width: 62px; height: 62px; border: 4px solid rgba(255,255,255,.25);
-    border-top-color: #fff; border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { font-size: 15px; font-weight: 500; letter-spacing: .3px; }
-
-  #loginScreen {
-    display: flex; align-items: center; justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 50%, #4a90c2 100%);
-    padding: 20px;
-  }
-  .login-box {
-    background: var(--card-bg); padding: 44px 40px; border-radius: 16px;
-    width: 460px; max-width: 92vw;
-    box-shadow: 0 30px 80px rgba(0,0,0,.35);
-    animation: slideUp .4s ease;
-  }
-  .login-logo { text-align: center; margin-bottom: 8px; display: flex; justify-content: center; color: var(--dark-blue); }
-  .login-logo svg { width: 54px; height: 54px; display: block; }
-  .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 24px; text-align: center; font-weight: 700; }
-  .login-box .subtitle { color: var(--text-muted); margin-bottom: 28px; font-size: 13px; text-align: center; }
-  .login-box label { display: block; font-size: 13px; color: var(--text); margin-bottom: 6px; margin-top: 14px; font-weight: 600; }
-  .login-box input {
-    width: 100%; padding: 12px 14px;
-    border: 2px solid var(--border); border-radius: 10px;
-    font-size: 14px; font-family: inherit; transition: var(--transition);
-    background: var(--card-bg); color: var(--text);
-  }
-  .login-box input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(46,117,182,.12); }
-  .login-box button.primary {
-    width: 100%; height: 48px; margin-top: 22px;
-    background: linear-gradient(135deg, var(--dark-blue), var(--blue));
-    color: #fff; border: none; border-radius: 10px;
-    font-size: 15px; font-weight: 600; cursor: pointer;
-    transition: var(--transition); letter-spacing: .5px;
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    font-family: inherit;
-  }
-  .login-box button.primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(31,78,121,.35); }
-  .login-box button.primary:disabled { opacity: .6; cursor: not-allowed; }
-
-  .token-status { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-top: 10px; }
-  .token-status.saved { background: #d4edda; color: #155724; }
-  .token-status.missing { background: #fff3cd; color: #856404; }
-  .token-status button {
-    margin-right: auto; padding: 5px 12px; font-size: 11px; border-radius: 6px;
-    background: rgba(0,0,0,.1); border: none; cursor: pointer; color: inherit;
-    font-weight: 600; font-family: inherit;
-  }
-  .token-help { font-size: 11px; color: var(--text-muted); margin-top: 8px; line-height: 1.7; }
-  .token-help a { color: var(--blue); text-decoration: none; font-weight: 600; }
-  .login-error {
-    color: var(--red); font-size: 13px; margin-top: 12px;
-    text-align: center; white-space: pre-line; line-height: 1.6;
-    background: #f8d7da; padding: 12px 16px; border-radius: 10px; display: none;
-  }
-  .login-error.show { display: block; animation: shake .3s ease; }
-  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
-  .login-loading { color: var(--blue); font-size: 12px; margin-top: 8px; text-align: center; }
-
-  #app { display: none; }
-  header {
-    background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
-    color: #fff; padding: 0 22px;
-    display: flex; justify-content: space-between; align-items: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,.18);
-    position: sticky; top: 0; z-index: 100; height: 60px;
-  }
-  [data-theme="dark"] header { background: linear-gradient(135deg, #0d1e2e, #1a3550); }
-  header .brand { display: flex; align-items: center; gap: 11px; }
-  header .brand-logo {
-    display: inline-flex !important; align-items: center; justify-content: center;
-    width: 34px; height: 34px; background: rgba(255,255,255,.15); border-radius: 9px;
-  }
-  header .brand-logo svg { width: 20px; height: 20px; display: block; }
-  header h1 { font-size: 16px; font-weight: 600; letter-spacing: .3px; }
-  .user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-  .user-chip {
-    display: inline-flex !important; align-items: center; gap: 8px;
-    background: rgba(255,255,255,.12); padding: 6px 13px;
-    border-radius: 20px; font-size: 12.5px;
-  }
-  .user-chip .ico { width: 14px; height: 14px; opacity: .9; }
-  .rate-limit-chip {
-    background: rgba(255,255,255,.1); padding: 5px 11px;
-    border-radius: 16px; font-size: 11px; font-weight: 600;
-    display: inline-flex !important; align-items: center; gap: 7px;
-  }
-  .rate-limit-chip .bar { width: 36px; height: 4px; background: rgba(255,255,255,.25); border-radius: 3px; overflow: hidden; }
-  .rate-limit-chip .fill { height: 100%; background: #4caf50; transition: width .3s; }
-  .rate-limit-chip .fill.warning { background: #ffc107; }
-  .rate-limit-chip .fill.danger { background: #dc3545; }
-  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #888; }
-  .status-dot.online { background: #4caf50; box-shadow: 0 0 8px #4caf50; animation: pulseGreen 2s infinite; }
-  .status-dot.sync { background: #2196f3; animation: pulseBlue 1s infinite; }
-  @keyframes pulseGreen { 0%,100% { box-shadow: 0 0 8px #4caf50; } 50% { box-shadow: 0 0 16px #4caf50; } }
-  @keyframes pulseBlue { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
-
-  nav {
-    background: var(--card-bg); padding: 0 22px; display: flex; gap: 2px;
-    overflow-x: auto; position: sticky; top: 60px; z-index: 99;
-    box-shadow: 0 2px 6px rgba(0,0,0,.06);
-    border-bottom: 2px solid var(--border);
-  }
-  nav button {
-    background: transparent; color: var(--text-muted); border: none;
-    padding: 15px 20px; cursor: pointer; font-size: 13.5px; font-weight: 500;
-    border-bottom: 3px solid transparent; white-space: nowrap;
-    transition: var(--transition);
-    display: inline-flex !important; align-items: center; gap: 8px;
-    font-family: inherit; flex-wrap: nowrap;
-  }
-  nav button > * { display: inline-flex; align-items: center; line-height: 1; }
-  nav button .ico { width: 16px; height: 16px; }
-  nav button:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
-  nav button.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); font-weight: 700; background: rgba(46,117,182,.08); }
-
-  main { padding: 22px; max-width: 1700px; margin: 0 auto; }
-
-  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 22px; }
-  .dash-card {
-    background: var(--card-bg); padding: 22px; border-radius: 14px;
-    box-shadow: var(--shadow-sm); cursor: pointer;
-    transition: var(--transition); border: 2px solid transparent;
-    position: relative; overflow: hidden;
-  }
-  .dash-card::before {
-    content: ''; position: absolute; top: 0; right: 0; bottom: 0;
-    width: 5px; background: var(--blue); transition: width .25s;
-  }
-  .dash-card:hover::before { width: 8px; }
-  .dash-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue); }
-  .dash-card .icon {
-    margin-bottom: 10px;
-    display: inline-flex !important; align-items: center; justify-content: center;
-    width: 56px; height: 56px; border-radius: 14px;
-    background: linear-gradient(135deg, #e8f2fb, #d0e4f5); color: var(--dark-blue);
-  }
-  [data-theme="dark"] .dash-card .icon { background: linear-gradient(135deg, #1e3a52, #0d1e2e); }
-  .dash-card .icon svg { width: 26px; height: 26px; }
-  .dash-card h3 { color: var(--dark-blue); font-size: 15px; margin-bottom: 3px; font-weight: 700; }
-  .dash-card p { color: var(--text-muted); font-size: 12px; }
-  .dash-card.green::before { background: var(--green); }
-  .dash-card.green .icon { background: linear-gradient(135deg, #e8f7ec, #c8ebd2); color: var(--green); }
-  [data-theme="dark"] .dash-card.green .icon { background: linear-gradient(135deg, #1a4a2a, #0d2e1a); }
-  .dash-card.purple::before { background: var(--purple); }
-  .dash-card.purple .icon { background: linear-gradient(135deg, #efe7fa, #dcc9f3); color: var(--purple); }
-  [data-theme="dark"] .dash-card.purple .icon { background: linear-gradient(135deg, #35204d, #1a1030); }
-  .dash-card.orange::before { background: #fd7e14; }
-  .dash-card.orange .icon { background: linear-gradient(135deg, #ffead6, #ffd0a8); color: #fd7e14; }
-  [data-theme="dark"] .dash-card.orange .icon { background: linear-gradient(135deg, #4d2f10, #2e1a05); }
-
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 22px; }
-  .stat {
-    background: var(--card-bg); padding: 20px 18px; border-radius: 12px;
-    box-shadow: var(--shadow-sm); transition: var(--transition);
-    position: relative; overflow: hidden;
-    border-right: 4px solid var(--blue);
-  }
-  .stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .stat .stat-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-  .stat .stat-icon {
-    width: 38px; height: 38px; border-radius: 10px;
-    display: inline-flex !important; align-items: center; justify-content: center;
-    background: rgba(46,117,182,.12); color: var(--blue);
-  }
-  .stat .stat-icon svg { width: 18px; height: 18px; }
-  .stat .trend { font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; padding: 3px 7px; border-radius: 10px; }
-  .stat .trend.up   { color: #1a7f37; background: #d4f5dd; }
-  .stat .trend.down { color: #a42029; background: #fbdde0; }
-  .stat .trend.flat { color: #6c757d; background: #e9ecef; }
-  [data-theme="dark"] .stat .trend.up   { background: #1a4a2a; color: #6ee7a5; }
-  [data-theme="dark"] .stat .trend.down { background: #4d1a20; color: #f89da7; }
-  [data-theme="dark"] .stat .trend.flat { background: #2c3e50; color: #adb5bd; }
-  .stat .num { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1.1; }
-  .stat .lbl { color: var(--text-muted); font-size: 12px; margin-top: 4px; font-weight: 500; }
-  .stat.red { border-right-color: var(--red); }
-  .stat.red .stat-icon { background: rgba(220,53,69,.12); color: var(--red); }
-  .stat.green { border-right-color: var(--green); }
-  .stat.green .stat-icon { background: rgba(40,167,69,.12); color: var(--green); }
-  .stat.purple { border-right-color: var(--purple); }
-  .stat.purple .stat-icon { background: rgba(111,66,193,.12); color: var(--purple); }
-
-  .analytics-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; margin-bottom: 22px; }
-  @media (max-width: 1100px) { .analytics-row { grid-template-columns: 1fr; } }
-  .analytics-card { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .analytics-card h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700; display: flex !important; align-items: center; gap: 8px; }
-  .analytics-card h4 .ico { width: 16px; height: 16px; }
-
-  .donut-wrap { display: flex; align-items: center; gap: 22px; }
-  .donut { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
-  .donut svg { transform: rotate(-90deg); }
-  .donut circle { fill: none; stroke-width: 16; transition: stroke-dashoffset .8s ease; }
-  .donut .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .donut .center .big { font-size: 24px; font-weight: 800; color: var(--dark-blue); }
-  .donut .center .small { font-size: 10.5px; color: var(--text-muted); }
-  .donut-legend { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 4px 0; }
-  .legend-item .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-  .legend-item .name { flex: 1; color: var(--text); }
-  .legend-item .val { font-weight: 700; color: var(--text); }
-
-  .top-list { display: flex; flex-direction: column; gap: 8px; }
-  .top-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(0,0,0,.03); font-size: 12.5px; transition: var(--transition); }
-  [data-theme="dark"] .top-item { background: rgba(255,255,255,.04); }
-  .top-item:hover { background: rgba(46,117,182,.08); }
-  .top-item .rank { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; flex-shrink: 0; }
-  .top-item .rank.gold   { background: linear-gradient(135deg,#f5b800,#ffc107); color:#333; }
-  .top-item .rank.silver { background: linear-gradient(135deg,#adb5bd,#dee2e6); color:#333; }
-  .top-item .rank.bronze { background: linear-gradient(135deg,#a0522d,#cd7f32); color:#fff; }
-  .top-item .name { flex: 1; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .top-item .count { font-weight: 700; color: var(--dark-blue); }
-  .empty-top { color: var(--text-muted); text-align: center; padding: 18px 0; font-size: 12.5px; }
-
-  .sparkline { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .sparkline h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700; display: flex !important; align-items: center; gap: 8px; }
-  .sparkline h4 .ico { width: 16px; height: 16px; }
-  .sparkline svg { width: 100%; height: 90px; }
-
-  .toolbar { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .filter-bar { display: flex !important; gap: 11px; flex-wrap: wrap; align-items: center; padding: 13px 16px; background: var(--card-bg); border-radius: 12px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-right: 4px solid var(--blue); }
-  .filter-bar > span { display: inline-flex; align-items: center; gap: 5px; }
-  .filter-bar label { font-size: 12px; color: var(--text); font-weight: 600; }
-  .filter-bar input, .filter-bar select { width: auto; padding: 7px 11px; font-size: 12.5px; height: 34px; }
-  .filter-bar .btn { height: 34px; padding: 0 13px; font-size: 12.5px; }
-
-  input, select, textarea { padding: 10px 13px; border: 2px solid var(--border); border-radius: 9px; font-size: 13.5px; font-family: inherit; width: 100%; transition: var(--transition); background: var(--card-bg); color: var(--text); }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(46,117,182,.1); }
-  textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
-
-  .field-error { border-color: var(--red) !important; box-shadow: 0 0 0 4px rgba(220,53,69,.12) !important; animation: shake .3s ease; }
-  .field-error-msg { color: var(--red); font-size: 11.5px; margin-top: 5px; display: none; font-weight: 600; }
-  .field-error-msg.show { display: block; }
-  .field-required::after { content: ' *'; color: var(--red); font-weight: 700; }
-
-  .table-wrap { background: var(--card-bg); border-radius: 12px; overflow: auto; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; min-width: 1400px; }
-  th { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; padding: 13px 11px; text-align: right; font-size: 12px; font-weight: 600; position: sticky; top: 0; z-index: 1; white-space: nowrap; }
-  td { padding: 11px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: top; }
-  tbody tr { cursor: pointer; transition: var(--transition); }
-  tbody tr:nth-child(even) { background: rgba(0,0,0,.02); }
-  [data-theme="dark"] tbody tr:nth-child(even) { background: rgba(255,255,255,.02); }
-  tbody tr:hover { background: rgba(46,117,182,.08); }
-  tbody tr.status-ready    { background: #e4f5e8 !important; }
-  [data-theme="dark"] tbody tr.status-ready { background: #1a4a2a !important; }
-  tbody tr.status-progress { background: #fff8e1 !important; }
-  [data-theme="dark"] tbody tr.status-progress { background: #4d3a10 !important; }
-  tbody tr.selected { outline: 2px solid var(--blue); outline-offset: -2px; background: rgba(46,117,182,.15) !important; }
-  .empty-row td { text-align: center; color: var(--text-muted); padding: 50px 20px; font-size: 13px; }
-  .empty-state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 20px; }
-  .empty-state .icon { width: 60px; height: 60px; border-radius: 50%; display: inline-flex !important; align-items: center; justify-content: center; background: rgba(46,117,182,.1); color: var(--blue); }
-  .empty-state .icon svg { width: 26px; height: 26px; }
-  .empty-state .title { font-size: 14.5px; font-weight: 600; color: var(--text); }
-  .empty-state .desc { font-size: 12.5px; color: var(--text-muted); }
-
-  .note-cell { max-width: 180px; min-width: 120px; white-space: normal; word-break: break-word; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; vertical-align: top; padding-top: 11px; padding-bottom: 11px; }
-  .note-cell .note-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
-  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: .2px; }
-  .badge-ready    { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
-  .badge-progress { background: linear-gradient(135deg,#f5b800,#ffc107); color: #333; }
-  .badge-paid     { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
-  .badge-unpaid   { background: linear-gradient(135deg,#dc3545,#e4606d); color: #fff; }
-  .badge-vip      { background: linear-gradient(135deg,#6f42c1,#8a5cd4); color: #fff; }
-  .badge-branch   { background: rgba(46,117,182,.12); color: var(--dark-blue); border: 1px solid rgba(46,117,182,.25); }
-
-  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 2px solid var(--light-blue); flex-wrap: wrap; gap: 11px; }
-  .section-header h2 { color: var(--dark-blue); font-size: 19px; font-weight: 700; display: inline-flex !important; align-items: center; gap: 9px; }
-  .section-header h2 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
-  .section-header .hint { font-size: 11px; color: var(--text-muted); background: rgba(0,0,0,.05); padding: 7px 13px; border-radius: 20px; border: 1px solid var(--border); display: inline-flex !important; align-items: center; gap: 6px; }
-  [data-theme="dark"] .section-header .hint { background: rgba(255,255,255,.05); }
-  .section-header .hint kbd { background: rgba(0,0,0,.1); }
-
-  .page { display: none; }
-  .page.active { display: block; animation: fadeSlide .25s ease; }
-  @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(10,20,35,.65); z-index: 1000; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; backdrop-filter: blur(3px); }
-  .modal-bg.active { display: flex; animation: fadeIn .15s; }
-  .modal { background: var(--card-bg); padding: 28px; border-radius: 16px; width: 90%; max-width: 620px; max-height: 92vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,.35); animation: slideUp .25s ease; color: var(--text); }
-  .modal h3 { color: var(--dark-blue); margin-bottom: 18px; font-size: 18px; font-weight: 700; display: flex !important; align-items: center; gap: 10px; line-height: 1.4; }
-  .modal h3 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
-  .modal label { display: block; margin: 13px 0 6px; font-size: 12.5px; color: var(--text); font-weight: 600; }
-  .modal-actions { display: flex; gap: 9px; margin-top: 22px; justify-content: flex-end; flex-wrap: wrap; }
-  .modal-actions .btn { min-width: 105px; }
-
-  .dialog-bg { display: none; position: fixed; inset: 0; background: rgba(10,20,35,.7); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
-  .dialog-bg.active { display: flex; animation: fadeIn .15s; }
-  .dialog { background: var(--card-bg); padding: 30px 26px; border-radius: 16px; width: 100%; max-width: 460px; color: var(--text); box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: slideUp .25s ease; text-align: center; }
-  .dialog-icon { margin-bottom: 14px; display: inline-flex !important; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%; }
-  .dialog-icon svg { width: 34px; height: 34px; }
-  .dialog-icon.info    { background: rgba(46,117,182,.15); color: var(--blue); }
-  .dialog-icon.warning { background: rgba(255,193,7,.18); color: #b38600; }
-  .dialog-icon.danger  { background: rgba(220,53,69,.15); color: var(--red); }
-  .dialog-icon.success { background: rgba(40,167,69,.15); color: var(--green); }
-  .dialog-title { font-size: 19px; font-weight: 700; color: var(--dark-blue); margin-bottom: 9px; }
-  .dialog-message { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 22px; white-space: pre-line; }
-  .dialog-actions { display: flex; gap: 9px; justify-content: center; }
-  .dialog-actions .btn { min-width: 105px; }
-
-  .toast-container { position: fixed; bottom: 22px; left: 22px; z-index: 3000; display: flex; flex-direction: column; gap: 9px; pointer-events: none; max-width: 360px; }
-  .toast { background: var(--card-bg); color: var(--text); padding: 12px 16px; border-radius: 11px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.2); border-right: 4px solid var(--blue); opacity: 0; transform: translateX(-30px); transition: .3s; pointer-events: auto; display: flex !important; align-items: center; gap: 10px; font-weight: 500; }
-  .toast.show { opacity: 1; transform: translateX(0); }
-  .toast .toast-icon { width: 24px; height: 24px; border-radius: 50%; display: inline-flex !important; align-items: center; justify-content: center; flex-shrink: 0; }
-  .toast.success .toast-icon { background: rgba(40,167,69,.15); color: var(--green); }
-  .toast.error   .toast-icon { background: rgba(220,53,69,.15); color: var(--red); }
-  .toast.info    .toast-icon { background: rgba(46,117,182,.15); color: var(--blue); }
-  .toast.warning .toast-icon { background: rgba(255,193,7,.2); color: #b38600; }
-  .toast .toast-icon svg { width: 14px; height: 14px; }
-  .toast.success { border-right-color: var(--green); }
-  .toast.error   { border-right-color: var(--red); }
-  .toast.warning { border-right-color: var(--yellow); }
-
-  .tabs { display: flex; gap: 3px; border-bottom: 2px solid var(--light-blue); margin-bottom: 20px; flex-wrap: wrap; }
-  .tab-btn { padding: 11px 18px; background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--text-muted); border-bottom: 3px solid transparent; transition: var(--transition); font-weight: 600; border-radius: 6px 6px 0 0; font-family: inherit; display: inline-flex !important; align-items: center; gap: 7px; }
-  .tab-btn > * { display: inline-flex; align-items: center; line-height: 1; }
-  .tab-btn .ico { width: 15px; height: 15px; }
-  .tab-btn:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
-  .tab-btn.active { color: var(--dark-blue); border-bottom-color: var(--dark-blue); background: rgba(46,117,182,.08); }
-
-  .perm-section { margin-top: 20px; padding-top: 18px; border-top: 2px dashed var(--border); }
-  .perm-section h4 { color: var(--dark-blue); font-size: 13.5px; margin-bottom: 13px; font-weight: 700; }
-  .perm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-  .perm-item { display: flex; align-items: center; gap: 9px; padding: 9px 12px; background: rgba(0,0,0,.03); border-radius: 8px; cursor: pointer; font-size: 12px; transition: var(--transition); border: 2px solid transparent; font-weight: 500; }
-  [data-theme="dark"] .perm-item { background: rgba(255,255,255,.05); }
-  .perm-item:hover { background: var(--light-blue); }
-  .perm-item.checked { background: #d4edda; border-color: #7ec98d; }
-  [data-theme="dark"] .perm-item.checked { background: #1a4a2a; border-color: #4caf50; }
-  .perm-item input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--green); flex-shrink: 0; }
-  .perm-note { background: #fff3cd; border: 1px solid #ffc107; padding: 11px 14px; border-radius: 10px; font-size: 12px; color: #856404; margin-top: 13px; line-height: 1.6; }
-  [data-theme="dark"] .perm-note { background: #4d3a10; border-color: #8a6914; color: #ffd54f; }
-
-  .customer-search { position: relative; }
-  .customer-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; max-height: 260px; overflow-y: auto; display: none; box-shadow: 0 12px 32px rgba(0,0,0,.18); z-index: 200; }
-  .customer-dropdown.show { display: block; }
-  .customer-option { padding: 11px 15px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 12.5px; transition: var(--transition); }
-  .customer-option:last-child { border-bottom: none; }
-  .customer-option:hover, .customer-option.active { background: var(--light-blue); }
-  .customer-option .code { color: var(--text-muted); font-size: 10.5px; margin-right: 6px; }
-  .customer-option .loc { color: var(--text-muted); font-size: 10.5px; float: left; }
-  .customer-option.empty { color: var(--text-muted); text-align: center; cursor: default; padding: 20px; }
-  .customer-option.create { color: var(--green); font-weight: 700; }
-  .customer-option.create:hover { background: #d4edda; }
-  [data-theme="dark"] .customer-option.create:hover { background: #1a4a2a; }
-
-  .template-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: var(--transition); }
-  .template-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); }
-  .template-card h4 { color: var(--dark-blue); margin-bottom: 15px; font-size: 14px; display: flex !important; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 2px solid var(--light-blue); }
-  .template-card h4 .ico { width: 17px; height: 17px; }
-  .template-row { display: grid; grid-template-columns: 170px 1fr; gap: 11px; align-items: center; margin-bottom: 11px; }
-  .template-row label { font-size: 12.5px; color: var(--text); font-weight: 600; }
-  .template-row input, .template-row textarea, .template-row select { font-size: 12.5px; }
-  .toggle-row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; padding: 7px 0; cursor: pointer; }
-  .toggle-row input { width: 17px; height: 17px; cursor: pointer; accent-color: var(--green); }
-  .toggle-row label { cursor: pointer; }
-
-  .logo-preview { margin-top: 11px; padding: 11px; background: rgba(0,0,0,.03); border-radius: 10px; border: 2px dashed var(--border); text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center; }
-  [data-theme="dark"] .logo-preview { background: rgba(255,255,255,.03); }
-  .logo-preview img { max-width: 100%; max-height: 120px; border-radius: 6px; pointer-events: none; }
-  .logo-preview .empty-logo { color: var(--text-muted); font-size: 12.5px; }
-
-  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
-  .shortcut-group h4 { color: var(--dark-blue); margin-bottom: 11px; padding-bottom: 7px; border-bottom: 2px solid var(--light-blue); font-size: 13.5px; font-weight: 700; display: flex !important; align-items: center; gap: 7px; }
-  .shortcut-group h4 .ico { width: 15px; height: 15px; }
-  .shortcut-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 12.5px; align-items: center; }
-  .shortcut-row .keys { display: flex; gap: 4px; }
-  .shortcut-row .desc { color: var(--text); font-weight: 500; }
-
-  .connection-banner { position: fixed; top: 0; left: 0; right: 0; background: var(--red); color: #fff; padding: 8px 16px; text-align: center; font-size: 12.5px; font-weight: 600; z-index: 9999; transform: translateY(-100%); transition: transform .3s; display: flex !important; align-items: center; justify-content: center; gap: 8px; }
-  .connection-banner.show { transform: translateY(0); }
-  .connection-banner .ico { width: 14px; height: 14px; }
-
-  .draft-badge { position: fixed; bottom: 22px; right: 22px; background: linear-gradient(135deg, #ffc107, #ffb300); color: #333; padding: 10px 15px; border-radius: 24px; font-size: 12px; font-weight: 700; box-shadow: 0 6px 20px rgba(0,0,0,.2); display: none !important; align-items: center; gap: 8px; cursor: pointer; z-index: 2500; animation: slideInRight .3s ease; }
-  .draft-badge.show { display: inline-flex !important; }
-  .draft-badge .ico { width: 14px; height: 14px; }
-  @keyframes slideInRight { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-  @media print {
-    body { background: #fff !important; color: #000 !important; }
-    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .tabs,
-    .draft-badge, .connection-banner, #loadingOverlay, .toast-container { display: none !important; }
-    main { padding: 0; max-width: 100%; }
-    table { min-width: auto; font-size: 10px; }
-    th { background: #ddd !important; color: #000 !important; position: static; }
-    .table-wrap { box-shadow: none; border-radius: 0; border: none; }
-    .badge { border: 1px solid #666; background: #fff !important; color: #000 !important; }
-    @page { size: A4 landscape; margin: 12mm; }
-  }
-
-  @media (max-width: 900px) {
-    header { padding: 10px 14px; height: auto; flex-direction: column; gap: 9px; }
-    header h1 { font-size: 14px; }
-    nav { top: 0; padding: 0 10px; }
-    nav button { padding: 12px 12px; font-size: 12.5px; }
-    main { padding: 12px; }
-    .dash-grid { grid-template-columns: 1fr; }
-    .perm-grid { grid-template-columns: 1fr; }
-    .template-row { grid-template-columns: 1fr; }
-    .user-info { flex-wrap: wrap; justify-content: center; }
-    .rate-limit-chip { display: none; }
-    .analytics-row { grid-template-columns: 1fr; }
-    .donut-wrap { flex-direction: column; }
-  }
-
-  ::-webkit-scrollbar { width: 9px; height: 9px; }
-  ::-webkit-scrollbar-track { background: rgba(0,0,0,.05); }
-  ::-webkit-scrollbar-thumb { background: #b8c5d1; border-radius: 5px; }
-  ::-webkit-scrollbar-thumb:hover { background: #8fa2b3; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  *:not(input):not(textarea):not(select){-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+  input,textarea,select{-webkit-user-select:text;user-select:text}
+  img{-webkit-user-drag:none;pointer-events:none}
+  html,body{height:100%}
+  :root{--dark-blue:#1f4e79;--blue:#2e75b6;--light-blue:#dbe5f1;--green:#28a745;--yellow:#ffc107;--red:#dc3545;--purple:#6f42c1;--gray:#6c757d;--bg:#f4f6f9;--card-bg:#fff;--text:#222;--text-muted:#6c757d;--border:#e0e0e0;--shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 14px rgba(0,0,0,.08);--shadow-lg:0 10px 40px rgba(0,0,0,.18);--btn-h:38px;--radius:10px;--transition:.2s ease}
+  [data-theme="dark"]{--dark-blue:#4a8bc7;--blue:#5fa3db;--light-blue:#1e3a52;--bg:#0f1825;--card-bg:#1a2634;--text:#e8edf2;--text-muted:#8ea2b5;--border:#2c3e50;--shadow-sm:0 1px 3px rgba(0,0,0,.3);--shadow-md:0 4px 14px rgba(0,0,0,.3);--shadow-lg:0 10px 40px rgba(0,0,0,.5)}
+  body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
+  .ico{display:inline-block;flex-shrink:0;vertical-align:middle;pointer-events:none;outline:none}
+  .btn{height:var(--btn-h);padding:0 16px;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:7px;letter-spacing:.2px;white-space:nowrap;flex-wrap:nowrap;font-family:inherit;line-height:1;text-decoration:none}
+  .btn>*{display:inline-flex;align-items:center;line-height:1}
+  .btn .ico{width:15px;height:15px}
+  .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15);filter:brightness(1.05)}
+  .btn:active:not(:disabled){transform:translateY(0);filter:brightness(.95)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn-primary{background:linear-gradient(135deg,var(--dark-blue),#2a5d8f);color:#fff}
+  .btn-success{background:linear-gradient(135deg,#28a745,#4bc760);color:#fff}
+  .btn-warning{background:linear-gradient(135deg,#f5b800,#ffc107);color:#2a2a2a}
+  .btn-danger{background:linear-gradient(135deg,#dc3545,#e4606d);color:#fff}
+  .btn-purple{background:linear-gradient(135deg,#6f42c1,#8a5cd4);color:#fff}
+  .btn-gray{background:linear-gradient(135deg,#6c757d,#8a9299);color:#fff}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn-ghost:hover:not(:disabled){background:var(--light-blue);border-color:var(--blue);color:var(--dark-blue)}
+  .btn-sm{height:30px;padding:0 10px;font-size:12px;border-radius:7px;min-width:30px}
+  .btn-sm .ico{width:13px;height:13px}
+  .btn-icon{width:var(--btn-h);height:var(--btn-h);padding:0;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition)}
+  .btn-icon:hover{background:rgba(255,255,255,.28);transform:scale(1.06)}
+  .btn-icon .ico{width:17px;height:17px}
+  kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'Consolas',monospace;font-weight:500;display:inline-block;line-height:1;pointer-events:none}
+  .btn-warning kbd{background:rgba(0,0,0,.15)}
+  #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(31,78,121,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(6px)}
+  #loadingOverlay.show{display:flex}
+  .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading-text{font-size:15px;font-weight:500;letter-spacing:.3px}
+  #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1f4e79 0%,#2e75b6 50%,#4a90c2 100%);padding:20px}
+  .login-box{background:var(--card-bg);padding:44px 40px;border-radius:16px;width:460px;max-width:92vw;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:slideUp .4s ease}
+  .login-logo{text-align:center;margin-bottom:8px;display:flex;justify-content:center;color:var(--dark-blue)}
+  .login-logo svg{width:54px;height:54px;display:block}
+  .login-box h1{color:var(--dark-blue);margin-bottom:6px;font-size:24px;text-align:center;font-weight:700}
+  .login-box .subtitle{color:var(--text-muted);margin-bottom:28px;font-size:13px;text-align:center}
+  .login-box label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;margin-top:14px;font-weight:600}
+  .login-box input{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;transition:var(--transition);background:var(--card-bg);color:var(--text)}
+  .login-box input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(46,117,182,.12)}
+  .login-box button.primary{width:100%;height:48px;margin-top:22px;background:linear-gradient(135deg,var(--dark-blue),var(--blue));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:var(--transition);letter-spacing:.5px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+  .login-box button.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 25px rgba(31,78,121,.35)}
+  .login-box button.primary:disabled{opacity:.6;cursor:not-allowed}
+  .token-status{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px;margin-top:10px}
+  .token-status.saved{background:#d4edda;color:#155724}
+  .token-status.missing{background:#fff3cd;color:#856404}
+  .token-status button{margin-right:auto;padding:5px 12px;font-size:11px;border-radius:6px;background:rgba(0,0,0,.1);border:none;cursor:pointer;color:inherit;font-weight:600;font-family:inherit}
+  .token-help{font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.7}
+  .token-help a{color:var(--blue);text-decoration:none;font-weight:600}
+  .login-error{color:var(--red);font-size:13px;margin-top:12px;text-align:center;white-space:pre-line;line-height:1.6;background:#f8d7da;padding:12px 16px;border-radius:10px;display:none}
+  .login-error.show{display:block;animation:shake .3s ease}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .login-loading{color:var(--blue);font-size:12px;margin-top:8px;text-align:center}
+  #app{display:none}
+  header{background:linear-gradient(135deg,var(--dark-blue),#2a5d8f);color:#fff;padding:0 22px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.18);position:sticky;top:0;z-index:100;height:60px}
+  [data-theme="dark"] header{background:linear-gradient(135deg,#0d1e2e,#1a3550)}
+  header .brand{display:flex;align-items:center;gap:11px}
+  header .brand-logo{display:inline-flex!important;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(255,255,255,.15);border-radius:9px}
+  header .brand-logo svg{width:20px;height:20px;display:block}
+  header h1{font-size:16px;font-weight:600;letter-spacing:.3px}
+  .user-info{display:flex;align-items:center;gap:8px;font-size:13px}
+  .user-chip{display:inline-flex!important;align-items:center;gap:8px;background:rgba(255,255,255,.12);padding:6px 13px;border-radius:20px;font-size:12.5px}
+  .user-chip .ico{width:14px;height:14px;opacity:.9}
+  .rate-limit-chip{background:rgba(255,255,255,.1);padding:5px 11px;border-radius:16px;font-size:11px;font-weight:600;display:inline-flex!important;align-items:center;gap:7px}
+  .rate-limit-chip .bar{width:36px;height:4px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden}
+  .rate-limit-chip .fill{height:100%;background:#4caf50;transition:width .3s}
+  .rate-limit-chip .fill.warning{background:#ffc107}
+  .rate-limit-chip .fill.danger{background:#dc3545}
+  .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#888}
+  .status-dot.online{background:#4caf50;box-shadow:0 0 8px #4caf50;animation:pulseGreen 2s infinite}
+  .status-dot.sync{background:#2196f3;animation:pulseBlue 1s infinite}
+  @keyframes pulseGreen{0%,100%{box-shadow:0 0 8px #4caf50}50%{box-shadow:0 0 16px #4caf50}}
+  @keyframes pulseBlue{0%,100%{opacity:1}50%{opacity:.3}}
+  nav{background:var(--card-bg);padding:0 22px;display:flex;gap:2px;overflow-x:auto;position:sticky;top:60px;z-index:99;box-shadow:0 2px 6px rgba(0,0,0,.06);border-bottom:2px solid var(--border)}
+  nav button{background:transparent;color:var(--text-muted);border:none;padding:15px 20px;cursor:pointer;font-size:13.5px;font-weight:500;border-bottom:3px solid transparent;white-space:nowrap;transition:var(--transition);display:inline-flex!important;align-items:center;gap:8px;font-family:inherit;flex-wrap:nowrap}
+  nav button>*{display:inline-flex;align-items:center;line-height:1}
+  nav button .ico{width:16px;height:16px}
+  nav button:hover{color:var(--dark-blue);background:rgba(46,117,182,.06)}
+  nav button.active{color:var(--dark-blue);border-bottom-color:var(--dark-blue);font-weight:700;background:rgba(46,117,182,.08)}
+  main{padding:22px;max-width:1700px;margin:0 auto}
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:22px}
+  .dash-card{background:var(--card-bg);padding:22px;border-radius:14px;box-shadow:var(--shadow-sm);cursor:pointer;transition:var(--transition);border:2px solid transparent;position:relative;overflow:hidden}
+  .dash-card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:5px;background:var(--blue);transition:width .25s}
+  .dash-card:hover::before{width:8px}
+  .dash-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+  .dash-card .icon{margin-bottom:10px;display:inline-flex!important;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#e8f2fb,#d0e4f5);color:var(--dark-blue)}
+  [data-theme="dark"] .dash-card .icon{background:linear-gradient(135deg,#1e3a52,#0d1e2e)}
+  .dash-card .icon svg{width:26px;height:26px}
+  .dash-card h3{color:var(--dark-blue);font-size:15px;margin-bottom:3px;font-weight:700}
+  .dash-card p{color:var(--text-muted);font-size:12px}
+  .dash-card.green::before{background:var(--green)}
+  .dash-card.green .icon{background:linear-gradient(135deg,#e8f7ec,#c8ebd2);color:var(--green)}
+  [data-theme="dark"] .dash-card.green .icon{background:linear-gradient(135deg,#1a4a2a,#0d2e1a)}
+  .dash-card.purple::before{background:var(--purple)}
+  .dash-card.purple .icon{background:linear-gradient(135deg,#efe7fa,#dcc9f3);color:var(--purple)}
+  [data-theme="dark"] .dash-card.purple .icon{background:linear-gradient(135deg,#35204d,#1a1030)}
+  .dash-card.orange::before{background:#fd7e14}
+  .dash-card.orange .icon{background:linear-gradient(135deg,#ffead6,#ffd0a8);color:#fd7e14}
+  [data-theme="dark"] .dash-card.orange .icon{background:linear-gradient(135deg,#4d2f10,#2e1a05)}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+  .stat{background:var(--card-bg);padding:20px 18px;border-radius:12px;box-shadow:var(--shadow-sm);transition:var(--transition);position:relative;overflow:hidden;border-right:4px solid var(--blue)}
+  .stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+  .stat .stat-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .stat .stat-icon{width:38px;height:38px;border-radius:10px;display:inline-flex!important;align-items:center;justify-content:center;background:rgba(46,117,182,.12);color:var(--blue)}
+  .stat .stat-icon svg{width:18px;height:18px}
+  .stat .trend{font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:10px}
+  .stat .trend.up{color:#1a7f37;background:#d4f5dd}
+  .stat .trend.down{color:#a42029;background:#fbdde0}
+  .stat .trend.flat{color:#6c757d;background:#e9ecef}
+  [data-theme="dark"] .stat .trend.up{background:#1a4a2a;color:#6ee7a5}
+  [data-theme="dark"] .stat .trend.down{background:#4d1a20;color:#f89da7}
+  [data-theme="dark"] .stat .trend.flat{background:#2c3e50;color:#adb5bd}
+  .stat .num{font-size:30px;font-weight:800;color:var(--text);line-height:1.1}
+  .stat .lbl{color:var(--text-muted);font-size:12px;margin-top:4px;font-weight:500}
+  .stat.red{border-right-color:var(--red)}
+  .stat.red .stat-icon{background:rgba(220,53,69,.12);color:var(--red)}
+  .stat.green{border-right-color:var(--green)}
+  .stat.green .stat-icon{background:rgba(40,167,69,.12);color:var(--green)}
+  .stat.purple{border-right-color:var(--purple)}
+  .stat.purple .stat-icon{background:rgba(111,66,193,.12);color:var(--purple)}
+  .analytics-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:22px}
+  @media(max-width:1100px){.analytics-row{grid-template-columns:1fr}}
+  .analytics-card{background:var(--card-bg);padding:20px 22px;border-radius:14px;box-shadow:var(--shadow-sm)}
+  .analytics-card h4{color:var(--dark-blue);font-size:14px;margin-bottom:16px;font-weight:700;display:flex!important;align-items:center;gap:8px}
+  .analytics-card h4 .ico{width:16px;height:16px}
+  .donut-wrap{display:flex;align-items:center;gap:22px}
+  .donut{position:relative;width:140px;height:140px;flex-shrink:0}
+  .donut svg{transform:rotate(-90deg)}
+  .donut circle{fill:none;stroke-width:16;transition:stroke-dashoffset .8s ease}
+  .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .donut .center .big{font-size:24px;font-weight:800;color:var(--dark-blue)}
+  .donut .center .small{font-size:10.5px;color:var(--text-muted)}
+  .donut-legend{flex:1;display:flex;flex-direction:column;gap:8px}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:4px 0}
+  .legend-item .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+  .legend-item .name{flex:1;color:var(--text)}
+  .legend-item .val{font-weight:700;color:var(--text)}
+  .top-list{display:flex;flex-direction:column;gap:8px}
+  .top-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,.03);font-size:12.5px;transition:var(--transition)}
+  [data-theme="dark"] .top-item{background:rgba(255,255,255,.04)}
+  .top-item:hover{background:rgba(46,117,182,.08)}
+  .top-item .rank{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:11px;font-weight:700;flex-shrink:0}
+  .top-item .rank.gold{background:linear-gradient(135deg,#f5b800,#ffc107);color:#333}
+  .top-item .rank.silver{background:linear-gradient(135deg,#adb5bd,#dee2e6);color:#333}
+  .top-item .rank.bronze{background:linear-gradient(135deg,#a0522d,#cd7f32);color:#fff}
+  .top-item .name{flex:1;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .top-item .count{font-weight:700;color:var(--dark-blue)}
+  .empty-top{color:var(--text-muted);text-align:center;padding:18px 0;font-size:12.5px}
+  .sparkline{background:var(--card-bg);padding:20px 22px;border-radius:14px;box-shadow:var(--shadow-sm)}
+  .sparkline h4{color:var(--dark-blue);font-size:14px;margin-bottom:16px;font-weight:700;display:flex!important;align-items:center;gap:8px}
+  .sparkline h4 .ico{width:16px;height:16px}
+  .sparkline svg{width:100%;height:90px}
+  .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .filter-bar{display:flex!important;gap:11px;flex-wrap:wrap;align-items:center;padding:13px 16px;background:var(--card-bg);border-radius:12px;margin-bottom:14px;box-shadow:var(--shadow-sm);border-right:4px solid var(--blue)}
+  .filter-bar>span{display:inline-flex;align-items:center;gap:5px}
+  .filter-bar label{font-size:12px;color:var(--text);font-weight:600}
+  .filter-bar input,.filter-bar select{width:auto;padding:7px 11px;font-size:12.5px;height:34px}
+  .filter-bar .btn{height:34px;padding:0 13px;font-size:12.5px}
+  input,select,textarea{padding:10px 13px;border:2px solid var(--border);border-radius:9px;font-size:13.5px;font-family:inherit;width:100%;transition:var(--transition);background:var(--card-bg);color:var(--text)}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(46,117,182,.1)}
+  textarea{min-height:90px;resize:vertical;line-height:1.6}
+  .field-error{border-color:var(--red)!important;box-shadow:0 0 0 4px rgba(220,53,69,.12)!important;animation:shake .3s ease}
+  .field-error-msg{color:var(--red);font-size:11.5px;margin-top:5px;display:none;font-weight:600}
+  .field-error-msg.show{display:block}
+  .field-required::after{content:' *';color:var(--red);font-weight:700}
+  .table-wrap{background:var(--card-bg);border-radius:12px;overflow:auto;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse;min-width:1400px}
+  th{background:linear-gradient(135deg,var(--dark-blue),#2a5d8f);color:#fff;padding:13px 11px;text-align:right;font-size:12px;font-weight:600;position:sticky;top:0;z-index:1;white-space:nowrap}
+  td{padding:11px;border-bottom:1px solid var(--border);font-size:12.5px;vertical-align:top}
+  tbody tr{cursor:pointer;transition:var(--transition)}
+  tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
+  [data-theme="dark"] tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+  tbody tr:hover{background:rgba(46,117,182,.08)}
+  tbody tr.status-ready{background:#e4f5e8!important}
+  [data-theme="dark"] tbody tr.status-ready{background:#1a4a2a!important}
+  tbody tr.status-progress{background:#fff8e1!important}
+  [data-theme="dark"] tbody tr.status-progress{background:#4d3a10!important}
+  tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:rgba(46,117,182,.15)!important}
+  .empty-row td{text-align:center;color:var(--text-muted);padding:50px 20px;font-size:13px}
+  .empty-state{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 20px}
+  .empty-state .icon{width:60px;height:60px;border-radius:50%;display:inline-flex!important;align-items:center;justify-content:center;background:rgba(46,117,182,.1);color:var(--blue)}
+  .empty-state .icon svg{width:26px;height:26px}
+  .empty-state .title{font-size:14.5px;font-weight:600;color:var(--text)}
+  .empty-state .desc{font-size:12.5px;color:var(--text-muted)}
+  .note-cell{max-width:180px;min-width:120px;white-space:normal;word-break:break-word;font-size:11.5px;color:var(--text-muted);line-height:1.5;vertical-align:top;padding-top:11px;padding-bottom:11px}
+  .note-cell .note-text{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.2px}
+  .badge-ready{background:linear-gradient(135deg,#28a745,#4bc760);color:#fff}
+  .badge-progress{background:linear-gradient(135deg,#f5b800,#ffc107);color:#333}
+  .badge-paid{background:linear-gradient(135deg,#28a745,#4bc760);color:#fff}
+  .badge-unpaid{background:linear-gradient(135deg,#dc3545,#e4606d);color:#fff}
+  .badge-vip{background:linear-gradient(135deg,#6f42c1,#8a5cd4);color:#fff}
+  .badge-branch{background:rgba(46,117,182,.12);color:var(--dark-blue);border:1px solid rgba(46,117,182,.25)}
+  .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:13px;border-bottom:2px solid var(--light-blue);flex-wrap:wrap;gap:11px}
+  .section-header h2{color:var(--dark-blue);font-size:19px;font-weight:700;display:inline-flex!important;align-items:center;gap:9px}
+  .section-header h2 .ico{width:20px;height:20px;color:var(--dark-blue)}
+  .section-header .hint{font-size:11px;color:var(--text-muted);background:rgba(0,0,0,.05);padding:7px 13px;border-radius:20px;border:1px solid var(--border);display:inline-flex!important;align-items:center;gap:6px}
+  [data-theme="dark"] .section-header .hint{background:rgba(255,255,255,.05)}
+  .section-header .hint kbd{background:rgba(0,0,0,.1)}
+  .page{display:none}
+  .page.active{display:block;animation:fadeSlide .25s ease}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(10,20,35,.65);z-index:1000;align-items:center;justify-content:center;padding:20px;overflow-y:auto;backdrop-filter:blur(3px)}
+  .modal-bg.active{display:flex;animation:fadeIn .15s}
+  .modal{background:var(--card-bg);padding:28px;border-radius:16px;width:90%;max-width:620px;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:slideUp .25s ease;color:var(--text)}
+  .modal h3{color:var(--dark-blue);margin-bottom:18px;font-size:18px;font-weight:700;display:flex!important;align-items:center;gap:10px;line-height:1.4}
+  .modal h3 .ico{width:20px;height:20px;color:var(--dark-blue)}
+  .modal label{display:block;margin:13px 0 6px;font-size:12.5px;color:var(--text);font-weight:600}
+  .modal-actions{display:flex;gap:9px;margin-top:22px;justify-content:flex-end;flex-wrap:wrap}
+  .modal-actions .btn{min-width:105px}
+  .dialog-bg{display:none;position:fixed;inset:0;background:rgba(10,20,35,.7);z-index:2000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+  .dialog-bg.active{display:flex;animation:fadeIn .15s}
+  .dialog{background:var(--card-bg);padding:30px 26px;border-radius:16px;width:100%;max-width:460px;color:var(--text);box-shadow:0 30px 80px rgba(0,0,0,.4);animation:slideUp .25s ease;text-align:center}
+  .dialog-icon{margin-bottom:14px;display:inline-flex!important;align-items:center;justify-content:center;width:76px;height:76px;border-radius:50%}
+  .dialog-icon svg{width:34px;height:34px}
+  .dialog-icon.info{background:rgba(46,117,182,.15);color:var(--blue)}
+  .dialog-icon.warning{background:rgba(255,193,7,.18);color:#b38600}
+  .dialog-icon.danger{background:rgba(220,53,69,.15);color:var(--red)}
+  .dialog-icon.success{background:rgba(40,167,69,.15);color:var(--green)}
+  .dialog-title{font-size:19px;font-weight:700;color:var(--dark-blue);margin-bottom:9px}
+  .dialog-message{font-size:13.5px;color:var(--text-muted);line-height:1.7;margin-bottom:22px;white-space:pre-line}
+  .dialog-actions{display:flex;gap:9px;justify-content:center}
+  .dialog-actions .btn{min-width:105px}
+  .toast-container{position:fixed;bottom:22px;left:22px;z-index:3000;display:flex;flex-direction:column;gap:9px;pointer-events:none;max-width:360px}
+  .toast{background:var(--card-bg);color:var(--text);padding:12px 16px;border-radius:11px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.2);border-right:4px solid var(--blue);opacity:0;transform:translateX(-30px);transition:.3s;pointer-events:auto;display:flex!important;align-items:center;gap:10px;font-weight:500}
+  .toast.show{opacity:1;transform:translateX(0)}
+  .toast .toast-icon{width:24px;height:24px;border-radius:50%;display:inline-flex!important;align-items:center;justify-content:center;flex-shrink:0}
+  .toast.success .toast-icon{background:rgba(40,167,69,.15);color:var(--green)}
+  .toast.error .toast-icon{background:rgba(220,53,69,.15);color:var(--red)}
+  .toast.info .toast-icon{background:rgba(46,117,182,.15);color:var(--blue)}
+  .toast.warning .toast-icon{background:rgba(255,193,7,.2);color:#b38600}
+  .toast .toast-icon svg{width:14px;height:14px}
+  .toast.success{border-right-color:var(--green)}
+  .toast.error{border-right-color:var(--red)}
+  .toast.warning{border-right-color:var(--yellow)}
+  .tabs{display:flex;gap:3px;border-bottom:2px solid var(--light-blue);margin-bottom:20px;flex-wrap:wrap}
+  .tab-btn{padding:11px 18px;background:transparent;border:none;cursor:pointer;font-size:13px;color:var(--text-muted);border-bottom:3px solid transparent;transition:var(--transition);font-weight:600;border-radius:6px 6px 0 0;font-family:inherit;display:inline-flex!important;align-items:center;gap:7px}
+  .tab-btn>*{display:inline-flex;align-items:center;line-height:1}
+  .tab-btn .ico{width:15px;height:15px}
+  .tab-btn:hover{color:var(--dark-blue);background:rgba(46,117,182,.06)}
+  .tab-btn.active{color:var(--dark-blue);border-bottom-color:var(--dark-blue);background:rgba(46,117,182,.08)}
+  .perm-section{margin-top:20px;padding-top:18px;border-top:2px dashed var(--border)}
+  .perm-section h4{color:var(--dark-blue);font-size:13.5px;margin-bottom:13px;font-weight:700}
+  .perm-category{margin-bottom:16px;padding:12px;background:rgba(0,0,0,.02);border-radius:10px;border:1px solid var(--border)}
+  [data-theme="dark"] .perm-category{background:rgba(255,255,255,.03)}
+  .perm-category-title{font-size:12px;font-weight:700;color:var(--dark-blue);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+  .perm-category-title .ico{width:14px;height:14px}
+  .perm-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .perm-item{display:flex;align-items:center;gap:9px;padding:9px 12px;background:rgba(0,0,0,.03);border-radius:8px;cursor:pointer;font-size:12px;transition:var(--transition);border:2px solid transparent;font-weight:500}
+  [data-theme="dark"] .perm-item{background:rgba(255,255,255,.05)}
+  .perm-item:hover{background:var(--light-blue)}
+  .perm-item.checked{background:#d4edda;border-color:#7ec98d}
+  [data-theme="dark"] .perm-item.checked{background:#1a4a2a;border-color:#4caf50}
+  .perm-item input{width:15px;height:15px;cursor:pointer;accent-color:var(--green);flex-shrink:0}
+  .perm-note{background:#fff3cd;border:1px solid #ffc107;padding:11px 14px;border-radius:10px;font-size:12px;color:#856404;margin-top:13px;line-height:1.6}
+  [data-theme="dark"] .perm-note{background:#4d3a10;border-color:#8a6914;color:#ffd54f}
+  .customer-search{position:relative}
+  .customer-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card-bg);border:2px solid var(--border);border-radius:10px;max-height:260px;overflow-y:auto;display:none;box-shadow:0 12px 32px rgba(0,0,0,.18);z-index:200}
+  .customer-dropdown.show{display:block}
+  .customer-option{padding:11px 15px;cursor:pointer;border-bottom:1px solid var(--border);font-size:12.5px;transition:var(--transition)}
+  .customer-option:last-child{border-bottom:none}
+  .customer-option:hover,.customer-option.active{background:var(--light-blue)}
+  .customer-option .code{color:var(--text-muted);font-size:10.5px;margin-right:6px}
+  .customer-option .loc{color:var(--text-muted);font-size:10.5px;float:left}
+  .customer-option.empty{color:var(--text-muted);text-align:center;cursor:default;padding:20px}
+  .customer-option.create{color:var(--green);font-weight:700}
+  .customer-option.create:hover{background:#d4edda}
+  [data-theme="dark"] .customer-option.create:hover{background:#1a4a2a}
+  .template-card{background:var(--card-bg);border:2px solid var(--border);border-radius:12px;padding:20px;margin-bottom:15px;transition:var(--transition)}
+  .template-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+  .template-card h4{color:var(--dark-blue);margin-bottom:15px;font-size:14px;display:flex!important;align-items:center;gap:8px;padding-bottom:10px;border-bottom:2px solid var(--light-blue)}
+  .template-card h4 .ico{width:17px;height:17px}
+  .template-row{display:grid;grid-template-columns:170px 1fr;gap:11px;align-items:center;margin-bottom:11px}
+  .template-row label{font-size:12.5px;color:var(--text);font-weight:600}
+  .template-row input,.template-row textarea,.template-row select{font-size:12.5px}
+  .toggle-row{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:7px 0;cursor:pointer}
+  .toggle-row input{width:17px;height:17px;cursor:pointer;accent-color:var(--green)}
+  .toggle-row label{cursor:pointer}
+  .logo-preview{margin-top:11px;padding:11px;background:rgba(0,0,0,.03);border-radius:10px;border:2px dashed var(--border);text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center}
+  [data-theme="dark"] .logo-preview{background:rgba(255,255,255,.03)}
+  .logo-preview img{max-width:100%;max-height:120px;border-radius:6px;pointer-events:none}
+  .logo-preview .empty-logo{color:var(--text-muted);font-size:12.5px}
+  .shortcuts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+  .shortcut-group h4{color:var(--dark-blue);margin-bottom:11px;padding-bottom:7px;border-bottom:2px solid var(--light-blue);font-size:13.5px;font-weight:700;display:flex!important;align-items:center;gap:7px}
+  .shortcut-group h4 .ico{width:15px;height:15px}
+  .shortcut-row{display:flex;justify-content:space-between;padding:7px 0;font-size:12.5px;align-items:center}
+  .shortcut-row .keys{display:flex;gap:4px}
+  .shortcut-row .desc{color:var(--text);font-weight:500}
+  .connection-banner{position:fixed;top:0;left:0;right:0;background:var(--red);color:#fff;padding:8px 16px;text-align:center;font-size:12.5px;font-weight:600;z-index:9999;transform:translateY(-100%);transition:transform .3s;display:flex!important;align-items:center;justify-content:center;gap:8px}
+  .connection-banner.show{transform:translateY(0)}
+  .connection-banner .ico{width:14px;height:14px}
+  .draft-badge{position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,#ffc107,#ffb300);color:#333;padding:10px 15px;border-radius:24px;font-size:12px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.2);display:none!important;align-items:center;gap:8px;cursor:pointer;z-index:2500;animation:slideInRight .3s ease}
+  .draft-badge.show{display:inline-flex!important}
+  .draft-badge .ico{width:14px;height:14px}
+  @keyframes slideInRight{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
+  @media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
+  @media(max-width:900px){header{padding:10px 14px;height:auto;flex-direction:column;gap:9px}header h1{font-size:14px}nav{top:0;padding:0 10px}nav button{padding:12px 12px;font-size:12.5px}main{padding:12px}.dash-grid{grid-template-columns:1fr}.perm-grid{grid-template-columns:1fr}.template-row{grid-template-columns:1fr}.user-info{flex-wrap:wrap;justify-content:center}.rate-limit-chip{display:none}.analytics-row{grid-template-columns:1fr}.donut-wrap{flex-direction:column}}
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-track{background:rgba(0,0,0,.05)}
+  ::-webkit-scrollbar-thumb{background:#b8c5d1;border-radius:5px}
+  ::-webkit-scrollbar-thumb:hover{background:#8fa2b3}
 </style>
 </head>
 <body oncontextmenu="return false">
@@ -533,9 +338,7 @@
     <div class="login-logo" id="loginLogo"></div>
     <h1>نظام إدارة الطلبات</h1>
     <p class="subtitle">قاعدة بيانات مشتركة مشفّرة عبر GitHub</p>
-
     <div id="tokenStatus"></div>
-
     <div id="tokenField" style="display:none;">
       <label>رمز الوصول</label>
       <input id="loginToken" type="password" placeholder="أدخل الرمز هنا" autocomplete="off">
@@ -544,13 +347,10 @@
         <br>🔐 يُستخدم هذا الرمز أيضاً لتشفير البيانات تلقائياً
       </div>
     </div>
-
     <label>اسم المستخدم</label>
     <input id="loginUser" type="text" placeholder="أدخل اسمك" autocomplete="username">
-
     <label>كلمة المرور</label>
     <input id="loginPass" type="password" placeholder="••••••" autocomplete="current-password">
-
     <button class="primary" id="loginBtn" onclick="doLogin()">تسجيل الدخول</button>
     <div id="loginError" class="login-error"></div>
     <div id="loginLoading" class="login-loading"></div>
@@ -744,7 +544,7 @@
   </select>
   <div id="permissionsSection" class="perm-section">
     <h4>الصلاحيات المخصصة</h4>
-    <div class="perm-grid" id="permissionsGrid"></div>
+    <div id="permissionsGrid"></div>
     <div class="perm-note" id="permAdminNote" style="display:none;">المستخدم الرئيسي يمتلك جميع الصلاحيات تلقائياً</div>
   </div>
   <div class="modal-actions">
@@ -795,62 +595,50 @@
    ICONS
    ============================================================== */
 const I = {
-  home: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10',
-  list: 'M8 6h13 M8 12h13 M8 18h13 M3 6h0 M3 12h0 M3 18h0',
-  box: 'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
-  archive: 'M21 8v13H3V8 M1 3h22v5H1z M10 12h4',
-  users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
-  user: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z',
-  cog: 'M12 15a3 3 0 100-6 3 3 0 000 6z M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z',
-  plus: 'M12 5v14 M5 12h14',
-  edit: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z',
-  trash: 'M3 6h18 M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z M10 11v6 M14 11v6',
-  arrowRight: 'M5 12h14 M12 5l7 7-7 7',
-  truck: 'M1 3h15v13H1z M16 8h4l3 3v5h-7V8 M5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z M18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',
-  printer: 'M6 9V2h12v7 M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2 M6 14h12v8H6z',
-  download: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3',
-  upload: 'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M17 8l-5-5-5 5 M12 3v12',
-  sync: 'M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0114.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0020.49 15',
-  moon: 'M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z',
-  sun: 'M12 17a5 5 0 100-10 5 5 0 000 10z M12 1v2 M12 21v2 M4.22 4.22l1.42 1.42 M18.36 18.36l1.42 1.42 M1 12h2 M21 12h2 M4.22 19.78l1.42-1.42 M18.36 5.64l1.42-1.42',
-  logout: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9',
-  keyboard: 'M20 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z M6 9h0 M10 9h0 M14 9h0 M18 9h0 M6 13h0 M18 13h0 M9 13h6',
-  search: 'M11 19a8 8 0 100-16 8 8 0 000 16z M21 21l-4.35-4.35',
-  filter: 'M22 3H2l8 9.46V19l4 2v-8.54L22 3z',
-  check: 'M20 6L9 17l-5-5',
-  x: 'M18 6L6 18 M6 6l12 12',
-  warning: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h0',
-  info: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 16v-4 M12 8h0',
-  key: 'M21 2l-2 2 M15.5 8.5l3 3L22 7l-3-3 M11.39 11.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777z',
-  lock: 'M5 11h14v11H5z M7 11V7a5 5 0 0110 0v4',
-  money: 'M1 4h22v16H1z M12 15a3 3 0 100-6 3 3 0 000 6z',
-  crown: 'M3 17l2-10 4 4 3-6 3 6 4-4 2 10z M3 21h18',
-  save: 'M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z M17 21v-8H7v8 M7 3v5h8',
-  image: 'M3 3h18v18H3z M8.5 10.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M21 15l-5-5L5 21',
-  file: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6',
-  chart: 'M18 20V10 M12 20V4 M6 20v-6',
-  calendar: 'M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z M16 2v4 M8 2v4 M3 10h18',
-  refresh: 'M23 4v6h-6 M1 20v-6h6 M20.49 9A9 9 0 005.64 5.64L1 10 M23 14l-4.64 4.36A9 9 0 013.51 15',
-  folder: 'M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z',
-  tag: 'M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z M7 7h0',
-  clock: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 6v6l4 2',
-  pin: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z M12 13a3 3 0 100-6 3 3 0 000 6z',
-  phone: 'M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z',
-  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
-  eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 15a3 3 0 100-6 3 3 0 000 6z',
-  trendUp: 'M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6',
-  trendDown: 'M23 18l-9.5-9.5-5 5L1 6 M17 18h6v-6',
-  zip: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M10 12h4v2h-4z M10 16h4v2h-4z',
-  stats: 'M18 20V10 M12 20V4 M6 20v-6',
-  package: 'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
-  award: 'M12 15a7 7 0 100-14 7 7 0 000 14z M8.21 13.89L7 23l5-3 5 3-1.21-9.12',
-  building: 'M3 21h18 M5 21V7l8-4v18 M19 21V11l-6-4 M9 9h0 M9 12h0 M9 15h0 M9 18h0',
-  branch: 'M6 3v12 M18 9a3 3 0 100-6 3 3 0 000 6z M6 21a3 3 0 100-6 3 3 0 000 6z M15 6a9 9 0 01-9 9',
-  grid: 'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
-  layers: 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
-  bell: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 01-3.46 0'
+  home:'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10',
+  list:'M8 6h13 M8 12h13 M8 18h13 M3 6h0 M3 12h0 M3 18h0',
+  box:'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
+  archive:'M21 8v13H3V8 M1 3h22v5H1z M10 12h4',
+  users:'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
+  user:'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z',
+  cog:'M12 15a3 3 0 100-6 3 3 0 000 6z M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z',
+  plus:'M12 5v14 M5 12h14',
+  edit:'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z',
+  trash:'M3 6h18 M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z M10 11v6 M14 11v6',
+  arrowRight:'M5 12h14 M12 5l7 7-7 7',
+  truck:'M1 3h15v13H1z M16 8h4l3 3v5h-7V8 M5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z M18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',
+  printer:'M6 9V2h12v7 M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2 M6 14h12v8H6z',
+  download:'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3',
+  sync:'M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0114.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0020.49 15',
+  moon:'M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z',
+  sun:'M12 17a5 5 0 100-10 5 5 0 000 10z M12 1v2 M12 21v2 M4.22 4.22l1.42 1.42 M18.36 18.36l1.42 1.42 M1 12h2 M21 12h2 M4.22 19.78l1.42-1.42 M18.36 5.64l1.42-1.42',
+  logout:'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9',
+  keyboard:'M20 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z M6 9h0 M10 9h0 M14 9h0 M18 9h0 M6 13h0 M18 13h0 M9 13h6',
+  search:'M11 19a8 8 0 100-16 8 8 0 000 16z M21 21l-4.35-4.35',
+  filter:'M22 3H2l8 9.46V19l4 2v-8.54L22 3z',
+  check:'M20 6L9 17l-5-5',
+  x:'M18 6L6 18 M6 6l12 12',
+  warning:'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h0',
+  info:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 16v-4 M12 8h0',
+  key:'M21 2l-2 2 M15.5 8.5l3 3L22 7l-3-3 M11.39 11.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777z',
+  lock:'M5 11h14v11H5z M7 11V7a5 5 0 0110 0v4',
+  crown:'M3 17l2-10 4 4 3-6 3 6 4-4 2 10z M3 21h18',
+  save:'M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z M17 21v-8H7v8 M7 3v5h8',
+  image:'M3 3h18v18H3z M8.5 10.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M21 15l-5-5L5 21',
+  file:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6',
+  chart:'M18 20V10 M12 20V4 M6 20v-6',
+  refresh:'M23 4v6h-6 M1 20v-6h6 M20.49 9A9 9 0 005.64 5.64L1 10 M23 14l-4.64 4.36A9 9 0 013.51 15',
+  eye:'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 15a3 3 0 100-6 3 3 0 000 6z',
+  trendUp:'M23 6l-9.5 9.5-5-5L1 18 M17 6h6v6',
+  trendDown:'M23 18l-9.5-9.5-5 5L1 6 M17 18h6v-6',
+  zip:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M10 12h4v2h-4z M10 16h4v2h-4z',
+  stats:'M18 20V10 M12 20V4 M6 20v-6',
+  package:'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
+  award:'M12 15a7 7 0 100-14 7 7 0 000 14z M8.21 13.89L7 23l5-3 5 3-1.21-9.12',
+  building:'M3 21h18 M5 21V7l8-4v18 M19 21V11l-6-4 M9 9h0 M9 12h0 M9 15h0 M9 18h0',
+  grid:'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
+  shield2:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4'
 };
-
 function ico(name, size = 16) {
   const p = I[name] || '';
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
@@ -870,100 +658,87 @@ const TOKEN_KEY = 'oms_github_token';
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 
 const FILES = {
-  users: 'data/users.json',
-  orders: 'data/orders.json',
-  ready: 'data/ready.json',
-  log: 'data/log.json',
-  customers: 'data/customers.json',
-  drivers: 'data/drivers.json',
-  branches: 'data/branches.json',
-  templates: 'data/templates.json',
-  meta: 'data/meta.json'
+  users:'data/users.json', orders:'data/orders.json', ready:'data/ready.json',
+  log:'data/log.json', customers:'data/customers.json', drivers:'data/drivers.json',
+  branches:'data/branches.json', templates:'data/templates.json', meta:'data/meta.json'
 };
-const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers', 'branches', 'templates'];
-
+const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 const PERMISSIONS = {
-  accessCustomers: { label: 'فتح العملاء' }, accessSettings: { label: 'فتح الإعدادات' },
-  addOrder: { label: 'إضافة طلب' }, editOrder: { label: 'تعديل طلب' },
-  deleteOrder: { label: 'حذف طلب' }, transferSingle: { label: 'تحويل فردي' },
-  bulkTransfer: { label: 'تحويل جماعي' }, moveToLog: { label: 'ترحيل للسجل' },
-  print: { label: 'طباعة وتصدير' }, editLog: { label: 'تعديل السجل' },
-  deleteLog: { label: 'حذف من السجل' }, manageCustomers: { label: 'إدارة العملاء' },
-  manageDrivers: { label: 'إدارة الموصلين' }, manageBranches: { label: 'إدارة الفروع' },
-  manageUsers: { label: 'إدارة المستخدمين' },
-  editTemplates: { label: 'تعديل القوالب' }, reset: { label: 'تصفير النظام' }
+  accessDashboard:{label:'الرئيسية',cat:'pages',icon:'home'},
+  accessEntry:{label:'إدخال الطلبات',cat:'pages',icon:'list'},
+  accessReady:{label:'الطلبات الجاهزة',cat:'pages',icon:'box'},
+  accessLog:{label:'سجل الطلبات',cat:'pages',icon:'archive'},
+  accessCustomers:{label:'العملاء',cat:'pages',icon:'users'},
+  accessSettings:{label:'الإعدادات',cat:'pages',icon:'cog'},
+  addOrder:{label:'زر: طلب جديد',cat:'entry',icon:'plus'},
+  editOrder:{label:'زر: تعديل طلب',cat:'entry',icon:'edit'},
+  deleteOrder:{label:'زر: حذف طلب',cat:'entry',icon:'trash'},
+  transferSingle:{label:'زر: تحويل فردي',cat:'entry',icon:'arrowRight'},
+  bulkTransfer:{label:'زر: تحويل جماعي',cat:'entry',icon:'truck'},
+  print:{label:'زر: طباعة/PDF',cat:'ready',icon:'printer'},
+  moveToLog:{label:'زر: ترحيل للسجل',cat:'ready',icon:'arrowRight'},
+  editLog:{label:'زر: تعديل السجل',cat:'log',icon:'edit'},
+  deleteLog:{label:'زر: حذف من السجل',cat:'log',icon:'trash'},
+  tabToken:{label:'الرمز والتشفير',cat:'settingsTabs',icon:'key'},
+  tabBranches:{label:'الفروع',cat:'settingsTabs',icon:'building'},
+  tabDrivers:{label:'الموصلون',cat:'settingsTabs',icon:'truck'},
+  tabUsers:{label:'المستخدمون',cat:'settingsTabs',icon:'user'},
+  tabTemplates:{label:'قوالب الطباعة',cat:'settingsTabs',icon:'printer'},
+  tabBackup:{label:'نسخ احتياطي',cat:'settingsTabs',icon:'save'},
+  manageCustomers:{label:'إدارة العملاء',cat:'manage',icon:'users'},
+  manageDrivers:{label:'إدارة الموصلين',cat:'manage',icon:'truck'},
+  manageBranches:{label:'إدارة الفروع',cat:'manage',icon:'building'},
+  manageUsers:{label:'إدارة المستخدمين',cat:'manage',icon:'user'},
+  editTemplates:{label:'تعديل القوالب',cat:'manage',icon:'image'},
+  reset:{label:'تصفير النظام',cat:'manage',icon:'warning'}
+};
+const PERM_CATEGORIES = {
+  pages:{label:'الصفحات الرئيسية',icon:'grid'},
+  entry:{label:'عمليات إدخال الطلبات',icon:'list'},
+  ready:{label:'عمليات الطلبات الجاهزة',icon:'box'},
+  log:{label:'عمليات السجل',icon:'archive'},
+  settingsTabs:{label:'تبويبات الإعدادات',icon:'cog'},
+  manage:{label:'إدارة النظام',icon:'shield2'}
 };
 const DEFAULT_PERMS = {
-  accessCustomers: false, accessSettings: false, addOrder: true, editOrder: true,
-  deleteOrder: false, transferSingle: true, bulkTransfer: false, moveToLog: false,
-  print: true, editLog: false, deleteLog: false, manageCustomers: false,
-  manageDrivers: false, manageBranches: false, manageUsers: false,
-  editTemplates: false, reset: false
+  accessDashboard:true,accessEntry:true,accessReady:true,accessLog:true,
+  accessCustomers:false,accessSettings:false,
+  addOrder:true,editOrder:true,deleteOrder:false,transferSingle:true,bulkTransfer:false,
+  print:true,moveToLog:false,editLog:false,deleteLog:false,
+  tabToken:false,tabBranches:false,tabDrivers:false,tabUsers:false,tabTemplates:false,tabBackup:false,
+  manageCustomers:false,manageDrivers:false,manageBranches:false,manageUsers:false,
+  editTemplates:false,reset:false
 };
 const DEFAULT_TEMPLATES = {
-  logo: '',
-  ready: {
-    title: 'قائمة الطلبات الجاهزة للنقل',
-    subtitle: 'التاريخ: {date} — العدد: {count} — المستخدم: {user}',
-    footer: 'توقيع الموظف: __________    توقيع الموصل: __________',
-    showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
-    showBranch: true,
-    fontSize: 12, orientation: 'landscape'
-  },
-  log: {
-    title: 'سجل الطلبات',
-    subtitle: 'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',
-    footer: 'تم الطباعة بواسطة: {user}',
-    showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
-    showBranch: true, showArchivedAt: true,
-    fontSize: 11, orientation: 'landscape'
-  }
+  logo:'',
+  ready:{title:'قائمة الطلبات الجاهزة للنقل',subtitle:'التاريخ: {date} — العدد: {count} — المستخدم: {user}',footer:'توقيع الموظف: __________    توقيع الموصل: __________',showNotes:true,showApprovalDate:true,showDriverPhone:true,showPay:true,showBranch:true,fontSize:12,orientation:'landscape'},
+  log:{title:'سجل الطلبات',subtitle:'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',footer:'تم الطباعة بواسطة: {user}',showNotes:true,showApprovalDate:true,showDriverPhone:true,showPay:true,showBranch:true,showArchivedAt:true,fontSize:11,orientation:'landscape'}
 };
 
-/* ==============================================================
-   State
-   ============================================================== */
 let currentUser = null;
-let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [], branches: [], templates: {} };
+let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{} };
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-let SHAs = {}, ETags = {}, localMeta = null;
-let pollTimer = null, syncing = false, selectedOrderId = null;
-let zoomLevel = 1, tempPerms = {}, lastSaveTime = 0, saveInProgress = false;
-let rateLimitInfo = null, apiCallCount = 0, apiCachedCount = 0;
-let prevStats = { orders: 0, ready: 0, log: 0 };
+let SHAs = {},ETags = {},localMeta = null;
+let pollTimer = null,syncing = false,selectedOrderId = null;
+let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
+let rateLimitInfo = null,apiCallCount = 0,apiCachedCount = 0;
+let prevStats = { orders:0,ready:0,log:0 };
+let hasUnencryptedFiles = false;
 
 /* ==============================================================
    Security
    ============================================================== */
-document.addEventListener('contextmenu', e => {
-  const t = e.target;
-  if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault();
-});
-document.addEventListener('copy', e => {
-  const t = e.target;
-  if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault();
-});
-document.addEventListener('cut', e => {
-  const t = e.target;
-  if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault();
-});
+document.addEventListener('contextmenu', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
+document.addEventListener('copy', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
+document.addEventListener('cut', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 document.addEventListener('dragstart', e => e.preventDefault());
-document.addEventListener('selectstart', e => {
-  const t = e.target;
-  if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault();
-});
-
+document.addEventListener('selectstart', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 let longPressTimer = null;
-document.addEventListener('touchstart', e => {
-  const t = e.target;
-  if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT') return;
-  longPressTimer = setTimeout(() => { if (navigator.vibrate) navigator.vibrate(20); }, 500);
-}, { passive: true });
+document.addEventListener('touchstart', e => { const t = e.target; if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT') return; longPressTimer = setTimeout(() => { if (navigator.vibrate) navigator.vibrate(20); }, 500); }, { passive: true });
 document.addEventListener('touchend', () => { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } });
 document.addEventListener('touchmove', () => { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } }, { passive: true });
-
 document.addEventListener('keydown', e => {
   if (e.key === 'F12') { e.preventDefault(); return false; }
   if (e.ctrlKey && e.shiftKey && (e.code === 'KeyI' || e.code === 'KeyJ' || e.code === 'KeyC')) { e.preventDefault(); return false; }
@@ -971,68 +746,48 @@ document.addEventListener('keydown', e => {
 });
 
 /* ==============================================================
-   ⭐ تشفير تلقائي بالتوكن
+   Encryption
    ============================================================== */
 function tokenSig(token) {
-  let h = 0;
-  const s = String(token || '');
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) - h) + s.charCodeAt(i);
-    h = h & 0x7fffffff;
-  }
+  let h = 0; const s = String(token || '');
+  for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h = h & 0x7fffffff; }
   return h.toString(16).padStart(8, '0');
 }
-
 function deriveKeyBytes(token) {
   const s = String(token || 'x');
   const bytes = new TextEncoder().encode(s);
-  if (!bytes.length) return new Uint8Array([0x4f, 0x4d, 0x53, 0x4b, 0x45, 0x59, 0x31, 0x32]);
+  if (!bytes.length) return new Uint8Array([0x4f,0x4d,0x53,0x4b,0x45,0x59,0x31,0x32]);
   const out = new Uint8Array(bytes.length);
-  for (let i = 0; i < bytes.length; i++) {
-    out[i] = (bytes[i] ^ ((i * 31 + 17) & 0xFF)) & 0xFF;
-  }
+  for (let i = 0; i < bytes.length; i++) out[i] = (bytes[i] ^ ((i * 31 + 17) & 0xFF)) & 0xFF;
   return out;
 }
-
 function encryptText(text, token) {
   const sig = tokenSig(token);
   const payload = sig + '|' + text;
   const keyBytes = deriveKeyBytes(token);
   const dataBytes = new TextEncoder().encode(payload);
   const result = new Uint8Array(dataBytes.length);
-  for (let i = 0; i < dataBytes.length; i++) {
-    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-  }
-  let binary = '';
-  const chunk = 8192;
-  for (let i = 0; i < result.length; i += chunk) {
-    binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
-  }
+  for (let i = 0; i < dataBytes.length; i++) result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
+  let binary = ''; const chunk = 8192;
+  for (let i = 0; i < result.length; i += chunk) binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
   return 'ENC:v1:' + btoa(binary);
 }
-
 function decryptText(encoded, token) {
   if (!encoded || !encoded.startsWith('ENC:v1:')) return null;
   try {
-    const b64 = encoded.substring(7);
-    const binary = atob(b64);
+    const binary = atob(encoded.substring(7));
     const dataBytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) dataBytes[i] = binary.charCodeAt(i);
     const keyBytes = deriveKeyBytes(token);
     const result = new Uint8Array(dataBytes.length);
-    for (let i = 0; i < dataBytes.length; i++) {
-      result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-    }
+    for (let i = 0; i < dataBytes.length; i++) result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
     const payload = new TextDecoder().decode(result);
     const expectedSig = tokenSig(token);
     if (!payload.startsWith(expectedSig + '|')) return null;
     return payload.substring(expectedSig.length + 1);
   } catch { return null; }
 }
-
-function isEncrypted(text) {
-  return typeof text === 'string' && text.startsWith('ENC:v1:');
-}
+function isEncrypted(text) { return typeof text === 'string' && text.startsWith('ENC:v1:'); }
 
 /* ==============================================================
    Theme
@@ -1066,8 +821,8 @@ function showDialog(opts) {
   return new Promise(resolve => {
     dialogCallback = resolve;
     const { type = 'info', title, message, okText, cancelText, showCancel = true } = opts;
-    const iconMap = { info: 'info', warning: 'warning', danger: 'trash', success: 'check', question: 'info' };
-    const titleMap = { info: 'تنبيه', warning: 'تحذير', danger: 'تأكيد الحذف', success: 'تم بنجاح', question: 'تأكيد' };
+    const iconMap = { info:'info', warning:'warning', danger:'trash', success:'check', question:'info' };
+    const titleMap = { info:'تنبيه', warning:'تحذير', danger:'تأكيد الحذف', success:'تم بنجاح', question:'تأكيد' };
     const iconEl = document.getElementById('dialogIcon');
     iconEl.className = 'dialog-icon ' + (type === 'danger' ? 'danger' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info');
     iconEl.innerHTML = ico(iconMap[type] || 'info', 34);
@@ -1096,7 +851,7 @@ const dialog = {
    Toast
    ============================================================== */
 function toast(msg, type = 'info') {
-  const icons = { success: 'check', error: 'x', info: 'info', warning: 'warning' };
+  const icons = { success:'check', error:'x', info:'info', warning:'warning' };
   const container = document.getElementById('toastContainer');
   const el = document.createElement('div');
   el.className = 'toast ' + type;
@@ -1106,15 +861,9 @@ function toast(msg, type = 'info') {
   setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); }, 3200);
 }
 
-/* ==============================================================
-   Loading
-   ============================================================== */
 function showLoading(t = 'جاري التحميل...') { document.getElementById('loadingText').textContent = t; document.getElementById('loadingOverlay').classList.add('show'); }
 function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
-/* ==============================================================
-   Validation
-   ============================================================== */
 function setFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);
   const err = document.getElementById('err-' + fieldId);
@@ -1138,25 +887,14 @@ function focusFirstError(modalId) {
   const first = modal?.querySelector('.field-error');
   if (first) first.focus();
 }
-
-/* ==============================================================
-   Base64
-   ============================================================== */
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
-/* ==============================================================
-   JSZip
-   ============================================================== */
 async function ensureJSZip() {
   if (typeof JSZip !== 'undefined') return true;
   return new Promise((resolve) => {
     const existing = document.querySelector('script[data-jszip-loader]');
-    if (existing) {
-      existing.addEventListener('load', () => resolve(typeof JSZip !== 'undefined'));
-      existing.addEventListener('error', () => resolve(false));
-      return;
-    }
+    if (existing) { existing.addEventListener('load', () => resolve(typeof JSZip !== 'undefined')); existing.addEventListener('error', () => resolve(false)); return; }
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
     script.setAttribute('data-jszip-loader', '1');
@@ -1171,7 +909,6 @@ async function ensureJSZip() {
    ============================================================== */
 function getStoredToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
 function saveToken(t) { localStorage.setItem(TOKEN_KEY, t.trim()); }
-
 async function clearToken() {
   const ok = await dialog.confirm('سيتم حذف رمز الوصول من هذا المتصفح.', { type: 'warning', title: 'حذف الرمز' });
   if (!ok) return;
@@ -1210,9 +947,7 @@ function updateCurrentTokenInfo() {
       <div>الطول: ${token.length} حرف</div>
       <div>بصمة التشفير: <code>${tokenSig(token)}</code></div>
       <div style="margin-top:8px;font-size:11px;opacity:.8;">🔐 جميع ملفات JSON مشفّرة بهذا الرمز</div>`;
-  } else {
-    el.textContent = 'لا يوجد رمز';
-  }
+  } else el.textContent = 'لا يوجد رمز';
 }
 function changeToken() {
   document.getElementById('newTokenInput').value = '';
@@ -1224,16 +959,11 @@ function changeToken() {
    GitHub API
    ============================================================== */
 function apiHeaders(json = false, key = null) {
-  const h = {
-    'Authorization': `Bearer ${getStoredToken()}`,
-    'Accept': 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28'
-  };
+  const h = { 'Authorization': `Bearer ${getStoredToken()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
   if (json) h['Content-Type'] = 'application/json';
   if (key && ETags[key]) h['If-None-Match'] = ETags[key];
   return h;
 }
-
 function updateRateLimit(headers) {
   const remaining = headers.get('X-RateLimit-Remaining');
   const limit = headers.get('X-RateLimit-Limit');
@@ -1243,7 +973,6 @@ function updateRateLimit(headers) {
     renderRateLimitChip();
   }
 }
-
 function renderRateLimitChip() {
   const chip = document.getElementById('rateLimitChip');
   if (!chip || !rateLimitInfo) return;
@@ -1253,10 +982,6 @@ function renderRateLimitChip() {
   fill.style.width = pct + '%';
   fill.className = 'fill' + (pct < 20 ? ' danger' : pct < 50 ? ' warning' : '');
 }
-
-/* ==============================================================
-   ⭐ قراءة ملف (مع فك التشفير التلقائي)
-   ============================================================== */
 async function ghReadFile(key) {
   const url = `${API_BASE}/${FILES[key]}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   let res;
@@ -1275,41 +1000,24 @@ async function ghReadFile(key) {
   SHAs[key] = json.sha;
   const etag = res.headers.get('ETag');
   if (etag) ETags[key] = etag;
-
   const raw = decodeBase64(json.content);
-
-  // meta.json نص عادي
   if (key === 'meta') {
     try { return { notModified: false, data: JSON.parse(raw) }; }
     catch { return { notModified: false, data: null }; }
   }
-
-  // ملف مشفّر → فك بالتوكن الحالي
   if (isEncrypted(raw)) {
     const decrypted = decryptText(raw, getStoredToken());
     if (decrypted === null) throw new Error('TOKEN_MISMATCH');
     try { return { notModified: false, data: JSON.parse(decrypted) }; }
     catch { throw new Error('فشل قراءة البيانات'); }
   }
-
-  // ملف عادي (ترحيل من نسخة سابقة)
-  try { return { notModified: false, data: JSON.parse(raw) }; }
+  try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; }
   catch { return { notModified: false, data: null }; }
 }
-
-/* ==============================================================
-   ⭐ كتابة ملف (مع التشفير التلقائي)
-   ============================================================== */
 async function ghWriteFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
-  // meta.json نص عادي، باقي الملفات تُشفَّر بالتوكن
   const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
-  const body = {
-    message: `تحديث ${key} - ${new Date().toISOString()}`,
-    content: encodeBase64(content),
-    branch: GITHUB_BRANCH,
-    sha: SHAs[key]
-  };
+  const body = { message: `تحديث ${key} - ${new Date().toISOString()}`, content: encodeBase64(content), branch: GITHUB_BRANCH, sha: SHAs[key] };
   let res;
   try { res = await fetch(`${API_BASE}/${FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
   catch { setOnline(false); throw new Error('فشل الاتصال أثناء الحفظ'); }
@@ -1324,15 +1032,10 @@ async function ghWriteFile(key, data) {
   delete ETags[key];
   return json;
 }
-
 async function ghCreateFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
   const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
-  const body = {
-    message: `إنشاء ${key}`,
-    content: encodeBase64(content),
-    branch: GITHUB_BRANCH
-  };
+  const body = { message: `إنشاء ${key}`, content: encodeBase64(content), branch: GITHUB_BRANCH };
   const res = await fetch(`${API_BASE}/${FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
   updateRateLimit(res.headers);
   apiCallCount++;
@@ -1341,22 +1044,16 @@ async function ghCreateFile(key, data) {
   SHAs[key] = json.content.sha;
   return json;
 }
-
-/* ==============================================================
-   قراءة الكل (مع تمرير TOKEN_MISMATCH)
-   ============================================================== */
 async function readAll() {
+  hasUnencryptedFiles = false;
   const results = await Promise.all(DATA_KEYS.map(async (k) => {
-    try {
-      return await ghReadFile(k);
-    } catch (e) {
-      if (e.message === 'TOKEN_MISMATCH') throw e;
-      return { notModified: false, data: null };
-    }
+    try { return await ghReadFile(k); }
+    catch (e) { if (e.message === 'TOKEN_MISMATCH') throw e; return { notModified: false, data: null }; }
   }));
   DATA_KEYS.forEach((k, i) => {
     const r = results[i];
     if (r.notModified) return;
+    if (r.wasPlain === true) hasUnencryptedFiles = true;
     if (k === 'templates') {
       cache.templates = r.data || null;
       const merged = r.data ? { ...DEFAULT_TEMPLATES, ...r.data } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
@@ -1365,45 +1062,20 @@ async function readAll() {
       templates = merged;
     } else cache[k] = Array.isArray(r.data) ? r.data : [];
   });
-  cache.drivers = cache.drivers.map(d => {
-    if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
-    return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' };
-  });
-  cache.branches = cache.branches.map(b => {
-    if (typeof b === 'string') return { id: uid(), name: b };
-    return { id: b.id || uid(), name: b.name || '' };
-  });
-  if (!cache.branches.length) {
-    cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
-  }
+  cache.drivers = cache.drivers.map(d => { if (typeof d === 'string') return { id: uid(), name: d, phone: '' }; return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' }; });
+  cache.branches = cache.branches.map(b => { if (typeof b === 'string') return { id: uid(), name: b }; return { id: b.id || uid(), name: b.name || '' }; });
+  if (!cache.branches.length) cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
   cache.users = cache.users.map(normalizeUser);
 }
-
 async function readMeta() {
-  try {
-    const r = await ghReadFile('meta');
-    if (r.notModified) return localMeta || { lastUpdate: '', version: 2 };
-    return r.data || { lastUpdate: '', version: 2 };
-  } catch { return { lastUpdate: '', version: 2 }; }
+  try { const r = await ghReadFile('meta'); if (r.notModified) return localMeta || { lastUpdate: '', version: 2 }; return r.data || { lastUpdate: '', version: 2 }; }
+  catch { return { lastUpdate: '', version: 2 }; }
 }
-
-/* ==============================================================
-   ⭐ meta مع tokenSig
-   ============================================================== */
 async function writeMeta() {
-  const meta = {
-    lastUpdate: new Date().toISOString(),
-    version: 2,
-    tokenSig: tokenSig(getStoredToken()),
-    encrypted: true
-  };
+  const meta = { lastUpdate: new Date().toISOString(), version: 2, tokenSig: tokenSig(getStoredToken()), encrypted: true };
   try { await ghWriteFile('meta', meta); localMeta = meta; }
-  catch (e) {
-    if (e.message === 'CONFLICT') { await readMeta(); await ghWriteFile('meta', meta); localMeta = meta; }
-    else throw e;
-  }
+  catch (e) { if (e.message === 'CONFLICT') { await readMeta(); await ghWriteFile('meta', meta); localMeta = meta; } else throw e; }
 }
-
 async function persistKeys(keys) {
   setSyncing(true);
   try {
@@ -1415,6 +1087,18 @@ async function persistKeys(keys) {
     await writeMeta();
   } finally { setSyncing(false); }
 }
+async function encryptAllNow() {
+  const ok = await dialog.confirm('سيتم تشفير جميع ملفات البيانات في GitHub بالرمز الحالي.\n\nمتابعة؟', { title: '🔐 تشفير جميع الملفات', okText: 'تشفير الآن' });
+  if (!ok) return;
+  try {
+    showLoading('جاري تشفير جميع الملفات...');
+    await persistKeys(DATA_KEYS);
+    hideLoading();
+    hasUnencryptedFiles = false;
+    toast('✅ تم تشفير جميع الملفات بنجاح', 'success');
+  } catch (e) { hideLoading(); toast('فشل التشفير: ' + e.message, 'error'); }
+}
+window.encryptAllNow = encryptAllNow;
 
 /* ==============================================================
    Sync
@@ -1431,15 +1115,10 @@ async function syncPull() {
     if (me) currentUser = me;
     applyPermissionsUI(); renderActive(); setOnline(true);
   } catch (e) {
-    if (e.message === 'TOKEN_MISMATCH') {
-      toast('تم تغيير الرمز في جهاز آخر — سيتم تسجيل خروجك', 'warning');
-      setTimeout(() => logout(true), 1500);
-    }
+    if (e.message === 'TOKEN_MISMATCH') { toast('تم تغيير الرمز في جهاز آخر — سيتم تسجيل خروجك', 'warning'); setTimeout(() => logout(true), 1500); }
     setOnline(false);
-  }
-  finally { syncing = false; }
+  } finally { syncing = false; }
 }
-
 function renderActive() {
   const a = document.querySelector('.page.active')?.id?.replace('page-', '');
   if (a === 'dashboard') renderDashboard();
@@ -1449,12 +1128,7 @@ function renderActive() {
   if (a === 'customers') renderCustomers();
   if (a === 'settings') renderSettings();
 }
-
-function startPolling() {
-  stopPolling();
-  pollTimer = setInterval(syncPull, SYNC_INTERVAL);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) syncPull(); });
-}
+function startPolling() { stopPolling(); pollTimer = setInterval(syncPull, SYNC_INTERVAL); document.addEventListener('visibilitychange', () => { if (!document.hidden) syncPull(); }); }
 function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
 function setOnline(ok) {
   const dot = document.getElementById('connDot');
@@ -1462,15 +1136,8 @@ function setOnline(ok) {
   const banner = document.getElementById('connectionBanner');
   if (banner) banner.classList.toggle('show', !ok && !!currentUser);
 }
-function setSyncing(on) {
-  const dot = document.getElementById('connDot');
-  if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online');
-}
-window.manualSync = async function () {
-  toast('جاري المزامنة...', 'info');
-  localMeta = null;
-  await syncPull();
-};
+function setSyncing(on) { const dot = document.getElementById('connDot'); if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online'); }
+window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; await syncPull(); };
 
 /* ==============================================================
    Utilities
@@ -1482,20 +1149,13 @@ function fmtDate(d = new Date()) {
   h = h % 12 || 12;
   return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(h)}:${p(d.getMinutes())} ${ampm}`;
 }
-function parseDate(str) {
-  if (!str) return null;
-  const m = str.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
-  if (!m) return null;
-  return new Date(parseInt(m[3]), parseInt(m[2])-1, parseInt(m[1]));
-}
+function parseDate(str) { if (!str) return null; const m = str.match(/^(\d{2})\/(\d{2})\/(\d{4})/); if (!m) return null; return new Date(parseInt(m[3]), parseInt(m[2])-1, parseInt(m[1])); }
 function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function badge(val) {
   const map = { 'جاهز':'badge-ready','قيد التجهيز':'badge-progress','مدفوع':'badge-paid','غير مدفوع':'badge-unpaid','VIP':'badge-vip' };
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
-function branchBadge(val) {
-  return `<span class="badge badge-branch">${esc(val || DEFAULT_BRANCH_NAME)}</span>`;
-}
+function branchBadge(val) { return `<span class="badge badge-branch">${esc(val || DEFAULT_BRANCH_NAME)}</span>`; }
 function emptyState(icon, title, desc, cols) {
   return `<tr class="empty-row"><td colspan="${cols}"><div class="empty-state"><div class="icon">${ico(icon, 26)}</div><div class="title">${title}</div><div class="desc">${desc}</div></div></td></tr>`;
 }
@@ -1516,9 +1176,7 @@ function normalizeUser(u) {
   if (!u) return u;
   if (u.role === 'رئيسي') return u;
   if (!u.permissions) u.permissions = { ...DEFAULT_PERMS };
-  else Object.keys(DEFAULT_PERMS).forEach(k => {
-    if (typeof u.permissions[k] !== 'boolean') u.permissions[k] = DEFAULT_PERMS[k];
-  });
+  else Object.keys(DEFAULT_PERMS).forEach(k => { if (typeof u.permissions[k] !== 'boolean') u.permissions[k] = DEFAULT_PERMS[k]; });
   return u;
 }
 function applyPermissionsUI() {
@@ -1533,6 +1191,41 @@ function applyPermissionsUI() {
     });
     el.style.display = allowed ? '' : 'none';
   });
+  rebuildNav();
+  rebuildSettingsTabs();
+}
+function rebuildNav() {
+  const navBar = document.getElementById('navBar');
+  if (!navBar) return;
+  const items = [
+    { page:'dashboard', icon:'home', label:'الرئيسية', perm:'accessDashboard' },
+    { page:'entry', icon:'list', label:'إدخال الطلبات', perm:'accessEntry' },
+    { page:'ready', icon:'box', label:'الطلبات الجاهزة', perm:'accessReady' },
+    { page:'log', icon:'archive', label:'سجل الطلبات', perm:'accessLog' },
+    { page:'customers', icon:'users', label:'العملاء', perm:'accessCustomers' },
+    { page:'settings', icon:'cog', label:'الإعدادات', perm:'accessSettings' }
+  ].filter(x => hasPerm(x.perm));
+  const active = document.querySelector('.page.active')?.id?.replace('page-', '') || '';
+  navBar.innerHTML = items.map(x => `<button data-page="${x.page}" class="${x.page === active ? 'active' : ''}" onclick="go('${x.page}')">${ico(x.icon, 16)}<span>${x.label}</span></button>`).join('');
+}
+function rebuildSettingsTabs() {
+  const tabsEl = document.getElementById('settingsTabs');
+  if (!tabsEl) return;
+  const tabs = [
+    { id:'token', icon:'key', label:'الرمز والتشفير', perm:'tabToken' },
+    { id:'branches', icon:'building', label:'الفروع', perm:'tabBranches' },
+    { id:'drivers', icon:'truck', label:'الموصلون', perm:'tabDrivers' },
+    { id:'users', icon:'user', label:'المستخدمون', perm:'tabUsers' },
+    { id:'templates', icon:'printer', label:'قوالب الطباعة', perm:'tabTemplates' },
+    { id:'backup', icon:'save', label:'نسخ احتياطي', perm:'tabBackup' }
+  ].filter(t => hasPerm(t.perm));
+  if (!tabs.length) { tabsEl.innerHTML = '<div style="padding:16px;color:var(--text-muted);">لا توجد تبويبات متاحة</div>'; return; }
+  const currentActive = tabsEl.querySelector('.tab-btn.active');
+  const currentId = currentActive?.dataset?.tab;
+  const firstId = tabs.find(t => t.id === currentId)?.id || tabs[0].id;
+  tabsEl.innerHTML = tabs.map(t => `<button class="tab-btn ${t.id === firstId ? 'active' : ''}" data-tab="${t.id}" onclick="switchTab(event,'${t.id}')">${ico(t.icon, 15)}<span>${t.label}</span></button>`).join('');
+  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+  document.getElementById('tab-' + firstId).style.display = 'block';
 }
 
 /* ==============================================================
@@ -1541,26 +1234,18 @@ function applyPermissionsUI() {
 function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
   const draft = {
-    invoice: document.getElementById('orderInvoice').value,
-    branch: document.getElementById('orderBranch').value,
-    customer: document.getElementById('orderCustomer').value,
-    customerId: document.getElementById('orderCustomerId').value,
-    location: document.getElementById('orderLocation').value,
-    status: document.getElementById('orderStatus').value,
-    pay: document.getElementById('orderPay').value,
-    driver: document.getElementById('orderDriver').value,
-    driverPhone: document.getElementById('orderDriverPhone').value,
-    notes: document.getElementById('orderNotes').value
+    invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value,
+    customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value,
+    location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value,
+    pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value,
+    driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value
   };
   if (draft.invoice || draft.customer) {
     localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     document.getElementById('draftBadge').classList.add('show');
   }
 }
-function clearDraft() {
-  localStorage.removeItem(DRAFT_KEY);
-  document.getElementById('draftBadge').classList.remove('show');
-}
+function clearDraft() { localStorage.removeItem(DRAFT_KEY); document.getElementById('draftBadge').classList.remove('show'); }
 window.discardDraft = function () { clearDraft(); toast('تم حذف المسودة', 'info'); };
 window.restoreDraft = function () {
   const raw = localStorage.getItem(DRAFT_KEY);
@@ -1595,29 +1280,18 @@ function buildUI() {
   document.getElementById('draftIcon').innerHTML = ico('file', 14);
   document.getElementById('connBannerIcon').innerHTML = ico('warning', 14);
   updateThemeBtn();
-
-  document.getElementById('navBar').innerHTML = [
-    { page: 'dashboard', icon: 'home', label: 'الرئيسية' },
-    { page: 'entry', icon: 'list', label: 'إدخال الطلبات' },
-    { page: 'ready', icon: 'box', label: 'الطلبات الجاهزة' },
-    { page: 'log', icon: 'archive', label: 'سجل الطلبات' },
-    { page: 'customers', icon: 'users', label: 'العملاء', cls: 'perm-accessCustomers' },
-    { page: 'settings', icon: 'cog', label: 'الإعدادات', cls: 'perm-accessSettings' }
-  ].map(x => `<button data-page="${x.page}" class="${x.page === 'dashboard' ? 'active' : ''} ${x.cls || ''}" onclick="go('${x.page}')">${ico(x.icon, 16)}<span>${x.label}</span></button>`).join('');
-
+  rebuildNav();
   document.getElementById('dashGrid').innerHTML = [
-    { page: 'entry', cls: '', icon: 'list', title: 'إدخال الطلبات', desc: 'تسجيل ومتابعة الطلبات اليومية' },
-    { page: 'ready', cls: 'green', icon: 'box', title: 'الطلبات الجاهزة', desc: 'جاهزة للنقل إلى الفرع' },
-    { page: 'log', cls: 'purple', icon: 'archive', title: 'سجل الطلبات', desc: 'الأرشيف النهائي الكامل' },
-    { page: 'customers', cls: 'orange perm-accessCustomers', icon: 'users', title: 'العملاء', desc: 'قاعدة بيانات العملاء' }
-  ].map(x => `<div class="dash-card ${x.cls}" onclick="go('${x.page}')"><div class="icon">${ico(x.icon, 26)}</div><h3>${x.title}</h3><p>${x.desc}</p></div>`).join('');
-
+    { page:'entry', cls:'', icon:'list', title:'إدخال الطلبات', desc:'تسجيل ومتابعة الطلبات اليومية', perm:'accessEntry' },
+    { page:'ready', cls:'green', icon:'box', title:'الطلبات الجاهزة', desc:'جاهزة للنقل إلى الفرع', perm:'accessReady' },
+    { page:'log', cls:'purple', icon:'archive', title:'سجل الطلبات', desc:'الأرشيف النهائي الكامل', perm:'accessLog' },
+    { page:'customers', cls:'orange', icon:'users', title:'العملاء', desc:'قاعدة بيانات العملاء', perm:'accessCustomers' }
+  ].filter(x => hasPerm(x.perm)).map(x => `<div class="dash-card ${x.cls}" onclick="go('${x.page}')"><div class="icon">${ico(x.icon, 26)}</div><h3>${x.title}</h3><p>${x.desc}</p></div>`).join('');
   document.getElementById('statsTitle').innerHTML = ico('chart', 16) + '<span>إحصائيات مباشرة</span>';
   document.getElementById('donutTitle').innerHTML = ico('stats', 16) + '<span>توزيع الطلبات</span>';
   document.getElementById('topCustTitle').innerHTML = ico('award', 16) + '<span>أكثر العملاء</span>';
   document.getElementById('topBranchTitle').innerHTML = ico('building', 16) + '<span>أكثر الفروع</span>';
   document.getElementById('trendTitle').innerHTML = ico('trendUp', 16) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
-
   document.getElementById('entryTitle').innerHTML = ico('list', 20) + '<span>إدخال الطلبات</span>';
   document.getElementById('entryHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>K</kbd> بحث • <kbd>Alt</kbd>+<kbd>N</kbd> جديد • <kbd>Alt</kbd>+<kbd>T</kbd> تحويل`;
   document.getElementById('entryToolbar').innerHTML = `
@@ -1625,8 +1299,7 @@ function buildUI() {
     <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">${ico('truck', 15)}<span>تحويل المستوفية</span><kbd>Alt+B</kbd></button>
     <select id="entryBranchFilter" onchange="renderEntry()" style="width:auto;max-width:200px;margin-right:auto;"></select>
     <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="max-width:280px;">`;
-  document.getElementById('entryHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
-
+  document.getElementById('entryHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
@@ -1634,8 +1307,7 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
     <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل إلى السجل</span><kbd>Alt+M</kbd></button>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
-  document.getElementById('readyHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل'].map(h => `<th>${h}</th>`).join('');
-
+  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
     <span style="color:var(--dark-blue);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;">${ico('filter', 14)}<span>فلترة:</span></span>
@@ -1650,24 +1322,14 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
     <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>تصدير CSV</span></button>
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
-  document.getElementById('logHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'تاريخ الترحيل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
-
+  document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
   document.getElementById('custToolbar').innerHTML = `
     <input id="searchCustomers" type="text" placeholder="بحث..." oninput="renderCustomers()" style="max-width:300px;">
     <button class="btn btn-primary perm-manageCustomers" onclick="openCustomerModal()">${ico('plus', 15)}<span>عميل جديد</span></button>`;
-  document.getElementById('custHead').innerHTML = ['#', 'رقم العميل', 'الاسم', 'الموقع', 'الهاتف', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
-
+  document.getElementById('custHead').innerHTML = ['#','رقم العميل','الاسم','الموقع','الهاتف','إجراءات'].map(h => `<th>${h}</th>`).join('');
   document.getElementById('settingsTitle').innerHTML = ico('cog', 20) + '<span>الإعدادات</span>';
-  document.getElementById('settingsTabs').innerHTML = [
-    { id: 'token', icon: 'key', label: 'الرمز والتشفير', active: true },
-    { id: 'branches', icon: 'building', label: 'الفروع' },
-    { id: 'drivers', icon: 'truck', label: 'الموصلون' },
-    { id: 'users', icon: 'user', label: 'المستخدمون' },
-    { id: 'templates', icon: 'printer', label: 'قوالب الطباعة' },
-    { id: 'backup', icon: 'save', label: 'نسخ احتياطي' }
-  ].map(t => `<button class="tab-btn ${t.active ? 'active' : ''}" onclick="switchTab(event,'${t.id}')">${ico(t.icon, 15)}<span>${t.label}</span></button>`).join('');
-
+  rebuildSettingsTabs();
   document.getElementById('tab-token').innerHTML = `
     <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">
       🔐 <b>جميع ملفات JSON مشفّرة تلقائياً</b> بنفس رمز الوصول.<br>
@@ -1679,16 +1341,14 @@ function buildUI() {
     </div>
     <div id="currentTokenInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>
     <div id="apiStats" style="margin-top:13px;padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-size:12px;line-height:1.8;border:1px solid var(--border);"></div>`;
-
   document.getElementById('tab-branches').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('building', 18)}<span>إدارة الفروع</span></div>
-    <div class="perm-note" style="margin-bottom:14px;">الفرع الافتراضي: <b>${DEFAULT_BRANCH_NAME}</b> — يظهر في جميع الواجهات والطباعة</div>
+    <div class="perm-note" style="margin-bottom:14px;">الفرع الافتراضي: <b>${DEFAULT_BRANCH_NAME}</b></div>
     <div class="toolbar">
       <input id="newBranchName" placeholder="اسم الفرع الجديد *" style="max-width:260px;">
       <button class="btn btn-success perm-manageBranches" onclick="addBranch()">${ico('plus', 15)}<span>إضافة فرع</span></button>
     </div>
     <div id="branchList" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;"></div>`;
-
   document.getElementById('tab-drivers').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('truck', 18)}<span>إدارة الموصلين</span></div>
     <div class="toolbar">
@@ -1697,15 +1357,13 @@ function buildUI() {
       <button class="btn btn-success perm-manageDrivers" onclick="addDriver()">${ico('plus', 15)}<span>إضافة</span></button>
     </div>
     <div id="driverList" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;"></div>`;
-
   document.getElementById('tab-users').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('user', 18)}<span>المستخدمون والصلاحيات</span></div>
     <div class="toolbar"><button class="btn btn-primary perm-manageUsers" onclick="openUserModal()">${ico('plus', 15)}<span>مستخدم جديد</span></button></div>
     <div class="table-wrap" style="max-width:950px;">
-      <table style="min-width:auto;"><thead><tr><th>اسم المستخدم</th><th>الصلاحية</th><th>الصلاحيات</th><th>إجراءات</th></tr></thead>
+      <table style="min-width:auto;"><thead><tr><th>اسم المستخدم</th><th>الصلاحية</th><th>عدد الصلاحيات</th><th>إجراءات</th></tr></thead>
       <tbody id="userBody"></tbody></table>
     </div>`;
-
   document.getElementById('tab-templates').innerHTML = `
     <div class="perm-note" style="margin-bottom:16px;">المالك فقط يمكنه تعديل القوالب</div>
     <div id="templatesContainer"></div>
@@ -1713,43 +1371,26 @@ function buildUI() {
       <button class="btn btn-success" onclick="saveTemplates()">${ico('save', 15)}<span>حفظ القوالب</span></button>
       <button class="btn btn-gray" onclick="resetTemplates()">${ico('refresh', 15)}<span>استعادة الافتراضي</span></button>
     </div>`;
-
   document.getElementById('tab-backup').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي والصيانة</span></div>
     <div class="perm-note" style="margin-bottom:14px;">
-      سيتم إنشاء ملف ZIP يحتوي على كل ملف بيانات منفصلاً بصيغة <b>JSON عادي</b> (بدون تشفير).<br>
-      💡 نسخة الاستعادة يمكن استخدامها مباشرة على GitHub بعد رفعها.
+      سيتم إنشاء ملف ZIP يحتوي على كل ملف بيانات منفصلاً بصيغة <b>JSON عادي</b> (بدون تشفير).
     </div>
     <div class="toolbar">
       <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة ZIP</span></button>
+      <button class="btn btn-success" onclick="encryptAllNow()">${ico('lock', 15)}<span>🔐 تشفير كل الملفات الآن</span></button>
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
     </div>`;
-
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('userModalTitle').innerHTML = ico('user', 20) + '<span>مستخدم جديد</span>';
   document.getElementById('tokenModalTitle').innerHTML = ico('lock', 20) + '<span>تحديث الرمز وإعادة التشفير</span>';
   document.getElementById('shortcutsTitle').innerHTML = ico('keyboard', 20) + '<span>الاختصارات</span>';
-
   document.getElementById('shortcutsGrid').innerHTML = [
-    { title: 'التنقل', icon: 'home', items: [
-      ['الرئيسية', ['Alt', '1']], ['إدخال الطلبات', ['Alt', '2']],
-      ['الطلبات الجاهزة', ['Alt', '3']], ['سجل الطلبات', ['Alt', '4']], ['العملاء', ['Alt', '5']]
-    ]},
-    { title: 'العمليات', icon: 'check', items: [
-      ['بحث سريع', ['Ctrl', 'K']], ['طلب جديد', ['Alt', 'N']],
-      ['حفظ', ['Ctrl', 'Enter']], ['طباعة', ['Ctrl', 'P']],
-      ['تحويل المحدد', ['Alt', 'T']], ['تحويل جماعي', ['Alt', 'B']], ['ترحيل للسجل', ['Alt', 'M']]
-    ]},
-    { title: 'داخل النموذج', icon: 'list', items: [
-      ['الحقل التالي', ['Enter']], ['الحقل السابق', ['Shift', 'Enter']],
-      ['حفظ', ['Ctrl', 'Enter']], ['إغلاق', ['Esc']],
-      ['مدفوع', ['Alt', 'P']], ['غير مدفوع', ['Alt', 'U']], ['VIP', ['Alt', 'V']], ['جاهز', ['Alt', 'G']]
-    ]},
-    { title: 'العرض', icon: 'eye', items: [
-      ['تكبير', ['Ctrl', '=']], ['تصغير', ['Ctrl', '-']], ['100%', ['Ctrl', '0']],
-      ['حذف المحدد', ['Delete']], ['الوضع الليلي', ['Alt', 'D']]
-    ]}
+    { title:'التنقل', icon:'home', items: [['الرئيسية',['Alt','1']],['إدخال الطلبات',['Alt','2']],['الطلبات الجاهزة',['Alt','3']],['سجل الطلبات',['Alt','4']],['العملاء',['Alt','5']]]},
+    { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل المحدد',['Alt','T']],['تحويل جماعي',['Alt','B']],['ترحيل للسجل',['Alt','M']]]},
+    { title:'داخل النموذج', icon:'list', items: [['الحقل التالي',['Enter']],['الحقل السابق',['Shift','Enter']],['حفظ',['Ctrl','Enter']],['إغلاق',['Esc']],['مدفوع',['Alt','P']],['غير مدفوع',['Alt','U']],['VIP',['Alt','V']],['جاهز',['Alt','G']]]},
+    { title:'العرض', icon:'eye', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف المحدد',['Delete']],['الوضع الليلي',['Alt','D']]]}
   ].map(g => `<div class="shortcut-group"><h4>${ico(g.icon, 15)}<span>${g.title}</span></h4>${g.items.map(([d, keys]) => `<div class="shortcut-row"><span class="desc">${d}</span><span class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</span></div>`).join('')}</div>`).join('');
 }
 
@@ -1759,23 +1400,20 @@ function buildUI() {
 function renderStats() {
   const unpaid = cache.orders.filter(o => o.pay === 'غير مدفوع').length;
   const vip = cache.orders.filter(o => o.pay === 'VIP').length;
-
   const diff = (curr, prev) => {
-    if (prev === 0 && curr === 0) return { dir: 'flat', pct: 0 };
-    if (prev === 0) return { dir: 'up', pct: 100 };
+    if (prev === 0 && curr === 0) return { dir:'flat', pct:0 };
+    if (prev === 0) return { dir:'up', pct:100 };
     const pct = Math.round(((curr - prev) / prev) * 100);
     return { dir: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat', pct: Math.abs(pct) };
   };
   const trendIcon = (dir) => dir === 'up' ? ico('trendUp', 11) : dir === 'down' ? ico('trendDown', 11) : '';
-
   const items = [
-    { icon: 'list', label: 'قيد الإدخال', value: cache.orders.length, cls: '', trend: diff(cache.orders.length, prevStats.orders) },
-    { icon: 'box', label: 'جاهزة للنقل', value: cache.ready.length, cls: 'green', trend: diff(cache.ready.length, prevStats.ready) },
-    { icon: 'x', label: 'غير مدفوعة', value: unpaid, cls: 'red', trend: { dir: 'flat', pct: 0 } },
-    { icon: 'crown', label: 'طلبات VIP', value: vip, cls: 'purple', trend: { dir: 'flat', pct: 0 } },
-    { icon: 'archive', label: 'في السجل', value: cache.log.length, cls: '', trend: diff(cache.log.length, prevStats.log) }
+    { icon:'list', label:'قيد الإدخال', value: cache.orders.length, cls:'', trend: diff(cache.orders.length, prevStats.orders) },
+    { icon:'box', label:'جاهزة للنقل', value: cache.ready.length, cls:'green', trend: diff(cache.ready.length, prevStats.ready) },
+    { icon:'x', label:'غير مدفوعة', value: unpaid, cls:'red', trend:{ dir:'flat', pct:0 } },
+    { icon:'crown', label:'طلبات VIP', value: vip, cls:'purple', trend:{ dir:'flat', pct:0 } },
+    { icon:'archive', label:'في السجل', value: cache.log.length, cls:'', trend: diff(cache.log.length, prevStats.log) }
   ];
-
   document.getElementById('statsGrid').innerHTML = items.map(s => `
     <div class="stat ${s.cls}">
       <div class="stat-head">
@@ -1786,32 +1424,22 @@ function renderStats() {
       <div class="lbl">${s.label}</div>
     </div>
   `).join('');
-
   renderDonut(cache.orders.length, cache.ready.length, cache.log.length);
-
   const custCount = {};
-  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => {
-    if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1;
-  });
+  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => { if (o.customer) custCount[o.customer] = (custCount[o.customer] || 0) + 1; });
   const topC = Object.entries(custCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
   document.getElementById('topCustomers').innerHTML = topC.length
     ? topC.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
-
   const branchCount = {};
-  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => {
-    const b = o.branch || DEFAULT_BRANCH_NAME;
-    branchCount[b] = (branchCount[b] || 0) + 1;
-  });
+  [...cache.orders, ...cache.ready, ...cache.log].forEach(o => { const b = o.branch || DEFAULT_BRANCH_NAME; branchCount[b] = (branchCount[b] || 0) + 1; });
   const topB = Object.entries(branchCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
   document.getElementById('topBranches').innerHTML = topB.length
     ? topB.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
-
   renderTrend7Days();
   prevStats = { orders: cache.orders.length, ready: cache.ready.length, log: cache.log.length };
 }
-
 function renderDonut(active, ready, archived) {
   const total = active + ready + archived;
   const donut = document.getElementById('donutChart');
@@ -1822,11 +1450,7 @@ function renderDonut(active, ready, archived) {
     return;
   }
   const radius = 60, cx = 70, cy = 70, circumference = 2 * Math.PI * radius;
-  const segments = [
-    { value: active, color: '#2e75b6', label: 'قيد الإدخال' },
-    { value: ready, color: '#28a745', label: 'جاهزة' },
-    { value: archived, color: '#6f42c1', label: 'في السجل' }
-  ];
+  const segments = [{ value: active, color:'#2e75b6', label:'قيد الإدخال' }, { value: ready, color:'#28a745', label:'جاهزة' }, { value: archived, color:'#6f42c1', label:'في السجل' }];
   let offset = 0;
   const circles = segments.map(s => {
     const pct = s.value / total;
@@ -1835,28 +1459,15 @@ function renderDonut(active, ready, archived) {
     offset += dash;
     return el;
   }).join('');
-  donut.innerHTML = `
-    <svg width="140" height="140" viewBox="0 0 140 140">
-      <circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="16" fill="none"/>
-      ${circles}
-    </svg>
-    <div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>
-  `;
+  donut.innerHTML = `<svg width="140" height="140" viewBox="0 0 140 140"><circle cx="${cx}" cy="${cy}" r="${radius}" stroke="var(--border)" stroke-width="16" fill="none"/>${circles}</svg><div class="center"><div class="big">${total.toLocaleString()}</div><div class="small">الإجمالي</div></div>`;
   legend.innerHTML = segments.map(s => `<div class="legend-item"><span class="dot" style="background:${s.color};"></span><span class="name">${s.label}</span><span class="val">${s.value}</span></div>`).join('');
 }
-
 function renderTrend7Days() {
   const days = [];
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  for (let i = 0; i <= 6; i++) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    days.push(d);
-  }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  for (let i = 0; i <= 6; i++) { const d = new Date(today); d.setDate(d.getDate() - i); days.push(d); }
   const counts = days.map(day => {
-    const nextDay = new Date(day);
-    nextDay.setDate(nextDay.getDate() + 1);
+    const nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
     return [...cache.orders, ...cache.ready, ...cache.log].filter(o => {
       const cd = parseDate(o.createdAt) || parseDate(o.transferredAt) || parseDate(o.archivedAt);
       return cd && cd >= day && cd < nextDay;
@@ -1864,23 +1475,13 @@ function renderTrend7Days() {
   });
   const max = Math.max(...counts, 1);
   const w = 100, h = 40;
-  const points = counts.map((c, i) => {
-    const x = w - (i / 6) * w;
-    const y = h - (c / max) * (h - 6) - 3;
-    return [x, y];
-  });
+  const points = counts.map((c, i) => { const x = w - (i / 6) * w; const y = h - (c / max) * (h - 6) - 3; return [x, y]; });
   const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
   const areaPath = path + ` L0 ${h} L${w} ${h} Z`;
-  const dayNames = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-
+  const dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
   document.getElementById('trendChart').innerHTML = `
     <svg viewBox="0 0 ${w + 4} ${h + 6}" preserveAspectRatio="none" style="width:100%;height:90px;direction:ltr;">
-      <defs>
-        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#2e75b6" stop-opacity="0.35"/>
-          <stop offset="100%" stop-color="#2e75b6" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
+      <defs><linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2e75b6" stop-opacity="0.35"/><stop offset="100%" stop-color="#2e75b6" stop-opacity="0"/></linearGradient></defs>
       <path d="${areaPath}" fill="url(#trendGrad)"/>
       <path d="${path}" fill="none" stroke="#2e75b6" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
       ${points.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="0.7" fill="#2e75b6" vector-effect="non-scaling-stroke" />`).join('')}
@@ -1889,7 +1490,6 @@ function renderTrend7Days() {
       ${days.map((d, i) => `<span style="text-align:center;flex:1;">${dayNames[d.getDay()]}<br><b style="color:var(--dark-blue);">${counts[i]}</b></span>`).join('')}
     </div>`;
 }
-
 function renderDashboard() { renderStats(); }
 
 /* ==============================================================
@@ -1932,7 +1532,6 @@ window.selectRow = function (id, event) {
   document.querySelectorAll('#entryBody tr').forEach(tr => tr.classList.remove('selected'));
   document.querySelector(`#entryBody tr[data-id="${id}"]`)?.classList.add('selected');
 };
-
 function renderReady() {
   const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
   let data = cache.ready;
@@ -1948,7 +1547,6 @@ function renderReady() {
     <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.lastEditBy || '—')}</td>
   </tr>`).join('');
 }
-
 function getLogFilteredData() {
   const fromVal = document.getElementById('filterLogFrom')?.value || '';
   const toVal = document.getElementById('filterLogTo')?.value || '';
@@ -1968,7 +1566,6 @@ function getLogFilteredData() {
     return true;
   });
 }
-
 function renderLog() {
   const data = getLogFilteredData();
   const canEdit = hasPerm('editLog'), canDelete = hasPerm('deleteLog');
@@ -1998,7 +1595,6 @@ function renderLog() {
     </tr>`;
   }).join('');
 }
-
 window.resetLogFilters = function () {
   document.getElementById('filterLogFrom').value = '';
   document.getElementById('filterLogTo').value = '';
@@ -2007,7 +1603,6 @@ window.resetLogFilters = function () {
   document.getElementById('filterLogBranch').value = '';
   renderLog();
 };
-
 function renderCustomers() {
   const q = (document.getElementById('searchCustomers')?.value || '').trim().toLowerCase();
   const data = q ? cache.customers.filter(c => `${c.code} ${c.name} ${c.location} ${c.phone}`.toLowerCase().includes(q)) : cache.customers;
@@ -2024,40 +1619,37 @@ function renderCustomers() {
     ` : '—'}</td>
   </tr>`).join('');
 }
-
 function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); }
-
 function renderBranchesList() {
   const canManage = hasPerm('manageBranches');
-  document.getElementById('branchList').innerHTML = cache.branches.length
-    ? cache.branches.map(b => {
-        const isDefault = b.name === DEFAULT_BRANCH_NAME;
-        return `<span style="background:linear-gradient(135deg,#eef7ff,#dceaf7);padding:10px 16px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:10px;border:1px solid #cddcf0;color:#1f4e79;${isDefault ? 'box-shadow:0 0 0 2px rgba(46,117,182,.3);' : ''}">
-          ${ico('building', 14)}<b>${esc(b.name)}</b>${isDefault ? `<span style="background:var(--blue);color:#fff;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;">افتراضي</span>` : ''}
-          ${canManage && !isDefault ? `<button onclick="deleteBranch('${b.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
-        </span>`;
-      }).join('')
-    : '<span style="color:var(--text-muted);padding:20px;">لا يوجد فروع</span>';
+  const el = document.getElementById('branchList');
+  if (!el) return;
+  el.innerHTML = cache.branches.length ? cache.branches.map(b => {
+    const isDefault = b.name === DEFAULT_BRANCH_NAME;
+    return `<span style="background:linear-gradient(135deg,#eef7ff,#dceaf7);padding:10px 16px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:10px;border:1px solid #cddcf0;color:#1f4e79;${isDefault ? 'box-shadow:0 0 0 2px rgba(46,117,182,.3);' : ''}">
+      ${ico('building', 14)}<b>${esc(b.name)}</b>${isDefault ? `<span style="background:var(--blue);color:#fff;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;">افتراضي</span>` : ''}
+      ${canManage && !isDefault ? `<button onclick="deleteBranch('${b.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
+    </span>`;
+  }).join('') : '<span style="color:var(--text-muted);padding:20px;">لا يوجد فروع</span>';
 }
-
 function renderDriversList() {
   const canManage = hasPerm('manageDrivers');
-  document.getElementById('driverList').innerHTML = cache.drivers.length
-    ? cache.drivers.map(d => `<span style="background:linear-gradient(135deg,#eef3fa,#e0ebf5);padding:9px 14px;border-radius:20px;font-size:12.5px;display:inline-flex;align-items:center;gap:9px;border:1px solid #d4e0ec;color:#1f4e79;">
-        ${ico('truck', 14)}<b>${esc(d.name)}</b>${d.phone ? `<span style="opacity:.7;font-size:11px;">(${esc(d.phone)})</span>` : ''}
-        ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
-      </span>`).join('')
-    : '<span style="color:var(--text-muted);padding:20px;">لا يوجد موصلون بعد</span>';
+  const el = document.getElementById('driverList');
+  if (!el) return;
+  el.innerHTML = cache.drivers.length ? cache.drivers.map(d => `<span style="background:linear-gradient(135deg,#eef3fa,#e0ebf5);padding:9px 14px;border-radius:20px;font-size:12.5px;display:inline-flex;align-items:center;gap:9px;border:1px solid #d4e0ec;color:#1f4e79;">
+    ${ico('truck', 14)}<b>${esc(d.name)}</b>${d.phone ? `<span style="opacity:.7;font-size:11px;">(${esc(d.phone)})</span>` : ''}
+    ${canManage ? `<button onclick="deleteDriver('${d.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
+  </span>`).join('') : '<span style="color:var(--text-muted);padding:20px;">لا يوجد موصلون بعد</span>';
 }
-
 function renderUsers() {
   const canManage = hasPerm('manageUsers');
-  document.getElementById('userBody').innerHTML = cache.users.map(u => {
+  const body = document.getElementById('userBody');
+  if (!body) return;
+  body.innerHTML = cache.users.map(u => {
     const permCount = u.role === 'رئيسي' ? 'الكل' : `${Object.values(u.permissions || {}).filter(v => v).length}/${Object.keys(DEFAULT_PERMS).length}`;
-    const actions = u.username === currentUser.username
-      ? '<span style="color:var(--text-muted);font-size:11.5px;">(أنت)</span>'
-      : (canManage ? `<button class="btn btn-primary btn-sm" onclick="editUser('${u.id}')">${ico('edit', 13)}</button>
-           <button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">${ico('trash', 13)}</button>` : '—');
+    const actions = u.username === currentUser.username ? '<span style="color:var(--text-muted);font-size:11.5px;">(أنت)</span>' :
+      (canManage ? `<button class="btn btn-primary btn-sm" onclick="editUser('${u.id}')">${ico('edit', 13)}</button>
+         <button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">${ico('trash', 13)}</button>` : '—');
     return `<tr>
       <td>${esc(u.username)}</td>
       <td>${u.role === 'رئيسي' ? `${ico('crown', 12)} رئيسي` : `${ico('user', 12)} عادي`}</td>
@@ -2066,7 +1658,6 @@ function renderUsers() {
     </tr>`;
   }).join('');
 }
-
 function populateBranchSelects() {
   const allBranches = cache.branches.map(b => b.name);
   const orderSel = document.getElementById('orderBranch');
@@ -2077,31 +1668,19 @@ function populateBranchSelects() {
     else orderSel.value = DEFAULT_BRANCH_NAME;
   }
   const entrySel = document.getElementById('entryBranchFilter');
-  if (entrySel) {
-    const cur = entrySel.value;
-    entrySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
-    if (cur) entrySel.value = cur;
-  }
+  if (entrySel) { const cur = entrySel.value; entrySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''); if (cur) entrySel.value = cur; }
   const readySel = document.getElementById('readyBranchFilter');
-  if (readySel) {
-    const cur = readySel.value;
-    readySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
-    if (cur) readySel.value = cur;
-  }
+  if (readySel) { const cur = readySel.value; readySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''); if (cur) readySel.value = cur; }
   const logSel = document.getElementById('filterLogBranch');
-  if (logSel) {
-    const cur = logSel.value;
-    logSel.innerHTML = '<option value="">الكل</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
-    if (cur) logSel.value = cur;
-  }
+  if (logSel) { const cur = logSel.value; logSel.innerHTML = '<option value="">الكل</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''); if (cur) logSel.value = cur; }
 }
 
 /* ==============================================================
    Navigation
    ============================================================== */
 window.go = function (page) {
-  if (page === 'settings' && !hasPerm('accessSettings')) { toast('غير مصرح بالدخول', 'error'); return; }
-  if (page === 'customers' && !hasPerm('accessCustomers')) { toast('غير مصرح بالدخول', 'error'); return; }
+  const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
+  if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast('غير مصرح بالدخول', 'error'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
@@ -2111,18 +1690,19 @@ window.go = function (page) {
   if (page === 'ready') { populateBranchSelects(); renderReady(); }
   if (page === 'log') { populateBranchSelects(); renderLog(); }
   if (page === 'customers') renderCustomers();
-  if (page === 'settings') { renderSettings(); updateCurrentTokenInfo(); renderApiStats(); }
+  if (page === 'settings') { rebuildSettingsTabs(); renderSettings(); updateCurrentTokenInfo(); renderApiStats(); }
 };
-
 window.switchTab = function (evt, tab) {
+  const tabPerm = { token:'tabToken', branches:'tabBranches', drivers:'tabDrivers', users:'tabUsers', templates:'tabTemplates', backup:'tabBackup' };
+  if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast('غير مصرح بالدخول', 'error'); return; }
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
-  evt.target.closest('.tab-btn')?.classList.add('active');
+  const btn = evt.target.closest('.tab-btn');
+  if (btn) btn.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
   if (tab === 'token') { renderApiStats(); updateCurrentTokenInfo(); }
 };
-
 function renderApiStats() {
   const el = document.getElementById('apiStats');
   if (!el) return;
@@ -2133,7 +1713,7 @@ function renderApiStats() {
 }
 
 /* ==============================================================
-   Login
+   ⭐⭐⭐ doLogin — النسخة الذكية (معالجة تغيير التوكن) ⭐⭐⭐
    ============================================================== */
 window.doLogin = async function () {
   const u = document.getElementById('loginUser').value.trim();
@@ -2143,6 +1723,11 @@ window.doLogin = async function () {
   const btn = document.getElementById('loginBtn');
   errEl.classList.remove('show'); errEl.textContent = ''; loadEl.textContent = '';
 
+  // ⭐ حفظ الرمز القديم قبل أي تعديل
+  const oldToken = getStoredToken();
+  let tokenChanged = false;
+  let newTokenCandidate = null;
+
   const tokenFieldEl = document.getElementById('tokenField');
   if (tokenFieldEl.style.display !== 'none') {
     const t = document.getElementById('loginToken').value.trim();
@@ -2151,9 +1736,11 @@ window.doLogin = async function () {
         errEl.textContent = 'الرمز لا يبدو صحيحاً — يجب أن يبدأ بـ github_pat_';
         errEl.classList.add('show'); return;
       }
+      if (t !== oldToken) { tokenChanged = true; newTokenCandidate = t; }
       saveToken(t); updateTokenStatus();
     }
   }
+
   if (!getStoredToken()) { errEl.textContent = 'الرجاء إدخال رمز الوصول أولاً'; errEl.classList.add('show'); return; }
   if (!u || !p) { errEl.textContent = 'الرجاء إدخال اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
   if (GITHUB_OWNER === 'YOUR_USERNAME') { errEl.textContent = 'لم يتم ضبط النظام بعد'; errEl.classList.add('show'); return; }
@@ -2162,22 +1749,115 @@ window.doLogin = async function () {
   btn.disabled = true;
   loadEl.textContent = 'جاري التحقق...';
   showLoading('جاري تحميل البيانات المشفّرة...');
+
   try {
+    // محاولة القراءة بالرمز الحالي
     await readAll();
     localMeta = await readMeta();
+
+    // التحقق من بيانات الدخول
     const found = cache.users.find(x => x.username === u && x.password === p);
     if (!found) {
       errEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
-      errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return;
+      errEl.classList.add('show');
+      if (tokenChanged && oldToken) saveToken(oldToken);
+      btn.disabled = false; loadEl.textContent = ''; hideLoading();
+      return;
     }
+
+    // نجح الدخول — إذا تغير الرمز وكانت الملفات غير مشفرة، اسأل عن التشفير
+    if (tokenChanged && hasUnencryptedFiles) {
+      hideLoading();
+      const ok = await dialog.confirm(
+        'تم تسجيل الدخول بنجاح.\n\n' +
+        'اكتشف النظام أن ملفات البيانات على GitHub غير مشفّرة.\n' +
+        'هل تريد تشفيرها الآن بالرمز الجديد؟',
+        { title: '🔐 تشفير البيانات', okText: 'تشفير الآن', cancelText: 'لاحقاً' }
+      );
+      if (ok) {
+        try {
+          showLoading('جاري التشفير...');
+          await persistKeys(DATA_KEYS);
+          hideLoading();
+          hasUnencryptedFiles = false;
+          toast('تم تشفير جميع الملفات بالرمز الجديد', 'success');
+        } catch (e2) { hideLoading(); toast('فشل التشفير: ' + e2.message, 'error'); }
+      }
+    }
+
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
     loadEl.textContent = 'تم الدخول بنجاح';
     hideLoading();
     startApp();
+
   } catch (e) {
+    // ⭐ خطأ TOKEN_MISMATCH — الرمز الجديد لا يطابق التشفير
+    if (e.message === 'TOKEN_MISMATCH' && tokenChanged && oldToken) {
+      saveToken(oldToken); // جرب القديم
+      try {
+        await readAll();
+        localMeta = await readMeta();
+
+        hideLoading();
+        const useNew = await dialog.confirm(
+          '⚠️ تنبيه مهم:\n\n' +
+          'الرمز الجديد الذي أدخلته لا يطابق الرمز المستخدم لتشفير البيانات الحالية.\n\n' +
+          'اختر:\n' +
+          '✅ "استخدم الجديد" — إعادة تشفير كل البيانات بالرمز الجديد\n' +
+          '❌ "احتفظ بالقديم" — الاستمرار بالرمز القديم',
+          { title: '🔐 تعارض في الرمز', okText: 'استخدم الجديد', cancelText: 'احتفظ بالقديم' }
+        );
+
+        if (useNew) {
+          saveToken(newTokenCandidate);
+          try {
+            showLoading('جاري إعادة تشفير البيانات بالرمز الجديد...');
+            await persistKeys(DATA_KEYS);
+            await readAll();
+            hideLoading();
+            toast('✅ تم تبديل الرمز وإعادة تشفير البيانات', 'success');
+          } catch (e3) {
+            saveToken(oldToken);
+            hideLoading();
+            errEl.textContent = 'فشل التبديل: ' + e3.message;
+            errEl.classList.add('show');
+            btn.disabled = false; loadEl.textContent = '';
+            return;
+          }
+        } else {
+          toast('تم الاحتفاظ بالرمز القديم', 'info');
+        }
+
+        // التحقق من بيانات الدخول
+        const found = cache.users.find(x => x.username === u && x.password === p);
+        if (!found) {
+          errEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+          errEl.classList.add('show');
+          btn.disabled = false; loadEl.textContent = ''; hideLoading();
+          return;
+        }
+
+        localStorage.setItem('oms_lastUser', u);
+        currentUser = found;
+        loadEl.textContent = 'تم الدخول بنجاح';
+        hideLoading();
+        startApp();
+        return;
+
+      } catch (e2) {
+        // الرمز القديم أيضاً فشل
+        saveToken(newTokenCandidate || oldToken);
+        errEl.textContent = 'فشل الاتصال بكل من الرمز القديم والجديد.\n\nتأكد من:\n• صحة الرمز\n• صلاحيته (Contents: Read and write)\n• أنه لم ينتهِ';
+        errEl.classList.add('show');
+        hideLoading();
+        return;
+      }
+    }
+
+    // أخطاء أخرى
     if (e.message === 'TOKEN_MISMATCH') {
-      errEl.textContent = 'الرمز لا يطابق الرمز المستخدم لتشفير البيانات.\nالرجاء إدخال الرمز الصحيح المستخدم في هذا المستودع.';
+      errEl.textContent = 'الرمز لا يطابق الرمز المستخدم لتشفير البيانات في المستودع.\n\n💡 الحل:\n• أدخل الرمز الصحيح المستخدم سابقاً، أو\n• غيّر الرمز من الإعدادات بعد الدخول';
     } else {
       errEl.textContent = e.message || 'حدث خطأ غير متوقع';
     }
@@ -2214,12 +1894,29 @@ function startApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   document.getElementById('currentUserName').textContent = currentUser.username;
+  buildUI();
   applyPermissionsUI();
   populateBranchSelects();
   loadDriversIntoSelects();
-  go('dashboard');
+  const firstAvailable = ['dashboard','entry','ready','log','customers','settings'].find(p => {
+    const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
+    return hasPerm(pagePerm[p]);
+  }) || 'dashboard';
+  go(firstAvailable);
   startPolling();
   toast(`أهلاً بك، ${currentUser.username}`, 'success');
+  // تشفير تلقائي إذا كانت الملفات غير مشفّرة
+  if (hasUnencryptedFiles && hasPerm('tabToken')) {
+    setTimeout(async () => {
+      const ok = await dialog.confirm(
+        'اكتشف النظام أن ملفات البيانات على GitHub غير مشفّرة.\n\n' +
+        'هل تريد تشفيرها الآن بالرمز الحالي؟\n\n' +
+        '✅ يُنصح بشدة للتأمين\n⏱️ سيستغرق بضع ثوانٍ',
+        { title: '🔐 تشفير البيانات', okText: 'تشفير الآن', cancelText: 'لاحقاً' }
+      );
+      if (ok) await encryptAllNow();
+    }, 1500);
+  }
 }
 
 /* ==============================================================
@@ -2242,7 +1939,6 @@ window.addOrder = function () {
   openModal('orderModal');
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
-
 window.editOrder = function (id) {
   if (!hasPerm('editOrder')) { toast('غير مصرح', 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
@@ -2266,7 +1962,6 @@ window.editOrder = function (id) {
   openModal('orderModal');
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
-
 window.editFromLog = function (id) {
   if (!hasPerm('editLog')) { toast('غير مصرح بتعديل السجل', 'error'); return; }
   const o = cache.log.find(x => x.id === id);
@@ -2290,7 +1985,6 @@ window.editFromLog = function (id) {
   openModal('orderModal');
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
-
 function validateOrderForm() {
   clearAllErrors('orderModal');
   let valid = true;
@@ -2299,44 +1993,26 @@ function validateOrderForm() {
   const customerId = document.getElementById('orderCustomerId').value;
   const branch = document.getElementById('orderBranch').value;
   const id = document.getElementById('orderId').value;
-
-  if (!invoice) {
-    setFieldError('orderInvoice', 'رقم الفاتورة مطلوب');
-    valid = false;
-  } else if (!id && cache.orders.find(o => o.invoice === invoice)) {
-    setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً');
-    valid = false;
-  }
+  if (!invoice) { setFieldError('orderInvoice', 'رقم الفاتورة مطلوب'); valid = false; }
+  else if (!id && cache.orders.find(o => o.invoice === invoice)) { setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً'); valid = false; }
   if (!branch) { setFieldError('orderBranch', 'الفرع مطلوب'); valid = false; }
-
-  if (!customer) {
-    setFieldError('orderCustomer', 'اسم العميل مطلوب');
-    valid = false;
-  } else {
+  if (!customer) { setFieldError('orderCustomer', 'اسم العميل مطلوب'); valid = false; }
+  else {
     let matched = customerId ? cache.customers.find(c => c.id === customerId) : null;
     if (!matched) matched = cache.customers.find(c => c.name.toLowerCase() === customer.toLowerCase());
-    if (!matched) {
-      setFieldError('orderCustomer', 'اختر العميل من القائمة أو أنشئ عميلاً جديداً أولاً');
-      valid = false;
-    } else {
+    if (!matched) { setFieldError('orderCustomer', 'اختر العميل من القائمة أو أنشئ عميلاً جديداً أولاً'); valid = false; }
+    else {
       document.getElementById('orderCustomerId').value = matched.id;
       document.getElementById('orderCustomer').value = matched.name;
-      if (!document.getElementById('orderLocation').value.trim() && matched.location) {
-        document.getElementById('orderLocation').value = matched.location;
-      }
+      if (!document.getElementById('orderLocation').value.trim() && matched.location) document.getElementById('orderLocation').value = matched.location;
     }
   }
-
   if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
   return valid;
 }
-
 window.saveOrder = async function () {
   const now = Date.now();
-  if (now - lastSaveTime < SAVE_COOLDOWN) {
-    const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000);
-    toast(`انتظر ${wait} ثانية قبل الحفظ التالي`, 'warning'); return;
-  }
+  if (now - lastSaveTime < SAVE_COOLDOWN) { const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000); toast(`انتظر ${wait} ثانية قبل الحفظ التالي`, 'warning'); return; }
   if (saveInProgress) { toast('جاري الحفظ...', 'info'); return; }
   if (!validateOrderForm()) return;
   const id = document.getElementById('orderId').value;
@@ -2344,7 +2020,6 @@ window.saveOrder = async function () {
   saveInProgress = true;
   const btn = document.getElementById('saveOrderBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ والتشفير...'; }
-
   const data = {
     invoice: document.getElementById('orderInvoice').value.trim(),
     branch: document.getElementById('orderBranch').value || DEFAULT_BRANCH_NAME,
@@ -2377,25 +2052,16 @@ window.saveOrder = async function () {
       let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
       if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
       data.approvalDate = approvalDate;
-      if (id) {
-        const idx = cache.orders.findIndex(x => x.id === id);
-        cache.orders[idx] = { ...cache.orders[idx], ...data };
-      } else {
-        data.id = uid(); data.createdAt = fmtDate();
-        cache.orders.push(data);
-      }
+      if (id) { const idx = cache.orders.findIndex(x => x.id === id); cache.orders[idx] = { ...cache.orders[idx], ...data }; }
+      else { data.id = uid(); data.createdAt = fmtDate(); cache.orders.push(data); }
       await persistKeys(['orders']);
       closeModal('orderModal'); clearDraft(); renderEntry();
       toast('تم حفظ الطلب بنجاح', 'success');
     }
     lastSaveTime = Date.now();
   } catch (e) { toast(e.message.includes('CONFLICT') ? 'تعارض — أعد المحاولة' : e.message, 'error'); }
-  finally {
-    saveInProgress = false;
-    if (btn) { btn.disabled = false; btn.innerHTML = ico('save', 15) + '<span>حفظ</span><kbd>Ctrl+Enter</kbd>'; }
-  }
+  finally { saveInProgress = false; if (btn) { btn.disabled = false; btn.innerHTML = ico('save', 15) + '<span>حفظ</span><kbd>Ctrl+Enter</kbd>'; } }
 };
-
 window.deleteOrder = async function (id) {
   if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
@@ -2406,7 +2072,6 @@ window.deleteOrder = async function (id) {
   try { await persistKeys(['orders']); renderEntry(); toast('تم حذف الطلب', 'success'); }
   catch (e) { toast(e.message, 'error'); }
 };
-
 window.deleteFromLog = async function (id) {
   if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
   const o = cache.log.find(x => x.id === id);
@@ -2484,13 +2149,8 @@ window.addDriver = async function () {
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
   if (cache.drivers.find(d => d.name === name)) { toast('الموصل موجود مسبقاً', 'error'); return; }
   cache.drivers.push({ id: uid(), name, phone });
-  try {
-    await persistKeys(['drivers']);
-    document.getElementById('newDriverName').value = '';
-    document.getElementById('newDriverPhone').value = '';
-    renderDriversList(); loadDriversIntoSelects();
-    toast('تم إضافة الموصل', 'success');
-  } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['drivers']); document.getElementById('newDriverName').value = ''; document.getElementById('newDriverPhone').value = ''; renderDriversList(); loadDriversIntoSelects(); toast('تم إضافة الموصل', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 window.deleteDriver = async function (id) {
   if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
@@ -2511,12 +2171,8 @@ window.addBranch = async function () {
   if (!name) { toast('اسم الفرع مطلوب', 'error'); return; }
   if (cache.branches.find(b => b.name === name)) { toast('الفرع موجود مسبقاً', 'error'); return; }
   cache.branches.push({ id: uid(), name });
-  try {
-    await persistKeys(['branches']);
-    document.getElementById('newBranchName').value = '';
-    renderBranchesList(); populateBranchSelects();
-    toast('تم إضافة الفرع', 'success');
-  } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['branches']); document.getElementById('newBranchName').value = ''; renderBranchesList(); populateBranchSelects(); toast('تم إضافة الفرع', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
 };
 window.deleteBranch = async function (id) {
   if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
@@ -2588,13 +2244,10 @@ function buildPrintHTML(items, template, extra = {}) {
   const showDriverPhone = tpl.showDriverPhone !== false, showPay = tpl.showPay !== false;
   const showArchived = tpl.showArchivedAt;
   const showBranch = tpl.showBranch !== false;
-  const replaceVars = (str) => String(str || '')
-    .replace(/{date}/g, fmtDate()).replace(/{count}/g, items.length)
-    .replace(/{user}/g, esc(currentUser.username))
-    .replace(/{from}/g, extra.from || 'البداية').replace(/{to}/g, extra.to || 'اليوم');
-  let headers = ['#', 'الفاتورة'];
+  const replaceVars = (str) => String(str || '').replace(/{date}/g, fmtDate()).replace(/{count}/g, items.length).replace(/{user}/g, esc(currentUser.username)).replace(/{from}/g, extra.from || 'البداية').replace(/{to}/g, extra.to || 'اليوم');
+  let headers = ['#','الفاتورة'];
   if (showBranch) headers.push('الفرع');
-  headers.push('العميل', 'الموقع', 'الحالة');
+  headers.push('العميل','الموقع','الحالة');
   if (showApproval) headers.push('الاعتماد');
   if (showPay) headers.push('الدفع');
   headers.push('الموصل');
@@ -2689,20 +2342,11 @@ window.handleLogoUpload = async function (evt) {
   if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
   if (!file.type.startsWith('image/')) { toast('الرجاء اختيار صورة', 'error'); return; }
   if (file.size > 5 * 1024 * 1024) { toast('حجم الصورة كبير', 'error'); return; }
-  try {
-    toast('جاري معالجة الصورة...', 'info');
-    templates.logo = await resizeImage(file, 1400);
-    renderTemplates();
-    toast('تم رفع الصورة — اضغط "حفظ القوالب"', 'success');
-  } catch { toast('فشل معالجة الصورة', 'error'); }
+  try { toast('جاري معالجة الصورة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم رفع الصورة — اضغط "حفظ القوالب"', 'success'); }
+  catch { toast('فشل معالجة الصورة', 'error'); }
   evt.target.value = '';
 };
-window.removeLogo = function () {
-  if (!hasPerm('editTemplates')) return;
-  templates.logo = '';
-  renderTemplates();
-  toast('تم حذف الصورة', 'info');
-};
+window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم حذف الصورة', 'info'); };
 
 /* ==============================================================
    Templates
@@ -2717,7 +2361,7 @@ function renderTemplates() {
     <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">ستظهر أعلى كل ورقة طباعة وتملأ عرض الورقة.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
     ${logoHTML}</div>`;
-  const bodyHTML = ['ready', 'log'].map(key => {
+  const bodyHTML = ['ready','log'].map(key => {
     const t = templates[key] || DEFAULT_TEMPLATES[key];
     const label = key === 'ready' ? 'قائمة الطلبات الجاهزة' : 'سجل الطلبات';
     return `<div class="template-card"><h4>${ico(key === 'ready' ? 'box' : 'archive', 17)}<span>${label}</span></h4>
@@ -2737,24 +2381,9 @@ function renderTemplates() {
   }).join('');
   container.innerHTML = logoSection + bodyHTML;
 }
-window.updateTemplate = function (key, field, value) {
-  if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] };
-  templates[key][field] = value;
-};
-window.saveTemplates = async function () {
-  if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
-  cache.templates = templates;
-  try { await persistKeys(['templates']); toast('تم حفظ القوالب', 'success'); }
-  catch (e) { toast(e.message, 'error'); }
-};
-window.resetTemplates = async function () {
-  if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
-  const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning', title: 'استعادة' });
-  if (!ok) return;
-  templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-  renderTemplates();
-  toast('تمت الاستعادة — لم يتم الحفظ', 'info');
-};
+window.updateTemplate = function (key, field, value) { if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] }; templates[key][field] = value; };
+window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم حفظ القوالب', 'success'); } catch (e) { toast(e.message, 'error'); } };
+window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning', title: 'استعادة' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة — لم يتم الحفظ', 'info'); };
 
 /* ==============================================================
    Customers
@@ -2796,13 +2425,7 @@ window.saveCustomer = async function () {
   if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
   if (!validateCustomerForm()) return;
   const id = document.getElementById('custId').value;
-  const custData = {
-    id: id || uid(),
-    code: document.getElementById('custCode').value.trim(),
-    name: document.getElementById('custName').value.trim(),
-    location: document.getElementById('custLocation').value.trim(),
-    phone: document.getElementById('custPhone').value.trim()
-  };
+  const custData = { id: id || uid(), code: document.getElementById('custCode').value.trim(), name: document.getElementById('custName').value.trim(), location: document.getElementById('custLocation').value.trim(), phone: document.getElementById('custPhone').value.trim() };
   try {
     if (id) { const idx = cache.customers.findIndex(x => x.id === id); if (idx > -1) cache.customers[idx] = custData; }
     else cache.customers.push(custData);
@@ -2827,7 +2450,7 @@ window.deleteCustomer = async function (id) {
 };
 
 /* ==============================================================
-   Users
+   Users + Permissions
    ============================================================== */
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
@@ -2858,18 +2481,36 @@ window.editUser = function (id) {
   openModal('userModal');
 };
 function renderPermissionsGrid() {
-  document.getElementById('permissionsGrid').innerHTML = Object.entries(PERMISSIONS).map(([key, def]) => {
-    const checked = tempPerms[key] === true;
-    return `<label class="perm-item ${checked ? 'checked' : ''}" data-perm="${key}"><input type="checkbox" ${checked ? 'checked' : ''} onchange="togglePerm('${key}', this.checked)"><span>${def.label}</span></label>`;
-  }).join('');
+  const container = document.getElementById('permissionsGrid');
+  const grouped = {};
+  Object.entries(PERMISSIONS).forEach(([key, def]) => {
+    if (!grouped[def.cat]) grouped[def.cat] = [];
+    grouped[def.cat].push({ key, ...def });
+  });
+  let html = '';
+  Object.keys(PERM_CATEGORIES).forEach(cat => {
+    const items = grouped[cat] || [];
+    if (!items.length) return;
+    const catDef = PERM_CATEGORIES[cat];
+    html += `<div class="perm-category">
+      <div class="perm-category-title">${ico(catDef.icon, 14)}<span>${catDef.label}</span></div>
+      <div class="perm-grid">
+        ${items.map(p => {
+          const checked = tempPerms[p.key] === true;
+          return `<label class="perm-item ${checked ? 'checked' : ''}" data-perm="${p.key}">
+            <input type="checkbox" ${checked ? 'checked' : ''} onchange="togglePerm('${p.key}', this.checked)">
+            <span>${esc(p.label)}</span>
+          </label>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+  container.innerHTML = html;
 }
-window.togglePerm = function (key, checked) {
-  tempPerms[key] = checked;
-  document.querySelector(`.perm-item[data-perm="${key}"]`)?.classList.toggle('checked', checked);
-};
+window.togglePerm = function (key, checked) { tempPerms[key] = checked; document.querySelector(`.perm-item[data-perm="${key}"]`)?.classList.toggle('checked', checked); };
 window.onUserRoleChange = function () {
   const isAdmin = document.getElementById('userRole').value === 'رئيسي';
-  document.getElementById('permissionsGrid').style.display = isAdmin ? 'none' : 'grid';
+  document.getElementById('permissionsGrid').style.display = isAdmin ? 'none' : 'block';
   document.getElementById('permAdminNote').style.display = isAdmin ? 'block' : 'none';
 };
 function validateUserForm() {
@@ -2919,7 +2560,7 @@ window.deleteUser = async function (id) {
 };
 
 /* ==============================================================
-   ⭐ حفظ الرمز الجديد + إعادة تشفير البيانات
+   Save new token (من الإعدادات)
    ============================================================== */
 async function saveNewToken() {
   const t = document.getElementById('newTokenInput').value.trim();
@@ -2928,21 +2569,13 @@ async function saveNewToken() {
     const ok = await dialog.confirm('الرمز لا يبدو صحيحاً. هل تريد المتابعة؟', { type: 'warning' });
     if (!ok) return;
   }
-
   const oldToken = getStoredToken();
   saveToken(t);
-
   try {
     showLoading('جاري التحقق من الرمز الجديد...');
-    // 1) التحقق من صلاحية الرمز بقراءة meta
     await ghReadFile('meta');
-
-    // 2) إعادة تشفير جميع الملفات بالرمز الجديد
     showLoading('جاري إعادة تشفير البيانات بالرمز الجديد...');
-    // نمسح SHAs للحصول على SHA محدث لكل ملف (لأن الرمز قد تغير)
-    // لكن لا نمسح لأن نفس المستودع → نفس SHAs
     await persistKeys(DATA_KEYS);
-
     hideLoading();
     closeModal('tokenModal');
     toast('تم تحديث الرمز وإعادة تشفير جميع البيانات', 'success');
@@ -2956,7 +2589,7 @@ async function saveNewToken() {
 window.saveNewToken = saveNewToken;
 
 /* ==============================================================
-   ZIP Backup — بدون تشفير
+   ZIP Backup
    ============================================================== */
 function downloadBlob(blob, filename) {
   const a = document.createElement('a');
@@ -2967,79 +2600,27 @@ function downloadBlob(blob, filename) {
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 }
-
 window.exportBackup = async function () {
   try {
     const ok = await ensureJSZip();
     if (!ok) { toast('فشل تحميل مكتبة ZIP — تحقق من الاتصال', 'error'); return; }
-
     showLoading('جاري تجهيز النسخة الاحتياطية...');
-
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
-
     const zip = new JSZip();
     const dataFolder = zip.folder('data');
-
-    // ملفات JSON عادية بدون تشفير
-    for (const key of DATA_KEYS) {
-      const content = JSON.stringify(cache[key] || [], null, 2);
-      dataFolder.file(`${key}.json`, content);
-    }
-    const meta = {
-      lastUpdate: new Date().toISOString(),
-      version: 2
-    };
+    for (const key of DATA_KEYS) { const content = JSON.stringify(cache[key] || [], null, 2); dataFolder.file(`${key}.json`, content); }
+    const meta = { lastUpdate: new Date().toISOString(), version: 2 };
     dataFolder.file('meta.json', JSON.stringify(meta, null, 2));
-
-    const info = {
-      repo: GITHUB_REPO,
-      owner: GITHUB_OWNER,
-      branch: GITHUB_BRANCH,
-      createdAt: stamp.toISOString(),
-      createdAtLocal: stamp.toLocaleString('ar-SA'),
-      createdBy: currentUser?.username || 'unknown',
-      filesCount: DATA_KEYS.length + 1,
-      files: DATA_KEYS.map(k => `${k}.json`),
-      note: 'هذه النسخة غير مشفرة — احفظها في مكان آمن'
-    };
+    const info = { repo: GITHUB_REPO, owner: GITHUB_OWNER, branch: GITHUB_BRANCH, createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`), note: 'هذه النسخة غير مشفرة — احفظها في مكان آمن' };
     zip.file('backup-info.json', JSON.stringify(info, null, 2));
-    zip.file('README.txt',
-      `نسخة احتياطية من نظام إدارة الطلبات\n` +
-      `=====================================\n` +
-      `المستودع: ${GITHUB_OWNER}/${GITHUB_REPO}\n` +
-      `الفرع: ${GITHUB_BRANCH}\n` +
-      `التاريخ: ${stamp.toLocaleString('ar-SA')}\n` +
-      `أنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n` +
-      `⚠️ تحذير: هذه النسخة غير مشفرة — احفظها في مكان آمن\n` +
-      `   لا ترفعها على مستودع عام.\n\n` +
-      `المحتوى:\n` +
-      DATA_KEYS.map(k => `  - data/${k}.json`).join('\n') + '\n' +
-      `  - data/meta.json\n` +
-      `  - backup-info.json\n\n` +
-      `لاستعادة النسخة:\n` +
-      `  1. فك ضغط الملف\n` +
-      `  2. انسخ محتويات مجلد data/ إلى مستودعك على GitHub\n` +
-      `  3. سيقوم النظام بتشفيرها تلقائياً عند أول حفظ\n`
-    );
-
-    const blob = await zip.generateAsync({
-      type: 'blob',
-      compression: 'DEFLATE',
-      compressionOptions: { level: 9 }
-    });
-
-    const filename = `${GITHUB_REPO}_backup_${dateStr}.zip`;
-    downloadBlob(blob, filename);
-
+    zip.file('README.txt', `نسخة احتياطية من نظام إدارة الطلبات\n=====================================\nالمستودع: ${GITHUB_OWNER}/${GITHUB_REPO}\nالفرع: ${GITHUB_BRANCH}\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n⚠️ تحذير: هذه النسخة غير مشفرة — احفظها في مكان آمن\n\nالمحتوى:\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n  - data/meta.json\n  - backup-info.json\n`);
+    const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 9 } });
+    downloadBlob(blob, `${GITHUB_REPO}_backup_${dateStr}.zip`);
     hideLoading();
     toast(`تم إنشاء النسخة (${(blob.size / 1024).toFixed(1)} KB) — بدون تشفير`, 'success');
-  } catch (e) {
-    hideLoading();
-    toast('فشل إنشاء النسخة: ' + e.message, 'error');
-  }
+  } catch (e) { hideLoading(); toast('فشل إنشاء النسخة: ' + e.message, 'error'); }
 };
-
 window.resetAll = async function () {
   if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
   const ok = await dialog.danger('سيتم حذف جميع الطلبات والسجل نهائياً.');
@@ -3050,7 +2631,6 @@ window.resetAll = async function () {
   try { await persistKeys(['orders', 'ready', 'log']); renderDashboard(); toast('تم تصفير النظام', 'success'); }
   catch (e) { toast(e.message, 'error'); }
 };
-
 window.exportLogCSV = function () {
   const data = getLogFilteredData();
   if (!data.length) { toast('السجل فارغ', 'error'); return; }
@@ -3073,7 +2653,6 @@ window.closeModal = id => document.getElementById(id).classList.remove('active')
 window.getActiveModal = () => document.querySelector('.modal-bg.active');
 document.querySelectorAll('.modal-bg').forEach(m => { m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }); });
 window.showShortcuts = () => openModal('shortcutsModal');
-
 function handleEnterNavigation(e) {
   if (e.key !== 'Enter') return;
   const el = e.target;
@@ -3100,15 +2679,12 @@ function handleEnterNavigation(e) {
   e.preventDefault();
   const modal = el.closest('.modal');
   if (!modal) return;
-  const fields = Array.from(modal.querySelectorAll('input:not([type=hidden]):not([disabled]), select, textarea'))
-    .filter(f => f.offsetParent !== null && !f.readOnly);
+  const fields = Array.from(modal.querySelectorAll('input:not([type=hidden]):not([disabled]), select, textarea')).filter(f => f.offsetParent !== null && !f.readOnly);
   const idx = fields.indexOf(el);
   if (idx === -1) return;
   const nextIdx = e.shiftKey ? idx - 1 : idx + 1;
-  if (nextIdx >= 0 && nextIdx < fields.length) {
-    fields[nextIdx].focus();
-    if (fields[nextIdx].select) fields[nextIdx].select();
-  } else if (!e.shiftKey) {
+  if (nextIdx >= 0 && nextIdx < fields.length) { fields[nextIdx].focus(); if (fields[nextIdx].select) fields[nextIdx].select(); }
+  else if (!e.shiftKey) {
     const mid = modal.parentElement.id;
     if (mid === 'orderModal') saveOrder();
     else if (mid === 'customerModal') saveCustomer();
@@ -3116,55 +2692,23 @@ function handleEnterNavigation(e) {
     else if (mid === 'tokenModal') saveNewToken();
   }
 }
-['orderModal','customerModal','userModal','tokenModal'].forEach(id => {
-  const m = document.getElementById(id);
-  if (m) m.addEventListener('keydown', handleEnterNavigation);
-});
-
-function isInInput() {
-  const t = document.activeElement?.tagName;
-  return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT';
-}
+['orderModal','customerModal','userModal','tokenModal'].forEach(id => { const m = document.getElementById(id); if (m) m.addEventListener('keydown', handleEnterNavigation); });
+function isInInput() { const t = document.activeElement?.tagName; return t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT'; }
 window.addEventListener('keydown', e => {
   const inInput = isInInput();
   const activeModal = getActiveModal();
   const dialogActive = document.getElementById('dialogBg').classList.contains('active');
-  if (dialogActive) {
-    if (e.key === 'Enter') { e.preventDefault(); dialogResolve(true); }
-    if (e.key === 'Escape') { e.preventDefault(); dialogResolve(false); }
-    return;
-  }
+  if (dialogActive) { if (e.key === 'Enter') { e.preventDefault(); dialogResolve(true); } if (e.key === 'Escape') { e.preventDefault(); dialogResolve(false); } return; }
   if (e.key === 'Escape' && activeModal) { activeModal.classList.remove('active'); return; }
   if (e.key === 'F1') { e.preventDefault(); showShortcuts(); return; }
-
   if (e.ctrlKey || e.metaKey) {
     const c = e.code;
     if (c === 'Equal' || c === 'NumpadAdd') { e.preventDefault(); zoomIn(); return; }
     if (c === 'Minus' || c === 'NumpadSubtract') { e.preventDefault(); zoomOut(); return; }
     if (c === 'Digit0' || c === 'Numpad0') { e.preventDefault(); zoomReset(); return; }
-    if (c === 'KeyS') {
-      e.preventDefault();
-      if (activeModal?.id === 'orderModal') saveOrder();
-      else if (activeModal?.id === 'customerModal') saveCustomer();
-      else if (activeModal?.id === 'userModal') saveUser();
-      else if (activeModal?.id === 'tokenModal') saveNewToken();
-      return;
-    }
-    if (c === 'KeyK') {
-      e.preventDefault();
-      const p = document.querySelector('.page.active')?.id?.replace('page-', '');
-      if (p === 'entry') document.getElementById('searchEntry')?.focus();
-      if (p === 'log') document.getElementById('filterLogName')?.focus();
-      if (p === 'customers') document.getElementById('searchCustomers')?.focus();
-      return;
-    }
-    if (c === 'KeyP') {
-      e.preventDefault();
-      if (document.getElementById('page-ready').classList.contains('active')) printReady();
-      else if (document.getElementById('page-log').classList.contains('active')) printLog();
-      else window.print();
-      return;
-    }
+    if (c === 'KeyS') { e.preventDefault(); if (activeModal?.id === 'orderModal') saveOrder(); else if (activeModal?.id === 'customerModal') saveCustomer(); else if (activeModal?.id === 'userModal') saveUser(); else if (activeModal?.id === 'tokenModal') saveNewToken(); return; }
+    if (c === 'KeyK') { e.preventDefault(); const p = document.querySelector('.page.active')?.id?.replace('page-', ''); if (p === 'entry') document.getElementById('searchEntry')?.focus(); if (p === 'log') document.getElementById('filterLogName')?.focus(); if (p === 'customers') document.getElementById('searchCustomers')?.focus(); return; }
+    if (c === 'KeyP') { e.preventDefault(); if (document.getElementById('page-ready').classList.contains('active')) printReady(); else if (document.getElementById('page-log').classList.contains('active')) printLog(); else window.print(); return; }
     return;
   }
   if (e.altKey) {
@@ -3177,17 +2721,13 @@ window.addEventListener('keydown', e => {
       if (c === 'KeyW') { e.preventDefault(); document.getElementById('orderStatus').value = 'قيد التجهيز'; toast('قيد التجهيز', 'info'); return; }
     }
     if (!activeModal) {
-      if (c === 'Digit1' || c === 'Numpad1') { e.preventDefault(); go('dashboard'); return; }
-      if (c === 'Digit2' || c === 'Numpad2') { e.preventDefault(); go('entry'); return; }
-      if (c === 'Digit3' || c === 'Numpad3') { e.preventDefault(); go('ready'); return; }
-      if (c === 'Digit4' || c === 'Numpad4') { e.preventDefault(); go('log'); return; }
+      if (c === 'Digit1' || c === 'Numpad1') { e.preventDefault(); if (hasPerm('accessDashboard')) go('dashboard'); return; }
+      if (c === 'Digit2' || c === 'Numpad2') { e.preventDefault(); if (hasPerm('accessEntry')) go('entry'); return; }
+      if (c === 'Digit3' || c === 'Numpad3') { e.preventDefault(); if (hasPerm('accessReady')) go('ready'); return; }
+      if (c === 'Digit4' || c === 'Numpad4') { e.preventDefault(); if (hasPerm('accessLog')) go('log'); return; }
       if (c === 'Digit5' || c === 'Numpad5') { e.preventDefault(); if (hasPerm('accessCustomers')) go('customers'); return; }
-      if (c === 'KeyN') { e.preventDefault(); addOrder(); return; }
-      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) {
-        e.preventDefault();
-        if (!selectedOrderId) { toast('اختر طلباً أولاً', 'warning'); return; }
-        transferSingle(selectedOrderId); return;
-      }
+      if (c === 'KeyN') { e.preventDefault(); if (hasPerm('addOrder')) addOrder(); return; }
+      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; } if (!selectedOrderId) { toast('اختر طلباً أولاً', 'warning'); return; } transferSingle(selectedOrderId); return; }
       if (c === 'KeyB' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); bulkTransfer(); return; }
       if (c === 'KeyM' && document.getElementById('page-ready').classList.contains('active')) { e.preventDefault(); moveReadyToLog(); return; }
       if (c === 'KeyD') { e.preventDefault(); toggleTheme(); return; }
@@ -3196,10 +2736,9 @@ window.addEventListener('keydown', e => {
   }
   if (!inInput && !activeModal && e.key === 'Delete') {
     const p = document.querySelector('.page.active')?.id?.replace('page-', '');
-    if (p === 'entry' && selectedOrderId) { e.preventDefault(); deleteOrder(selectedOrderId); }
+    if (p === 'entry' && selectedOrderId && hasPerm('deleteOrder')) { e.preventDefault(); deleteOrder(selectedOrderId); }
   }
 });
-
 ['orderInvoice','orderCustomer','orderLocation','orderStatus','orderPay','orderDriver','orderDriverPhone','orderNotes','orderBranch'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => { clearTimeout(el._t); el._t = setTimeout(saveDraft, 1500); });
@@ -3207,16 +2746,13 @@ window.addEventListener('keydown', e => {
 document.getElementById('orderModal')?.addEventListener('click', e => { if (e.target.tagName === 'INPUT') e.target.classList.remove('field-error'); });
 
 window.addEventListener('DOMContentLoaded', () => {
-  buildUI();
   initTheme();
   updateTokenStatus();
   loadLastUser();
   initCustomerSearch();
-
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginToken').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
-
   setTimeout(() => { if (localStorage.getItem(DRAFT_KEY)) document.getElementById('draftBadge').classList.add('show'); }, 500);
 });
 </script>
