@@ -46,10 +46,7 @@
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
   }
 
-  .ico {
-    display: inline-block; flex-shrink: 0; vertical-align: middle;
-    pointer-events: none; outline: none;
-  }
+  .ico { display: inline-block; flex-shrink: 0; vertical-align: middle; pointer-events: none; outline: none; }
 
   .btn {
     height: var(--btn-h); padding: 0 16px;
@@ -120,10 +117,7 @@
     box-shadow: 0 30px 80px rgba(0,0,0,.35);
     animation: slideUp .4s ease;
   }
-  .login-logo {
-    text-align: center; margin-bottom: 8px;
-    display: flex; justify-content: center; color: var(--dark-blue);
-  }
+  .login-logo { text-align: center; margin-bottom: 8px; display: flex; justify-content: center; color: var(--dark-blue); }
   .login-logo svg { width: 54px; height: 54px; display: block; }
   .login-box h1 { color: var(--dark-blue); margin-bottom: 6px; font-size: 24px; text-align: center; font-weight: 700; }
   .login-box .subtitle { color: var(--text-muted); margin-bottom: 28px; font-size: 13px; text-align: center; }
@@ -147,10 +141,7 @@
   .login-box button.primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(31,78,121,.35); }
   .login-box button.primary:disabled { opacity: .6; cursor: not-allowed; }
 
-  .token-status {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-top: 10px;
-  }
+  .token-status { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-top: 10px; }
   .token-status.saved { background: #d4edda; color: #155724; }
   .token-status.missing { background: #fff3cd; color: #856404; }
   .token-status button {
@@ -276,11 +267,7 @@
     background: rgba(46,117,182,.12); color: var(--blue);
   }
   .stat .stat-icon svg { width: 18px; height: 18px; }
-  .stat .trend {
-    font-size: 11px; font-weight: 700;
-    display: inline-flex; align-items: center; gap: 3px;
-    padding: 3px 7px; border-radius: 10px;
-  }
+  .stat .trend { font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; padding: 3px 7px; border-radius: 10px; }
   .stat .trend.up   { color: #1a7f37; background: #d4f5dd; }
   .stat .trend.down { color: #a42029; background: #fbdde0; }
   .stat .trend.flat { color: #6c757d; background: #e9ecef; }
@@ -299,10 +286,7 @@
   .analytics-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; margin-bottom: 22px; }
   @media (max-width: 1100px) { .analytics-row { grid-template-columns: 1fr; } }
   .analytics-card { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .analytics-card h4 {
-    color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
-    display: flex !important; align-items: center; gap: 8px;
-  }
+  .analytics-card h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700; display: flex !important; align-items: center; gap: 8px; }
   .analytics-card h4 .ico { width: 16px; height: 16px; }
 
   .donut-wrap { display: flex; align-items: center; gap: 22px; }
@@ -319,18 +303,10 @@
   .legend-item .val { font-weight: 700; color: var(--text); }
 
   .top-list { display: flex; flex-direction: column; gap: 8px; }
-  .top-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 8px 10px; border-radius: 8px;
-    background: rgba(0,0,0,.03); font-size: 12.5px; transition: var(--transition);
-  }
+  .top-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(0,0,0,.03); font-size: 12.5px; transition: var(--transition); }
   [data-theme="dark"] .top-item { background: rgba(255,255,255,.04); }
   .top-item:hover { background: rgba(46,117,182,.08); }
-  .top-item .rank {
-    width: 22px; height: 22px; border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; flex-shrink: 0;
-  }
+  .top-item .rank { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; flex-shrink: 0; }
   .top-item .rank.gold   { background: linear-gradient(135deg,#f5b800,#ffc107); color:#333; }
   .top-item .rank.silver { background: linear-gradient(135deg,#adb5bd,#dee2e6); color:#333; }
   .top-item .rank.bronze { background: linear-gradient(135deg,#a0522d,#cd7f32); color:#fff; }
@@ -339,49 +315,29 @@
   .empty-top { color: var(--text-muted); text-align: center; padding: 18px 0; font-size: 12.5px; }
 
   .sparkline { background: var(--card-bg); padding: 20px 22px; border-radius: 14px; box-shadow: var(--shadow-sm); }
-  .sparkline h4 {
-    color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700;
-    display: flex !important; align-items: center; gap: 8px;
-  }
+  .sparkline h4 { color: var(--dark-blue); font-size: 14px; margin-bottom: 16px; font-weight: 700; display: flex !important; align-items: center; gap: 8px; }
   .sparkline h4 .ico { width: 16px; height: 16px; }
   .sparkline svg { width: 100%; height: 90px; }
 
   .toolbar { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .filter-bar {
-    display: flex !important; gap: 11px; flex-wrap: wrap; align-items: center;
-    padding: 13px 16px; background: var(--card-bg); border-radius: 12px;
-    margin-bottom: 14px; box-shadow: var(--shadow-sm);
-    border-right: 4px solid var(--blue);
-  }
+  .filter-bar { display: flex !important; gap: 11px; flex-wrap: wrap; align-items: center; padding: 13px 16px; background: var(--card-bg); border-radius: 12px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-right: 4px solid var(--blue); }
   .filter-bar > span { display: inline-flex; align-items: center; gap: 5px; }
   .filter-bar label { font-size: 12px; color: var(--text); font-weight: 600; }
   .filter-bar input, .filter-bar select { width: auto; padding: 7px 11px; font-size: 12.5px; height: 34px; }
   .filter-bar .btn { height: 34px; padding: 0 13px; font-size: 12.5px; }
 
-  input, select, textarea {
-    padding: 10px 13px; border: 2px solid var(--border); border-radius: 9px;
-    font-size: 13.5px; font-family: inherit; width: 100%;
-    transition: var(--transition); background: var(--card-bg); color: var(--text);
-  }
+  input, select, textarea { padding: 10px 13px; border: 2px solid var(--border); border-radius: 9px; font-size: 13.5px; font-family: inherit; width: 100%; transition: var(--transition); background: var(--card-bg); color: var(--text); }
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(46,117,182,.1); }
   textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
 
-  .field-error {
-    border-color: var(--red) !important;
-    box-shadow: 0 0 0 4px rgba(220,53,69,.12) !important;
-    animation: shake .3s ease;
-  }
+  .field-error { border-color: var(--red) !important; box-shadow: 0 0 0 4px rgba(220,53,69,.12) !important; animation: shake .3s ease; }
   .field-error-msg { color: var(--red); font-size: 11.5px; margin-top: 5px; display: none; font-weight: 600; }
   .field-error-msg.show { display: block; }
   .field-required::after { content: ' *'; color: var(--red); font-weight: 700; }
 
   .table-wrap { background: var(--card-bg); border-radius: 12px; overflow: auto; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; min-width: 1300px; }
-  th {
-    background: linear-gradient(135deg, var(--dark-blue), #2a5d8f);
-    color: #fff; padding: 13px 11px; text-align: right;
-    font-size: 12px; font-weight: 600; position: sticky; top: 0; z-index: 1; white-space: nowrap;
-  }
+  table { width: 100%; border-collapse: collapse; min-width: 1400px; }
+  th { background: linear-gradient(135deg, var(--dark-blue), #2a5d8f); color: #fff; padding: 13px 11px; text-align: right; font-size: 12px; font-weight: 600; position: sticky; top: 0; z-index: 1; white-space: nowrap; }
   td { padding: 11px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: top; }
   tbody tr { cursor: pointer; transition: var(--transition); }
   tbody tr:nth-child(even) { background: rgba(0,0,0,.02); }
@@ -394,51 +350,26 @@
   tbody tr.selected { outline: 2px solid var(--blue); outline-offset: -2px; background: rgba(46,117,182,.15) !important; }
   .empty-row td { text-align: center; color: var(--text-muted); padding: 50px 20px; font-size: 13px; }
   .empty-state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 20px; }
-  .empty-state .icon {
-    width: 60px; height: 60px; border-radius: 50%;
-    display: inline-flex !important; align-items: center; justify-content: center;
-    background: rgba(46,117,182,.1); color: var(--blue);
-  }
+  .empty-state .icon { width: 60px; height: 60px; border-radius: 50%; display: inline-flex !important; align-items: center; justify-content: center; background: rgba(46,117,182,.1); color: var(--blue); }
   .empty-state .icon svg { width: 26px; height: 26px; }
   .empty-state .title { font-size: 14.5px; font-weight: 600; color: var(--text); }
   .empty-state .desc { font-size: 12.5px; color: var(--text-muted); }
 
-  .note-cell {
-    max-width: 180px; min-width: 120px;
-    white-space: normal; word-break: break-word;
-    font-size: 11.5px; color: var(--text-muted);
-    line-height: 1.5; vertical-align: top;
-    padding-top: 11px; padding-bottom: 11px;
-  }
+  .note-cell { max-width: 180px; min-width: 120px; white-space: normal; word-break: break-word; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; vertical-align: top; padding-top: 11px; padding-bottom: 11px; }
   .note-cell .note-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 4px 10px; border-radius: 12px;
-    font-size: 11px; font-weight: 700; letter-spacing: .2px;
-  }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: .2px; }
   .badge-ready    { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
   .badge-progress { background: linear-gradient(135deg,#f5b800,#ffc107); color: #333; }
   .badge-paid     { background: linear-gradient(135deg,#28a745,#4bc760); color: #fff; }
   .badge-unpaid   { background: linear-gradient(135deg,#dc3545,#e4606d); color: #fff; }
   .badge-vip      { background: linear-gradient(135deg,#6f42c1,#8a5cd4); color: #fff; }
+  .badge-branch   { background: rgba(46,117,182,.12); color: var(--dark-blue); border: 1px solid rgba(46,117,182,.25); }
 
-  .section-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 16px; padding-bottom: 13px;
-    border-bottom: 2px solid var(--light-blue); flex-wrap: wrap; gap: 11px;
-  }
-  .section-header h2 {
-    color: var(--dark-blue); font-size: 19px; font-weight: 700;
-    display: inline-flex !important; align-items: center; gap: 9px;
-  }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 2px solid var(--light-blue); flex-wrap: wrap; gap: 11px; }
+  .section-header h2 { color: var(--dark-blue); font-size: 19px; font-weight: 700; display: inline-flex !important; align-items: center; gap: 9px; }
   .section-header h2 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
-  .section-header .hint {
-    font-size: 11px; color: var(--text-muted);
-    background: rgba(0,0,0,.05); padding: 7px 13px; border-radius: 20px;
-    border: 1px solid var(--border);
-    display: inline-flex !important; align-items: center; gap: 6px;
-  }
+  .section-header .hint { font-size: 11px; color: var(--text-muted); background: rgba(0,0,0,.05); padding: 7px 13px; border-radius: 20px; border: 1px solid var(--border); display: inline-flex !important; align-items: center; gap: 6px; }
   [data-theme="dark"] .section-header .hint { background: rgba(255,255,255,.05); }
   .section-header .hint kbd { background: rgba(0,0,0,.1); }
 
@@ -448,45 +379,19 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-  .modal-bg {
-    display: none; position: fixed; inset: 0; background: rgba(10,20,35,.65);
-    z-index: 1000; align-items: center; justify-content: center;
-    padding: 20px; overflow-y: auto; backdrop-filter: blur(3px);
-  }
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(10,20,35,.65); z-index: 1000; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; backdrop-filter: blur(3px); }
   .modal-bg.active { display: flex; animation: fadeIn .15s; }
-  .modal {
-    background: var(--card-bg); padding: 28px; border-radius: 16px;
-    width: 90%; max-width: 620px; max-height: 92vh; overflow-y: auto;
-    box-shadow: 0 30px 80px rgba(0,0,0,.35);
-    animation: slideUp .25s ease; color: var(--text);
-  }
-  .modal h3 {
-    color: var(--dark-blue); margin-bottom: 18px; font-size: 18px; font-weight: 700;
-    display: flex !important; align-items: center; gap: 10px; line-height: 1.4;
-  }
+  .modal { background: var(--card-bg); padding: 28px; border-radius: 16px; width: 90%; max-width: 620px; max-height: 92vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,.35); animation: slideUp .25s ease; color: var(--text); }
+  .modal h3 { color: var(--dark-blue); margin-bottom: 18px; font-size: 18px; font-weight: 700; display: flex !important; align-items: center; gap: 10px; line-height: 1.4; }
   .modal h3 .ico { width: 20px; height: 20px; color: var(--dark-blue); }
   .modal label { display: block; margin: 13px 0 6px; font-size: 12.5px; color: var(--text); font-weight: 600; }
   .modal-actions { display: flex; gap: 9px; margin-top: 22px; justify-content: flex-end; flex-wrap: wrap; }
   .modal-actions .btn { min-width: 105px; }
 
-  .dialog-bg {
-    display: none; position: fixed; inset: 0;
-    background: rgba(10,20,35,.7); z-index: 2000;
-    align-items: center; justify-content: center; padding: 20px;
-    backdrop-filter: blur(4px);
-  }
+  .dialog-bg { display: none; position: fixed; inset: 0; background: rgba(10,20,35,.7); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
   .dialog-bg.active { display: flex; animation: fadeIn .15s; }
-  .dialog {
-    background: var(--card-bg); padding: 30px 26px; border-radius: 16px;
-    width: 100%; max-width: 460px; color: var(--text);
-    box-shadow: 0 30px 80px rgba(0,0,0,.4);
-    animation: slideUp .25s ease; text-align: center;
-  }
-  .dialog-icon {
-    margin-bottom: 14px;
-    display: inline-flex !important; align-items: center; justify-content: center;
-    width: 76px; height: 76px; border-radius: 50%;
-  }
+  .dialog { background: var(--card-bg); padding: 30px 26px; border-radius: 16px; width: 100%; max-width: 460px; color: var(--text); box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: slideUp .25s ease; text-align: center; }
+  .dialog-icon { margin-bottom: 14px; display: inline-flex !important; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%; }
   .dialog-icon svg { width: 34px; height: 34px; }
   .dialog-icon.info    { background: rgba(46,117,182,.15); color: var(--blue); }
   .dialog-icon.warning { background: rgba(255,193,7,.18); color: #b38600; }
@@ -497,26 +402,10 @@
   .dialog-actions { display: flex; gap: 9px; justify-content: center; }
   .dialog-actions .btn { min-width: 105px; }
 
-  .toast-container {
-    position: fixed; bottom: 22px; left: 22px;
-    z-index: 3000; display: flex; flex-direction: column; gap: 9px;
-    pointer-events: none; max-width: 360px;
-  }
-  .toast {
-    background: var(--card-bg); color: var(--text);
-    padding: 12px 16px; border-radius: 11px; font-size: 13px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-    border-right: 4px solid var(--blue);
-    opacity: 0; transform: translateX(-30px); transition: .3s;
-    pointer-events: auto; display: flex !important; align-items: center; gap: 10px;
-    font-weight: 500;
-  }
+  .toast-container { position: fixed; bottom: 22px; left: 22px; z-index: 3000; display: flex; flex-direction: column; gap: 9px; pointer-events: none; max-width: 360px; }
+  .toast { background: var(--card-bg); color: var(--text); padding: 12px 16px; border-radius: 11px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.2); border-right: 4px solid var(--blue); opacity: 0; transform: translateX(-30px); transition: .3s; pointer-events: auto; display: flex !important; align-items: center; gap: 10px; font-weight: 500; }
   .toast.show { opacity: 1; transform: translateX(0); }
-  .toast .toast-icon {
-    width: 24px; height: 24px; border-radius: 50%;
-    display: inline-flex !important; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  .toast .toast-icon { width: 24px; height: 24px; border-radius: 50%; display: inline-flex !important; align-items: center; justify-content: center; flex-shrink: 0; }
   .toast.success .toast-icon { background: rgba(40,167,69,.15); color: var(--green); }
   .toast.error   .toast-icon { background: rgba(220,53,69,.15); color: var(--red); }
   .toast.info    .toast-icon { background: rgba(46,117,182,.15); color: var(--blue); }
@@ -527,14 +416,7 @@
   .toast.warning { border-right-color: var(--yellow); }
 
   .tabs { display: flex; gap: 3px; border-bottom: 2px solid var(--light-blue); margin-bottom: 20px; flex-wrap: wrap; }
-  .tab-btn {
-    padding: 11px 18px; background: transparent; border: none;
-    cursor: pointer; font-size: 13px; color: var(--text-muted);
-    border-bottom: 3px solid transparent; transition: var(--transition);
-    font-weight: 600; border-radius: 6px 6px 0 0;
-    font-family: inherit;
-    display: inline-flex !important; align-items: center; gap: 7px;
-  }
+  .tab-btn { padding: 11px 18px; background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--text-muted); border-bottom: 3px solid transparent; transition: var(--transition); font-weight: 600; border-radius: 6px 6px 0 0; font-family: inherit; display: inline-flex !important; align-items: center; gap: 7px; }
   .tab-btn > * { display: inline-flex; align-items: center; line-height: 1; }
   .tab-btn .ico { width: 15px; height: 15px; }
   .tab-btn:hover { color: var(--dark-blue); background: rgba(46,117,182,.06); }
@@ -543,36 +425,19 @@
   .perm-section { margin-top: 20px; padding-top: 18px; border-top: 2px dashed var(--border); }
   .perm-section h4 { color: var(--dark-blue); font-size: 13.5px; margin-bottom: 13px; font-weight: 700; }
   .perm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-  .perm-item {
-    display: flex; align-items: center; gap: 9px;
-    padding: 9px 12px; background: rgba(0,0,0,.03); border-radius: 8px;
-    cursor: pointer; font-size: 12px; transition: var(--transition);
-    border: 2px solid transparent; font-weight: 500;
-  }
+  .perm-item { display: flex; align-items: center; gap: 9px; padding: 9px 12px; background: rgba(0,0,0,.03); border-radius: 8px; cursor: pointer; font-size: 12px; transition: var(--transition); border: 2px solid transparent; font-weight: 500; }
   [data-theme="dark"] .perm-item { background: rgba(255,255,255,.05); }
   .perm-item:hover { background: var(--light-blue); }
   .perm-item.checked { background: #d4edda; border-color: #7ec98d; }
   [data-theme="dark"] .perm-item.checked { background: #1a4a2a; border-color: #4caf50; }
   .perm-item input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--green); flex-shrink: 0; }
-  .perm-note {
-    background: #fff3cd; border: 1px solid #ffc107;
-    padding: 11px 14px; border-radius: 10px;
-    font-size: 12px; color: #856404; margin-top: 13px; line-height: 1.6;
-  }
+  .perm-note { background: #fff3cd; border: 1px solid #ffc107; padding: 11px 14px; border-radius: 10px; font-size: 12px; color: #856404; margin-top: 13px; line-height: 1.6; }
   [data-theme="dark"] .perm-note { background: #4d3a10; border-color: #8a6914; color: #ffd54f; }
 
   .customer-search { position: relative; }
-  .customer-dropdown {
-    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-    background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px;
-    max-height: 260px; overflow-y: auto; display: none;
-    box-shadow: 0 12px 32px rgba(0,0,0,.18); z-index: 200;
-  }
+  .customer-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; max-height: 260px; overflow-y: auto; display: none; box-shadow: 0 12px 32px rgba(0,0,0,.18); z-index: 200; }
   .customer-dropdown.show { display: block; }
-  .customer-option {
-    padding: 11px 15px; cursor: pointer;
-    border-bottom: 1px solid var(--border); font-size: 12.5px; transition: var(--transition);
-  }
+  .customer-option { padding: 11px 15px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 12.5px; transition: var(--transition); }
   .customer-option:last-child { border-bottom: none; }
   .customer-option:hover, .customer-option.active { background: var(--light-blue); }
   .customer-option .code { color: var(--text-muted); font-size: 10.5px; margin-right: 6px; }
@@ -582,17 +447,9 @@
   .customer-option.create:hover { background: #d4edda; }
   [data-theme="dark"] .customer-option.create:hover { background: #1a4a2a; }
 
-  .template-card {
-    background: var(--card-bg); border: 2px solid var(--border);
-    border-radius: 12px; padding: 20px; margin-bottom: 15px;
-    transition: var(--transition);
-  }
+  .template-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: var(--transition); }
   .template-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); }
-  .template-card h4 {
-    color: var(--dark-blue); margin-bottom: 15px; font-size: 14px;
-    display: flex !important; align-items: center; gap: 8px;
-    padding-bottom: 10px; border-bottom: 2px solid var(--light-blue);
-  }
+  .template-card h4 { color: var(--dark-blue); margin-bottom: 15px; font-size: 14px; display: flex !important; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 2px solid var(--light-blue); }
   .template-card h4 .ico { width: 17px; height: 17px; }
   .template-row { display: grid; grid-template-columns: 170px 1fr; gap: 11px; align-items: center; margin-bottom: 11px; }
   .template-row label { font-size: 12.5px; color: var(--text); font-weight: 600; }
@@ -601,49 +458,23 @@
   .toggle-row input { width: 17px; height: 17px; cursor: pointer; accent-color: var(--green); }
   .toggle-row label { cursor: pointer; }
 
-  .logo-preview {
-    margin-top: 11px; padding: 11px; background: rgba(0,0,0,.03);
-    border-radius: 10px; border: 2px dashed var(--border);
-    text-align: center; min-height: 80px;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .logo-preview { margin-top: 11px; padding: 11px; background: rgba(0,0,0,.03); border-radius: 10px; border: 2px dashed var(--border); text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center; }
   [data-theme="dark"] .logo-preview { background: rgba(255,255,255,.03); }
   .logo-preview img { max-width: 100%; max-height: 120px; border-radius: 6px; pointer-events: none; }
   .logo-preview .empty-logo { color: var(--text-muted); font-size: 12.5px; }
 
   .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
-  .shortcut-group h4 {
-    color: var(--dark-blue); margin-bottom: 11px;
-    padding-bottom: 7px; border-bottom: 2px solid var(--light-blue);
-    font-size: 13.5px; font-weight: 700;
-    display: flex !important; align-items: center; gap: 7px;
-  }
+  .shortcut-group h4 { color: var(--dark-blue); margin-bottom: 11px; padding-bottom: 7px; border-bottom: 2px solid var(--light-blue); font-size: 13.5px; font-weight: 700; display: flex !important; align-items: center; gap: 7px; }
   .shortcut-group h4 .ico { width: 15px; height: 15px; }
   .shortcut-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 12.5px; align-items: center; }
   .shortcut-row .keys { display: flex; gap: 4px; }
   .shortcut-row .desc { color: var(--text); font-weight: 500; }
 
-  .connection-banner {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: var(--red); color: #fff; padding: 8px 16px;
-    text-align: center; font-size: 12.5px; font-weight: 600;
-    z-index: 9999; transform: translateY(-100%);
-    transition: transform .3s;
-    display: flex !important; align-items: center; justify-content: center; gap: 8px;
-  }
+  .connection-banner { position: fixed; top: 0; left: 0; right: 0; background: var(--red); color: #fff; padding: 8px 16px; text-align: center; font-size: 12.5px; font-weight: 600; z-index: 9999; transform: translateY(-100%); transition: transform .3s; display: flex !important; align-items: center; justify-content: center; gap: 8px; }
   .connection-banner.show { transform: translateY(0); }
   .connection-banner .ico { width: 14px; height: 14px; }
 
-  .draft-badge {
-    position: fixed; bottom: 22px; right: 22px;
-    background: linear-gradient(135deg, #ffc107, #ffb300); color: #333;
-    padding: 10px 15px; border-radius: 24px;
-    font-size: 12px; font-weight: 700;
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
-    display: none !important; align-items: center; gap: 8px;
-    cursor: pointer; z-index: 2500;
-    animation: slideInRight .3s ease;
-  }
+  .draft-badge { position: fixed; bottom: 22px; right: 22px; background: linear-gradient(135deg, #ffc107, #ffb300); color: #333; padding: 10px 15px; border-radius: 24px; font-size: 12px; font-weight: 700; box-shadow: 0 6px 20px rgba(0,0,0,.2); display: none !important; align-items: center; gap: 8px; cursor: pointer; z-index: 2500; animation: slideInRight .3s ease; }
   .draft-badge.show { display: inline-flex !important; }
   .draft-badge .ico { width: 14px; height: 14px; }
   @keyframes slideInRight { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -701,7 +532,7 @@
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
     <h1>نظام إدارة الطلبات</h1>
-    <p class="subtitle">قاعدة بيانات مشتركة عبر GitHub</p>
+    <p class="subtitle">قاعدة بيانات مشتركة مشفّرة عبر GitHub</p>
 
     <div id="tokenStatus"></div>
 
@@ -710,6 +541,7 @@
       <input id="loginToken" type="password" placeholder="أدخل الرمز هنا" autocomplete="off">
       <div class="token-help">
         احصل على الرمز من إعدادات GitHub — الصلاحية: <b>Contents: Read and write</b>
+        <br>🔐 يُستخدم هذا الرمز أيضاً لتشفير البيانات تلقائياً
       </div>
     </div>
 
@@ -768,8 +600,8 @@
           <div class="top-list" id="topCustomers"></div>
         </div>
         <div class="analytics-card">
-          <h4 id="topDrvTitle"></h4>
-          <div class="top-list" id="topDrivers"></div>
+          <h4 id="topBranchTitle"></h4>
+          <div class="top-list" id="topBranches"></div>
         </div>
       </div>
       <div class="sparkline">
@@ -831,6 +663,7 @@
       <div class="section-header"><h2 id="settingsTitle"></h2></div>
       <div class="tabs" id="settingsTabs"></div>
       <div id="tab-token" class="tab-panel"></div>
+      <div id="tab-branches" class="tab-panel" style="display:none;"></div>
       <div id="tab-drivers" class="tab-panel" style="display:none;"></div>
       <div id="tab-users" class="tab-panel" style="display:none;"></div>
       <div id="tab-templates" class="tab-panel" style="display:none;"></div>
@@ -847,6 +680,9 @@
   <label class="field-required">رقم الفاتورة</label>
   <input id="orderInvoice" autocomplete="off" placeholder="مثال: 1001">
   <div class="field-error-msg" id="err-orderInvoice"></div>
+  <label class="field-required">الفرع</label>
+  <select id="orderBranch"></select>
+  <div class="field-error-msg" id="err-orderBranch"></div>
   <label class="field-required">العميل</label>
   <div class="customer-search">
     <input id="orderCustomer" autocomplete="off" placeholder="اكتب للبحث أو اختر من القائمة...">
@@ -919,11 +755,15 @@
 
 <div id="tokenModal" class="modal-bg"><div class="modal">
   <h3 id="tokenModalTitle"></h3>
+  <div class="perm-note" style="margin-bottom:14px;">
+    ⚠️ سيتم <b>إعادة تشفير جميع البيانات</b> بالرمز الجديد تلقائياً.<br>
+    تأكد من أن الرمز الجديد صحيح قبل الحفظ.
+  </div>
   <label>الرمز الجديد</label>
   <input id="newTokenInput" type="password" autocomplete="off">
   <div class="modal-actions">
     <button class="btn btn-gray" onclick="closeModal('tokenModal')">إلغاء</button>
-    <button class="btn btn-primary" onclick="saveNewToken()">حفظ</button>
+    <button class="btn btn-primary" onclick="saveNewToken()">حفظ وإعادة تشفير</button>
   </div>
 </div></div>
 
@@ -949,8 +789,6 @@
 </div>
 
 <div id="toastContainer" class="toast-container"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5LXC31PKgxz93Qitaijw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
 /* ==============================================================
@@ -1006,6 +844,8 @@ const I = {
   stats: 'M18 20V10 M12 20V4 M6 20v-6',
   package: 'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
   award: 'M12 15a7 7 0 100-14 7 7 0 000 14z M8.21 13.89L7 23l5-3 5 3-1.21-9.12',
+  building: 'M3 21h18 M5 21V7l8-4v18 M19 21V11l-6-4 M9 9h0 M9 12h0 M9 15h0 M9 18h0',
+  branch: 'M6 3v12 M18 9a3 3 0 100-6 3 3 0 000 6z M6 21a3 3 0 100-6 3 3 0 000 6z M15 6a9 9 0 01-9 9',
   grid: 'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
   layers: 'M12 2L2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5',
   bell: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 01-3.46 0'
@@ -1030,11 +870,19 @@ const TOKEN_KEY = 'oms_github_token';
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 
 const FILES = {
-  users: 'data/users.json', orders: 'data/orders.json', ready: 'data/ready.json',
-  log: 'data/log.json', customers: 'data/customers.json', drivers: 'data/drivers.json',
-  templates: 'data/templates.json', meta: 'data/meta.json'
+  users: 'data/users.json',
+  orders: 'data/orders.json',
+  ready: 'data/ready.json',
+  log: 'data/log.json',
+  customers: 'data/customers.json',
+  drivers: 'data/drivers.json',
+  branches: 'data/branches.json',
+  templates: 'data/templates.json',
+  meta: 'data/meta.json'
 };
-const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers', 'templates'];
+const DATA_KEYS = ['users', 'orders', 'ready', 'log', 'customers', 'drivers', 'branches', 'templates'];
+
+const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 const PERMISSIONS = {
   accessCustomers: { label: 'فتح العملاء' }, accessSettings: { label: 'فتح الإعدادات' },
@@ -1043,14 +891,16 @@ const PERMISSIONS = {
   bulkTransfer: { label: 'تحويل جماعي' }, moveToLog: { label: 'ترحيل للسجل' },
   print: { label: 'طباعة وتصدير' }, editLog: { label: 'تعديل السجل' },
   deleteLog: { label: 'حذف من السجل' }, manageCustomers: { label: 'إدارة العملاء' },
-  manageDrivers: { label: 'إدارة الموصلين' }, manageUsers: { label: 'إدارة المستخدمين' },
+  manageDrivers: { label: 'إدارة الموصلين' }, manageBranches: { label: 'إدارة الفروع' },
+  manageUsers: { label: 'إدارة المستخدمين' },
   editTemplates: { label: 'تعديل القوالب' }, reset: { label: 'تصفير النظام' }
 };
 const DEFAULT_PERMS = {
   accessCustomers: false, accessSettings: false, addOrder: true, editOrder: true,
   deleteOrder: false, transferSingle: true, bulkTransfer: false, moveToLog: false,
   print: true, editLog: false, deleteLog: false, manageCustomers: false,
-  manageDrivers: false, manageUsers: false, editTemplates: false, reset: false
+  manageDrivers: false, manageBranches: false, manageUsers: false,
+  editTemplates: false, reset: false
 };
 const DEFAULT_TEMPLATES = {
   logo: '',
@@ -1059,6 +909,7 @@ const DEFAULT_TEMPLATES = {
     subtitle: 'التاريخ: {date} — العدد: {count} — المستخدم: {user}',
     footer: 'توقيع الموظف: __________    توقيع الموصل: __________',
     showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
+    showBranch: true,
     fontSize: 12, orientation: 'landscape'
   },
   log: {
@@ -1066,7 +917,8 @@ const DEFAULT_TEMPLATES = {
     subtitle: 'من {from} إلى {to} — العدد: {count} — المستخدم: {user}',
     footer: 'تم الطباعة بواسطة: {user}',
     showNotes: true, showApprovalDate: true, showDriverPhone: true, showPay: true,
-    showArchivedAt: true, fontSize: 11, orientation: 'landscape'
+    showBranch: true, showArchivedAt: true,
+    fontSize: 11, orientation: 'landscape'
   }
 };
 
@@ -1074,7 +926,7 @@ const DEFAULT_TEMPLATES = {
    State
    ============================================================== */
 let currentUser = null;
-let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [], templates: {} };
+let cache = { users: [], orders: [], ready: [], log: [], customers: [], drivers: [], branches: [], templates: {} };
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {}, ETags = {}, localMeta = null;
 let pollTimer = null, syncing = false, selectedOrderId = null;
@@ -1117,6 +969,70 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.shiftKey && (e.code === 'KeyI' || e.code === 'KeyJ' || e.code === 'KeyC')) { e.preventDefault(); return false; }
   if (e.ctrlKey && e.code === 'KeyU') { e.preventDefault(); return false; }
 });
+
+/* ==============================================================
+   ⭐ تشفير تلقائي بالتوكن
+   ============================================================== */
+function tokenSig(token) {
+  let h = 0;
+  const s = String(token || '');
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) - h) + s.charCodeAt(i);
+    h = h & 0x7fffffff;
+  }
+  return h.toString(16).padStart(8, '0');
+}
+
+function deriveKeyBytes(token) {
+  const s = String(token || 'x');
+  const bytes = new TextEncoder().encode(s);
+  if (!bytes.length) return new Uint8Array([0x4f, 0x4d, 0x53, 0x4b, 0x45, 0x59, 0x31, 0x32]);
+  const out = new Uint8Array(bytes.length);
+  for (let i = 0; i < bytes.length; i++) {
+    out[i] = (bytes[i] ^ ((i * 31 + 17) & 0xFF)) & 0xFF;
+  }
+  return out;
+}
+
+function encryptText(text, token) {
+  const sig = tokenSig(token);
+  const payload = sig + '|' + text;
+  const keyBytes = deriveKeyBytes(token);
+  const dataBytes = new TextEncoder().encode(payload);
+  const result = new Uint8Array(dataBytes.length);
+  for (let i = 0; i < dataBytes.length; i++) {
+    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
+  }
+  let binary = '';
+  const chunk = 8192;
+  for (let i = 0; i < result.length; i += chunk) {
+    binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
+  }
+  return 'ENC:v1:' + btoa(binary);
+}
+
+function decryptText(encoded, token) {
+  if (!encoded || !encoded.startsWith('ENC:v1:')) return null;
+  try {
+    const b64 = encoded.substring(7);
+    const binary = atob(b64);
+    const dataBytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) dataBytes[i] = binary.charCodeAt(i);
+    const keyBytes = deriveKeyBytes(token);
+    const result = new Uint8Array(dataBytes.length);
+    for (let i = 0; i < dataBytes.length; i++) {
+      result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
+    }
+    const payload = new TextDecoder().decode(result);
+    const expectedSig = tokenSig(token);
+    if (!payload.startsWith(expectedSig + '|')) return null;
+    return payload.substring(expectedSig.length + 1);
+  } catch { return null; }
+}
+
+function isEncrypted(text) {
+  return typeof text === 'string' && text.startsWith('ENC:v1:');
+}
 
 /* ==============================================================
    Theme
@@ -1224,37 +1140,30 @@ function focusFirstError(modalId) {
 }
 
 /* ==============================================================
-   Base64 + Simple Crypto (XOR + Base64 — works without HTTPS)
+   Base64
    ============================================================== */
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
-function encryptData(text, password) {
-  const encoder = new TextEncoder();
-  const dataBytes = encoder.encode(text);
-  const keyBytes = encoder.encode(password || 'key');
-  const result = new Uint8Array(dataBytes.length);
-  for (let i = 0; i < dataBytes.length; i++) {
-    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-  }
-  let binary = '';
-  const chunk = 8192;
-  for (let i = 0; i < result.length; i += chunk) {
-    binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
-  }
-  return btoa(binary);
-}
-
-function decryptData(b64, password) {
-  const binary = atob(b64);
-  const dataBytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) dataBytes[i] = binary.charCodeAt(i);
-  const keyBytes = new TextEncoder().encode(password || 'key');
-  const result = new Uint8Array(dataBytes.length);
-  for (let i = 0; i < dataBytes.length; i++) {
-    result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-  }
-  return new TextDecoder().decode(result);
+/* ==============================================================
+   JSZip
+   ============================================================== */
+async function ensureJSZip() {
+  if (typeof JSZip !== 'undefined') return true;
+  return new Promise((resolve) => {
+    const existing = document.querySelector('script[data-jszip-loader]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(typeof JSZip !== 'undefined'));
+      existing.addEventListener('error', () => resolve(false));
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    script.setAttribute('data-jszip-loader', '1');
+    script.onload = () => resolve(typeof JSZip !== 'undefined');
+    script.onerror = () => resolve(false);
+    document.head.appendChild(script);
+  });
 }
 
 /* ==============================================================
@@ -1277,7 +1186,7 @@ function updateTokenStatus() {
   if (token) {
     const masked = token.length > 25 ? token.substring(0, 12) + '…' + token.slice(-4) : token;
     statusEl.className = 'token-status saved';
-    statusEl.innerHTML = `<span>${ico('check', 14)} الرمز محفوظ</span>
+    statusEl.innerHTML = `<span>${ico('lock', 14)} الرمز محفوظ (مشفّر)</span>
       <span style="font-family:monospace;font-size:10px;opacity:.7;">${masked}</span>
       <button onclick="showTokenField()">تغيير</button>`;
     fieldEl.style.display = 'none';
@@ -1296,22 +1205,19 @@ function updateCurrentTokenInfo() {
   const el = document.getElementById('currentTokenInfo');
   if (!el) return;
   const token = getStoredToken();
-  el.textContent = token ? `محفوظ (${token.length} حرف)` : 'لا يوجد رمز';
+  if (token) {
+    el.innerHTML = `<div style="color:#28a745;font-weight:700;margin-bottom:6px;">${ico('lock', 13)} مشفّر</div>
+      <div>الطول: ${token.length} حرف</div>
+      <div>بصمة التشفير: <code>${tokenSig(token)}</code></div>
+      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔐 جميع ملفات JSON مشفّرة بهذا الرمز</div>`;
+  } else {
+    el.textContent = 'لا يوجد رمز';
+  }
 }
 function changeToken() {
   document.getElementById('newTokenInput').value = '';
   openModal('tokenModal');
   setTimeout(() => document.getElementById('newTokenInput').focus(), 100);
-}
-function saveNewToken() {
-  const t = document.getElementById('newTokenInput').value.trim();
-  if (!t) { toast('أدخل الرمز', 'error'); return; }
-  saveToken(t);
-  closeModal('tokenModal');
-  toast('تم حفظ الرمز', 'success');
-  updateCurrentTokenInfo();
-  SHAs = {}; ETags = {}; localMeta = null;
-  syncPull();
 }
 
 /* ==============================================================
@@ -1348,6 +1254,9 @@ function renderRateLimitChip() {
   fill.className = 'fill' + (pct < 20 ? ' danger' : pct < 50 ? ' warning' : '');
 }
 
+/* ==============================================================
+   ⭐ قراءة ملف (مع فك التشفير التلقائي)
+   ============================================================== */
 async function ghReadFile(key) {
   const url = `${API_BASE}/${FILES[key]}?ref=${GITHUB_BRANCH}&_=${Date.now()}`;
   let res;
@@ -1366,14 +1275,38 @@ async function ghReadFile(key) {
   SHAs[key] = json.sha;
   const etag = res.headers.get('ETag');
   if (etag) ETags[key] = etag;
-  try { return { notModified: false, data: JSON.parse(decodeBase64(json.content)) }; }
+
+  const raw = decodeBase64(json.content);
+
+  // meta.json نص عادي
+  if (key === 'meta') {
+    try { return { notModified: false, data: JSON.parse(raw) }; }
+    catch { return { notModified: false, data: null }; }
+  }
+
+  // ملف مشفّر → فك بالتوكن الحالي
+  if (isEncrypted(raw)) {
+    const decrypted = decryptText(raw, getStoredToken());
+    if (decrypted === null) throw new Error('TOKEN_MISMATCH');
+    try { return { notModified: false, data: JSON.parse(decrypted) }; }
+    catch { throw new Error('فشل قراءة البيانات'); }
+  }
+
+  // ملف عادي (ترحيل من نسخة سابقة)
+  try { return { notModified: false, data: JSON.parse(raw) }; }
   catch { return { notModified: false, data: null }; }
 }
 
+/* ==============================================================
+   ⭐ كتابة ملف (مع التشفير التلقائي)
+   ============================================================== */
 async function ghWriteFile(key, data) {
+  const jsonStr = JSON.stringify(data, null, 2);
+  // meta.json نص عادي، باقي الملفات تُشفَّر بالتوكن
+  const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
   const body = {
     message: `تحديث ${key} - ${new Date().toISOString()}`,
-    content: encodeBase64(JSON.stringify(data, null, 2)),
+    content: encodeBase64(content),
     branch: GITHUB_BRANCH,
     sha: SHAs[key]
   };
@@ -1393,9 +1326,11 @@ async function ghWriteFile(key, data) {
 }
 
 async function ghCreateFile(key, data) {
+  const jsonStr = JSON.stringify(data, null, 2);
+  const content = key === 'meta' ? jsonStr : encryptText(jsonStr, getStoredToken());
   const body = {
     message: `إنشاء ${key}`,
-    content: encodeBase64(JSON.stringify(data, null, 2)),
+    content: encodeBase64(content),
     branch: GITHUB_BRANCH
   };
   const res = await fetch(`${API_BASE}/${FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
@@ -1407,8 +1342,18 @@ async function ghCreateFile(key, data) {
   return json;
 }
 
+/* ==============================================================
+   قراءة الكل (مع تمرير TOKEN_MISMATCH)
+   ============================================================== */
 async function readAll() {
-  const results = await Promise.all(DATA_KEYS.map(k => ghReadFile(k).catch(() => ({ notModified: false, data: null }))));
+  const results = await Promise.all(DATA_KEYS.map(async (k) => {
+    try {
+      return await ghReadFile(k);
+    } catch (e) {
+      if (e.message === 'TOKEN_MISMATCH') throw e;
+      return { notModified: false, data: null };
+    }
+  }));
   DATA_KEYS.forEach((k, i) => {
     const r = results[i];
     if (r.notModified) return;
@@ -1424,19 +1369,34 @@ async function readAll() {
     if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
     return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' };
   });
+  cache.branches = cache.branches.map(b => {
+    if (typeof b === 'string') return { id: uid(), name: b };
+    return { id: b.id || uid(), name: b.name || '' };
+  });
+  if (!cache.branches.length) {
+    cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
+  }
   cache.users = cache.users.map(normalizeUser);
 }
 
 async function readMeta() {
   try {
     const r = await ghReadFile('meta');
-    if (r.notModified) return localMeta || { lastUpdate: '', version: 1 };
-    return r.data || { lastUpdate: '', version: 1 };
-  } catch { return { lastUpdate: '', version: 1 }; }
+    if (r.notModified) return localMeta || { lastUpdate: '', version: 2 };
+    return r.data || { lastUpdate: '', version: 2 };
+  } catch { return { lastUpdate: '', version: 2 }; }
 }
 
+/* ==============================================================
+   ⭐ meta مع tokenSig
+   ============================================================== */
 async function writeMeta() {
-  const meta = { lastUpdate: new Date().toISOString(), version: 1 };
+  const meta = {
+    lastUpdate: new Date().toISOString(),
+    version: 2,
+    tokenSig: tokenSig(getStoredToken()),
+    encrypted: true
+  };
   try { await ghWriteFile('meta', meta); localMeta = meta; }
   catch (e) {
     if (e.message === 'CONFLICT') { await readMeta(); await ghWriteFile('meta', meta); localMeta = meta; }
@@ -1470,7 +1430,13 @@ async function syncPull() {
     const me = cache.users.find(u => u.username === currentUser.username);
     if (me) currentUser = me;
     applyPermissionsUI(); renderActive(); setOnline(true);
-  } catch (e) { setOnline(false); }
+  } catch (e) {
+    if (e.message === 'TOKEN_MISMATCH') {
+      toast('تم تغيير الرمز في جهاز آخر — سيتم تسجيل خروجك', 'warning');
+      setTimeout(() => logout(true), 1500);
+    }
+    setOnline(false);
+  }
   finally { syncing = false; }
 }
 
@@ -1527,6 +1493,9 @@ function badge(val) {
   const map = { 'جاهز':'badge-ready','قيد التجهيز':'badge-progress','مدفوع':'badge-paid','غير مدفوع':'badge-unpaid','VIP':'badge-vip' };
   return `<span class="badge ${map[val] || ''}">${esc(val)}</span>`;
 }
+function branchBadge(val) {
+  return `<span class="badge badge-branch">${esc(val || DEFAULT_BRANCH_NAME)}</span>`;
+}
 function emptyState(icon, title, desc, cols) {
   return `<tr class="empty-row"><td colspan="${cols}"><div class="empty-state"><div class="icon">${ico(icon, 26)}</div><div class="title">${title}</div><div class="desc">${desc}</div></div></td></tr>`;
 }
@@ -1573,6 +1542,7 @@ function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
   const draft = {
     invoice: document.getElementById('orderInvoice').value,
+    branch: document.getElementById('orderBranch').value,
     customer: document.getElementById('orderCustomer').value,
     customerId: document.getElementById('orderCustomerId').value,
     location: document.getElementById('orderLocation').value,
@@ -1599,6 +1569,7 @@ window.restoreDraft = function () {
     const d = JSON.parse(raw);
     addOrder();
     document.getElementById('orderInvoice').value = d.invoice || '';
+    if (d.branch) document.getElementById('orderBranch').value = d.branch;
     document.getElementById('orderCustomer').value = d.customer || '';
     document.getElementById('orderCustomerId').value = d.customerId || '';
     document.getElementById('orderLocation').value = d.location || '';
@@ -1644,7 +1615,7 @@ function buildUI() {
   document.getElementById('statsTitle').innerHTML = ico('chart', 16) + '<span>إحصائيات مباشرة</span>';
   document.getElementById('donutTitle').innerHTML = ico('stats', 16) + '<span>توزيع الطلبات</span>';
   document.getElementById('topCustTitle').innerHTML = ico('award', 16) + '<span>أكثر العملاء</span>';
-  document.getElementById('topDrvTitle').innerHTML = ico('truck', 16) + '<span>أكثر الموصلين</span>';
+  document.getElementById('topBranchTitle').innerHTML = ico('building', 16) + '<span>أكثر الفروع</span>';
   document.getElementById('trendTitle').innerHTML = ico('trendUp', 16) + '<span>آخر 7 أيام — معدل إنشاء الطلبات</span>';
 
   document.getElementById('entryTitle').innerHTML = ico('list', 20) + '<span>إدخال الطلبات</span>';
@@ -1652,31 +1623,34 @@ function buildUI() {
   document.getElementById('entryToolbar').innerHTML = `
     <button class="btn btn-primary perm-addOrder" onclick="addOrder()">${ico('plus', 15)}<span>طلب جديد</span><kbd>Alt+N</kbd></button>
     <button class="btn btn-success perm-bulkTransfer" onclick="bulkTransfer()">${ico('truck', 15)}<span>تحويل المستوفية</span><kbd>Alt+B</kbd></button>
-    <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="margin-right:auto;max-width:300px;">`;
-  document.getElementById('entryHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
+    <select id="entryBranchFilter" onchange="renderEntry()" style="width:auto;max-width:200px;margin-right:auto;"></select>
+    <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="max-width:280px;">`;
+  document.getElementById('entryHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
 
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
     <button class="btn btn-primary perm-print" onclick="printReady()">${ico('printer', 15)}<span>طباعة القائمة</span></button>
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
-    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل إلى السجل</span><kbd>Alt+M</kbd></button>`;
-  document.getElementById('readyHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل'].map(h => `<th>${h}</th>`).join('');
+    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل إلى السجل</span><kbd>Alt+M</kbd></button>
+    <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
+  document.getElementById('readyHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل'].map(h => `<th>${h}</th>`).join('');
 
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
     <span style="color:var(--dark-blue);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;">${ico('filter', 14)}<span>فلترة:</span></span>
     <label>من:</label><input id="filterLogFrom" type="date" onchange="renderLog()">
     <label>إلى:</label><input id="filterLogTo" type="date" onchange="renderLog()">
-    <label>الاسم:</label><input id="filterLogName" type="text" placeholder="اسم العميل" oninput="renderLog()" style="width:180px;">
-    <label>الدفع:</label><select id="filterLogPay" onchange="renderLog()" style="width:130px;"><option value="">الكل</option><option>مدفوع</option><option>غير مدفوع</option><option>VIP</option></select>
+    <label>الاسم:</label><input id="filterLogName" type="text" placeholder="اسم العميل" oninput="renderLog()" style="width:160px;">
+    <label>الدفع:</label><select id="filterLogPay" onchange="renderLog()" style="width:120px;"><option value="">الكل</option><option>مدفوع</option><option>غير مدفوع</option><option>VIP</option></select>
+    <label>الفرع:</label><select id="filterLogBranch" onchange="renderLog()" style="width:160px;"></select>
     <button class="btn btn-ghost btn-sm" onclick="resetLogFilters()">${ico('refresh', 13)}<span>مسح</span></button>`;
   document.getElementById('logToolbar').innerHTML = `
     <button class="btn btn-primary perm-print" onclick="printLog()">${ico('printer', 15)}<span>طباعة المُفلتر</span></button>
     <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>تصدير PDF</span></button>
     <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>تصدير CSV</span></button>
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
-  document.getElementById('logHead').innerHTML = ['#', 'رقم الفاتورة', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'تاريخ الترحيل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('logHead').innerHTML = ['#', 'رقم الفاتورة', 'الفرع', 'العميل', 'الموقع', 'حالة الطلب', 'تاريخ الاعتماد', 'الدفع', 'الموصل', 'رقم الموصل', 'ملاحظات', 'آخر تعديل', 'تاريخ الترحيل', 'إجراءات'].map(h => `<th>${h}</th>`).join('');
 
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
   document.getElementById('custToolbar').innerHTML = `
@@ -1686,7 +1660,8 @@ function buildUI() {
 
   document.getElementById('settingsTitle').innerHTML = ico('cog', 20) + '<span>الإعدادات</span>';
   document.getElementById('settingsTabs').innerHTML = [
-    { id: 'token', icon: 'key', label: 'الرمز', active: true },
+    { id: 'token', icon: 'key', label: 'الرمز والتشفير', active: true },
+    { id: 'branches', icon: 'building', label: 'الفروع' },
     { id: 'drivers', icon: 'truck', label: 'الموصلون' },
     { id: 'users', icon: 'user', label: 'المستخدمون' },
     { id: 'templates', icon: 'printer', label: 'قوالب الطباعة' },
@@ -1694,12 +1669,25 @@ function buildUI() {
   ].map(t => `<button class="tab-btn ${t.active ? 'active' : ''}" onclick="switchTab(event,'${t.id}')">${ico(t.icon, 15)}<span>${t.label}</span></button>`).join('');
 
   document.getElementById('tab-token').innerHTML = `
+    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">
+      🔐 <b>جميع ملفات JSON مشفّرة تلقائياً</b> بنفس رمز الوصول.<br>
+      عند تغيير الرمز، تُعاد عملية التشفير تلقائياً.
+    </div>
     <div class="toolbar">
-      <button class="btn btn-warning" onclick="changeToken()">${ico('refresh', 15)}<span>تغيير الرمز</span></button>
+      <button class="btn btn-warning" onclick="changeToken()">${ico('refresh', 15)}<span>تغيير الرمز (إعادة تشفير)</span></button>
       <button class="btn btn-danger" onclick="clearToken()">${ico('trash', 15)}<span>حذف الرمز</span></button>
     </div>
     <div id="currentTokenInfo" style="padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>
     <div id="apiStats" style="margin-top:13px;padding:13px;background:rgba(0,0,0,.03);border-radius:10px;font-size:12px;line-height:1.8;border:1px solid var(--border);"></div>`;
+
+  document.getElementById('tab-branches').innerHTML = `
+    <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('building', 18)}<span>إدارة الفروع</span></div>
+    <div class="perm-note" style="margin-bottom:14px;">الفرع الافتراضي: <b>${DEFAULT_BRANCH_NAME}</b> — يظهر في جميع الواجهات والطباعة</div>
+    <div class="toolbar">
+      <input id="newBranchName" placeholder="اسم الفرع الجديد *" style="max-width:260px;">
+      <button class="btn btn-success perm-manageBranches" onclick="addBranch()">${ico('plus', 15)}<span>إضافة فرع</span></button>
+    </div>
+    <div id="branchList" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;"></div>`;
 
   document.getElementById('tab-drivers').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('truck', 18)}<span>إدارة الموصلين</span></div>
@@ -1729,18 +1717,18 @@ function buildUI() {
   document.getElementById('tab-backup').innerHTML = `
     <div style="color:var(--dark-blue);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي والصيانة</span></div>
     <div class="perm-note" style="margin-bottom:14px;">
-      سيتم إنشاء ملف ZIP مشفّر يحتوي على كل ملف بيانات منفصلاً.<br>
-      <b>كلمة السر = اسم المستودع (${GITHUB_REPO})</b>
+      سيتم إنشاء ملف ZIP يحتوي على كل ملف بيانات منفصلاً بصيغة <b>JSON عادي</b> (بدون تشفير).<br>
+      💡 نسخة الاستعادة يمكن استخدامها مباشرة على GitHub بعد رفعها.
     </div>
     <div class="toolbar">
-      <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة مشفّرة ZIP</span></button>
+      <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير نسخة ZIP</span></button>
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير النظام</span></button>
     </div>`;
 
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('userModalTitle').innerHTML = ico('user', 20) + '<span>مستخدم جديد</span>';
-  document.getElementById('tokenModalTitle').innerHTML = ico('key', 20) + '<span>تحديث الرمز</span>';
+  document.getElementById('tokenModalTitle').innerHTML = ico('lock', 20) + '<span>تحديث الرمز وإعادة التشفير</span>';
   document.getElementById('shortcutsTitle').innerHTML = ico('keyboard', 20) + '<span>الاختصارات</span>';
 
   document.getElementById('shortcutsGrid').innerHTML = [
@@ -1810,13 +1798,14 @@ function renderStats() {
     ? topC.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
 
-  const drvCount = {};
+  const branchCount = {};
   [...cache.orders, ...cache.ready, ...cache.log].forEach(o => {
-    if (o.driver) drvCount[o.driver] = (drvCount[o.driver] || 0) + 1;
+    const b = o.branch || DEFAULT_BRANCH_NAME;
+    branchCount[b] = (branchCount[b] || 0) + 1;
   });
-  const topD = Object.entries(drvCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  document.getElementById('topDrivers').innerHTML = topD.length
-    ? topD.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
+  const topB = Object.entries(branchCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  document.getElementById('topBranches').innerHTML = topB.length
+    ? topB.map(([name, count], i) => `<div class="top-item"><span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i+1}</span><span class="name">${esc(name)}</span><span class="count">${count}</span></div>`).join('')
     : '<div class="empty-top">لا توجد بيانات بعد</div>';
 
   renderTrend7Days();
@@ -1856,7 +1845,6 @@ function renderDonut(active, ready, archived) {
   legend.innerHTML = segments.map(s => `<div class="legend-item"><span class="dot" style="background:${s.color};"></span><span class="name">${s.label}</span><span class="val">${s.value}</span></div>`).join('');
 }
 
-/* ⭐ إصلاح: المخطط RTL (اليوم على اليمين) */
 function renderTrend7Days() {
   const days = [];
   const today = new Date();
@@ -1866,7 +1854,6 @@ function renderTrend7Days() {
     d.setDate(d.getDate() - i);
     days.push(d);
   }
-
   const counts = days.map(day => {
     const nextDay = new Date(day);
     nextDay.setDate(nextDay.getDate() + 1);
@@ -1875,11 +1862,8 @@ function renderTrend7Days() {
       return cd && cd >= day && cd < nextDay;
     }).length;
   });
-
   const max = Math.max(...counts, 1);
   const w = 100, h = 40;
-
-  // RTL: days[0] (اليوم) على اليمين → x = w
   const points = counts.map((c, i) => {
     const x = w - (i / 6) * w;
     const y = h - (c / max) * (h - 6) - 3;
@@ -1913,10 +1897,13 @@ function renderDashboard() { renderStats(); }
    ============================================================== */
 function renderEntry() {
   const q = (document.getElementById('searchEntry')?.value || '').trim().toLowerCase();
-  const data = q ? cache.orders.filter(o => `${o.invoice} ${o.customer} ${o.location} ${o.driver} ${o.notes}`.toLowerCase().includes(q)) : cache.orders;
+  const branchFilter = document.getElementById('entryBranchFilter')?.value || '';
+  let data = cache.orders;
+  if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
+  if (q) data = data.filter(o => `${o.invoice} ${o.customer} ${o.location} ${o.driver} ${o.notes} ${o.branch}`.toLowerCase().includes(q));
   const body = document.getElementById('entryBody');
   if (!data.length) {
-    body.innerHTML = q ? emptyState('search', 'لا توجد نتائج', 'جرّب كلمات بحث مختلفة', 12) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب جديد', 12);
+    body.innerHTML = (q || branchFilter) ? emptyState('search', 'لا توجد نتائج', 'جرّب تعديل الفلاتر', 13) : emptyState('list', 'لا توجد طلبات', 'ابدأ بإضافة طلب جديد', 13);
     return;
   }
   const canEdit = hasPerm('editOrder'), canDelete = hasPerm('deleteOrder'), canTrans = hasPerm('transferSingle');
@@ -1929,7 +1916,7 @@ function renderEntry() {
       ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteOrder('${o.id}')" title="حذف">${ico('trash', 13)}</button>` : ''}
     `;
     return `<tr class="${cls}${sel}" data-id="${o.id}" onclick="selectRow('${o.id}', event)" ondblclick="${canEdit ? `editOrder('${o.id}')` : ''}">
-      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -1947,10 +1934,13 @@ window.selectRow = function (id, event) {
 };
 
 function renderReady() {
+  const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
+  let data = cache.ready;
+  if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
   const body = document.getElementById('readyBody');
-  if (!cache.ready.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات من واجهة الإدخال', 11); return; }
-  body.innerHTML = cache.ready.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
-    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات من واجهة الإدخال', 12); return; }
+  body.innerHTML = data.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
+    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
     <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
     <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
     <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -1964,11 +1954,13 @@ function getLogFilteredData() {
   const toVal = document.getElementById('filterLogTo')?.value || '';
   const nameVal = (document.getElementById('filterLogName')?.value || '').trim().toLowerCase();
   const payVal = document.getElementById('filterLogPay')?.value || '';
+  const branchVal = document.getElementById('filterLogBranch')?.value || '';
   const fromDate = fromVal ? new Date(fromVal) : null;
   const toDate = toVal ? new Date(toVal + 'T23:59:59') : null;
   return cache.log.filter(o => {
     if (nameVal && !`${o.customer} ${o.invoice}`.toLowerCase().includes(nameVal)) return false;
     if (payVal && o.pay !== payVal) return false;
+    if (branchVal && (o.branch || DEFAULT_BRANCH_NAME) !== branchVal) return false;
     const d = parseDate(o.approvalDate) || parseDate(o.archivedAt);
     if (fromDate && d && d < fromDate) return false;
     if (toDate && d && d > toDate) return false;
@@ -1986,7 +1978,7 @@ function renderLog() {
   if (fc) fc.textContent = `المُفلتر: ${data.length}`;
   const body = document.getElementById('logBody');
   if (!data.length) {
-    body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل أي طلب بعد', 13);
+    body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل أي طلب بعد', 14);
     return;
   }
   body.innerHTML = data.map((o, i) => {
@@ -1995,7 +1987,7 @@ function renderLog() {
       ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="deleteFromLog('${o.id}')" title="حذف">${ico('trash', 13)}</button>` : ''}
     `;
     return `<tr>
-      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${esc(o.customer)}</td>
+      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
       <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
@@ -2012,6 +2004,7 @@ window.resetLogFilters = function () {
   document.getElementById('filterLogTo').value = '';
   document.getElementById('filterLogName').value = '';
   document.getElementById('filterLogPay').value = '';
+  document.getElementById('filterLogBranch').value = '';
   renderLog();
 };
 
@@ -2032,7 +2025,20 @@ function renderCustomers() {
   </tr>`).join('');
 }
 
-function renderSettings() { renderDriversList(); renderUsers(); }
+function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); }
+
+function renderBranchesList() {
+  const canManage = hasPerm('manageBranches');
+  document.getElementById('branchList').innerHTML = cache.branches.length
+    ? cache.branches.map(b => {
+        const isDefault = b.name === DEFAULT_BRANCH_NAME;
+        return `<span style="background:linear-gradient(135deg,#eef7ff,#dceaf7);padding:10px 16px;border-radius:20px;font-size:13px;display:inline-flex;align-items:center;gap:10px;border:1px solid #cddcf0;color:#1f4e79;${isDefault ? 'box-shadow:0 0 0 2px rgba(46,117,182,.3);' : ''}">
+          ${ico('building', 14)}<b>${esc(b.name)}</b>${isDefault ? `<span style="background:var(--blue);color:#fff;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;">افتراضي</span>` : ''}
+          ${canManage && !isDefault ? `<button onclick="deleteBranch('${b.id}')" style="border:none;background:rgba(220,53,69,.1);color:var(--red);cursor:pointer;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;">${ico('x', 10)}</button>` : ''}
+        </span>`;
+      }).join('')
+    : '<span style="color:var(--text-muted);padding:20px;">لا يوجد فروع</span>';
+}
 
 function renderDriversList() {
   const canManage = hasPerm('manageDrivers');
@@ -2061,6 +2067,35 @@ function renderUsers() {
   }).join('');
 }
 
+function populateBranchSelects() {
+  const allBranches = cache.branches.map(b => b.name);
+  const orderSel = document.getElementById('orderBranch');
+  if (orderSel) {
+    const cur = orderSel.value;
+    orderSel.innerHTML = cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
+    if (cur && allBranches.includes(cur)) orderSel.value = cur;
+    else orderSel.value = DEFAULT_BRANCH_NAME;
+  }
+  const entrySel = document.getElementById('entryBranchFilter');
+  if (entrySel) {
+    const cur = entrySel.value;
+    entrySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
+    if (cur) entrySel.value = cur;
+  }
+  const readySel = document.getElementById('readyBranchFilter');
+  if (readySel) {
+    const cur = readySel.value;
+    readySel.innerHTML = '<option value="">— كل الفروع —</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
+    if (cur) readySel.value = cur;
+  }
+  const logSel = document.getElementById('filterLogBranch');
+  if (logSel) {
+    const cur = logSel.value;
+    logSel.innerHTML = '<option value="">الكل</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
+    if (cur) logSel.value = cur;
+  }
+}
+
 /* ==============================================================
    Navigation
    ============================================================== */
@@ -2072,9 +2107,9 @@ window.go = function (page) {
   document.getElementById('page-' + page)?.classList.add('active');
   document.querySelector(`nav button[data-page="${page}"]`)?.classList.add('active');
   if (page === 'dashboard') renderDashboard();
-  if (page === 'entry') renderEntry();
-  if (page === 'ready') renderReady();
-  if (page === 'log') renderLog();
+  if (page === 'entry') { populateBranchSelects(); renderEntry(); }
+  if (page === 'ready') { populateBranchSelects(); renderReady(); }
+  if (page === 'log') { populateBranchSelects(); renderLog(); }
   if (page === 'customers') renderCustomers();
   if (page === 'settings') { renderSettings(); updateCurrentTokenInfo(); renderApiStats(); }
 };
@@ -2085,7 +2120,7 @@ window.switchTab = function (evt, tab) {
   evt.target.closest('.tab-btn')?.classList.add('active');
   document.getElementById('tab-' + tab).style.display = 'block';
   if (tab === 'templates') renderTemplates();
-  if (tab === 'token') renderApiStats();
+  if (tab === 'token') { renderApiStats(); updateCurrentTokenInfo(); }
 };
 
 function renderApiStats() {
@@ -2126,7 +2161,7 @@ window.doLogin = async function () {
 
   btn.disabled = true;
   loadEl.textContent = 'جاري التحقق...';
-  showLoading('جاري تحميل البيانات...');
+  showLoading('جاري تحميل البيانات المشفّرة...');
   try {
     await readAll();
     localMeta = await readMeta();
@@ -2141,14 +2176,21 @@ window.doLogin = async function () {
     hideLoading();
     startApp();
   } catch (e) {
-    errEl.textContent = e.message || 'حدث خطأ غير متوقع';
-    errEl.classList.add('show'); hideLoading();
+    if (e.message === 'TOKEN_MISMATCH') {
+      errEl.textContent = 'الرمز لا يطابق الرمز المستخدم لتشفير البيانات.\nالرجاء إدخال الرمز الصحيح المستخدم في هذا المستودع.';
+    } else {
+      errEl.textContent = e.message || 'حدث خطأ غير متوقع';
+    }
+    errEl.classList.add('show');
+    hideLoading();
   } finally { btn.disabled = false; }
 };
 
-window.logout = async function () {
-  const ok = await dialog.confirm('هل تريد تسجيل الخروج من النظام؟', { title: 'تسجيل الخروج' });
-  if (!ok) return;
+window.logout = async function (silent = false) {
+  if (!silent) {
+    const ok = await dialog.confirm('هل تريد تسجيل الخروج من النظام؟', { title: 'تسجيل الخروج' });
+    if (!ok) return;
+  }
   stopPolling();
   currentUser = null; selectedOrderId = null;
   SHAs = {}; ETags = {}; localMeta = null;
@@ -2157,7 +2199,7 @@ window.logout = async function () {
   document.getElementById('loginPass').value = '';
   document.getElementById('loginLoading').textContent = '';
   updateTokenStatus(); loadLastUser();
-  toast('تم تسجيل الخروج بنجاح', 'success');
+  if (!silent) toast('تم تسجيل الخروج بنجاح', 'success');
 };
 
 function loadLastUser() {
@@ -2173,6 +2215,7 @@ function startApp() {
   document.getElementById('app').style.display = 'block';
   document.getElementById('currentUserName').textContent = currentUser.username;
   applyPermissionsUI();
+  populateBranchSelects();
   loadDriversIntoSelects();
   go('dashboard');
   startPolling();
@@ -2193,6 +2236,8 @@ window.addOrder = function () {
   document.getElementById('orderStatus').value = 'قيد التجهيز';
   document.getElementById('orderPay').value = 'غير مدفوع';
   document.getElementById('orderDriver').value = '';
+  populateBranchSelects();
+  document.getElementById('orderBranch').value = DEFAULT_BRANCH_NAME;
   document.getElementById('customerDropdown').classList.remove('show');
   openModal('orderModal');
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
@@ -2207,6 +2252,8 @@ window.editOrder = function (id) {
   document.getElementById('orderId').value = id;
   document.getElementById('orderLogMode').value = '';
   document.getElementById('orderInvoice').value = o.invoice || '';
+  populateBranchSelects();
+  document.getElementById('orderBranch').value = o.branch || DEFAULT_BRANCH_NAME;
   document.getElementById('orderCustomer').value = o.customer || '';
   document.getElementById('orderLocation').value = o.location || '';
   document.getElementById('orderStatus').value = o.status || 'قيد التجهيز';
@@ -2229,6 +2276,8 @@ window.editFromLog = function (id) {
   document.getElementById('orderId').value = id;
   document.getElementById('orderLogMode').value = '1';
   document.getElementById('orderInvoice').value = o.invoice || '';
+  populateBranchSelects();
+  document.getElementById('orderBranch').value = o.branch || DEFAULT_BRANCH_NAME;
   document.getElementById('orderCustomer').value = o.customer || '';
   document.getElementById('orderLocation').value = o.location || '';
   document.getElementById('orderStatus').value = o.status || 'قيد التجهيز';
@@ -2242,13 +2291,13 @@ window.editFromLog = function (id) {
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
 
-/* ⭐ التحقق: العميل يجب أن يكون من قاعدة العملاء */
 function validateOrderForm() {
   clearAllErrors('orderModal');
   let valid = true;
   const invoice = document.getElementById('orderInvoice').value.trim();
   const customer = document.getElementById('orderCustomer').value.trim();
   const customerId = document.getElementById('orderCustomerId').value;
+  const branch = document.getElementById('orderBranch').value;
   const id = document.getElementById('orderId').value;
 
   if (!invoice) {
@@ -2258,16 +2307,14 @@ function validateOrderForm() {
     setFieldError('orderInvoice', 'رقم الفاتورة موجود مسبقاً');
     valid = false;
   }
+  if (!branch) { setFieldError('orderBranch', 'الفرع مطلوب'); valid = false; }
 
   if (!customer) {
     setFieldError('orderCustomer', 'اسم العميل مطلوب');
     valid = false;
   } else {
     let matched = customerId ? cache.customers.find(c => c.id === customerId) : null;
-    if (!matched) {
-      matched = cache.customers.find(c => c.name.toLowerCase() === customer.toLowerCase());
-    }
-
+    if (!matched) matched = cache.customers.find(c => c.name.toLowerCase() === customer.toLowerCase());
     if (!matched) {
       setFieldError('orderCustomer', 'اختر العميل من القائمة أو أنشئ عميلاً جديداً أولاً');
       valid = false;
@@ -2280,10 +2327,7 @@ function validateOrderForm() {
     }
   }
 
-  if (!valid) {
-    focusFirstError('orderModal');
-    toast('يرجى تصحيح الحقول المطلوبة', 'error');
-  }
+  if (!valid) { focusFirstError('orderModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
   return valid;
 }
 
@@ -2299,10 +2343,11 @@ window.saveOrder = async function () {
   const isLogEdit = document.getElementById('orderLogMode').value === '1';
   saveInProgress = true;
   const btn = document.getElementById('saveOrderBtn');
-  if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ...'; }
+  if (btn) { btn.disabled = true; btn.textContent = 'جاري الحفظ والتشفير...'; }
 
   const data = {
     invoice: document.getElementById('orderInvoice').value.trim(),
+    branch: document.getElementById('orderBranch').value || DEFAULT_BRANCH_NAME,
     customerId: document.getElementById('orderCustomerId').value,
     customer: document.getElementById('orderCustomer').value.trim(),
     location: document.getElementById('orderLocation').value.trim(),
@@ -2458,6 +2503,36 @@ window.deleteDriver = async function (id) {
 };
 
 /* ==============================================================
+   Branches
+   ============================================================== */
+window.addBranch = async function () {
+  if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
+  const name = document.getElementById('newBranchName').value.trim();
+  if (!name) { toast('اسم الفرع مطلوب', 'error'); return; }
+  if (cache.branches.find(b => b.name === name)) { toast('الفرع موجود مسبقاً', 'error'); return; }
+  cache.branches.push({ id: uid(), name });
+  try {
+    await persistKeys(['branches']);
+    document.getElementById('newBranchName').value = '';
+    renderBranchesList(); populateBranchSelects();
+    toast('تم إضافة الفرع', 'success');
+  } catch (e) { toast(e.message, 'error'); }
+};
+window.deleteBranch = async function (id) {
+  if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
+  const b = cache.branches.find(x => x.id === id);
+  if (!b) return;
+  if (b.name === DEFAULT_BRANCH_NAME) { toast('لا يمكن حذف الفرع الافتراضي', 'error'); return; }
+  const used = [...cache.orders, ...cache.ready, ...cache.log].some(o => (o.branch || DEFAULT_BRANCH_NAME) === b.name);
+  if (used) { toast('لا يمكن حذف فرع مستخدم في طلبات', 'error'); return; }
+  const ok = await dialog.danger(`حذف الفرع "${b.name}"؟`);
+  if (!ok) return;
+  cache.branches = cache.branches.filter(x => x.id !== id);
+  try { await persistKeys(['branches']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف', 'success'); }
+  catch (e) { toast(e.message, 'error'); }
+};
+
+/* ==============================================================
    Transfers
    ============================================================== */
 window.transferSingle = async function (id) {
@@ -2512,11 +2587,14 @@ function buildPrintHTML(items, template, extra = {}) {
   const showNotes = tpl.showNotes !== false, showApproval = tpl.showApprovalDate !== false;
   const showDriverPhone = tpl.showDriverPhone !== false, showPay = tpl.showPay !== false;
   const showArchived = tpl.showArchivedAt;
+  const showBranch = tpl.showBranch !== false;
   const replaceVars = (str) => String(str || '')
     .replace(/{date}/g, fmtDate()).replace(/{count}/g, items.length)
     .replace(/{user}/g, esc(currentUser.username))
     .replace(/{from}/g, extra.from || 'البداية').replace(/{to}/g, extra.to || 'اليوم');
-  let headers = ['#', 'الفاتورة', 'العميل', 'الموقع', 'الحالة'];
+  let headers = ['#', 'الفاتورة'];
+  if (showBranch) headers.push('الفرع');
+  headers.push('العميل', 'الموقع', 'الحالة');
   if (showApproval) headers.push('الاعتماد');
   if (showPay) headers.push('الدفع');
   headers.push('الموصل');
@@ -2524,7 +2602,9 @@ function buildPrintHTML(items, template, extra = {}) {
   if (showNotes) headers.push('ملاحظات');
   if (showArchived) headers.push('تاريخ الترحيل');
   const rows = items.map((o, i) => {
-    let cells = [i+1, esc(o.invoice), esc(o.customer), esc(o.location), esc(o.status)];
+    let cells = [i+1, esc(o.invoice)];
+    if (showBranch) cells.push(esc(o.branch || DEFAULT_BRANCH_NAME));
+    cells.push(esc(o.customer), esc(o.location), esc(o.status));
     if (showApproval) cells.push(esc(o.approvalDate || '—'));
     if (showPay) cells.push(esc(o.pay || '—'));
     cells.push(esc(o.driver || '—'));
@@ -2561,9 +2641,12 @@ function buildPrintHTML(items, template, extra = {}) {
 }
 window.printReady = function () {
   if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
-  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
+  const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
+  let data = cache.ready;
+  if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
+  if (!data.length) { toast('لا توجد طلبات', 'error'); return; }
   const win = window.open('', '_blank');
-  win.document.write(buildPrintHTML(cache.ready, templates.ready || DEFAULT_TEMPLATES.ready));
+  win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
   win.document.close();
 };
 window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
@@ -2644,6 +2727,7 @@ function renderTemplates() {
       <div class="template-row"><label>حجم الخط</label><input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)"></div>
       <div class="template-row"><label>اتجاه الصفحة</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <div class="toggle-row"><input type="checkbox" id="tpl-${key}-branch" ${t.showBranch !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showBranch', this.checked)"><label for="tpl-${key}-branch">إظهار عمود الفرع</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-notes" ${t.showNotes !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showNotes', this.checked)"><label for="tpl-${key}-notes">إظهار عمود الملاحظات</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-approval" ${t.showApprovalDate !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showApprovalDate', this.checked)"><label for="tpl-${key}-approval">إظهار تاريخ الاعتماد</label></div>
         <div class="toggle-row"><input type="checkbox" id="tpl-${key}-dphone" ${t.showDriverPhone !== false ? 'checked' : ''} onchange="updateTemplate('${key}', 'showDriverPhone', this.checked)"><label for="tpl-${key}-dphone">إظهار هاتف الموصل</label></div>
@@ -2835,7 +2919,44 @@ window.deleteUser = async function (id) {
 };
 
 /* ==============================================================
-   ⭐ Backup — ZIP مشفّر (بسيط، بدون crypto.subtle)
+   ⭐ حفظ الرمز الجديد + إعادة تشفير البيانات
+   ============================================================== */
+async function saveNewToken() {
+  const t = document.getElementById('newTokenInput').value.trim();
+  if (!t) { toast('أدخل الرمز', 'error'); return; }
+  if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
+    const ok = await dialog.confirm('الرمز لا يبدو صحيحاً. هل تريد المتابعة؟', { type: 'warning' });
+    if (!ok) return;
+  }
+
+  const oldToken = getStoredToken();
+  saveToken(t);
+
+  try {
+    showLoading('جاري التحقق من الرمز الجديد...');
+    // 1) التحقق من صلاحية الرمز بقراءة meta
+    await ghReadFile('meta');
+
+    // 2) إعادة تشفير جميع الملفات بالرمز الجديد
+    showLoading('جاري إعادة تشفير البيانات بالرمز الجديد...');
+    // نمسح SHAs للحصول على SHA محدث لكل ملف (لأن الرمز قد تغير)
+    // لكن لا نمسح لأن نفس المستودع → نفس SHAs
+    await persistKeys(DATA_KEYS);
+
+    hideLoading();
+    closeModal('tokenModal');
+    toast('تم تحديث الرمز وإعادة تشفير جميع البيانات', 'success');
+    updateCurrentTokenInfo();
+  } catch (e) {
+    saveToken(oldToken);
+    hideLoading();
+    toast('فشل تحديث الرمز: ' + (e.message === 'TOKEN_MISMATCH' ? 'تعارض في البيانات' : e.message), 'error');
+  }
+}
+window.saveNewToken = saveNewToken;
+
+/* ==============================================================
+   ZIP Backup — بدون تشفير
    ============================================================== */
 function downloadBlob(blob, filename) {
   const a = document.createElement('a');
@@ -2849,41 +2970,70 @@ function downloadBlob(blob, filename) {
 
 window.exportBackup = async function () {
   try {
-    const repoKey = GITHUB_REPO;
+    const ok = await ensureJSZip();
+    if (!ok) { toast('فشل تحميل مكتبة ZIP — تحقق من الاتصال', 'error'); return; }
+
+    showLoading('جاري تجهيز النسخة الاحتياطية...');
+
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
 
-    const files = {};
+    const zip = new JSZip();
+    const dataFolder = zip.folder('data');
+
+    // ملفات JSON عادية بدون تشفير
     for (const key of DATA_KEYS) {
       const content = JSON.stringify(cache[key] || [], null, 2);
-      files[`${key}.json`] = encryptData(content, repoKey);
+      dataFolder.file(`${key}.json`, content);
     }
-    const metaContent = JSON.stringify({ lastUpdate: new Date().toISOString(), version: 1 }, null, 2);
-    files['meta.json'] = encryptData(metaContent, repoKey);
+    const meta = {
+      lastUpdate: new Date().toISOString(),
+      version: 2
+    };
+    dataFolder.file('meta.json', JSON.stringify(meta, null, 2));
 
-    files['backup-info.txt'] =
-      `اسم المستودع: ${GITHUB_REPO}\n` +
-      `تاريخ الإنشاء: ${stamp.toLocaleString('ar-SA')}\n` +
-      `عدد الملفات: ${DATA_KEYS.length + 1}\n` +
-      `كلمة السر: ${repoKey}\n` +
-      `طريقة فك التشفير: XOR + Base64 بكلمة السر أعلاه\n`;
+    const info = {
+      repo: GITHUB_REPO,
+      owner: GITHUB_OWNER,
+      branch: GITHUB_BRANCH,
+      createdAt: stamp.toISOString(),
+      createdAtLocal: stamp.toLocaleString('ar-SA'),
+      createdBy: currentUser?.username || 'unknown',
+      filesCount: DATA_KEYS.length + 1,
+      files: DATA_KEYS.map(k => `${k}.json`),
+      note: 'هذه النسخة غير مشفرة — احفظها في مكان آمن'
+    };
+    zip.file('backup-info.json', JSON.stringify(info, null, 2));
+    zip.file('README.txt',
+      `نسخة احتياطية من نظام إدارة الطلبات\n` +
+      `=====================================\n` +
+      `المستودع: ${GITHUB_OWNER}/${GITHUB_REPO}\n` +
+      `الفرع: ${GITHUB_BRANCH}\n` +
+      `التاريخ: ${stamp.toLocaleString('ar-SA')}\n` +
+      `أنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n` +
+      `⚠️ تحذير: هذه النسخة غير مشفرة — احفظها في مكان آمن\n` +
+      `   لا ترفعها على مستودع عام.\n\n` +
+      `المحتوى:\n` +
+      DATA_KEYS.map(k => `  - data/${k}.json`).join('\n') + '\n' +
+      `  - data/meta.json\n` +
+      `  - backup-info.json\n\n` +
+      `لاستعادة النسخة:\n` +
+      `  1. فك ضغط الملف\n` +
+      `  2. انسخ محتويات مجلد data/ إلى مستودعك على GitHub\n` +
+      `  3. سيقوم النظام بتشفيرها تلقائياً عند أول حفظ\n`
+    );
 
-    if (typeof JSZip !== 'undefined') {
-      showLoading('جاري إنشاء النسخة...');
-      const zip = new JSZip();
-      Object.entries(files).forEach(([name, content]) => zip.file(name, content));
-      const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
-      downloadBlob(blob, `${GITHUB_REPO}_backup_${dateStr}.zip`);
-      hideLoading();
-      toast('تم إنشاء النسخة الاحتياطية بنجاح', 'success');
-    } else {
-      toast('مكتبة ZIP غير متوفرة — يتم تحميل الملفات منفصلة', 'warning');
-      for (const [name, content] of Object.entries(files)) {
-        const blob = new Blob([content], { type: 'text/plain' });
-        downloadBlob(blob, name);
-        await new Promise(r => setTimeout(r, 200));
-      }
-    }
+    const blob = await zip.generateAsync({
+      type: 'blob',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 9 }
+    });
+
+    const filename = `${GITHUB_REPO}_backup_${dateStr}.zip`;
+    downloadBlob(blob, filename);
+
+    hideLoading();
+    toast(`تم إنشاء النسخة (${(blob.size / 1024).toFixed(1)} KB) — بدون تشفير`, 'success');
   } catch (e) {
     hideLoading();
     toast('فشل إنشاء النسخة: ' + e.message, 'error');
@@ -2904,8 +3054,8 @@ window.resetAll = async function () {
 window.exportLogCSV = function () {
   const data = getLogFilteredData();
   if (!data.length) { toast('السجل فارغ', 'error'); return; }
-  const headers = ['رقم الفاتورة','العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
-  const rows = data.map(o => [o.invoice, o.customer, o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
+  const headers = ['رقم الفاتورة','الفرع','العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
+  const rows = data.map(o => [o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
   const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
@@ -2916,7 +3066,7 @@ window.exportLogCSV = function () {
 };
 
 /* ==============================================================
-   Modals
+   Modals & Shortcuts
    ============================================================== */
 window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
@@ -3050,7 +3200,7 @@ window.addEventListener('keydown', e => {
   }
 });
 
-['orderInvoice','orderCustomer','orderLocation','orderStatus','orderPay','orderDriver','orderDriverPhone','orderNotes'].forEach(id => {
+['orderInvoice','orderCustomer','orderLocation','orderStatus','orderPay','orderDriver','orderDriverPhone','orderNotes','orderBranch'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => { clearTimeout(el._t); el._t = setTimeout(saveDraft, 1500); });
 });
