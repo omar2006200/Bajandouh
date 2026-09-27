@@ -385,7 +385,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .activity-item .activity-desc{font-size:11.5px;color:var(--text-muted);line-height:1.5;word-break:break-word}
 .activity-item .activity-meta{font-size:10.5px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
 .activity-item .activity-meta span{display:inline-flex;align-items:center;gap:3px}
-/* Activity Pagination & Filters */
 .activity-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;padding:12px 14px;background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow-sm);border-right:3px solid var(--blue)}
 .activity-search-box{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.03);border:2px solid var(--border);border-radius:9px;padding:0 12px;transition:var(--transition)}
 [data-theme="dark"] .activity-search-box{background:rgba(255,255,255,.05)}
@@ -810,10 +809,11 @@ function ico(name, size = 16) {
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
 }
 
-/* ==============================================================
-   Config
-   ============================================================== */
-const APP_ID       = 'omar2006200/Bajandouh';
+
+// ═══════════════════════════════════════════════════════════════
+const GITHUB_OWNER = 'omar2006200'; 
+const GITHUB_REPO  = 'Bajandouh';     
+const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
 const SYNC_INTERVAL = 15000;
 const SAVE_COOLDOWN = 10000;
@@ -827,7 +827,7 @@ const ACTIVITY_PER_PAGE = 30;
 const ACTIVITY_WARN_THRESHOLD = 5000;
 const ACTIVITY_TOTAL_LIMIT = 0;
 
-const API_BASE = `https://api.github.com/repos/${APP_ID}/${APP_ID}/contents`;
+const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
 const DATA_FILES = {
   users:'data/users.json', orders:'data/orders.json', ready:'data/ready.json',
   log:'data/log.json', customers:'data/customers.json', drivers:'data/drivers.json',
@@ -836,6 +836,11 @@ const DATA_FILES = {
 };
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
+
+// تحقق من صحة الإعدادات عند التحميل
+if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
+  console.error('⚠️ يجب تعديل GITHUB_OWNER في أعلى الملف!');
+}
 
 const PERMISSIONS = {
   accessDashboard:{label:'الرئيسية',cat:'pages',icon:'home'},
@@ -1199,15 +1204,19 @@ async function apiReadFile(key) {
   const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
   let res;
   try { res = await fetch(url, { headers: apiHeaders(false, key) }); }
-  catch { setOnline(false); throw new Error('فشل الاتصال'); }
+  catch { setOnline(false); throw new Error('فشل الاتصال بالشبكة'); }
   updateRateLimit(res.headers);
   apiCallCount++;
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
-    if (res.status === 401) throw new Error('المفتاح غير صالح');
-    if (res.status === 403) throw new Error('انتهت الحصة');
-    if (res.status === 404) return { notModified: false, data: null };
-    throw new Error('فشل التحميل');
+    if (res.status === 401) throw new Error('مفتاح الاتصال غير صالح (401)');
+    if (res.status === 403) throw new Error('الحصة منتهية أو لا صلاحيات (403)');
+    if (res.status === 404) {
+      // ملف المستخدمين إلزامي — نُرجع خطأ صريح
+      if (key === 'users') throw new Error(`ملف data/users.json غير موجود في المستودع (404).\nتأكد من:\n- صحة GITHUB_OWNER و GITHUB_REPO\n- وجود ملف data/users.json على فرع "${APP_BRANCH}"`);
+      return { notModified: false, data: null };
+    }
+    throw new Error(`فشل التحميل (${res.status})`);
   }
   const json = await res.json();
   SHAs[key] = json.sha;
@@ -1219,8 +1228,8 @@ async function apiReadFile(key) {
   }
   if (isEncrypted(raw)) {
     const decrypted = decryptText(raw);
-    if (decrypted === null) throw new Error('فشل القراءة');
-    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error('فشل القراءة'); }
+    if (decrypted === null) throw new Error(`فشل فك التشفير لملف ${key}`);
+    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(`فشل تحليل JSON لملف ${key}`); }
   }
   try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
 }
@@ -1256,9 +1265,12 @@ async function apiCreateFile(key, data) {
 }
 async function readAll() {
   hasUnencryptedFiles = false;
+  const errors = [];
   const results = await Promise.all(DATA_KEYS.map(async (k) => {
-    try { return await apiReadFile(k); } catch (e) { return { notModified: false, data: null }; }
+    try { return await apiReadFile(k); }
+    catch (e) { errors.push(`${k}: ${e.message}`); return { notModified: false, data: null }; }
   }));
+  readAll.lastErrors = errors;
   DATA_KEYS.forEach((k, i) => {
     const r = results[i];
     if (r.notModified) return;
@@ -1414,7 +1426,7 @@ window.clearAllNotifications = function() {
 };
 
 /* ==============================================================
-   Activity Log — UNLIMITED + PAGINATION
+   Activity Log
    ============================================================== */
 function logActivity(action, title, description, type = 'info') {
   const entry = {
@@ -2323,15 +2335,35 @@ window.doLogin = async function () {
   }
   if (!getStoredKey()) { errEl.textContent = 'أدخل مفتاح الاتصال'; errEl.classList.add('show'); return; }
   if (!u || !p) { errEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
-  if (location.protocol === 'file:') { errEl.textContent = 'افتح من الرابط المنشور'; errEl.classList.add('show'); return; }
+  if (location.protocol === 'file:') { errEl.textContent = 'افتح من الرابط المنشور (وليس بفتح الملف مباشرة)'; errEl.classList.add('show'); return; }
 
   btn.disabled = true;
   loadEl.textContent = 'جاري التحقق...';
   showLoading('جاري التحميل...');
   try {
     await readAll(); localMeta = await readMeta();
+
+    // إذا لم تصل بيانات المستخدمين → أظهر السبب الحقيقي
+    if (!cache.users.length) {
+      const errs = readAll.lastErrors || [];
+      if (errs.length) {
+        errEl.textContent = 'تعذر تحميل البيانات من GitHub:\n' + errs.join('\n');
+      } else {
+        errEl.textContent = 'لم يتم العثور على مستخدمين.\nتأكد من وجود ملف data/users.json في المستودع.';
+      }
+      errEl.classList.add('show');
+      btn.disabled = false; loadEl.textContent = ''; hideLoading();
+      return;
+    }
+
     const found = cache.users.find(x => x.username === u && x.password === p);
-    if (!found) { errEl.textContent = 'بيانات غير صحيحة'; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
+    if (!found) {
+      errEl.textContent = 'بيانات غير صحيحة — تحقق من اسم المستخدم وكلمة المرور';
+      errEl.classList.add('show');
+      btn.disabled = false; loadEl.textContent = ''; hideLoading();
+      return;
+    }
+
     if (hasUnencryptedFiles && found.role === 'رئيسي') {
       hideLoading();
       const ok = await dialog.confirm('تفعيل الحماية على البيانات؟', { title: '🔒 تفعيل', okText: 'الآن', cancelText: 'لاحقاً' });
@@ -2343,7 +2375,11 @@ window.doLogin = async function () {
     loadEl.textContent = 'تم الدخول';
     hideLoading();
     startApp();
-  } catch (e) { errEl.textContent = e.message || 'خطأ'; errEl.classList.add('show'); hideLoading(); }
+  } catch (e) {
+    errEl.textContent = (e.message || 'خطأ') + '\n\nتأكد من:\n- GITHUB_OWNER و GITHUB_REPO في أعلى الملف\n- صلاحيات المفتاح (repo)';
+    errEl.classList.add('show');
+    hideLoading();
+  }
   finally { btn.disabled = false; }
 };
 
