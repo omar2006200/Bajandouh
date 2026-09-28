@@ -69,8 +69,6 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .col-toggles-actions button{padding:5px 11px;font-size:11px;border-radius:14px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);cursor:pointer;font-family:inherit;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
 .col-toggles-actions button:hover{border-color:var(--blue);color:var(--dark-blue);background:rgba(46,117,182,.08)}
 .logo-size-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:6px}
-
-/* ═══ Session Conflict Modal — Professional ═══ */
 #sessionConflictModal .modal{max-width:600px;padding:0;overflow:hidden}
 .sc-header{padding:32px 28px 24px;text-align:center;background:linear-gradient(160deg,rgba(255,193,7,.12) 0%,rgba(255,193,7,.02) 60%,transparent 100%);position:relative;overflow:hidden}
 .sc-header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,193,7,.08) 0%,transparent 60%);animation:scRotate 20s linear infinite}
@@ -104,7 +102,6 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .sc-btn-cancel{background:transparent;color:var(--text-muted);border:2px solid var(--border);font-weight:600}
 .sc-btn-cancel:hover:not(:disabled){background:rgba(0,0,0,.03);border-color:var(--text-muted);color:var(--text)}
 @media(max-width:700px){#sessionConflictModal .modal{max-width:96vw}.sc-header{padding:24px 20px 18px}.sc-icon-wrap{width:80px;height:80px}.sc-icon-wrap svg{width:38px;height:38px}.sc-title{font-size:19px}.sc-body{padding:0 20px 22px}.sc-actions{padding:0 20px 22px}.sc-actions .btn{height:46px;font-size:13.5px}}
-
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(31,78,121,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(6px)}
 #loadingOverlay.show{display:flex}
 .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
@@ -1072,6 +1069,7 @@ let visibilityHandlerAttached = false;
 let lastRateNotificationAt = 0;
 let activeSessions = {};
 let mySessionId = null;
+let mySessionStartedAt = 0;   // ← جديد: متى بدأنا جلستنا
 
 /* ==============================================================
    Security
@@ -1526,19 +1524,13 @@ async function readMeta() {
 }
 
 /**
- * ⬇ كتابة meta مع إعادة محاولة وإعادة قراءة العكس للتحقق.
- * تُستخدم خصيصاً لفصل الجلسات السابقة بشكل قسري.
+ * ⬇ كتابة meta لكتابة meta ذرية مع إعادة محاولة عند CONFLICT
  */
 async function forceWriteMeta(newSessions, maxRetries = SESSION_TERMINATE_RETRIES) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       setLoadingProgress(20 + attempt * 15, `جاري فصل الجلسة السابقة... (محاولة ${attempt}/${maxRetries})`);
-      const meta = {
-        lastUpdate: new Date().toISOString(),
-        version: 3,
-        sessions: newSessions
-      };
-      // قراءة SHA محدَّث أولاً (لتفادي conflict)
+      const meta = { lastUpdate: new Date().toISOString(), version: 3, sessions: newSessions };
       const readRes = await fetch(`${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`, { headers: apiHeaders(false) });
       if (readRes.ok) {
         const rd = await readRes.json();
@@ -1546,7 +1538,6 @@ async function forceWriteMeta(newSessions, maxRetries = SESSION_TERMINATE_RETRIE
       }
       await apiWriteFile('meta', meta);
       localMeta = meta;
-      // تحقق عكسي — نقرأ النسخة المكتوبة حديثاً ونتأكد أن sid مطابق
       setLoadingProgress(60 + attempt * 10, 'جاري التحقق من فصل الجلسة...');
       const verifyRes = await fetch(`${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`, { headers: apiHeaders(false) });
       if (!verifyRes.ok) throw new Error('فشل التحقق');
@@ -1570,15 +1561,47 @@ async function forceWriteMeta(newSessions, maxRetries = SESSION_TERMINATE_RETRIE
   return { ok: false, error: 'فشل الفصل بعد كل المحاولات' };
 }
 
+/**
+ * ⬇ writeMeta محسّنة — تقرأ meta من السيرفر أولاً ثم تدمج
+ * هذا يمنع مسح جلسات المستخدمين الآخرين عند أي حفظ عادي.
+ */
 async function writeMeta(extra = {}) {
-  const meta = { lastUpdate: new Date().toISOString(), version: 3, sessions: activeSessions || {}, ...extra };
-  try { await apiWriteFile('meta', meta); localMeta = meta; }
-  catch (e) {
+  let freshSessions = { ...(activeSessions || {}) };
+
+  // ⬇ اقرأ meta الحديثة من السيرفر لدمج الجلسات
+  try {
+    const fresh = await readMeta();
+    if (fresh && fresh.sessions) freshSessions = { ...fresh.sessions };
+  } catch (e) { /* استخدم localSessions */ }
+
+  // ⬇ ضع/حدّث جلستي الحالية
+  if (currentUser && mySessionId) {
+    freshSessions[currentUser.username] = {
+      sid: mySessionId,
+      at: new Date(mySessionStartedAt || Date.now()).toISOString()
+    };
+  }
+
+  const meta = { lastUpdate: new Date().toISOString(), version: 3, sessions: freshSessions, ...extra };
+  activeSessions = freshSessions;
+
+  try {
+    await apiWriteFile('meta', meta);
+    localMeta = meta;
+  } catch (e) {
     if (e.message === 'CONFLICT') {
-      await readMeta();
-      meta.sessions = activeSessions || {};
-      await apiWriteFile('meta', meta);
-      localMeta = meta;
+      const fresh2 = await readMeta();
+      const mergedSessions = { ...(fresh2.sessions || {}), ...freshSessions };
+      if (currentUser && mySessionId) {
+        mergedSessions[currentUser.username] = {
+          sid: mySessionId,
+          at: new Date(mySessionStartedAt || Date.now()).toISOString()
+        };
+      }
+      activeSessions = mergedSessions;
+      const meta2 = { ...meta, sessions: mergedSessions };
+      await apiWriteFile('meta', meta2);
+      localMeta = meta2;
     } else throw e;
   }
 }
@@ -1606,7 +1629,7 @@ async function saveAllDataNow() {
 window.saveAllDataNow = saveAllDataNow;
 
 /* ==============================================================
-   Sync
+   Sync  ⬅ (لا يطرد إلا إذا كانت جلسة السيرفر أحدث)
    ============================================================== */
 async function syncPull() {
   if (syncing || !currentUser) return;
@@ -1617,14 +1640,30 @@ async function syncPull() {
   syncing = true;
   try {
     const meta = await readMeta();
+
+    // ⬇ فحص الجلسة: لا نطرد إلا إذا كانت جلسة السيرفر أحدث من بدايتنا
     if (mySessionId && currentUser) {
       const serverSess = meta.sessions?.[currentUser.username];
       if (!serverSess || serverSess.sid !== mySessionId) {
-        syncing = false;
-        await forceLogout('تم إنهاء جلستك من جهاز آخر');
-        return;
+        const serverAt = serverSess?.at ? new Date(serverSess.at).getTime() : 0;
+        if (serverAt > mySessionStartedAt) {
+          // دليل قوي: جهاز آخر استولى بعدنا → اطرد
+          syncing = false;
+          await forceLogout('تم إنهاء جلستك من جهاز آخر');
+          return;
+        } else {
+          // نحن الأحق (جلستنا أحدث أو مساوية) → استرداد بدل الطرد
+          const restored = { ...(meta.sessions || {}) };
+          restored[currentUser.username] = {
+            sid: mySessionId,
+            at: new Date(mySessionStartedAt).toISOString()
+          };
+          activeSessions = restored;
+          try { await writeMeta(); } catch (e) { /* استمر */ }
+        }
       }
     }
+
     if (document.hidden) { syncing = false; return; }
     if (localMeta && meta.lastUpdate === localMeta.lastUpdate) { setOnline(true); syncing = false; return; }
     localMeta = meta;
@@ -1667,7 +1706,7 @@ function setSyncing(on) { const dot = document.getElementById('connDot'); if (do
 window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; lastSyncTime = 0; await syncPull(); };
 
 /* ==============================================================
-   Session Conflict Dialog  (احترافي — بدون اسم الجهاز)
+   Session Conflict Dialog  (احترافي)
    ============================================================== */
 function formatTimeSince(isoStr) {
   if (!isoStr) return '—';
@@ -1682,7 +1721,6 @@ function formatTimeSince(isoStr) {
   const days = Math.floor(hours / 24);
   return `منذ ${days} يوم`;
 }
-
 function showSessionConflictDialog(username, session) {
   return new Promise(resolve => {
     const content = document.getElementById('sessionConflictContent');
@@ -1704,14 +1742,8 @@ function showSessionConflictDialog(username, session) {
         </div>
         <div class="sc-info-card">
           <div class="sc-info-title">${ico('clock', 15)}<span>بيانات الجلسة النشطة</span></div>
-          <div class="sc-info-row">
-            <span>وقت الدخول</span>
-            <b>${esc(atStr)}</b>
-          </div>
-          <div class="sc-info-row">
-            <span>منذ</span>
-            <span class="val-badge">${ico('activity', 12)} ${esc(sinceStr)}</span>
-          </div>
+          <div class="sc-info-row"><span>وقت الدخول</span><b>${esc(atStr)}</b></div>
+          <div class="sc-info-row"><span>منذ</span><span class="val-badge">${ico('activity', 12)} ${esc(sinceStr)}</span></div>
         </div>
         <div class="sc-notice">
           ${ico('warning', 16)}
@@ -1725,12 +1757,8 @@ function showSessionConflictDialog(username, session) {
       </div>
     `;
     actions.innerHTML = `
-      <button class="btn sc-btn-terminate" id="scTerminateBtn">
-        ${ico('logout', 16)}<span>فصل الجلسة السابقة والدخول</span>
-      </button>
-      <button class="btn sc-btn-cancel" id="scCancelBtn">
-        ${ico('x', 16)}<span>رجوع (بدون دخول)</span>
-      </button>
+      <button class="btn sc-btn-terminate" id="scTerminateBtn">${ico('logout', 16)}<span>فصل الجلسة السابقة والدخول</span></button>
+      <button class="btn sc-btn-cancel" id="scCancelBtn">${ico('x', 16)}<span>رجوع (بدون دخول)</span></button>
     `;
     const cancelBtn = document.getElementById('scCancelBtn');
     const termBtn = document.getElementById('scTerminateBtn');
@@ -1755,6 +1783,7 @@ async function forceLogout(reason) {
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   mySessionId = null;
+  mySessionStartedAt = 0;
   currentSyncInterval = SYNC_INTERVAL;
   lastSyncTime = 0;
   document.getElementById('app').style.display = 'none';
@@ -1865,11 +1894,7 @@ function renderActivity() {
     const total = cache.activity.length;
     const shown = filtered.length;
     const pages = Math.max(1, Math.ceil(shown / ACTIVITY_PER_PAGE));
-    statsEl.innerHTML = `
-      <span>${ico('activity', 13)} إجمالي: <b>${total.toLocaleString()}</b></span>
-      ${shown !== total ? `<span>${ico('filter', 13)} مُفلتر: <b>${shown.toLocaleString()}</b></span>` : ''}
-      <span>${ico('chart', 13)} صفحة: <b>${pages}</b></span>
-    `;
+    statsEl.innerHTML = `<span>${ico('activity', 13)} إجمالي: <b>${total.toLocaleString()}</b></span>${shown !== total ? `<span>${ico('filter', 13)} مُفلتر: <b>${shown.toLocaleString()}</b></span>` : ''}<span>${ico('chart', 13)} صفحة: <b>${pages}</b></span>`;
   }
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / ACTIVITY_PER_PAGE));
@@ -1886,31 +1911,11 @@ function renderActivity() {
   el.innerHTML = pageEntries.map(a => {
     const typeClass = a.type === 'success' ? 'success' : a.type === 'danger' ? 'danger' : a.type === 'warning' ? 'warning' : '';
     const iconName = a.type === 'danger' ? 'trash' : a.type === 'success' ? 'check' : a.type === 'warning' ? 'warning' : 'info';
-    return `<div class="activity-item">
-      <div class="activity-icon ${typeClass}">${ico(iconName, 15)}</div>
-      <div class="activity-body">
-        <div class="activity-title">${esc(a.title)}</div>
-        <div class="activity-desc">${esc(a.description || '')}</div>
-        <div class="activity-meta">
-          <span>${ico('user', 11)} ${esc(a.user)}</span>
-          <span>${ico('clock', 11)} ${esc(a.time)}</span>
-        </div>
-      </div>
-    </div>`;
+    return `<div class="activity-item"><div class="activity-icon ${typeClass}">${ico(iconName, 15)}</div><div class="activity-body"><div class="activity-title">${esc(a.title)}</div><div class="activity-desc">${esc(a.description || '')}</div><div class="activity-meta"><span>${ico('user', 11)} ${esc(a.user)}</span><span>${ico('clock', 11)} ${esc(a.time)}</span></div></div></div>`;
   }).join('');
   if (!paginationEl) return;
   const pageButtons = buildPageNumbers(activityCurrentPage, totalPages);
-  paginationEl.innerHTML = `
-    <div class="activity-pagination-inner">
-      <button class="pg-btn" onclick="activityGoFirst()" ${activityCurrentPage === 1 ? 'disabled' : ''} title="الأولى">${ico('chevronsRight', 14)}</button>
-      <button class="pg-btn" onclick="activityGoPrev()" ${activityCurrentPage === 1 ? 'disabled' : ''} title="السابقة">${ico('arrowRight', 14)}</button>
-      ${pageButtons}
-      <button class="pg-btn" onclick="activityGoNext()" ${activityCurrentPage === totalPages ? 'disabled' : ''} title="التالية">${ico('arrowRight', 14)}</button>
-      <button class="pg-btn" onclick="activityGoLast()" ${activityCurrentPage === totalPages ? 'disabled' : ''} title="الأخيرة">${ico('chevronsLeft', 14)}</button>
-      <span class="pg-info">صفحة <b>${activityCurrentPage}</b> / <b>${totalPages}</b></span>
-      <span class="pg-info">عرض ${start + 1}-${end} من ${total}</span>
-    </div>
-  `;
+  paginationEl.innerHTML = `<div class="activity-pagination-inner"><button class="pg-btn" onclick="activityGoFirst()" ${activityCurrentPage === 1 ? 'disabled' : ''}>${ico('chevronsRight', 14)}</button><button class="pg-btn" onclick="activityGoPrev()" ${activityCurrentPage === 1 ? 'disabled' : ''}>${ico('arrowRight', 14)}</button>${pageButtons}<button class="pg-btn" onclick="activityGoNext()" ${activityCurrentPage === totalPages ? 'disabled' : ''}>${ico('arrowRight', 14)}</button><button class="pg-btn" onclick="activityGoLast()" ${activityCurrentPage === totalPages ? 'disabled' : ''}>${ico('chevronsLeft', 14)}</button><span class="pg-info">صفحة <b>${activityCurrentPage}</b> / <b>${totalPages}</b></span><span class="pg-info">عرض ${start + 1}-${end} من ${total}</span></div>`;
 }
 function buildPageNumbers(current, total) {
   const buttons = [];
@@ -2639,7 +2644,6 @@ window.doLogin = async function () {
 
     setLoadingProgress(60, 'فحص الجلسات النشطة...');
 
-    // ⬇ كشف الجلسة النشطة
     const existing = meta.sessions?.[u];
     let needsTerminate = false;
     if (existing && existing.sid) {
@@ -2656,25 +2660,22 @@ window.doLogin = async function () {
       }
     }
 
-    // ⬇ إنشاء جلسة جديدة
     mySessionId = uid();
+    mySessionStartedAt = Date.now();   // ← وقت بدايتنا
     const newSessions = { ...(meta.sessions || {}) };
-    newSessions[u] = { sid: mySessionId, at: new Date().toISOString() };
+    newSessions[u] = { sid: mySessionId, at: new Date(mySessionStartedAt).toISOString() };
 
     if (needsTerminate) {
-      // ⬇ فصل الجلسة السابقة قسرياً — كتابة فورية + إعادة محاولة + تحقق عكسي
       showLoading('جاري فصل الجلسة السابقة...', 20);
       const result = await forceWriteMeta(newSessions);
       if (!result.ok) {
-        // لم ينجح الفصل — لا ندخل
         hideLoading();
         errEl.textContent = '❌ تعذر فصل الجلسة السابقة.\n' + (result.error || '') + '\n\nحاول مرة أخرى بعد لحظات.';
         errEl.classList.add('show');
         btn.disabled = false; loadEl.textContent = '';
-        mySessionId = null;
+        mySessionId = null; mySessionStartedAt = 0;
         return;
       }
-      // ⬇ تأكيد إضافي: انتظار قصير ثم قراءة عكسية
       setLoadingProgress(80, 'جاري تأكيد المزامنة...');
       await new Promise(r => setTimeout(r, 1000));
       const confirm = await readMeta();
@@ -2684,17 +2685,39 @@ window.doLogin = async function () {
         errEl.textContent = '❌ لم يتم تأكيد فصل الجلسة. أعد المحاولة.';
         errEl.classList.add('show');
         btn.disabled = false; loadEl.textContent = '';
-        mySessionId = null;
+        mySessionId = null; mySessionStartedAt = 0;
         return;
       }
       setLoadingProgress(100, 'تم فصل الجلسة السابقة بنجاح ✅');
       await new Promise(r => setTimeout(r, 400));
     } else {
-      // لا يوجد جلسة سابقة — تسجيل عادي بكتابة فورية
+      // ⬇ تسجيل جلسة جديدة — كتابة إلزامية مع تحقق عكسي
       setLoadingProgress(75, 'جاري تسجيل الجلسة...');
-      activeSessions = newSessions;
-      try { await writeMeta(); } catch (e) { /* تخطّي — قد ناجح جزئياً */ }
-      setLoadingProgress(100, 'تم تسجيل الدخول');
+      try {
+        activeSessions = newSessions;
+        await writeMeta();
+        setLoadingProgress(90, 'جاري التحقق من تسجيل الجلسة...');
+        const verify = await readMeta();
+        const serverSid = verify.sessions?.[u]?.sid;
+        if (serverSid !== mySessionId) {
+          // أعد محاولة الكتابة مرة واحدة
+          setLoadingProgress(95, 'إعادة محاولة الكتابة...');
+          activeSessions = newSessions;
+          await writeMeta();
+          const verify2 = await readMeta();
+          if (verify2.sessions?.[u]?.sid !== mySessionId) {
+            throw new Error('لم يتم تأكيد تسجيل الجلسة');
+          }
+        }
+        setLoadingProgress(100, 'تم تسجيل الدخول');
+      } catch (e) {
+        hideLoading();
+        errEl.textContent = '❌ تعذر تسجيل الجلسة: ' + (e.message || '') + '\nحاول مرة أخرى.';
+        errEl.classList.add('show');
+        btn.disabled = false; loadEl.textContent = '';
+        mySessionId = null; mySessionStartedAt = 0;
+        return;
+      }
     }
 
     hideKeyForever();
@@ -2727,7 +2750,10 @@ window.logout = async function (silent = false) {
       const meta = await readMeta();
       const serverSid = meta.sessions?.[currentUser.username]?.sid;
       if (serverSid === mySessionId) {
-        delete activeSessions[currentUser.username];
+        // احذف جلستي فقط، واحتفظ بجلسات الآخرين
+        const currentFresh = { ...(meta.sessions || {}) };
+        delete currentFresh[currentUser.username];
+        activeSessions = currentFresh;
         await writeMeta();
       }
     } catch (e) { /* تجاهل */ }
@@ -2735,6 +2761,7 @@ window.logout = async function (silent = false) {
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   mySessionId = null;
+  mySessionStartedAt = 0;
   currentSyncInterval = SYNC_INTERVAL;
   lastSyncTime = 0;
   document.getElementById('app').style.display = 'none';
@@ -3088,7 +3115,7 @@ window.moveReadyToLog = async function () {
 };
 
 /* ==============================================================
-   Print  (وحدات فيزيائية pt — نفس الحجم على كل ورق)
+   Print
    ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
@@ -3141,13 +3168,22 @@ function buildPrintHTML(items, template, extra = {}) {
       .print-logo { text-align: center; margin-bottom: 4mm; }
       h1 { font-size: ${titleSize}pt; color: #1f4e79; margin: 0 0 3mm 0; text-align: center; font-weight: 700; }
       .meta { text-align: center; font-size: ${metaSize}pt; color: #444; margin-bottom: 4mm; }
-      table { width: 100%; border-collapse: collapse; table-layout: auto; font-size: ${baseFont}pt; }
-      th, td { border: 1px solid #333; padding: 3px 4px; text-align: right; vertical-align: top; word-wrap: break-word; overflow-wrap: anywhere; word-break: break-word; line-height: 1.25; }
+      table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: ${baseFont}pt; }
+      th, td { border: 1px solid #333; padding: 3px 4px; text-align: right; vertical-align: top; word-wrap: normal; overflow-wrap: break-word; word-break: normal; line-height: 1.25; }
+      th { white-space: normal; }
+      td { min-width: 0; }
       th { background: #1f4e79; color: #fff; font-weight: 600; }
       .cell-notes { word-break: break-word; white-space: pre-wrap; }
       tbody tr:nth-child(even) { background: #f5f7fa; }
       tfoot td { border: none; padding-top: 8mm; text-align: center; font-size: ${footSize}pt; color: #333; }
-      @media print { body { padding: 0; } }
+      @media print {
+        body { padding: 0; width: 100%; }
+        table { width: 100% !important; table-layout: fixed !important; }
+        th, td { box-sizing: border-box; }
+        tr { page-break-inside: avoid; break-inside: avoid; }
+        thead { display: table-header-group; }
+        tfoot { display: table-footer-group; }
+      }
     </style>
     </head><body>
     ${logoHTML}
@@ -3216,7 +3252,6 @@ window.handleLogoUpload = async function (evt) {
   evt.target.value = '';
 };
 window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم الحذف', 'info'); };
-
 window.toggleCol = function(key, tplKey) {
   if (!hasPerm('editTemplates')) return;
   if (!templates[tplKey]) templates[tplKey] = { ...DEFAULT_TEMPLATES[tplKey] };
@@ -3239,19 +3274,15 @@ window.updatePaperSize = function(value) {
   if (!hasPerm('editTemplates')) return;
   templates.paperSize = value;
 };
-
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
   if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
-
   const logoHTML = templates.logo
     ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف</span></button></div>`
     : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
-
   const paperOptions = Object.entries(PAPER_SIZES).map(([k, v]) =>
     `<option value="${k}" ${(templates.paperSize || 'A4') === k ? 'selected' : ''}>${v.label}</option>`
   ).join('');
-
   const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>الكليشه (صورة الطباعة)</span></h4>
     <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة. حدّد الطول والعرض يدوياً.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
@@ -3268,7 +3299,6 @@ function renderTemplates() {
       <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">💡 حجم الكتابة بوحدة pt فيزيائية — نفس الحجم على كل الأحجام.</div>
     </div>
   </div>`;
-
   const bodyHTML = ['ready','log'].map(key => {
     const t = { ...DEFAULT_TEMPLATES[key], ...(templates[key] || {}) };
     const label = key === 'ready' ? 'قائمة الطلبات الجاهزة' : 'سجل الطلبات';
@@ -3279,7 +3309,6 @@ function renderTemplates() {
         ${ico(isVisible ? 'eye' : 'eyeOff', 12)}<span>${c.label}</span><span class="col-chip-status">${isVisible ? 'ظاهر' : 'مخفي'}</span>
       </button>`;
     }).join('');
-
     return `<div class="template-card"><h4>${ico(key === 'ready' ? 'box' : 'archive', 17)}<span>${label}</span></h4>
       <div class="template-row"><label>العنوان</label><input value="${esc(t.title)}" onchange="updateTemplate('${key}', 'title', this.value)"></div>
       <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">{date} {count} {user} {from} {to}</div></div></div>
