@@ -69,12 +69,11 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .col-toggles-actions button{padding:5px 11px;font-size:11px;border-radius:14px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);cursor:pointer;font-family:inherit;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
 .col-toggles-actions button:hover{border-color:var(--blue);color:var(--dark-blue);background:rgba(46,117,182,.08)}
 .logo-size-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:6px}
-/* ═══ Session Conflict Modal ═══ */
-#sessionConflictModal .modal{max-width:560px;padding:30px 28px}
+#sessionConflictModal .modal{max-width:560px;padding:32px 28px}
 .sc-icon-wrap{display:inline-flex;align-items:center;justify-content:center;width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,rgba(255,193,7,.28),rgba(255,193,7,.08));color:#b38600;margin-bottom:18px;box-shadow:0 0 0 10px rgba(255,193,7,.07);animation:scPulse 2s ease-in-out infinite}
 @keyframes scPulse{0%,100%{box-shadow:0 0 0 10px rgba(255,193,7,.07)}50%{box-shadow:0 0 0 18px rgba(255,193,7,.03)}}
 .sc-title{font-size:22px;font-weight:800;color:var(--dark-blue);margin-bottom:10px;letter-spacing:.3px}
-.sc-message{font-size:13.5px;color:var(--text-muted);line-height:1.75;max-width:400px;margin:0 auto 18px}
+.sc-message{font-size:13.5px;color:var(--text-muted);line-height:1.75;max-width:420px;margin:0 auto 18px}
 .sc-message b{color:var(--dark-blue);font-weight:700}
 .sc-details{margin-top:16px;padding:14px 16px;background:linear-gradient(135deg,rgba(255,193,7,.1),rgba(255,193,7,.04));border-radius:12px;border-right:3px solid #ffc107;text-align:right;font-size:12.5px}
 .sc-details-head{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-weight:700;color:#856404}
@@ -797,7 +796,6 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <div class="modal-actions"><button class="btn btn-primary" onclick="closeModal('shortcutsModal')">تم</button></div>
 </div></div>
 
-<!-- ═══ Session Conflict Modal ═══ -->
 <div id="sessionConflictModal" class="modal-bg"><div class="modal">
   <div id="sessionConflictContent" style="text-align:center;"></div>
   <div class="modal-actions" id="sessionConflictActions"></div>
@@ -895,8 +893,7 @@ const SYNC_INTERVAL = 30000;
 const SAVE_COOLDOWN = 10000;
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
-// الجلسة تُعتبر "قديمة" (منتهية بدون خروج) إذا مضى عليها أكثر من هذه المدة
-const SESSION_STALE_MS = 12 * 60 * 60 * 1000; // 12 ساعة
+const SESSION_STALE_MS = 12 * 60 * 60 * 1000;
 const DRAFT_KEY = 'oms_draft_order';
 const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
@@ -931,8 +928,6 @@ const PAPER_SIZES = {
   A4: { w: 210, h: 297, label: 'A4 (210×297mm)' },
   A5: { w: 148, h: 210, label: 'A5 (148×210mm)' }
 };
-// العرض المرجعي (A4) — يُستخدم لتكييف حجم النص لتبدو الكتابة طبيعية على كل الأحجام
-const PAPER_REF_WIDTH = 210;
 
 if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
   console.error('⚠️ يجب تعديل GITHUB_OWNER في أعلى الملف!');
@@ -1027,7 +1022,7 @@ const DEFAULT_TEMPLATES = {
     showInvoice:true, showBranch:true, showCustomer:true, showCustomerPhone:true,
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
     showDriver:true, showDriverPhone:true, showNotes:true,
-    fontSize:12
+    fontSize:10
   },
   log:{
     title:'سجل الطلبات',
@@ -1036,7 +1031,7 @@ const DEFAULT_TEMPLATES = {
     showInvoice:true, showBranch:true, showCustomer:true, showCustomerPhone:true,
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
     showDriver:true, showDriverPhone:true, showNotes:true, showArchivedAt:true,
-    fontSize:11
+    fontSize:10
   }
 };
 
@@ -1058,9 +1053,8 @@ let currentSyncInterval = SYNC_INTERVAL;
 let lastSyncTime = 0;
 let visibilityHandlerAttached = false;
 let lastRateNotificationAt = 0;
-// ⬇ الجلسات
-let activeSessions = {};  // mirror of meta.sessions
-let mySessionId = null;   // my session id
+let activeSessions = {};
+let mySessionId = null;
 
 /* ==============================================================
    Security
@@ -1238,7 +1232,7 @@ function getDeviceInfo() {
 }
 
 /* ==============================================================
-   Access Key  (يختفي تلقائياً بعد أول دخول)
+   Access Key
    ============================================================== */
 function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
 function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
@@ -1578,10 +1572,10 @@ async function saveAllDataNow() {
 window.saveAllDataNow = saveAllDataNow;
 
 /* ==============================================================
-   Sync  (يتحقق من صلاحية الجلسة)
+   Sync  (يتحقق من الجلسة حتى في التبويب المخفي)
    ============================================================== */
 async function syncPull() {
-  if (syncing || !currentUser || document.hidden) return;
+  if (syncing || !currentUser) return;
   const now = Date.now();
   if (now - lastSyncTime < SYNC_THROTTLE_MS) return;
   if (currentSyncInterval <= 0) return;
@@ -1590,7 +1584,7 @@ async function syncPull() {
   try {
     const meta = await readMeta();
 
-    // ⬅ تحقق من صلاحية جلستي — إذا استُبدلت من جهاز آخر → إنهاء قسري
+    // ⬇ فحص الجلسة دائماً (حتى لو كان التبويب مخفياً)
     if (mySessionId && currentUser) {
       const serverSess = meta.sessions?.[currentUser.username];
       if (!serverSess || serverSess.sid !== mySessionId) {
@@ -1599,6 +1593,9 @@ async function syncPull() {
         return;
       }
     }
+
+    // إذا كان التبويب مخفياً، لا نُكمل مزامنة البيانات الكاملة
+    if (document.hidden) { syncing = false; return; }
 
     if (localMeta && meta.lastUpdate === localMeta.lastUpdate) {
       setOnline(true);
@@ -1629,7 +1626,7 @@ function startPolling() {
   pollTimer = setInterval(syncPull, interval);
   if (!visibilityHandlerAttached) {
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && currentUser && currentSyncInterval > 0) syncPull();
+      if (!document.hidden && currentUser && currentSyncInterval > 0) { lastSyncTime = 0; syncPull(); }
     });
     visibilityHandlerAttached = true;
   }
@@ -1645,7 +1642,7 @@ function setSyncing(on) { const dot = document.getElementById('connDot'); if (do
 window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; lastSyncTime = 0; await syncPull(); };
 
 /* ==============================================================
-   Session Conflict Dialog  (احترافي)
+   Session Conflict Dialog
    ============================================================== */
 function showSessionConflictDialog(username, session) {
   return new Promise(resolve => {
@@ -1658,7 +1655,7 @@ function showSessionConflictDialog(username, session) {
       <div class="sc-title">الحساب مستخدم بالفعل</div>
       <div class="sc-message">
         الحساب <b>"${esc(username)}"</b> مسجّل دخول حالياً على جهاز آخر.
-        <br>يمكنك إنهاء الجلسات السابقة والمتابعة من هنا.
+        <br>يجب <b>إنهاء الجلسة السابقة</b> أولاً لتتمكن من الدخول.
       </div>
       <div class="sc-details">
         <div class="sc-details-head">${ico('monitor', 14)}<span>تفاصيل الجلسة النشطة</span></div>
@@ -1668,10 +1665,10 @@ function showSessionConflictDialog(username, session) {
     `;
     actions.innerHTML = `
       <button class="btn sc-btn-terminate" id="scTerminateBtn">
-        ${ico('logout', 16)}<span>فصل الجلسات السابقة والمتابعة</span>
+        ${ico('logout', 16)}<span>فصل الجلسة السابقة والدخول</span>
       </button>
       <button class="btn sc-btn-cancel" id="scCancelBtn">
-        ${ico('x', 16)}<span>إلغاء الدخول</span>
+        ${ico('x', 16)}<span>رجوع (بدون دخول)</span>
       </button>
     `;
     const cancelBtn = document.getElementById('scCancelBtn');
@@ -1690,12 +1687,10 @@ function showSessionConflictDialog(username, session) {
 }
 
 /* ==============================================================
-   Force Logout (عند إنهاء الجلسة من جهاز آخر)
+   Force Logout
    ============================================================== */
 async function forceLogout(reason) {
-  if (currentUser) {
-    logActivity('force-logout', `إنهاء جلسة: ${currentUser.username}`, reason, 'warning');
-  }
+  if (currentUser) logActivity('force-logout', `إنهاء جلسة: ${currentUser.username}`, reason, 'warning');
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   mySessionId = null;
@@ -2222,7 +2217,6 @@ function renderStats() {
   const weekAgo = new Date(today); weekAgo.setDate(weekAgo.getDate()-7);
   const monthAgo = new Date(today); monthAgo.setDate(monthAgo.getDate()-30);
   const getOrderDate = (o) => parseDate(o.createdAt) || parseDate(o.transferredAt) || parseDate(o.archivedAt);
-
   const todayCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= today && d < tomorrow; }).length;
   const weekCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= weekAgo; }).length;
   const monthCount = allOrders.filter(o => { const d = getOrderDate(o); return d && d >= monthAgo; }).length;
@@ -2586,7 +2580,7 @@ window.switchTab = function (evt, tab) {
 };
 
 /* ==============================================================
-   Login  (مع كشف الجلسة المكررة)
+   Login  (إلزام المستخدم بفصل الجلسة السابقة)
    ============================================================== */
 window.doLogin = async function () {
   const u = document.getElementById('loginUser').value.trim();
@@ -2630,7 +2624,7 @@ window.doLogin = async function () {
       return;
     }
 
-    // ⬇ كشف الجلسة النشطة مسبقاً
+    // ⬇ كشف الجلسة النشطة — إلزام المستخدم بالفصل قبل الدخول
     const existing = meta.sessions?.[u];
     let needsTerminate = false;
     if (existing && existing.sid) {
@@ -2640,15 +2634,15 @@ window.doLogin = async function () {
         const choice = await showSessionConflictDialog(u, existing);
         if (choice === 'cancel') {
           btn.disabled = false; loadEl.textContent = ''; hideLoading();
-          toast('تم إلغاء الدخول', 'info');
+          toast('تم رجوعك لشاشة الدخول — الجلسة السابقة لم تُفصل', 'info');
           return;
         }
         needsTerminate = true;
-        showLoading('جاري فصل الجلسات السابقة...');
+        showLoading('جاري فصل الجلسة السابقة...');
       }
     }
 
-    // تسجيل جلسة جديدة
+    // تسجيل جلسة جديدة (تُلغي الجلسة القديمة)
     mySessionId = uid();
     activeSessions[u] = {
       sid: mySessionId,
@@ -2666,10 +2660,10 @@ window.doLogin = async function () {
     }
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
-    logActivity('login', `تسجيل دخول: ${u}`, needsTerminate ? 'تم فصل الجلسات السابقة' : `الدور: ${found.role}`, 'success');
+    logActivity('login', `تسجيل دخول: ${u}`, needsTerminate ? 'تم فصل الجلسة السابقة' : `الدور: ${found.role}`, 'success');
     loadEl.textContent = 'تم الدخول';
     hideLoading();
-    if (needsTerminate) toast('✅ تم فصل الجلسات السابقة', 'success');
+    if (needsTerminate) toast('✅ تم فصل الجلسة السابقة', 'success');
     startApp();
   } catch (e) {
     errEl.textContent = (e.message || 'خطأ') + '\n\nتأكد من:\n- GITHUB_OWNER و GITHUB_REPO في أعلى الملف\n- صلاحيات المفتاح (repo)';
@@ -2682,8 +2676,6 @@ window.doLogin = async function () {
 window.logout = async function (silent = false) {
   if (!silent) { const ok = await dialog.confirm('تسجيل الخروج؟', { title: 'خروج' }); if (!ok) return; }
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
-
-  // حذف جلستي من meta (best-effort)
   if (mySessionId && currentUser) {
     try {
       const meta = await readMeta();
@@ -2694,7 +2686,6 @@ window.logout = async function (silent = false) {
       }
     } catch (e) { /* تجاهل */ }
   }
-
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   mySessionId = null;
@@ -3051,7 +3042,7 @@ window.moveReadyToLog = async function () {
 };
 
 /* ==============================================================
-   Print  (نص طبيعي على كل الأحجام + دائماً عمودي)
+   Print  ⬅ (وحدات فيزيائية pt — نفس الحجم على كل ورق)
    ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
@@ -3086,41 +3077,55 @@ function buildPrintHTML(items, template, extra = {}) {
   const paperKey = tpl.paperSize || 'A4';
   const paper = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
 
-  // ⬇ تكييف حجم النص نسبةً لعرض الورقة — ليبدو طبيعياً على كل الأحجام
-  const scale = paper.w / PAPER_REF_WIDTH;
-  const baseFont = tpl.fontSize || 12;
-  const fontSize = (baseFont * scale).toFixed(2);
-  const titleSize = (18 * scale).toFixed(2);
-  const metaSize = (12 * scale).toFixed(2);
-  const padV = (6 * scale).toFixed(2);
-  const padH = (5 * scale).toFixed(2);
-  const footSize = (12 * scale).toFixed(2);
+  // ⬇ خطوط بوحدات pt فيزيائية — نفس حجم الكتابة على كل ورقة
+  const baseFont = tpl.fontSize || 10;
+  const titleSize = baseFont + 5;
+  const metaSize = baseFont;
+  const footSize = baseFont;
 
-  // ⬇ حجم الكليشه يدوي (مم)
-  const logoW = templates.logoWidth || 180;
+  // ⬇ الكليشة محصورة في عرض الورقة القابل للطباعة (بعد الهوامش)
+  const printableW = paper.w - 16; // 8مم هامش من كل طرف
+  const logoW = Math.min(templates.logoWidth || 180, printableW);
   const logoH = templates.logoHeight || 40;
-  const logoHTML = templates.logo ? `<div class="print-logo"><img src="${templates.logo}" alt="" style="width:${logoW}mm;height:${logoH}mm;object-fit:cover;display:block;border-radius:4px;"></div>` : '';
+  const logoHTML = templates.logo
+    ? `<div class="print-logo"><img src="${templates.logo}" alt="" style="width:${logoW}mm;max-width:100%;height:auto;max-height:${logoH}mm;object-fit:contain;display:block;"></div>`
+    : '';
 
   return `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
-    <style>*{box-sizing:border-box;} body{font-family:Tahoma,Arial;padding:15px;margin:0;color:#222;}
-    .print-logo{width:100%;margin-bottom:${padV}mm;display:flex;justify-content:center;}
-    h1{color:#1f4e79;text-align:center;margin:0 0 ${padV}mm 0;font-size:${titleSize}px;font-weight:700;}
-    .meta{text-align:center;color:#555;margin-bottom:${padV}mm;font-size:${metaSize}px;}
-    table{width:100%;border-collapse:collapse;font-size:${fontSize}px;}
-    th,td{border:1px solid #999;padding:${padV}px ${padH}px;text-align:right;vertical-align:top;word-break:break-word;}
-    th{background:#1f4e79;color:#fff;font-weight:600;}
-    .cell-notes{max-width:${(200*scale).toFixed(0)}px;white-space:normal;word-break:break-word;line-height:1.4;}
-    tbody tr:nth-child(even){background:#f8f9fa;}
-    tfoot td{padding:${(20*scale).toFixed(2)}px 10px;border:none;font-size:${footSize}px;text-align:center;color:#333;}
-    @page{size:${paper.w}mm ${paper.h}mm portrait;margin:8mm 10mm;}
-    @media print{body{padding:0;}}</style></head><body>
+    <style>
+      @page { size: ${paper.w}mm ${paper.h}mm portrait; margin: 8mm; }
+      * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+      html, body { margin: 0; padding: 0; background: #fff; }
+      body { font-family: Tahoma, Arial, sans-serif; color: #000; }
+      .print-logo { text-align: center; margin-bottom: 4mm; }
+      h1 { font-size: ${titleSize}pt; color: #1f4e79; margin: 0 0 3mm 0; text-align: center; font-weight: 700; }
+      .meta { text-align: center; font-size: ${metaSize}pt; color: #444; margin-bottom: 4mm; }
+      table { width: 100%; border-collapse: collapse; table-layout: auto; font-size: ${baseFont}pt; }
+      th, td {
+        border: 1px solid #333;
+        padding: 3px 4px;
+        text-align: right;
+        vertical-align: top;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        line-height: 1.25;
+      }
+      th { background: #1f4e79; color: #fff; font-weight: 600; }
+      .cell-notes { word-break: break-word; white-space: pre-wrap; }
+      tbody tr:nth-child(even) { background: #f5f7fa; }
+      tfoot td { border: none; padding-top: 8mm; text-align: center; font-size: ${footSize}pt; color: #333; }
+      @media print { body { padding: 0; } }
+    </style>
+    </head><body>
     ${logoHTML}
     <h1>${esc(replaceVars(tpl.title))}</h1>
     <div class="meta">${esc(replaceVars(tpl.subtitle))}</div>
     <table><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
     <tbody>${rows}</tbody>
     ${tpl.footer ? `<tfoot><tr><td colspan="${headers.length}">${esc(replaceVars(tpl.footer))}</td></tr></tfoot>` : ''}
-    </table><script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
+    </table>
+    <script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
     </body></html>`;
 }
 window.printReady = function () {
@@ -3149,7 +3154,7 @@ window.printLog = function () {
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
 /* ==============================================================
-   Templates  (حجم الكليشه يدوي + حجم الورق)
+   Templates
    ============================================================== */
 async function resizeImage(file, maxWidth = 1400) {
   return new Promise((resolve, reject) => {
@@ -3232,7 +3237,7 @@ function renderTemplates() {
     <div style="margin-top:11px;">
       <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">حجم ورقة الطباعة (طولية دائماً)</label>
       <select onchange="updatePaperSize(this.value)">${paperOptions}</select>
-      <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">💡 حجم الكتابة يتكيّف تلقائياً مع حجم الورقة ليظهر طبيعياً.</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">💡 حجم الكتابة يُقاس بوحدة pt فيزيائية — نفس الحجم على كل الأحجام. إذا ضاقت الأعمدة، صغّر حجم الخط أو أخفِ بعض الأعمدة.</div>
     </div>
   </div>`;
 
@@ -3253,7 +3258,7 @@ function renderTemplates() {
       <div class="template-row"><label>العنوان</label><input value="${esc(t.title)}" onchange="updateTemplate('${key}', 'title', this.value)"></div>
       <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">{date} {count} {user} {from} {to}</div></div></div>
       <div class="template-row"><label>التذييل</label><input value="${esc(t.footer || '')}" onchange="updateTemplate('${key}', 'footer', this.value)"></div>
-      <div class="template-row"><label>حجم الخط</label><input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)"><div style="font-size:11px;color:var(--text-muted);">يُقاس نسبةً لحجم A4</div></div>
+      <div class="template-row"><label>حجم الخط (pt)</label><input type="number" value="${t.fontSize || 10}" min="6" max="18" step="0.5" onchange="updateTemplate('${key}', 'fontSize', +this.value)"><div style="font-size:11px;color:var(--text-muted);">6 = صغير جداً، 10 = عادي، 14 = كبير</div></div>
 
       <div class="template-columns-section">
         <div class="tcs-title">${ico('grid', 14)}<span>الأعمدة الظاهرة في الطباعة</span></div>
