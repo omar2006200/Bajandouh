@@ -43,8 +43,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;t
 .btn-icon .badge-num{position:absolute;top:-4px;left:-4px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center}
 kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'Consolas',monospace;font-weight:500;display:inline-block;line-height:1;pointer-events:none}
 .btn-warning kbd{background:rgba(0,0,0,.15)}
-
-/* ═══ Rate Limit Widget ═══ */
 .rate-widget{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.13);padding:5px 10px;border-radius:14px;font-size:10.5px;font-weight:600;cursor:help;position:relative;min-width:135px;transition:var(--transition)}
 .rate-widget:hover{background:rgba(255,255,255,.22)}
 .rate-widget .rate-ico{display:inline-flex;align-items:center;justify-content:center;opacity:.9}
@@ -55,8 +53,6 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .rate-widget .rate-text{font-family:'Consolas',monospace;letter-spacing:.3px;white-space:nowrap;font-size:10px;opacity:.95;direction:ltr}
 @media(max-width:1000px){.rate-widget .rate-text{display:none}.rate-widget{min-width:auto;padding:5px 8px}}
 @media(max-width:700px){.rate-widget .rate-bar{width:36px}.rate-widget{min-width:auto;padding:4px 7px;font-size:9.5px}}
-
-/* ═══ Column Toggle Chips ═══ */
 .col-toggles{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
 .col-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;background:rgba(0,0,0,.04);border:2px solid var(--border);cursor:pointer;font-size:11.5px;font-weight:600;transition:var(--transition);color:var(--text-muted);font-family:inherit;user-select:none;line-height:1}
 .col-chip:hover{border-color:var(--blue);background:rgba(46,117,182,.08);color:var(--text);transform:translateY(-1px)}
@@ -72,7 +68,7 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .col-toggles-actions{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
 .col-toggles-actions button{padding:5px 11px;font-size:11px;border-radius:14px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);cursor:pointer;font-family:inherit;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
 .col-toggles-actions button:hover{border-color:var(--blue);color:var(--dark-blue);background:rgba(46,117,182,.08)}
-
+.logo-size-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:6px}
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(31,78,121,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(6px)}
 #loadingOverlay.show{display:flex}
 .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
@@ -103,7 +99,6 @@ kbd{background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px;font-size:10px;
 .key-status.missing{background:#fff3cd;color:#856404}
 .key-status button{margin-right:auto;padding:5px 12px;font-size:11px;border-radius:6px;background:rgba(0,0,0,.1);border:none;cursor:pointer;color:inherit;font-weight:600;font-family:inherit}
 .key-help{font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.7}
-.key-help a{color:var(--blue);text-decoration:none;font-weight:600}
 .login-error{color:var(--red);font-size:13px;margin-top:12px;text-align:center;white-space:pre-line;line-height:1.6;background:#f8d7da;padding:12px 16px;border-radius:10px;display:none}
 .login-error.show{display:block;animation:shake .3s ease}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -438,7 +433,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
 .pg-dots{padding:0 6px;color:var(--text-muted);font-weight:700;user-select:none}
 .pg-info{font-size:11.5px;color:var(--text-muted);font-weight:600;padding:0 8px}
 .pg-info b{color:var(--dark-blue);font-weight:700}
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination,.rate-widget{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}@page{size:A4 landscape;margin:12mm}}
+@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination,.rate-widget{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}}
 @media(max-width:700px){
   .modal{max-width:96vw;padding:20px 16px}
   .admin-token-section .admin-header{font-size:13px;padding:8px 12px}
@@ -480,6 +475,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   .pg-info{font-size:10.5px;padding:0 4px}
   .activity-stats{font-size:11px;gap:10px;padding:8px 10px}
   .col-chip{padding:6px 10px;font-size:11px}
+  .logo-size-row{grid-template-columns:1fr}
 }
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:rgba(0,0,0,.05)}
@@ -518,7 +514,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
     <h1>نظام إدارة الطلبات</h1>
-    <p class="subtitle">منصة احترافية آمنة لإدارة الطلبات</p>
+    <p class="subtitle">منصة احترافية لإدارة الطلبات</p>
     <div id="keyStatus"></div>
     <div id="keyField" style="display:none;">
       <label>مفتاح الاتصال</label>
@@ -566,7 +562,7 @@ tbody tr.selected{outline:2px solid var(--blue);outline-offset:-2px;background:r
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
-      <div class="rate-widget" id="rateWidget" title="استهلاك GitHub API">
+      <div class="rate-widget" id="rateWidget" title="استهلاك API">
         <span class="rate-ico" id="rateIcon"></span>
         <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
         <span class="rate-text" id="rateText">— / —</span>
@@ -851,7 +847,8 @@ const I = {
   pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z',
   chevronsRight:'M13 17l5-5-5-5 M6 17l5-5-5-5',
   chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5',
-  zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z'
+  zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+  file_text:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -866,13 +863,13 @@ const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
 const SYNC_INTERVAL = 30000;
-const MIN_SYNC_INTERVAL = 15000;
 const SAVE_COOLDOWN = 10000;
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
 const DRAFT_KEY = 'oms_draft_order';
 const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
+const KEY_HIDDEN_FLAG = 'oms_key_hidden';
 const NOTIF_KEY = 'oms_notifications';
 const ACTIVITY_PER_PAGE = 30;
 const ACTIVITY_WARN_THRESHOLD = 5000;
@@ -896,6 +893,13 @@ const DATA_FILES = {
 };
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
+
+// أحجام الورق (عرض × ارتفاع بالملم)
+const PAPER_SIZES = {
+  A3: { w: 297, h: 420, label: 'A3 (297×420mm)' },
+  A4: { w: 210, h: 297, label: 'A4 (210×297mm)' },
+  A5: { w: 148, h: 210, label: 'A5 (148×210mm)' }
+};
 
 if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
   console.error('⚠️ يجب تعديل GITHUB_OWNER في أعلى الملف!');
@@ -949,7 +953,6 @@ const DEFAULT_PERMS = {
   manageCustomers:false,manageDrivers:false,manageBranches:false,manageUsers:false,
   editTemplates:false,viewActivity:false,reset:false
 };
-// أعمدة الطباعة (اسم الحقل داخلياً يبقى customerPhone)
 const PRINT_COLUMNS = {
   ready: [
     { key:'showInvoice',        label:'رقم الفاتورة' },
@@ -981,6 +984,9 @@ const PRINT_COLUMNS = {
 };
 const DEFAULT_TEMPLATES = {
   logo:'',
+  logoWidth:180,
+  logoHeight:40,
+  paperSize:'A4',
   ready:{
     title:'قائمة الطلبات الجاهزة للنقل',
     subtitle:'التاريخ: {date} — العدد: {count} — المستخدم: {user}',
@@ -988,7 +994,7 @@ const DEFAULT_TEMPLATES = {
     showInvoice:true, showBranch:true, showCustomer:true, showCustomerPhone:true,
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
     showDriver:true, showDriverPhone:true, showNotes:true,
-    fontSize:12, orientation:'landscape'
+    fontSize:12
   },
   log:{
     title:'سجل الطلبات',
@@ -997,7 +1003,7 @@ const DEFAULT_TEMPLATES = {
     showInvoice:true, showBranch:true, showCustomer:true, showCustomerPhone:true,
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
     showDriver:true, showDriverPhone:true, showNotes:true, showArchivedAt:true,
-    fontSize:11, orientation:'landscape'
+    fontSize:11
   }
 };
 
@@ -1009,13 +1015,12 @@ let pollTimer = null,syncing = false,selectedOrderId = null;
 let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
 let rateLimitInfo = null, apiCallCount = 0, apiCachedCount = 0;
 let prevStats = { orders:0,ready:0,log:0,total:0 };
-let hasUnencryptedFiles = false;
+let hasLegacyFiles = false;
 let sessionTimer = null, sessionWarningTimer = null, sessionExpireAt = 0;
 let activityCurrentPage = 1;
 let activityFilterUser = '';
 let activityFilterType = '';
 let activitySearchQuery = '';
-
 let currentSyncInterval = SYNC_INTERVAL;
 let lastSyncTime = 0;
 let visibilityHandlerAttached = false;
@@ -1040,7 +1045,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ==============================================================
-   Encryption
+   Data Encoding (internal)
    ============================================================== */
 function deriveFixedKey() {
   const s = APP_ID + '|secure|fixed|v3|schema';
@@ -1177,14 +1182,17 @@ async function ensureJSZip() {
 }
 
 /* ==============================================================
-   Access Key
+   Access Key  (يختفي تلقائياً بعد أول دخول)
    ============================================================== */
 function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
 function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
+function hideKeyForever() { localStorage.setItem(KEY_HIDDEN_FLAG, '1'); }
+function isKeyHidden() { return localStorage.getItem(KEY_HIDDEN_FLAG) === '1'; }
 async function clearKey() {
-  const ok = await dialog.confirm('سيتم حذف مفتاح الاتصال.', { type: 'warning', title: 'حذف المفتاح' });
+  const ok = await dialog.confirm('سيتم حذف مفتاح الاتصال من هذا المتصفح.', { type: 'warning', title: 'حذف المفتاح' });
   if (!ok) return;
   localStorage.removeItem(ACCESS_KEY);
+  localStorage.removeItem(KEY_HIDDEN_FLAG);
   toast('تم حذف المفتاح', 'success');
   updateKeyStatus(); updateCurrentKeyInfo();
 }
@@ -1192,11 +1200,16 @@ function updateKeyStatus() {
   const statusEl = document.getElementById('keyStatus');
   const fieldEl = document.getElementById('keyField');
   const token = getStoredKey();
+  // إخفاء تلقائي بعد أول دخول ناجح
+  if (isKeyHidden() && token) {
+    statusEl.style.display = 'none';
+    fieldEl.style.display = 'none';
+    return;
+  }
+  statusEl.style.display = '';
   if (token) {
-    const masked = token.length > 25 ? token.substring(0, 8) + '…' + token.slice(-4) : token;
     statusEl.className = 'key-status saved';
-    statusEl.innerHTML = `<span>${ico('lock', 14)} مفتاح الاتصال نشط</span>
-      <span style="font-family:monospace;font-size:10px;opacity:.7;">${masked}</span>
+    statusEl.innerHTML = `<span>${ico('check', 14)} مفتاح الاتصال جاهز</span>
       <button onclick="showKeyField()">تغيير</button>`;
     fieldEl.style.display = 'none';
   } else {
@@ -1216,7 +1229,7 @@ function updateCurrentKeyInfo() {
   if (token) {
     el.innerHTML = `<div style="color:#28a745;font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div>
       <div>الطول: ${token.length} حرف</div>
-      <div style="margin-top:8px;font-size:11px;opacity:.8;">🔒 بياناتك محمية</div>`;
+      <div style="margin-top:8px;font-size:11px;opacity:.8;">✅ النظام جاهز للعمل</div>`;
   } else el.textContent = 'لا يوجد مفتاح';
 }
 function changeKeyModal() {
@@ -1336,7 +1349,7 @@ function renderRateLimitWidget() {
   const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
   const level = getRateLevel(remaining);
   widget.title =
-`📊 استهلاك رصيد الاستخدام
+`📊 استهلاك API
 ━━━━━━━━━━━━━━━━━━━
 المتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}
 النسبة: ${pct.toFixed(1)}%
@@ -1365,7 +1378,7 @@ function adjustSyncInterval() {
     if (oldInterval !== currentSyncInterval) {
       if (oldInterval === 0 || currentSyncInterval === 0) {
         toast(currentSyncInterval === 0
-          ? '⏸ تم إيقاف المزامنة مؤقتاً (حصة منخفضة)'
+          ? '⏸ تم إيقاف المزامنة مؤقتاً'
           : '▶ تم استئناف المزامنة', currentSyncInterval === 0 ? 'warning' : 'success');
       }
     }
@@ -1381,7 +1394,7 @@ function maybeNotifyLowRate() {
   const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
   if (pct < 10) {
     lastRateNotificationAt = now;
-    addNotification('تحذير API', `استهلاك منخفض: ${rateLimitInfo.remaining} طلب متبقي`, 'warning');
+    addNotification('تنبيه', `استهلاك منخفض: ${rateLimitInfo.remaining} طلب متبقي`, 'warning');
   }
 }
 
@@ -1421,8 +1434,8 @@ async function apiReadFile(key) {
   }
   if (isEncrypted(raw)) {
     const decrypted = decryptText(raw);
-    if (decrypted === null) throw new Error(`فشل فك التشفير لملف ${key}`);
-    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(`فشل تحليل JSON لملف ${key}`); }
+    if (decrypted === null) throw new Error(`فشل قراءة ملف ${key}`);
+    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(`فشل تحليل ملف ${key}`); }
   }
   try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
 }
@@ -1457,7 +1470,7 @@ async function apiCreateFile(key, data) {
   return json;
 }
 async function readAll() {
-  hasUnencryptedFiles = false;
+  hasLegacyFiles = false;
   const errors = [];
   const results = await Promise.all(DATA_KEYS.map(async (k) => {
     try { return await apiReadFile(k); }
@@ -1467,7 +1480,7 @@ async function readAll() {
   DATA_KEYS.forEach((k, i) => {
     const r = results[i];
     if (r.notModified) return;
-    if (r.wasPlain === true) hasUnencryptedFiles = true;
+    if (r.wasPlain === true) hasLegacyFiles = true;
     if (k === 'templates') {
       cache.templates = r.data || null;
       const merged = r.data ? { ...DEFAULT_TEMPLATES, ...r.data } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
@@ -1501,18 +1514,18 @@ async function persistKeys(keys) {
     await writeMeta();
   } finally { setSyncing(false); }
 }
-async function encryptAllNow() {
-  const ok = await dialog.confirm('تفعيل الحماية على جميع البيانات؟', { title: '🔒 تفعيل', okText: 'الآن' });
+async function saveAllDataNow() {
+  const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن. متابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
   if (!ok) return;
   try {
-    showLoading('جاري التفعيل...');
+    showLoading('جاري الحفظ...');
     await persistKeys(DATA_KEYS);
     hideLoading();
-    hasUnencryptedFiles = false;
-    toast('✅ تم التفعيل', 'success');
+    hasLegacyFiles = false;
+    toast('✅ تم الحفظ', 'success');
   } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
 }
-window.encryptAllNow = encryptAllNow;
+window.saveAllDataNow = saveAllDataNow;
 
 /* ==============================================================
    Sync
@@ -1854,7 +1867,7 @@ function checkSessionWarning() {
   const remaining = sessionExpireAt - Date.now();
   if (remaining <= 0) { stopSessionTimer(); logout(true); toast('انتهت الجلسة', 'warning'); return; }
   if (remaining <= SESSION_WARNING && remaining > SESSION_WARNING - 1000) {
-    addNotification('تحذير', 'ستنتهي الجلسة قريباً', 'warning');
+    addNotification('تنبيه', 'ستنتهي الجلسة قريباً', 'warning');
     toast('⚠️ ستنتهي جلستك قريباً', 'warning');
   }
 }
@@ -2040,7 +2053,7 @@ function buildUI() {
   rebuildSettingsTabs();
 
   document.getElementById('tab-token').innerHTML = `
-    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">🔒 بياناتك محمية بتشفير.</div>
+    <div class="perm-note" style="background:#d4edda;border-color:#7ec98d;color:#155724;margin-bottom:14px;">✅ النظام جاهز وبياناتك محفوظة.</div>
     <div class="toolbar">
       <button class="btn btn-warning" onclick="changeKeyModal()">${ico('refresh', 15)}<span>تحديث المفتاح</span></button>
       <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>حذف المفتاح</span></button>
@@ -2052,7 +2065,7 @@ function buildUI() {
       ${ico('activity', 18)}<span>سجل النشاط الكامل</span>
     </div>
     <div class="perm-note" style="margin-bottom:14px;">
-      🔓 السجل — يعرض ${ACTIVITY_PER_PAGE} عملية لكل صفحة
+      🔓 السجل غير محدود — يعرض ${ACTIVITY_PER_PAGE} عملية لكل صفحة
     </div>
     <div class="activity-filters">
       <div class="activity-search-box">
@@ -2099,7 +2112,7 @@ function buildUI() {
     <div class="perm-note" style="margin-bottom:14px;">ZIP يحتوي على جميع البيانات بصيغة JSON.</div>
     <div class="toolbar">
       <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير ZIP</span></button>
-      <button class="btn btn-success" onclick="encryptAllNow()">${ico('lock', 15)}<span>🔒 تفعيل الحماية</span></button>
+      <button class="btn btn-success" onclick="saveAllDataNow()">${ico('save', 15)}<span>حفظ شامل</span></button>
       <button class="btn btn-danger perm-reset" onclick="resetAll()">${ico('trash', 15)}<span>تصفير</span></button>
     </div>`;
 
@@ -2571,7 +2584,7 @@ window.doLogin = async function () {
 
     if (!cache.users.length) {
       const errs = readAll.lastErrors || [];
-      if (errs.length) errEl.textContent = 'تعذر تحميل البيانات من GitHub:\n' + errs.join('\n');
+      if (errs.length) errEl.textContent = 'تعذر تحميل البيانات:\n' + errs.join('\n');
       else errEl.textContent = 'لم يتم العثور على مستخدمين.\nتأكد من وجود ملف data/users.json في المستودع.';
       errEl.classList.add('show');
       btn.disabled = false; loadEl.textContent = ''; hideLoading();
@@ -2586,10 +2599,13 @@ window.doLogin = async function () {
       return;
     }
 
-    if (hasUnencryptedFiles && found.role === 'رئيسي') {
+    // بعد أول دخول ناجح: أخفِ خانة المفتاح
+    hideKeyForever();
+
+    if (hasLegacyFiles && found.role === 'رئيسي') {
       hideLoading();
-      const ok = await dialog.confirm('تفعيل الحماية على البيانات؟', { title: '🔒 تفعيل', okText: 'الآن', cancelText: 'لاحقاً' });
-      if (ok) { try { showLoading('جاري التفعيل...'); await persistKeys(DATA_KEYS); hideLoading(); hasUnencryptedFiles = false; toast('✅ تم', 'success'); } catch (e2) { hideLoading(); } }
+      const ok = await dialog.confirm('سيتم تحديث طريقة حفظ البيانات الآن. متابعة؟', { title: 'تحديث', okText: 'الآن', cancelText: 'لاحقاً' });
+      if (ok) { try { showLoading('جاري التحديث...'); await persistKeys(DATA_KEYS); hideLoading(); hasLegacyFiles = false; toast('✅ تم', 'success'); } catch (e2) { hideLoading(); } }
     }
     localStorage.setItem('oms_lastUser', u);
     currentUser = found;
@@ -2813,7 +2829,7 @@ window.deleteFromLog = async function (id) {
 };
 
 /* ==============================================================
-   Customer Search  ⬅ (يملأ هاتف العميل تلقائياً)
+   Customer Search
    ============================================================== */
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
@@ -2846,7 +2862,6 @@ function initCustomerSearch() {
         } else {
           document.getElementById('orderCustomerId').value = opt.dataset.id;
           input.value = opt.dataset.name;
-          // ✅ ملء هاتف العميل تلقائياً
           document.getElementById('orderCustomerPhone').value = opt.dataset.phone || '';
           document.getElementById('orderLocation').value = opt.dataset.loc || '';
           dropdown.classList.remove('show');
@@ -2964,7 +2979,7 @@ window.moveReadyToLog = async function () {
 };
 
 /* ==============================================================
-   Print  ⬅ (هاتف العميل + أعمدة ديناميكية)
+   Print  (دائماً عمودي + أحجام A3/A4/A5 + حجم كليشه يدوي)
    ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
@@ -2995,22 +3010,28 @@ function buildPrintHTML(items, template, extra = {}) {
     return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
   }).join('');
 
-  const orientation = tpl.orientation === 'portrait' ? 'portrait' : 'landscape';
+  // حجم الورق (دائماً عمودي)
+  const paperKey = tpl.paperSize || 'A4';
+  const paper = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
   const fontSize = tpl.fontSize || 12;
-  const logoHTML = templates.logo ? `<div class="print-logo"><img src="${templates.logo}" alt=""></div>` : '';
+
+  // حجم الكليشه يدوي (مم)
+  const logoW = templates.logoWidth || 180;
+  const logoH = templates.logoHeight || 40;
+  const logoHTML = templates.logo ? `<div class="print-logo"><img src="${templates.logo}" alt="" style="width:${logoW}mm;height:${logoH}mm;object-fit:cover;display:block;border-radius:4px;"></div>` : '';
+
   return `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
-    <style>*{box-sizing:border-box;} body{font-family:Tahoma,Arial;padding:20px;margin:0;color:#222;}
-    .print-logo{width:100%;margin-bottom:16px;display:flex;justify-content:center;}
-    .print-logo img{width:100%;max-height:110px;object-fit:cover;display:block;border-radius:6px;}
-    h1{color:#1f4e79;text-align:center;margin:0 0 8px 0;font-size:20px;font-weight:700;}
-    .meta{text-align:center;color:#555;margin-bottom:18px;font-size:12.5px;}
+    <style>*{box-sizing:border-box;} body{font-family:Tahoma,Arial;padding:15px;margin:0;color:#222;}
+    .print-logo{width:100%;margin-bottom:14px;display:flex;justify-content:center;}
+    h1{color:#1f4e79;text-align:center;margin:0 0 8px 0;font-size:18px;font-weight:700;}
+    .meta{text-align:center;color:#555;margin-bottom:16px;font-size:12px;}
     table{width:100%;border-collapse:collapse;font-size:${fontSize}px;}
-    th,td{border:1px solid #999;padding:7px 6px;text-align:right;vertical-align:top;word-break:break-word;}
+    th,td{border:1px solid #999;padding:6px 5px;text-align:right;vertical-align:top;word-break:break-word;}
     th{background:#1f4e79;color:#fff;font-weight:600;}
-    .cell-notes{max-width:220px;white-space:normal;word-break:break-word;line-height:1.5;}
+    .cell-notes{max-width:200px;white-space:normal;word-break:break-word;line-height:1.4;}
     tbody tr:nth-child(even){background:#f8f9fa;}
-    tfoot td{padding:24px 10px;border:none;font-size:12.5px;text-align:center;color:#333;}
-    @page{size:A4 ${orientation};margin:10mm 12mm;}
+    tfoot td{padding:20px 10px;border:none;font-size:12px;text-align:center;color:#333;}
+    @page{size:${paper.w}mm ${paper.h}mm portrait;margin:8mm 10mm;}
     @media print{body{padding:0;}}</style></head><body>
     ${logoHTML}
     <h1>${esc(replaceVars(tpl.title))}</h1>
@@ -3047,7 +3068,7 @@ window.printLog = function () {
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
 /* ==============================================================
-   Templates (أزرار إظهار/إخفاء)
+   Templates  (حجم الكليشه يدوي + حجم الورق)
    ============================================================== */
 async function resizeImage(file, maxWidth = 1400) {
   return new Promise((resolve, reject) => {
@@ -3091,17 +3112,47 @@ window.setAllCols = function(tplKey, visible) {
   (PRINT_COLUMNS[tplKey] || []).forEach(c => { templates[tplKey][c.key] = visible; });
   renderTemplates();
 };
+window.updateLogoSize = function(field, value) {
+  if (!hasPerm('editTemplates')) return;
+  const n = parseFloat(value) || 0;
+  templates[field] = Math.max(10, Math.min(500, n));
+};
+window.updatePaperSize = function(value) {
+  if (!hasPerm('editTemplates')) return;
+  templates.paperSize = value;
+};
 
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
   if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
+
   const logoHTML = templates.logo
     ? `<div class="logo-preview"><img src="${templates.logo}" alt=""></div><div style="margin-top:10px;"><button class="btn btn-danger btn-sm" onclick="removeLogo()">${ico('trash', 13)}<span>حذف</span></button></div>`
     : `<div class="logo-preview"><span class="empty-logo">لا توجد صورة</span></div>`;
-  const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>صورة الكليشه</span></h4>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة.</p>
+
+  const paperOptions = Object.entries(PAPER_SIZES).map(([k, v]) =>
+    `<option value="${k}" ${(templates.paperSize || 'A4') === k ? 'selected' : ''}>${v.label}</option>`
+  ).join('');
+
+  const logoSection = `<div class="template-card"><h4>${ico('image', 17)}<span>الكليشه (صورة الطباعة)</span></h4>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">تظهر أعلى كل ورقة طباعة. حدّد الطول والعرض يدوياً.</p>
     <input type="file" accept="image/*" onchange="handleLogoUpload(event)" style="padding:8px;font-size:13px;">
-    ${logoHTML}</div>`;
+    ${logoHTML}
+    <div class="logo-size-row">
+      <div>
+        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">العرض (مم)</label>
+        <input type="number" min="10" max="500" value="${templates.logoWidth || 180}" onchange="updateLogoSize('logoWidth', this.value)" oninput="updateLogoSize('logoWidth', this.value)">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">الارتفاع (مم)</label>
+        <input type="number" min="10" max="500" value="${templates.logoHeight || 40}" onchange="updateLogoSize('logoHeight', this.value)" oninput="updateLogoSize('logoHeight', this.value)">
+      </div>
+    </div>
+    <div style="margin-top:11px;">
+      <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">حجم ورقة الطباعة (طولية دائماً)</label>
+      <select onchange="updatePaperSize(this.value)">${paperOptions}</select>
+    </div>
+  </div>`;
 
   const bodyHTML = ['ready','log'].map(key => {
     const t = { ...DEFAULT_TEMPLATES[key], ...(templates[key] || {}) };
@@ -3121,7 +3172,6 @@ function renderTemplates() {
       <div class="template-row"><label>السطر الفرعي</label><div><input value="${esc(t.subtitle)}" onchange="updateTemplate('${key}', 'subtitle', this.value)"><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">{date} {count} {user} {from} {to}</div></div></div>
       <div class="template-row"><label>التذييل</label><input value="${esc(t.footer || '')}" onchange="updateTemplate('${key}', 'footer', this.value)"></div>
       <div class="template-row"><label>حجم الخط</label><input type="number" value="${t.fontSize || 12}" min="8" max="20" onchange="updateTemplate('${key}', 'fontSize', +this.value)"></div>
-      <div class="template-row"><label>الاتجاه</label><select onchange="updateTemplate('${key}', 'orientation', this.value)"><option value="landscape" ${t.orientation === 'landscape' ? 'selected' : ''}>أفقي</option><option value="portrait" ${t.orientation === 'portrait' ? 'selected' : ''}>عمودي</option></select></div>
 
       <div class="template-columns-section">
         <div class="tcs-title">${ico('grid', 14)}<span>الأعمدة الظاهرة في الطباعة</span></div>
