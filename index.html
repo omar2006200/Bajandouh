@@ -1037,8 +1037,194 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 /* ═══════════════════════════════════════════════════════════
    Print
    ═══════════════════════════════════════════════════════════ */
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination,.rate-widget{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}}
+@media print {
 
+    /* =========================
+       إعداد الصفحة
+       ========================= */
+    @page {
+        size: A4 portrait;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* =========================
+       إخفاء عناصر الواجهة
+       ========================= */
+    header,
+    nav,
+    .toolbar,
+    .no-print,
+    .section-header .hint,
+    .filter-bar,
+    .tabs,
+    .draft-badge,
+    .connection-banner,
+    #loadingOverlay,
+    .toast-container,
+    .notif-panel,
+    .activity-filters,
+    .activity-pagination,
+    .rate-widget {
+        display: none !important;
+    }
+
+    /* =========================
+       مساحة المحتوى
+       ========================= */
+    main {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* =========================
+       جميع الجداول
+       ========================= */
+    table {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        table-layout: fixed !important;
+
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+
+        margin: 0 !important;
+        font-size: 9px !important;
+        line-height: 1.25 !important;
+    }
+
+    /* =========================
+       رؤوس وخلايا جميع الجداول
+       ========================= */
+    table th,
+    table td {
+        box-sizing: border-box !important;
+
+        padding: 5px 4px !important;
+
+        vertical-align: middle !important;
+        text-align: center !important;
+
+        border: 1px solid #888 !important;
+
+        /* كل شيء في سطر واحد */
+        white-space: nowrap !important;
+
+        overflow: hidden !important;
+        text-overflow: clip !important;
+
+        /* منع ارتفاع الصف بسبب النص */
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    /* =========================
+       رؤوس الجداول
+       ========================= */
+    table th {
+        background: #ddd !important;
+        color: #000 !important;
+
+        font-weight: 700 !important;
+
+        position: static !important;
+
+        white-space: nowrap !important;
+    }
+
+    /* =========================
+       الملاحظات فقط
+       ========================= */
+    table th:last-child,
+    table td:last-child {
+        white-space: normal !important;
+
+        overflow: visible !important;
+
+        text-overflow: initial !important;
+
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+
+        vertical-align: top !important;
+
+        line-height: 1.35 !important;
+    }
+
+    /* =========================
+       الشارات
+       ========================= */
+    .badge {
+        display: inline-block !important;
+
+        border: 1px solid #666 !important;
+        background: #fff !important;
+        color: #000 !important;
+
+        white-space: nowrap !important;
+
+        padding: 2px 5px !important;
+        font-size: 8px !important;
+    }
+
+    /* =========================
+       منع انقسام صفوف الجدول
+       ========================= */
+    table tr {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* تكرار رأس الجدول عند الانتقال لصفحة أخرى */
+    table thead {
+        display: table-header-group !important;
+    }
+
+    table tfoot {
+        display: table-footer-group !important;
+    }
+
+    /* =========================
+       الصور داخل الطباعة
+       ========================= */
+    table img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* =========================
+       الروابط
+       ========================= */
+    table a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+}
 /* ═══════════════════════════════════════════════════════════
    Responsive
    ═══════════════════════════════════════════════════════════ */
@@ -3955,6 +4141,104 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
+</script>
+<script>
+(function () {
+
+    function prepareTablesForPrint() {
+
+        const tables = document.querySelectorAll('table');
+
+        tables.forEach(function (table) {
+
+            const headers = table.querySelectorAll('thead th');
+
+            /* تحديد عمود الملاحظات تلقائياً */
+            let notesIndex = -1;
+
+            headers.forEach(function (th, index) {
+                const text = (th.textContent || '')
+                    .trim()
+                    .replace(/\s+/g, ' ');
+
+                if (
+                    text.includes('ملاحظات') ||
+                    text.includes('ملاحظة') ||
+                    text.includes('الملاحظات') ||
+                    text.toLowerCase().includes('notes')
+                ) {
+                    notesIndex = index;
+                }
+            });
+
+            const rows = table.querySelectorAll('tr');
+
+            rows.forEach(function (row) {
+
+                const cells = row.querySelectorAll('th, td');
+
+                cells.forEach(function (cell, index) {
+
+                    /* الملاحظات فقط تسمح بأكثر من سطر */
+                    if (index === notesIndex) {
+
+                        cell.style.whiteSpace = 'normal';
+                        cell.style.overflow = 'visible';
+                        cell.style.textOverflow = 'initial';
+                        cell.style.wordBreak = 'normal';
+                        cell.style.overflowWrap = 'anywhere';
+
+                        return;
+                    }
+
+                    /* باقي الأعمدة: سطر واحد */
+                    cell.style.whiteSpace = 'nowrap';
+                    cell.style.overflow = 'hidden';
+                    cell.style.textOverflow = 'clip';
+
+                    /*
+                     * تصغير الخط تدريجياً إذا كان النص
+                     * أطول من مساحة الخلية
+                     */
+                    if (cell.tagName.toLowerCase() === 'td') {
+
+                        let fontSize = 9;
+
+                        cell.style.fontSize = fontSize + 'px';
+
+                        while (
+                            cell.scrollWidth > cell.clientWidth &&
+                            fontSize > 6
+                        ) {
+                            fontSize -= 0.25;
+                            cell.style.fontSize = fontSize + 'px';
+                        }
+                    }
+
+                });
+
+            });
+
+        });
+    }
+
+    /* قبل الطباعة */
+    window.addEventListener('beforeprint', function () {
+        prepareTablesForPrint();
+    });
+
+    /* عند فتح معاينة الطباعة */
+    if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('print');
+
+        mediaQuery.addEventListener('change', function (event) {
+            if (event.matches) {
+                prepareTablesForPrint();
+            }
+        });
+    }
+
+})();
 </script>
 </body>
 </html>
