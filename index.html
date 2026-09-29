@@ -424,6 +424,20 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 [data-theme="dark"] .badge-worker{background:rgba(148,163,184,.15);color:#cbd5e1;border-color:rgba(148,163,184,.25)}
 .badge-locked{background:rgba(15,23,42,.06);color:var(--text-muted);border-color:var(--border);font-size:10px}
 [data-theme="dark"] .badge-locked{background:rgba(255,255,255,.06)}
+.badge-received{background:linear-gradient(135deg,#c5f8e0,#8aefc9);color:var(--success-700);border-color:rgba(6,148,99,.28);box-shadow:0 1px 4px rgba(12,185,123,.2)}
+[data-theme="dark"] .badge-received{background:linear-gradient(135deg,rgba(12,185,123,.22),rgba(12,185,123,.1));color:#6ee7b7;border-color:rgba(12,185,123,.4)}
+.badge-not-received{background:var(--slate-100);color:var(--slate-600);border-color:rgba(100,116,139,.2)}
+[data-theme="dark"] .badge-not-received{background:rgba(148,163,184,.12);color:#94a3b8;border-color:rgba(148,163,184,.22)}
+.badge-locked-owner{background:linear-gradient(135deg,rgba(240,168,36,.15),rgba(240,168,36,.08));color:var(--gold-3);border-color:rgba(240,168,36,.35)}
+[data-theme="dark"] .badge-locked-owner{color:#ffd66b;border-color:rgba(240,168,36,.4)}
+
+.receipt-select{padding:5px 10px;padding-left:26px;font-size:11.5px;font-weight:700;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-secondary);width:auto;min-width:78px;cursor:pointer;line-height:1.2;height:auto;background-position:left 8px center;transition:var(--transition)}
+.receipt-select:hover{border-color:var(--brand-400);box-shadow:0 2px 8px rgba(66,102,232,.12)}
+.receipt-select:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 3px var(--focus-ring)}
+.receipt-select.is-done{background:linear-gradient(135deg,var(--success-50),rgba(12,185,123,.14));border-color:var(--success-500);color:var(--success-700)}
+[data-theme="dark"] .receipt-select.is-done{color:#6ee7b7}
+.receipt-select.owner-locked{background:linear-gradient(135deg,rgba(240,168,36,.12),rgba(240,168,36,.06));border-color:rgba(240,168,36,.4);color:var(--gold-3)}
+[data-theme="dark"] .receipt-select.owner-locked{color:#ffd66b}
 
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:11px}
 .section-header h2{color:var(--text);font-size:19px;font-weight:700;display:inline-flex!important;align-items:center;gap:9px;letter-spacing:-.2px}
@@ -966,6 +980,7 @@ const I = {
   edit:'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z',
   trash:'M3 6h18 M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z M10 11v6 M14 11v6',
   arrowRight:'M5 12h14 M12 5l7 7-7 7',
+  arrowLeft:'M19 12H5 M12 19l-7-7 7-7',
   truck:'M1 3h15v13H1z M16 8h4l3 3v5h-7V8 M5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z M18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z',
   printer:'M6 9V2h12v7 M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2 M6 14h12v8H6z',
   download:'M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3',
@@ -1010,7 +1025,9 @@ const I = {
   pieChart:'M21.21 15.89A10 10 0 118 2.83 M22 12A10 10 0 0012 2v10z',
   chevronsRight:'M13 17l5-5-5-5 M6 17l5-5-5-5',
   chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5',
-  zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z'
+  zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+  undo:'M3 7v6h6 M21 17a9 9 0 00-15-6.7L3 13',
+  inbox:'M22 12h-6l-2 3h-4l-2-3H2 M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -1057,15 +1074,14 @@ const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branche
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 /* ==============================================================
-   ROLE SYSTEM — نظام هرمي ديناميكي
-   ───────────────────────────────────────
-   المالك  : يملك كل الصلاحيات — يمنح ما يشاء للمدير
-   المدير  : يملك فقط ما منحه المالك — يمنح العامل فقط مما يملكه هو
-   العامل  : يملك فقط ما منحه المدير (من صلاحيات المدير)
+   ROLE SYSTEM — هرمي ديناميكي
    ============================================================== */
 const ROLE_OWNER   = 'مالك';
 const ROLE_MANAGER = 'مدير';
 const ROLE_WORKER  = 'عامل';
+
+const RECEIPT_NOT_RECEIVED = 'لا';
+const RECEIPT_RECEIVED     = 'تم';
 
 const PAPER_SIZES = {
   A3: { w: 297, h: 420, label: 'A3 (297×420mm)' },
@@ -1076,7 +1092,7 @@ const PAPER_SIZES = {
 const PRINT_COL_WEIGHTS = {
   index:25, invoice:80, branch:70, customer:100, customerPhone:105,
   location:95, status:60, approvalDate:85, pay:55, driver:85,
-  driverPhone:105, notes:130, archivedAt:85
+  driverPhone:105, notes:130, archivedAt:85, receiptStatus:70
 };
 
 if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
@@ -1095,10 +1111,12 @@ const PERMISSIONS = {
   deleteOrder:{label:'زر: حذف طلب',cat:'entry',icon:'trash'},
   transferSingle:{label:'زر: تحويل فردي',cat:'entry',icon:'arrowRight'},
   bulkTransfer:{label:'زر: تحويل جماعي',cat:'entry',icon:'truck'},
+  returnSingle:{label:'زر: إرجاع فردي للجاهزة',cat:'ready',icon:'undo'},
   print:{label:'زر: طباعة/PDF',cat:'ready',icon:'printer'},
   moveToLog:{label:'زر: ترحيل للسجل',cat:'ready',icon:'arrowRight'},
   editLog:{label:'زر: تعديل السجل',cat:'log',icon:'edit'},
   deleteLog:{label:'زر: حذف من السجل',cat:'log',icon:'trash'},
+  editReceiptStatus:{label:'تأكيد حالة الاستلام',cat:'log',icon:'inbox'},
   tabToken:{label:'مفتاح الاتصال',cat:'settingsTabs',icon:'key'},
   tabActivity:{label:'سجل النشاط',cat:'settingsTabs',icon:'activity'},
   tabBranches:{label:'الفروع',cat:'settingsTabs',icon:'building'},
@@ -1125,11 +1143,11 @@ const PERM_CATEGORIES = {
 
 const ALL_PERM_KEYS = Object.keys(PERMISSIONS);
 
-// افتراضيات أولية عند إنشاء مستخدم جديد
 const WORKER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:false, accessSettings:false,
   addOrder:true, editOrder:true, deleteOrder:false, transferSingle:true, bulkTransfer:false,
-  print:true, moveToLog:false, editLog:false, deleteLog:false,
+  returnSingle:false,
+  print:true, moveToLog:false, editLog:false, deleteLog:false, editReceiptStatus:false,
   tabToken:false, tabActivity:false, tabBranches:false, tabDrivers:false, tabUsers:false, tabTemplates:false, tabBackup:false,
   manageCustomers:false, manageDrivers:false, manageBranches:false, manageUsers:false,
   editTemplates:false, viewActivity:false, reset:false
@@ -1137,7 +1155,8 @@ const WORKER_DEFAULTS = {
 const MANAGER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:true, accessSettings:true,
   addOrder:true, editOrder:true, deleteOrder:true, transferSingle:true, bulkTransfer:true,
-  print:true, moveToLog:true, editLog:true, deleteLog:true,
+  returnSingle:true,
+  print:true, moveToLog:true, editLog:true, deleteLog:true, editReceiptStatus:true,
   tabToken:false, tabActivity:true, tabBranches:true, tabDrivers:true, tabUsers:true, tabTemplates:true, tabBackup:true,
   manageCustomers:true, manageDrivers:true, manageBranches:true, manageUsers:true,
   editTemplates:true, viewActivity:true, reset:false
@@ -1170,7 +1189,8 @@ const PRINT_COLUMNS = {
     { key:'showDriver', label:'الموصل' },
     { key:'showDriverPhone', label:'هاتف الموصل' },
     { key:'showNotes', label:'ملاحظات' },
-    { key:'showArchivedAt', label:'تاريخ الترحيل' }
+    { key:'showArchivedAt', label:'تاريخ الترحيل' },
+    { key:'showReceiptStatus', label:'حالة الاستلام' }
   ]
 };
 const DEFAULT_TEMPLATES = {
@@ -1189,7 +1209,8 @@ const DEFAULT_TEMPLATES = {
     footer:'تم الطباعة بواسطة: {user}',
     showInvoice:true, showBranch:true, showCustomer:true, showCustomerPhone:true,
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
-    showDriver:true, showDriverPhone:true, showNotes:true, showArchivedAt:true, fontSize:10
+    showDriver:true, showDriverPhone:true, showNotes:true, showArchivedAt:true,
+    showReceiptStatus:true, fontSize:10
   }
 };
 
@@ -1313,7 +1334,7 @@ let dialogCallback = null;
 function showDialog(opts) {
   return new Promise(resolve => {
     dialogCallback = resolve;
-    const { type = 'info', title, message, okText, cancelText, showCancel = true } = opts;
+    const { type = 'info', title, message, okText, cancelText, showCancel = true, okClass } = opts;
     const iconMap = { info:'info', warning:'warning', danger:'trash', success:'check', question:'info' };
     const titleMap = { info:'تنبيه', warning:'تحذير', danger:'تأكيد الحذف', success:'تم بنجاح', question:'تأكيد' };
     const iconEl = document.getElementById('dialogIcon');
@@ -1322,7 +1343,7 @@ function showDialog(opts) {
     document.getElementById('dialogTitle').textContent = title || titleMap[type] || 'تنبيه';
     document.getElementById('dialogMessage').textContent = message || '';
     document.getElementById('dialogOkBtn').textContent = okText || 'موافق';
-    document.getElementById('dialogOkBtn').className = 'btn ' + (type === 'danger' ? 'btn-danger' : 'btn-primary');
+    document.getElementById('dialogOkBtn').className = 'btn ' + (okClass || (type === 'danger' ? 'btn-danger' : type === 'success' ? 'btn-success' : 'btn-primary'));
     const cancelBtn = document.getElementById('dialogCancelBtn');
     cancelBtn.textContent = cancelText || 'إلغاء';
     cancelBtn.style.display = showCancel ? '' : 'none';
@@ -1336,7 +1357,7 @@ window.dialogResolve = function(r) {
 };
 const dialog = {
   alert: (msg, o = {}) => showDialog({ type: o.type || 'info', title: o.title, message: msg, showCancel: false, okText: o.okText || 'حسناً' }),
-  confirm: (msg, o = {}) => showDialog({ type: o.type || 'question', title: o.title, message: msg, okText: o.okText || 'تأكيد', showCancel: true }),
+  confirm: (msg, o = {}) => showDialog({ type: o.type || 'question', title: o.title, message: msg, okText: o.okText || 'تأكيد', showCancel: true, okClass: o.okClass }),
   danger: (msg, o = {}) => showDialog({ type: 'danger', title: o.title || 'تأكيد الحذف', message: msg, okText: o.okText || 'نعم، احذف', showCancel: true })
 };
 
@@ -1667,6 +1688,11 @@ async function readAll() {
   cache.branches = cache.branches.map(b => { if (typeof b === 'string') return { id: uid(), name: b }; return { id: b.id || uid(), name: b.name || '' }; });
   if (!cache.branches.length) cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
   cache.users = cache.users.map(normalizeUser);
+  // ضمان وجود حقل receiptStatus في كل عناصر السجل
+  cache.log = cache.log.map(o => ({
+    ...o,
+    receiptStatus: (o.receiptStatus === RECEIPT_RECEIVED || o.receiptStatus === RECEIPT_NOT_RECEIVED) ? o.receiptStatus : RECEIPT_NOT_RECEIVED
+  }));
 }
 async function readMeta() {
   try {
@@ -1971,71 +1997,53 @@ function checkSessionWarning() {
 
 /* ==============================================================
    ROLE / PERMISSIONS — نظام هرمي ديناميكي
-   المالك → يمنح أي صلاحية للمدير
-   المدير → يمنح العامل فقط الصلاحيات التي يملكها هو
    ============================================================== */
 function roleLabel(role) {
   if (role === ROLE_OWNER)   return { label:'مالك',  icon:'crown',  cls:'badge-owner' };
   if (role === ROLE_MANAGER) return { label:'مدير',  icon:'shield', cls:'badge-manager' };
   return { label:'عامل', icon:'user', cls:'badge-worker' };
 }
-
-// يتحقق إن كان المستخدم الحالي يستطيع إدارة مستخدم معين
 function canManageUser(targetUser) {
   if (!currentUser || !targetUser) return false;
   if (targetUser.id === currentUser.id) return false;
-  // المالك يدير الجميع
   if (currentUser.role === ROLE_OWNER) return true;
-  // المدير يدير العامل فقط — ويجب أن يملك صلاحية manageUsers
   if (currentUser.role === ROLE_MANAGER) {
     if (!currentUser.permissions?.manageUsers) return false;
     return targetUser.role === ROLE_WORKER;
   }
   return false;
 }
-
-// الصلاحيات القابلة للمنح حسب المستخدم الحالي والدور المستهدف
 function getGrantablePerms(targetRole) {
   if (!currentUser) return [];
-  // المالك يمنح كل الصلاحيات (ما عدا لمالك آخر — لا نسمح بإنشاء مالِك)
   if (currentUser.role === ROLE_OWNER) {
     if (targetRole === ROLE_OWNER) return [];
     return ALL_PERM_KEYS;
   }
-  // المدير يمنح للعامل فقط ما يملكه هو نفسه
   if (currentUser.role === ROLE_MANAGER) {
-    if (targetRole === ROLE_OWNER) return [];
-    if (targetRole === ROLE_MANAGER) return [];
-    // عامل: فقط الصلاحيات التي يملكها المدير
+    if (targetRole === ROLE_OWNER || targetRole === ROLE_MANAGER) return [];
     return ALL_PERM_KEYS.filter(k => currentUser.permissions?.[k] === true);
   }
   return [];
 }
-
-// الأدوار المسموح للمستخدم الحالي بإنشائها
 function getAllowedRolesToCreate() {
   if (!currentUser) return [];
   if (currentUser.role === ROLE_OWNER) return [ROLE_MANAGER, ROLE_WORKER];
   if (currentUser.role === ROLE_MANAGER) return [ROLE_WORKER];
   return [];
 }
-
 function hasPerm(perm) {
   if (!currentUser) return false;
   if (currentUser.role === ROLE_OWNER) return true;
-  // ربط تلقائي: إذا كان مدير المستخدمين مُفعّلاً فتبويب المستخدمين متاح
   if (perm === 'tabUsers' && currentUser.permissions?.manageUsers === true) return true;
   return currentUser.permissions?.[perm] === true;
 }
 function normalizeUser(u) {
   if (!u) return u;
-  // توافق مع الأدوار القديمة
   if (u.role === 'رئيسي') u.role = ROLE_OWNER;
   if (u.role === 'عادي')  u.role = ROLE_WORKER;
   if (u.role !== ROLE_OWNER && u.role !== ROLE_MANAGER && u.role !== ROLE_WORKER) u.role = ROLE_WORKER;
   if (u.role === ROLE_OWNER) return u;
   if (!u.permissions) u.permissions = {};
-  // تنظيف: نُبقي فقط المفاتيح المعروفة
   const clean = {};
   ALL_PERM_KEYS.forEach(k => { clean[k] = u.permissions[k] === true; });
   u.permissions = clean;
@@ -2166,6 +2174,7 @@ function buildUI() {
     <select id="entryBranchFilter" onchange="renderEntry()" style="width:auto;max-width:200px;margin-right:auto;"></select>
     <input id="searchEntry" type="text" placeholder="بحث سريع..." oninput="renderEntry()" style="max-width:280px;">`;
   document.getElementById('entryHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+
   document.getElementById('readyTitle').innerHTML = ico('box', 20) + '<span>الطلبات الجاهزة للنقل</span>';
   document.getElementById('readyHint').innerHTML = `<kbd>Ctrl</kbd>+<kbd>P</kbd> طباعة • <kbd>Alt</kbd>+<kbd>M</kbd> ترحيل`;
   document.getElementById('readyToolbar').innerHTML = `
@@ -2173,7 +2182,8 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>PDF</span></button>
     <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل للسجل</span></button>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
-  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
     <span style="color:var(--brand-700);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;">${ico('filter', 14)}<span>فلترة:</span></span>
@@ -2181,6 +2191,7 @@ function buildUI() {
     <label>إلى:</label><input id="filterLogTo" type="date" onchange="renderLog()">
     <label>الاسم:</label><input id="filterLogName" type="text" placeholder="اسم العميل" oninput="renderLog()" style="width:160px;">
     <label>الدفع:</label><select id="filterLogPay" onchange="renderLog()" style="width:120px;"><option value="">الكل</option><option>مدفوع</option><option>غير مدفوع</option><option>VIP</option></select>
+    <label>الاستلام:</label><select id="filterLogReceipt" onchange="renderLog()" style="width:120px;"><option value="">الكل</option><option value="لا">لا</option><option value="تم">تم</option></select>
     <label>الفرع:</label><select id="filterLogBranch" onchange="renderLog()" style="width:160px;"></select>
     <button class="btn btn-ghost btn-sm" onclick="resetLogFilters()">${ico('refresh', 13)}<span>مسح</span></button>`;
   document.getElementById('logToolbar').innerHTML = `
@@ -2188,7 +2199,8 @@ function buildUI() {
     <button class="btn btn-warning perm-print" onclick="exportLogPDF()">${ico('download', 15)}<span>PDF</span></button>
     <button class="btn btn-gray" onclick="exportLogCSV()">${ico('file', 15)}<span>CSV</span></button>
     <span id="logFilteredCount" style="margin-right:auto;font-size:12.5px;color:var(--text-muted);font-weight:600;"></span>`;
-  document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('logHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','حالة الاستلام','إجراءات'].map(h => `<th>${h}</th>`).join('');
+
   document.getElementById('custTitle').innerHTML = ico('users', 20) + '<span>قاعدة بيانات العملاء</span>';
   document.getElementById('custToolbar').innerHTML = `
     <input id="searchCustomers" type="text" placeholder="بحث..." oninput="renderCustomers()" style="max-width:300px;">
@@ -2474,28 +2486,37 @@ function renderReady() {
   let data = cache.ready;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
   const body = document.getElementById('readyBody');
-  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 13); return; }
-  body.innerHTML = data.map((o, i) => `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
-    <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
-    <td>${phoneBadge(o.customerPhone)}</td>
-    <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
-    <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
-    <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
-    <td class="note-cell"><div class="note-text" title="${esc(o.notes)}">${esc(o.notes) || '—'}</div></td>
-    <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.lastEditBy || '—')}</td>
-  </tr>`).join('');
+  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 14); return; }
+  const canReturn = hasPerm('returnSingle');
+  body.innerHTML = data.map((o, i) => {
+    const returnBtn = canReturn
+      ? `<button class="btn btn-warning btn-sm" onclick="event.stopPropagation();returnReadyToEntry('${o.id}')" title="إرجاع إلى إدخال الطلبات">${ico('undo', 13)}<span>إرجاع</span></button>`
+      : '—';
+    return `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
+      <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
+      <td>${phoneBadge(o.customerPhone)}</td>
+      <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
+      <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.approvalDate || '—')}</td>
+      <td>${badge(o.pay)}</td><td>${esc(o.driver)}</td><td>${esc(o.driverPhone)}</td>
+      <td class="note-cell"><div class="note-text" title="${esc(o.notes)}">${esc(o.notes) || '—'}</div></td>
+      <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.lastEditBy || '—')}</td>
+      <td class="no-print" style="white-space:nowrap;">${returnBtn}</td>
+    </tr>`;
+  }).join('');
 }
 function getLogFilteredData() {
   const fromVal = document.getElementById('filterLogFrom')?.value || '';
   const toVal = document.getElementById('filterLogTo')?.value || '';
   const nameVal = (document.getElementById('filterLogName')?.value || '').trim().toLowerCase();
   const payVal = document.getElementById('filterLogPay')?.value || '';
+  const receiptVal = document.getElementById('filterLogReceipt')?.value || '';
   const branchVal = document.getElementById('filterLogBranch')?.value || '';
   const fromDate = fromVal ? new Date(fromVal) : null;
   const toDate = toVal ? new Date(toVal + 'T23:59:59') : null;
   return cache.log.filter(o => {
     if (nameVal && !`${o.customer} ${o.invoice} ${o.customerPhone || ''}`.toLowerCase().includes(nameVal)) return false;
     if (payVal && o.pay !== payVal) return false;
+    if (receiptVal && (o.receiptStatus || RECEIPT_NOT_RECEIVED) !== receiptVal) return false;
     if (branchVal && (o.branch || DEFAULT_BRANCH_NAME) !== branchVal) return false;
     const d = parseDate(o.approvalDate) || parseDate(o.archivedAt);
     if (fromDate && d && d < fromDate) return false;
@@ -2503,6 +2524,37 @@ function getLogFilteredData() {
     if ((fromDate || toDate) && !d) return false;
     return true;
   });
+}
+/**
+ * يرسم خلية حالة الاستلام في السجل حسب الصلاحيات والحالة الحالية.
+ * - غير مصرح + الحالة 'لا' → شارة رمادية
+ * - غير مصرح + الحالة 'تم' → شارة خضراء مقفلة
+ * - مصرح (لكن ليس مالك) + 'تم' → شارة خضراء مقفلة (لا يمكن التراجع)
+ * - مصرح + 'لا' → قائمة منسدلة
+ * - مالك + 'لا' → قائمة منسدلة عادية
+ * - مالك + 'تم' → قائمة منسدلة بلون ذهبي (يمكن التراجع)
+ */
+function receiptStatusCell(o) {
+  const status = o.receiptStatus || RECEIPT_NOT_RECEIVED;
+  const isDone = status === RECEIPT_RECEIVED;
+  const canEdit = hasPerm('editReceiptStatus');
+  const isOwner = currentUser?.role === ROLE_OWNER;
+  // حالة 'تم' مقفلة لغير المالك
+  if (isDone && !isOwner) {
+    return `<span class="badge badge-received" title="تم الاستلام${o.receiptUpdatedBy ? ' • بواسطة ' + esc(o.receiptUpdatedBy) : ''}${o.receiptUpdatedAt ? ' • ' + esc(o.receiptUpdatedAt) : ''}">${ico('check', 11)} تم</span>`;
+  }
+  // غير مصرح بالتعديل
+  if (!canEdit && !isOwner) {
+    return isDone
+      ? `<span class="badge badge-received">${ico('check', 11)} تم</span>`
+      : `<span class="badge badge-not-received">لا</span>`;
+  }
+  // قابل للتعديل
+  const cls = isDone ? 'receipt-select is-done owner-locked' : 'receipt-select';
+  return `<select class="${cls}" onclick="event.stopPropagation()" onchange="changeReceiptStatus('${o.id}', this.value)" title="${isDone ? 'المالك فقط يمكنه التراجع' : 'تأكيد الاستلام'}">
+    <option value="${RECEIPT_NOT_RECEIVED}" ${!isDone ? 'selected' : ''}>لا</option>
+    <option value="${RECEIPT_RECEIVED}" ${isDone ? 'selected' : ''}>تم</option>
+  </select>`;
 }
 function renderLog() {
   const data = getLogFilteredData();
@@ -2512,7 +2564,7 @@ function renderLog() {
   const fc = document.getElementById('logFilteredCount');
   if (fc) fc.textContent = `المُفلتر: ${data.length}`;
   const body = document.getElementById('logBody');
-  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل بعد', 15); return; }
+  if (!data.length) { body.innerHTML = emptyState('archive', 'لا توجد نتائج', cache.log.length ? 'جرّب تعديل الفلاتر' : 'لم يتم ترحيل بعد', 16); return; }
   body.innerHTML = data.map((o, i) => {
     const btns = `
       ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editFromLog('${o.id}')" title="تعديل">${ico('edit', 13)}</button>` : ''}
@@ -2527,6 +2579,7 @@ function renderLog() {
       <td class="note-cell"><div class="note-text" title="${esc(o.notes)}">${esc(o.notes) || '—'}</div></td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.lastEditBy || '—')}</td>
       <td style="font-size:11.5px;color:var(--text-muted);">${esc(o.archivedAt || '—')}</td>
+      <td class="no-print" style="text-align:center;">${receiptStatusCell(o)}</td>
       <td class="no-print" style="white-space:nowrap;">${showActions ? btns : '—'}</td>
     </tr>`;
   }).join('');
@@ -2536,6 +2589,7 @@ window.resetLogFilters = function () {
   document.getElementById('filterLogTo').value = '';
   document.getElementById('filterLogName').value = '';
   document.getElementById('filterLogPay').value = '';
+  const r = document.getElementById('filterLogReceipt'); if (r) r.value = '';
   document.getElementById('filterLogBranch').value = '';
   renderLog();
 };
@@ -2573,7 +2627,6 @@ function renderDriversList() {
 }
 function renderUsers() {
   const body = document.getElementById('userBody'); if (!body) return;
-  // عرض المستخدمين: المالك يرى الجميع، المدير يرى العاملين ونفسه فقط
   let visibleUsers = cache.users;
   if (currentUser.role === ROLE_MANAGER) {
     visibleUsers = cache.users.filter(u => u.id === currentUser.id || u.role === ROLE_WORKER);
@@ -2879,6 +2932,9 @@ window.saveOrder = async function () {
       data.approvalDate = approvalDate;
       data.archivedAt = cache.log[idx].archivedAt;
       data.archivedBy = cache.log[idx].archivedBy;
+      data.receiptStatus = cache.log[idx].receiptStatus || RECEIPT_NOT_RECEIVED;
+      data.receiptUpdatedAt = cache.log[idx].receiptUpdatedAt;
+      data.receiptUpdatedBy = cache.log[idx].receiptUpdatedBy;
       cache.log[idx] = { ...cache.log[idx], ...data };
       await persistKeys(['log']);
       logActivity('edit-log', `تعديل في السجل: ${data.invoice}`, '', 'warning');
@@ -3028,7 +3084,7 @@ window.deleteBranch = async function (id) {
 };
 
 /* ==============================================================
-   Transfers
+   Transfers + Return
    ============================================================== */
 window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; }
@@ -3065,13 +3121,122 @@ window.moveReadyToLog = async function () {
   const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب؟`, { title: 'ترحيل' }); if (!ok) return;
   try {
     const count = cache.ready.length;
-    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username }));
+    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
     cache.ready = [];
     logActivity('move-log', `ترحيل ${count}`, '', 'success');
     await persistKeys(['ready', 'log', 'activity']); renderReady(); renderDashboard();
     addNotification('ترحيل', `${count} طلب`, 'success');
     toast('تم الترحيل', 'success');
   } catch (e) { toast(e.message, 'error'); }
+};
+
+/**
+ * إرجاع طلب فردي من "الجاهزة" إلى "إدخال الطلبات"
+ * يعيد الطلب إلى الطلبات النشطة مع الاحتفاظ ببياناته
+ */
+window.returnReadyToEntry = async function (id) {
+  if (!hasPerm('returnSingle')) { toast('غير مصرح بالإرجاع', 'error'); return; }
+  const order = cache.ready.find(x => x.id === id);
+  if (!order) { toast('الطلب غير موجود', 'error'); return; }
+  const ok = await dialog.confirm(
+    `إرجاع الطلب "${order.invoice}" للعميل "${order.customer}" إلى صفحة إدخال الطلبات؟\nسيُحذف من قائمة الجاهزة ويعود إلى قائمة النشطة.`,
+    { title: 'إرجاع طلب', okText: 'إرجاع', type: 'warning', okClass: 'btn-warning' }
+  );
+  if (!ok) return;
+  try {
+    // حذف بيانات التحويل من النسخة المُرجَعة
+    const restored = { ...order };
+    delete restored.transferredAt;
+    delete restored.transferredBy;
+    restored.lastEditBy = currentUser.username;
+    restored.updatedAt = fmtDate();
+    restored.returnedAt = fmtDate();
+    restored.returnedBy = currentUser.username;
+    cache.orders.push(restored);
+    cache.ready = cache.ready.filter(x => x.id !== id);
+    logActivity('return-single', `إرجاع طلب: ${order.invoice}`, `العميل: ${order.customer}`, 'warning');
+    await persistKeys(['orders', 'ready', 'activity']);
+    renderReady(); renderDashboard();
+    addNotification('إرجاع طلب', `تم إرجاع ${order.invoice} إلى الإدخال`, 'warning');
+    toast('تم الإرجاع', 'success');
+  } catch (e) { toast(e.message, 'error'); }
+};
+
+/**
+ * تغيير حالة الاستلام في السجل
+ * - التحويل من 'لا' إلى 'تم' يتطلب تأكيداً باسم العميل
+ * - بعد أن يصبح 'تم'، لا يمكن تغييره إلا من قِبَل المالك
+ */
+window.changeReceiptStatus = async function (id, newStatus) {
+  const o = cache.log.find(x => x.id === id);
+  if (!o) { renderLog(); return; }
+  const current = o.receiptStatus || RECEIPT_NOT_RECEIVED;
+  const isOwner = currentUser?.role === ROLE_OWNER;
+
+  // حالة عدم التغيير
+  if (current === newStatus) { renderLog(); return; }
+
+  // حالة محاولة تغيير 'تم' من غير المالك
+  if (current === RECEIPT_RECEIVED && !isOwner) {
+    toast('لا يمكن التعديل — تم الاستلام مسبقاً (للمالك فقط)', 'error');
+    renderLog();
+    return;
+  }
+
+  // التحقق من الصلاحية (المالك دائماً مصرح)
+  if (!isOwner && !hasPerm('editReceiptStatus')) {
+    toast('غير مصرح بتعديل حالة الاستلام', 'error');
+    renderLog();
+    return;
+  }
+
+  // تأكيد التحويل إلى 'تم' — باسم العميل
+  if (newStatus === RECEIPT_RECEIVED) {
+    const ok = await dialog.confirm(
+      `هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟\n\n⚠️ بعد التأكيد لا يمكن التراجع إلا من قِبَل المالك.`,
+      { title: 'تأكيد الاستلام', okText: 'نعم، تم الاستلام', type: 'success', okClass: 'btn-success' }
+    );
+    if (!ok) { renderLog(); return; }
+  }
+
+  // تأكيد التراجع من 'تم' إلى 'لا' (للمالك فقط)
+  if (newStatus === RECEIPT_NOT_RECEIVED && current === RECEIPT_RECEIVED) {
+    const ok = await dialog.confirm(
+      `⚠️ إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟\n\nهذا الإجراء متاح للمالك فقط.`,
+      { title: 'إلغاء الاستلام', okText: 'نعم، إلغاء', type: 'warning', okClass: 'btn-warning' }
+    );
+    if (!ok) { renderLog(); return; }
+  }
+
+  const previous = current;
+  o.receiptStatus = newStatus;
+  o.receiptUpdatedAt = fmtDate();
+  o.receiptUpdatedBy = currentUser.username;
+
+  logActivity(
+    'receipt-status',
+    newStatus === RECEIPT_RECEIVED
+      ? `تأكيد استلام: ${o.invoice}`
+      : `إلغاء استلام: ${o.invoice}`,
+    `العميل: ${o.customer}`,
+    newStatus === RECEIPT_RECEIVED ? 'success' : 'warning'
+  );
+
+  try {
+    await persistKeys(['log', 'activity']);
+    renderLog();
+    addNotification(
+      newStatus === RECEIPT_RECEIVED ? 'تأكيد استلام' : 'إلغاء استلام',
+      `${o.invoice} — ${o.customer}`,
+      newStatus === RECEIPT_RECEIVED ? 'success' : 'warning'
+    );
+    toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
+  } catch (e) {
+    // إرجاع في حال فشل الحفظ
+    o.receiptStatus = previous;
+    toast(e.message, 'error');
+    renderLog();
+  }
 };
 
 /* ==============================================================
@@ -3099,6 +3264,7 @@ function buildPrintHTML(items, template, extra = {}) {
   if (tpl.showDriverPhone !== false)    cols.push({ key:'driverPhone',    header:'هاتف الموصل',   cls:'col-code',  weight: PRINT_COL_WEIGHTS.driverPhone,    cell:o => esc(o.driverPhone || '—') });
   if (tpl.showNotes !== false)          cols.push({ key:'notes',          header:'ملاحظات',       cls:'col-notes', weight: PRINT_COL_WEIGHTS.notes,          cell:o => esc(o.notes || '—') });
   if (tpl.showArchivedAt)               cols.push({ key:'archivedAt',     header:'تاريخ الترحيل', cls:'col-code',  weight: PRINT_COL_WEIGHTS.archivedAt,     cell:o => esc(o.archivedAt || '—') });
+  if (tpl.showReceiptStatus)            cols.push({ key:'receiptStatus',  header:'حالة الاستلام', cls:'',          weight: PRINT_COL_WEIGHTS.receiptStatus,  cell:o => esc(o.receiptStatus || RECEIPT_NOT_RECEIVED) });
 
   const allCols = [{ key:'index', header:'#', cls:'col-num', weight: PRINT_COL_WEIGHTS.index, cell:null }].concat(cols);
 
@@ -3385,12 +3551,7 @@ window.deleteCustomer = async function (id) {
 };
 
 /* ==============================================================
-   Users — إدارة المستخدمين
-   ⚠️ قواعد صارمة:
-   1. المالك: يدير الجميع، يمنح المدير أي صلاحية
-   2. المدير: يدير العاملين فقط (إذا منحه المالك manageUsers)
-              يمنح العامل فقط الصلاحيات التي يملكها هو
-   3. العامل: لا يدير أحد
+   Users
    ============================================================== */
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
@@ -3399,12 +3560,10 @@ window.openUserModal = function () {
   document.getElementById('userId').value = '';
   document.getElementById('userName').value = '';
   document.getElementById('userPass').value = '';
-  // بناء قائمة الأدوار المسموحة
   buildRoleSelect();
   const allowedRoles = getAllowedRolesToCreate();
   if (!allowedRoles.length) { toast('غير مصرح بإنشاء مستخدمين', 'error'); closeModal('userModal'); return; }
   document.getElementById('userRole').value = allowedRoles[0];
-  // صلاحيات افتراضية
   rebuildTempPermsForRole(allowedRoles[0]);
   renderPermissionsGrid(); onUserRoleChange();
   openModal('userModal');
@@ -3419,17 +3578,14 @@ window.editUser = function (id) {
   document.getElementById('userId').value = id;
   document.getElementById('userName').value = u.username;
   document.getElementById('userPass').value = u.password;
-  // المدير لا يستطيع تغيير دور العامل
   buildRoleSelect(u);
   document.getElementById('userRole').value = u.role;
   if (u.role === ROLE_OWNER) {
     tempPerms = {};
   } else {
-    // نملأ الصلاحيات من صلاحيات المستخدم
     tempPerms = {};
     ALL_PERM_KEYS.forEach(k => { tempPerms[k] = u.permissions?.[k] === true; });
   }
-  // قفل الدور إذا كان المدير يعدّل
   if (currentUser.role === ROLE_MANAGER) {
     document.getElementById('userRole').disabled = true;
   }
@@ -3440,14 +3596,12 @@ function buildRoleSelect(editingUser = null) {
   const select = document.getElementById('userRole');
   const allowed = getAllowedRolesToCreate();
   select.disabled = false;
-  // إذا كان المالك يعدّل نفسه، يمكنه رؤية دوره
   if (editingUser && editingUser.id === currentUser.id) {
     const rl = roleLabel(editingUser.role);
     select.innerHTML = `<option value="${editingUser.role}">${rl.label}</option>`;
     select.disabled = true;
     return;
   }
-  // إذا كان المالك يعدّل شخصاً آخر
   if (currentUser.role === ROLE_OWNER && editingUser) {
     const roleOpts = [ROLE_MANAGER, ROLE_WORKER];
     select.innerHTML = roleOpts.map(r => {
@@ -3456,7 +3610,6 @@ function buildRoleSelect(editingUser = null) {
     }).join('');
     return;
   }
-  // إنشاء جديد
   select.innerHTML = allowed.map(r => {
     const rl = roleLabel(r);
     return `<option value="${r}">${rl.label}</option>`;
@@ -3474,7 +3627,6 @@ function renderPermissionsGrid() {
   const ctx = document.getElementById('permContextInfo');
   const role = document.getElementById('userRole').value;
   const grantable = getGrantablePerms(role);
-  // معلومات السياق
   if (ctx) {
     if (currentUser.role === ROLE_OWNER) {
       ctx.style.display = 'block';
@@ -3527,7 +3679,6 @@ function renderPermissionsGrid() {
 window.togglePerm = function (key, checked) {
   tempPerms[key] = checked;
   document.querySelector(`.perm-item[data-perm="${key}"]`)?.classList.toggle('checked', checked);
-  // ربط تلقائي: manageUsers ⟺ tabUsers
   if (key === 'manageUsers') {
     const tabChip = document.querySelector(`.perm-item[data-perm="tabUsers"]`);
     if (tabChip) {
@@ -3548,7 +3699,6 @@ window.onUserRoleChange = function () {
     tempPerms = {};
     renderPermissionsGrid();
   } else {
-    // حفظ الاختيارات الحالية إن وُجدت، وإلا نبني الافتراضي
     const grantable = getGrantablePerms(role);
     const existing = { ...tempPerms };
     const newPerms = {};
@@ -3580,37 +3730,31 @@ window.saveUser = async function () {
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
 
-  // فحوصات أمنية
   if (id) {
     const existing = cache.users.find(u => u.id === id);
     if (!existing) { toast('غير موجود', 'error'); return; }
     if (!canManageUser(existing)) { toast('لا يمكنك تعديل هذا المستخدم', 'error'); return; }
-    // لا يمكن خفض صلاحية المالك الوحيد
     if (existing.role === ROLE_OWNER && role !== ROLE_OWNER) {
       const ownersCount = cache.users.filter(u => u.role === ROLE_OWNER).length;
       if (ownersCount <= 1) { toast('لا يمكن تغيير دور المالك الوحيد', 'error'); return; }
     }
   } else {
-    // إنشاء جديد — فحص الدور
     const allowedRoles = getAllowedRolesToCreate();
     if (!allowedRoles.includes(role)) { toast('غير مصرح بإنشاء هذا الدور', 'error'); return; }
   }
 
-  // بناء الصلاحيات — مع الفلترة الأمنية
   let permissions = {};
   if (role === ROLE_OWNER) {
     permissions = {};
   } else {
     const grantable = getGrantablePerms(role);
     grantable.forEach(k => { permissions[k] = tempPerms[k] === true; });
-    // المدير: نتأكد أنه لا يمنح إلا ما يملكه
     if (currentUser.role === ROLE_MANAGER) {
       const ownPerms = ALL_PERM_KEYS.filter(k => currentUser.permissions?.[k] === true);
       Object.keys(permissions).forEach(k => {
         if (!ownPerms.includes(k)) permissions[k] = false;
       });
     }
-    // ربط manageUsers ↔ tabUsers
     if (permissions.manageUsers) permissions.tabUsers = true;
   }
 
@@ -3679,8 +3823,13 @@ window.resetAll = async function () {
 };
 window.exportLogCSV = function () {
   const data = getLogFilteredData(); if (!data.length) { toast('فارغ', 'error'); return; }
-  const headers = ['رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل'];
-  const rows = data.map(o => [o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.customerPhone || '', o.location, o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes, o.lastEditBy, o.archivedAt]);
+  const headers = ['رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','حالة الاستلام','تاريخ تأكيد الاستلام','المستخدم'];
+  const rows = data.map(o => [
+    o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.customerPhone || '', o.location,
+    o.status, o.approvalDate, o.pay, o.driver, o.driverPhone, o.notes,
+    o.lastEditBy, o.archivedAt,
+    o.receiptStatus || RECEIPT_NOT_RECEIVED, o.receiptUpdatedAt || '', o.receiptUpdatedBy || ''
+  ]);
   const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `log_${new Date().toISOString().slice(0,10)}.csv`; a.click();
