@@ -1037,8 +1037,194 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 /* ═══════════════════════════════════════════════════════════
    Print
    ═══════════════════════════════════════════════════════════ */
-@media print{body{background:#fff!important;color:#000!important}header,nav,.toolbar,.no-print,.section-header .hint,.filter-bar,.tabs,.draft-badge,.connection-banner,#loadingOverlay,.toast-container,.notif-panel,.activity-filters,.activity-pagination,.rate-widget{display:none!important}main{padding:0;max-width:100%}table{min-width:auto;font-size:10px}th{background:#ddd!important;color:#000!important;position:static}.table-wrap{box-shadow:none;border-radius:0;border:none}.badge{border:1px solid #666;background:#fff!important;color:#000!important}}
+@media print {
 
+    /* =========================
+       إعداد الصفحة
+       ========================= */
+    @page {
+        size: A4 portrait;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* =========================
+       إخفاء عناصر الواجهة
+       ========================= */
+    header,
+    nav,
+    .toolbar,
+    .no-print,
+    .section-header .hint,
+    .filter-bar,
+    .tabs,
+    .draft-badge,
+    .connection-banner,
+    #loadingOverlay,
+    .toast-container,
+    .notif-panel,
+    .activity-filters,
+    .activity-pagination,
+    .rate-widget {
+        display: none !important;
+    }
+
+    /* =========================
+       مساحة المحتوى
+       ========================= */
+    main {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* =========================
+       جميع الجداول
+       ========================= */
+    table {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        table-layout: fixed !important;
+
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+
+        margin: 0 !important;
+        font-size: 9px !important;
+        line-height: 1.25 !important;
+    }
+
+    /* =========================
+       رؤوس وخلايا جميع الجداول
+       ========================= */
+    table th,
+    table td {
+        box-sizing: border-box !important;
+
+        padding: 5px 4px !important;
+
+        vertical-align: middle !important;
+        text-align: center !important;
+
+        border: 1px solid #888 !important;
+
+        /* كل شيء في سطر واحد */
+        white-space: nowrap !important;
+
+        overflow: hidden !important;
+        text-overflow: clip !important;
+
+        /* منع ارتفاع الصف بسبب النص */
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    /* =========================
+       رؤوس الجداول
+       ========================= */
+    table th {
+        background: #ddd !important;
+        color: #000 !important;
+
+        font-weight: 700 !important;
+
+        position: static !important;
+
+        white-space: nowrap !important;
+    }
+
+    /* =========================
+       الملاحظات فقط
+       ========================= */
+    table th:last-child,
+    table td:last-child {
+        white-space: normal !important;
+
+        overflow: visible !important;
+
+        text-overflow: initial !important;
+
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+
+        vertical-align: top !important;
+
+        line-height: 1.35 !important;
+    }
+
+    /* =========================
+       الشارات
+       ========================= */
+    .badge {
+        display: inline-block !important;
+
+        border: 1px solid #666 !important;
+        background: #fff !important;
+        color: #000 !important;
+
+        white-space: nowrap !important;
+
+        padding: 2px 5px !important;
+        font-size: 8px !important;
+    }
+
+    /* =========================
+       منع انقسام صفوف الجدول
+       ========================= */
+    table tr {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* تكرار رأس الجدول عند الانتقال لصفحة أخرى */
+    table thead {
+        display: table-header-group !important;
+    }
+
+    table tfoot {
+        display: table-footer-group !important;
+    }
+
+    /* =========================
+       الصور داخل الطباعة
+       ========================= */
+    table img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* =========================
+       الروابط
+       ========================= */
+    table a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+}
 /* ═══════════════════════════════════════════════════════════
    Responsive
    ═══════════════════════════════════════════════════════════ */
@@ -3478,7 +3664,7 @@ function buildPrintHTML(items, template, extra = {}) {
 
   const paperKey = tpl.paperSize || 'A4';
   const paper = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
-  const baseFont = tpl.fontSize || 7;
+  const baseFont = tpl.fontSize || 6;
   const titleSize = baseFont + 5;
   const metaSize = baseFont;
   const footSize = baseFont;
@@ -3492,157 +3678,28 @@ function buildPrintHTML(items, template, extra = {}) {
 
   return `<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
     <style>
-  @page {
-    size: ${paper.w}mm ${paper.h}mm portrait;
-    margin: 8mm;
-  }
-
-  * {
-    box-sizing: border-box;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    color-adjust: exact !important;
-  }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    color: #000;
-    font-family: Tahoma, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -webkit-hyphens: none;
-    hyphens: none;
-  }
-
-  .print-logo {
-    text-align: center;
-    margin: 0 0 4mm 0;
-  }
-
-  h1 {
-    font-size: ${titleSize}pt;
-    color: #1e40af;
-    margin: 0 0 2mm 0;
-    text-align: center;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-  .meta {
-    text-align: center;
-    font-size: ${metaSize}pt;
-    color: #475569;
-    margin: 0 0 3mm 0;
-    line-height: 1.4;
-  }
-
-  table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    font-size: ${baseFont}pt;
-  }
-
-  th, td {
-    border: 1px solid #334155;
-    padding: 4px 5px;
-    vertical-align: top;
-    line-height: 1.35;
-    word-break: normal;
-    overflow: hidden;
-    -webkit-hyphens: none;
-    hyphens: none;
-    white-space: nowrap;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tfoot {
-    display: table-footer-group;
-  }
-
-  th {
-    background: #1e40af;
-    color: #fff;
-    font-weight: 700;
-    text-align: center;
-    font-size: ${smallFont}pt;
-    line-height: 1.25;
-    vertical-align: middle;
-  }
-
-  td {
-    text-align: right;
-    background: #fff;
-  }
-
-  tbody tr:nth-child(even) td {
-    background: #f1f5f9;
-  }
-
-  tbody tr {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .col-num {
-    text-align: center !important;
-    font-weight: 600;
-    color: #1e40af;
-  }
-
-  .col-code {
-    direction: ltr;
-    text-align: center !important;
-    font-family: 'Courier New', Consolas, 'Lucida Console', monospace;
-    font-size: ${smallFont}pt;
-    letter-spacing: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    line-height: 1.3;
-  }
-
-  .col-notes {
-    text-align: right !important;
-    white-space: normal !important;
-    word-break: normal;
-    overflow-wrap: break-word;
-    line-height: 1.4;
-  }
-
-  .col-name {
-    text-align: right !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
-  }
-
-  tfoot td {
-    border: none;
-    padding-top: 6mm;
-    text-align: center;
-    font-size: ${footSize}pt;
-    color: #334155;
-    background: #fff !important;
-  }
-
-  @media print {
-    body {
-      padding: 0;
-    }
-
-    h1, .meta {
-      page-break-after: avoid;
-    }
-
-    table {
-      page-break-inside: auto;
-    }
-  }
-</style>
+      @page { size: ${paper.w}mm ${paper.h}mm portrait; margin: 8mm; }
+      * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+      html, body { margin: 0; padding: 0; background: #fff; color: #000; font-family: Tahoma, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-hyphens: none; hyphens: none; }
+      .print-logo { text-align: center; margin: 0 0 4mm 0; }
+      h1 { font-size: ${titleSize}pt; color: #1e40af; margin: 0 0 2mm 0; text-align: center; font-weight: 700; line-height: 1.3; }
+      .meta { text-align: center; font-size: ${metaSize}pt; color: #475569; margin: 0 0 3mm 0; line-height: 1.4; }
+      table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: ${baseFont}pt; }
+      th, td { border: 1px solid #334155; padding: 4px 5px; vertical-align: top; line-height: 1.35; word-break: normal; overflow: hidden; -webkit-hyphens: none; hyphens: none; white-space: nowrap; }
+      thead { display: table-header-group; }
+      tfoot { display: table-footer-group; }
+      th { background: #1e40af; color: #fff; font-weight: 700; text-align: center; font-size: ${smallFont}pt; line-height: 1.25; vertical-align: middle; }
+      td { text-align: right; background: #fff; }
+      tbody tr:nth-child(even) td { background: #f1f5f9; }
+      tbody tr { page-break-inside: avoid; break-inside: avoid; }
+      .fit-text { display: inline-block; white-space: nowrap; max-width: none; }
+      .col-num { text-align: center !important; font-weight: 600; color: #1e40af; }
+      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, 'Lucida Console', monospace; font-size: ${smallFont}pt; letter-spacing: 0; white-space: nowrap; line-height: 1.3; }
+      .col-notes { text-align: right !important; white-space: normal !important; word-break: normal; overflow-wrap: break-word; line-height: 1.4; overflow: visible; }
+      .col-name { text-align: right !important; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+      tfoot td { border: none; padding-top: 6mm; text-align: center; font-size: ${footSize}pt; color: #334155; background: #fff !important; }
+      @media print { body { padding: 0; } h1, .meta { page-break-after: avoid; } table { page-break-inside: auto; } }
+    </style>
     </head><body>
     ${logoHTML}
     <h1>${esc(replaceVars(tpl.title))}</h1>
@@ -3653,7 +3710,49 @@ function buildPrintHTML(items, template, extra = {}) {
       <tbody>${rowsHTML}</tbody>
       ${tpl.footer ? `<tfoot><tr><td colspan="${allCols.length}">${esc(replaceVars(tpl.footer))}</td></tr></tfoot>` : ''}
     </table>
-    <script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
+    <script>
+      function fitPrintText() {
+        const cells = document.querySelectorAll('th, td');
+        cells.forEach(cell => {
+          if (cell.classList.contains('col-notes') || cell.closest('tfoot')) return;
+
+          const text = (cell.textContent || '').trim();
+          if (!text) return;
+
+          const span = document.createElement('span');
+          span.className = 'fit-text';
+          span.innerHTML = cell.innerHTML;
+          cell.innerHTML = '';
+          cell.appendChild(span);
+
+          const style = getComputedStyle(span);
+          const basePx = parseFloat(style.fontSize) || 13.33;
+          const minPx = 6;
+          let size = basePx;
+
+          span.style.fontSize = size + 'px';
+          span.style.whiteSpace = 'nowrap';
+
+          const available = Math.max(1, cell.clientWidth - 10);
+          while (span.scrollWidth > available && size > minPx) {
+            size -= 0.25;
+            span.style.fontSize = size + 'px';
+          }
+
+          /* محاولة أخيرة: ضغط أفقي بسيط بدون قص النص */
+          if (span.scrollWidth > available) {
+            const scaleX = Math.max(0.55, available / span.scrollWidth);
+            span.style.transformOrigin = 'right center';
+            span.style.transform = 'scaleX(' + scaleX + ')';
+          }
+        });
+      }
+
+      window.onload = () => setTimeout(() => {
+        fitPrintText();
+        setTimeout(() => window.print(), 150);
+      }, 300);
+    <\/script>
     </body></html>`;
 }
 window.printReady = function () {
@@ -4085,6 +4184,104 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
+</script>
+<script>
+(function () {
+
+    function prepareTablesForPrint() {
+
+        const tables = document.querySelectorAll('table');
+
+        tables.forEach(function (table) {
+
+            const headers = table.querySelectorAll('thead th');
+
+            /* تحديد عمود الملاحظات تلقائياً */
+            let notesIndex = -1;
+
+            headers.forEach(function (th, index) {
+                const text = (th.textContent || '')
+                    .trim()
+                    .replace(/\s+/g, ' ');
+
+                if (
+                    text.includes('ملاحظات') ||
+                    text.includes('ملاحظة') ||
+                    text.includes('الملاحظات') ||
+                    text.toLowerCase().includes('notes')
+                ) {
+                    notesIndex = index;
+                }
+            });
+
+            const rows = table.querySelectorAll('tr');
+
+            rows.forEach(function (row) {
+
+                const cells = row.querySelectorAll('th, td');
+
+                cells.forEach(function (cell, index) {
+
+                    /* الملاحظات فقط تسمح بأكثر من سطر */
+                    if (index === notesIndex) {
+
+                        cell.style.whiteSpace = 'normal';
+                        cell.style.overflow = 'visible';
+                        cell.style.textOverflow = 'initial';
+                        cell.style.wordBreak = 'normal';
+                        cell.style.overflowWrap = 'anywhere';
+
+                        return;
+                    }
+
+                    /* باقي الأعمدة: سطر واحد */
+                    cell.style.whiteSpace = 'nowrap';
+                    cell.style.overflow = 'hidden';
+                    cell.style.textOverflow = 'clip';
+
+                    /*
+                     * تصغير الخط تدريجياً إذا كان النص
+                     * أطول من مساحة الخلية
+                     */
+                    if (cell.tagName.toLowerCase() === 'td') {
+
+                        let fontSize = 9;
+
+                        cell.style.fontSize = fontSize + 'px';
+
+                        while (
+                            cell.scrollWidth > cell.clientWidth &&
+                            fontSize > 6
+                        ) {
+                            fontSize -= 0.25;
+                            cell.style.fontSize = fontSize + 'px';
+                        }
+                    }
+
+                });
+
+            });
+
+        });
+    }
+
+    /* قبل الطباعة */
+    window.addEventListener('beforeprint', function () {
+        prepareTablesForPrint();
+    });
+
+    /* عند فتح معاينة الطباعة */
+    if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('print');
+
+        mediaQuery.addEventListener('change', function (event) {
+            if (event.matches) {
+                prepareTablesForPrint();
+            }
+        });
+    }
+
+})();
 </script>
 </body>
 </html>
