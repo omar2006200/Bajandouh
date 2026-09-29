@@ -33,24 +33,20 @@ html,body{height:100%}
   --bronze-1:#e8a06a;--bronze-2:#b76b32;--bronze-3:#7a3f16;
   --slate-50:#f8fafc;--slate-100:#f1f5f9;--slate-200:#e5e9f0;--slate-300:#cbd5e1;--slate-400:#94a3b8;
   --slate-500:#64748b;--slate-600:#475569;--slate-700:#334155;--slate-800:#1e293b;--slate-900:#0f172a;--slate-950:#020617;
-
   --bg:#eef3fd;--bg-elevated:#ffffff;--card-bg:#ffffff;--card-border:#e3eaf8;
   --text:#0c1526;--text-secondary:#2e3d57;--text-muted:#66748f;--text-inverse:#ffffff;
   --border:#e3eaf8;--border-strong:#c3d0e8;--divider:#eef2fb;
   --hover-bg:rgba(66,102,232,.07);--active-bg:rgba(66,102,232,.12);--focus-ring:rgba(66,102,232,.22);
   --primary:var(--brand-600);--primary-hover:var(--brand-700);--primary-dark:var(--brand-800);
-
   --shadow-xs:0 1px 2px rgba(31,58,123,.05);
   --shadow-sm:0 2px 5px rgba(31,58,123,.07),0 1px 2px rgba(31,58,123,.04);
   --shadow-md:0 6px 18px rgba(31,58,123,.09),0 2px 6px rgba(31,58,123,.05);
   --shadow-lg:0 16px 40px rgba(31,58,123,.13),0 4px 14px rgba(31,58,123,.07);
   --shadow-xl:0 28px 60px rgba(31,58,123,.17),0 10px 22px rgba(31,58,123,.09);
   --shadow-inset:inset 0 1px 0 rgba(255,255,255,.22);
-
   --btn-h:38px;--radius-xs:6px;--radius-sm:8px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;
   --transition:.18s cubic-bezier(.4,0,.2,1);
 }
-
 [data-theme="dark"]{
   --bg:#070b15;--bg-elevated:#0d1422;--card-bg:#111a2c;--card-border:#1c2840;
   --text:#eaf0fb;--text-secondary:#b6c3da;--text-muted:#7c8ba6;--text-inverse:#070b15;
@@ -67,7 +63,6 @@ html,body{height:100%}
   --shadow-xl:0 28px 60px rgba(0,0,0,.7),0 10px 22px rgba(0,0,0,.45);
   --shadow-inset:inset 0 1px 0 rgba(255,255,255,.08);
 }
-
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Tahoma,Arial,sans-serif;font-size:14px;line-height:1.5;transition:background .3s ease,color .3s ease;-webkit-font-smoothing:antialiased}
 [data-theme="light"] body{background:radial-gradient(circle at 0% 0%,rgba(66,102,232,.06),transparent 45%),radial-gradient(circle at 100% 100%,rgba(139,92,246,.05),transparent 45%),var(--bg);background-attachment:fixed}
 .ico{display:inline-block;flex-shrink:0;vertical-align:middle;pointer-events:none;outline:none}
@@ -164,7 +159,6 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 [data-theme="dark"] .login-box button.primary{background:linear-gradient(180deg,var(--brand-500),var(--brand-600))}
 .login-box button.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 28px rgba(66,102,232,.5),var(--shadow-inset)}
 .login-box button.primary:disabled{opacity:.6;cursor:not-allowed}
-
 .admin-toggle-link{text-align:center;margin-top:18px;font-size:12px}
 .admin-toggle-link a{color:var(--text-muted);text-decoration:none;border-bottom:1px dashed var(--border);padding-bottom:2px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:var(--transition)}
 .admin-toggle-link a:hover{color:var(--brand-600);border-bottom-color:var(--brand-500)}
@@ -576,9 +570,11 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .notif-item.success{border-right-color:var(--success-500)}
 .notif-item.warning{border-right-color:var(--warning-500)}
 .notif-item.danger{border-right-color:var(--danger-500)}
-.notif-item .nt{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.notif-item .nt{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:6px;justify-content:space-between}
 .notif-item .nm{font-size:11.5px;color:var(--text-muted);line-height:1.5}
-.notif-item .nd{font-size:10px;color:var(--text-muted);opacity:.8;margin-top:5px}
+.notif-item .nd{font-size:10px;color:var(--text-muted);opacity:.8;margin-top:5px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.notif-item .nd .author{opacity:.85}
+.notif-item.unread{background:linear-gradient(135deg,var(--brand-50),transparent);border-right-color:var(--brand-500)}
 .notif-empty{padding:40px 20px;text-align:center;color:var(--text-muted);font-size:13px}
 
 .activity-list{background:var(--card-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:8px;border:1px solid var(--card-border)}
@@ -714,7 +710,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
   <div class="notif-header">
     <span id="notifHeaderTitle"></span>
     <div style="display:flex;gap:6px;">
-      <button onclick="clearAllNotifications()" id="notifClearBtn" title="مسح الكل"></button>
+      <button onclick="clearAllNotifications()" id="notifClearBtn" title="مسح الكل (يخصّني فقط)"></button>
       <button onclick="toggleNotifPanel()" id="notifCloseBtn" title="إغلاق"></button>
     </div>
   </div>
@@ -769,7 +765,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
-      <div class="rate-widget" id="rateWidget" title="استهلاك API">
+      <div class="rate-widget" id="rateWidget" title="استهلاك الحصة">
         <span class="rate-ico" id="rateIcon"></span>
         <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
         <span class="rate-text" id="rateText">— / —</span>
@@ -1035,7 +1031,8 @@ const GITHUB_OWNER = 'omar2006200';
 const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
-const SYNC_INTERVAL = 30000;
+// تحسين استهلاك الحصة: فاصل مزامنة أكبر + throttle أعلى
+const SYNC_INTERVAL = 60000;
 const SAVE_COOLDOWN = 10000;
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
@@ -1043,28 +1040,30 @@ const DRAFT_KEY = 'oms_draft_order';
 const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
 const KEY_HIDDEN_FLAG = 'oms_key_hidden';
-const NOTIF_KEY = 'oms_notifications';
 const ACTIVITY_PER_PAGE = 30;
-const ACTIVITY_WARN_THRESHOLD = 5000;
-const ACTIVITY_TOTAL_LIMIT = 0;
-const SYNC_THROTTLE_MS = 5000;
+const SYNC_THROTTLE_MS = 10000;
+// مؤقت حفظ الإشعارات (debounce)
+const NOTIF_SAVE_DELAY = 3000;
+
 const RATE_LEVELS = [
-  { min: 3000, interval: 15000, label: 'مرتفعة' },
-  { min: 1500, interval: 30000, label: 'جيدة' },
-  { min: 800,  interval: 60000, label: 'متوسطة' },
-  { min: 300,  interval: 120000, label: 'منخفضة' },
-  { min: 100,  interval: 300000, label: 'منخفضة جداً' },
+  { min: 3000, interval: 30000, label: 'مرتفعة' },
+  { min: 1500, interval: 60000, label: 'جيدة' },
+  { min: 800,  interval: 120000, label: 'متوسطة' },
+  { min: 300,  interval: 240000, label: 'منخفضة' },
+  { min: 100,  interval: 420000, label: 'منخفضة جداً' },
   { min: 0,    interval: 0,      label: 'حرجة — موقوفة' }
 ];
 
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+const TREE_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${APP_BRANCH}?recursive=1`;
 const DATA_FILES = {
   users:'data/users.json', orders:'data/orders.json', ready:'data/ready.json',
   log:'data/log.json', customers:'data/customers.json', drivers:'data/drivers.json',
   branches:'data/branches.json', templates:'data/templates.json',
-  activity:'data/activity.json', meta:'data/meta.json'
+  activity:'data/activity.json', notifications:'data/notifications.json',
+  meta:'data/meta.json'
 };
-const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
+const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity','notifications'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 /* ==============================================================
@@ -1107,6 +1106,7 @@ const PERMISSIONS = {
   editLog:{label:'زر: تعديل السجل',cat:'log',icon:'edit'},
   deleteLog:{label:'زر: حذف من السجل',cat:'log',icon:'trash'},
   editReceiptStatus:{label:'تأكيد حالة الاستلام',cat:'log',icon:'inbox'},
+  revertReceiptStatus:{label:'التراجع عن تأكيد الاستلام',cat:'log',icon:'undo'},
   tabToken:{label:'مفتاح الاتصال',cat:'settingsTabs',icon:'key'},
   tabActivity:{label:'سجل النشاط',cat:'settingsTabs',icon:'activity'},
   tabBranches:{label:'الفروع',cat:'settingsTabs',icon:'building'},
@@ -1120,6 +1120,7 @@ const PERMISSIONS = {
   manageUsers:{label:'إضافة/تعديل المستخدمين',cat:'manage',icon:'user'},
   editTemplates:{label:'تعديل القوالب',cat:'manage',icon:'image'},
   viewActivity:{label:'عرض سجل النشاط',cat:'manage',icon:'activity'},
+  resetActivity:{label:'تصفير سجل النشاط',cat:'manage',icon:'trash'},
   reset:{label:'تصفير النظام',cat:'manage',icon:'warning'}
 };
 const PERM_CATEGORIES = {
@@ -1137,19 +1138,21 @@ const WORKER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:false, accessSettings:false,
   addOrder:true, editOrder:true, deleteOrder:false, transferSingle:true, bulkTransfer:false,
   returnSingle:false,
-  print:true, moveToLog:false, editLog:false, deleteLog:false, editReceiptStatus:false,
+  print:true, moveToLog:false, editLog:false, deleteLog:false,
+  editReceiptStatus:false, revertReceiptStatus:false,
   tabToken:false, tabActivity:false, tabBranches:false, tabDrivers:false, tabUsers:false, tabTemplates:false, tabBackup:false,
   manageCustomers:false, manageDrivers:false, manageBranches:false, manageUsers:false,
-  editTemplates:false, viewActivity:false, reset:false
+  editTemplates:false, viewActivity:false, resetActivity:false, reset:false
 };
 const MANAGER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:true, accessSettings:true,
   addOrder:true, editOrder:true, deleteOrder:true, transferSingle:true, bulkTransfer:true,
   returnSingle:true,
-  print:true, moveToLog:true, editLog:true, deleteLog:true, editReceiptStatus:true,
+  print:true, moveToLog:true, editLog:true, deleteLog:true,
+  editReceiptStatus:true, revertReceiptStatus:false,
   tabToken:false, tabActivity:true, tabBranches:true, tabDrivers:true, tabUsers:true, tabTemplates:true, tabBackup:true,
   manageCustomers:true, manageDrivers:true, manageBranches:true, manageUsers:true,
-  editTemplates:true, viewActivity:true, reset:false
+  editTemplates:true, viewActivity:true, resetActivity:false, reset:false
 };
 const DEFAULT_PERMS = { ...WORKER_DEFAULTS };
 
@@ -1205,7 +1208,7 @@ const DEFAULT_TEMPLATES = {
 };
 
 let currentUser = null;
-let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{},activity:[] };
+let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{},activity:[],notifications:[] };
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {},ETags = {},localMeta = null;
 let pollTimer = null,syncing = false,selectedOrderId = null;
@@ -1222,9 +1225,12 @@ let currentSyncInterval = SYNC_INTERVAL;
 let lastSyncTime = 0;
 let visibilityHandlerAttached = false;
 let lastRateNotificationAt = 0;
+let _notifSaveTimer = null;
+let _treeApiDisabled = false;
+let _lastNotifUnreadCount = 0;
 
 /* ==============================================================
-   Professional Messages — رسائل احترافية موحّدة
+   Professional Messages
    ============================================================== */
 const MSG = {
   connFail:       'تعذر الاتصال بالخدمة، يرجى المحاولة لاحقاً',
@@ -1402,7 +1408,6 @@ function hideLoading() {
   const bar = document.getElementById('loadingBar');
   if (bar) bar.style.width = '0%';
 }
-
 function setFieldError(fieldId, message) {
   const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
   if (f) f.classList.add('field-error'); if (e) { e.textContent = message; e.classList.add('show'); }
@@ -1422,7 +1427,6 @@ function focusFirstError(modalId) {
 }
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
-
 async function ensureJSZip() {
   if (typeof JSZip !== 'undefined') return true;
   return new Promise((resolve) => {
@@ -1487,74 +1491,48 @@ function changeKeyModal() {
   openModal('keyModal');
   setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
 }
-
-/**
- * تحديث مفتاح الاتصال — طريقة مباشرة بدون بيانات دخول
- * يتم اختبار المفتاح الجديد قبل حفظه
- */
 async function performKeyChange(newKey, errorEl, btn) {
   if (!newKey) {
     errorEl.textContent = MSG.keyMissing;
     errorEl.classList.add('show');
     return false;
   }
-
   if (newKey.length < 20) {
     errorEl.textContent = MSG.keyShort;
     errorEl.classList.add('show');
     return false;
   }
-
   if (btn) btn.disabled = true;
-
   try {
     showLoading('جاري اختبار المفتاح الجديد...');
-
     const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
-
     const testRes = await fetch(testUrl, {
-      headers: {
-        'Authorization': `Bearer ${newKey}`,
-        'Accept': 'application/vnd.github+json'
-      }
+      headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' }
     });
-
     if (!testRes.ok) {
       if (testRes.status === 401) throw new Error(MSG.keyInvalid);
       if (testRes.status === 403) throw new Error(MSG.noPermissions);
       throw new Error(MSG.connFail);
     }
-
-    // حفظ المفتاح الجديد مباشرة
     saveKey(newKey);
-    SHAs = {};
-    ETags = {};
-    localMeta = null;
+    SHAs = {}; ETags = {}; localMeta = null;
     await readAll();
-
     hideLoading();
-    updateKeyStatus();
-    updateCurrentKeyInfo();
+    updateKeyStatus(); updateCurrentKeyInfo();
     toast('✅ ' + MSG.keySuccess, 'success');
     return true;
-
   } catch (e) {
     hideLoading();
     errorEl.textContent = '❌ ' + (e.message || MSG.connFail);
     errorEl.classList.add('show');
     return false;
-
-  } finally {
-    if (btn) btn.disabled = false;
-  }
+  } finally { if (btn) btn.disabled = false; }
 }
-
 window.toggleAdminPanel = function() {
   const panel = document.getElementById('adminTokenSection');
   panel.classList.toggle('show');
   if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminNewKey').focus(), 100);
 };
-
 window.adminChangeKey = async function() {
   const newKey = document.getElementById('adminNewKey').value.trim();
   const errEl = document.getElementById('adminError');
@@ -1567,7 +1545,6 @@ window.adminChangeKey = async function() {
     await dialog.alert('✅ ' + MSG.keySuccess, { type: 'success', title: 'تم بنجاح' });
   }
 };
-
 async function saveNewKey() {
   const newKey = document.getElementById('newKeyInput').value.trim();
   const errEl = document.createElement('div');
@@ -1606,7 +1583,7 @@ function renderRateLimitWidget() {
   if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
   const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
   const level = getRateLevel(remaining);
-  widget.title = `📊 استهلاك الحصة\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}`;
+  widget.title = `📊 استهلاك الحصة\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}\nعدد الطلبات: ${apiCallCount}`;
 }
 function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
 function adjustSyncInterval() {
@@ -1628,11 +1605,11 @@ function maybeNotifyLowRate() {
   const now = Date.now();
   if (now - lastRateNotificationAt < 30 * 60 * 1000) return;
   const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
-  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض: ${rateLimitInfo.remaining} طلب متبقي`, 'warning'); }
+  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning'); }
 }
 
 /* ==============================================================
-   API — برسائل احترافية لا تكشف تفاصيل تقنية
+   API
    ============================================================== */
 function apiHeaders(json = false, key = null) {
   const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
@@ -1640,6 +1617,33 @@ function apiHeaders(json = false, key = null) {
   if (key && ETags[key]) h['If-None-Match'] = ETags[key];
   return h;
 }
+
+/**
+ * GET /git/trees/{branch}?recursive=1
+ * يعيد SHAs لجميع الملفات في المستودع بطلب واحد فقط
+ * يُستخدم لتقليل الحصة: بدلاً من قراءة 10 ملفات، نقرأ طلب واحد لمعرفة ما تغيّر
+ */
+async function getTreeShas() {
+  if (_treeApiDisabled) return null;
+  try {
+    const res = await fetch(`${TREE_API}&_=${Date.now()}`, { headers: apiHeaders(false) });
+    updateRateLimit(res.headers);
+    apiCallCount++;
+    if (!res.ok) {
+      if (res.status >= 400 && res.status < 500 && res.status !== 403) _treeApiDisabled = true;
+      return null;
+    }
+    const json = await res.json();
+    const shas = {};
+    (json.tree || []).forEach(e => {
+      if (!e.path || e.type !== 'blob') return;
+      const m = e.path.match(/^data\/(.+)\.json$/);
+      if (m) shas[m[1]] = e.sha;
+    });
+    return shas;
+  } catch { return null; }
+}
+
 async function apiReadFile(key) {
   const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
   let res;
@@ -1700,26 +1704,27 @@ async function apiCreateFile(key, data) {
   SHAs[key] = json.content.sha;
   return json;
 }
-async function readAll() {
-  hasLegacyFiles = false;
-  const errors = [];
-  const results = await Promise.all(DATA_KEYS.map(async (k) => {
-    try { return await apiReadFile(k); }
-    catch (e) { errors.push(e.message); return { notModified: false, data: null }; }
-  }));
-  readAll.lastErrors = errors;
-  DATA_KEYS.forEach((k, i) => {
-    const r = results[i];
-    if (r.notModified) return;
-    if (r.wasPlain === true) hasLegacyFiles = true;
-    if (k === 'templates') {
-      cache.templates = r.data || null;
-      const merged = r.data ? { ...DEFAULT_TEMPLATES, ...r.data } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-      if (r.data?.ready) merged.ready = { ...DEFAULT_TEMPLATES.ready, ...r.data.ready };
-      if (r.data?.log) merged.log = { ...DEFAULT_TEMPLATES.log, ...r.data.log };
-      templates = merged;
-    } else cache[k] = Array.isArray(r.data) ? r.data : [];
-  });
+
+/**
+ * تطبيق بيانات ملف واحد على الـ cache
+ */
+function applyFileData(k, data, wasPlain) {
+  if (wasPlain === true) hasLegacyFiles = true;
+  if (k === 'templates') {
+    cache.templates = data || null;
+    const merged = data ? { ...DEFAULT_TEMPLATES, ...data } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
+    if (data?.ready) merged.ready = { ...DEFAULT_TEMPLATES.ready, ...data.ready };
+    if (data?.log) merged.log = { ...DEFAULT_TEMPLATES.log, ...data.log };
+    templates = merged;
+  } else {
+    cache[k] = Array.isArray(data) ? data : [];
+  }
+}
+
+/**
+ * معالجة ما بعد القراءة (تنظيف وتوحيد البيانات)
+ */
+function postProcessData() {
   cache.drivers = cache.drivers.map(d => { if (typeof d === 'string') return { id: uid(), name: d, phone: '' }; return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' }; });
   cache.branches = cache.branches.map(b => { if (typeof b === 'string') return { id: uid(), name: b }; return { id: b.id || uid(), name: b.name || '' }; });
   if (!cache.branches.length) cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
@@ -1728,17 +1733,44 @@ async function readAll() {
     ...o,
     receiptStatus: (o.receiptStatus === RECEIPT_RECEIVED || o.receiptStatus === RECEIPT_NOT_RECEIVED) ? o.receiptStatus : RECEIPT_NOT_RECEIVED
   }));
+  // تطبيع الإشعارات
+  cache.notifications = (Array.isArray(cache.notifications) ? cache.notifications : []).map(n => ({
+    ...n,
+    deletedBy: Array.isArray(n.deletedBy) ? n.deletedBy : [],
+    readBy: Array.isArray(n.readBy) ? n.readBy : [],
+    createdBy: n.createdBy || 'system'
+  }));
+}
+
+/**
+ * readAll - تقرأ كل الملفات أو مجموعة محددة
+ */
+async function readAll(keysToRead = null) {
+  hasLegacyFiles = false;
+  const keys = keysToRead || DATA_KEYS;
+  const errors = [];
+  const results = await Promise.all(keys.map(async (k) => {
+    try { return await apiReadFile(k); }
+    catch (e) { errors.push(e.message); return { notModified: false, data: null }; }
+  }));
+  readAll.lastErrors = errors;
+  keys.forEach((k, i) => {
+    const r = results[i];
+    if (r.notModified) return;
+    applyFileData(k, r.data, r.wasPlain);
+  });
+  postProcessData();
 }
 async function readMeta() {
   try {
     const r = await apiReadFile('meta');
-    if (r.notModified) return localMeta || { lastUpdate: '', version: 3 };
-    return r.data || { lastUpdate: '', version: 3 };
+    if (r.notModified) return localMeta || { lastUpdate: '', version: 4 };
+    return r.data || { lastUpdate: '', version: 4 };
   }
-  catch { return { lastUpdate: '', version: 3 }; }
+  catch { return { lastUpdate: '', version: 4 }; }
 }
 async function writeMeta(extra = {}) {
-  const meta = { lastUpdate: new Date().toISOString(), version: 3, ...extra };
+  const meta = { lastUpdate: new Date().toISOString(), version: 4, ...extra };
   try { await apiWriteFile('meta', meta); localMeta = meta; }
   catch (e) {
     if (e.message === 'CONFLICT') {
@@ -1772,7 +1804,7 @@ async function saveAllDataNow() {
 window.saveAllDataNow = saveAllDataNow;
 
 /* ==============================================================
-   Sync
+   Sync — محسّن لاستهلاك أقل
    ============================================================== */
 async function syncPull() {
   if (syncing || !currentUser) return;
@@ -1782,14 +1814,38 @@ async function syncPull() {
   lastSyncTime = now;
   syncing = true;
   try {
-    const meta = await readMeta();
-    if (document.hidden) { syncing = false; return; }
-    if (localMeta && meta.lastUpdate === localMeta.lastUpdate) { setOnline(true); syncing = false; return; }
-    localMeta = meta;
-    await readAll();
-    const me = cache.users.find(u => u.username === currentUser.username);
-    if (me) currentUser = normalizeUser(me);
-    applyPermissionsUI(); renderActive(); setOnline(true);
+    let didChange = false;
+    const treeShas = await getTreeShas();
+    if (treeShas) {
+      // نحدد الملفات التي تغيّر SHA الخاص بها فقط
+      const changed = DATA_KEYS.filter(k => {
+        const remoteSha = treeShas[k];
+        return remoteSha && remoteSha !== SHAs[k];
+      });
+      if (changed.length) {
+        for (const k of changed) {
+          try {
+            const r = await apiReadFile(k);
+            if (!r.notModified) { applyFileData(k, r.data, r.wasPlain); didChange = true; }
+          } catch (e) { /* تجاهل فشل ملف واحد */ }
+        }
+        if (didChange) postProcessData();
+      }
+    } else {
+      // fallback: قراءة meta ثم كل الملفات
+      const meta = await readMeta();
+      if (!localMeta || meta.lastUpdate !== localMeta.lastUpdate) {
+        localMeta = meta;
+        await readAll();
+        didChange = true;
+      }
+    }
+    if (didChange) {
+      const me = cache.users.find(u => u.username === currentUser.username);
+      if (me) currentUser = normalizeUser(me);
+      applyPermissionsUI(); renderActive(); renderNotifications();
+    }
+    setOnline(true);
   } catch (e) { setOnline(false); }
   finally { syncing = false; }
 }
@@ -1854,42 +1910,109 @@ function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); a
 function zoomReset() { zoomLevel = 1; applyZoom(); }
 
 /* ==============================================================
-   Notifications
+   Notifications — مشتركة بين المستخدمين مع حذف شخصي
    ============================================================== */
-let notifications = JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]');
-function addNotification(title, message, type = 'info') {
-  notifications.unshift({ id: uid(), title, message, type, time: fmtDate(), read: false });
-  if (notifications.length > 50) notifications = notifications.slice(0, 50);
-  localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
-  renderNotifications();
+function scheduleNotificationsSave() {
+  if (_notifSaveTimer) clearTimeout(_notifSaveTimer);
+  _notifSaveTimer = setTimeout(() => {
+    _notifSaveTimer = null;
+    if (!currentUser) return;
+    persistKeys(['notifications']).catch(() => {});
+  }, NOTIF_SAVE_DELAY);
 }
+async function flushNotificationsSave() {
+  if (_notifSaveTimer) { clearTimeout(_notifSaveTimer); _notifSaveTimer = null; }
+  if (!currentUser) return;
+  try { await persistKeys(['notifications']); } catch {}
+}
+
+function addNotification(title, message, type = 'info') {
+  const u = currentUser?.username;
+  const n = {
+    id: uid(),
+    title, message, type,
+    time: fmtDate(),
+    ts: Date.now(),
+    createdBy: u || 'system',
+    deletedBy: [],
+    readBy: u ? [u] : []
+  };
+  if (!Array.isArray(cache.notifications)) cache.notifications = [];
+  cache.notifications.unshift(n);
+  if (cache.notifications.length > 100) cache.notifications = cache.notifications.slice(0, 100);
+  renderNotifications();
+  scheduleNotificationsSave();
+}
+
+function getVisibleNotifications() {
+  const u = currentUser?.username;
+  if (!u) return [];
+  return (cache.notifications || []).filter(n => !(Array.isArray(n.deletedBy) && n.deletedBy.includes(u)));
+}
+
 function renderNotifications() {
   const list = document.getElementById('notifList'); if (!list) return;
-  const unread = notifications.filter(n => !n.read).length;
+  const u = currentUser?.username;
+  const visible = getVisibleNotifications();
+  const unread = u ? visible.filter(n => !(Array.isArray(n.readBy) && n.readBy.includes(u))).length : 0;
   const badge = document.getElementById('notifBadge');
   if (badge) { if (unread > 0) { badge.textContent = unread; badge.style.display = ''; } else badge.style.display = 'none'; }
-  if (!notifications.length) { list.innerHTML = `<div class="notif-empty">${ico('bell', 40)}<div style="margin-top:10px;">لا توجد إشعارات</div></div>`; return; }
-  list.innerHTML = notifications.slice(0, 30).map(n => `
-    <div class="notif-item ${n.type}">
-      <div class="nt">${esc(n.title)}</div>
-      <div class="nm">${esc(n.message)}</div>
-      <div class="nd">${esc(n.time)}</div>
-    </div>
-  `).join('');
+  _lastNotifUnreadCount = unread;
+
+  if (!visible.length) {
+    list.innerHTML = `<div class="notif-empty">${ico('bell', 40)}<div style="margin-top:10px;">لا توجد إشعارات</div></div>`;
+    return;
+  }
+  list.innerHTML = visible.slice(0, 30).map(n => {
+    const isUnread = u && !(Array.isArray(n.readBy) && n.readBy.includes(u));
+    const author = n.createdBy && n.createdBy !== 'system' ? n.createdBy : '';
+    return `<div class="notif-item ${n.type || 'info'}${isUnread ? ' unread' : ''}">
+      <div class="nt">
+        <span>${esc(n.title || '')}</span>
+      </div>
+      <div class="nm">${esc(n.message || '')}</div>
+      <div class="nd">
+        <span>${esc(n.time || '')}</span>
+        ${author ? `<span class="author">بواسطة: ${esc(author)}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
 }
+
 window.toggleNotifPanel = function() {
   const panel = document.getElementById('notifPanel');
   panel.classList.toggle('show');
   if (panel.classList.contains('show')) {
-    notifications.forEach(n => n.read = true);
-    localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
-    renderNotifications();
+    const u = currentUser?.username;
+    if (!u) return;
+    let dirty = false;
+    (cache.notifications || []).forEach(n => {
+      if (!Array.isArray(n.readBy)) n.readBy = [];
+      if (!Array.isArray(n.deletedBy)) n.deletedBy = [];
+      if (n.deletedBy.includes(u)) return;
+      if (!n.readBy.includes(u)) { n.readBy.push(u); dirty = true; }
+    });
+    if (dirty) { renderNotifications(); scheduleNotificationsSave(); }
   }
 };
-window.clearAllNotifications = function() {
-  notifications = [];
-  localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
+
+window.clearAllNotifications = async function() {
+  const u = currentUser?.username;
+  if (!u) return;
+  const ok = await dialog.confirm(
+    'سيتم مسح الإشعارات من جهتك فقط، ولن تتأثر إشعارات بقية المستخدمين.\n\nهل تريد المتابعة؟',
+    { title: 'مسح الإشعارات', okText: 'نعم، امسح', type: 'warning', okClass: 'btn-warning' }
+  );
+  if (!ok) return;
+  (cache.notifications || []).forEach(n => {
+    if (!Array.isArray(n.deletedBy)) n.deletedBy = [];
+    if (!n.deletedBy.includes(u)) n.deletedBy.push(u);
+  });
   renderNotifications();
+  try {
+    await persistKeys(['notifications']);
+    toast('تم مسح الإشعارات لديك', 'success');
+  } catch { toast(MSG.saveFail, 'error'); }
 };
 
 /* ==============================================================
@@ -1898,7 +2021,6 @@ window.clearAllNotifications = function() {
 function logActivity(action, title, description, type = 'info') {
   const entry = { id: uid(), action, title, description, type, user: currentUser?.username || 'system', time: fmtDate(), ts: Date.now() };
   cache.activity.unshift(entry);
-  if (ACTIVITY_TOTAL_LIMIT > 0 && cache.activity.length > ACTIVITY_TOTAL_LIMIT) cache.activity = cache.activity.slice(0, ACTIVITY_TOTAL_LIMIT);
 }
 function getFilteredActivity() {
   let filtered = cache.activity;
@@ -1986,6 +2108,30 @@ window.exportActivityLog = function() {
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `activity_log_${new Date().toISOString().slice(0,10)}.csv`; a.click();
   toast(`تم تصدير ${cache.activity.length} عملية`, 'success');
+};
+
+/**
+ * تصفير سجل النشاط — صلاحية خاصة
+ * يمسح كل السجل مع تسجيل العملية نفسها بعده
+ */
+window.resetActivityLog = async function() {
+  if (!hasPerm('resetActivity')) { toast(MSG.unauthorized, 'error'); return; }
+  const count = cache.activity.length;
+  if (!count) { toast('السجل فارغ بالفعل', 'info'); return; }
+  const ok = await dialog.danger(
+    `سيتم حذف ${count.toLocaleString()} عملية من سجل النشاط نهائياً.\n\nلا يمكن التراجع عن هذه العملية.`,
+    { title: 'تصفير سجل النشاط', okText: 'نعم، صفّر السجل' }
+  );
+  if (!ok) return;
+  const ok2 = await dialog.confirm('هل أنت متأكد تماماً؟', { type: 'warning', title: 'تأكيد أخير' });
+  if (!ok2) return;
+  try {
+    cache.activity = [];
+    logActivity('reset-activity', 'تصفير سجل النشاط', `تم حذف ${count} عملية`, 'danger');
+    await persistKeys(['activity']);
+    renderActivity();
+    toast('تم تصفير سجل النشاط بنجاح', 'success');
+  } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -2174,7 +2320,7 @@ function buildUI() {
   document.getElementById('draftIcon').innerHTML = ico('file', 14);
   document.getElementById('connBannerIcon').innerHTML = ico('warning', 14);
   document.getElementById('notifBtnIcon').innerHTML = ico('bell', 17);
-  document.getElementById('notifHeaderTitle').innerHTML = ico('bell', 15) + '<span style="margin-right:6px;">الإشعارات</span>';
+  document.getElementById('notifHeaderTitle').innerHTML = ico('bell', 15) + '<span style="margin-right:6px;">الإشعارات المشتركة</span>';
   document.getElementById('notifClearBtn').innerHTML = ico('trash', 15);
   document.getElementById('notifCloseBtn').innerHTML = ico('x', 15);
   document.getElementById('sessionTimerIcon').innerHTML = ico('clock', 12);
@@ -2261,6 +2407,7 @@ function buildUI() {
       <select id="activityTypeFilter" onchange="activityFilterByType(this.value)"><option value="">كل الأنواع</option><option value="success">✅ نجاح</option><option value="warning">⚠️ تحذير</option><option value="danger">❌ حذف</option><option value="info">ℹ️ معلومة</option></select>
       <button class="btn btn-ghost btn-sm" onclick="activityResetFilters()">${ico('refresh', 13)}<span>مسح</span></button>
       <button class="btn btn-primary btn-sm" onclick="exportActivityLog()">${ico('download', 13)}<span>تصدير</span></button>
+      <button class="btn btn-danger btn-sm perm-resetActivity" onclick="resetActivityLog()">${ico('trash', 13)}<span>تصفير السجل</span></button>
     </div>
     <div id="activityStats" class="activity-stats"></div>
     <div id="activityList" class="activity-list"></div>
@@ -2278,7 +2425,7 @@ function buildUI() {
   document.getElementById('tab-users').innerHTML = `
     <div style="color:var(--text);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('user', 18)}<span>المستخدمون والصلاحيات</span></div>
     <div class="perm-info-box">
-      👑 <strong>المالك</strong>: يملك كل شيء — 🛡️ <strong>المدير</strong>: يمنحه المالك ما يشاء (بما فيها إدارة المستخدمين) — 👤 <strong>العامل</strong>: يحصل على صلاحياته من المدير (بحدود ما يملكه المدير)
+      👑 <strong>المالك</strong>: يملك كل شيء — 🛡️ <strong>المدير</strong>: يمنحه المالك ما يشاء — 👤 <strong>العامل</strong>: يحصل على صلاحياته من المدير (بحدود ما يملكه المدير)
     </div>
     <div class="toolbar"><button class="btn btn-primary perm-manageUsers" onclick="openUserModal()">${ico('plus', 15)}<span>مستخدم جديد</span></button></div>
     <div class="table-wrap" style="max-width:1050px;"><table style="min-width:auto;"><thead><tr><th>اسم المستخدم</th><th>الدور</th><th>عدد الصلاحيات</th><th>إجراءات</th></tr></thead><tbody id="userBody"></tbody></table></div>`;
@@ -2564,17 +2711,24 @@ function receiptStatusCell(o) {
   const status = o.receiptStatus || RECEIPT_NOT_RECEIVED;
   const isDone = status === RECEIPT_RECEIVED;
   const canEdit = hasPerm('editReceiptStatus');
+  const canRevert = hasPerm('revertReceiptStatus');
   const isOwner = currentUser?.role === ROLE_OWNER;
-  if (isDone && !isOwner) {
+  // حالة "تم" غير قابلة للتعديل إلا من يملك صلاحية التراجع (أو المالك)
+  if (isDone && !canRevert && !isOwner) {
     return `<span class="badge badge-received" title="تم الاستلام${o.receiptUpdatedBy ? ' • بواسطة ' + esc(o.receiptUpdatedBy) : ''}${o.receiptUpdatedAt ? ' • ' + esc(o.receiptUpdatedAt) : ''}">${ico('check', 11)} تم</span>`;
   }
-  if (!canEdit && !isOwner) {
+  // غير مصرح بالتعديل أصلاً
+  if (!canEdit && !canRevert && !isOwner) {
     return isDone
       ? `<span class="badge badge-received">${ico('check', 11)} تم</span>`
       : `<span class="badge badge-not-received">لا</span>`;
   }
+  // قابل للتعديل
   const cls = isDone ? 'receipt-select is-done owner-locked' : 'receipt-select';
-  return `<select class="${cls}" onclick="event.stopPropagation()" onchange="changeReceiptStatus('${o.id}', this.value)" title="${isDone ? 'المالك فقط يمكنه التراجع' : 'تأكيد الاستلام'}">
+  const titleAttr = isDone
+    ? (canRevert || isOwner ? 'يمكنك التراجع' : 'مقفل')
+    : 'تأكيد الاستلام';
+  return `<select class="${cls}" onclick="event.stopPropagation()" onchange="changeReceiptStatus('${o.id}', this.value)" title="${titleAttr}">
     <option value="${RECEIPT_NOT_RECEIVED}" ${!isDone ? 'selected' : ''}>لا</option>
     <option value="${RECEIPT_RECEIVED}" ${isDone ? 'selected' : ''}>تم</option>
   </select>`;
@@ -2793,6 +2947,7 @@ window.doLogin = async function () {
 window.logout = async function (silent = false) {
   if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
+  try { await flushNotificationsSave(); } catch {}
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   currentSyncInterval = SYNC_INTERVAL;
@@ -3183,16 +3338,19 @@ window.changeReceiptStatus = async function (id, newStatus) {
   if (!o) { renderLog(); return; }
   const current = o.receiptStatus || RECEIPT_NOT_RECEIVED;
   const isOwner = currentUser?.role === ROLE_OWNER;
+  const canRevert = hasPerm('revertReceiptStatus');
 
   if (current === newStatus) { renderLog(); return; }
 
-  if (current === RECEIPT_RECEIVED && !isOwner) {
-    toast('لا يمكن التعديل — تم الاستلام مسبقاً (للمالك فقط)', 'error');
+  // منع غير المصرح من التراجع من "تم"
+  if (current === RECEIPT_RECEIVED && !isOwner && !canRevert) {
+    toast('لا يمكن التراجع — يلزم صلاحية "التراجع عن تأكيد الاستلام"', 'error');
     renderLog();
     return;
   }
 
-  if (!isOwner && !hasPerm('editReceiptStatus')) {
+  // منع غير المصرح من التأكيد
+  if (newStatus === RECEIPT_RECEIVED && !isOwner && !hasPerm('editReceiptStatus')) {
     toast(MSG.unauthorized, 'error');
     renderLog();
     return;
@@ -3200,7 +3358,7 @@ window.changeReceiptStatus = async function (id, newStatus) {
 
   if (newStatus === RECEIPT_RECEIVED) {
     const ok = await dialog.confirm(
-      `هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟\n\n⚠️ بعد التأكيد لا يمكن التراجع إلا من قِبَل المالك.`,
+      `هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟\n\n⚠️ بعد التأكيد لا يمكن التراجع إلا من يملك صلاحية التراجع.`,
       { title: 'تأكيد الاستلام', okText: 'نعم، تم الاستلام', type: 'success', okClass: 'btn-success' }
     );
     if (!ok) { renderLog(); return; }
@@ -3208,7 +3366,7 @@ window.changeReceiptStatus = async function (id, newStatus) {
 
   if (newStatus === RECEIPT_NOT_RECEIVED && current === RECEIPT_RECEIVED) {
     const ok = await dialog.confirm(
-      `⚠️ إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟\n\nهذا الإجراء متاح للمالك فقط.`,
+      `⚠️ إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟\n\nسيُعاد إلى "لا".`,
       { title: 'إلغاء الاستلام', okText: 'نعم، إلغاء', type: 'warning', okClass: 'btn-warning' }
     );
     if (!ok) { renderLog(); return; }
@@ -3272,7 +3430,6 @@ function buildPrintHTML(items, template, extra = {}) {
   if (tpl.showReceiptStatus)            cols.push({ key:'receiptStatus',  header:'حالة الاستلام', cls:'',          weight: PRINT_COL_WEIGHTS.receiptStatus,  cell:o => esc(o.receiptStatus || RECEIPT_NOT_RECEIVED) });
 
   const allCols = [{ key:'index', header:'#', cls:'col-num', weight: PRINT_COL_WEIGHTS.index, cell:null }].concat(cols);
-
   const totalWeight = allCols.reduce((s, c) => s + c.weight, 0);
   const colgroup = allCols.map(c => `<col style="width:${((c.weight / totalWeight) * 100).toFixed(3)}%">`).join('');
   const headersHTML = allCols.map(c => `<th class="${c.cls}"><span class="fit-text">${esc(c.header)}</span></th>`).join('');
@@ -3585,15 +3742,9 @@ window.editUser = function (id) {
   document.getElementById('userPass').value = u.password;
   buildRoleSelect(u);
   document.getElementById('userRole').value = u.role;
-  if (u.role === ROLE_OWNER) {
-    tempPerms = {};
-  } else {
-    tempPerms = {};
-    ALL_PERM_KEYS.forEach(k => { tempPerms[k] = u.permissions?.[k] === true; });
-  }
-  if (currentUser.role === ROLE_MANAGER) {
-    document.getElementById('userRole').disabled = true;
-  }
+  if (u.role === ROLE_OWNER) { tempPerms = {}; }
+  else { tempPerms = {}; ALL_PERM_KEYS.forEach(k => { tempPerms[k] = u.permissions?.[k] === true; }); }
+  if (currentUser.role === ROLE_MANAGER) { document.getElementById('userRole').disabled = true; }
   renderPermissionsGrid(); onUserRoleChange();
   openModal('userModal');
 };
@@ -3707,9 +3858,7 @@ window.onUserRoleChange = function () {
     const grantable = getGrantablePerms(role);
     const existing = { ...tempPerms };
     const newPerms = {};
-    grantable.forEach(k => {
-      newPerms[k] = (typeof existing[k] === 'boolean') ? existing[k] : false;
-    });
+    grantable.forEach(k => { newPerms[k] = (typeof existing[k] === 'boolean') ? existing[k] : false; });
     tempPerms = newPerms;
     renderPermissionsGrid();
   }
@@ -3734,7 +3883,6 @@ window.saveUser = async function () {
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
   const role = document.getElementById('userRole').value;
-
   if (id) {
     const existing = cache.users.find(u => u.id === id);
     if (!existing) { toast('المستخدم غير موجود', 'error'); return; }
@@ -3747,22 +3895,17 @@ window.saveUser = async function () {
     const allowedRoles = getAllowedRolesToCreate();
     if (!allowedRoles.includes(role)) { toast('لا يمكنك إنشاء هذا الدور', 'error'); return; }
   }
-
   let permissions = {};
-  if (role === ROLE_OWNER) {
-    permissions = {};
-  } else {
+  if (role === ROLE_OWNER) { permissions = {}; }
+  else {
     const grantable = getGrantablePerms(role);
     grantable.forEach(k => { permissions[k] = tempPerms[k] === true; });
     if (currentUser.role === ROLE_MANAGER) {
       const ownPerms = ALL_PERM_KEYS.filter(k => currentUser.permissions?.[k] === true);
-      Object.keys(permissions).forEach(k => {
-        if (!ownPerms.includes(k)) permissions[k] = false;
-      });
+      Object.keys(permissions).forEach(k => { if (!ownPerms.includes(k)) permissions[k] = false; });
     }
     if (permissions.manageUsers) permissions.tabUsers = true;
   }
-
   const userData = { id: id || uid(), username, password, role, permissions };
   if (id) {
     const idx = cache.users.findIndex(u => u.id === id);
@@ -3807,7 +3950,7 @@ window.exportBackup = async function () {
     const zip = new JSZip();
     const dataFolder = zip.folder('data');
     for (const key of DATA_KEYS) { const content = JSON.stringify(cache[key] || [], null, 2); dataFolder.file(`${key}.json`, content); }
-    dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 3 }, null, 2));
+    dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 4 }, null, 2));
     const info = { name: 'نظام إدارة الطلبات', createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`) };
     zip.file('backup-info.json', JSON.stringify(info, null, 2));
     zip.file('README.txt', `نسخة احتياطية\n=====================================\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n`);
@@ -3936,6 +4079,9 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
+
+// حفظ الإشعارات قبل إغلاق النافذة
+window.addEventListener('beforeunload', () => { if (_notifSaveTimer && currentUser) { try { flushNotificationsSave(); } catch {} } });
 </script>
 <script>
 (function () {
