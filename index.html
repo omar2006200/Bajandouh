@@ -1360,7 +1360,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
-      <div class="rate-widget" id="rateWidget" title="استهلاك API">
+      <div class="rate-widget" id="rateWidget" title="رصيدك">
         <span class="rate-ico" id="rateIcon"></span>
         <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
         <span class="rate-text" id="rateText">— / —</span>
@@ -1689,7 +1689,7 @@ const DATA_FILES = {
   activity:'data/activity.json', meta:'data/meta.json'
 };
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
-const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
+const DEFAULT_BRANCH_NAME = 'الرئيسي';
 
 const PAPER_SIZES = {
   A3: { w: 297, h: 420, label: 'A3 (297×420mm)' },
@@ -3664,7 +3664,7 @@ function buildPrintHTML(items, template, extra = {}) {
 
   const paperKey = tpl.paperSize || 'A4';
   const paper = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
-  const baseFont = tpl.fontSize || 6;
+  const baseFont = tpl.fontSize || 10;
   const titleSize = baseFont + 5;
   const metaSize = baseFont;
   const footSize = baseFont;
@@ -3694,7 +3694,7 @@ function buildPrintHTML(items, template, extra = {}) {
       tbody tr { page-break-inside: avoid; break-inside: avoid; }
       .fit-text { display: inline-block; white-space: nowrap; max-width: none; }
       .col-num { text-align: center !important; font-weight: 600; color: #1e40af; }
-      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, 'Lucida Console', monospace; font-size: ${baseFont}pt; letter-spacing: 0; white-space: nowrap; line-height: 1.3; }
+      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, 'Lucida Console', monospace; font-size: ${smallFont}pt; letter-spacing: 0; white-space: nowrap; line-height: 1.3; }
       .col-notes { text-align: right !important; white-space: normal !important; word-break: normal; overflow-wrap: break-word; line-height: 1.4; overflow: visible; }
       .col-name { text-align: right !important; white-space: nowrap; overflow: hidden; text-overflow: clip; }
       tfoot td { border: none; padding-top: 6mm; text-align: center; font-size: ${footSize}pt; color: #334155; background: #fff !important; }
