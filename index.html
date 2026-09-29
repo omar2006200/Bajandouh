@@ -2182,7 +2182,7 @@ function renderRateLimitWidget() {
   if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
   const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
   const level = getRateLevel(remaining);
-  widget.title = `📊 استهلاك API\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}\n\n⏱ فاصل المزامنة: ${currentSyncInterval > 0 ? (currentSyncInterval/1000) + ' ث' : 'متوقف'}`;
+  widget.title = `📊 رصيدك\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}\n\n⏱ فاصل المزامنة: ${currentSyncInterval > 0 ? (currentSyncInterval/1000) + ' ث' : 'متوقف'}`;
 }
 function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
 function adjustSyncInterval() {
