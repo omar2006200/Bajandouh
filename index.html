@@ -1360,7 +1360,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
       <h1>نظام إدارة الطلبات</h1>
     </div>
     <div class="user-info">
-      <div class="rate-widget" id="rateWidget" title="رصيدك">
+      <div class="rate-widget" id="rateWidget" title="استهلاك API">
         <span class="rate-ico" id="rateIcon"></span>
         <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
         <span class="rate-text" id="rateText">— / —</span>
@@ -1689,7 +1689,7 @@ const DATA_FILES = {
   activity:'data/activity.json', meta:'data/meta.json'
 };
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity'];
-const DEFAULT_BRANCH_NAME = 'الرئيسي';
+const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 const PAPER_SIZES = {
   A3: { w: 297, h: 420, label: 'A3 (297×420mm)' },
@@ -2182,7 +2182,7 @@ function renderRateLimitWidget() {
   if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
   const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
   const level = getRateLevel(remaining);
-  widget.title = `📊 رصيدك\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}\n\n⏱ فاصل المزامنة: ${currentSyncInterval > 0 ? (currentSyncInterval/1000) + ' ث' : 'متوقف'}`;
+  widget.title = `📊 استهلاك API\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}\n\n⏱ فاصل المزامنة: ${currentSyncInterval > 0 ? (currentSyncInterval/1000) + ' ث' : 'متوقف'}`;
 }
 function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
 function adjustSyncInterval() {
@@ -3653,11 +3653,12 @@ function buildPrintHTML(items, template, extra = {}) {
 
   const totalWeight = allCols.reduce((s, c) => s + c.weight, 0);
   const colgroup = allCols.map(c => `<col style="width:${((c.weight / totalWeight) * 100).toFixed(3)}%">`).join('');
-  const headersHTML = allCols.map(c => `<th class="${c.cls}">${esc(c.header)}</th>`).join('');
+  const headersHTML = allCols.map(c => `<th class="${c.cls}"><span class="fit-text">${esc(c.header)}</span></th>`).join('');
   const rowsHTML = items.map((o, i) => {
     const cells = allCols.map(c => {
       const content = c.cell ? c.cell(o) : String(i + 1);
-      return `<td class="${c.cls}">${content}</td>`;
+      if (c.cls === 'col-notes') return `<td class="${c.cls}">${content}</td>`;
+      return `<td class="${c.cls}"><span class="fit-text">${content}</span></td>`;
     }).join('');
     return `<tr>${cells}</tr>`;
   }).join('');
@@ -3685,19 +3686,20 @@ function buildPrintHTML(items, template, extra = {}) {
       h1 { font-size: ${titleSize}pt; color: #1e40af; margin: 0 0 2mm 0; text-align: center; font-weight: 700; line-height: 1.3; }
       .meta { text-align: center; font-size: ${metaSize}pt; color: #475569; margin: 0 0 3mm 0; line-height: 1.4; }
       table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: ${baseFont}pt; }
-      th, td { border: 1px solid #334155; padding: 4px 5px; vertical-align: top; line-height: 1.35; word-break: normal; overflow: hidden; -webkit-hyphens: none; hyphens: none; white-space: nowrap; }
+      th, td { border: 1px solid #334155; padding: 3px 5px; vertical-align: middle; line-height: 1.25; word-break: keep-all; overflow-wrap: normal; -webkit-hyphens: none; hyphens: none; white-space: nowrap; overflow: hidden; text-overflow: clip; }
       thead { display: table-header-group; }
       tfoot { display: table-footer-group; }
       th { background: #1e40af; color: #fff; font-weight: 700; text-align: center; font-size: ${smallFont}pt; line-height: 1.25; vertical-align: middle; }
       td { text-align: right; background: #fff; }
       tbody tr:nth-child(even) td { background: #f1f5f9; }
       tbody tr { page-break-inside: avoid; break-inside: avoid; }
-      .fit-text { display: inline-block; white-space: nowrap; max-width: none; }
+      .fit-text { display: inline-block; white-space: nowrap; max-width: none; vertical-align: middle; transform-origin: right center; }
+      th .fit-text { transform-origin: center center; }
       .col-num { text-align: center !important; font-weight: 600; color: #1e40af; }
-      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, 'Lucida Console', monospace; font-size: ${smallFont}pt; letter-spacing: 0; white-space: nowrap; line-height: 1.3; }
-      .col-notes { text-align: right !important; white-space: normal !important; word-break: normal; overflow-wrap: break-word; line-height: 1.4; overflow: visible; }
-      .col-name { text-align: right !important; white-space: nowrap; overflow: hidden; text-overflow: clip; }
-      tfoot td { border: none; padding-top: 6mm; text-align: center; font-size: ${footSize}pt; color: #334155; background: #fff !important; }
+      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, 'Lucida Console', monospace; font-size: ${baseFont}pt; letter-spacing: 0; white-space: nowrap !important; word-break: keep-all !important; overflow-wrap: normal !important; line-height: 1.2; }
+      .col-notes { text-align: right !important; white-space: normal !important; word-break: normal; overflow-wrap: anywhere; line-height: 1.4; overflow: visible; }
+      .col-name { text-align: right !important; white-space: nowrap !important; word-break: keep-all !important; overflow-wrap: normal !important; }
+      tfoot td { border: none; padding-top: 6mm; text-align: center; font-size: ${footSize}pt; color: #334155; background: #fff !important; white-space: normal; overflow: visible; }
       @media print { body { padding: 0; } h1, .meta { page-break-after: avoid; } table { page-break-inside: auto; } }
     </style>
     </head><body>
@@ -3712,46 +3714,35 @@ function buildPrintHTML(items, template, extra = {}) {
     </table>
     <script>
       function fitPrintText() {
-        const cells = document.querySelectorAll('th, td');
+        const table = document.querySelector('table');
+        if (!table) return;
+        const cells = table.querySelectorAll('thead th, tbody td:not(.col-notes)');
         cells.forEach(cell => {
-          if (cell.classList.contains('col-notes') || cell.closest('tfoot')) return;
-
-          const text = (cell.textContent || '').trim();
+          const text = cell.querySelector('.fit-text');
           if (!text) return;
-
-          const span = document.createElement('span');
-          span.className = 'fit-text';
-          span.innerHTML = cell.innerHTML;
-          cell.innerHTML = '';
-          cell.appendChild(span);
-
-          const style = getComputedStyle(span);
-          const basePx = parseFloat(style.fontSize) || 13.33;
-          const minPx = 6;
-          let size = basePx;
-
-          span.style.fontSize = size + 'px';
-          span.style.whiteSpace = 'nowrap';
-
-          const available = Math.max(1, cell.clientWidth - 10);
-          while (span.scrollWidth > available && size > minPx) {
-            size -= 0.25;
-            span.style.fontSize = size + 'px';
+          text.style.transform = 'none';
+          text.style.fontSize = '';
+          text.style.whiteSpace = 'nowrap';
+          const base = parseFloat(getComputedStyle(text).fontSize) || ${baseFont} * 1.333;
+          const min = 5 * 1.333;
+          const available = Math.max(1, cell.clientWidth - 8);
+          let size = base;
+          text.style.fontSize = size + 'px';
+          let guard = 120;
+          while (text.scrollWidth > available && size > min && guard-- > 0) {
+            size -= 0.2;
+            text.style.fontSize = size + 'px';
           }
-
-          /* محاولة أخيرة: ضغط أفقي بسيط بدون قص النص */
-          if (span.scrollWidth > available) {
-            const scaleX = Math.max(0.55, available / span.scrollWidth);
-            span.style.transformOrigin = 'right center';
-            span.style.transform = 'scaleX(' + scaleX + ')';
+          if (text.scrollWidth > available) {
+            const scale = available / Math.max(1, text.scrollWidth);
+            text.style.transform = 'scaleX(' + Math.max(0.08, scale).toFixed(4) + ')';
           }
         });
       }
-
       window.onload = () => setTimeout(() => {
         fitPrintText();
-        setTimeout(() => window.print(), 150);
-      }, 300);
+        setTimeout(() => window.print(), 180);
+      }, 350);
     <\/script>
     </body></html>`;
 }
