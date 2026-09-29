@@ -428,8 +428,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 [data-theme="dark"] .badge-received{background:linear-gradient(135deg,rgba(12,185,123,.22),rgba(12,185,123,.1));color:#6ee7b7;border-color:rgba(12,185,123,.4)}
 .badge-not-received{background:var(--slate-100);color:var(--slate-600);border-color:rgba(100,116,139,.2)}
 [data-theme="dark"] .badge-not-received{background:rgba(148,163,184,.12);color:#94a3b8;border-color:rgba(148,163,184,.22)}
-.badge-locked-owner{background:linear-gradient(135deg,rgba(240,168,36,.15),rgba(240,168,36,.08));color:var(--gold-3);border-color:rgba(240,168,36,.35)}
-[data-theme="dark"] .badge-locked-owner{color:#ffd66b;border-color:rgba(240,168,36,.4)}
 
 .receipt-select{padding:5px 10px;padding-left:26px;font-size:11.5px;font-weight:700;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-secondary);width:auto;min-width:78px;cursor:pointer;line-height:1.2;height:auto;background-position:left 8px center;transition:var(--transition)}
 .receipt-select:hover{border-color:var(--brand-400);box-shadow:0 2px 8px rgba(66,102,232,.12)}
@@ -753,10 +751,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
         <span>تحديث مفتاح الاتصال</span>
       </div>
       <div class="admin-warning">ℹ️ أدخل المفتاح الجديد مباشرة — لا تحتاج للمفتاح القديم.</div>
-      <label>اسم المستخدم (مالك)</label>
-      <input id="adminUser" type="text" placeholder="اسم المستخدم المالك" autocomplete="username">
-      <label>كلمة المرور</label>
-      <input id="adminPass" type="password" placeholder="••••••" autocomplete="current-password">
       <label>مفتاح الاتصال الجديد</label>
       <input id="adminNewKey" type="password" placeholder="أدخل المفتاح الجديد" autocomplete="off">
       <button class="primary" id="adminChangeBtn" onclick="adminChangeKey()" style="margin-top:16px;">
@@ -1074,7 +1068,7 @@ const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branche
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
 /* ==============================================================
-   ROLE SYSTEM — هرمي ديناميكي
+   ROLE SYSTEM
    ============================================================== */
 const ROLE_OWNER   = 'مالك';
 const ROLE_MANAGER = 'مدير';
@@ -1094,10 +1088,6 @@ const PRINT_COL_WEIGHTS = {
   location:95, status:60, approvalDate:85, pay:55, driver:85,
   driverPhone:105, notes:130, archivedAt:85, receiptStatus:70
 };
-
-if (GITHUB_OWNER.includes('ضع-') || GITHUB_OWNER.includes('هنا')) {
-  console.error('⚠️ يجب تعديل GITHUB_OWNER في أعلى الملف!');
-}
 
 const PERMISSIONS = {
   accessDashboard:{label:'الرئيسية',cat:'pages',icon:'home'},
@@ -1232,6 +1222,30 @@ let currentSyncInterval = SYNC_INTERVAL;
 let lastSyncTime = 0;
 let visibilityHandlerAttached = false;
 let lastRateNotificationAt = 0;
+
+/* ==============================================================
+   Professional Messages — رسائل احترافية موحّدة
+   ============================================================== */
+const MSG = {
+  connFail:       'تعذر الاتصال بالخدمة، يرجى المحاولة لاحقاً',
+  authFail:       'بيانات الدخول غير صحيحة، يرجى التحقق والمحاولة مجدداً',
+  loadFail:       'تعذر تحميل البيانات، يرجى المحاولة لاحقاً',
+  saveFail:       'تعذر حفظ التغييرات، يرجى المحاولة لاحقاً',
+  createFail:     'تعذر إنشاء البيانات، يرجى المحاولة لاحقاً',
+  readFail:       'تعذر قراءة البيانات، يرجى المحاولة لاحقاً',
+  parseFail:      'تعذر معالجة البيانات، يرجى المحاولة لاحقاً',
+  rateExceeded:   'تم تجاوز الحد المسموح، يرجى المحاولة لاحقاً',
+  noPermissions:  'لا تملك الصلاحيات الكافية لتنفيذ هذا الإجراء',
+  keyInvalid:     'المفتاح الجديد غير صالح، يرجى التحقق والمحاولة مجدداً',
+  keyShort:       'المفتاح قصير جداً، يجب أن يكون 20 حرفاً على الأقل',
+  keyMissing:     'يرجى إدخال المفتاح',
+  keySuccess:     'تم تحديث المفتاح بنجاح',
+  storageIssues:  'تعذر الوصول إلى البيانات، تحقق من الاتصال بالشبكة',
+  sessionExpired: 'انتهت الجلسة، يرجى تسجيل الدخول مجدداً',
+  sessionWarning: 'ستنتهي جلستك قريباً',
+  unauthorized:   'غير مصرح لك بتنفيذ هذا الإجراء',
+  missingData:    'يرجى تعبئة الحقول المطلوبة'
+};
 
 /* ==============================================================
    Security
@@ -1431,11 +1445,11 @@ function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
 function hideKeyForever() { localStorage.setItem(KEY_HIDDEN_FLAG, '1'); }
 function isKeyHidden() { return localStorage.getItem(KEY_HIDDEN_FLAG) === '1'; }
 async function clearKey() {
-  const ok = await dialog.confirm('سيتم حذف مفتاح الاتصال من هذا المتصفح.', { type: 'warning', title: 'حذف المفتاح' });
+  const ok = await dialog.confirm('سيتم إزالة المفتاح من هذا الجهاز، هل تريد المتابعة؟', { type: 'warning', title: 'إزالة المفتاح' });
   if (!ok) return;
   localStorage.removeItem(ACCESS_KEY);
   localStorage.removeItem(KEY_HIDDEN_FLAG);
-  toast('تم حذف المفتاح', 'success');
+  toast('تمت إزالة المفتاح بنجاح', 'success');
   updateKeyStatus(); updateCurrentKeyInfo();
 }
 function updateKeyStatus() {
@@ -1446,11 +1460,11 @@ function updateKeyStatus() {
   statusEl.style.display = '';
   if (token) {
     statusEl.className = 'key-status saved';
-    statusEl.innerHTML = `<span>${ico('check', 14)} مفتاح الاتصال جاهز</span><button onclick="showKeyField()">تغيير</button>`;
+    statusEl.innerHTML = `<span>${ico('check', 14)} المفتاح جاهز للاستخدام</span><button onclick="showKeyField()">تغيير</button>`;
     fieldEl.style.display = 'none';
   } else {
     statusEl.className = 'key-status missing';
-    statusEl.innerHTML = `<span>${ico('warning', 14)} لم يتم إدخال المفتاح</span>`;
+    statusEl.innerHTML = `<span>${ico('warning', 14)} يرجى إدخال المفتاح</span>`;
     fieldEl.style.display = 'block';
   }
 }
@@ -1473,72 +1487,94 @@ function changeKeyModal() {
   openModal('keyModal');
   setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
 }
-async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
-  if (!adminUser || !adminPass) { errorEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errorEl.classList.add('show'); return false; }
-  if (!newKey) { errorEl.textContent = 'أدخل مفتاح الاتصال الجديد'; errorEl.classList.add('show'); return false; }
-  if (newKey.length < 20) { errorEl.textContent = 'المفتاح الجديد قصير جداً'; errorEl.classList.add('show'); return false; }
-  const oldKey = getStoredKey();
-  if (!oldKey) { errorEl.textContent = 'لا يوجد مفتاح حالي'; errorEl.classList.add('show'); return false; }
-  if (btn) btn.disabled = true;
-  try {
-    showLoading('جاري التحقق...');
-    await readAll(); localMeta = await readMeta();
-    const found = cache.users.find(x => x.username === adminUser && x.password === adminPass);
-    if (!found) throw new Error('❌ بيانات الدخول غير صحيحة');
-    if (found.role !== ROLE_OWNER) throw new Error('❌ للمالك فقط');
-    showLoading('جاري اختبار المفتاح...');
-    const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
-    const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
-    if (!testRes.ok) {
-      if (testRes.status === 401) throw new Error('المفتاح الجديد غير صالح');
-      if (testRes.status === 403) throw new Error('لا يملك الصلاحيات');
-      throw new Error('فشل الاتصال');
-    }
-    saveKey(newKey);
-    SHAs = {}; ETags = {}; localMeta = null;
-    await readAll();
-    hideLoading();
-    logActivity('key-change', 'تحديث مفتاح الاتصال', `بواسطة ${adminUser}`, 'success');
-    toast('✅ تم التحديث', 'success');
-    updateKeyStatus(); updateCurrentKeyInfo();
-    return true;
-  } catch (e) {
-    if (oldKey) saveKey(oldKey);
-    hideLoading();
-    errorEl.textContent = '❌ ' + e.message;
+
+/**
+ * تحديث مفتاح الاتصال — طريقة مباشرة بدون بيانات دخول
+ * يتم اختبار المفتاح الجديد قبل حفظه
+ */
+async function performKeyChange(newKey, errorEl, btn) {
+  if (!newKey) {
+    errorEl.textContent = MSG.keyMissing;
     errorEl.classList.add('show');
     return false;
-  } finally { if (btn) btn.disabled = false; }
+  }
+
+  if (newKey.length < 20) {
+    errorEl.textContent = MSG.keyShort;
+    errorEl.classList.add('show');
+    return false;
+  }
+
+  if (btn) btn.disabled = true;
+
+  try {
+    showLoading('جاري اختبار المفتاح الجديد...');
+
+    const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
+
+    const testRes = await fetch(testUrl, {
+      headers: {
+        'Authorization': `Bearer ${newKey}`,
+        'Accept': 'application/vnd.github+json'
+      }
+    });
+
+    if (!testRes.ok) {
+      if (testRes.status === 401) throw new Error(MSG.keyInvalid);
+      if (testRes.status === 403) throw new Error(MSG.noPermissions);
+      throw new Error(MSG.connFail);
+    }
+
+    // حفظ المفتاح الجديد مباشرة
+    saveKey(newKey);
+    SHAs = {};
+    ETags = {};
+    localMeta = null;
+    await readAll();
+
+    hideLoading();
+    updateKeyStatus();
+    updateCurrentKeyInfo();
+    toast('✅ ' + MSG.keySuccess, 'success');
+    return true;
+
+  } catch (e) {
+    hideLoading();
+    errorEl.textContent = '❌ ' + (e.message || MSG.connFail);
+    errorEl.classList.add('show');
+    return false;
+
+  } finally {
+    if (btn) btn.disabled = false;
+  }
 }
+
 window.toggleAdminPanel = function() {
   const panel = document.getElementById('adminTokenSection');
   panel.classList.toggle('show');
-  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminUser').focus(), 100);
+  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminNewKey').focus(), 100);
 };
+
 window.adminChangeKey = async function() {
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value;
   const newKey = document.getElementById('adminNewKey').value.trim();
   const errEl = document.getElementById('adminError');
   const btn = document.getElementById('adminChangeBtn');
   errEl.classList.remove('show'); errEl.textContent = '';
-  const ok = await performKeyChange(newKey, u, p, errEl, btn);
+  const ok = await performKeyChange(newKey, errEl, btn);
   if (ok) {
-    document.getElementById('adminUser').value = '';
-    document.getElementById('adminPass').value = '';
     document.getElementById('adminNewKey').value = '';
     document.getElementById('adminTokenSection').classList.remove('show');
-    await dialog.alert('✅ تم تحديث المفتاح!', { type: 'success', title: 'تم' });
+    await dialog.alert('✅ ' + MSG.keySuccess, { type: 'success', title: 'تم بنجاح' });
   }
 };
+
 async function saveNewKey() {
   const newKey = document.getElementById('newKeyInput').value.trim();
   const errEl = document.createElement('div');
-  if (!currentUser || currentUser.role !== ROLE_OWNER) { toast('غير مصرح', 'error'); return; }
   errEl.className = 'login-error';
-  const ok = await performKeyChange(newKey, currentUser.username, currentUser.password, errEl, null);
+  const ok = await performKeyChange(newKey, errEl, null);
   if (ok) closeModal('keyModal');
-  else toast(errEl.textContent || 'فشل', 'error');
+  else toast(errEl.textContent || MSG.connFail, 'error');
 }
 window.saveNewKey = saveNewKey;
 
@@ -1570,7 +1606,7 @@ function renderRateLimitWidget() {
   if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
   const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
   const level = getRateLevel(remaining);
-  widget.title = `📊 استهلاك API\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}`;
+  widget.title = `📊 استهلاك الحصة\n━━━━━━━━━━━━━━━━━━━\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}`;
 }
 function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
 function adjustSyncInterval() {
@@ -1596,7 +1632,7 @@ function maybeNotifyLowRate() {
 }
 
 /* ==============================================================
-   API
+   API — برسائل احترافية لا تكشف تفاصيل تقنية
    ============================================================== */
 function apiHeaders(json = false, key = null) {
   const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
@@ -1608,18 +1644,18 @@ async function apiReadFile(key) {
   const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
   let res;
   try { res = await fetch(url, { headers: apiHeaders(false, key) }); }
-  catch { setOnline(false); throw new Error('فشل الاتصال بالشبكة'); }
+  catch { setOnline(false); throw new Error(MSG.connFail); }
   updateRateLimit(res.headers);
   apiCallCount++;
   if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
   if (!res.ok) {
-    if (res.status === 401) throw new Error('مفتاح الاتصال غير صالح (401)');
-    if (res.status === 403) throw new Error('الحصة منتهية أو لا صلاحيات (403)');
+    if (res.status === 401) throw new Error(MSG.authFail);
+    if (res.status === 403) throw new Error(MSG.rateExceeded);
     if (res.status === 404) {
-      if (key === 'users') throw new Error(`ملف data/users.json غير موجود في المستودع (404).`);
+      if (key === 'users') throw new Error(MSG.storageIssues);
       return { notModified: false, data: null };
     }
-    throw new Error(`فشل التحميل (${res.status})`);
+    throw new Error(MSG.loadFail);
   }
   const json = await res.json();
   SHAs[key] = json.sha;
@@ -1629,23 +1665,23 @@ async function apiReadFile(key) {
   if (key === 'meta') { try { return { notModified: false, data: JSON.parse(raw) }; } catch { return { notModified: false, data: null }; } }
   if (isEncrypted(raw)) {
     const decrypted = decryptText(raw);
-    if (decrypted === null) throw new Error(`فشل قراءة ملف ${key}`);
-    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(`فشل تحليل ملف ${key}`); }
+    if (decrypted === null) throw new Error(MSG.readFail);
+    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(MSG.parseFail); }
   }
   try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
 }
 async function apiWriteFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
   const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
-  const body = { message: `تحديث ${key}`, content: encodeBase64(content), branch: APP_BRANCH, sha: SHAs[key] };
+  const body = { message: `تحديث البيانات`, content: encodeBase64(content), branch: APP_BRANCH, sha: SHAs[key] };
   let res;
   try { res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
-  catch { setOnline(false); throw new Error('فشل الاتصال'); }
+  catch { setOnline(false); throw new Error(MSG.connFail); }
   updateRateLimit(res.headers);
   apiCallCount++;
   if (!res.ok) {
     if (res.status === 409) throw new Error('CONFLICT');
-    throw new Error('فشل الحفظ');
+    throw new Error(MSG.saveFail);
   }
   const json = await res.json();
   SHAs[key] = json.content.sha;
@@ -1655,11 +1691,11 @@ async function apiWriteFile(key, data) {
 async function apiCreateFile(key, data) {
   const jsonStr = JSON.stringify(data, null, 2);
   const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
-  const body = { message: `إنشاء ${key}`, content: encodeBase64(content), branch: APP_BRANCH };
+  const body = { message: `تهيئة البيانات`, content: encodeBase64(content), branch: APP_BRANCH };
   const res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
   updateRateLimit(res.headers);
   apiCallCount++;
-  if (!res.ok) throw new Error('فشل الإنشاء');
+  if (!res.ok) throw new Error(MSG.createFail);
   const json = await res.json();
   SHAs[key] = json.content.sha;
   return json;
@@ -1669,7 +1705,7 @@ async function readAll() {
   const errors = [];
   const results = await Promise.all(DATA_KEYS.map(async (k) => {
     try { return await apiReadFile(k); }
-    catch (e) { errors.push(`${k}: ${e.message}`); return { notModified: false, data: null }; }
+    catch (e) { errors.push(e.message); return { notModified: false, data: null }; }
   }));
   readAll.lastErrors = errors;
   DATA_KEYS.forEach((k, i) => {
@@ -1688,7 +1724,6 @@ async function readAll() {
   cache.branches = cache.branches.map(b => { if (typeof b === 'string') return { id: uid(), name: b }; return { id: b.id || uid(), name: b.name || '' }; });
   if (!cache.branches.length) cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
   cache.users = cache.users.map(normalizeUser);
-  // ضمان وجود حقل receiptStatus في كل عناصر السجل
   cache.log = cache.log.map(o => ({
     ...o,
     receiptStatus: (o.receiptStatus === RECEIPT_RECEIVED || o.receiptStatus === RECEIPT_NOT_RECEIVED) ? o.receiptStatus : RECEIPT_NOT_RECEIVED
@@ -1725,14 +1760,14 @@ async function persistKeys(keys) {
   } finally { setSyncing(false); }
 }
 async function saveAllDataNow() {
-  const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن. متابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
+  const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن، هل تريد المتابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
   if (!ok) return;
   try {
     showLoading('جاري الحفظ...');
     await persistKeys(DATA_KEYS);
     hideLoading(); hasLegacyFiles = false;
-    toast('✅ تم الحفظ', 'success');
-  } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
+    toast('✅ تم حفظ جميع البيانات', 'success');
+  } catch (e) { hideLoading(); toast(e.message, 'error'); }
 }
 window.saveAllDataNow = saveAllDataNow;
 
@@ -1985,10 +2020,10 @@ function updateSessionTimer() {
 function checkSessionWarning() {
   if (!currentUser) return;
   const remaining = sessionExpireAt - Date.now();
-  if (remaining <= 0) { stopSessionTimer(); logout(true); toast('انتهت الجلسة', 'warning'); return; }
+  if (remaining <= 0) { stopSessionTimer(); logout(true); toast(MSG.sessionExpired, 'warning'); return; }
   if (remaining <= SESSION_WARNING && remaining > SESSION_WARNING - 1000) {
-    addNotification('تنبيه', 'ستنتهي الجلسة قريباً', 'warning');
-    toast('⚠️ ستنتهي جلستك قريباً', 'warning');
+    addNotification('تنبيه', MSG.sessionWarning, 'warning');
+    toast('⚠️ ' + MSG.sessionWarning, 'warning');
   }
 }
 ['mousemove','keydown','click','scroll','touchstart'].forEach(evt => {
@@ -1996,7 +2031,7 @@ function checkSessionWarning() {
 });
 
 /* ==============================================================
-   ROLE / PERMISSIONS — نظام هرمي ديناميكي
+   ROLE / PERMISSIONS
    ============================================================== */
 function roleLabel(role) {
   if (role === ROLE_OWNER)   return { label:'مالك',  icon:'crown',  cls:'badge-owner' };
@@ -2213,7 +2248,7 @@ function buildUI() {
     <div class="perm-note" style="background:linear-gradient(135deg,var(--success-50),rgba(12,185,123,.1));border-color:rgba(6,148,99,.3);color:var(--success-700);margin-bottom:14px;">✅ النظام جاهز وبياناتك محفوظة.</div>
     <div class="toolbar">
       <button class="btn btn-warning" onclick="changeKeyModal()">${ico('refresh', 15)}<span>تحديث المفتاح</span></button>
-      <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>حذف المفتاح</span></button>
+      <button class="btn btn-danger" onclick="clearKey()">${ico('trash', 15)}<span>إزالة المفتاح</span></button>
     </div>
     <div id="currentKeyInfo" style="padding:13px;background:var(--bg);border-radius:var(--radius-md);font-family:monospace;font-size:12px;color:var(--text-muted);white-space:pre-line;line-height:1.7;border:1px solid var(--border);"></div>`;
 
@@ -2253,7 +2288,7 @@ function buildUI() {
     <div class="toolbar" style="margin-top:16px;"><button class="btn btn-success" onclick="saveTemplates()">${ico('save', 15)}<span>حفظ القوالب</span></button><button class="btn btn-ghost" onclick="resetTemplates()">${ico('refresh', 15)}<span>استعادة الافتراضي</span></button></div>`;
   document.getElementById('tab-backup').innerHTML = `
     <div style="color:var(--text);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${ico('save', 18)}<span>النسخ الاحتياطي</span></div>
-    <div class="perm-note" style="margin-bottom:14px;">ZIP يحتوي على جميع البيانات بصيغة JSON.</div>
+    <div class="perm-note" style="margin-bottom:14px;">ملف مضغوط يحتوي على جميع البيانات للنسخ الاحتياطي.</div>
     <div class="toolbar">
       <button class="btn btn-primary" onclick="exportBackup()">${ico('zip', 15)}<span>تصدير ZIP</span></button>
       <button class="btn btn-success" onclick="saveAllDataNow()">${ico('save', 15)}<span>حفظ شامل</span></button>
@@ -2525,31 +2560,19 @@ function getLogFilteredData() {
     return true;
   });
 }
-/**
- * يرسم خلية حالة الاستلام في السجل حسب الصلاحيات والحالة الحالية.
- * - غير مصرح + الحالة 'لا' → شارة رمادية
- * - غير مصرح + الحالة 'تم' → شارة خضراء مقفلة
- * - مصرح (لكن ليس مالك) + 'تم' → شارة خضراء مقفلة (لا يمكن التراجع)
- * - مصرح + 'لا' → قائمة منسدلة
- * - مالك + 'لا' → قائمة منسدلة عادية
- * - مالك + 'تم' → قائمة منسدلة بلون ذهبي (يمكن التراجع)
- */
 function receiptStatusCell(o) {
   const status = o.receiptStatus || RECEIPT_NOT_RECEIVED;
   const isDone = status === RECEIPT_RECEIVED;
   const canEdit = hasPerm('editReceiptStatus');
   const isOwner = currentUser?.role === ROLE_OWNER;
-  // حالة 'تم' مقفلة لغير المالك
   if (isDone && !isOwner) {
     return `<span class="badge badge-received" title="تم الاستلام${o.receiptUpdatedBy ? ' • بواسطة ' + esc(o.receiptUpdatedBy) : ''}${o.receiptUpdatedAt ? ' • ' + esc(o.receiptUpdatedAt) : ''}">${ico('check', 11)} تم</span>`;
   }
-  // غير مصرح بالتعديل
   if (!canEdit && !isOwner) {
     return isDone
       ? `<span class="badge badge-received">${ico('check', 11)} تم</span>`
       : `<span class="badge badge-not-received">لا</span>`;
   }
-  // قابل للتعديل
   const cls = isDone ? 'receipt-select is-done owner-locked' : 'receipt-select';
   return `<select class="${cls}" onclick="event.stopPropagation()" onchange="changeReceiptStatus('${o.id}', this.value)" title="${isDone ? 'المالك فقط يمكنه التراجع' : 'تأكيد الاستلام'}">
     <option value="${RECEIPT_NOT_RECEIVED}" ${!isDone ? 'selected' : ''}>لا</option>
@@ -2675,7 +2698,7 @@ function populateBranchSelects() {
    ============================================================== */
 window.go = function (page) {
   const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
-  if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast('غير مصرح', 'error'); return; }
+  if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast(MSG.unauthorized, 'error'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + page)?.classList.add('active');
@@ -2689,7 +2712,7 @@ window.go = function (page) {
 };
 window.switchTab = function (evt, tab) {
   const tabPerm = { token:'tabToken', activity:'tabActivity', branches:'tabBranches', drivers:'tabDrivers', users:'tabUsers', templates:'tabTemplates', backup:'tabBackup' };
-  if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast('غير مصرح', 'error'); return; }
+  if (tabPerm[tab] && !hasPerm(tabPerm[tab])) { toast(MSG.unauthorized, 'error'); return; }
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
   const btn = evt.target.closest('.tab-btn'); if (btn) btn.classList.add('active');
@@ -2716,24 +2739,22 @@ window.doLogin = async function () {
     const t = document.getElementById('loginKey').value.trim();
     if (t) { saveKey(t); updateKeyStatus(); }
   }
-  if (!getStoredKey()) { errEl.textContent = 'أدخل مفتاح الاتصال'; errEl.classList.add('show'); return; }
-  if (!u || !p) { errEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
-  if (location.protocol === 'file:') { errEl.textContent = 'افتح من الرابط المنشور (وليس بفتح الملف مباشرة)'; errEl.classList.add('show'); return; }
+  if (!getStoredKey()) { errEl.textContent = MSG.keyMissing; errEl.classList.add('show'); return; }
+  if (!u || !p) { errEl.textContent = 'يرجى إدخال اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
+  if (location.protocol === 'file:') { errEl.textContent = 'يرجى فتح النظام عبر الرابط الرسمي'; errEl.classList.add('show'); return; }
 
   btn.disabled = true;
   loadEl.textContent = 'جاري التحقق...';
   showLoading('جاري التحقق من البيانات...', 20);
   try {
-    setLoadingProgress(50, 'تحميل بيانات المستخدمين...');
+    setLoadingProgress(50, 'جاري التحميل...');
     await readAll();
     const meta = await readMeta();
     localMeta = meta;
     setLoadingProgress(80, 'جاري تسجيل الدخول...');
 
     if (!cache.users.length) {
-      const errs = readAll.lastErrors || [];
-      if (errs.length) errEl.textContent = 'تعذر تحميل البيانات:\n' + errs.join('\n');
-      else errEl.textContent = 'لم يتم العثور على مستخدمين.\nتأكد من وجود ملف data/users.json في المستودع.';
+      errEl.textContent = MSG.storageIssues;
       errEl.classList.add('show');
       btn.disabled = false; loadEl.textContent = ''; hideLoading();
       return;
@@ -2741,7 +2762,7 @@ window.doLogin = async function () {
 
     const found = cache.users.find(x => x.username === u && x.password === p);
     if (!found) {
-      errEl.textContent = 'بيانات غير صحيحة — تحقق من اسم المستخدم وكلمة المرور';
+      errEl.textContent = MSG.authFail;
       errEl.classList.add('show');
       btn.disabled = false; loadEl.textContent = ''; hideLoading();
       return;
@@ -2751,8 +2772,8 @@ window.doLogin = async function () {
 
     if (hasLegacyFiles && found.role === ROLE_OWNER) {
       hideLoading();
-      const ok = await dialog.confirm('سيتم تحديث طريقة حفظ البيانات الآن. متابعة؟', { title: 'تحديث', okText: 'الآن', cancelText: 'لاحقاً' });
-      if (ok) { try { showLoading('جاري التحديث...'); await persistKeys(DATA_KEYS); hideLoading(); hasLegacyFiles = false; toast('✅ تم', 'success'); } catch (e2) { hideLoading(); } }
+      const ok = await dialog.confirm('سيتم تحديث طريقة حفظ البيانات، هل تريد المتابعة؟', { title: 'تحديث', okText: 'الآن', cancelText: 'لاحقاً' });
+      if (ok) { try { showLoading('جاري التحديث...'); await persistKeys(DATA_KEYS); hideLoading(); hasLegacyFiles = false; toast('✅ تم بنجاح', 'success'); } catch (e2) { hideLoading(); } }
     }
     setLoadingProgress(100, 'تم الدخول');
     localStorage.setItem('oms_lastUser', u);
@@ -2762,7 +2783,7 @@ window.doLogin = async function () {
     hideLoading();
     startApp();
   } catch (e) {
-    errEl.textContent = (e.message || 'خطأ') + '\n\nتأكد من:\n- GITHUB_OWNER و GITHUB_REPO في أعلى الملف\n- صلاحيات المفتاح (repo)';
+    errEl.textContent = e.message || MSG.connFail;
     errEl.classList.add('show');
     hideLoading();
   }
@@ -2770,7 +2791,7 @@ window.doLogin = async function () {
 };
 
 window.logout = async function (silent = false) {
-  if (!silent) { const ok = await dialog.confirm('تسجيل الخروج؟', { title: 'خروج' }); if (!ok) return; }
+  if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
@@ -2781,7 +2802,7 @@ window.logout = async function (silent = false) {
   document.getElementById('loginPass').value = ''; document.getElementById('loginLoading').textContent = '';
   const adminSection = document.getElementById('adminTokenSection'); if (adminSection) adminSection.classList.remove('show');
   updateKeyStatus(); loadLastUser();
-  if (!silent) toast('تم الخروج', 'success');
+  if (!silent) toast('تم تسجيل الخروج بنجاح', 'success');
 };
 
 function loadLastUser() {
@@ -2810,7 +2831,7 @@ function startApp() {
    Order CRUD
    ============================================================== */
 window.addOrder = function () {
-  if (!hasPerm('addOrder')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('addOrder')) { toast(MSG.unauthorized, 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
   clearAllErrors('orderModal');
   document.getElementById('orderModalTitle').innerHTML = ico('plus', 20) + '<span>طلب جديد</span>';
@@ -2827,7 +2848,7 @@ window.addOrder = function () {
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
 window.editOrder = function (id) {
-  if (!hasPerm('editOrder')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('editOrder')) { toast(MSG.unauthorized, 'error'); return; }
   const o = cache.orders.find(x => x.id === id); if (!o) return;
   clearAllErrors('orderModal');
   document.getElementById('orderModalTitle').innerHTML = ico('edit', 20) + '<span>تعديل الطلب</span>';
@@ -2850,7 +2871,7 @@ window.editOrder = function (id) {
   setTimeout(() => document.getElementById('orderInvoice').focus(), 100);
 };
 window.editFromLog = function (id) {
-  if (!hasPerm('editLog')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('editLog')) { toast(MSG.unauthorized, 'error'); return; }
   const o = cache.log.find(x => x.id === id); if (!o) return;
   clearAllErrors('orderModal');
   document.getElementById('orderModalTitle').innerHTML = ico('edit', 20) + '<span>تعديل في السجل</span>';
@@ -2895,12 +2916,12 @@ function validateOrderForm() {
       if (!document.getElementById('orderLocation').value.trim() && matched.location) document.getElementById('orderLocation').value = matched.location;
     }
   }
-  if (!valid) { focusFirstError('orderModal'); toast('صحّح الحقول', 'error'); }
+  if (!valid) { focusFirstError('orderModal'); toast('يرجى تعبئة الحقول المطلوبة', 'error'); }
   return valid;
 }
 window.saveOrder = async function () {
   const now = Date.now();
-  if (now - lastSaveTime < SAVE_COOLDOWN) { const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000); toast(`انتظر ${wait} ثانية`, 'warning'); return; }
+  if (now - lastSaveTime < SAVE_COOLDOWN) { const wait = Math.ceil((SAVE_COOLDOWN - (now - lastSaveTime)) / 1000); toast(`يرجى الانتظار ${wait} ثانية`, 'warning'); return; }
   if (saveInProgress) { toast('جاري الحفظ...', 'info'); return; }
   if (!validateOrderForm()) return;
   const id = document.getElementById('orderId').value;
@@ -2926,7 +2947,7 @@ window.saveOrder = async function () {
   try {
     if (isLogEdit) {
       const idx = cache.log.findIndex(x => x.id === id);
-      if (idx === -1) { toast('غير موجود', 'error'); return; }
+      if (idx === -1) { toast('الطلب غير موجود', 'error'); return; }
       let approvalDate = cache.log[idx].approvalDate || '';
       if (data.status === 'جاهز' && !approvalDate) approvalDate = fmtDate();
       data.approvalDate = approvalDate;
@@ -2939,7 +2960,7 @@ window.saveOrder = async function () {
       await persistKeys(['log']);
       logActivity('edit-log', `تعديل في السجل: ${data.invoice}`, '', 'warning');
       closeModal('orderModal'); clearDraft(); renderLog();
-      toast('تم التحديث', 'success');
+      toast('تم التحديث بنجاح', 'success');
     } else {
       const existing = id ? cache.orders.find(x => x.id === id) : null;
       let approvalDate = document.getElementById('orderDate').value || (existing?.approvalDate || '');
@@ -2956,28 +2977,28 @@ window.saveOrder = async function () {
       }
       await persistKeys(['orders', 'activity']);
       closeModal('orderModal'); clearDraft(); renderEntry();
-      toast('تم الحفظ', 'success');
+      toast('تم الحفظ بنجاح', 'success');
     }
     lastSaveTime = Date.now();
   } catch (e) { toast(e.message, 'error'); }
   finally { saveInProgress = false; if (btn) { btn.disabled = false; btn.innerHTML = ico('save', 15) + '<span>حفظ</span><kbd>Ctrl+Enter</kbd>'; } }
 };
 window.deleteOrder = async function (id) {
-  if (!hasPerm('deleteOrder')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('deleteOrder')) { toast(MSG.unauthorized, 'error'); return; }
   const o = cache.orders.find(x => x.id === id);
   const ok = await dialog.danger(`حذف "${o?.invoice || ''}"؟`); if (!ok) return;
   cache.orders = cache.orders.filter(x => x.id !== id);
   if (selectedOrderId === id) selectedOrderId = null;
   logActivity('delete-order', `حذف: ${o?.invoice || ''}`, '', 'danger');
-  try { await persistKeys(['orders', 'activity']); renderEntry(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['orders', 'activity']); renderEntry(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteFromLog = async function (id) {
-  if (!hasPerm('deleteLog')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('deleteLog')) { toast(MSG.unauthorized, 'error'); return; }
   const o = cache.log.find(x => x.id === id); if (!o) return;
   const ok = await dialog.danger(`حذف "${o.invoice}" من السجل؟`); if (!ok) return;
   cache.log = cache.log.filter(x => x.id !== id);
   logActivity('delete-log', `حذف من السجل: ${o.invoice}`, '', 'danger');
-  try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -3041,53 +3062,53 @@ window.onDriverSelect = function () {
   if (phone) document.getElementById('orderDriverPhone').value = phone;
 };
 window.addDriver = async function () {
-  if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageDrivers')) { toast(MSG.unauthorized, 'error'); return; }
   const name = document.getElementById('newDriverName').value.trim();
   const phone = document.getElementById('newDriverPhone').value.trim();
   if (!name) { toast('اسم الموصل مطلوب', 'error'); return; }
-  if (cache.drivers.find(d => d.name === name)) { toast('موجود مسبقاً', 'error'); return; }
+  if (cache.drivers.find(d => d.name === name)) { toast('الاسم موجود مسبقاً', 'error'); return; }
   cache.drivers.push({ id: uid(), name, phone });
   logActivity('add-driver', `إضافة موصل: ${name}`, '', 'success');
-  try { await persistKeys(['drivers', 'activity']); document.getElementById('newDriverName').value = ''; document.getElementById('newDriverPhone').value = ''; renderDriversList(); loadDriversIntoSelects(); toast('تم الإضافة', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['drivers', 'activity']); document.getElementById('newDriverName').value = ''; document.getElementById('newDriverPhone').value = ''; renderDriversList(); loadDriversIntoSelects(); toast('تم الإضافة بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteDriver = async function (id) {
-  if (!hasPerm('manageDrivers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageDrivers')) { toast(MSG.unauthorized, 'error'); return; }
   const d = cache.drivers.find(x => x.id === id);
   const ok = await dialog.danger(`حذف "${d?.name || ''}"؟`); if (!ok) return;
   cache.drivers = cache.drivers.filter(x => x.id !== id);
   logActivity('delete-driver', `حذف موصل: ${d?.name || ''}`, '', 'danger');
-  try { await persistKeys(['drivers', 'activity']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['drivers', 'activity']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
    Branches
    ============================================================== */
 window.addBranch = async function () {
-  if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageBranches')) { toast(MSG.unauthorized, 'error'); return; }
   const name = document.getElementById('newBranchName').value.trim();
   if (!name) { toast('اسم الفرع مطلوب', 'error'); return; }
-  if (cache.branches.find(b => b.name === name)) { toast('موجود مسبقاً', 'error'); return; }
+  if (cache.branches.find(b => b.name === name)) { toast('الاسم موجود مسبقاً', 'error'); return; }
   cache.branches.push({ id: uid(), name });
   logActivity('add-branch', `إضافة فرع: ${name}`, '', 'success');
-  try { await persistKeys(['branches', 'activity']); document.getElementById('newBranchName').value = ''; renderBranchesList(); populateBranchSelects(); toast('تم الإضافة', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['branches', 'activity']); document.getElementById('newBranchName').value = ''; renderBranchesList(); populateBranchSelects(); toast('تم الإضافة بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteBranch = async function (id) {
-  if (!hasPerm('manageBranches')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageBranches')) { toast(MSG.unauthorized, 'error'); return; }
   const b = cache.branches.find(x => x.id === id); if (!b) return;
-  if (b.name === DEFAULT_BRANCH_NAME) { toast('لا يمكن حذف الافتراضي', 'error'); return; }
+  if (b.name === DEFAULT_BRANCH_NAME) { toast('لا يمكن حذف الفرع الافتراضي', 'error'); return; }
   const used = [...cache.orders, ...cache.ready, ...cache.log].some(o => (o.branch || DEFAULT_BRANCH_NAME) === b.name);
-  if (used) { toast('مستخدم في طلبات', 'error'); return; }
+  if (used) { toast('الفرع مستخدم في طلبات', 'error'); return; }
   const ok = await dialog.danger(`حذف "${b.name}"؟`); if (!ok) return;
   cache.branches = cache.branches.filter(x => x.id !== id);
   logActivity('delete-branch', `حذف فرع: ${b.name}`, '', 'danger');
-  try { await persistKeys(['branches', 'activity']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['branches', 'activity']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
    Transfers + Return
    ============================================================== */
 window.transferSingle = async function (id) {
-  if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.orders.find(x => x.id === id); if (!order) return;
   const ok = await dialog.confirm(`تحويل "${order.invoice}"؟`, { title: 'تحويل' }); if (!ok) return;
   try {
@@ -3097,14 +3118,14 @@ window.transferSingle = async function (id) {
     logActivity('transfer-single', `تحويل: ${order.invoice}`, '', 'success');
     await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
     addNotification('تحويل طلب', `تم تحويل ${order.invoice}`, 'success');
-    toast('تم التحويل', 'success');
+    toast('تم التحويل بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.bulkTransfer = async function () {
-  if (!hasPerm('bulkTransfer')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('bulkTransfer')) { toast(MSG.unauthorized, 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
-  if (!eligible.length) { toast('لا يوجد طلبات مستوفية', 'error'); return; }
-  const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'جماعي' }); if (!ok) return;
+  if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
+  const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'تحويل جماعي' }); if (!ok) return;
   try {
     eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
     cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
@@ -3112,13 +3133,13 @@ window.bulkTransfer = async function () {
     logActivity('bulk-transfer', `تحويل جماعي: ${eligible.length}`, '', 'success');
     await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
     addNotification('تحويل جماعي', `${eligible.length} طلب`, 'success');
-    toast(`تم تحويل ${eligible.length}`, 'success');
+    toast(`تم تحويل ${eligible.length} طلب بنجاح`, 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.moveReadyToLog = async function () {
-  if (!hasPerm('moveToLog')) { toast('غير مصرح', 'error'); return; }
-  if (!cache.ready.length) { toast('لا توجد طلبات', 'error'); return; }
-  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب؟`, { title: 'ترحيل' }); if (!ok) return;
+  if (!hasPerm('moveToLog')) { toast(MSG.unauthorized, 'error'); return; }
+  if (!cache.ready.length) { toast('لا توجد طلبات جاهزة', 'error'); return; }
+  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`, { title: 'ترحيل' }); if (!ok) return;
   try {
     const count = cache.ready.length;
     cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
@@ -3126,25 +3147,20 @@ window.moveReadyToLog = async function () {
     logActivity('move-log', `ترحيل ${count}`, '', 'success');
     await persistKeys(['ready', 'log', 'activity']); renderReady(); renderDashboard();
     addNotification('ترحيل', `${count} طلب`, 'success');
-    toast('تم الترحيل', 'success');
+    toast('تم الترحيل بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 
-/**
- * إرجاع طلب فردي من "الجاهزة" إلى "إدخال الطلبات"
- * يعيد الطلب إلى الطلبات النشطة مع الاحتفاظ ببياناته
- */
 window.returnReadyToEntry = async function (id) {
-  if (!hasPerm('returnSingle')) { toast('غير مصرح بالإرجاع', 'error'); return; }
+  if (!hasPerm('returnSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.ready.find(x => x.id === id);
   if (!order) { toast('الطلب غير موجود', 'error'); return; }
   const ok = await dialog.confirm(
-    `إرجاع الطلب "${order.invoice}" للعميل "${order.customer}" إلى صفحة إدخال الطلبات؟\nسيُحذف من قائمة الجاهزة ويعود إلى قائمة النشطة.`,
+    `إرجاع الطلب "${order.invoice}" للعميل "${order.customer}" إلى صفحة إدخال الطلبات؟\n\nسيُحذف من قائمة الجاهزة ويعود إلى قائمة النشطة.`,
     { title: 'إرجاع طلب', okText: 'إرجاع', type: 'warning', okClass: 'btn-warning' }
   );
   if (!ok) return;
   try {
-    // حذف بيانات التحويل من النسخة المُرجَعة
     const restored = { ...order };
     delete restored.transferredAt;
     delete restored.transferredBy;
@@ -3158,39 +3174,30 @@ window.returnReadyToEntry = async function (id) {
     await persistKeys(['orders', 'ready', 'activity']);
     renderReady(); renderDashboard();
     addNotification('إرجاع طلب', `تم إرجاع ${order.invoice} إلى الإدخال`, 'warning');
-    toast('تم الإرجاع', 'success');
+    toast('تم الإرجاع بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 
-/**
- * تغيير حالة الاستلام في السجل
- * - التحويل من 'لا' إلى 'تم' يتطلب تأكيداً باسم العميل
- * - بعد أن يصبح 'تم'، لا يمكن تغييره إلا من قِبَل المالك
- */
 window.changeReceiptStatus = async function (id, newStatus) {
   const o = cache.log.find(x => x.id === id);
   if (!o) { renderLog(); return; }
   const current = o.receiptStatus || RECEIPT_NOT_RECEIVED;
   const isOwner = currentUser?.role === ROLE_OWNER;
 
-  // حالة عدم التغيير
   if (current === newStatus) { renderLog(); return; }
 
-  // حالة محاولة تغيير 'تم' من غير المالك
   if (current === RECEIPT_RECEIVED && !isOwner) {
     toast('لا يمكن التعديل — تم الاستلام مسبقاً (للمالك فقط)', 'error');
     renderLog();
     return;
   }
 
-  // التحقق من الصلاحية (المالك دائماً مصرح)
   if (!isOwner && !hasPerm('editReceiptStatus')) {
-    toast('غير مصرح بتعديل حالة الاستلام', 'error');
+    toast(MSG.unauthorized, 'error');
     renderLog();
     return;
   }
 
-  // تأكيد التحويل إلى 'تم' — باسم العميل
   if (newStatus === RECEIPT_RECEIVED) {
     const ok = await dialog.confirm(
       `هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟\n\n⚠️ بعد التأكيد لا يمكن التراجع إلا من قِبَل المالك.`,
@@ -3199,7 +3206,6 @@ window.changeReceiptStatus = async function (id, newStatus) {
     if (!ok) { renderLog(); return; }
   }
 
-  // تأكيد التراجع من 'تم' إلى 'لا' (للمالك فقط)
   if (newStatus === RECEIPT_NOT_RECEIVED && current === RECEIPT_RECEIVED) {
     const ok = await dialog.confirm(
       `⚠️ إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟\n\nهذا الإجراء متاح للمالك فقط.`,
@@ -3232,7 +3238,6 @@ window.changeReceiptStatus = async function (id, newStatus) {
     );
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
   } catch (e) {
-    // إرجاع في حال فشل الحفظ
     o.receiptStatus = previous;
     toast(e.message, 'error');
     renderLog();
@@ -3352,11 +3357,11 @@ function buildPrintHTML(items, template, extra = {}) {
     </body></html>`;
 }
 window.printReady = function () {
-  if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
   const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
   let data = cache.ready;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
-  if (!data.length) { toast('لا توجد طلبات', 'error'); return; }
+  if (!data.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
   const win = window.open('', '_blank');
   win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
   win.document.close();
@@ -3364,9 +3369,9 @@ window.printReady = function () {
 };
 window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
 window.printLog = function () {
-  if (!hasPerm('print')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
   const data = getLogFilteredData();
-  if (!data.length) { toast('لا نتائج', 'error'); return; }
+  if (!data.length) { toast('لا توجد نتائج للطباعة', 'error'); return; }
   const fromVal = document.getElementById('filterLogFrom').value;
   const toVal = document.getElementById('filterLogTo').value;
   const win = window.open('', '_blank');
@@ -3399,11 +3404,11 @@ async function resizeImage(file, maxWidth = 1400) {
 }
 window.handleLogoUpload = async function (evt) {
   const file = evt.target.files[0]; if (!file) return;
-  if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; }
-  if (!file.type.startsWith('image/')) { toast('اختر صورة', 'error'); return; }
-  if (file.size > 5 * 1024 * 1024) { toast('حجم كبير', 'error'); return; }
-  try { toast('جاري المعالجة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم', 'success'); }
-  catch { toast('فشل', 'error'); }
+  if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; }
+  if (!file.type.startsWith('image/')) { toast('يرجى اختيار صورة', 'error'); return; }
+  if (file.size > 5 * 1024 * 1024) { toast('حجم الصورة كبير جداً', 'error'); return; }
+  try { toast('جاري المعالجة...', 'info'); templates.logo = await resizeImage(file, 1400); renderTemplates(); toast('تم بنجاح', 'success'); }
+  catch { toast('تعذر معالجة الصورة', 'error'); }
   evt.target.value = '';
 };
 window.removeLogo = function () { if (!hasPerm('editTemplates')) return; templates.logo = ''; renderTemplates(); toast('تم الحذف', 'info'); };
@@ -3484,14 +3489,14 @@ window.updateTemplate = function (key, field, value) {
   if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] };
   templates[key][field] = value;
 };
-window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ', 'success'); } catch (e) { toast(e.message, 'error'); } };
-window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast('غير مصرح', 'error'); return; } const ok = await dialog.confirm('استعادة القوالب؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة', 'info'); };
+window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); } };
+window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة بنجاح', 'info'); };
 
 /* ==============================================================
    Customers
    ============================================================== */
 window.openCustomerModal = function () {
-  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('customerModal');
   document.getElementById('custModalTitle').innerHTML = ico('user', 20) + '<span>عميل جديد</span>';
   document.getElementById('custId').value = '';
@@ -3500,7 +3505,7 @@ window.openCustomerModal = function () {
   setTimeout(() => document.getElementById('custCode').focus(), 100);
 };
 window.editCustomer = function (id) {
-  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   const c = cache.customers.find(x => x.id === id); if (!c) return;
   clearAllErrors('customerModal');
   document.getElementById('custModalTitle').innerHTML = ico('edit', 20) + '<span>تعديل عميل</span>';
@@ -3518,12 +3523,12 @@ function validateCustomerForm() {
   const name = document.getElementById('custName').value.trim();
   const phone = document.getElementById('custPhone').value.trim();
   if (!name) { setFieldError('custName', 'الاسم مطلوب'); valid = false; }
-  if (phone && !/^[0-9+\-\s]{6,20}$/.test(phone)) { setFieldError('custPhone', 'رقم غير صالح'); valid = false; }
-  if (!valid) { focusFirstError('customerModal'); toast('صحّح الحقول', 'error'); }
+  if (phone && !/^[0-9+\-\s]{6,20}$/.test(phone)) { setFieldError('custPhone', 'رقم الهاتف غير صالح'); valid = false; }
+  if (!valid) { focusFirstError('customerModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
   return valid;
 }
 window.saveCustomer = async function () {
-  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   if (!validateCustomerForm()) return;
   const id = document.getElementById('custId').value;
   const custData = { id: id || uid(), code: document.getElementById('custCode').value.trim(), name: document.getElementById('custName').value.trim(), location: document.getElementById('custLocation').value.trim(), phone: document.getElementById('custPhone').value.trim() };
@@ -3538,23 +3543,23 @@ window.saveCustomer = async function () {
       document.getElementById('orderCustomerPhone').value = custData.phone || '';
       document.getElementById('orderLocation').value = custData.location;
     }
-    toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
+    toast(id ? 'تم التعديل بنجاح' : 'تم الإضافة بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteCustomer = async function (id) {
-  if (!hasPerm('manageCustomers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   const c = cache.customers.find(x => x.id === id);
   const ok = await dialog.danger(`حذف "${c?.name || ''}"؟`); if (!ok) return;
   cache.customers = cache.customers.filter(x => x.id !== id);
   logActivity('delete-customer', `حذف: ${c?.name || ''}`, '', 'danger');
-  try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
    Users
    ============================================================== */
 window.openUserModal = function () {
-  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('userModal');
   document.getElementById('userModalTitle').innerHTML = ico('plus', 20) + '<span>مستخدم جديد</span>';
   document.getElementById('userId').value = '';
@@ -3562,7 +3567,7 @@ window.openUserModal = function () {
   document.getElementById('userPass').value = '';
   buildRoleSelect();
   const allowedRoles = getAllowedRolesToCreate();
-  if (!allowedRoles.length) { toast('غير مصرح بإنشاء مستخدمين', 'error'); closeModal('userModal'); return; }
+  if (!allowedRoles.length) { toast('لا تملك صلاحية إنشاء مستخدمين', 'error'); closeModal('userModal'); return; }
   document.getElementById('userRole').value = allowedRoles[0];
   rebuildTempPermsForRole(allowedRoles[0]);
   renderPermissionsGrid(); onUserRoleChange();
@@ -3570,7 +3575,7 @@ window.openUserModal = function () {
   setTimeout(() => document.getElementById('userName').focus(), 100);
 };
 window.editUser = function (id) {
-  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   const u = cache.users.find(x => x.id === id); if (!u) return;
   if (!canManageUser(u)) { toast('لا يمكنك إدارة هذا المستخدم', 'error'); return; }
   clearAllErrors('userModal');
@@ -3715,15 +3720,15 @@ function validateUserForm() {
   const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
   const password = document.getElementById('userPass').value.trim();
-  if (!username) { setFieldError('userName', 'الاسم مطلوب'); valid = false; }
-  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'موجود'); valid = false; }
+  if (!username) { setFieldError('userName', 'اسم المستخدم مطلوب'); valid = false; }
+  else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'الاسم مستخدم مسبقاً'); valid = false; }
   if (!password) { setFieldError('userPass', 'كلمة المرور مطلوبة'); valid = false; }
-  else if (password.length < 4) { setFieldError('userPass', '4+'); valid = false; }
-  if (!valid) { focusFirstError('userModal'); toast('صحّح', 'error'); }
+  else if (password.length < 4) { setFieldError('userPass', 'كلمة المرور يجب أن تكون 4 أحرف على الأقل'); valid = false; }
+  if (!valid) { focusFirstError('userModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
   return valid;
 }
 window.saveUser = async function () {
-  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   if (!validateUserForm()) return;
   const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
@@ -3732,7 +3737,7 @@ window.saveUser = async function () {
 
   if (id) {
     const existing = cache.users.find(u => u.id === id);
-    if (!existing) { toast('غير موجود', 'error'); return; }
+    if (!existing) { toast('المستخدم غير موجود', 'error'); return; }
     if (!canManageUser(existing)) { toast('لا يمكنك تعديل هذا المستخدم', 'error'); return; }
     if (existing.role === ROLE_OWNER && role !== ROLE_OWNER) {
       const ownersCount = cache.users.filter(u => u.role === ROLE_OWNER).length;
@@ -3740,7 +3745,7 @@ window.saveUser = async function () {
     }
   } else {
     const allowedRoles = getAllowedRolesToCreate();
-    if (!allowedRoles.includes(role)) { toast('غير مصرح بإنشاء هذا الدور', 'error'); return; }
+    if (!allowedRoles.includes(role)) { toast('لا يمكنك إنشاء هذا الدور', 'error'); return; }
   }
 
   let permissions = {};
@@ -3771,18 +3776,18 @@ window.saveUser = async function () {
     await persistKeys(['users', 'activity']);
     if (currentUser.username === username) { currentUser = normalizeUser(userData); applyPermissionsUI(); }
     closeModal('userModal'); renderUsers();
-    toast(id ? 'تم التعديل' : 'تم الإضافة', 'success');
+    toast(id ? 'تم التعديل بنجاح' : 'تم الإضافة بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 window.deleteUser = async function (id) {
-  if (!hasPerm('manageUsers')) { toast('غير مصرح', 'error'); return; }
+  if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   const u = cache.users.find(x => x.id === id); if (!u) return;
   if (!canManageUser(u)) { toast('لا يمكنك حذف هذا المستخدم', 'error'); return; }
   if (u.role === ROLE_OWNER && cache.users.filter(x => x.role === ROLE_OWNER).length <= 1) { toast('لا يمكن حذف المالك الوحيد', 'error'); return; }
   const ok = await dialog.danger(`حذف "${u.username}"؟`); if (!ok) return;
   cache.users = cache.users.filter(x => x.id !== id);
   logActivity('delete-user', `حذف: ${u.username}`, '', 'danger');
-  try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم', 'success'); } catch (e) { toast(e.message, 'error'); }
+  try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
 /* ==============================================================
@@ -3795,7 +3800,7 @@ function downloadBlob(blob, filename) {
 }
 window.exportBackup = async function () {
   try {
-    const ok = await ensureJSZip(); if (!ok) { toast('فشل ZIP', 'error'); return; }
+    const ok = await ensureJSZip(); if (!ok) { toast('تعذر تجهيز ملف النسخ الاحتياطي', 'error'); return; }
     showLoading('جاري التجهيز...');
     const stamp = new Date();
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
@@ -3810,19 +3815,19 @@ window.exportBackup = async function () {
     downloadBlob(blob, `backup_${dateStr}.zip`);
     hideLoading();
     logActivity('backup', `تصدير ${DATA_KEYS.length + 1} ملف`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
-    toast(`تم (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
-  } catch (e) { hideLoading(); toast('فشل: ' + e.message, 'error'); }
+    toast(`تم التصدير بنجاح (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
+  } catch (e) { hideLoading(); toast('تعذر تجهيز النسخة الاحتياطية', 'error'); }
 };
 window.resetAll = async function () {
-  if (!hasPerm('reset')) { toast('غير مصرح', 'error'); return; }
-  const ok = await dialog.danger('حذف جميع الطلبات؟'); if (!ok) return;
-  const ok2 = await dialog.confirm('تأكيد؟', { type: 'warning' }); if (!ok2) return;
+  if (!hasPerm('reset')) { toast(MSG.unauthorized, 'error'); return; }
+  const ok = await dialog.danger('سيتم حذف جميع الطلبات نهائياً، هل تريد المتابعة؟'); if (!ok) return;
+  const ok2 = await dialog.confirm('هل أنت متأكد تماماً؟ لا يمكن التراجع.', { type: 'warning' }); if (!ok2) return;
   cache.orders = []; cache.ready = []; cache.log = [];
-  logActivity('reset', 'تصفير', '', 'danger');
-  try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم', 'success'); } catch (e) { toast(e.message, 'error'); }
+  logActivity('reset', 'تصفير النظام', '', 'danger');
+  try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم التصفير بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 window.exportLogCSV = function () {
-  const data = getLogFilteredData(); if (!data.length) { toast('فارغ', 'error'); return; }
+  const data = getLogFilteredData(); if (!data.length) { toast('لا توجد بيانات للتصدير', 'error'); return; }
   const headers = ['رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','الحالة','تاريخ الاعتماد','الدفع','الموصل','هاتف الموصل','ملاحظات','آخر تعديل','تاريخ الترحيل','حالة الاستلام','تاريخ تأكيد الاستلام','المستخدم'];
   const rows = data.map(o => [
     o.invoice, o.branch || DEFAULT_BRANCH_NAME, o.customer, o.customerPhone || '', o.location,
@@ -3833,7 +3838,7 @@ window.exportLogCSV = function () {
   const csv = [headers, ...rows].map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `log_${new Date().toISOString().slice(0,10)}.csv`; a.click();
-  toast('تم CSV', 'success');
+  toast('تم تصدير CSV بنجاح', 'success');
 };
 
 /* ==============================================================
@@ -3891,7 +3896,7 @@ window.addEventListener('keydown', e => {
       if (c === 'Digit4' || c === 'Numpad4') { e.preventDefault(); if (hasPerm('accessLog')) go('log'); return; }
       if (c === 'Digit5' || c === 'Numpad5') { e.preventDefault(); if (hasPerm('accessCustomers')) go('customers'); return; }
       if (c === 'KeyN') { e.preventDefault(); if (hasPerm('addOrder')) addOrder(); return; }
-      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast('غير مصرح', 'error'); return; } if (!selectedOrderId) { toast('اختر طلباً', 'warning'); return; } transferSingle(selectedOrderId); return; }
+      if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; } if (!selectedOrderId) { toast('يرجى اختيار طلب أولاً', 'warning'); return; } transferSingle(selectedOrderId); return; }
       if (c === 'KeyB' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); bulkTransfer(); return; }
       if (c === 'KeyM' && document.getElementById('page-ready').classList.contains('active')) { e.preventDefault(); moveReadyToLog(); return; }
       if (c === 'KeyD') { e.preventDefault(); toggleTheme(); return; }
@@ -3923,10 +3928,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginKey').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
-  ['adminUser','adminPass','adminNewKey'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); adminChangeKey(); } });
-  });
+  document.getElementById('adminNewKey').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); adminChangeKey(); } });
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('data:text/javascript,self.addEventListener("fetch",()=>{});').catch(()=>{});
   }
