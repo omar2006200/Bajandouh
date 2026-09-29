@@ -1,1 +1,45 @@
-DAT:v3:FFkdPbSopEV9Bi6ozrlbfQOR/5a4eGc2lvae4gI+fIcuPlg/9YKmVH8KBuGKu0F/UYW9x+MdNXKU7Jy1QGk93XpxERfvgqRFf1Rjrc+5W30DPH9sMqvNzgUPNrV7ey6UY1kdPbSopEV9Bi6ozrlbfQOJu9jnHXZi3+ffpkM0LMVFcx0974DxFjhUYqDH/kNnAcb4lrh4ZzaW9p7nECh9niAhWT/1gqZTaxA644aRQX0BxOzG+x4iNIz2nk/Ig6kx4Iq3P+OopEV9Bi6xz+kMNFKXp9v6AWUslq22t1F7LslvcVx+rMf3FhlHf6nI9AAvRcb0lOAAMnOa3Jy3UXsuyW0yXn6q0fcgM1J+uIihQSlTkauYnlJnNpb2nLUQOG2MPCBveK7G/UdnBniz3/5NVwHE7pS0UmV31bXZ5AIXYY5taR1pvdfhSVcGLOGKu0F/QIet0ecBBGPFotP6FCl9y3VzSW+6x6hvfQYs4Yq7QzxCh6vH5yEiYsK/0vACeTTJOyFIeOOopEV9BizhiPoFOW6WqtHmUH02wqTJ8l1RLslvcx097cfgDClpfqXP6UNnAZC8wfFeTTaW9py3UXlqjCM2SXiA0OAALwQ24d7pFDgN7u6UtFJnNpSizvYfKGiMPQBUc6jO4UdnBniz3/5NVwHE7pS0UmV0w7rXwwM6YJopNk8/9YLwFyhDIMuKu0F9AcTsxOYbKWKU7JzjAy5rxUVzHT3vgqRHMEl6pP70LTJGxvSU4AAyc5rcnLdRey7JbTZZdLvu6wJ/HCyny/cSOA3u7pS0Umc2lLLZ+xQva6UgNB8n78TlCS5DIMuKu0F9AcTswPUQE3nds9K1S3toiCMgWDHFgqRFfQYs4976AxxCkKfC/QY+NIz22vYdKGvFRXMdPe+CpEcpR26D2PoPPkmBvZauUiF32qXZu3t7Lslvcx0/u8PmIS9PeqTY6ENnAZC8wfFeTTaW9py3UXl6iC0GTni90aZffVJ+tM+3a30BxO6UtFAzd9SC2foBN2+dKiAfJ+/E5QkuQyDLirtBfQHE7MD1EAV31b3J51NhLo8uP05446ikRX0GLOGI9gAzQIOr9+EBM3nbs87kU2EunT0mWDHFgqRFfQYs48f6DzxGgYrG/QQiZMX0hrcFKXuMY1kdPe+CpEV/S22vy/wEH1OFoNf8FzQ0jPba9h0oa8VFcx0974KkRzBHYqDN/jQuRJa9lq5SIXfapdm7e3suyW9zHT+qxu0RCUNhscb6FThSxvSU8hMrZdP6trdRey7Jb3FLdKrVxQYpT3qo3uJDZwGCr9jnF2sclvact1F7LJsqIFhp7ZikAzxKf6Sgu0F9AZnElLQPTUs=
+[
+  {
+    "id": "u1",
+    "username": "1",
+    "password": "12345",
+    "role": "رئيسي"
+  },
+  {
+    "id": "mulso1ti1c12o",
+    "username": "6",
+    "password": "6666",
+    "role": "عادي",
+    "permissions": {
+      "accessDashboard": true,
+      "accessEntry": true,
+      "accessReady": true,
+      "accessLog": true,
+      "accessCustomers": true,
+      "accessSettings": true,
+      "addOrder": true,
+      "editOrder": true,
+      "deleteOrder": true,
+      "transferSingle": true,
+      "bulkTransfer": true,
+      "print": true,
+      "moveToLog": true,
+      "editLog": false,
+      "deleteLog": false,
+      "tabToken": false,
+      "tabActivity": false,
+      "tabBranches": false,
+      "tabDrivers": true,
+      "tabUsers": true,
+      "tabTemplates": false,
+      "tabBackup": false,
+      "manageCustomers": true,
+      "manageDrivers": true,
+      "manageBranches": false,
+      "manageUsers": false,
+      "editTemplates": false,
+      "viewActivity": false,
+      "reset": false
+    }
+  }
+]
