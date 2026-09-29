@@ -1337,13 +1337,9 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
         <span id="adminHeaderIcon"></span>
         <span>تحديث مفتاح الاتصال</span>
       </div>
-      <div class="admin-warning">ℹ️ أدخل المفتاح الجديد مباشرة — لا تحتاج للمفتاح القديم.</div>
-      <label>اسم المستخدم (مدير)</label>
-      <input id="adminUser" type="text" placeholder="اسم المستخدم الرئيسي" autocomplete="username">
-      <label>كلمة المرور</label>
-      <input id="adminPass" type="password" placeholder="••••••" autocomplete="current-password">
+      <div class="admin-warning">ℹ️ أدخل مفتاح GitHub الجديد مباشرة. لا تحتاج إلى اسم مستخدم أو كلمة مرور أو المفتاح القديم.</div>
       <label>مفتاح الاتصال الجديد</label>
-      <input id="adminNewKey" type="password" placeholder="أدخل المفتاح الجديد" autocomplete="off">
+      <input id="adminNewKey" type="password" placeholder="أدخل مفتاح GitHub الجديد" autocomplete="off">
       <button class="primary" id="adminChangeBtn" onclick="adminChangeKey()" style="margin-top:16px;">
         <span id="adminBtnIcon"></span>
         <span>تحديث المفتاح الآن</span>
@@ -2085,39 +2081,50 @@ function changeKeyModal() {
   openModal('keyModal');
   setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
 }
-async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
-  if (!adminUser || !adminPass) { errorEl.textContent = 'أدخل اسم المستخدم وكلمة المرور'; errorEl.classList.add('show'); return false; }
+async function performKeyChange(newKey, errorEl, btn) {
   if (!newKey) { errorEl.textContent = 'أدخل مفتاح الاتصال الجديد'; errorEl.classList.add('show'); return false; }
   if (newKey.length < 20) { errorEl.textContent = 'المفتاح الجديد قصير جداً'; errorEl.classList.add('show'); return false; }
   const oldKey = getStoredKey();
-  if (!oldKey) { errorEl.textContent = 'لا يوجد مفتاح حالي'; errorEl.classList.add('show'); return false; }
   if (btn) btn.disabled = true;
   try {
-    showLoading('جاري التحقق...');
-    await readAll(); localMeta = await readMeta();
-    const found = cache.users.find(x => x.username === adminUser && x.password === adminPass);
-    if (!found) throw new Error('❌ بيانات الدخول غير صحيحة');
-    if (found.role !== 'رئيسي') throw new Error('❌ للمدير فقط');
-    showLoading('جاري اختبار المفتاح...');
+    showLoading('جاري اختبار المفتاح الجديد...');
+
+    // نختبر المفتاح الجديد مباشرة مع GitHub، بدون قراءة المستودع بالمفتاح القديم
+    // وبدون طلب اسم مستخدم أو كلمة مرور التطبيق.
     const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
-    const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
+    const testRes = await fetch(testUrl, {
+      headers: {
+        'Authorization': `Bearer ${newKey}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+
     if (!testRes.ok) {
-      if (testRes.status === 401) throw new Error('المفتاح الجديد غير صالح');
-      if (testRes.status === 403) throw new Error('لا يملك الصلاحيات');
-      throw new Error('فشل الاتصال');
+      if (testRes.status === 401) throw new Error('المفتاح الجديد غير صالح أو منتهي');
+      if (testRes.status === 403) throw new Error('المفتاح الجديد لا يملك الصلاحيات المطلوبة للمستودع');
+      if (testRes.status === 404) throw new Error('المستودع أو ملف البيانات غير موجود، أو لا يملك المفتاح صلاحية الوصول');
+      throw new Error(`فشل الاتصال بـ GitHub (رمز ${testRes.status})`);
     }
+
+    // لا نحفظ المفتاح إلا بعد نجاح اختباره.
     saveKey(newKey);
     SHAs = {}; ETags = {}; localMeta = null;
+
+    // إعادة تحميل البيانات بالمفتاح الجديد للتأكد من أن القراءة تعمل فعلاً.
     await readAll();
+
     hideLoading();
-    logActivity('key-change', 'تحديث مفتاح الاتصال', `بواسطة ${adminUser}`, 'success');
-    toast('✅ تم التحديث', 'success');
+    logActivity('key-change', 'تحديث مفتاح الاتصال', 'تحديث مباشر للمفتاح', 'success');
+    toast('✅ تم تحديث المفتاح بنجاح', 'success');
     updateKeyStatus(); updateCurrentKeyInfo();
     return true;
   } catch (e) {
+    // إذا فشل التحميل بالمفتاح الجديد، نعيد المفتاح السابق إن كان موجوداً.
     if (oldKey) saveKey(oldKey);
+    SHAs = {}; ETags = {}; localMeta = null;
     hideLoading();
-    errorEl.textContent = '❌ ' + e.message;
+    errorEl.textContent = '❌ ' + (e.message || 'فشل تحديث المفتاح');
     errorEl.classList.add('show');
     return false;
   } finally { if (btn) btn.disabled = false; }
@@ -2125,19 +2132,15 @@ async function performKeyChange(newKey, adminUser, adminPass, errorEl, btn) {
 window.toggleAdminPanel = function() {
   const panel = document.getElementById('adminTokenSection');
   panel.classList.toggle('show');
-  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminUser').focus(), 100);
+  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminNewKey').focus(), 100);
 };
 window.adminChangeKey = async function() {
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value;
   const newKey = document.getElementById('adminNewKey').value.trim();
   const errEl = document.getElementById('adminError');
   const btn = document.getElementById('adminChangeBtn');
   errEl.classList.remove('show'); errEl.textContent = '';
-  const ok = await performKeyChange(newKey, u, p, errEl, btn);
+  const ok = await performKeyChange(newKey, errEl, btn);
   if (ok) {
-    document.getElementById('adminUser').value = '';
-    document.getElementById('adminPass').value = '';
     document.getElementById('adminNewKey').value = '';
     document.getElementById('adminTokenSection').classList.remove('show');
     await dialog.alert('✅ تم تحديث المفتاح!', { type: 'success', title: 'تم' });
@@ -2148,7 +2151,7 @@ async function saveNewKey() {
   const errEl = document.createElement('div');
   if (!currentUser || currentUser.role !== 'رئيسي') { toast('غير مصرح', 'error'); return; }
   errEl.className = 'login-error';
-  const ok = await performKeyChange(newKey, currentUser.username, currentUser.password, errEl, null);
+  const ok = await performKeyChange(newKey, errEl, null);
   if (ok) closeModal('keyModal');
   else toast(errEl.textContent || 'فشل', 'error');
 }
@@ -4164,9 +4167,9 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
   document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
   document.getElementById('loginKey').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginUser').focus(); });
-  ['adminUser','adminPass','adminNewKey'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); adminChangeKey(); } });
+  const adminKeyEl = document.getElementById('adminNewKey');
+  if (adminKeyEl) adminKeyEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); adminChangeKey(); }
   });
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('data:text/javascript,self.addEventListener("fetch",()=>{});').catch(()=>{});
