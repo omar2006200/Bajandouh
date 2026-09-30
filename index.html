@@ -17,7 +17,6 @@
 input,textarea,select{-webkit-user-select:text;user-select:text}
 img{-webkit-user-drag:none;pointer-events:none}
 html,body{height:100%}
-
 :root{
   --brand-50:#eef4ff;--brand-100:#dce7ff;--brand-200:#bfd4ff;--brand-300:#93b4fe;--brand-400:#6890fa;
   --brand-500:#4266e8;--brand-600:#2d4cd9;--brand-700:#233cb8;--brand-800:#1d3193;--brand-900:#1a2870;--brand-950:#0f1747;
@@ -66,7 +65,6 @@ html,body{height:100%}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Tahoma,Arial,sans-serif;font-size:14px;line-height:1.5;transition:background .3s ease,color .3s ease;-webkit-font-smoothing:antialiased}
 [data-theme="light"] body{background:radial-gradient(circle at 0% 0%,rgba(66,102,232,.06),transparent 45%),radial-gradient(circle at 100% 100%,rgba(139,92,246,.05),transparent 45%),var(--bg);background-attachment:fixed}
 .ico{display:inline-block;flex-shrink:0;vertical-align:middle;pointer-events:none;outline:none}
-
 .btn{height:var(--btn-h);padding:0 16px;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:7px;letter-spacing:.2px;white-space:nowrap;flex-wrap:nowrap;font-family:inherit;line-height:1;text-decoration:none;position:relative;overflow:hidden}
 .btn>*{display:inline-flex;align-items:center;line-height:1}
 .btn .ico{width:15px;height:15px}
@@ -102,7 +100,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;f
 kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'SF Mono','Consolas',monospace;font-weight:600;display:inline-block;line-height:1.3;pointer-events:none;border:1px solid rgba(15,23,42,.06)}
 [data-theme="dark"] kbd{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.06);color:var(--text)}
 .btn-warning kbd,.btn-primary kbd,.btn-success kbd,.btn-danger kbd,.btn-purple kbd,.btn-gray kbd{background:rgba(255,255,255,.22);color:#fff;border-color:rgba(255,255,255,.18)}
-
 .rate-widget{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:14px;font-size:10.5px;font-weight:600;cursor:help;position:relative;min-width:135px;transition:var(--transition);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .rate-widget:hover{background:rgba(255,255,255,.2)}
 .rate-widget .rate-ico{display:inline-flex;align-items:center;justify-content:center;opacity:.9}
@@ -113,7 +110,6 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .rate-widget .rate-text{font-family:'SF Mono','Consolas',monospace;letter-spacing:.3px;white-space:nowrap;font-size:10px;opacity:.95;direction:ltr}
 @media(max-width:1000px){.rate-widget .rate-text{display:none}.rate-widget{min-width:auto;padding:5px 8px}}
 @media(max-width:700px){.rate-widget .rate-bar{width:36px}.rate-widget{min-width:auto;padding:4px 7px;font-size:9.5px}}
-
 .col-toggles{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
 .col-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;background:var(--bg);border:1.5px solid var(--border);cursor:pointer;font-size:11.5px;font-weight:600;transition:var(--transition);color:var(--text-muted);font-family:inherit;user-select:none;line-height:1}
 .col-chip:hover{border-color:var(--brand-500);background:var(--hover-bg);color:var(--text);transform:translateY(-1px)}
@@ -130,9 +126,8 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .col-toggles-actions button{padding:5px 11px;font-size:11px;border-radius:14px;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);cursor:pointer;font-family:inherit;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
 .col-toggles-actions button:hover{border-color:var(--brand-500);color:var(--brand-600);background:var(--hover-bg)}
 .logo-size-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:6px}
-
-/* Stats filter bar */
 .stats-filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px;background:var(--card-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--card-border);margin-bottom:16px;border-right:3px solid var(--brand-500)}
+.stats-filter-bar .stats-filter-label{font-size:12px;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;gap:5px;margin-left:4px}
 .stats-filter-btn{padding:8px 16px;border:1.5px solid var(--border);background:var(--bg);color:var(--text-secondary);border-radius:20px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;transition:var(--transition);display:inline-flex;align-items:center;gap:5px}
 .stats-filter-btn:hover{border-color:var(--brand-400);color:var(--brand-600);transform:translateY(-1px)}
 .stats-filter-btn.active{background:linear-gradient(180deg,var(--brand-500),var(--brand-700));color:#fff;border-color:var(--brand-700);box-shadow:0 4px 10px rgba(66,102,232,.3)}
@@ -140,7 +135,6 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .stats-custom-range.show{display:inline-flex}
 .stats-custom-range label{font-size:12px;color:var(--text-muted);font-weight:600}
 .stats-custom-range input[type="date"]{width:auto;padding:6px 10px;font-size:12.5px;height:auto}
-
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(7,11,21,.85);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #loadingOverlay.show{display:flex}
 .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
@@ -148,7 +142,6 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .loading-text{font-size:15px;font-weight:500;letter-spacing:.3px;text-align:center;max-width:80vw}
 .login-loading-progress{width:220px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden}
 .login-loading-progress .bar{height:100%;background:linear-gradient(90deg,var(--brand-300),var(--brand-500));width:0%;transition:width .3s ease;border-radius:2px}
-
 #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;position:relative;overflow:hidden}
 [data-theme="light"] #loginScreen{background:radial-gradient(circle at 15% 15%,rgba(104,144,250,.35),transparent 45%),radial-gradient(circle at 85% 85%,rgba(167,139,250,.3),transparent 45%),radial-gradient(circle at 50% 50%,rgba(20,184,166,.12),transparent 60%),linear-gradient(135deg,#dbe7ff 0%,#eef4ff 45%,#f2edfe 100%)}
 [data-theme="dark"] #loginScreen{background:radial-gradient(circle at 15% 15%,rgba(66,102,232,.4),transparent 45%),radial-gradient(circle at 85% 85%,rgba(124,58,237,.35),transparent 45%),radial-gradient(circle at 50% 50%,rgba(20,184,166,.12),transparent 60%),linear-gradient(135deg,#060810 0%,#0d1422 45%,#1a2870 100%)}
@@ -189,7 +182,6 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .login-loading{color:var(--brand-600);font-size:12px;margin-top:8px;text-align:center}
 [data-theme="dark"] .login-loading{color:var(--brand-400)}
-
 #app{display:none}
 header{color:#fff;padding:0 22px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;height:60px}
 [data-theme="light"] header{background:linear-gradient(135deg,#4266e8 0%,#6890fa 55%,#93b4fe 100%);box-shadow:0 3px 20px rgba(66,102,232,.3),inset 0 1px 0 rgba(255,255,255,.25);border-bottom:1px solid rgba(255,255,255,.15)}
@@ -210,7 +202,6 @@ header h1{font-size:16px;font-weight:600;letter-spacing:.2px}
 .status-dot.sync{background:#93b4fe;animation:pulseBlue 1s infinite}
 @keyframes pulseGreen{0%,100%{box-shadow:0 0 8px #4be0a8}50%{box-shadow:0 0 16px #4be0a8}}
 @keyframes pulseBlue{0%,100%{opacity:1}50%{opacity:.3}}
-
 nav{background:var(--card-bg);padding:0 22px;display:flex;gap:2px;overflow-x:auto;position:sticky;top:60px;z-index:99;border-bottom:1px solid var(--border)}
 [data-theme="light"] nav{box-shadow:0 2px 12px rgba(31,58,123,.06)}
 [data-theme="dark"] nav{box-shadow:0 1px 3px rgba(0,0,0,.5)}
@@ -222,7 +213,6 @@ nav button:hover{color:var(--brand-600);background:var(--hover-bg)}
 nav button.active{color:var(--brand-700);border-bottom-color:var(--brand-600);font-weight:700;background:var(--brand-50)}
 [data-theme="dark"] nav button.active{color:var(--brand-400);border-bottom-color:var(--brand-400)}
 main{padding:22px;max-width:1700px;margin:0 auto}
-
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:22px}
 .dash-card{background:var(--card-bg);padding:22px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);cursor:pointer;transition:var(--transition);border:1px solid var(--card-border);position:relative;overflow:hidden}
 .dash-card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--brand-400),var(--brand-600));transition:width .25s}
@@ -244,11 +234,9 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .dash-card.orange::before{background:linear-gradient(180deg,var(--orange-500),var(--orange-600))}
 .dash-card.orange .icon{background:linear-gradient(135deg,var(--orange-50),rgba(234,88,12,.2));color:var(--orange-600);border-color:rgba(234,88,12,.2)}
 [data-theme="dark"] .dash-card.orange .icon{color:#fb923c;border-color:rgba(234,88,12,.28)}
-
 .section-title-dash{color:var(--text);font-size:15px;font-weight:700;margin:22px 0 12px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .section-title-dash .ico{width:17px;height:17px;color:var(--brand-600)}
 [data-theme="dark"] .section-title-dash .ico{color:var(--brand-400)}
-
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
 .stat{background:var(--card-bg);padding:18px 16px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);transition:var(--transition);position:relative;overflow:hidden;border:1px solid var(--card-border);border-right:3px solid var(--brand-500)}
 [data-theme="light"] .stat{background:linear-gradient(180deg,#ffffff 0%,#fafbff 100%)}
@@ -292,7 +280,6 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .stat .progress-bar .fill.green{background:linear-gradient(90deg,var(--success-500),#4be0a8)}
 .stat .progress-bar .fill.red{background:linear-gradient(90deg,var(--danger-500),#f9717f)}
 .stat .progress-bar .fill.purple{background:linear-gradient(90deg,var(--violet-500),#a78bfa)}
-
 .analytics-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;margin-bottom:22px}
 .analytics-row.cols-2{grid-template-columns:1fr 1fr}
 @media(max-width:1200px){.analytics-row{grid-template-columns:1fr 1fr}}
@@ -315,7 +302,6 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .legend-item .name{flex:1;color:var(--text-secondary)}
 .legend-item .val{font-weight:700;color:var(--text)}
 .legend-item .pct{font-size:10.5px;color:var(--text-muted);font-weight:500;margin-right:6px}
-
 .top-list{display:flex;flex-direction:column;gap:7px}
 .top-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg);font-size:12px;transition:var(--transition);border:1px solid transparent}
 .top-item:hover{background:var(--hover-bg);border-color:var(--border)}
@@ -330,13 +316,11 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 [data-theme="dark"] .top-item .bar-mini{background:rgba(255,255,255,.08)}
 .top-item .bar-mini .fill{height:100%;background:linear-gradient(90deg,var(--brand-500),var(--brand-400));border-radius:3px;transition:width .5s ease}
 .empty-top{color:var(--text-muted);text-align:center;padding:18px 0;font-size:12px}
-
 .sparkline{background:var(--card-bg);padding:18px 20px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);margin-bottom:22px;border:1px solid var(--card-border)}
 [data-theme="light"] .sparkline{background:linear-gradient(180deg,#ffffff 0%,#fafbff 100%)}
 .sparkline h4{color:var(--text);font-size:13.5px;margin-bottom:14px;font-weight:700;display:flex!important;align-items:center;gap:8px}
 .sparkline h4 .ico{width:15px;height:15px;color:var(--brand-600)}
 .sparkline svg{width:100%;height:100px}
-
 .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:6px}
 .metric-box{background:var(--bg);border-radius:var(--radius-md);padding:14px 12px;text-align:center;border:1px solid var(--border);transition:var(--transition)}
 .metric-box:hover{border-color:var(--brand-300);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
@@ -350,7 +334,6 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 [data-theme="dark"] .metric-box .mv.red{color:#f87171}
 [data-theme="dark"] .metric-box .mv.purple{color:#a78bfa}
 .metric-box .ml{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:500}
-
 .time-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
 .time-stat{background:linear-gradient(135deg,var(--brand-50),rgba(104,144,250,.05));border-radius:var(--radius-md);padding:14px;text-align:center;border:1px solid rgba(66,102,232,.2);transition:var(--transition)}
 .time-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);border-color:var(--brand-400)}
@@ -358,14 +341,12 @@ main{padding:22px;max-width:1700px;margin:0 auto}
 .time-stat .tv{font-size:26px;font-weight:800;color:var(--brand-700);line-height:1;letter-spacing:-.5px}
 [data-theme="dark"] .time-stat .tv{color:var(--brand-400)}
 .time-stat .tl{font-size:11px;color:var(--text-muted);margin-top:5px;font-weight:600}
-
 .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
 .filter-bar{display:flex!important;gap:11px;flex-wrap:wrap;align-items:center;padding:13px 16px;background:var(--card-bg);border-radius:var(--radius-lg);margin-bottom:14px;box-shadow:var(--shadow-sm);border:1px solid var(--card-border);border-right:3px solid var(--brand-500)}
 .filter-bar>span{display:inline-flex;align-items:center;gap:5px}
 .filter-bar label{font-size:12px;color:var(--text-secondary);font-weight:600}
 .filter-bar input,.filter-bar select{width:auto;padding:7px 11px;font-size:12.5px;height:34px}
 .filter-bar .btn{height:34px;padding:0 13px;font-size:12.5px}
-
 input,select,textarea{padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13.5px;font-family:inherit;width:100%;transition:var(--transition);background:var(--card-bg);color:var(--text)}
 input:hover,select:hover,textarea:hover{border-color:var(--border-strong)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px var(--focus-ring)}
@@ -378,7 +359,6 @@ select{appearance:none;-webkit-appearance:none;background-image:url("data:image/
 .field-error-msg{color:var(--danger-600);font-size:11.5px;margin-top:5px;display:none;font-weight:600}
 .field-error-msg.show{display:block}
 .field-required::after{content:' *';color:var(--danger-500);font-weight:700}
-
 .table-wrap{background:var(--card-bg);border-radius:var(--radius-lg);overflow:auto;box-shadow:var(--shadow-sm);border:1px solid var(--card-border)}
 table{width:100%;border-collapse:collapse;min-width:1400px}
 th{background:linear-gradient(180deg,var(--slate-700),var(--slate-800));color:#fff;padding:13px 11px;text-align:right;font-size:12px;font-weight:600;position:sticky;top:0;z-index:1;white-space:nowrap;letter-spacing:.2px}
@@ -402,7 +382,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .empty-state .desc{font-size:12.5px;color:var(--text-muted)}
 .note-cell{max-width:180px;min-width:120px;white-space:normal;word-break:break-word;font-size:11.5px;color:var(--text-muted);line-height:1.5;vertical-align:top;padding-top:11px;padding-bottom:11px}
 .note-cell .note-text{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-
 .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.2px;border:1px solid transparent}
 .badge-ready{background:linear-gradient(135deg,#c5f8e0,#8aefc9);color:var(--success-700);border-color:rgba(6,148,99,.25)}
 [data-theme="dark"] .badge-ready{background:linear-gradient(135deg,rgba(12,185,123,.2),rgba(12,185,123,.1));color:#6ee7b7;border-color:rgba(12,185,123,.35)}
@@ -429,7 +408,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 [data-theme="dark"] .badge-received{background:linear-gradient(135deg,rgba(12,185,123,.22),rgba(12,185,123,.1));color:#6ee7b7;border-color:rgba(12,185,123,.4)}
 .badge-not-received{background:var(--slate-100);color:var(--slate-600);border-color:rgba(100,116,139,.2)}
 [data-theme="dark"] .badge-not-received{background:rgba(148,163,184,.12);color:#94a3b8;border-color:rgba(148,163,184,.22)}
-
 .receipt-select{padding:5px 10px;padding-left:26px;font-size:11.5px;font-weight:700;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-secondary);width:auto;min-width:78px;cursor:pointer;line-height:1.2;height:auto;background-position:left 8px center;transition:var(--transition)}
 .receipt-select:hover{border-color:var(--brand-400);box-shadow:0 2px 8px rgba(66,102,232,.12)}
 .receipt-select:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 3px var(--focus-ring)}
@@ -437,20 +415,17 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 [data-theme="dark"] .receipt-select.is-done{color:#6ee7b7}
 .receipt-select.owner-locked{background:linear-gradient(135deg,rgba(240,168,36,.12),rgba(240,168,36,.06));border-color:rgba(240,168,36,.4);color:var(--gold-3)}
 [data-theme="dark"] .receipt-select.owner-locked{color:#ffd66b}
-
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:11px}
 .section-header h2{color:var(--text);font-size:19px;font-weight:700;display:inline-flex!important;align-items:center;gap:9px;letter-spacing:-.2px}
 .section-header h2 .ico{width:20px;height:20px;color:var(--brand-600)}
 [data-theme="dark"] .section-header h2 .ico{color:var(--brand-400)}
 .section-header .hint{font-size:11px;color:var(--text-muted);background:var(--bg);padding:7px 13px;border-radius:20px;border:1px solid var(--border);display:inline-flex!important;align-items:center;gap:6px}
-
 .page{display:none}
 .page.active{display:block;animation:fadeSlide .25s ease}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scRotate{to{transform:rotate(360deg)}}
-
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(7,11,21,.62);z-index:1000;align-items:center;justify-content:center;padding:20px;overflow-y:auto;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 [data-theme="light"] .modal-bg{background:rgba(31,58,123,.35)}
 .modal-bg.active{display:flex;animation:fadeIn .15s}
@@ -461,7 +436,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .modal label{display:block;margin:13px 0 6px;font-size:12.5px;color:var(--text-secondary);font-weight:600}
 .modal-actions{display:flex;gap:9px;margin-top:22px;justify-content:flex-end;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border)}
 .modal-actions .btn{min-width:105px}
-
 .dialog-bg{display:none;position:fixed;inset:0;background:rgba(7,11,21,.72);z-index:2000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 [data-theme="light"] .dialog-bg{background:rgba(31,58,123,.42)}
 .dialog-bg.active{display:flex;animation:fadeIn .15s}
@@ -480,7 +454,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .dialog-message{font-size:13.5px;color:var(--text-muted);line-height:1.7;margin-bottom:22px;white-space:pre-line}
 .dialog-actions{display:flex;gap:9px;justify-content:center}
 .dialog-actions .btn{min-width:105px}
-
 .toast-container{position:fixed;bottom:22px;left:22px;z-index:3000;display:flex;flex-direction:column;gap:9px;pointer-events:none;max-width:360px}
 .toast{background:var(--card-bg);color:var(--text);padding:12px 16px;border-radius:var(--radius-md);font-size:13px;box-shadow:var(--shadow-lg);border:1px solid var(--card-border);border-right:3px solid var(--brand-500);opacity:0;transform:translateX(-30px);transition:.3s;pointer-events:auto;display:flex!important;align-items:center;gap:10px;font-weight:500}
 .toast.show{opacity:1;transform:translateX(0)}
@@ -497,7 +470,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .toast.success{border-right-color:var(--success-500)}
 .toast.error{border-right-color:var(--danger-500)}
 .toast.warning{border-right-color:var(--warning-500)}
-
 .tabs{display:flex;gap:3px;border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap}
 .tab-btn{padding:11px 18px;background:transparent;border:none;cursor:pointer;font-size:13px;color:var(--text-muted);border-bottom:2.5px solid transparent;transition:var(--transition);font-weight:600;border-radius:var(--radius-xs) var(--radius-xs) 0 0;font-family:inherit;display:inline-flex!important;align-items:center;gap:7px;margin-bottom:-1px}
 .tab-btn>*{display:inline-flex;align-items:center;line-height:1}
@@ -506,7 +478,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 [data-theme="dark"] .tab-btn:hover{color:var(--brand-400)}
 .tab-btn.active{color:var(--brand-700);border-bottom-color:var(--brand-600);background:var(--brand-50)}
 [data-theme="dark"] .tab-btn.active{color:var(--brand-400);border-bottom-color:var(--brand-400)}
-
 .perm-section{margin-top:20px;padding-top:18px;border-top:1px dashed var(--border)}
 .perm-section h4{color:var(--text);font-size:13.5px;margin-bottom:13px;font-weight:700}
 .perm-category{margin-bottom:16px;padding:12px;background:var(--bg);border-radius:var(--radius-md);border:1px solid var(--border)}
@@ -521,7 +492,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .perm-item.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 .perm-note{background:var(--warning-50);border:1px solid rgba(217,125,7,.35);padding:11px 14px;border-radius:var(--radius-md);font-size:12px;color:var(--warning-700);margin-top:13px;line-height:1.6}
 [data-theme="dark"] .perm-note{color:#fcd34d}
-
 .customer-search{position:relative}
 .customer-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius-md);max-height:260px;overflow-y:auto;display:none;box-shadow:var(--shadow-lg);z-index:200}
 .customer-dropdown.show{display:block;animation:fadeIn .15s}
@@ -533,7 +503,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .customer-option.empty{color:var(--text-muted);text-align:center;cursor:default;padding:20px}
 .customer-option.create{color:var(--success-600);font-weight:700}
 .customer-option.create:hover{background:var(--success-50)}
-
 .template-card{background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:15px;transition:var(--transition)}
 .template-card:hover{border-color:var(--brand-400);box-shadow:var(--shadow-md)}
 .template-card h4{color:var(--text);margin-bottom:15px;font-size:14px;display:flex!important;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--border)}
@@ -547,21 +516,18 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .logo-preview{margin-top:11px;padding:11px;background:var(--bg);border-radius:var(--radius-md);border:1.5px dashed var(--border);text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center}
 .logo-preview img{max-width:100%;max-height:120px;border-radius:var(--radius-sm);pointer-events:none}
 .logo-preview .empty-logo{color:var(--text-muted);font-size:12.5px}
-
 .shortcuts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
 .shortcut-group h4{color:var(--text);margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border);font-size:13.5px;font-weight:700;display:flex!important;align-items:center;gap:7px}
 .shortcut-group h4 .ico{width:15px;height:15px;color:var(--brand-600)}
 .shortcut-row{display:flex;justify-content:space-between;padding:7px 0;font-size:12.5px;align-items:center}
 .shortcut-row .keys{display:flex;gap:4px}
 .shortcut-row .desc{color:var(--text-secondary);font-weight:500}
-
 .connection-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,var(--danger-600),var(--danger-500));color:#fff;padding:8px 16px;text-align:center;font-size:12.5px;font-weight:600;z-index:9999;transform:translateY(-100%);transition:transform .3s;display:flex!important;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(215,38,61,.45)}
 .connection-banner.show{transform:translateY(0)}
 .connection-banner .ico{width:14px;height:14px}
 .draft-badge{position:fixed;bottom:22px;right:22px;background:linear-gradient(180deg,#fbc23c,var(--warning-600));color:#4a2b00;padding:10px 15px;border-radius:24px;font-size:12px;font-weight:700;box-shadow:0 8px 24px rgba(217,125,7,.45),inset 0 1px 0 rgba(255,255,255,.4);display:none!important;align-items:center;gap:8px;cursor:pointer;z-index:2500;border:1px solid rgba(255,255,255,.25)}
 .draft-badge.show{display:inline-flex!important}
 .draft-badge .ico{width:14px;height:14px}
-
 .notif-panel{position:fixed;top:60px;left:22px;width:360px;max-width:92vw;max-height:70vh;background:var(--card-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);z-index:500;overflow:hidden;display:none;flex-direction:column;border:1px solid var(--card-border)}
 .notif-panel.show{display:flex;animation:slideUp .25s ease}
 .notif-header{padding:14px 18px;background:linear-gradient(135deg,var(--brand-700),var(--brand-500));color:#fff;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
@@ -580,7 +546,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .notif-item .nd .author{opacity:.85}
 .notif-item.unread{background:linear-gradient(135deg,var(--brand-50),transparent);border-right-color:var(--brand-500)}
 .notif-empty{padding:40px 20px;text-align:center;color:var(--text-muted);font-size:13px}
-
 .activity-list{background:var(--card-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:8px;border:1px solid var(--card-border)}
 .activity-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--radius-sm);transition:var(--transition);border-bottom:1px solid var(--divider)}
 .activity-item:last-child{border-bottom:none}
@@ -609,7 +574,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .activity-stats span{display:inline-flex;align-items:center;gap:5px}
 .activity-stats b{color:var(--brand-700);font-weight:700}
 [data-theme="dark"] .activity-stats b{color:var(--brand-400)}
-
 .activity-pagination{margin-top:14px;padding:14px;background:var(--card-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--card-border)}
 .activity-pagination-inner{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center}
 .pg-btn{width:36px;height:36px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-secondary);border-radius:var(--radius-sm);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);font-family:inherit}
@@ -624,7 +588,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .pg-info{font-size:11.5px;color:var(--text-muted);font-weight:600;padding:0 8px}
 .pg-info b{color:var(--brand-700);font-weight:700}
 [data-theme="dark"] .pg-info b{color:var(--brand-400)}
-
 @media print {
     @page { size: A4 portrait; margin: 10mm; }
     html, body { width: 100%; margin: 0 !important; padding: 0 !important; background: #fff !important; color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -644,7 +607,6 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 }
 @media(max-width:700px){
   .modal{max-width:96vw;padding:20px 16px}
-  .admin-token-section .admin-header{font-size:13px;padding:8px 12px}
   .login-box{padding:32px 24px}
   .login-box h1{font-size:20px}
   .user-info{gap:4px}
@@ -799,8 +761,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
     <section id="page-dashboard" class="page active">
       <div class="dash-grid" id="dashGrid"></div>
       <div class="stats-filter-bar">
-        <span style="font-size:12px;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;gap:5px;margin-left:4px;">
-          ${''}
+        <span class="stats-filter-label">
           <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--brand-600);"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
           <span>فترة العرض:</span>
         </span>
@@ -1033,7 +994,8 @@ const I = {
   chevronsLeft:'M11 17l-5-5 5-5 M18 17l-5-5 5-5',
   zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
   undo:'M3 7v6h6 M21 17a9 9 0 00-15-6.7L3 13',
-  inbox:'M22 12h-6l-2 3h-4l-2-3H2 M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z'
+  inbox:'M22 12h-6l-2 3h-4l-2-3H2 M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z',
+  archiveBox:'M3 3h18v5H3z M5 8v13h14V8 M10 12h4 M10 16h4'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -1047,8 +1009,10 @@ const GITHUB_OWNER = 'omar2006200';
 const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
-const SYNC_INTERVAL = 60000;
-const SAVE_COOLDOWN = 10000;
+
+// 🔥 إعدادات السرعة الجديدة
+const SYNC_INTERVAL = 60000;          // فاصل المزامنة
+const SAVE_COOLDOWN = 1500;           // انتظار أقل بين الحفظ والحفظ
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
 const DRAFT_KEY = 'oms_draft_order';
@@ -1056,8 +1020,9 @@ const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
 const KEY_HIDDEN_FLAG = 'oms_key_hidden';
 const ACTIVITY_PER_PAGE = 30;
-const SYNC_THROTTLE_MS = 10000;
-const NOTIF_SAVE_DELAY = 1200;
+const SYNC_THROTTLE_MS = 5000;         // تقليل من 10s إلى 5s
+const NOTIF_SAVE_DELAY = 1000;         // حفظ الإشعارات أسرع
+const ACTIVITY_SAVE_DELAY = 2000;      // حفظ سجل النشاط بعد ثانيتين
 
 const RATE_LEVELS = [
   { min: 3000, interval: 30000, label: 'مرتفعة' },
@@ -1086,7 +1051,6 @@ const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 const ROLE_OWNER   = 'مالك';
 const ROLE_MANAGER = 'مدير';
 const ROLE_WORKER  = 'عامل';
-
 const RECEIPT_NOT_RECEIVED = 'لا';
 const RECEIPT_RECEIVED     = 'تم';
 
@@ -1116,7 +1080,7 @@ const PERMISSIONS = {
   bulkTransfer:{label:'تحويل جماعي',cat:'entry',icon:'truck'},
   returnSingle:{label:'إرجاع فردي',cat:'ready',icon:'undo'},
   print:{label:'طباعة / PDF',cat:'ready',icon:'printer'},
-  moveToLog:{label:'ترحيل للسجل',cat:'ready',icon:'arrowRight'},
+  moveToLog:{label:'ترحيل للسجل',cat:'ready',icon:'archiveBox'},
   editLog:{label:'تعديل السجل',cat:'log',icon:'edit'},
   deleteLog:{label:'حذف من السجل',cat:'log',icon:'trash'},
   editReceiptStatus:{label:'تأكيد حالة الاستلام',cat:'log',icon:'inbox'},
@@ -1240,9 +1204,9 @@ let visibilityHandlerAttached = false;
 let onlineHandlerAttached = false;
 let lastRateNotificationAt = 0;
 let _notifSaveTimer = null;
+let _activitySaveTimer = null;
 let _treeApiDisabled = false;
 let _lastNotifUnreadCount = 0;
-// Stats filter
 let statsFilter = 'all';
 let statsFromDate = '';
 let statsToDate = '';
@@ -1362,7 +1326,7 @@ function updateThemeBtn() {
 }
 
 /* ==============================================================
-   Dialog + Toast
+   Dialog + Toast + Loading
    ============================================================== */
 let dialogCallback = null;
 function showDialog(opts) {
@@ -1394,7 +1358,6 @@ const dialog = {
   confirm: (msg, o = {}) => showDialog({ type: o.type || 'question', title: o.title, message: msg, okText: o.okText || 'تأكيد', showCancel: true, okClass: o.okClass }),
   danger: (msg, o = {}) => showDialog({ type: 'danger', title: o.title || 'تأكيد الحذف', message: msg, okText: o.okText || 'نعم، احذف', showCancel: true })
 };
-
 function toast(msg, type = 'info') {
   const icons = { success:'check', error:'x', info:'info', warning:'warning' };
   const container = document.getElementById('toastContainer');
@@ -1494,8 +1457,7 @@ function updateCurrentKeyInfo() {
   const el = document.getElementById('currentKeyInfo'); if (!el) return;
   const token = getStoredKey();
   if (token) {
-    el.innerHTML = `<div style="color:var(--success-600);font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div>
-      <div>الطول: ${token.length} حرف</div>`;
+    el.innerHTML = `<div style="color:var(--success-600);font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div><div>الطول: ${token.length} حرف</div>`;
   } else el.textContent = 'لا يوجد مفتاح';
 }
 function changeKeyModal() {
@@ -1558,7 +1520,7 @@ async function saveNewKey() {
 window.saveNewKey = saveNewKey;
 
 /* ==============================================================
-   Rate Limit Widget
+   Rate Limit
    ============================================================== */
 function updateRateLimit(headers) {
   const remaining = headers.get('X-RateLimit-Remaining');
@@ -1592,7 +1554,6 @@ function adjustSyncInterval() {
   if (!rateLimitInfo) return;
   const level = getRateLevel(rateLimitInfo.remaining);
   if (level.interval === currentSyncInterval) return;
-  const oldInterval = currentSyncInterval;
   currentSyncInterval = level.interval;
   if (!currentUser) return;
   if (currentSyncInterval > 0) startPolling();
@@ -1603,7 +1564,7 @@ function maybeNotifyLowRate() {
   const now = Date.now();
   if (now - lastRateNotificationAt < 30 * 60 * 1000) return;
   const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
-  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning'); }
+  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning', true); }
 }
 
 /* ==============================================================
@@ -1695,6 +1656,76 @@ async function apiCreateFile(key, data) {
   SHAs[key] = json.content.sha;
   return json;
 }
+
+/**
+ * ⚡ persistKeys — النسخة السريعة
+ * - يكتب الملفات بالتوازي (Promise.all) لتقليل الوقت
+ * - لا يكتب meta (يُحدّث تلقائياً عند الحاجة عبر شجرة Git)
+ * - يسجل النشاط بشكل مؤجل (batched) لتوفير طلبات
+ */
+async function persistKeys(keys) {
+  setSyncing(true);
+  try {
+    const activityRequested = keys.includes('activity');
+    const dataKeys = keys.filter(k => k !== 'activity' && DATA_FILES[k]);
+
+    if (dataKeys.length > 0) {
+      // محاولة الكتابة المتوازية
+      const writePromises = dataKeys.map(k => {
+        if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
+        return apiWriteFile(k, cache[k]);
+      });
+
+      try {
+        await Promise.all(writePromises);
+      } catch (parallelError) {
+        // في حال فشل أي ملف، نعيد المحاولة بتسلسل للأمان
+        // (نتخطى الناجحة لأن SHA تحدّث بالفعل)
+        for (const k of dataKeys) {
+          try {
+            if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
+            else await apiWriteFile(k, cache[k]);
+          } catch (e) {
+            // إذا فشل بسبب تعارض، نحاول تحديث SHA مرة واحدة
+            if (e.message === 'CONFLICT') {
+              try { await apiReadFile(k); } catch {}
+              if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
+              else await apiWriteFile(k, cache[k]);
+            } else throw e;
+          }
+        }
+      }
+    }
+
+    if (activityRequested) scheduleActivitySave();
+  } finally { setSyncing(false); }
+}
+
+/**
+ * حفظ مؤجل لسجل النشاط - يجمع التعديلات المتتالية في طلب واحد
+ */
+function scheduleActivitySave() {
+  if (_activitySaveTimer) clearTimeout(_activitySaveTimer);
+  _activitySaveTimer = setTimeout(async () => {
+    _activitySaveTimer = null;
+    if (!currentUser) return;
+    try {
+      if (!SHAs.activity && cache.activity) await apiCreateFile('activity', cache.activity);
+      else await apiWriteFile('activity', cache.activity);
+    } catch (e) {
+      // تجاهل بصمت — ستُحفظ في المحاولة التالية
+    }
+  }, ACTIVITY_SAVE_DELAY);
+}
+async function flushActivitySave() {
+  if (_activitySaveTimer) { clearTimeout(_activitySaveTimer); _activitySaveTimer = null; }
+  if (!currentUser) return;
+  try {
+    if (!SHAs.activity && cache.activity) await apiCreateFile('activity', cache.activity);
+    else await apiWriteFile('activity', cache.activity);
+  } catch {}
+}
+
 function applyFileData(k, data, wasPlain) {
   if (wasPlain === true) hasLegacyFiles = true;
   if (k === 'templates') {
@@ -1758,23 +1789,20 @@ async function writeMeta(extra = {}) {
     } else throw e;
   }
 }
-async function persistKeys(keys) {
-  setSyncing(true);
-  try {
-    for (const k of keys) {
-      if (!DATA_FILES[k]) continue;
-      if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
-      else await apiWriteFile(k, cache[k]);
-    }
-    await writeMeta();
-  } finally { setSyncing(false); }
-}
 async function saveAllDataNow() {
   const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن، هل تريد المتابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
   if (!ok) return;
   try {
     showLoading('جاري الحفظ...');
-    await persistKeys(DATA_KEYS);
+    // اكتب ملفات البيانات بالتوازي
+    const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
+    await Promise.all(dataKeys.map(k => {
+      if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
+      return apiWriteFile(k, cache[k]);
+    }));
+    // اكتب سجل النشاط والمعرف
+    await flushActivitySave();
+    await writeMeta();
     hideLoading(); hasLegacyFiles = false;
     toast('✅ تم حفظ جميع البيانات', 'success');
   } catch (e) { hideLoading(); toast(e.message, 'error'); }
@@ -1782,7 +1810,7 @@ async function saveAllDataNow() {
 window.saveAllDataNow = saveAllDataNow;
 
 /* ==============================================================
-   Sync (محسّن + إصلاح انقطاع الاتصال عند العودة)
+   Sync
    ============================================================== */
 async function syncPull(force = false) {
   if (syncing || !currentUser) return;
@@ -1800,12 +1828,13 @@ async function syncPull(force = false) {
         return remoteSha && remoteSha !== SHAs[k];
       });
       if (changed.length) {
-        for (const k of changed) {
-          try {
-            const r = await apiReadFile(k);
-            if (!r.notModified) { applyFileData(k, r.data, r.wasPlain); didChange = true; }
-          } catch (e) {}
-        }
+        const reads = await Promise.all(changed.map(async k => {
+          try { return { k, r: await apiReadFile(k) }; }
+          catch (e) { return { k, r: null }; }
+        }));
+        reads.forEach(({ k, r }) => {
+          if (r && !r.notModified) { applyFileData(k, r.data, r.wasPlain); didChange = true; }
+        });
         if (didChange) postProcessData();
       }
     } else {
@@ -1923,7 +1952,7 @@ function orderInRange(o, from, to) {
 }
 
 /* ==============================================================
-   Notifications (مشتركة + تظهر للمستخدمين عند الدخول)
+   Notifications
    ============================================================== */
 function scheduleNotificationsSave() {
   if (_notifSaveTimer) clearTimeout(_notifSaveTimer);
@@ -1952,10 +1981,7 @@ function addNotification(title, message, type = 'info', silent = false) {
   if (cache.notifications.length > 100) cache.notifications = cache.notifications.slice(0, 100);
   renderNotifications();
   scheduleNotificationsSave();
-  if (!silent) showNotificationToast(title, message, type);
-}
-function showNotificationToast(title, message, type) {
-  toast(`${title}: ${message}`, type || 'info');
+  if (!silent) toast(`${title}: ${message}`, type || 'info');
 }
 function getVisibleNotifications() {
   const u = currentUser?.username;
@@ -1969,10 +1995,6 @@ function renderNotifications() {
   const unread = u ? visible.filter(n => !(Array.isArray(n.readBy) && n.readBy.includes(u))).length : 0;
   const badge = document.getElementById('notifBadge');
   if (badge) { if (unread > 0) { badge.textContent = unread; badge.style.display = ''; } else badge.style.display = 'none'; }
-  // إشعار صوتي/بصري عند وصول إشعارات جديدة غير مقروءة
-  if (unread > _lastNotifUnreadCount && currentUser && document.getElementById('app').style.display !== 'none') {
-    // بصري فقط - البادج يتحدث تلقائياً
-  }
   _lastNotifUnreadCount = unread;
   if (!visible.length) {
     list.innerHTML = `<div class="notif-empty">${ico('bell', 40)}<div style="margin-top:10px;">لا توجد إشعارات</div></div>`;
@@ -2118,7 +2140,7 @@ window.resetActivityLog = async function() {
   if (!hasPerm('resetActivity')) { toast(MSG.unauthorized, 'error'); return; }
   const count = cache.activity.length;
   if (!count) { toast('السجل فارغ بالفعل', 'info'); return; }
-  const ok = await dialog.danger(`سيتم حذف ${count.toLocaleString()} عملية من سجل النشاط نهائياً.\n\nلا يمكن التراجع عن هذه العملية.`, { title: 'تصفير سجل النشاط', okText: 'نعم، صفّر السجل' });
+  const ok = await dialog.danger(`سيتم حذف ${count.toLocaleString()} عملية من سجل النشاط نهائياً.`, { title: 'تصفير سجل النشاط', okText: 'نعم، صفّر السجل' });
   if (!ok) return;
   const ok2 = await dialog.confirm('هل أنت متأكد تماماً؟', { type: 'warning', title: 'تأكيد أخير' });
   if (!ok2) return;
@@ -2357,7 +2379,7 @@ function buildUI() {
   document.getElementById('readyToolbar').innerHTML = `
     <button class="btn btn-primary perm-print" onclick="printReady()">${ico('printer', 15)}<span>طباعة</span></button>
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>PDF</span></button>
-    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('arrowRight', 15)}<span>ترحيل للسجل</span></button>
+    <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('archiveBox', 15)}<span>ترحيل للسجل</span><kbd>Alt+M</kbd></button>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
   document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
 
@@ -2440,7 +2462,7 @@ function buildUI() {
 }
 
 /* ==============================================================
-   Statistics (مع فلترة كاملة)
+   Statistics
    ============================================================== */
 function renderStats() {
   const { from, to } = getStatsDateRange();
@@ -2461,7 +2483,6 @@ function renderStats() {
   const unpaidRate = total > 0 ? Math.round((payUnpaid / total) * 100) : 0;
   const vipRate = total > 0 ? Math.round((payVip / total) * 100) : 0;
   const readyRate = active > 0 ? Math.round((readyActive / active) * 100) : 0;
-  // إحصائيات زمنية دائماً بالنسبة الفعلية
   const today = new Date(); today.setHours(0,0,0,0);
   const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
   const weekAgo = new Date(today); weekAgo.setDate(weekAgo.getDate()-7);
@@ -2907,7 +2928,7 @@ window.doLogin = async function () {
     if (hasLegacyFiles && found.role === ROLE_OWNER) {
       hideLoading();
       const ok = await dialog.confirm('سيتم تحديث طريقة حفظ البيانات، هل تريد المتابعة؟', { title: 'تحديث', okText: 'الآن', cancelText: 'لاحقاً' });
-      if (ok) { try { showLoading('جاري التحديث...'); await persistKeys(DATA_KEYS); hideLoading(); hasLegacyFiles = false; toast('✅ تم بنجاح', 'success'); } catch (e2) { hideLoading(); } }
+      if (ok) { try { showLoading('جاري التحديث...'); await saveAllDataNowSilent(); hideLoading(); hasLegacyFiles = false; } catch (e2) { hideLoading(); } }
     }
     setLoadingProgress(100, 'تم الدخول');
     localStorage.setItem('oms_lastUser', u);
@@ -2924,10 +2945,21 @@ window.doLogin = async function () {
   finally { btn.disabled = false; }
 };
 
+async function saveAllDataNowSilent() {
+  const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
+  await Promise.all(dataKeys.map(k => {
+    if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
+    return apiWriteFile(k, cache[k]);
+  }));
+  await flushActivitySave();
+  await writeMeta();
+}
+
 window.logout = async function (silent = false) {
   if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   try { await flushNotificationsSave(); } catch {}
+  try { await flushActivitySave(); } catch {}
   stopPolling(); stopSessionTimer();
   currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
   currentSyncInterval = SYNC_INTERVAL;
@@ -2959,14 +2991,13 @@ function startApp() {
   go(firstAvailable); startPolling(); startSessionTimer();
   renderNotifications();
   addNotification('مرحباً', `أهلاً ${currentUser.username} (${rl.label})`, 'info', true);
-  // إصلاح انقطاع الاتصال: عند العودة للصفحة نزامن فوراً
   attachVisibilityHandler();
   attachOnlineHandlers();
   toast(`أهلاً ${currentUser.username}`, 'success');
 }
 
 /* ==============================================================
-   Connection Resilience — إصلاح انقطاع الاتصال
+   Connection Resilience
    ============================================================== */
 let _visHandlerAttached = false;
 function attachVisibilityHandler() {
@@ -2974,12 +3005,10 @@ function attachVisibilityHandler() {
   _visHandlerAttached = true;
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      // عند إخفاء الصفحة: نوقف المؤقت لتوفير الحصة
       stopPolling();
     } else if (currentUser) {
-      // عند العودة: نزامن فوراً ونتأكد من استئناف المؤقت
       lastSyncTime = 0;
-      localMeta = null; // قوة المزامنة
+      localMeta = null;
       syncPull(true).finally(() => {
         if (!pollTimer && currentSyncInterval > 0) startPolling();
       });
@@ -3127,9 +3156,10 @@ window.saveOrder = async function () {
       data.receiptUpdatedAt = cache.log[idx].receiptUpdatedAt;
       data.receiptUpdatedBy = cache.log[idx].receiptUpdatedBy;
       cache.log[idx] = { ...cache.log[idx], ...data };
-      await persistKeys(['log']);
       logActivity('edit-log', `تعديل في السجل: ${data.invoice}`, '', 'warning');
-      closeModal('orderModal'); clearDraft(); renderLog();
+      closeModal('orderModal'); clearDraft();
+      try { await persistKeys(['log', 'activity']); } catch (e) { toast(e.message, 'error'); return; }
+      renderLog();
       toast('تم التحديث بنجاح', 'success');
     } else {
       const existing = id ? cache.orders.find(x => x.id === id) : null;
@@ -3145,8 +3175,9 @@ window.saveOrder = async function () {
         cache.orders.push(data);
         logActivity('add-order', `طلب جديد: ${data.invoice}`, `العميل: ${data.customer}`, 'success');
       }
-      await persistKeys(['orders', 'activity']);
-      closeModal('orderModal'); clearDraft(); renderEntry();
+      closeModal('orderModal'); clearDraft();
+      try { await persistKeys(['orders', 'activity']); } catch (e) { toast(e.message, 'error'); return; }
+      renderEntry();
       toast('تم الحفظ بنجاح', 'success');
     }
     lastSaveTime = Date.now();
@@ -3275,50 +3306,67 @@ window.deleteBranch = async function (id) {
 };
 
 /* ==============================================================
-   Transfers + Return
+   Transfers + Return + Archive
    ============================================================== */
 window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.orders.find(x => x.id === id); if (!order) return;
   const ok = await dialog.confirm(`تحويل "${order.invoice}"؟`, { title: 'تحويل' }); if (!ok) return;
+  const backup = { orders: [...cache.orders], ready: [...cache.ready] };
   try {
     cache.ready.push({ ...order, transferredAt: fmtDate(), transferredBy: currentUser.username });
     cache.orders = cache.orders.filter(x => x.id !== id);
     if (selectedOrderId === id) selectedOrderId = null;
     logActivity('transfer-single', `تحويل: ${order.invoice}`, '', 'success');
-    await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
+    await persistKeys(['orders', 'ready', 'activity']);
+    renderEntry(); renderDashboard();
     addNotification('تحويل طلب', `تم تحويل ${order.invoice}`, 'success', true);
     toast('تم التحويل بنجاح', 'success');
-  } catch (e) { toast(e.message, 'error'); }
+  } catch (e) {
+    cache.orders = backup.orders; cache.ready = backup.ready;
+    toast(e.message, 'error');
+  }
 };
 window.bulkTransfer = async function () {
   if (!hasPerm('bulkTransfer')) { toast(MSG.unauthorized, 'error'); return; }
   const eligible = cache.orders.filter(o => o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP'));
   if (!eligible.length) { toast('لا توجد طلبات مستوفية', 'error'); return; }
   const ok = await dialog.confirm(`تحويل ${eligible.length} طلب؟`, { title: 'تحويل جماعي' }); if (!ok) return;
+  const backup = { orders: [...cache.orders], ready: [...cache.ready] };
   try {
     eligible.forEach(o => cache.ready.push({ ...o, transferredAt: fmtDate(), transferredBy: currentUser.username }));
     cache.orders = cache.orders.filter(o => !(o.status === 'جاهز' && (o.pay === 'مدفوع' || o.pay === 'VIP')));
     selectedOrderId = null;
     logActivity('bulk-transfer', `تحويل جماعي: ${eligible.length}`, '', 'success');
-    await persistKeys(['orders', 'ready', 'activity']); renderEntry(); renderDashboard();
+    await persistKeys(['orders', 'ready', 'activity']);
+    renderEntry(); renderDashboard();
     addNotification('تحويل جماعي', `${eligible.length} طلب`, 'success', true);
     toast(`تم تحويل ${eligible.length} طلب بنجاح`, 'success');
-  } catch (e) { toast(e.message, 'error'); }
+  } catch (e) {
+    cache.orders = backup.orders; cache.ready = backup.ready;
+    toast(e.message, 'error');
+  }
 };
 window.moveReadyToLog = async function () {
   if (!hasPerm('moveToLog')) { toast(MSG.unauthorized, 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات جاهزة', 'error'); return; }
-  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`, { title: 'ترحيل' }); if (!ok) return;
+  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`, { title: 'ترحيل للسجل', okText: 'نعم، رحّل', okClass: 'btn-purple' }); if (!ok) return;
+  const backup = { ready: [...cache.ready], log: [...cache.log] };
   try {
     const count = cache.ready.length;
-    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: fmtDate(), archivedBy: currentUser.username, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
+    const now = fmtDate();
+    const user = currentUser.username;
+    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: now, archivedBy: user, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
     cache.ready = [];
-    logActivity('move-log', `ترحيل ${count}`, '', 'success');
-    await persistKeys(['ready', 'log', 'activity']); renderReady(); renderDashboard();
-    addNotification('ترحيل', `${count} طلب`, 'success', true);
-    toast('تم الترحيل بنجاح', 'success');
-  } catch (e) { toast(e.message, 'error'); }
+    logActivity('move-log', `ترحيل ${count} طلب إلى السجل`, '', 'success');
+    await persistKeys(['ready', 'log', 'activity']);
+    renderReady(); renderDashboard();
+    addNotification('ترحيل', `${count} طلب إلى السجل`, 'success', true);
+    toast(`تم ترحيل ${count} طلب بنجاح`, 'success');
+  } catch (e) {
+    cache.ready = backup.ready; cache.log = backup.log;
+    toast(e.message, 'error');
+  }
 };
 
 window.returnReadyToEntry = async function (id) {
@@ -3330,6 +3378,7 @@ window.returnReadyToEntry = async function (id) {
     { title: 'إرجاع طلب', okText: 'إرجاع', type: 'warning', okClass: 'btn-warning' }
   );
   if (!ok) return;
+  const backup = { orders: [...cache.orders], ready: [...cache.ready] };
   try {
     const restored = { ...order };
     delete restored.transferredAt;
@@ -3345,7 +3394,10 @@ window.returnReadyToEntry = async function (id) {
     renderReady(); renderDashboard();
     addNotification('إرجاع طلب', `تم إرجاع ${order.invoice} إلى الإدخال`, 'warning', true);
     toast('تم الإرجاع بنجاح', 'success');
-  } catch (e) { toast(e.message, 'error'); }
+  } catch (e) {
+    cache.orders = backup.orders; cache.ready = backup.ready;
+    toast(e.message, 'error');
+  }
 };
 
 window.changeReceiptStatus = async function (id, newStatus) {
@@ -3380,6 +3432,8 @@ window.changeReceiptStatus = async function (id, newStatus) {
     if (!ok) { renderLog(); return; }
   }
   const previous = current;
+  const previousAt = o.receiptUpdatedAt;
+  const previousBy = o.receiptUpdatedBy;
   o.receiptStatus = newStatus;
   o.receiptUpdatedAt = fmtDate();
   o.receiptUpdatedBy = currentUser.username;
@@ -3401,6 +3455,8 @@ window.changeReceiptStatus = async function (id, newStatus) {
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
   } catch (e) {
     o.receiptStatus = previous;
+    o.receiptUpdatedAt = previousAt;
+    o.receiptUpdatedBy = previousBy;
     toast(e.message, 'error');
     renderLog();
   }
@@ -4056,7 +4112,13 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
-window.addEventListener('beforeunload', () => { if (_notifSaveTimer && currentUser) { try { flushNotificationsSave(); } catch {} } });
+
+// حفظ كل شيء قبل إغلاق النافذة
+window.addEventListener('beforeunload', () => {
+  if (!currentUser) return;
+  try { if (_notifSaveTimer) flushNotificationsSave(); } catch {}
+  try { if (_activitySaveTimer) flushActivitySave(); } catch {}
+});
 </script>
 <script>
 (function () {
