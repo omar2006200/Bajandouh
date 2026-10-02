@@ -1025,9 +1025,6 @@ function ico(name, size = 16) {
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
 }
 
-/* ==============================================================
-   Config
-   ============================================================== */
 const GITHUB_OWNER = 'omar2006200';
 const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
@@ -1135,8 +1132,7 @@ const ALL_PERM_KEYS = Object.keys(PERMISSIONS);
 const WORKER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:false, accessSettings:false,
   addOrder:true, editOrder:true, deleteOrder:false, transferSingle:true, bulkTransfer:false,
-  selectReadyOrders:false,
-  returnSingle:false,
+  selectReadyOrders:false, returnSingle:false,
   print:true, moveToLog:false, editLog:false, deleteLog:false,
   editReceiptStatus:false, revertReceiptStatus:false, sendWhatsApp:false,
   tabToken:false, tabActivity:false, tabBranches:false, tabDrivers:false, tabUsers:false, tabTemplates:false, tabBackup:false,
@@ -1146,8 +1142,7 @@ const WORKER_DEFAULTS = {
 const MANAGER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:true, accessSettings:true,
   addOrder:true, editOrder:true, deleteOrder:true, transferSingle:true, bulkTransfer:true,
-  selectReadyOrders:true,
-  returnSingle:true,
+  selectReadyOrders:true, returnSingle:true,
   print:true, moveToLog:true, editLog:true, deleteLog:true,
   editReceiptStatus:true, revertReceiptStatus:false, sendWhatsApp:true,
   tabToken:false, tabActivity:true, tabBranches:true, tabDrivers:true, tabUsers:true, tabTemplates:true, tabBackup:true,
@@ -1256,7 +1251,8 @@ const MSG = {
   sessionExpired: 'انتهت الجلسة، يرجى تسجيل الدخول مجدداً',
   sessionWarning: 'ستنتهي جلستك قريباً',
   unauthorized:   'غير مصرح لك بتنفيذ هذا الإجراء',
-  missingData:    'يرجى تعبئة الحقول المطلوبة'
+  missingData:    'يرجى تعبئة الحقول المطلوبة',
+  invoiceDup:     'رقم الفاتورة مستخدم مسبقاً'
 };
 
 document.addEventListener('contextmenu', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
@@ -1668,7 +1664,6 @@ async function persistKeys(keys) {
   try {
     const activityRequested = keys.includes('activity');
     const dataKeys = keys.filter(k => k !== 'activity' && DATA_FILES[k]);
-
     if (dataKeys.length > 0) {
       const writePromises = dataKeys.map(k => {
         if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
@@ -1691,7 +1686,6 @@ async function persistKeys(keys) {
         }
       }
     }
-
     if (activityRequested) scheduleActivitySave();
   } finally { setSyncing(false); }
 }
@@ -1743,7 +1737,6 @@ function postProcessData() {
     readBy: Array.isArray(n.readBy) ? n.readBy : [],
     createdBy: n.createdBy || 'system'
   }));
-  // إزالة العناصر المحذوفة من مجموعة التحديد
   const validIds = new Set(cache.ready.map(o => o.id));
   Array.from(selectedReadyIds).forEach(id => { if (!validIds.has(id)) selectedReadyIds.delete(id); });
 }
@@ -1895,6 +1888,50 @@ function applyZoom() { document.body.style.zoom = zoomLevel; }
 function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); applyZoom(); }
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
+
+/* ══════════════════════════════════════════════════════════════
+   فحص تكرار رقم الفاتورة — يشمل جميع الطلبات
+   ══════════════════════════════════════════════════════════════ */
+function isInvoiceDuplicate(invoice, excludeId, excludeType) {
+  if (!invoice) return false;
+  const inv = String(invoice).trim().toLowerCase();
+  if (!inv) return false;
+  // البحث في الطلبات قيد الإدخال
+  if (excludeType !== 'orders') {
+    for (const o of cache.orders) {
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  } else if (excludeId) {
+    for (const o of cache.orders) {
+      if (o.id === excludeId) continue;
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  } else {
+    for (const o of cache.orders) {
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  }
+  // البحث في الطلبات الجاهزة
+  for (const o of cache.ready) {
+    if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+  }
+  // البحث في السجل
+  if (excludeType !== 'log') {
+    for (const o of cache.log) {
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  } else if (excludeId) {
+    for (const o of cache.log) {
+      if (o.id === excludeId) continue;
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  } else {
+    for (const o of cache.log) {
+      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
+    }
+  }
+  return false;
+}
 
 window.setStatsFilter = function(type) {
   statsFilter = type;
@@ -2635,9 +2672,6 @@ window.selectRow = function (id, event) {
   document.querySelector(`#entryBody tr[data-id="${id}"]`)?.classList.add('selected');
 };
 
-/* ══════════════════════════════════════════════════════════════
-   Ready Page — مع تحديد الطلبات
-   ══════════════════════════════════════════════════════════════ */
 function getReadyFilteredData() {
   const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
   let data = cache.ready;
@@ -2716,7 +2750,6 @@ window.toggleReadySelection = function(id, checked) {
   if (!hasPerm('selectReadyOrders')) { toast(MSG.unauthorized, 'error'); return; }
   if (checked) selectedReadyIds.add(id);
   else selectedReadyIds.delete(id);
-  // تحديث الواجهة فقط
   renderReady();
 };
 window.onSelectAllReadyChange = function(checked) {
@@ -3126,8 +3159,16 @@ function validateOrderForm() {
   const customerId = document.getElementById('orderCustomerId').value;
   const branch = document.getElementById('orderBranch').value;
   const id = document.getElementById('orderId').value;
+  const isLogEdit = document.getElementById('orderLogMode').value === '1';
   if (!invoice) { setFieldError('orderInvoice', 'رقم الفاتورة مطلوب'); valid = false; }
-  else if (!id && cache.orders.find(o => o.invoice === invoice)) { setFieldError('orderInvoice', 'موجود مسبقاً'); valid = false; }
+  else {
+    // 🔒 فحص تكرار رقم الفاتورة في جميع الطلبات
+    const excludeType = isLogEdit ? 'log' : (id ? 'orders' : null);
+    if (isInvoiceDuplicate(invoice, id, excludeType)) {
+      setFieldError('orderInvoice', MSG.invoiceDup);
+      valid = false;
+    }
+  }
   if (!branch) { setFieldError('orderBranch', 'الفرع مطلوب'); valid = false; }
   if (!customer) { setFieldError('orderCustomer', 'العميل مطلوب'); valid = false; }
   else {
@@ -3362,9 +3403,6 @@ window.bulkTransfer = async function () {
   }
 };
 
-/* ══════════════════════════════════════════════════════════════
-   moveReadyToLog — مع دعم تحديد الطلبات
-   ══════════════════════════════════════════════════════════════ */
 window.moveReadyToLog = async function () {
   if (!hasPerm('moveToLog')) { toast(MSG.unauthorized, 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات جاهزة', 'error'); return; }
@@ -3378,7 +3416,6 @@ window.moveReadyToLog = async function () {
     { title: 'ترحيل للسجل', okText: 'نعم، رحّل', okClass: 'btn-purple' }
   );
   if (!ok) return;
-
   const backup = { ready: [...cache.ready], log: [...cache.log] };
   try {
     const count = toMove.length;
@@ -3399,9 +3436,6 @@ window.moveReadyToLog = async function () {
   }
 };
 
-/* ══════════════════════════════════════════════════════════════
-   printReady — مع دعم تحديد الطلبات
-   ══════════════════════════════════════════════════════════════ */
 window.printReady = function () {
   if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
   const visibleData = getReadyFilteredData();
@@ -3449,7 +3483,7 @@ window.returnReadyToEntry = async function (id) {
 };
 
 /* ══════════════════════════════════════════════════════════════
-   WhatsApp Notification
+   WhatsApp Notification — فتح مباشر في نفس الصفحة
    ══════════════════════════════════════════════════════════════ */
 function buildWhatsAppMessage(order) {
   const tpl = (templates.whatsapp?.message) || DEFAULT_TEMPLATES.whatsapp.message;
@@ -3464,16 +3498,12 @@ function buildWhatsAppMessage(order) {
 function normalizePhoneForWhatsApp(phone) {
   if (!phone) return '';
   let p = String(phone).trim();
-  // إزالة كل ما ليس رقماً
   p = p.replace(/[^0-9]/g, '');
-  // معالجة الرقم اليمني: إذا كان يبدأ بـ 7 ولم يكن يبدأ بـ 967 أضف 967
   if (/^7\d{8}$/.test(p)) p = '967' + p;
-  // إذا كان يبدأ بـ 0 (مثل 0770...)، احذف الصفر وأضف 967
   else if (/^0\d{9}$/.test(p)) p = '967' + p.substring(1);
   return p;
 }
 function triggerWhatsAppNotification(order) {
-  // فحص التفعيل
   if (templates.whatsapp?.enabled === false) return;
   if (!hasPerm('sendWhatsApp')) return;
   const phone = normalizePhoneForWhatsApp(order.customerPhone);
@@ -3483,19 +3513,9 @@ function triggerWhatsAppNotification(order) {
   }
   const message = buildWhatsAppMessage(order);
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  try {
-    const win = window.open(url, '_blank');
-    if (!win || win.closed || typeof win.closed === 'undefined') {
-      // في حال منع النوافذ المنبثقة — نستخدم location
-      window.location.href = url;
-    } else {
-      logActivity('whatsapp-sent', `إرسال واتساب: ${order.invoice}`, `إلى: ${order.customer} (${order.customerPhone})`, 'success');
-      toast(`✅ تم فتح واتساب لإرسال الإشعار إلى ${order.customer}`, 'success');
-    }
-  } catch (e) {
-    // Fallback
-    window.location.href = url;
-  }
+  logActivity('whatsapp-sent', `إرسال واتساب: ${order.invoice}`, `إلى: ${order.customer} (${order.customerPhone})`, 'success');
+  // ✅ فتح واتساب مباشرة في نفس الصفحة (يعمل على Windows/Android/Web)
+  window.location.href = url;
 }
 window.sendWhatsAppManually = function(orderId) {
   if (!hasPerm('sendWhatsApp')) { toast(MSG.unauthorized, 'error'); return; }
@@ -3557,9 +3577,9 @@ window.changeReceiptStatus = async function (id, newStatus) {
       true
     );
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
-    // إرسال واتساب عند تأكيد الاستلام
+    // 📱 فتح واتساب مباشرة عند تأكيد الاستلام
     if (newStatus === RECEIPT_RECEIVED) {
-      setTimeout(() => triggerWhatsAppNotification(o), 300);
+      setTimeout(() => triggerWhatsAppNotification(o), 400);
     }
   } catch (e) {
     o.receiptStatus = previous;
