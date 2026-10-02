@@ -27,6 +27,7 @@ html,body{height:100%}
   --teal-50:#e8fdfa;--teal-100:#c4faf2;--teal-500:#14b8a6;--teal-600:#0d9488;--teal-700:#0f766e;
   --orange-50:#fff2e6;--orange-100:#ffddb8;--orange-500:#f97316;--orange-600:#ea580c;
   --pink-50:#fdeef6;--pink-100:#fbd5e7;--pink-500:#ec4899;--pink-600:#db2777;
+  --whatsapp-500:#25d366;--whatsapp-600:#128c7e;--whatsapp-700:#075e54;
   --gold-1:#ffd66b;--gold-2:#f0a824;--gold-3:#b8760b;
   --silver-1:#eef2f7;--silver-2:#b9c3d1;--silver-3:#7a8899;
   --bronze-1:#e8a06a;--bronze-2:#b76b32;--bronze-3:#7a3f16;
@@ -86,6 +87,8 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;f
 .btn-purple:hover:not(:disabled){background:linear-gradient(180deg,#c4b5fd 0%,#a78bfa 50%,#8b5cf6 100%);box-shadow:0 8px 22px rgba(124,58,237,.45),var(--shadow-inset)}
 .btn-gray{background:linear-gradient(180deg,#94a3b8 0%,#64748b 55%,#475569 100%);color:#fff;box-shadow:0 1px 3px rgba(51,65,85,.3),var(--shadow-inset)}
 .btn-gray:hover:not(:disabled){background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 55%,#64748b 100%);box-shadow:0 8px 22px rgba(71,85,105,.35),var(--shadow-inset)}
+.btn-whatsapp{background:linear-gradient(180deg,#2ee076 0%,var(--whatsapp-500) 50%,var(--whatsapp-600) 100%);color:#fff;box-shadow:0 1px 3px rgba(18,140,126,.35),var(--shadow-inset)}
+.btn-whatsapp:hover:not(:disabled){background:linear-gradient(180deg,#4bf090 0%,#2ee076 50%,var(--whatsapp-500) 100%);box-shadow:0 8px 22px rgba(37,211,102,.45),var(--shadow-inset)}
 .btn-ghost{background:var(--card-bg);color:var(--text-secondary);border:1.5px solid var(--border);box-shadow:var(--shadow-xs)}
 .btn-ghost:hover:not(:disabled){background:var(--card-bg);border-color:var(--brand-500);color:var(--brand-600);box-shadow:0 3px 12px rgba(66,102,232,.18)}
 [data-theme="dark"] .btn-ghost:hover:not(:disabled){border-color:var(--brand-400);color:var(--brand-400);box-shadow:0 3px 12px rgba(104,144,250,.22)}
@@ -99,7 +102,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;f
 .btn-icon .badge-num{position:absolute;top:-4px;left:-4px;background:linear-gradient(180deg,#f9717f,var(--danger-500));color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center;border:1.5px solid rgba(255,255,255,.9);box-shadow:0 2px 6px rgba(239,61,82,.55)}
 kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'SF Mono','Consolas',monospace;font-weight:600;display:inline-block;line-height:1.3;pointer-events:none;border:1px solid rgba(15,23,42,.06)}
 [data-theme="dark"] kbd{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.06);color:var(--text)}
-.btn-warning kbd,.btn-primary kbd,.btn-success kbd,.btn-danger kbd,.btn-purple kbd,.btn-gray kbd{background:rgba(255,255,255,.22);color:#fff;border-color:rgba(255,255,255,.18)}
+.btn-warning kbd,.btn-primary kbd,.btn-success kbd,.btn-danger kbd,.btn-purple kbd,.btn-gray kbd,.btn-whatsapp kbd{background:rgba(255,255,255,.22);color:#fff;border-color:rgba(255,255,255,.18)}
 .rate-widget{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:14px;font-size:10.5px;font-weight:600;cursor:help;position:relative;min-width:135px;transition:var(--transition);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .rate-widget:hover{background:rgba(255,255,255,.2)}
 .rate-widget .rate-ico{display:inline-flex;align-items:center;justify-content:center;opacity:.9}
@@ -135,6 +138,12 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .stats-custom-range.show{display:inline-flex}
 .stats-custom-range label{font-size:12px;color:var(--text-muted);font-weight:600}
 .stats-custom-range input[type="date"]{width:auto;padding:6px 10px;font-size:12.5px;height:auto}
+.row-checkbox{width:18px;height:18px;cursor:pointer;accent-color:var(--brand-500);vertical-align:middle;margin:0}
+.row-checkbox:disabled{opacity:.4;cursor:not-allowed}
+.selection-info{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--brand-50);border:1px solid rgba(66,102,232,.28);border-radius:20px;font-size:12px;font-weight:700;color:var(--brand-700)}
+[data-theme="dark"] .selection-info{color:var(--brand-300);border-color:rgba(104,144,250,.35)}
+.selection-info.has-selection{background:linear-gradient(135deg,var(--success-50),rgba(12,185,123,.1));border-color:rgba(12,185,123,.35);color:var(--success-700)}
+[data-theme="dark"] .selection-info.has-selection{color:#6ee7b7;border-color:rgba(12,185,123,.4)}
 #loadingOverlay{display:none;position:fixed;inset:0;background:rgba(7,11,21,.85);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:22px;color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #loadingOverlay.show{display:flex}
 .spinner{width:62px;height:62px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}
@@ -368,11 +377,13 @@ tbody tr{cursor:pointer;transition:var(--transition)}
 tbody tr:nth-child(even){background:var(--bg)}
 [data-theme="dark"] tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
 tbody tr:hover{background:var(--hover-bg)}
+tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;background:var(--active-bg)!important}
+tbody tr.row-selected{background:linear-gradient(90deg,rgba(66,102,232,.1),transparent)!important}
+[data-theme="dark"] tbody tr.row-selected{background:linear-gradient(90deg,rgba(104,144,250,.15),transparent)!important}
 tbody tr.status-ready{background:linear-gradient(90deg,rgba(12,185,123,.08),transparent)!important}
 [data-theme="dark"] tbody tr.status-ready{background:linear-gradient(90deg,rgba(12,185,123,.12),transparent)!important}
 tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),transparent)!important}
 [data-theme="dark"] tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.1),transparent)!important}
-tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;background:var(--active-bg)!important}
 .empty-row td{text-align:center;color:var(--text-muted);padding:50px 20px;font-size:13px}
 .empty-state{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 20px}
 .empty-state .icon{width:60px;height:60px;border-radius:50%;display:inline-flex!important;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand-500)}
@@ -510,12 +521,20 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
 .template-row{display:grid;grid-template-columns:170px 1fr;gap:11px;align-items:center;margin-bottom:11px}
 .template-row label{font-size:12.5px;color:var(--text-secondary);font-weight:600}
 .template-row input,.template-row textarea,.template-row select{font-size:12.5px}
+.template-row .template-checkbox-label{display:inline-flex!important;align-items:center;gap:9px;cursor:pointer;font-weight:600;font-size:12.5px;color:var(--text-secondary)}
+.template-row .template-checkbox-label input[type="checkbox"]{width:16px;height:16px;accent-color:var(--brand-500);cursor:pointer;flex-shrink:0}
 .template-columns-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
 .template-columns-section .tcs-title{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--brand-700);margin-bottom:10px}
 [data-theme="dark"] .template-columns-section .tcs-title{color:var(--brand-400)}
 .logo-preview{margin-top:11px;padding:11px;background:var(--bg);border-radius:var(--radius-md);border:1.5px dashed var(--border);text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center}
 .logo-preview img{max-width:100%;max-height:120px;border-radius:var(--radius-sm);pointer-events:none}
 .logo-preview .empty-logo{color:var(--text-muted);font-size:12.5px}
+.whatsapp-card{border-color:rgba(37,211,102,.35)}
+.whatsapp-card h4 .ico{color:var(--whatsapp-600)}
+[data-theme="dark"] .whatsapp-card h4 .ico{color:var(--whatsapp-500)}
+.whatsapp-vars{background:linear-gradient(135deg,var(--success-50),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.25);padding:10px 12px;border-radius:var(--radius-md);font-size:11.5px;color:var(--success-700);line-height:1.7;margin-top:8px}
+[data-theme="dark"] .whatsapp-vars{color:#6ee7b7;border-color:rgba(37,211,102,.35)}
+.whatsapp-vars code{background:rgba(37,211,102,.15);padding:1px 5px;border-radius:4px;font-family:'SF Mono','Consolas',monospace;font-size:11px;font-weight:700;margin:0 2px}
 .shortcuts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
 .shortcut-group h4{color:var(--text);margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border);font-size:13.5px;font-weight:700;display:flex!important;align-items:center;gap:7px}
 .shortcut-group h4 .ico{width:15px;height:15px;color:var(--brand-600)}
@@ -647,6 +666,7 @@ tbody tr.selected{outline:2px solid var(--brand-500);outline-offset:-2px;backgro
   .col-chip{padding:6px 10px;font-size:11px}
   .logo-size-row{grid-template-columns:1fr}
   .stats-filter-btn{padding:6px 12px;font-size:11.5px}
+  .template-row{grid-template-columns:1fr}
 }
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -940,6 +960,7 @@ const I = {
   list:'M8 6h13 M8 12h13 M8 18h13 M3 6h0 M3 12h0 M3 18h0',
   box:'M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.27 6.96L12 12.01l8.73-5.05 M12 22.08V12',
   archive:'M21 8v13H3V8 M1 3h22v5H1z M10 12h4',
+  archiveBox:'M3 3h18v5H3z M5 8v13h14V8 M10 12h4 M10 16h4',
   users:'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
   user:'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z',
   cog:'M12 15a3 3 0 100-6 3 3 0 000 6z M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z',
@@ -959,6 +980,8 @@ const I = {
   search:'M11 19a8 8 0 100-16 8 8 0 000 16z M21 21l-4.35-4.35',
   filter:'M22 3H2l8 9.46V19l4 2v-8.54L22 3z',
   check:'M20 6L9 17l-5-5',
+  checkSquare:'M9 11l3 3L22 4 M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',
+  square:'M3 3h18v18H3z',
   x:'M18 6L6 18 M6 6l12 12',
   warning:'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h0',
   info:'M12 22a10 10 0 100-20 10 10 0 000 20z M12 16v-4 M12 8h0',
@@ -995,7 +1018,7 @@ const I = {
   zap:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
   undo:'M3 7v6h6 M21 17a9 9 0 00-15-6.7L3 13',
   inbox:'M22 12h-6l-2 3h-4l-2-3H2 M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z',
-  archiveBox:'M3 3h18v5H3z M5 8v13h14V8 M10 12h4 M10 16h4'
+  whatsapp:'M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z M8.5 8.5c.3 1 1.2 2.3 2.2 3.2 1 .9 2.3 1.8 3.2 2.2'
 };
 function ico(name, size = 16) {
   const p = I[name] || '';
@@ -1009,10 +1032,8 @@ const GITHUB_OWNER = 'omar2006200';
 const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
-
-// 🔥 إعدادات السرعة الجديدة
-const SYNC_INTERVAL = 60000;          // فاصل المزامنة
-const SAVE_COOLDOWN = 1500;           // انتظار أقل بين الحفظ والحفظ
+const SYNC_INTERVAL = 60000;
+const SAVE_COOLDOWN = 1500;
 const SESSION_TIMEOUT = 60 * 60 * 1000;
 const SESSION_WARNING = 5 * 60 * 1000;
 const DRAFT_KEY = 'oms_draft_order';
@@ -1020,9 +1041,9 @@ const THEME_KEY = 'oms_theme';
 const ACCESS_KEY = 'oms_access_key';
 const KEY_HIDDEN_FLAG = 'oms_key_hidden';
 const ACTIVITY_PER_PAGE = 30;
-const SYNC_THROTTLE_MS = 5000;         // تقليل من 10s إلى 5s
-const NOTIF_SAVE_DELAY = 1000;         // حفظ الإشعارات أسرع
-const ACTIVITY_SAVE_DELAY = 2000;      // حفظ سجل النشاط بعد ثانيتين
+const SYNC_THROTTLE_MS = 5000;
+const NOTIF_SAVE_DELAY = 1000;
+const ACTIVITY_SAVE_DELAY = 2000;
 
 const RATE_LEVELS = [
   { min: 3000, interval: 30000, label: 'مرتفعة' },
@@ -1045,9 +1066,6 @@ const DATA_FILES = {
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity','notifications'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
-/* ==============================================================
-   ROLE SYSTEM
-   ============================================================== */
 const ROLE_OWNER   = 'مالك';
 const ROLE_MANAGER = 'مدير';
 const ROLE_WORKER  = 'عامل';
@@ -1078,6 +1096,7 @@ const PERMISSIONS = {
   deleteOrder:{label:'حذف طلب',cat:'entry',icon:'trash'},
   transferSingle:{label:'تحويل فردي',cat:'entry',icon:'arrowRight'},
   bulkTransfer:{label:'تحويل جماعي',cat:'entry',icon:'truck'},
+  selectReadyOrders:{label:'تحديد الطلبات الجاهزة',cat:'ready',icon:'checkSquare'},
   returnSingle:{label:'إرجاع فردي',cat:'ready',icon:'undo'},
   print:{label:'طباعة / PDF',cat:'ready',icon:'printer'},
   moveToLog:{label:'ترحيل للسجل',cat:'ready',icon:'archiveBox'},
@@ -1085,6 +1104,7 @@ const PERMISSIONS = {
   deleteLog:{label:'حذف من السجل',cat:'log',icon:'trash'},
   editReceiptStatus:{label:'تأكيد حالة الاستلام',cat:'log',icon:'inbox'},
   revertReceiptStatus:{label:'التراجع عن تأكيد الاستلام',cat:'log',icon:'undo'},
+  sendWhatsApp:{label:'إرسال إشعار واتساب',cat:'log',icon:'whatsapp'},
   tabToken:{label:'مفتاح الاتصال',cat:'settingsTabs',icon:'key'},
   tabActivity:{label:'سجل النشاط',cat:'settingsTabs',icon:'activity'},
   tabBranches:{label:'الفروع',cat:'settingsTabs',icon:'building'},
@@ -1115,9 +1135,10 @@ const ALL_PERM_KEYS = Object.keys(PERMISSIONS);
 const WORKER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:false, accessSettings:false,
   addOrder:true, editOrder:true, deleteOrder:false, transferSingle:true, bulkTransfer:false,
+  selectReadyOrders:false,
   returnSingle:false,
   print:true, moveToLog:false, editLog:false, deleteLog:false,
-  editReceiptStatus:false, revertReceiptStatus:false,
+  editReceiptStatus:false, revertReceiptStatus:false, sendWhatsApp:false,
   tabToken:false, tabActivity:false, tabBranches:false, tabDrivers:false, tabUsers:false, tabTemplates:false, tabBackup:false,
   manageCustomers:false, manageDrivers:false, manageBranches:false, manageUsers:false,
   editTemplates:false, viewActivity:false, resetActivity:false, reset:false
@@ -1125,9 +1146,10 @@ const WORKER_DEFAULTS = {
 const MANAGER_DEFAULTS = {
   accessDashboard:true, accessEntry:true, accessReady:true, accessLog:true, accessCustomers:true, accessSettings:true,
   addOrder:true, editOrder:true, deleteOrder:true, transferSingle:true, bulkTransfer:true,
+  selectReadyOrders:true,
   returnSingle:true,
   print:true, moveToLog:true, editLog:true, deleteLog:true,
-  editReceiptStatus:true, revertReceiptStatus:false,
+  editReceiptStatus:true, revertReceiptStatus:false, sendWhatsApp:true,
   tabToken:false, tabActivity:true, tabBranches:true, tabDrivers:true, tabUsers:true, tabTemplates:true, tabBackup:true,
   manageCustomers:true, manageDrivers:true, manageBranches:true, manageUsers:true,
   editTemplates:true, viewActivity:true, resetActivity:false, reset:false
@@ -1181,6 +1203,10 @@ const DEFAULT_TEMPLATES = {
     showLocation:true, showStatus:true, showApprovalDate:true, showPay:true,
     showDriver:true, showDriverPhone:true, showNotes:true, showArchivedAt:true,
     showReceiptStatus:true, fontSize:10
+  },
+  whatsapp:{
+    enabled:true,
+    message:'عميلنا الكريم {customer}\n\nنود إعلامك أن طلبك رقم {invoice} قد تم إرساله مع الموصل {driver}\nرقم الموصل: {driverPhone}\n\nيرجى استلام طلبكم منه.\n\nشكراً لتعاملكم معنا'
   }
 };
 
@@ -1189,6 +1215,7 @@ let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branche
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
 let SHAs = {},ETags = {},localMeta = null;
 let pollTimer = null,syncing = false,selectedOrderId = null;
+let selectedReadyIds = new Set();
 let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
 let rateLimitInfo = null, apiCallCount = 0, apiCachedCount = 0;
 let prevStats = { orders:0,ready:0,log:0,total:0 };
@@ -1232,9 +1259,6 @@ const MSG = {
   missingData:    'يرجى تعبئة الحقول المطلوبة'
 };
 
-/* ==============================================================
-   Security
-   ============================================================== */
 document.addEventListener('contextmenu', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 document.addEventListener('copy', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 document.addEventListener('cut', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
@@ -1250,9 +1274,6 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.code === 'KeyU') { e.preventDefault(); return false; }
 });
 
-/* ==============================================================
-   Data Encoding
-   ============================================================== */
 function deriveFixedKey() {
   const s = APP_ID + '|secure|fixed|v3|schema';
   const bytes = new TextEncoder().encode(s);
@@ -1283,9 +1304,6 @@ function decryptText(encoded) {
 }
 function isEncrypted(text) { return typeof text === 'string' && text.startsWith('DAT:v3:'); }
 
-/* ==============================================================
-   Theme
-   ============================================================== */
 let _themeMediaListener = null;
 function initTheme() {
   let saved = localStorage.getItem(THEME_KEY);
@@ -1325,9 +1343,6 @@ function updateThemeBtn() {
   btn.setAttribute('title', isDark ? 'الوضع النهاري' : 'الوضع الليلي');
 }
 
-/* ==============================================================
-   Dialog + Toast + Loading
-   ============================================================== */
 let dialogCallback = null;
 function showDialog(opts) {
   return new Promise(resolve => {
@@ -1417,9 +1432,6 @@ async function ensureJSZip() {
   });
 }
 
-/* ==============================================================
-   Access Key
-   ============================================================== */
 function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
 function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
 function hideKeyForever() { localStorage.setItem(KEY_HIDDEN_FLAG, '1'); }
@@ -1519,9 +1531,6 @@ async function saveNewKey() {
 }
 window.saveNewKey = saveNewKey;
 
-/* ==============================================================
-   Rate Limit
-   ============================================================== */
 function updateRateLimit(headers) {
   const remaining = headers.get('X-RateLimit-Remaining');
   const limit = headers.get('X-RateLimit-Limit');
@@ -1567,9 +1576,6 @@ function maybeNotifyLowRate() {
   if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning', true); }
 }
 
-/* ==============================================================
-   API
-   ============================================================== */
 function apiHeaders(json = false, key = null) {
   const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
   if (json) h['Content-Type'] = 'application/json';
@@ -1657,12 +1663,6 @@ async function apiCreateFile(key, data) {
   return json;
 }
 
-/**
- * ⚡ persistKeys — النسخة السريعة
- * - يكتب الملفات بالتوازي (Promise.all) لتقليل الوقت
- * - لا يكتب meta (يُحدّث تلقائياً عند الحاجة عبر شجرة Git)
- * - يسجل النشاط بشكل مؤجل (batched) لتوفير طلبات
- */
 async function persistKeys(keys) {
   setSyncing(true);
   try {
@@ -1670,23 +1670,18 @@ async function persistKeys(keys) {
     const dataKeys = keys.filter(k => k !== 'activity' && DATA_FILES[k]);
 
     if (dataKeys.length > 0) {
-      // محاولة الكتابة المتوازية
       const writePromises = dataKeys.map(k => {
         if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
         return apiWriteFile(k, cache[k]);
       });
-
       try {
         await Promise.all(writePromises);
       } catch (parallelError) {
-        // في حال فشل أي ملف، نعيد المحاولة بتسلسل للأمان
-        // (نتخطى الناجحة لأن SHA تحدّث بالفعل)
         for (const k of dataKeys) {
           try {
             if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
             else await apiWriteFile(k, cache[k]);
           } catch (e) {
-            // إذا فشل بسبب تعارض، نحاول تحديث SHA مرة واحدة
             if (e.message === 'CONFLICT') {
               try { await apiReadFile(k); } catch {}
               if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
@@ -1700,10 +1695,6 @@ async function persistKeys(keys) {
     if (activityRequested) scheduleActivitySave();
   } finally { setSyncing(false); }
 }
-
-/**
- * حفظ مؤجل لسجل النشاط - يجمع التعديلات المتتالية في طلب واحد
- */
 function scheduleActivitySave() {
   if (_activitySaveTimer) clearTimeout(_activitySaveTimer);
   _activitySaveTimer = setTimeout(async () => {
@@ -1712,9 +1703,7 @@ function scheduleActivitySave() {
     try {
       if (!SHAs.activity && cache.activity) await apiCreateFile('activity', cache.activity);
       else await apiWriteFile('activity', cache.activity);
-    } catch (e) {
-      // تجاهل بصمت — ستُحفظ في المحاولة التالية
-    }
+    } catch (e) {}
   }, ACTIVITY_SAVE_DELAY);
 }
 async function flushActivitySave() {
@@ -1733,6 +1722,7 @@ function applyFileData(k, data, wasPlain) {
     const merged = data ? { ...DEFAULT_TEMPLATES, ...data } : JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
     if (data?.ready) merged.ready = { ...DEFAULT_TEMPLATES.ready, ...data.ready };
     if (data?.log) merged.log = { ...DEFAULT_TEMPLATES.log, ...data.log };
+    if (data?.whatsapp) merged.whatsapp = { ...DEFAULT_TEMPLATES.whatsapp, ...data.whatsapp };
     templates = merged;
   } else {
     cache[k] = Array.isArray(data) ? data : [];
@@ -1753,6 +1743,9 @@ function postProcessData() {
     readBy: Array.isArray(n.readBy) ? n.readBy : [],
     createdBy: n.createdBy || 'system'
   }));
+  // إزالة العناصر المحذوفة من مجموعة التحديد
+  const validIds = new Set(cache.ready.map(o => o.id));
+  Array.from(selectedReadyIds).forEach(id => { if (!validIds.has(id)) selectedReadyIds.delete(id); });
 }
 async function readAll(keysToRead = null) {
   hasLegacyFiles = false;
@@ -1789,29 +1782,27 @@ async function writeMeta(extra = {}) {
     } else throw e;
   }
 }
+async function saveAllDataNowSilent() {
+  const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
+  await Promise.all(dataKeys.map(k => {
+    if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
+    return apiWriteFile(k, cache[k]);
+  }));
+  await flushActivitySave();
+  await writeMeta();
+}
 async function saveAllDataNow() {
   const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن، هل تريد المتابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
   if (!ok) return;
   try {
     showLoading('جاري الحفظ...');
-    // اكتب ملفات البيانات بالتوازي
-    const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
-    await Promise.all(dataKeys.map(k => {
-      if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
-      return apiWriteFile(k, cache[k]);
-    }));
-    // اكتب سجل النشاط والمعرف
-    await flushActivitySave();
-    await writeMeta();
+    await saveAllDataNowSilent();
     hideLoading(); hasLegacyFiles = false;
     toast('✅ تم حفظ جميع البيانات', 'success');
   } catch (e) { hideLoading(); toast(e.message, 'error'); }
 }
 window.saveAllDataNow = saveAllDataNow;
 
-/* ==============================================================
-   Sync
-   ============================================================== */
 async function syncPull(force = false) {
   if (syncing || !currentUser) return;
   const now = Date.now();
@@ -1879,9 +1870,6 @@ function setOnline(ok) {
 function setSyncing(on) { const dot = document.getElementById('connDot'); if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online'); }
 window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; lastSyncTime = 0; await syncPull(true); };
 
-/* ==============================================================
-   Utilities
-   ============================================================== */
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 function fmtDate(d = new Date()) {
   const p = n => String(n).padStart(2, '0');
@@ -1908,9 +1896,6 @@ function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); appl
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
 
-/* ==============================================================
-   Stats Filter
-   ============================================================== */
 window.setStatsFilter = function(type) {
   statsFilter = type;
   document.querySelectorAll('.stats-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.range === type));
@@ -1951,9 +1936,6 @@ function orderInRange(o, from, to) {
   return true;
 }
 
-/* ==============================================================
-   Notifications
-   ============================================================== */
 function scheduleNotificationsSave() {
   if (_notifSaveTimer) clearTimeout(_notifSaveTimer);
   _notifSaveTimer = setTimeout(() => {
@@ -2032,7 +2014,7 @@ window.toggleNotifPanel = function() {
 window.clearAllNotifications = async function() {
   const u = currentUser?.username;
   if (!u) return;
-  const ok = await dialog.confirm('سيتم مسح الإشعارات من جهتك فقط، ولن تتأثر إشعارات بقية المستخدمين.\n\nهل تريد المتابعة؟', { title: 'مسح الإشعارات', okText: 'نعم، امسح', type: 'warning', okClass: 'btn-warning' });
+  const ok = await dialog.confirm('سيتم مسح الإشعارات من جهتك فقط.', { title: 'مسح الإشعارات', okText: 'نعم، امسح', type: 'warning', okClass: 'btn-warning' });
   if (!ok) return;
   (cache.notifications || []).forEach(n => {
     if (!Array.isArray(n.deletedBy)) n.deletedBy = [];
@@ -2042,9 +2024,6 @@ window.clearAllNotifications = async function() {
   try { await persistKeys(['notifications']); toast('تم مسح الإشعارات لديك', 'success'); } catch { toast(MSG.saveFail, 'error'); }
 };
 
-/* ==============================================================
-   Activity Log
-   ============================================================== */
 function logActivity(action, title, description, type = 'info') {
   const entry = { id: uid(), action, title, description, type, user: currentUser?.username || 'system', time: fmtDate(), ts: Date.now() };
   cache.activity.unshift(entry);
@@ -2153,9 +2132,6 @@ window.resetActivityLog = async function() {
   } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   Session Timer
-   ============================================================== */
 function startSessionTimer() {
   stopSessionTimer();
   sessionExpireAt = Date.now() + SESSION_TIMEOUT;
@@ -2194,9 +2170,6 @@ function checkSessionWarning() {
   document.addEventListener(evt, () => { if (currentUser) resetSessionTimer(); }, { passive: true });
 });
 
-/* ==============================================================
-   ROLE / PERMISSIONS
-   ============================================================== */
 function roleLabel(role) {
   if (role === ROLE_OWNER)   return { label:'مالك',  icon:'crown',  cls:'badge-owner' };
   if (role === ROLE_MANAGER) return { label:'مدير',  icon:'shield', cls:'badge-manager' };
@@ -2292,9 +2265,6 @@ function rebuildSettingsTabs() {
   document.getElementById('tab-' + firstId).style.display = 'block';
 }
 
-/* ==============================================================
-   Draft
-   ============================================================== */
 function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
   const draft = { invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value, customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value, customerPhone: document.getElementById('orderCustomerPhone').value, location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value, pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value, driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value };
@@ -2322,9 +2292,6 @@ window.restoreDraft = function () {
   } catch { clearDraft(); }
 };
 
-/* ==============================================================
-   UI Builder
-   ============================================================== */
 function buildUI() {
   document.getElementById('loginLogo').innerHTML = ico('package', 54);
   document.getElementById('adminToggleIcon').innerHTML = ico('shield2', 13);
@@ -2380,8 +2347,11 @@ function buildUI() {
     <button class="btn btn-primary perm-print" onclick="printReady()">${ico('printer', 15)}<span>طباعة</span></button>
     <button class="btn btn-warning perm-print" onclick="exportReadyPDF()">${ico('download', 15)}<span>PDF</span></button>
     <button class="btn btn-purple perm-moveToLog" onclick="moveReadyToLog()">${ico('archiveBox', 15)}<span>ترحيل للسجل</span><kbd>Alt+M</kbd></button>
+    <button class="btn btn-ghost btn-sm perm-selectReadyOrders" onclick="selectAllReady()">${ico('checkSquare', 13)}<span>تحديد الكل</span></button>
+    <button class="btn btn-ghost btn-sm perm-selectReadyOrders" onclick="deselectAllReady()">${ico('square', 13)}<span>إلغاء التحديد</span></button>
+    <span id="readySelectionInfo" class="selection-info" style="display:none;"></span>
     <select id="readyBranchFilter" onchange="renderReady()" style="width:auto;max-width:200px;margin-right:auto;"></select>`;
-  document.getElementById('readyHead').innerHTML = ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+  document.getElementById('readyHead').innerHTML = `<th style="width:40px;text-align:center;"></th>` + ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
 
   document.getElementById('logTitle').innerHTML = ico('archive', 20) + '<span>سجل الطلبات</span>';
   document.getElementById('logFilterBar').innerHTML = `
@@ -2455,15 +2425,12 @@ function buildUI() {
 
   document.getElementById('shortcutsGrid').innerHTML = [
     { title:'التنقل', icon:'home', items: [['الرئيسية',['Alt','1']],['إدخال الطلبات',['Alt','2']],['الطلبات الجاهزة',['Alt','3']],['سجل الطلبات',['Alt','4']],['العملاء',['Alt','5']]]},
-    { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل',['Alt','T']],['جماعي',['Alt','B']],['ترحيل',['Alt','M']]]},
+    { title:'العمليات', icon:'check', items: [['بحث سريع',['Ctrl','K']],['طلب جديد',['Alt','N']],['حفظ',['Ctrl','Enter']],['طباعة',['Ctrl','P']],['تحويل',['Alt','T']],['جماعي',['Alt','B']],['ترحيل',['Alt','M']],['تحديد الكل',['Alt','A']]]},
     { title:'النموذج', icon:'list', items: [['التالي',['Enter']],['السابق',['Shift','Enter']],['حفظ',['Ctrl','Enter']],['إغلاق',['Esc']],['مدفوع',['Alt','P']],['غير مدفوع',['Alt','U']],['VIP',['Alt','V']],['جاهز',['Alt','G']]]},
     { title:'العرض', icon:'eye', items: [['تكبير',['Ctrl','=']],['تصغير',['Ctrl','-']],['100%',['Ctrl','0']],['حذف',['Delete']],['ليلي',['Alt','D']],['إشعارات',['Alt','I']]]}
   ].map(g => `<div class="shortcut-group"><h4>${ico(g.icon, 15)}<span>${g.title}</span></h4>${g.items.map(([d, keys]) => `<div class="shortcut-row"><span class="desc">${d}</span><span class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</span></div>`).join('')}</div>`).join('');
 }
 
-/* ==============================================================
-   Statistics
-   ============================================================== */
 function renderStats() {
   const { from, to } = getStatsDateRange();
   const allOrdersRaw = [...cache.orders, ...cache.ready, ...cache.log];
@@ -2632,9 +2599,6 @@ function renderTrend7Days() {
 }
 function renderDashboard() { renderStats(); }
 
-/* ==============================================================
-   Renderers
-   ============================================================== */
 function renderEntry() {
   const q = (document.getElementById('searchEntry')?.value || '').trim().toLowerCase();
   const branchFilter = document.getElementById('entryBranchFilter')?.value || '';
@@ -2670,18 +2634,71 @@ window.selectRow = function (id, event) {
   document.querySelectorAll('#entryBody tr').forEach(tr => tr.classList.remove('selected'));
   document.querySelector(`#entryBody tr[data-id="${id}"]`)?.classList.add('selected');
 };
-function renderReady() {
+
+/* ══════════════════════════════════════════════════════════════
+   Ready Page — مع تحديد الطلبات
+   ══════════════════════════════════════════════════════════════ */
+function getReadyFilteredData() {
   const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
   let data = cache.ready;
   if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
+  return data;
+}
+function updateReadyHeaderUI() {
+  const head = document.getElementById('readyHead'); if (!head) return;
+  const canSelect = hasPerm('selectReadyOrders');
+  const data = getReadyFilteredData();
+  const visibleIds = data.map(o => o.id);
+  const selectedCount = visibleIds.filter(id => selectedReadyIds.has(id)).length;
+  const allSelected = canSelect && visibleIds.length > 0 && selectedCount === visibleIds.length;
+  const someSelected = canSelect && selectedCount > 0 && selectedCount < visibleIds.length;
+  const checkboxHTML = canSelect
+    ? `<input type="checkbox" id="selectAllReadyHeader" ${allSelected ? 'checked' : ''} onclick="event.stopPropagation();onSelectAllReadyChange(this.checked)" style="cursor:pointer;accent-color:var(--brand-500);width:16px;height:16px;vertical-align:middle;" title="${allSelected ? 'إلغاء تحديد الكل' : 'تحديد الكل'}">`
+    : '';
+  head.innerHTML = `<th style="width:40px;text-align:center;">${checkboxHTML}</th>` +
+    ['#','رقم الفاتورة','الفرع','العميل','هاتف العميل','الموقع','حالة الطلب','تاريخ الاعتماد','الدفع','الموصل','رقم الموصل','ملاحظات','آخر تعديل','إجراءات'].map(h => `<th>${h}</th>`).join('');
+  const cb = document.getElementById('selectAllReadyHeader');
+  if (cb) cb.indeterminate = someSelected;
+}
+function updateReadySelectionInfo() {
+  const el = document.getElementById('readySelectionInfo'); if (!el) return;
+  const canSelect = hasPerm('selectReadyOrders');
+  if (!canSelect) { el.style.display = 'none'; return; }
+  const data = getReadyFilteredData();
+  const visibleIds = data.map(o => o.id);
+  const selectedCount = visibleIds.filter(id => selectedReadyIds.has(id)).length;
+  if (selectedCount === 0) {
+    el.style.display = 'none';
+  } else {
+    el.style.display = 'inline-flex';
+    el.classList.add('has-selection');
+    el.innerHTML = `${ico('checkSquare', 13)}<span>${selectedCount} من ${data.length} محدد</span>`;
+  }
+}
+function renderReady() {
+  const data = getReadyFilteredData();
   const body = document.getElementById('readyBody');
-  if (!data.length) { body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 14); return; }
+  if (!data.length) {
+    body.innerHTML = emptyState('box', 'لا توجد طلبات جاهزة', 'قم بتحويل الطلبات', 15);
+    updateReadyHeaderUI();
+    updateReadySelectionInfo();
+    return;
+  }
+  const canSelect = hasPerm('selectReadyOrders');
   const canReturn = hasPerm('returnSingle');
   body.innerHTML = data.map((o, i) => {
+    const isSelected = selectedReadyIds.has(o.id);
+    const checkboxCell = `<td style="text-align:center;" onclick="event.stopPropagation()">${
+      canSelect
+        ? `<input type="checkbox" class="row-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleReadySelection('${o.id}', this.checked)" onclick="event.stopPropagation()">`
+        : ''
+    }</td>`;
     const returnBtn = canReturn
-      ? `<button class="btn btn-warning btn-sm" onclick="event.stopPropagation();returnReadyToEntry('${o.id}')" title="إرجاع إلى إدخال الطلبات">${ico('undo', 13)}<span>إرجاع</span></button>`
+      ? `<button class="btn btn-warning btn-sm" onclick="event.stopPropagation();returnReadyToEntry('${o.id}')" title="إرجاع">${ico('undo', 13)}<span>إرجاع</span></button>`
       : '—';
-    return `<tr class="${o.status === 'جاهز' ? 'status-ready' : ''}">
+    const rowClass = (o.status === 'جاهز' ? 'status-ready ' : '') + (isSelected ? 'row-selected' : '');
+    return `<tr class="${rowClass.trim()}">
+      ${checkboxCell}
       <td>${i+1}</td><td><b>${esc(o.invoice)}</b></td><td>${branchBadge(o.branch)}</td><td>${esc(o.customer)}</td>
       <td>${phoneBadge(o.customerPhone)}</td>
       <td>${esc(o.location)}</td><td>${badge(o.status)}</td>
@@ -2692,7 +2709,38 @@ function renderReady() {
       <td class="no-print" style="white-space:nowrap;">${returnBtn}</td>
     </tr>`;
   }).join('');
+  updateReadyHeaderUI();
+  updateReadySelectionInfo();
 }
+window.toggleReadySelection = function(id, checked) {
+  if (!hasPerm('selectReadyOrders')) { toast(MSG.unauthorized, 'error'); return; }
+  if (checked) selectedReadyIds.add(id);
+  else selectedReadyIds.delete(id);
+  // تحديث الواجهة فقط
+  renderReady();
+};
+window.onSelectAllReadyChange = function(checked) {
+  if (!hasPerm('selectReadyOrders')) return;
+  const data = getReadyFilteredData();
+  if (checked) data.forEach(o => selectedReadyIds.add(o.id));
+  else data.forEach(o => selectedReadyIds.delete(o.id));
+  renderReady();
+};
+window.selectAllReady = function() {
+  if (!hasPerm('selectReadyOrders')) { toast(MSG.unauthorized, 'error'); return; }
+  const data = getReadyFilteredData();
+  if (!data.length) { toast('لا توجد طلبات لتحديدها', 'warning'); return; }
+  data.forEach(o => selectedReadyIds.add(o.id));
+  renderReady();
+  toast(`تم تحديد ${data.length} طلب`, 'success');
+};
+window.deselectAllReady = function() {
+  if (!hasPerm('selectReadyOrders')) { toast(MSG.unauthorized, 'error'); return; }
+  selectedReadyIds.clear();
+  renderReady();
+  toast('تم إلغاء التحديد', 'info');
+};
+
 function getLogFilteredData() {
   const fromVal = document.getElementById('filterLogFrom')?.value || '';
   const toVal = document.getElementById('filterLogTo')?.value || '';
@@ -2848,9 +2896,6 @@ function populateBranchSelects() {
   if (logSel) { const cur = logSel.value; logSel.innerHTML = '<option value="">الكل</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''); if (cur) logSel.value = cur; }
 }
 
-/* ==============================================================
-   Navigation
-   ============================================================== */
 window.go = function (page) {
   const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
   if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast(MSG.unauthorized, 'error'); return; }
@@ -2878,9 +2923,6 @@ window.switchTab = function (evt, tab) {
   if (tab === 'users') renderUsers();
 };
 
-/* ==============================================================
-   Login
-   ============================================================== */
 window.doLogin = async function () {
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value;
@@ -2945,23 +2987,13 @@ window.doLogin = async function () {
   finally { btn.disabled = false; }
 };
 
-async function saveAllDataNowSilent() {
-  const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
-  await Promise.all(dataKeys.map(k => {
-    if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
-    return apiWriteFile(k, cache[k]);
-  }));
-  await flushActivitySave();
-  await writeMeta();
-}
-
 window.logout = async function (silent = false) {
   if (!silent) { const ok = await dialog.confirm('هل تريد تسجيل الخروج؟', { title: 'تسجيل الخروج' }); if (!ok) return; }
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   try { await flushNotificationsSave(); } catch {}
   try { await flushActivitySave(); } catch {}
   stopPolling(); stopSessionTimer();
-  currentUser = null; selectedOrderId = null; SHAs = {}; ETags = {}; localMeta = null;
+  currentUser = null; selectedOrderId = null; selectedReadyIds.clear(); SHAs = {}; ETags = {}; localMeta = null;
   currentSyncInterval = SYNC_INTERVAL;
   lastSyncTime = 0;
   document.getElementById('app').style.display = 'none';
@@ -2996,9 +3028,6 @@ function startApp() {
   toast(`أهلاً ${currentUser.username}`, 'success');
 }
 
-/* ==============================================================
-   Connection Resilience
-   ============================================================== */
 let _visHandlerAttached = false;
 function attachVisibilityHandler() {
   if (_visHandlerAttached) return;
@@ -3026,9 +3055,6 @@ function attachOnlineHandlers() {
   window.addEventListener('offline', () => { setOnline(false); });
 }
 
-/* ==============================================================
-   Order CRUD
-   ============================================================== */
 window.addOrder = function () {
   if (!hasPerm('addOrder')) { toast(MSG.unauthorized, 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
@@ -3202,9 +3228,6 @@ window.deleteFromLog = async function (id) {
   try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   Customer Search
-   ============================================================== */
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
   const dropdown = document.getElementById('customerDropdown');
@@ -3247,9 +3270,6 @@ function initCustomerSearch() {
   input.addEventListener('blur', () => setTimeout(() => dropdown.classList.remove('show'), 150));
 }
 
-/* ==============================================================
-   Drivers
-   ============================================================== */
 function loadDriversIntoSelects() {
   const sel = document.getElementById('orderDriver'); if (!sel) return;
   const cur = sel.value;
@@ -3281,9 +3301,6 @@ window.deleteDriver = async function (id) {
   try { await persistKeys(['drivers', 'activity']); renderDriversList(); loadDriversIntoSelects(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   Branches
-   ============================================================== */
 window.addBranch = async function () {
   if (!hasPerm('manageBranches')) { toast(MSG.unauthorized, 'error'); return; }
   const name = document.getElementById('newBranchName').value.trim();
@@ -3305,9 +3322,6 @@ window.deleteBranch = async function (id) {
   try { await persistKeys(['branches', 'activity']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   Transfers + Return + Archive
-   ============================================================== */
 window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.orders.find(x => x.id === id); if (!order) return;
@@ -3347,17 +3361,33 @@ window.bulkTransfer = async function () {
     toast(e.message, 'error');
   }
 };
+
+/* ══════════════════════════════════════════════════════════════
+   moveReadyToLog — مع دعم تحديد الطلبات
+   ══════════════════════════════════════════════════════════════ */
 window.moveReadyToLog = async function () {
   if (!hasPerm('moveToLog')) { toast(MSG.unauthorized, 'error'); return; }
   if (!cache.ready.length) { toast('لا توجد طلبات جاهزة', 'error'); return; }
-  const ok = await dialog.confirm(`ترحيل ${cache.ready.length} طلب إلى السجل؟`, { title: 'ترحيل للسجل', okText: 'نعم، رحّل', okClass: 'btn-purple' }); if (!ok) return;
+  const visibleData = getReadyFilteredData();
+  if (!visibleData.length) { toast('لا توجد طلبات في الفلتر الحالي', 'error'); return; }
+  const selectedInVisible = visibleData.filter(o => selectedReadyIds.has(o.id));
+  const toMove = selectedInVisible.length > 0 ? selectedInVisible : visibleData;
+  const mode = selectedInVisible.length > 0 ? `المحددة (${selectedInVisible.length})` : `جميع المعروضة (${visibleData.length})`;
+  const ok = await dialog.confirm(
+    `سيتم ترحيل ${mode} إلى السجل.\n\nهل تريد المتابعة؟`,
+    { title: 'ترحيل للسجل', okText: 'نعم، رحّل', okClass: 'btn-purple' }
+  );
+  if (!ok) return;
+
   const backup = { ready: [...cache.ready], log: [...cache.log] };
   try {
-    const count = cache.ready.length;
+    const count = toMove.length;
     const now = fmtDate();
     const user = currentUser.username;
-    cache.ready.forEach(o => cache.log.push({ ...o, archivedAt: now, archivedBy: user, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
-    cache.ready = [];
+    const idsToMove = new Set(toMove.map(o => o.id));
+    toMove.forEach(o => cache.log.push({ ...o, archivedAt: now, archivedBy: user, receiptStatus: o.receiptStatus || RECEIPT_NOT_RECEIVED }));
+    cache.ready = cache.ready.filter(o => !idsToMove.has(o.id));
+    idsToMove.forEach(id => selectedReadyIds.delete(id));
     logActivity('move-log', `ترحيل ${count} طلب إلى السجل`, '', 'success');
     await persistKeys(['ready', 'log', 'activity']);
     renderReady(); renderDashboard();
@@ -3369,12 +3399,29 @@ window.moveReadyToLog = async function () {
   }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   printReady — مع دعم تحديد الطلبات
+   ══════════════════════════════════════════════════════════════ */
+window.printReady = function () {
+  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
+  const visibleData = getReadyFilteredData();
+  if (!visibleData.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
+  const selectedInVisible = visibleData.filter(o => selectedReadyIds.has(o.id));
+  const data = selectedInVisible.length > 0 ? selectedInVisible : visibleData;
+  if (!data.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
+  const win = window.open('', '_blank');
+  win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
+  win.document.close();
+  logActivity('print-ready', `طباعة ${data.length}${selectedInVisible.length > 0 ? ' (محددة)' : ''}`, '', 'info');
+};
+window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
+
 window.returnReadyToEntry = async function (id) {
   if (!hasPerm('returnSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.ready.find(x => x.id === id);
   if (!order) { toast('الطلب غير موجود', 'error'); return; }
   const ok = await dialog.confirm(
-    `إرجاع الطلب "${order.invoice}" للعميل "${order.customer}" إلى صفحة إدخال الطلبات؟\n\nسيُحذف من قائمة الجاهزة ويعود إلى قائمة النشطة.`,
+    `إرجاع الطلب "${order.invoice}" للعميل "${order.customer}" إلى صفحة إدخال الطلبات؟`,
     { title: 'إرجاع طلب', okText: 'إرجاع', type: 'warning', okClass: 'btn-warning' }
   );
   if (!ok) return;
@@ -3389,6 +3436,7 @@ window.returnReadyToEntry = async function (id) {
     restored.returnedBy = currentUser.username;
     cache.orders.push(restored);
     cache.ready = cache.ready.filter(x => x.id !== id);
+    selectedReadyIds.delete(id);
     logActivity('return-single', `إرجاع طلب: ${order.invoice}`, `العميل: ${order.customer}`, 'warning');
     await persistKeys(['orders', 'ready', 'activity']);
     renderReady(); renderDashboard();
@@ -3398,6 +3446,62 @@ window.returnReadyToEntry = async function (id) {
     cache.orders = backup.orders; cache.ready = backup.ready;
     toast(e.message, 'error');
   }
+};
+
+/* ══════════════════════════════════════════════════════════════
+   WhatsApp Notification
+   ══════════════════════════════════════════════════════════════ */
+function buildWhatsAppMessage(order) {
+  const tpl = (templates.whatsapp?.message) || DEFAULT_TEMPLATES.whatsapp.message;
+  return tpl
+    .replace(/{customer}/g, order.customer || '')
+    .replace(/{invoice}/g, order.invoice || '')
+    .replace(/{driver}/g, order.driver || '—')
+    .replace(/{driverPhone}/g, order.driverPhone || '—')
+    .replace(/{customerPhone}/g, order.customerPhone || '—')
+    .replace(/{date}/g, fmtDate());
+}
+function normalizePhoneForWhatsApp(phone) {
+  if (!phone) return '';
+  let p = String(phone).trim();
+  // إزالة كل ما ليس رقماً
+  p = p.replace(/[^0-9]/g, '');
+  // معالجة الرقم اليمني: إذا كان يبدأ بـ 7 ولم يكن يبدأ بـ 967 أضف 967
+  if (/^7\d{8}$/.test(p)) p = '967' + p;
+  // إذا كان يبدأ بـ 0 (مثل 0770...)، احذف الصفر وأضف 967
+  else if (/^0\d{9}$/.test(p)) p = '967' + p.substring(1);
+  return p;
+}
+function triggerWhatsAppNotification(order) {
+  // فحص التفعيل
+  if (templates.whatsapp?.enabled === false) return;
+  if (!hasPerm('sendWhatsApp')) return;
+  const phone = normalizePhoneForWhatsApp(order.customerPhone);
+  if (!phone) {
+    toast('لا يوجد رقم هاتف للعميل لإرسال الإشعار', 'warning');
+    return;
+  }
+  const message = buildWhatsAppMessage(order);
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  try {
+    const win = window.open(url, '_blank');
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      // في حال منع النوافذ المنبثقة — نستخدم location
+      window.location.href = url;
+    } else {
+      logActivity('whatsapp-sent', `إرسال واتساب: ${order.invoice}`, `إلى: ${order.customer} (${order.customerPhone})`, 'success');
+      toast(`✅ تم فتح واتساب لإرسال الإشعار إلى ${order.customer}`, 'success');
+    }
+  } catch (e) {
+    // Fallback
+    window.location.href = url;
+  }
+}
+window.sendWhatsAppManually = function(orderId) {
+  if (!hasPerm('sendWhatsApp')) { toast(MSG.unauthorized, 'error'); return; }
+  const o = cache.log.find(x => x.id === orderId) || cache.orders.find(x => x.id === orderId) || cache.ready.find(x => x.id === orderId);
+  if (!o) { toast('الطلب غير موجود', 'error'); return; }
+  triggerWhatsAppNotification(o);
 };
 
 window.changeReceiptStatus = async function (id, newStatus) {
@@ -3453,6 +3557,10 @@ window.changeReceiptStatus = async function (id, newStatus) {
       true
     );
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
+    // إرسال واتساب عند تأكيد الاستلام
+    if (newStatus === RECEIPT_RECEIVED) {
+      setTimeout(() => triggerWhatsAppNotification(o), 300);
+    }
   } catch (e) {
     o.receiptStatus = previous;
     o.receiptUpdatedAt = previousAt;
@@ -3462,9 +3570,6 @@ window.changeReceiptStatus = async function (id, newStatus) {
   }
 };
 
-/* ==============================================================
-   Print
-   ============================================================== */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
   const replaceVars = (str) => String(str || '')
@@ -3569,18 +3674,7 @@ function buildPrintHTML(items, template, extra = {}) {
     <\/script>
     </body></html>`;
 }
-window.printReady = function () {
-  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
-  const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
-  let data = cache.ready;
-  if (branchFilter) data = data.filter(o => (o.branch || DEFAULT_BRANCH_NAME) === branchFilter);
-  if (!data.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
-  const win = window.open('', '_blank');
-  win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
-  win.document.close();
-  logActivity('print-ready', `طباعة ${data.length}`, '', 'info');
-};
-window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
+
 window.printLog = function () {
   if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
   const data = getLogFilteredData();
@@ -3594,9 +3688,6 @@ window.printLog = function () {
 };
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
-/* ==============================================================
-   Templates
-   ============================================================== */
 async function resizeImage(file, maxWidth = 1400) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -3647,6 +3738,11 @@ window.updatePaperSize = function(value) {
   if (!hasPerm('editTemplates')) return;
   templates.paperSize = value;
 };
+window.updateWhatsAppSetting = function(field, value) {
+  if (!hasPerm('editTemplates')) return;
+  if (!templates.whatsapp) templates.whatsapp = { ...DEFAULT_TEMPLATES.whatsapp };
+  templates.whatsapp[field] = value;
+};
 function renderTemplates() {
   const container = document.getElementById('templatesContainer');
   if (!hasPerm('editTemplates')) { container.innerHTML = `<div class="perm-note">غير مصرح</div>`; return; }
@@ -3668,6 +3764,29 @@ function renderTemplates() {
     <div style="margin-top:11px;">
       <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px;">حجم ورقة الطباعة</label>
       <select onchange="updatePaperSize(this.value)">${paperOptions}</select>
+    </div>
+  </div>`;
+  const wa = templates.whatsapp || DEFAULT_TEMPLATES.whatsapp;
+  const whatsappSection = `<div class="template-card whatsapp-card"><h4>${ico('whatsapp', 17)}<span>إشعار الواتساب عند الاستلام</span></h4>
+    <div class="template-row">
+      <label>تفعيل الإشعار</label>
+      <label class="template-checkbox-label">
+        <input type="checkbox" ${wa.enabled !== false ? 'checked' : ''} onchange="updateWhatsAppSetting('enabled', this.checked)">
+        <span>${wa.enabled !== false ? 'مفعّل — يُرسل عند تأكيد الاستلام' : 'معطّل'}</span>
+      </label>
+    </div>
+    <div class="template-row">
+      <label>نص الرسالة</label>
+      <textarea rows="6" style="font-family:inherit;line-height:1.6;" onchange="updateWhatsAppSetting('message', this.value)" oninput="updateWhatsAppSetting('message', this.value)">${esc(wa.message || DEFAULT_TEMPLATES.whatsapp.message)}</textarea>
+    </div>
+    <div class="whatsapp-vars">
+      <b>المتغيرات المتاحة:</b>
+      <code>{customer}</code> اسم العميل •
+      <code>{invoice}</code> رقم الفاتورة •
+      <code>{driver}</code> اسم الموصل •
+      <code>{driverPhone}</code> رقم الموصل •
+      <code>{customerPhone}</code> رقم العميل •
+      <code>{date}</code> التاريخ والوقت
     </div>
   </div>`;
   const bodyHTML = ['ready','log'].map(key => {
@@ -3695,7 +3814,7 @@ function renderTemplates() {
       </div>
     </div>`;
   }).join('');
-  container.innerHTML = logoSection + bodyHTML;
+  container.innerHTML = logoSection + whatsappSection + bodyHTML;
 }
 window.updateTemplate = function (key, field, value) {
   if (!templates[key]) templates[key] = { ...DEFAULT_TEMPLATES[key] };
@@ -3704,9 +3823,6 @@ window.updateTemplate = function (key, field, value) {
 window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); } };
 window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة بنجاح', 'info'); };
 
-/* ==============================================================
-   Customers
-   ============================================================== */
 window.openCustomerModal = function () {
   if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('customerModal');
@@ -3767,9 +3883,6 @@ window.deleteCustomer = async function (id) {
   try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   Users
-   ============================================================== */
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('userModal');
@@ -3966,9 +4079,6 @@ window.deleteUser = async function (id) {
   try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
-/* ==============================================================
-   ZIP Backup
-   ============================================================== */
 function downloadBlob(blob, filename) {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
@@ -3999,6 +4109,7 @@ window.resetAll = async function () {
   const ok = await dialog.danger('سيتم حذف جميع الطلبات نهائياً، هل تريد المتابعة؟'); if (!ok) return;
   const ok2 = await dialog.confirm('هل أنت متأكد تماماً؟ لا يمكن التراجع.', { type: 'warning' }); if (!ok2) return;
   cache.orders = []; cache.ready = []; cache.log = [];
+  selectedReadyIds.clear();
   logActivity('reset', 'تصفير النظام', '', 'danger');
   try { await persistKeys(['orders', 'ready', 'log', 'activity']); renderDashboard(); toast('تم التصفير بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
@@ -4017,9 +4128,6 @@ window.exportLogCSV = function () {
   toast('تم تصدير CSV بنجاح', 'success');
 };
 
-/* ==============================================================
-   Modals & Shortcuts
-   ============================================================== */
 window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
 window.getActiveModal = () => document.querySelector('.modal-bg.active');
@@ -4075,6 +4183,7 @@ window.addEventListener('keydown', e => {
       if (c === 'KeyT' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; } if (!selectedOrderId) { toast('يرجى اختيار طلب أولاً', 'warning'); return; } transferSingle(selectedOrderId); return; }
       if (c === 'KeyB' && document.getElementById('page-entry').classList.contains('active')) { e.preventDefault(); bulkTransfer(); return; }
       if (c === 'KeyM' && document.getElementById('page-ready').classList.contains('active')) { e.preventDefault(); moveReadyToLog(); return; }
+      if (c === 'KeyA' && document.getElementById('page-ready').classList.contains('active')) { e.preventDefault(); selectAllReady(); return; }
       if (c === 'KeyD') { e.preventDefault(); toggleTheme(); return; }
       if (c === 'KeyI') { e.preventDefault(); toggleNotifPanel(); return; }
     }
@@ -4112,8 +4221,6 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
-
-// حفظ كل شيء قبل إغلاق النافذة
 window.addEventListener('beforeunload', () => {
   if (!currentUser) return;
   try { if (_notifSaveTimer) flushNotificationsSave(); } catch {}
