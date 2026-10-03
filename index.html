@@ -607,29 +607,10 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
 .pg-info{font-size:11.5px;color:var(--text-muted);font-weight:600;padding:0 8px}
 .pg-info b{color:var(--brand-700);font-weight:700}
 [data-theme="dark"] .pg-info b{color:var(--brand-400)}
-
-/* ═══ شاشة التوجيه إلى واتساب ═══ */
-#whatsappOverlay{display:none;position:fixed;inset:0;background:rgba(7,11,21,.92);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-[data-theme="light"] #whatsappOverlay{background:rgba(31,58,123,.55)}
-#whatsappOverlay.show{display:flex;animation:fadeIn .2s ease}
-.wa-overlay-box{background:var(--card-bg);padding:38px 34px;border-radius:var(--radius-xl);text-align:center;max-width:420px;width:100%;box-shadow:var(--shadow-xl);border:1px solid var(--card-border);animation:slideUp .3s ease}
-.wa-overlay-icon{width:86px;height:86px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--whatsapp-500),var(--whatsapp-600));color:#fff;box-shadow:0 12px 30px rgba(37,211,102,.4);position:relative}
-.wa-overlay-icon::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:3px solid rgba(37,211,102,.4);animation:waPulse 1.5s ease-out infinite}
-@keyframes waPulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.3);opacity:0}}
-.wa-overlay-icon svg{width:44px;height:44px}
-.wa-overlay-title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:8px}
-.wa-overlay-text{font-size:13.5px;color:var(--text-muted);line-height:1.6;margin-bottom:20px}
-.wa-overlay-progress{width:100%;height:5px;background:var(--slate-100);border-radius:3px;overflow:hidden;margin-bottom:22px}
-[data-theme="dark"] .wa-overlay-progress{background:rgba(255,255,255,.06)}
-.wa-overlay-progress .bar{height:100%;background:linear-gradient(90deg,var(--whatsapp-500),var(--whatsapp-600));width:0%;border-radius:3px;transition:width .1s linear}
-.wa-overlay-btn{width:100%;height:44px;border:none;border-radius:var(--radius-md);background:linear-gradient(180deg,#2ee076,var(--whatsapp-500));color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);box-shadow:0 4px 12px rgba(37,211,102,.35)}
-.wa-overlay-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(37,211,102,.5)}
-.wa-overlay-countdown{font-size:11.5px;color:var(--text-muted);margin-top:12px;font-weight:600}
-
 @media print {
     @page { size: A4 portrait; margin: 10mm; }
     html, body { width: 100%; margin: 0 !important; padding: 0 !important; background: #fff !important; color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .stats-filter-bar, .tabs, .draft-badge, .connection-banner, #loadingOverlay, .toast-container, .notif-panel, .activity-filters, .activity-pagination, .rate-widget, #whatsappOverlay { display: none !important; }
+    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .stats-filter-bar, .tabs, .draft-badge, .connection-banner, #loadingOverlay, .toast-container, .notif-panel, .activity-filters, .activity-pagination, .rate-widget { display: none !important; }
     main { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
     .table-wrap { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; border-radius: 0 !important; overflow: visible !important; }
     table { width: 100% !important; max-width: 100% !important; min-width: 0 !important; table-layout: fixed !important; border-collapse: collapse !important; border-spacing: 0 !important; margin: 0 !important; font-size: 9px !important; line-height: 1.25 !important; }
@@ -968,17 +949,6 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
   </div>
 </div>
 
-<div id="whatsappOverlay">
-  <div class="wa-overlay-box">
-    <div class="wa-overlay-icon" id="waOverlayIcon"></div>
-    <div class="wa-overlay-title">جاري التوجيه إلى واتساب</div>
-    <div class="wa-overlay-text">يتم فتح تطبيق واتساب لإرسال الإشعار للعميل، وسيعود النظام تلقائياً خلال ثوانٍ</div>
-    <div class="wa-overlay-progress"><div class="bar" id="waOverlayBar"></div></div>
-    <button class="wa-overlay-btn" onclick="closeWhatsAppOverlay()">العودة إلى النظام</button>
-    <div class="wa-overlay-countdown" id="waOverlayCountdown">سيتم العودة تلقائياً خلال 5 ثوان...</div>
-  </div>
-</div>
-
 <div id="toastContainer" class="toast-container"></div>
 
 <script>
@@ -1152,7 +1122,7 @@ const PERM_CATEGORIES = {
   pages:{label:'الصفحات الرئيسية',icon:'grid'},
   entry:{label:'عمليات إدخال الطلبات',icon:'list'},
   ready:{label:'عمليات الطلبات الجاهزة',icon:'box'},
-  log:{label:'عمليات السجل',cat:'log',icon:'archive'},
+  log:{label:'عمليات السجل',icon:'archive'},
   settingsTabs:{label:'تبويبات الإعدادات',icon:'cog'},
   manage:{label:'إدارة النظام',icon:'shield2'}
 };
@@ -1919,9 +1889,6 @@ function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); appl
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
 
-/* ══════════════════════════════════════════════════════════════
-   فحص تكرار رقم الفاتورة — يشمل جميع الطلبات
-   ══════════════════════════════════════════════════════════════ */
 function isInvoiceDuplicate(invoice, excludeId, excludeType) {
   if (!invoice) return false;
   const inv = String(invoice).trim().toLowerCase();
@@ -2374,8 +2341,6 @@ function buildUI() {
   document.getElementById('notifCloseBtn').innerHTML = ico('x', 15);
   document.getElementById('sessionTimerIcon').innerHTML = ico('clock', 12);
   document.getElementById('rateIcon').innerHTML = ico('zap', 12);
-  const waIconEl = document.getElementById('waOverlayIcon');
-  if (waIconEl) waIconEl.innerHTML = ico('whatsapp', 44);
   updateThemeBtn(); renderRateLimitWidget(); rebuildNav();
 
   document.getElementById('dashGrid').innerHTML = [
@@ -3511,9 +3476,73 @@ window.returnReadyToEntry = async function (id) {
 };
 
 /* ══════════════════════════════════════════════════════════════
-   WhatsApp Notification — شاشة توجيه + فتح بدون تسجيل خروج
-   يعمل على: Android / Windows / Web
+   WhatsApp Notification — فتح مباشر بدون أي واجهة أو انتظار
+   يعمل على: Android / iOS / Windows / Mac / Web
    ══════════════════════════════════════════════════════════════ */
+function openWhatsApp(phone, message) {
+  phone = String(phone).replace(/[^\d]/g, '');
+  const text = encodeURIComponent(message);
+
+  const ua = navigator.userAgent;
+
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isWindows = /Windows/i.test(ua);
+  const isMac = /Macintosh|Mac OS X/i.test(ua);
+
+  // 📱 Android
+  if (isAndroid) {
+    const appUrl =
+      `intent://send?phone=${phone}&text=${text}` +
+      `#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+
+    window.location.href = appUrl;
+
+    setTimeout(() => {
+      window.location.href =
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+    }, 1800);
+
+    return;
+  }
+
+  // 🍎 iPhone / iPad
+  if (isIOS) {
+    window.location.href =
+      `whatsapp://send?phone=${phone}&text=${text}`;
+
+    setTimeout(() => {
+      window.location.href =
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+    }, 1800);
+
+    return;
+  }
+
+  // 💻 Windows
+  if (isWindows) {
+    const desktopUrl =
+      `whatsapp://send?phone=${phone}&text=${text}`;
+
+    window.location.href = desktopUrl;
+
+    setTimeout(() => {
+      window.open(
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`,
+        '_blank'
+      );
+    }, 2000);
+
+    return;
+  }
+
+  // 💻 Mac / الأجهزة الأخرى
+  window.open(
+    `https://web.whatsapp.com/send?phone=${phone}&text=${text}`,
+    '_blank'
+  );
+}
+
 function buildWhatsAppMessage(order) {
   const tpl = (templates.whatsapp?.message) || DEFAULT_TEMPLATES.whatsapp.message;
   return tpl
@@ -3532,46 +3561,6 @@ function normalizePhoneForWhatsApp(phone) {
   else if (/^0\d{9}$/.test(p)) p = '967' + p.substring(1);
   return p;
 }
-
-let _waOverlayInterval = null;
-const WA_OVERLAY_DURATION = 5000;
-
-function showWhatsAppOverlay() {
-  const overlay = document.getElementById('whatsappOverlay');
-  if (!overlay) return;
-  const iconEl = document.getElementById('waOverlayIcon');
-  if (iconEl && !iconEl.innerHTML) iconEl.innerHTML = ico('whatsapp', 44);
-  const bar = document.getElementById('waOverlayBar');
-  if (bar) bar.style.width = '0%';
-  const cd = document.getElementById('waOverlayCountdown');
-  if (cd) cd.textContent = 'سيتم العودة تلقائياً خلال 5 ثوان...';
-  overlay.classList.add('show');
-  const start = Date.now();
-  if (_waOverlayInterval) clearInterval(_waOverlayInterval);
-  _waOverlayInterval = setInterval(() => {
-    const elapsed = Date.now() - start;
-    const pct = Math.min(100, (elapsed / WA_OVERLAY_DURATION) * 100);
-    if (bar) bar.style.width = pct + '%';
-    const cdEl = document.getElementById('waOverlayCountdown');
-    if (cdEl) {
-      const remaining = Math.max(0, Math.ceil((WA_OVERLAY_DURATION - elapsed) / 1000));
-      cdEl.textContent = `سيتم العودة تلقائياً خلال ${remaining} ثوان...`;
-    }
-    if (elapsed >= WA_OVERLAY_DURATION) {
-      clearInterval(_waOverlayInterval);
-      _waOverlayInterval = null;
-      hideWhatsAppOverlay();
-    }
-  }, 50);
-}
-
-function hideWhatsAppOverlay() {
-  const overlay = document.getElementById('whatsappOverlay');
-  if (overlay) overlay.classList.remove('show');
-  if (_waOverlayInterval) { clearInterval(_waOverlayInterval); _waOverlayInterval = null; }
-}
-window.closeWhatsAppOverlay = hideWhatsAppOverlay;
-
 function triggerWhatsAppNotification(order) {
   if (templates.whatsapp?.enabled === false) return;
   if (!hasPerm('sendWhatsApp')) return;
@@ -3581,34 +3570,9 @@ function triggerWhatsAppNotification(order) {
     return;
   }
   const message = buildWhatsAppMessage(order);
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   logActivity('whatsapp-sent', `إرسال واتساب: ${order.invoice}`, `إلى: ${order.customer} (${order.customerPhone})`, 'success');
-
-  // 1) إظهار شاشة التوجيه فوق النظام مباشرة (بدون مغادرة الصفحة)
-  showWhatsAppOverlay();
-
-  // 2) فتح واتساب في تبويب/نافذة جديدة — النظام الأصلي يبقى يعمل
-  //    نستخدم عنصر <a> لأنه يتجاوز حاجب النوافذ المنبثقة في معظم المتصفحات
-  let popupOk = false;
-  try {
-    const a = document.createElement('a');
-    a.href = url;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;pointer-events:none;';
-    document.body.appendChild(a);
-    a.click();
-    popupOk = true;
-    setTimeout(() => { try { a.remove(); } catch (_) {} }, 400);
-  } catch (_) { popupOk = false; }
-
-  // 3) احتياطي إذا حجب المتصفح العنصر (نادر جداً)
-  if (!popupOk) {
-    try { window.open(url, '_blank', 'noopener,noreferrer'); }
-    catch (_) { toast('يرجى السماح بالنوافذ المنبثقة لإرسال الإشعار', 'warning'); }
-  }
-
-  // 4) الشاشة تُغلق تلقائياً بعد 5 ثوان — والنظام يستمر بدون أي تسجيل خروج
+  // ✅ فتح واتساب مباشرة بحسب الجهاز — بدون أي واجهة أو انتظار
+  openWhatsApp(phone, message);
 }
 window.sendWhatsAppManually = function(orderId) {
   if (!hasPerm('sendWhatsApp')) { toast(MSG.unauthorized, 'error'); return; }
@@ -3670,6 +3634,7 @@ window.changeReceiptStatus = async function (id, newStatus) {
       true
     );
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
+    // 📱 فتح واتساب مباشرة عند تأكيد الاستلام
     if (newStatus === RECEIPT_RECEIVED) {
       setTimeout(() => triggerWhatsAppNotification(o), 400);
     }
