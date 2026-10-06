@@ -3476,8 +3476,27 @@ window.returnReadyToEntry = async function (id) {
 };
 
 /* ══════════════════════════════════════════════════════════════
-   WhatsApp Notification — فتح مباشر بدون أي واجهة أو انتظار
-   يعمل على: Android / iOS / Windows / Mac / Web
+   فتح تبويب في الخلفية + إغلاقه تلقائياً بعد 5 ثوان
+   ══════════════════════════════════════════════════════════════ */
+function openBackgroundTab(url, closeAfterMs = 5000) {
+  let win = null;
+  try { win = window.open(url, '_blank'); } catch (_) { win = null; }
+  if (!win) return null;
+  // محاولة إبقاء التبويب في الخلفية دون سرقة التركيز من النظام
+  try { win.blur(); } catch (_) {}
+  try { window.focus(); } catch (_) {}
+  // إغلاق تلقائي بعد المدة المحددة (افتراضياً 5 ثوان)
+  if (closeAfterMs > 0) {
+    setTimeout(() => { try { win.close(); } catch (_) {} }, closeAfterMs);
+  }
+  return win;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WhatsApp — فتح مباشر بحسب المنصة
+   - Android / iOS: فتح التطبيق مباشرة (بدون تبويب)
+   - Windows: فتح التطبيق، وإن فشل يفتح Web في تبويب خلفي يُغلق بعد 5 ثوان
+   - Mac / Web: فتح Web في تبويب خلفي يُغلق بعد 5 ثوان
    ══════════════════════════════════════════════════════════════ */
 function openWhatsApp(phone, message) {
   phone = String(phone).replace(/[^\d]/g, '');
@@ -3499,8 +3518,9 @@ function openWhatsApp(phone, message) {
     window.location.href = appUrl;
 
     setTimeout(() => {
-      window.location.href =
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+      openBackgroundTab(
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
+      );
     }, 1800);
 
     return;
@@ -3512,8 +3532,9 @@ function openWhatsApp(phone, message) {
       `whatsapp://send?phone=${phone}&text=${text}`;
 
     setTimeout(() => {
-      window.location.href =
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+      openBackgroundTab(
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
+      );
     }, 1800);
 
     return;
@@ -3527,9 +3548,8 @@ function openWhatsApp(phone, message) {
     window.location.href = desktopUrl;
 
     setTimeout(() => {
-      window.open(
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`,
-        '_blank'
+      openBackgroundTab(
+        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
       );
     }, 2000);
 
@@ -3537,9 +3557,8 @@ function openWhatsApp(phone, message) {
   }
 
   // 💻 Mac / الأجهزة الأخرى
-  window.open(
-    `https://web.whatsapp.com/send?phone=${phone}&text=${text}`,
-    '_blank'
+  openBackgroundTab(
+    `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
   );
 }
 
