@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>نظام إدارة الطلبات</title>
+<title>نظام إدارة الطلبات v3.5</title>
 <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22%D9%86%D8%B8%D8%A7%D9%85%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%D8%A7%D8%AA%22%2C%22short_name%22%3A%22%D8%A7%D9%84%D8%B7%D9%84%D8%A8%D8%A7%D8%AA%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%233654d4%22%2C%22theme_color%22%3A%22%233654d4%22%7D">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -87,8 +87,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;f
 .btn-purple:hover:not(:disabled){background:linear-gradient(180deg,#c4b5fd 0%,#a78bfa 50%,#8b5cf6 100%);box-shadow:0 8px 22px rgba(124,58,237,.45),var(--shadow-inset)}
 .btn-gray{background:linear-gradient(180deg,#94a3b8 0%,#64748b 55%,#475569 100%);color:#fff;box-shadow:0 1px 3px rgba(51,65,85,.3),var(--shadow-inset)}
 .btn-gray:hover:not(:disabled){background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 55%,#64748b 100%);box-shadow:0 8px 22px rgba(71,85,105,.35),var(--shadow-inset)}
-.btn-whatsapp{background:linear-gradient(180deg,#2ee076 0%,var(--whatsapp-500) 50%,var(--whatsapp-600) 100%);color:#fff;box-shadow:0 1px 3px rgba(18,140,126,.35),var(--shadow-inset)}
-.btn-whatsapp:hover:not(:disabled){background:linear-gradient(180deg,#4bf090 0%,#2ee076 50%,var(--whatsapp-500) 100%);box-shadow:0 8px 22px rgba(37,211,102,.45),var(--shadow-inset)}
 .btn-ghost{background:var(--card-bg);color:var(--text-secondary);border:1.5px solid var(--border);box-shadow:var(--shadow-xs)}
 .btn-ghost:hover:not(:disabled){background:var(--card-bg);border-color:var(--brand-500);color:var(--brand-600);box-shadow:0 3px 12px rgba(66,102,232,.18)}
 [data-theme="dark"] .btn-ghost:hover:not(:disabled){border-color:var(--brand-400);color:var(--brand-400);box-shadow:0 3px 12px rgba(104,144,250,.22)}
@@ -102,7 +100,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;f
 .btn-icon .badge-num{position:absolute;top:-4px;left:-4px;background:linear-gradient(180deg,#f9717f,var(--danger-500));color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;min-width:16px;text-align:center;border:1.5px solid rgba(255,255,255,.9);box-shadow:0 2px 6px rgba(239,61,82,.55)}
 kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;border-radius:4px;font-size:10px;font-family:'SF Mono','Consolas',monospace;font-weight:600;display:inline-block;line-height:1.3;pointer-events:none;border:1px solid rgba(15,23,42,.06)}
 [data-theme="dark"] kbd{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.06);color:var(--text)}
-.btn-warning kbd,.btn-primary kbd,.btn-success kbd,.btn-danger kbd,.btn-purple kbd,.btn-gray kbd,.btn-whatsapp kbd{background:rgba(255,255,255,.22);color:#fff;border-color:rgba(255,255,255,.18)}
+.btn-warning kbd,.btn-primary kbd,.btn-success kbd,.btn-danger kbd,.btn-purple kbd,.btn-gray kbd{background:rgba(255,255,255,.22);color:#fff;border-color:rgba(255,255,255,.18)}
 .rate-widget{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:14px;font-size:10.5px;font-weight:600;cursor:help;position:relative;min-width:135px;transition:var(--transition);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .rate-widget:hover{background:rgba(255,255,255,.2)}
 .rate-widget .rate-ico{display:inline-flex;align-items:center;justify-content:center;opacity:.9}
@@ -111,6 +109,7 @@ kbd{background:rgba(15,23,42,.08);color:var(--text-secondary);padding:2px 6px;bo
 .rate-widget.warn .rate-fill{background:linear-gradient(90deg,#ffd66b,#f5a318)}
 .rate-widget.danger .rate-fill{background:linear-gradient(90deg,#f9717f,#ef3d52);animation:pulseRed 1.5s infinite}
 .rate-widget .rate-text{font-family:'SF Mono','Consolas',monospace;letter-spacing:.3px;white-space:nowrap;font-size:10px;opacity:.95;direction:ltr}
+#saveQueueIndicator{display:none;align-items:center;gap:4px;padding:4px 10px;border-radius:12px;background:rgba(255,193,7,.25);border:1px solid rgba(255,193,7,.4);font-size:10.5px;font-weight:700;color:#fff;animation:pulseBlue 1s infinite}
 @media(max-width:1000px){.rate-widget .rate-text{display:none}.rate-widget{min-width:auto;padding:5px 8px}}
 @media(max-width:700px){.rate-widget .rate-bar{width:36px}.rate-widget{min-width:auto;padding:4px 7px;font-size:9.5px}}
 .col-toggles{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
@@ -610,7 +609,7 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
 @media print {
     @page { size: A4 portrait; margin: 10mm; }
     html, body { width: 100%; margin: 0 !important; padding: 0 !important; background: #fff !important; color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .stats-filter-bar, .tabs, .draft-badge, .connection-banner, #loadingOverlay, .toast-container, .notif-panel, .activity-filters, .activity-pagination, .rate-widget { display: none !important; }
+    header, nav, .toolbar, .no-print, .section-header .hint, .filter-bar, .stats-filter-bar, .tabs, .draft-badge, .connection-banner, #loadingOverlay, .toast-container, .notif-panel, .activity-filters, .activity-pagination, .rate-widget, #saveQueueIndicator { display: none !important; }
     main { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
     .table-wrap { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; border-radius: 0 !important; overflow: visible !important; }
     table { width: 100% !important; max-width: 100% !important; min-width: 0 !important; table-layout: fixed !important; border-collapse: collapse !important; border-spacing: 0 !important; margin: 0 !important; font-size: 9px !important; line-height: 1.25 !important; }
@@ -676,6 +675,7 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:var(--slate-500);background-clip:padding-box}
 </style>
 </head>
+
 <body oncontextmenu="return false">
 
 <div id="connectionBanner" class="connection-banner">
@@ -707,7 +707,7 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo" id="loginLogo"></div>
-    <h1>نظام إدارة الطلبات</h1>
+    <h1>نظام إدارة الطلبات v3.5</h1>
     <p class="subtitle">منصة احترافية لإدارة الطلبات</p>
     <div id="keyStatus"></div>
     <div id="keyField" style="display:none;">
@@ -747,9 +747,10 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
   <header>
     <div class="brand">
       <span class="brand-logo" id="brandLogo"></span>
-      <h1>نظام إدارة الطلبات</h1>
+      <h1>نظام إدارة الطلبات v3.5</h1>
     </div>
     <div class="user-info">
+      <span id="saveQueueIndicator"></span>
       <div class="rate-widget" id="rateWidget" title="استهلاك الحصة">
         <span class="rate-ico" id="rateIcon"></span>
         <div class="rate-bar"><div class="rate-fill" id="rateFill"></div></div>
@@ -907,7 +908,7 @@ tbody tr.status-progress{background:linear-gradient(90deg,rgba(245,163,24,.08),t
   <input type="hidden" id="userId">
   <label class="field-required">اسم المستخدم</label><input id="userName" autocomplete="off">
   <div class="field-error-msg" id="err-userName"></div>
-  <label class="field-required">كلمة المرور</label><input id="userPass" type="text" autocomplete="off" placeholder="4 أحرف على الأقل">
+  <label class="field-required">كلمة المرور</label><input id="userPass" type="text" autocomplete="off" placeholder="6 أحرف على الأقل مع أحرف وأرقام">
   <div class="field-error-msg" id="err-userPass"></div>
   <label>الدور</label>
   <select id="userRole" onchange="onUserRoleChange()"></select>
@@ -1025,9 +1026,12 @@ function ico(name, size = 16) {
   return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
 }
 
-const GITHUB_OWNER = 'omar2006200';
-const GITHUB_REPO  = 'Bajandouh';
-const APP_ID       = 'Bajandouh';
+/* ══════════════════════════════════════════════════════════════
+   CONSTANTS
+   ══════════════════════════════════════════════════════════════ */
+const GITHUB_OWNER = 'prizes2000-blip';
+const GITHUB_REPO  = 'test';
+const APP_ID       = 'test';
 const APP_BRANCH   = 'main';
 const SYNC_INTERVAL = 60000;
 const SAVE_COOLDOWN = 1500;
@@ -1051,15 +1055,35 @@ const RATE_LEVELS = [
   { min: 0,    interval: 0,      label: 'حرجة — موقوفة' }
 ];
 
-const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
-const TREE_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${APP_BRANCH}?recursive=1`;
+/* ─── بنية الملفات الجديدة ─── */
 const DATA_FILES = {
-  users:'data/users.json', orders:'data/orders.json', ready:'data/ready.json',
-  log:'data/log.json', customers:'data/customers.json', drivers:'data/drivers.json',
-  branches:'data/branches.json', templates:'data/templates.json',
-  activity:'data/activity.json', notifications:'data/notifications.json',
-  meta:'data/meta.json'
+  orders:        'data/orders.json',
+  ready:         'data/ready.json',
+  log:           'data/log.json',
+  customers:     'data/customers.json',
+  settings:      'data/settings.json',
+  notifications: 'data/notifications.json',
+  meta:          'data/meta.json'
 };
+const KEY_TO_FILE = {
+  orders:'orders', ready:'ready', log:'log', customers:'customers',
+  users:'settings', drivers:'settings', branches:'settings', templates:'settings',
+  notifications:'notifications', meta:'meta'
+};
+const LEGACY_FILES = {
+  users:     'data/users.json',
+  drivers:   'data/drivers.json',
+  branches:  'data/branches.json',
+  templates: 'data/templates.json',
+  activity:  'data/activity.json'
+};
+const ACTIVITY_DIR = 'data/activity';
+function getMonthKey(d = new Date()) {
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}`;
+}
+function getActivityPath(month) { return `${ACTIVITY_DIR}/${month}.json`; }
+
 const DATA_KEYS = ['users','orders','ready','log','customers','drivers','branches','templates','activity','notifications'];
 const DEFAULT_BRANCH_NAME = 'المستودع الرئيسي';
 
@@ -1205,10 +1229,13 @@ const DEFAULT_TEMPLATES = {
   }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════════ */
 let currentUser = null;
 let cache = { users:[],orders:[],ready:[],log:[],customers:[],drivers:[],branches:[],templates:{},activity:[],notifications:[] };
 let templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
-let SHAs = {},ETags = {},localMeta = null;
+let localMeta = null;
 let pollTimer = null,syncing = false,selectedOrderId = null;
 let selectedReadyIds = new Set();
 let zoomLevel = 1,tempPerms = {},lastSaveTime = 0,saveInProgress = false;
@@ -1222,12 +1249,9 @@ let activityFilterType = '';
 let activitySearchQuery = '';
 let currentSyncInterval = SYNC_INTERVAL;
 let lastSyncTime = 0;
-let visibilityHandlerAttached = false;
-let onlineHandlerAttached = false;
 let lastRateNotificationAt = 0;
 let _notifSaveTimer = null;
 let _activitySaveTimer = null;
-let _treeApiDisabled = false;
 let _lastNotifUnreadCount = 0;
 let statsFilter = 'all';
 let statsFromDate = '';
@@ -1255,6 +1279,9 @@ const MSG = {
   invoiceDup:     'رقم الفاتورة مستخدم مسبقاً'
 };
 
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL PROTECTION
+   ══════════════════════════════════════════════════════════════ */
 document.addEventListener('contextmenu', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 document.addEventListener('copy', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
 document.addEventListener('cut', e => { const t = e.target; if (t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA') e.preventDefault(); });
@@ -1270,6 +1297,9 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.code === 'KeyU') { e.preventDefault(); return false; }
 });
 
+/* ══════════════════════════════════════════════════════════════
+   ENCRYPTION (XOR + base64 — للبيانات JSON)
+   ══════════════════════════════════════════════════════════════ */
 function deriveFixedKey() {
   const s = APP_ID + '|secure|fixed|v3|schema';
   const bytes = new TextEncoder().encode(s);
@@ -1300,415 +1330,376 @@ function decryptText(encoded) {
 }
 function isEncrypted(text) { return typeof text === 'string' && text.startsWith('DAT:v3:'); }
 
-let _themeMediaListener = null;
-function initTheme() {
-  let saved = localStorage.getItem(THEME_KEY);
-  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  updateMetaThemeColor(saved);
-  updateThemeBtn();
-  if (window.matchMedia) {
-    if (_themeMediaListener) window.matchMedia('(prefers-color-scheme: dark)').removeEventListener?.('change', _themeMediaListener);
-    _themeMediaListener = (e) => {
-      if (!localStorage.getItem(THEME_KEY)) {
-        const t = e.matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', t);
-        updateMetaThemeColor(t); updateThemeBtn();
-      }
+/* ══════════════════════════════════════════════════════════════
+   SECURITY LAYER — تشفير كلمات المرور PBKDF2-SHA256
+   ══════════════════════════════════════════════════════════════ */
+const Crypto = (() => {
+  const ITERATIONS = 100000;
+  const KEY_LEN = 32;
+  const DIGEST = 'SHA-256';
+
+  async function pbkdf2(password, salt, iterations = ITERATIONS) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      'raw', enc.encode(password), { name: 'PBKDF2' }, false, ['deriveBits']
+    );
+    const bits = await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt, iterations, hash: DIGEST },
+      keyMaterial,
+      KEY_LEN * 8
+    );
+    return new Uint8Array(bits);
+  }
+  function toHex(bytes) { return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(''); }
+  function fromHex(hex) {
+    const out = new Uint8Array(hex.length / 2);
+    for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i*2, 2), 16);
+    return out;
+  }
+  async function hashPassword(password) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const hash = await pbkdf2(password, salt);
+    return {
+      passwordHash: toHex(hash),
+      passwordSalt: toHex(salt),
+      passwordAlgo: `PBKDF2-${DIGEST}-${ITERATIONS}`
     };
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', _themeMediaListener);
   }
-}
-function updateMetaThemeColor(theme) {
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#070b15' : '#3654d4');
-}
-function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem(THEME_KEY, next);
-  updateMetaThemeColor(next); updateThemeBtn();
-  const btn = document.getElementById('themeBtn');
-  if (btn) { btn.style.transform = 'rotate(360deg) scale(1.15)'; setTimeout(() => { btn.style.transform = ''; }, 350); }
-}
-function updateThemeBtn() {
-  const btn = document.getElementById('themeBtn'); if (!btn) return;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  btn.innerHTML = isDark ? ico('sun', 17) : ico('moon', 17);
-  btn.setAttribute('title', isDark ? 'الوضع النهاري' : 'الوضع الليلي');
-}
-
-let dialogCallback = null;
-function showDialog(opts) {
-  return new Promise(resolve => {
-    dialogCallback = resolve;
-    const { type = 'info', title, message, okText, cancelText, showCancel = true, okClass } = opts;
-    const iconMap = { info:'info', warning:'warning', danger:'trash', success:'check', question:'info' };
-    const titleMap = { info:'تنبيه', warning:'تحذير', danger:'تأكيد الحذف', success:'تم بنجاح', question:'تأكيد' };
-    const iconEl = document.getElementById('dialogIcon');
-    iconEl.className = 'dialog-icon ' + (type === 'danger' ? 'danger' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info');
-    iconEl.innerHTML = ico(iconMap[type] || 'info', 34);
-    document.getElementById('dialogTitle').textContent = title || titleMap[type] || 'تنبيه';
-    document.getElementById('dialogMessage').textContent = message || '';
-    document.getElementById('dialogOkBtn').textContent = okText || 'موافق';
-    document.getElementById('dialogOkBtn').className = 'btn ' + (okClass || (type === 'danger' ? 'btn-danger' : type === 'success' ? 'btn-success' : 'btn-primary'));
-    const cancelBtn = document.getElementById('dialogCancelBtn');
-    cancelBtn.textContent = cancelText || 'إلغاء';
-    cancelBtn.style.display = showCancel ? '' : 'none';
-    document.getElementById('dialogBg').classList.add('active');
-  });
-}
-window.dialogResolve = function(r) {
-  document.getElementById('dialogBg').classList.remove('active');
-  if (dialogCallback) dialogCallback(r);
-  dialogCallback = null;
-};
-const dialog = {
-  alert: (msg, o = {}) => showDialog({ type: o.type || 'info', title: o.title, message: msg, showCancel: false, okText: o.okText || 'حسناً' }),
-  confirm: (msg, o = {}) => showDialog({ type: o.type || 'question', title: o.title, message: msg, okText: o.okText || 'تأكيد', showCancel: true, okClass: o.okClass }),
-  danger: (msg, o = {}) => showDialog({ type: 'danger', title: o.title || 'تأكيد الحذف', message: msg, okText: o.okText || 'نعم، احذف', showCancel: true })
-};
-function toast(msg, type = 'info') {
-  const icons = { success:'check', error:'x', info:'info', warning:'warning' };
-  const container = document.getElementById('toastContainer');
-  const el = document.createElement('div');
-  el.className = 'toast ' + type;
-  el.innerHTML = `<span class="toast-icon">${ico(icons[type] || 'info', 14)}</span><span class="toast-msg">${msg}</span>`;
-  container.appendChild(el);
-  setTimeout(() => el.classList.add('show'), 10);
-  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); }, 3200);
-}
-function showLoading(t = 'جاري التحميل...', pct = null) {
-  document.getElementById('loadingText').textContent = t;
-  const bar = document.getElementById('loadingBar');
-  if (bar) bar.style.width = (pct !== null ? pct : 0) + '%';
-  document.getElementById('loadingOverlay').classList.add('show');
-}
-function setLoadingProgress(pct, txt) {
-  const bar = document.getElementById('loadingBar');
-  if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
-  if (txt) document.getElementById('loadingText').textContent = txt;
-}
-function hideLoading() {
-  document.getElementById('loadingOverlay').classList.remove('show');
-  const bar = document.getElementById('loadingBar');
-  if (bar) bar.style.width = '0%';
-}
-function setFieldError(fieldId, message) {
-  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
-  if (f) f.classList.add('field-error'); if (e) { e.textContent = message; e.classList.add('show'); }
-}
-function clearFieldError(fieldId) {
-  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
-  if (f) f.classList.remove('field-error'); if (e) { e.textContent = ''; e.classList.remove('show'); }
-}
-function clearAllErrors(modalId) {
-  const modal = document.getElementById(modalId); if (!modal) return;
-  modal.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
-  modal.querySelectorAll('.field-error-msg').forEach(el => { el.textContent = ''; el.classList.remove('show'); });
-}
-function focusFirstError(modalId) {
-  const modal = document.getElementById(modalId);
-  const first = modal?.querySelector('.field-error'); if (first) first.focus();
-}
-function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
-function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
-async function ensureJSZip() {
-  if (typeof JSZip !== 'undefined') return true;
-  return new Promise((resolve) => {
-    const existing = document.querySelector('script[data-jszip-loader]');
-    if (existing) { existing.addEventListener('load', () => resolve(typeof JSZip !== 'undefined')); existing.addEventListener('error', () => resolve(false)); return; }
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    script.setAttribute('data-jszip-loader', '1');
-    script.onload = () => resolve(typeof JSZip !== 'undefined');
-    script.onerror = () => resolve(false);
-    document.head.appendChild(script);
-  });
-}
-
-function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
-function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
-function hideKeyForever() { localStorage.setItem(KEY_HIDDEN_FLAG, '1'); }
-function isKeyHidden() { return localStorage.getItem(KEY_HIDDEN_FLAG) === '1'; }
-async function clearKey() {
-  const ok = await dialog.confirm('سيتم إزالة المفتاح من هذا الجهاز، هل تريد المتابعة؟', { type: 'warning', title: 'إزالة المفتاح' });
-  if (!ok) return;
-  localStorage.removeItem(ACCESS_KEY);
-  localStorage.removeItem(KEY_HIDDEN_FLAG);
-  toast('تمت إزالة المفتاح بنجاح', 'success');
-  updateKeyStatus(); updateCurrentKeyInfo();
-}
-function updateKeyStatus() {
-  const statusEl = document.getElementById('keyStatus');
-  const fieldEl = document.getElementById('keyField');
-  const token = getStoredKey();
-  if (isKeyHidden() && token) { statusEl.style.display = 'none'; fieldEl.style.display = 'none'; return; }
-  statusEl.style.display = '';
-  if (token) {
-    statusEl.className = 'key-status saved';
-    statusEl.innerHTML = `<span>${ico('check', 14)} المفتاح جاهز للاستخدام</span><button onclick="showKeyField()">تغيير</button>`;
-    fieldEl.style.display = 'none';
-  } else {
-    statusEl.className = 'key-status missing';
-    statusEl.innerHTML = `<span>${ico('warning', 14)} يرجى إدخال المفتاح</span>`;
-    fieldEl.style.display = 'block';
-  }
-}
-function showKeyField() {
-  document.getElementById('keyField').style.display = 'block';
-  document.getElementById('keyStatus').style.display = 'none';
-  document.getElementById('loginKey').focus();
-}
-function updateCurrentKeyInfo() {
-  const el = document.getElementById('currentKeyInfo'); if (!el) return;
-  const token = getStoredKey();
-  if (token) {
-    el.innerHTML = `<div style="color:var(--success-600);font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div><div>الطول: ${token.length} حرف</div>`;
-  } else el.textContent = 'لا يوجد مفتاح';
-}
-function changeKeyModal() {
-  document.getElementById('newKeyInput').value = '';
-  openModal('keyModal');
-  setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
-}
-async function performKeyChange(newKey, errorEl, btn) {
-  if (!newKey) { errorEl.textContent = MSG.keyMissing; errorEl.classList.add('show'); return false; }
-  if (newKey.length < 20) { errorEl.textContent = MSG.keyShort; errorEl.classList.add('show'); return false; }
-  if (btn) btn.disabled = true;
-  try {
-    showLoading('جاري اختبار المفتاح الجديد...');
-    const testUrl = `${API_BASE}/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
-    const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
-    if (!testRes.ok) {
-      if (testRes.status === 401) throw new Error(MSG.keyInvalid);
-      if (testRes.status === 403) throw new Error(MSG.noPermissions);
-      throw new Error(MSG.connFail);
+  async function verifyPassword(password, user) {
+    if (user.password && !user.passwordHash) {
+      // مقارنة زمن ثابت للنص الصريح أيضاً
+      const a = String(password), b = String(user.password);
+      if (a.length !== b.length) return false;
+      let diff = 0;
+      for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+      return diff === 0;
     }
-    saveKey(newKey);
-    SHAs = {}; ETags = {}; localMeta = null;
-    await readAll();
-    hideLoading();
-    updateKeyStatus(); updateCurrentKeyInfo();
-    toast('✅ ' + MSG.keySuccess, 'success');
-    return true;
-  } catch (e) {
-    hideLoading();
-    errorEl.textContent = '❌ ' + (e.message || MSG.connFail);
-    errorEl.classList.add('show');
-    return false;
-  } finally { if (btn) btn.disabled = false; }
-}
-window.toggleAdminPanel = function() {
-  const panel = document.getElementById('adminTokenSection');
-  panel.classList.toggle('show');
-  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminNewKey').focus(), 100);
-};
-window.adminChangeKey = async function() {
-  const newKey = document.getElementById('adminNewKey').value.trim();
-  const errEl = document.getElementById('adminError');
-  const btn = document.getElementById('adminChangeBtn');
-  errEl.classList.remove('show'); errEl.textContent = '';
-  const ok = await performKeyChange(newKey, errEl, btn);
-  if (ok) {
-    document.getElementById('adminNewKey').value = '';
-    document.getElementById('adminTokenSection').classList.remove('show');
-    await dialog.alert('✅ ' + MSG.keySuccess, { type: 'success', title: 'تم بنجاح' });
+    if (!user.passwordHash || !user.passwordSalt) return false;
+    const algo = user.passwordAlgo || `PBKDF2-${DIGEST}-${ITERATIONS}`;
+    const m = algo.match(/PBKDF2-SHA-256-(\d+)/);
+    const iterations = m ? parseInt(m[1]) : ITERATIONS;
+    const salt = fromHex(user.passwordSalt);
+    const hash = await pbkdf2(password, salt, iterations);
+    const computed = toHex(hash);
+    if (computed.length !== user.passwordHash.length) return false;
+    let diff = 0;
+    for (let i = 0; i < computed.length; i++) diff |= computed.charCodeAt(i) ^ user.passwordHash.charCodeAt(i);
+    return diff === 0;
   }
-};
-async function saveNewKey() {
-  const newKey = document.getElementById('newKeyInput').value.trim();
-  const errEl = document.createElement('div');
-  errEl.className = 'login-error';
-  const ok = await performKeyChange(newKey, errEl, null);
-  if (ok) closeModal('keyModal');
-  else toast(errEl.textContent || MSG.connFail, 'error');
-}
-window.saveNewKey = saveNewKey;
+  function isHashed(user) { return !!(user && user.passwordHash && user.passwordSalt); }
+  function needsMigration(user) { return !!(user && user.password && !user.passwordHash); }
+  return { hashPassword, verifyPassword, isHashed, needsMigration };
+})();
 
-function updateRateLimit(headers) {
-  const remaining = headers.get('X-RateLimit-Remaining');
-  const limit = headers.get('X-RateLimit-Limit');
-  const reset = headers.get('X-RateLimit-Reset');
-  if (remaining !== null && limit !== null) {
-    rateLimitInfo = { remaining: parseInt(remaining), limit: parseInt(limit), reset: reset ? new Date(parseInt(reset) * 1000) : null };
-    renderRateLimitWidget(); adjustSyncInterval(); maybeNotifyLowRate();
+/* ══════════════════════════════════════════════════════════════
+   SAVE QUEUE — منع تعارضات الحفظ المتزامن
+   ══════════════════════════════════════════════════════════════ */
+const SaveQueue = (() => {
+  const queues = new Map();
+  const stats = { total: 0, succeeded: 0, failed: 0 };
+  function enqueue(key, task) {
+    stats.total++;
+    const prev = queues.get(key) || Promise.resolve();
+    const next = prev.catch(() => {}).then(async () => {
+      try { const r = await task(); stats.succeeded++; return r; }
+      catch (e) { stats.failed++; throw e; }
+    });
+    queues.set(key, next);
+    next.finally(() => { if (queues.get(key) === next) queues.delete(key); });
+    return next;
   }
-}
-function renderRateLimitWidget() {
-  const widget = document.getElementById('rateWidget');
-  const fill = document.getElementById('rateFill');
-  const text = document.getElementById('rateText');
-  const icon = document.getElementById('rateIcon');
-  if (!widget || !fill || !text) return;
-  if (icon && !icon.innerHTML) icon.innerHTML = ico('zap', 12);
-  if (!rateLimitInfo) { text.textContent = '— / —'; fill.style.width = '0%'; return; }
-  const { remaining, limit, reset } = rateLimitInfo;
-  const pct = limit > 0 ? Math.max(0, Math.min(100, (remaining / limit) * 100)) : 0;
-  fill.style.width = pct + '%';
-  text.textContent = `${remaining.toLocaleString('en-US')} / ${limit.toLocaleString('en-US')}`;
-  widget.classList.remove('warn','danger');
-  if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
-  const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
-  const level = getRateLevel(remaining);
-  widget.title = `📊 استهلاك الحصة\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}`;
-}
-function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
-function adjustSyncInterval() {
-  if (!rateLimitInfo) return;
-  const level = getRateLevel(rateLimitInfo.remaining);
-  if (level.interval === currentSyncInterval) return;
-  currentSyncInterval = level.interval;
-  if (!currentUser) return;
-  if (currentSyncInterval > 0) startPolling();
-  else stopPolling();
-}
-function maybeNotifyLowRate() {
-  if (!rateLimitInfo) return;
-  const now = Date.now();
-  if (now - lastRateNotificationAt < 30 * 60 * 1000) return;
-  const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
-  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning', true); }
+  function drain() { return Promise.all(Array.from(queues.values()).map(p => p.catch(() => {}))); }
+  function getStats() { return { ...stats, pending: queues.size }; }
+  return { enqueue, drain, getStats };
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   RETRY — إعادة محاولة تلقائية مع backoff
+   ══════════════════════════════════════════════════════════════ */
+async function withRetry(fn, opts = {}) {
+  const maxAttempts = opts.maxAttempts || 3;
+  const baseDelay = opts.baseDelay || 400;
+  const maxDelay = opts.maxDelay || 5000;
+  const retryOn = opts.retryOn || ((e) => {
+    const msg = e?.message || '';
+    return !msg.includes('authFail') && !msg.includes('rateExceeded') && !msg.includes('CONFLICT');
+  });
+  let lastErr;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try { return await fn(); }
+    catch (e) {
+      lastErr = e;
+      if (attempt >= maxAttempts || !retryOn(e)) throw e;
+      const delay = Math.min(maxDelay, baseDelay * Math.pow(2, attempt - 1));
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  throw lastErr;
 }
 
-function apiHeaders(json = false, key = null) {
-  const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
-  if (json) h['Content-Type'] = 'application/json';
-  if (key && ETags[key]) h['If-None-Match'] = ETags[key];
-  return h;
-}
-async function getTreeShas() {
-  if (_treeApiDisabled) return null;
-  try {
-    const res = await fetch(`${TREE_API}&_=${Date.now()}`, { headers: apiHeaders(false) });
+/* ══════════════════════════════════════════════════════════════
+   REQUEST DEDUPLICATION
+   ══════════════════════════════════════════════════════════════ */
+const InFlight = (() => {
+  const map = new Map();
+  return {
+    async run(key, fn) {
+      if (map.has(key)) return map.get(key);
+      const p = fn().finally(() => map.delete(key));
+      map.set(key, p);
+      return p;
+    }
+  };
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   STORAGE LAYER — معزولة تماماً
+   ══════════════════════════════════════════════════════════════ */
+const Storage = (() => {
+  const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+  const TREE_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${APP_BRANCH}?recursive=1`;
+  const SHAs = {};
+  const ETags = {};
+  let treeDisabled = false;
+
+  function headers(json = false, key = null) {
+    const h = { 'Authorization': `Bearer ${getStoredKey()}`, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+    if (json) h['Content-Type'] = 'application/json';
+    if (key && ETags[key]) h['If-None-Match'] = ETags[key];
+    return h;
+  }
+  function isMetaPath(path) { return path === 'data/meta.json'; }
+
+  async function _loadData(path, cacheKey) {
+    const url = `${API_BASE}/${path}?ref=${APP_BRANCH}&_=${Date.now()}`;
+    let res;
+    try { res = await fetch(url, { headers: headers(false, cacheKey) }); }
+    catch { setOnline(false); throw new Error(MSG.connFail); }
+    updateRateLimit(res.headers);
+    apiCallCount++;
+    if (res.status === 304) { apiCachedCount++; return { notModified: true, data: null }; }
+    if (!res.ok) {
+      if (res.status === 401) throw new Error(MSG.authFail);
+      if (res.status === 403) throw new Error(MSG.rateExceeded);
+      if (res.status === 404) return { notModified: false, data: null, notFound: true };
+      throw new Error(MSG.loadFail);
+    }
+    const json = await res.json();
+    if (cacheKey) SHAs[cacheKey] = json.sha;
+    const etag = res.headers.get('ETag');
+    if (etag && cacheKey) ETags[cacheKey] = etag;
+    const raw = decodeBase64(json.content);
+    if (isMetaPath(path)) {
+      try { return { notModified: false, data: JSON.parse(raw) }; }
+      catch { return { notModified: false, data: null }; }
+    }
+    if (isEncrypted(raw)) {
+      const dec = decryptText(raw);
+      if (dec === null) throw new Error(MSG.readFail);
+      try { return { notModified: false, data: JSON.parse(dec) }; }
+      catch { throw new Error(MSG.parseFail); }
+    }
+    try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; }
+    catch { return { notModified: false, data: null }; }
+  }
+
+  async function loadData(path, cacheKey = null) {
+    const dedupKey = `load:${path}:${cacheKey || ''}`;
+    return InFlight.run(dedupKey, () => _loadData(path, cacheKey));
+  }
+
+  async function _writeFile(path, data, cacheKey, isCreate) {
+    const jsonStr = JSON.stringify(data, null, 2);
+    const content = isMetaPath(path) ? jsonStr : encryptText(jsonStr);
+    const body = { message: isCreate ? 'تهيئة البيانات' : 'تحديث البيانات', content: encodeBase64(content), branch: APP_BRANCH };
+    if (!isCreate && cacheKey && SHAs[cacheKey]) body.sha = SHAs[cacheKey];
+    let res;
+    try { res = await fetch(`${API_BASE}/${path}`, { method: 'PUT', headers: headers(true), body: JSON.stringify(body) }); }
+    catch { setOnline(false); throw new Error(MSG.connFail); }
     updateRateLimit(res.headers);
     apiCallCount++;
     if (!res.ok) {
-      if (res.status >= 400 && res.status < 500 && res.status !== 403) _treeApiDisabled = true;
-      return null;
+      if (res.status === 409) throw new Error('CONFLICT');
+      if (res.status === 404 && !isCreate) throw new Error('NOT_FOUND');
+      throw new Error(isCreate ? MSG.createFail : MSG.saveFail);
     }
     const json = await res.json();
-    const shas = {};
-    (json.tree || []).forEach(e => {
-      if (!e.path || e.type !== 'blob') return;
-      const m = e.path.match(/^data\/(.+)\.json$/);
-      if (m) shas[m[1]] = e.sha;
-    });
-    return shas;
-  } catch { return null; }
-}
-async function apiReadFile(key) {
-  const url = `${API_BASE}/${DATA_FILES[key]}?ref=${APP_BRANCH}&_=${Date.now()}`;
-  let res;
-  try { res = await fetch(url, { headers: apiHeaders(false, key) }); }
-  catch { setOnline(false); throw new Error(MSG.connFail); }
-  updateRateLimit(res.headers);
-  apiCallCount++;
-  if (res.status === 304) { apiCachedCount++; return { notModified: true }; }
-  if (!res.ok) {
-    if (res.status === 401) throw new Error(MSG.authFail);
-    if (res.status === 403) throw new Error(MSG.rateExceeded);
-    if (res.status === 404) {
-      if (key === 'users') throw new Error(MSG.storageIssues);
-      return { notModified: false, data: null };
-    }
-    throw new Error(MSG.loadFail);
+    if (cacheKey) { SHAs[cacheKey] = json.content.sha; delete ETags[cacheKey]; }
+    return json;
   }
-  const json = await res.json();
-  SHAs[key] = json.sha;
-  const etag = res.headers.get('ETag');
-  if (etag) ETags[key] = etag;
-  const raw = decodeBase64(json.content);
-  if (key === 'meta') { try { return { notModified: false, data: JSON.parse(raw) }; } catch { return { notModified: false, data: null }; } }
-  if (isEncrypted(raw)) {
-    const decrypted = decryptText(raw);
-    if (decrypted === null) throw new Error(MSG.readFail);
-    try { return { notModified: false, data: JSON.parse(decrypted) }; } catch { throw new Error(MSG.parseFail); }
-  }
-  try { return { notModified: false, data: JSON.parse(raw), wasPlain: true }; } catch { return { notModified: false, data: null }; }
-}
-async function apiWriteFile(key, data) {
-  const jsonStr = JSON.stringify(data, null, 2);
-  const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
-  const body = { message: `تحديث البيانات`, content: encodeBase64(content), branch: APP_BRANCH, sha: SHAs[key] };
-  let res;
-  try { res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) }); }
-  catch { setOnline(false); throw new Error(MSG.connFail); }
-  updateRateLimit(res.headers);
-  apiCallCount++;
-  if (!res.ok) {
-    if (res.status === 409) throw new Error('CONFLICT');
-    throw new Error(MSG.saveFail);
-  }
-  const json = await res.json();
-  SHAs[key] = json.content.sha;
-  delete ETags[key];
-  return json;
-}
-async function apiCreateFile(key, data) {
-  const jsonStr = JSON.stringify(data, null, 2);
-  const content = key === 'meta' ? jsonStr : encryptText(jsonStr);
-  const body = { message: `تهيئة البيانات`, content: encodeBase64(content), branch: APP_BRANCH };
-  const res = await fetch(`${API_BASE}/${DATA_FILES[key]}`, { method: 'PUT', headers: apiHeaders(true), body: JSON.stringify(body) });
-  updateRateLimit(res.headers);
-  apiCallCount++;
-  if (!res.ok) throw new Error(MSG.createFail);
-  const json = await res.json();
-  SHAs[key] = json.content.sha;
-  return json;
-}
 
-async function persistKeys(keys) {
-  setSyncing(true);
-  try {
-    const activityRequested = keys.includes('activity');
-    const dataKeys = keys.filter(k => k !== 'activity' && DATA_FILES[k]);
-    if (dataKeys.length > 0) {
-      const writePromises = dataKeys.map(k => {
-        if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
-        return apiWriteFile(k, cache[k]);
-      });
-      try {
-        await Promise.all(writePromises);
-      } catch (parallelError) {
-        for (const k of dataKeys) {
-          try {
-            if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
-            else await apiWriteFile(k, cache[k]);
-          } catch (e) {
-            if (e.message === 'CONFLICT') {
-              try { await apiReadFile(k); } catch {}
-              if (!SHAs[k] && cache[k]) await apiCreateFile(k, cache[k]);
-              else await apiWriteFile(k, cache[k]);
-            } else throw e;
-          }
+  async function _saveData(path, data, cacheKey) {
+    if (cacheKey && SHAs[cacheKey]) {
+      try { return await _writeFile(path, data, cacheKey, false); }
+      catch (e) {
+        if (e.message === 'NOT_FOUND') return _writeFile(path, data, cacheKey, true);
+        if (e.message === 'CONFLICT') {
+          try { await _loadData(path, cacheKey); } catch {}
+          return _writeFile(path, data, cacheKey, false);
         }
+        throw e;
       }
     }
-    if (activityRequested) scheduleActivitySave();
-  } finally { setSyncing(false); }
-}
-function scheduleActivitySave() {
-  if (_activitySaveTimer) clearTimeout(_activitySaveTimer);
-  _activitySaveTimer = setTimeout(async () => {
-    _activitySaveTimer = null;
-    if (!currentUser) return;
+    try { return await _writeFile(path, data, cacheKey, true); }
+    catch (e) {
+      if (e.message === 'CONFLICT') {
+        try { await _loadData(path, cacheKey); } catch {}
+        return _writeFile(path, data, cacheKey, false);
+      }
+      throw e;
+    }
+  }
+
+  async function saveData(path, data, cacheKey = null) {
+    const queueKey = cacheKey || path;
+    return SaveQueue.enqueue(queueKey, () =>
+      withRetry(() => _saveData(path, data, cacheKey), { maxAttempts: 3, baseDelay: 500 })
+    );
+  }
+
+  async function deleteFile(path, cacheKey = null) {
+    if (!cacheKey || !SHAs[cacheKey]) return false;
+    const queueKey = 'del:' + (cacheKey || path);
+    return SaveQueue.enqueue(queueKey, async () => {
+      const body = { message: 'حذف البيانات', sha: SHAs[cacheKey], branch: APP_BRANCH };
+      let res;
+      try { res = await fetch(`${API_BASE}/${path}`, { method: 'DELETE', headers: headers(true), body: JSON.stringify(body) }); }
+      catch { setOnline(false); throw new Error(MSG.connFail); }
+      updateRateLimit(res.headers);
+      apiCallCount++;
+      if (!res.ok && res.status !== 404) throw new Error(MSG.saveFail);
+      delete SHAs[cacheKey];
+      delete ETags[cacheKey];
+      return true;
+    });
+  }
+
+  async function getTreeShas() {
+    if (treeDisabled) return null;
     try {
-      if (!SHAs.activity && cache.activity) await apiCreateFile('activity', cache.activity);
-      else await apiWriteFile('activity', cache.activity);
-    } catch (e) {}
-  }, ACTIVITY_SAVE_DELAY);
-}
-async function flushActivitySave() {
-  if (_activitySaveTimer) { clearTimeout(_activitySaveTimer); _activitySaveTimer = null; }
-  if (!currentUser) return;
+      const res = await fetch(`${TREE_API}&_=${Date.now()}`, { headers: headers(false) });
+      updateRateLimit(res.headers);
+      apiCallCount++;
+      if (!res.ok) {
+        if (res.status >= 400 && res.status < 500 && res.status !== 403) treeDisabled = true;
+        return null;
+      }
+      const json = await res.json();
+      const shas = {};
+      (json.tree || []).forEach(e => {
+        if (!e.path || e.type !== 'blob') return;
+        const m1 = e.path.match(/^data\/([^\/]+)\.json$/);
+        if (m1) { shas[m1[1]] = e.sha; return; }
+        const m2 = e.path.match(/^data\/activity\/(\d{4}-\d{2})\.json$/);
+        if (m2) { shas['activity/' + m2[1]] = e.sha; }
+      });
+      return shas;
+    } catch { return null; }
+  }
+
+  function resetCache() {
+    Object.keys(SHAs).forEach(k => delete SHAs[k]);
+    Object.keys(ETags).forEach(k => delete ETags[k]);
+    treeDisabled = false;
+  }
+
+  return {
+    loadData, saveData,
+    createFile: (p,d,k)=>_writeFile(p,d,k,true),
+    updateFile: (p,d,k)=>_writeFile(p,d,k,false),
+    deleteFile, getTreeShas, resetCache,
+    SHAs
+  };
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   ACTIVITY — تحميل وحفظ شهري
+   ══════════════════════════════════════════════════════════════ */
+async function loadActivity() {
+  const all = [];
+  let hadLegacy = false;
   try {
-    if (!SHAs.activity && cache.activity) await apiCreateFile('activity', cache.activity);
-    else await apiWriteFile('activity', cache.activity);
-  } catch {}
+    const r = await Storage.loadData(LEGACY_FILES.activity, 'legacy_activity');
+    if (r.data && Array.isArray(r.data) && r.data.length > 0) {
+      all.push(...r.data);
+      hadLegacy = true;
+    }
+  } catch (_) {}
+  const treeShas = await Storage.getTreeShas();
+  if (treeShas) {
+    const months = Object.keys(treeShas).filter(k => k.startsWith('activity/')).map(k => k.substring('activity/'.length));
+    const results = await Promise.all(months.map(async m => {
+      try { return await Storage.loadData(getActivityPath(m), 'activity/' + m); }
+      catch { return null; }
+    }));
+    results.forEach(r => { if (r && r.data && Array.isArray(r.data)) all.push(...r.data); });
+  }
+  const seen = new Set();
+  cache.activity = all.filter(a => {
+    if (!a || !a.id) return false;
+    if (seen.has(a.id)) return false;
+    seen.add(a.id);
+    return true;
+  }).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+  if (hadLegacy) hasLegacyFiles = true;
 }
 
+async function saveActivity() {
+  if (!currentUser) return;
+  const byMonth = {};
+  (cache.activity || []).forEach(a => {
+    let m = a.month;
+    if (!m) {
+      const d = a.ts ? new Date(a.ts) : (parseDate(a.time) || new Date());
+      m = getMonthKey(d);
+    }
+    if (!byMonth[m]) byMonth[m] = [];
+    byMonth[m].push(a);
+  });
+  if (!Object.keys(byMonth).length) return;
+  await Promise.all(Object.keys(byMonth).map(async m => {
+    const path = getActivityPath(m);
+    const key = 'activity/' + m;
+    await Storage.saveData(path, byMonth[m], key);
+  }));
+}
+
+async function migrateActivityLegacy() {
+  if (!hasLegacyFiles) return;
+  try {
+    await saveActivity();
+    try { await Storage.deleteFile(LEGACY_FILES.activity, 'legacy_activity'); } catch (_) {}
+  } catch (_) {}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DATA VALIDATION
+   ══════════════════════════════════════════════════════════════ */
+function validateOrder(o) {
+  if (!o || typeof o !== 'object') return false;
+  if (!o.id || typeof o.id !== 'string') return false;
+  if (typeof o.invoice !== 'string' || !o.invoice.trim()) return false;
+  if (typeof o.customer !== 'string') return false;
+  return true;
+}
+function validateCustomer(c) {
+  if (!c || typeof c !== 'object') return false;
+  if (!c.id || typeof c.id !== 'string') return false;
+  if (!c.name || typeof c.name !== 'string') return false;
+  return true;
+}
+function validateUser(u) {
+  if (!u || typeof u !== 'object') return false;
+  if (!u.id || typeof u.id !== 'string') return false;
+  if (!u.username || typeof u.username !== 'string') return false;
+  if (u.role !== ROLE_OWNER && u.role !== ROLE_MANAGER && u.role !== ROLE_WORKER) return false;
+  if (!u.password && !u.passwordHash) return false;
+  return true;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   READ / WRITE / MIGRATION
+   ══════════════════════════════════════════════════════════════ */
 function applyFileData(k, data, wasPlain) {
   if (wasPlain === true) hasLegacyFiles = true;
   if (k === 'templates') {
@@ -1722,67 +1713,170 @@ function applyFileData(k, data, wasPlain) {
     cache[k] = Array.isArray(data) ? data : [];
   }
 }
+
 function postProcessData() {
-  cache.drivers = cache.drivers.map(d => { if (typeof d === 'string') return { id: uid(), name: d, phone: '' }; return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' }; });
-  cache.branches = cache.branches.map(b => { if (typeof b === 'string') return { id: uid(), name: b }; return { id: b.id || uid(), name: b.name || '' }; });
+  cache.drivers = (cache.drivers || [])
+    .map(d => {
+      if (typeof d === 'string') return { id: uid(), name: d, phone: '' };
+      return { id: d.id || uid(), name: d.name || '', phone: d.phone || '' };
+    })
+    .filter(d => d.name);
+  cache.branches = (cache.branches || [])
+    .map(b => {
+      if (typeof b === 'string') return { id: uid(), name: b };
+      return { id: b.id || uid(), name: b.name || '' };
+    })
+    .filter(b => b.name);
   if (!cache.branches.length) cache.branches = [{ id: uid(), name: DEFAULT_BRANCH_NAME }];
-  cache.users = cache.users.map(normalizeUser);
-  cache.log = cache.log.map(o => ({
+  cache.users = (cache.users || []).map(normalizeUser).filter(validateUser);
+  cache.orders = (cache.orders || []).filter(validateOrder);
+  cache.ready = (cache.ready || []).filter(validateOrder);
+  cache.log = (cache.log || []).filter(validateOrder).map(o => ({
     ...o,
     receiptStatus: (o.receiptStatus === RECEIPT_RECEIVED || o.receiptStatus === RECEIPT_NOT_RECEIVED) ? o.receiptStatus : RECEIPT_NOT_RECEIVED
   }));
-  cache.notifications = (Array.isArray(cache.notifications) ? cache.notifications : []).map(n => ({
-    ...n,
-    deletedBy: Array.isArray(n.deletedBy) ? n.deletedBy : [],
-    readBy: Array.isArray(n.readBy) ? n.readBy : [],
-    createdBy: n.createdBy || 'system'
-  }));
+  cache.customers = (cache.customers || []).filter(validateCustomer);
+  cache.notifications = (Array.isArray(cache.notifications) ? cache.notifications : [])
+    .filter(n => n && n.id)
+    .map(n => ({
+      ...n,
+      deletedBy: Array.isArray(n.deletedBy) ? n.deletedBy : [],
+      readBy: Array.isArray(n.readBy) ? n.readBy : [],
+      createdBy: n.createdBy || 'system'
+    }));
+  cache.activity = (Array.isArray(cache.activity) ? cache.activity : [])
+    .filter(a => a && a.id && a.action)
+    .map(a => {
+      if (!a.month) {
+        const d = a.ts ? new Date(a.ts) : (parseDate(a.time) || new Date());
+        a.month = getMonthKey(d);
+      }
+      return a;
+    });
   const validIds = new Set(cache.ready.map(o => o.id));
   Array.from(selectedReadyIds).forEach(id => { if (!validIds.has(id)) selectedReadyIds.delete(id); });
 }
+
 async function readAll(keysToRead = null) {
   hasLegacyFiles = false;
-  const keys = keysToRead || DATA_KEYS;
+  const keys = keysToRead || DATA_KEYS.filter(k => k !== 'activity');
+  const filesToLoad = new Set();
+  for (const k of keys) {
+    if (k === 'activity') continue;
+    const f = KEY_TO_FILE[k];
+    if (f) filesToLoad.add(f);
+  }
   const errors = [];
-  const results = await Promise.all(keys.map(async (k) => {
-    try { return await apiReadFile(k); }
-    catch (e) { errors.push(e.message); return { notModified: false, data: null }; }
+  const fileResults = {};
+  await Promise.all(Array.from(filesToLoad).map(async f => {
+    try { fileResults[f] = await Storage.loadData(DATA_FILES[f], f); }
+    catch (e) { errors.push(e.message); fileResults[f] = { notModified: false, data: null, notFound: true }; }
   }));
   readAll.lastErrors = errors;
-  keys.forEach((k, i) => {
-    const r = results[i];
-    if (r.notModified) return;
-    applyFileData(k, r.data, r.wasPlain);
+
+  const sr = fileResults.settings;
+  let settingsLoaded = false;
+  if (sr && !sr.notModified && sr.data) {
+    const s = sr.data;
+    cache.users    = Array.isArray(s.users)    ? s.users    : [];
+    cache.drivers  = Array.isArray(s.drivers)  ? s.drivers  : [];
+    cache.branches = Array.isArray(s.branches) ? s.branches : [];
+    if (s.templates) applyFileData('templates', s.templates, sr.wasPlain);
+    settingsLoaded = true;
+    if (sr.wasPlain) hasLegacyFiles = true;
+  }
+  if (!settingsLoaded && filesToLoad.has('settings')) {
+    let anyLegacy = false;
+    const legacyResults = await Promise.all(['users','drivers','branches','templates'].map(async k => {
+      try { return { k, r: await Storage.loadData(LEGACY_FILES[k], 'legacy_' + k) }; }
+      catch { return { k, r: null }; }
+    }));
+    for (const { k, r } of legacyResults) {
+      if (r && r.data) { applyFileData(k, r.data, r.wasPlain); anyLegacy = true; }
+    }
+    if (anyLegacy) hasLegacyFiles = true;
+  }
+  ['orders','ready','log','customers','notifications'].forEach(f => {
+    if (!filesToLoad.has(f)) return;
+    const r = fileResults[f];
+    if (!r || r.notModified) return;
+    applyFileData(f, r.data, r.wasPlain);
   });
+  if (keys.includes('activity')) await loadActivity();
   postProcessData();
 }
+
 async function readMeta() {
   try {
-    const r = await apiReadFile('meta');
+    const r = await Storage.loadData(DATA_FILES.meta, 'meta');
     if (r.notModified) return localMeta || { lastUpdate: '', version: 4 };
     return r.data || { lastUpdate: '', version: 4 };
-  }
-  catch { return { lastUpdate: '', version: 4 }; }
+  } catch { return { lastUpdate: '', version: 4 }; }
 }
 async function writeMeta(extra = {}) {
   const meta = { lastUpdate: new Date().toISOString(), version: 4, ...extra };
-  try { await apiWriteFile('meta', meta); localMeta = meta; }
+  try { await Storage.saveData(DATA_FILES.meta, meta, 'meta'); localMeta = meta; }
   catch (e) {
     if (e.message === 'CONFLICT') {
       await readMeta();
-      await apiWriteFile('meta', meta);
+      await Storage.saveData(DATA_FILES.meta, meta, 'meta');
       localMeta = meta;
     } else throw e;
   }
 }
+
+async function persistKeys(keys) {
+  setSyncing(true);
+  try {
+    const activityRequested = keys.includes('activity');
+    const filesToWrite = new Set();
+    for (const k of keys) {
+      if (k === 'activity') continue;
+      const f = KEY_TO_FILE[k];
+      if (f) filesToWrite.add(f);
+    }
+    if (filesToWrite.size > 0) {
+      await Promise.all(Array.from(filesToWrite).map(async f => {
+        let data;
+        if (f === 'settings') {
+          data = {
+            users: cache.users || [],
+            drivers: cache.drivers || [],
+            branches: cache.branches || [],
+            templates: templates || {}
+          };
+        } else if (f === 'meta') {
+          data = localMeta || { lastUpdate: new Date().toISOString(), version: 4 };
+        } else {
+          data = cache[f] || [];
+        }
+        await Storage.saveData(DATA_FILES[f], data, f);
+      }));
+    }
+    if (activityRequested) scheduleActivitySave();
+  } finally { setSyncing(false); }
+}
+
+function scheduleActivitySave() {
+  if (_activitySaveTimer) clearTimeout(_activitySaveTimer);
+  _activitySaveTimer = setTimeout(async () => {
+    _activitySaveTimer = null;
+    if (!currentUser) return;
+    try { await saveActivity(); } catch (_) {}
+  }, ACTIVITY_SAVE_DELAY);
+}
+async function flushActivitySave() {
+  if (_activitySaveTimer) { clearTimeout(_activitySaveTimer); _activitySaveTimer = null; }
+  if (!currentUser) return;
+  try { await saveActivity(); } catch (_) {}
+}
+
 async function saveAllDataNowSilent() {
-  const dataKeys = DATA_KEYS.filter(k => k !== 'activity' && DATA_FILES[k]);
-  await Promise.all(dataKeys.map(k => {
-    if (!SHAs[k] && cache[k]) return apiCreateFile(k, cache[k]);
-    return apiWriteFile(k, cache[k]);
-  }));
-  await flushActivitySave();
+  const keysToSave = ['orders','ready','log','customers','users','drivers','branches','templates','notifications','activity'];
+  await persistKeys(keysToSave);
   await writeMeta();
+  await migrateActivityLegacy();
+  hasLegacyFiles = false;
 }
 async function saveAllDataNow() {
   const ok = await dialog.confirm('سيتم إعادة حفظ جميع البيانات الآن، هل تريد المتابعة؟', { title: 'حفظ شامل', okText: 'متابعة' });
@@ -1796,6 +1890,9 @@ async function saveAllDataNow() {
 }
 window.saveAllDataNow = saveAllDataNow;
 
+/* ══════════════════════════════════════════════════════════════
+   SYNC & POLLING
+   ══════════════════════════════════════════════════════════════ */
 async function syncPull(force = false) {
   if (syncing || !currentUser) return;
   const now = Date.now();
@@ -1805,27 +1902,44 @@ async function syncPull(force = false) {
   syncing = true;
   try {
     let didChange = false;
-    const treeShas = await getTreeShas();
+    const treeShas = await Storage.getTreeShas();
     if (treeShas) {
-      const changed = DATA_KEYS.filter(k => {
-        const remoteSha = treeShas[k];
-        return remoteSha && remoteSha !== SHAs[k];
+      const fileKeys = Object.keys(DATA_FILES);
+      const changedFiles = fileKeys.filter(f => {
+        const remoteSha = treeShas[f];
+        return remoteSha && remoteSha !== Storage.SHAs[f];
       });
-      if (changed.length) {
-        const reads = await Promise.all(changed.map(async k => {
-          try { return { k, r: await apiReadFile(k) }; }
-          catch (e) { return { k, r: null }; }
-        }));
-        reads.forEach(({ k, r }) => {
-          if (r && !r.notModified) { applyFileData(k, r.data, r.wasPlain); didChange = true; }
-        });
-        if (didChange) postProcessData();
+      const activityRemote = Object.keys(treeShas).filter(k => k.startsWith('activity/'));
+      const changedActivity = activityRemote.filter(k => treeShas[k] !== Storage.SHAs[k]);
+      if (changedFiles.length) {
+        for (const f of changedFiles) {
+          try {
+            const r = await Storage.loadData(DATA_FILES[f], f);
+            if (r.notModified) continue;
+            if (f === 'settings') {
+              const s = r.data || {};
+              cache.users    = Array.isArray(s.users)    ? s.users    : [];
+              cache.drivers  = Array.isArray(s.drivers)  ? s.drivers  : [];
+              cache.branches = Array.isArray(s.branches) ? s.branches : [];
+              if (s.templates) applyFileData('templates', s.templates, r.wasPlain);
+            } else {
+              applyFileData(f, r.data, r.wasPlain);
+            }
+            didChange = true;
+          } catch (_) {}
+        }
       }
+      if (changedActivity.length) {
+        await loadActivity();
+        didChange = true;
+      }
+      if (didChange) postProcessData();
     } else {
       const meta = await readMeta();
       if (!localMeta || meta.lastUpdate !== localMeta.lastUpdate) {
         localMeta = meta;
         await readAll();
+        await loadActivity();
         didChange = true;
       }
     }
@@ -1863,6 +1977,9 @@ function setOnline(ok) {
 function setSyncing(on) { const dot = document.getElementById('connDot'); if (dot) dot.className = 'status-dot' + (on ? ' sync' : ' online'); }
 window.manualSync = async function () { toast('جاري المزامنة...', 'info'); localMeta = null; lastSyncTime = 0; await syncPull(true); };
 
+/* ══════════════════════════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════════════════════════ */
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 function fmtDate(d = new Date()) {
   const p = n => String(n).padStart(2, '0');
@@ -1889,44 +2006,34 @@ function zoomIn() { zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2)); appl
 function zoomOut() { zoomLevel = Math.max(0.5, +(zoomLevel - 0.1).toFixed(2)); applyZoom(); }
 function zoomReset() { zoomLevel = 1; applyZoom(); }
 
+/* ══════════════════════════════════════════════════════════════
+   INVOICE DUPLICATE CHECK
+   ══════════════════════════════════════════════════════════════ */
 function isInvoiceDuplicate(invoice, excludeId, excludeType) {
   if (!invoice) return false;
   const inv = String(invoice).trim().toLowerCase();
   if (!inv) return false;
   if (excludeType !== 'orders') {
-    for (const o of cache.orders) {
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.orders) { if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   } else if (excludeId) {
-    for (const o of cache.orders) {
-      if (o.id === excludeId) continue;
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.orders) { if (o.id === excludeId) continue; if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   } else {
-    for (const o of cache.orders) {
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.orders) { if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   }
-  for (const o of cache.ready) {
-    if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-  }
+  for (const o of cache.ready) { if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   if (excludeType !== 'log') {
-    for (const o of cache.log) {
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.log) { if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   } else if (excludeId) {
-    for (const o of cache.log) {
-      if (o.id === excludeId) continue;
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.log) { if (o.id === excludeId) continue; if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   } else {
-    for (const o of cache.log) {
-      if ((o.invoice || '').trim().toLowerCase() === inv) return true;
-    }
+    for (const o of cache.log) { if ((o.invoice || '').trim().toLowerCase() === inv) return true; }
   }
   return false;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   STATS FILTER
+   ══════════════════════════════════════════════════════════════ */
 window.setStatsFilter = function(type) {
   statsFilter = type;
   document.querySelectorAll('.stats-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.range === type));
@@ -1967,6 +2074,9 @@ function orderInRange(o, from, to) {
   return true;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   NOTIFICATIONS
+   ══════════════════════════════════════════════════════════════ */
 function scheduleNotificationsSave() {
   if (_notifSaveTimer) clearTimeout(_notifSaveTimer);
   _notifSaveTimer = setTimeout(() => {
@@ -1982,13 +2092,7 @@ async function flushNotificationsSave() {
 }
 function addNotification(title, message, type = 'info', silent = false) {
   const u = currentUser?.username;
-  const n = {
-    id: uid(), title, message, type,
-    time: fmtDate(), ts: Date.now(),
-    createdBy: u || 'system',
-    deletedBy: [],
-    readBy: u ? [u] : []
-  };
+  const n = { id: uid(), title, message, type, time: fmtDate(), ts: Date.now(), createdBy: u || 'system', deletedBy: [], readBy: u ? [u] : [] };
   if (!Array.isArray(cache.notifications)) cache.notifications = [];
   cache.notifications.unshift(n);
   if (cache.notifications.length > 100) cache.notifications = cache.notifications.slice(0, 100);
@@ -2016,14 +2120,7 @@ function renderNotifications() {
   list.innerHTML = visible.slice(0, 30).map(n => {
     const isUnread = u && !(Array.isArray(n.readBy) && n.readBy.includes(u));
     const author = n.createdBy && n.createdBy !== 'system' ? n.createdBy : '';
-    return `<div class="notif-item ${n.type || 'info'}${isUnread ? ' unread' : ''}">
-      <div class="nt"><span>${esc(n.title || '')}</span></div>
-      <div class="nm">${esc(n.message || '')}</div>
-      <div class="nd">
-        <span>${esc(n.time || '')}</span>
-        ${author ? `<span class="author">بواسطة: ${esc(author)}</span>` : ''}
-      </div>
-    </div>`;
+    return `<div class="notif-item ${n.type || 'info'}${isUnread ? ' unread' : ''}"><div class="nt"><span>${esc(n.title || '')}</span></div><div class="nm">${esc(n.message || '')}</div><div class="nd"><span>${esc(n.time || '')}</span>${author ? `<span class="author">بواسطة: ${esc(author)}</span>` : ''}</div></div>`;
   }).join('');
 }
 window.toggleNotifPanel = function() {
@@ -2055,8 +2152,18 @@ window.clearAllNotifications = async function() {
   try { await persistKeys(['notifications']); toast('تم مسح الإشعارات لديك', 'success'); } catch { toast(MSG.saveFail, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   ACTIVITY LOG
+   ══════════════════════════════════════════════════════════════ */
 function logActivity(action, title, description, type = 'info') {
-  const entry = { id: uid(), action, title, description, type, user: currentUser?.username || 'system', time: fmtDate(), ts: Date.now() };
+  const ts = Date.now();
+  const entry = {
+    id: uid(), action, title, description, type,
+    user: currentUser?.username || 'system',
+    time: fmtDate(new Date(ts)),
+    ts,
+    month: getMonthKey(new Date(ts))
+  };
   cache.activity.unshift(entry);
 }
 function getFilteredActivity() {
@@ -2156,13 +2263,17 @@ window.resetActivityLog = async function() {
   if (!ok2) return;
   try {
     cache.activity = [];
+    await saveActivity();
     logActivity('reset-activity', 'تصفير سجل النشاط', `تم حذف ${count} عملية`, 'danger');
-    await persistKeys(['activity']);
+    await saveActivity();
     renderActivity();
     toast('تم تصفير سجل النشاط بنجاح', 'success');
   } catch (e) { toast(e.message, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   SESSION TIMER
+   ══════════════════════════════════════════════════════════════ */
 function startSessionTimer() {
   stopSessionTimer();
   sessionExpireAt = Date.now() + SESSION_TIMEOUT;
@@ -2201,6 +2312,9 @@ function checkSessionWarning() {
   document.addEventListener(evt, () => { if (currentUser) resetSessionTimer(); }, { passive: true });
 });
 
+/* ══════════════════════════════════════════════════════════════
+   PERMISSIONS & ROLES
+   ══════════════════════════════════════════════════════════════ */
 function roleLabel(role) {
   if (role === ROLE_OWNER)   return { label:'مالك',  icon:'crown',  cls:'badge-owner' };
   if (role === ROLE_MANAGER) return { label:'مدير',  icon:'shield', cls:'badge-manager' };
@@ -2296,6 +2410,9 @@ function rebuildSettingsTabs() {
   document.getElementById('tab-' + firstId).style.display = 'block';
 }
 
+/* ══════════════════════════════════════════════════════════════
+   DRAFT
+   ══════════════════════════════════════════════════════════════ */
 function saveDraft() {
   if (!document.getElementById('orderModal').classList.contains('active')) return;
   const draft = { invoice: document.getElementById('orderInvoice').value, branch: document.getElementById('orderBranch').value, customer: document.getElementById('orderCustomer').value, customerId: document.getElementById('orderCustomerId').value, customerPhone: document.getElementById('orderCustomerPhone').value, location: document.getElementById('orderLocation').value, status: document.getElementById('orderStatus').value, pay: document.getElementById('orderPay').value, driver: document.getElementById('orderDriver').value, driverPhone: document.getElementById('orderDriverPhone').value, notes: document.getElementById('orderNotes').value };
@@ -2323,6 +2440,9 @@ window.restoreDraft = function () {
   } catch { clearDraft(); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   BUILD UI
+   ══════════════════════════════════════════════════════════════ */
 function buildUI() {
   document.getElementById('loginLogo').innerHTML = ico('package', 54);
   document.getElementById('adminToggleIcon').innerHTML = ico('shield2', 13);
@@ -2462,6 +2582,9 @@ function buildUI() {
   ].map(g => `<div class="shortcut-group"><h4>${ico(g.icon, 15)}<span>${g.title}</span></h4>${g.items.map(([d, keys]) => `<div class="shortcut-row"><span class="desc">${d}</span><span class="keys">${keys.map(k => `<kbd>${k}</kbd>`).join('')}</span></div>`).join('')}</div>`).join('');
 }
 
+/* ══════════════════════════════════════════════════════════════
+   DASHBOARD STATS
+   ══════════════════════════════════════════════════════════════ */
 function renderStats() {
   const { from, to } = getStatsDateRange();
   const allOrdersRaw = [...cache.orders, ...cache.ready, ...cache.log];
@@ -2510,13 +2633,13 @@ function renderStats() {
     return { dir: pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat', pct: Math.abs(pct) };
   };
   const trendIcon = (dir) => dir === 'up' ? ico('trendUp', 10) : dir === 'down' ? ico('trendDown', 10) : '';
-  const badge = (t) => (t && t.dir !== 'flat') ? `<span class="trend ${t.dir}">${trendIcon(t.dir)}<span>${t.pct}%</span></span>` : '';
+  const badgeT = (t) => (t && t.dir !== 'flat') ? `<span class="trend ${t.dir}">${trendIcon(t.dir)}<span>${t.pct}%</span></span>` : '';
 
   document.getElementById('statsOverview').innerHTML = `
-    <div class="stat"><div class="stat-head"><div class="stat-icon">${ico('layers', 17)}</div>${badge(diff(total, prevStats.total))}</div><div class="num">${total.toLocaleString()}</div><div class="lbl">إجمالي الطلبات</div><div class="sub">حسب الفترة المحددة</div></div>
-    <div class="stat orange"><div class="stat-head"><div class="stat-icon">${ico('list', 17)}</div>${badge(diff(active, prevStats.orders))}</div><div class="num">${active.toLocaleString()}</div><div class="lbl">قيد الإدخال</div><div class="sub">${progressActive} قيد • ${readyActive} جاهز</div></div>
-    <div class="stat green"><div class="stat-head"><div class="stat-icon">${ico('box', 17)}</div>${badge(diff(ready, prevStats.ready))}</div><div class="num">${ready.toLocaleString()}</div><div class="lbl">جاهزة للنقل</div><div class="sub">${readyRate}% من النشطة</div><div class="progress-bar"><div class="fill green" style="width:${readyRate}%"></div></div></div>
-    <div class="stat purple"><div class="stat-head"><div class="stat-icon">${ico('archive', 17)}</div>${badge(diff(archived, prevStats.log))}</div><div class="num">${archived.toLocaleString()}</div><div class="lbl">في السجل</div><div class="sub">أرشيف نهائي</div></div>
+    <div class="stat"><div class="stat-head"><div class="stat-icon">${ico('layers', 17)}</div>${badgeT(diff(total, prevStats.total))}</div><div class="num">${total.toLocaleString()}</div><div class="lbl">إجمالي الطلبات</div><div class="sub">حسب الفترة المحددة</div></div>
+    <div class="stat orange"><div class="stat-head"><div class="stat-icon">${ico('list', 17)}</div>${badgeT(diff(active, prevStats.orders))}</div><div class="num">${active.toLocaleString()}</div><div class="lbl">قيد الإدخال</div><div class="sub">${progressActive} قيد • ${readyActive} جاهز</div></div>
+    <div class="stat green"><div class="stat-head"><div class="stat-icon">${ico('box', 17)}</div>${badgeT(diff(ready, prevStats.ready))}</div><div class="num">${ready.toLocaleString()}</div><div class="lbl">جاهزة للنقل</div><div class="sub">${readyRate}% من النشطة</div><div class="progress-bar"><div class="fill green" style="width:${readyRate}%"></div></div></div>
+    <div class="stat purple"><div class="stat-head"><div class="stat-icon">${ico('archive', 17)}</div>${badgeT(diff(archived, prevStats.log))}</div><div class="num">${archived.toLocaleString()}</div><div class="lbl">في السجل</div><div class="sub">أرشيف نهائي</div></div>
     <div class="stat teal"><div class="stat-head"><div class="stat-icon">${ico('target', 17)}</div></div><div class="num">${completionRate}%</div><div class="lbl">نسبة الإنجاز</div><div class="progress-bar"><div class="fill" style="width:${completionRate}%"></div></div></div>
   `;
   document.getElementById('statsPayments').innerHTML = `
@@ -2630,6 +2753,9 @@ function renderTrend7Days() {
 }
 function renderDashboard() { renderStats(); }
 
+/* ══════════════════════════════════════════════════════════════
+   RENDER: ENTRY
+   ══════════════════════════════════════════════════════════════ */
 function renderEntry() {
   const q = (document.getElementById('searchEntry')?.value || '').trim().toLowerCase();
   const branchFilter = document.getElementById('entryBranchFilter')?.value || '';
@@ -2666,6 +2792,9 @@ window.selectRow = function (id, event) {
   document.querySelector(`#entryBody tr[data-id="${id}"]`)?.classList.add('selected');
 };
 
+/* ══════════════════════════════════════════════════════════════
+   RENDER: READY
+   ══════════════════════════════════════════════════════════════ */
 function getReadyFilteredData() {
   const branchFilter = document.getElementById('readyBranchFilter')?.value || '';
   let data = cache.ready;
@@ -2768,6 +2897,9 @@ window.deselectAllReady = function() {
   toast('تم إلغاء التحديد', 'info');
 };
 
+/* ══════════════════════════════════════════════════════════════
+   RENDER: LOG
+   ══════════════════════════════════════════════════════════════ */
 function getLogFilteredData() {
   const fromVal = document.getElementById('filterLogFrom')?.value || '';
   const toVal = document.getElementById('filterLogTo')?.value || '';
@@ -2846,6 +2978,10 @@ window.resetLogFilters = function () {
   document.getElementById('filterLogBranch').value = '';
   renderLog();
 };
+
+/* ══════════════════════════════════════════════════════════════
+   RENDER: CUSTOMERS
+   ══════════════════════════════════════════════════════════════ */
 function renderCustomers() {
   const q = (document.getElementById('searchCustomers')?.value || '').trim().toLowerCase();
   const data = q ? cache.customers.filter(c => `${c.code} ${c.name} ${c.location} ${c.phone}`.toLowerCase().includes(q)) : cache.customers;
@@ -2858,6 +2994,10 @@ function renderCustomers() {
     <td>${canManage ? `<button class="btn btn-primary btn-sm" onclick="editCustomer('${c.id}')">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteCustomer('${c.id}')">${ico('trash', 13)}</button>` : '—'}</td>
   </tr>`).join('');
 }
+
+/* ══════════════════════════════════════════════════════════════
+   RENDER: SETTINGS
+   ══════════════════════════════════════════════════════════════ */
 function renderSettings() { renderBranchesList(); renderDriversList(); renderUsers(); renderActivity(); }
 function renderBranchesList() {
   const canManage = hasPerm('manageBranches');
@@ -2903,10 +3043,11 @@ function renderUsers() {
     } else {
       actions = `<span class="badge badge-locked">${ico('lock', 10)} مقفل</span>`;
     }
+    const hashed = Crypto.isHashed(u);
     return `<tr>
       <td>${esc(u.username)}</td>
       <td><span class="badge ${rl.cls}">${ico(rl.icon, 12)} ${rl.label}</span></td>
-      <td style="font-size:11.5px;color:var(--text-muted);">${permCount}</td>
+      <td style="font-size:11.5px;color:var(--text-muted);">${permCount}${hashed ? ' 🔒' : ''}</td>
       <td style="white-space:nowrap;">${actions}</td>
     </tr>`;
   }).join('');
@@ -2923,6 +3064,9 @@ function populateBranchSelects() {
   if (logSel) { const cur = logSel.value; logSel.innerHTML = '<option value="">الكل</option>' + cache.branches.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''); if (cur) logSel.value = cur; }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   NAVIGATION
+   ══════════════════════════════════════════════════════════════ */
 window.go = function (page) {
   const pagePerm = { dashboard:'accessDashboard', entry:'accessEntry', ready:'accessReady', log:'accessLog', customers:'accessCustomers', settings:'accessSettings' };
   if (pagePerm[page] && !hasPerm(pagePerm[page])) { toast(MSG.unauthorized, 'error'); return; }
@@ -2950,6 +3094,296 @@ window.switchTab = function (evt, tab) {
   if (tab === 'users') renderUsers();
 };
 
+/* ══════════════════════════════════════════════════════════════
+   KEY MANAGEMENT
+   ══════════════════════════════════════════════════════════════ */
+function getStoredKey() { return localStorage.getItem(ACCESS_KEY) || ''; }
+function saveKey(t) { localStorage.setItem(ACCESS_KEY, t.trim()); }
+function hideKeyForever() { localStorage.setItem(KEY_HIDDEN_FLAG, '1'); }
+function isKeyHidden() { return localStorage.getItem(KEY_HIDDEN_FLAG) === '1'; }
+async function clearKey() {
+  const ok = await dialog.confirm('سيتم إزالة المفتاح من هذا الجهاز، هل تريد المتابعة؟', { type: 'warning', title: 'إزالة المفتاح' });
+  if (!ok) return;
+  localStorage.removeItem(ACCESS_KEY);
+  localStorage.removeItem(KEY_HIDDEN_FLAG);
+  toast('تمت إزالة المفتاح بنجاح', 'success');
+  updateKeyStatus(); updateCurrentKeyInfo();
+}
+function updateKeyStatus() {
+  const statusEl = document.getElementById('keyStatus');
+  const fieldEl = document.getElementById('keyField');
+  const token = getStoredKey();
+  if (isKeyHidden() && token) { statusEl.style.display = 'none'; fieldEl.style.display = 'none'; return; }
+  statusEl.style.display = '';
+  if (token) {
+    statusEl.className = 'key-status saved';
+    statusEl.innerHTML = `<span>${ico('check', 14)} المفتاح جاهز للاستخدام</span><button onclick="showKeyField()">تغيير</button>`;
+    fieldEl.style.display = 'none';
+  } else {
+    statusEl.className = 'key-status missing';
+    statusEl.innerHTML = `<span>${ico('warning', 14)} يرجى إدخال المفتاح</span>`;
+    fieldEl.style.display = 'block';
+  }
+}
+function showKeyField() {
+  document.getElementById('keyField').style.display = 'block';
+  document.getElementById('keyStatus').style.display = 'none';
+  document.getElementById('loginKey').focus();
+}
+function updateCurrentKeyInfo() {
+  const el = document.getElementById('currentKeyInfo'); if (!el) return;
+  const token = getStoredKey();
+  if (token) {
+    el.innerHTML = `<div style="color:var(--success-600);font-weight:700;margin-bottom:6px;">${ico('check', 13)} نشط</div><div>الطول: ${token.length} حرف</div>`;
+  } else el.textContent = 'لا يوجد مفتاح';
+}
+function changeKeyModal() {
+  document.getElementById('newKeyInput').value = '';
+  openModal('keyModal');
+  setTimeout(() => document.getElementById('newKeyInput').focus(), 100);
+}
+async function performKeyChange(newKey, errorEl, btn) {
+  if (!newKey) { errorEl.textContent = MSG.keyMissing; errorEl.classList.add('show'); return false; }
+  if (newKey.length < 20) { errorEl.textContent = MSG.keyShort; errorEl.classList.add('show'); return false; }
+  if (btn) btn.disabled = true;
+  try {
+    showLoading('جاري اختبار المفتاح الجديد...');
+    const testUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILES.meta}?ref=${APP_BRANCH}&_=${Date.now()}`;
+    const testRes = await fetch(testUrl, { headers: { 'Authorization': `Bearer ${newKey}`, 'Accept': 'application/vnd.github+json' } });
+    if (!testRes.ok) {
+      if (testRes.status === 401) throw new Error(MSG.keyInvalid);
+      if (testRes.status === 403) throw new Error(MSG.noPermissions);
+      throw new Error(MSG.connFail);
+    }
+    saveKey(newKey);
+    Storage.resetCache();
+    localMeta = null;
+    await readAll();
+    await loadActivity();
+    hideLoading();
+    updateKeyStatus(); updateCurrentKeyInfo();
+    toast('✅ ' + MSG.keySuccess, 'success');
+    return true;
+  } catch (e) {
+    hideLoading();
+    errorEl.textContent = '❌ ' + (e.message || MSG.connFail);
+    errorEl.classList.add('show');
+    return false;
+  } finally { if (btn) btn.disabled = false; }
+}
+window.toggleAdminPanel = function() {
+  const panel = document.getElementById('adminTokenSection');
+  panel.classList.toggle('show');
+  if (panel.classList.contains('show')) setTimeout(() => document.getElementById('adminNewKey').focus(), 100);
+};
+window.adminChangeKey = async function() {
+  const newKey = document.getElementById('adminNewKey').value.trim();
+  const errEl = document.getElementById('adminError');
+  const btn = document.getElementById('adminChangeBtn');
+  errEl.classList.remove('show'); errEl.textContent = '';
+  const ok = await performKeyChange(newKey, errEl, btn);
+  if (ok) {
+    document.getElementById('adminNewKey').value = '';
+    document.getElementById('adminTokenSection').classList.remove('show');
+    await dialog.alert('✅ ' + MSG.keySuccess, { type: 'success', title: 'تم بنجاح' });
+  }
+};
+async function saveNewKey() {
+  const newKey = document.getElementById('newKeyInput').value.trim();
+  const errEl = document.createElement('div');
+  errEl.className = 'login-error';
+  const ok = await performKeyChange(newKey, errEl, null);
+  if (ok) closeModal('keyModal');
+  else toast(errEl.textContent || MSG.connFail, 'error');
+}
+window.saveNewKey = saveNewKey;
+
+/* ══════════════════════════════════════════════════════════════
+   RATE LIMIT
+   ══════════════════════════════════════════════════════════════ */
+function updateRateLimit(headers) {
+  const remaining = headers.get('X-RateLimit-Remaining');
+  const limit = headers.get('X-RateLimit-Limit');
+  const reset = headers.get('X-RateLimit-Reset');
+  if (remaining !== null && limit !== null) {
+    rateLimitInfo = { remaining: parseInt(remaining), limit: parseInt(limit), reset: reset ? new Date(parseInt(reset) * 1000) : null };
+    renderRateLimitWidget(); adjustSyncInterval(); maybeNotifyLowRate();
+  }
+}
+function renderRateLimitWidget() {
+  const widget = document.getElementById('rateWidget');
+  const fill = document.getElementById('rateFill');
+  const text = document.getElementById('rateText');
+  const icon = document.getElementById('rateIcon');
+  if (!widget || !fill || !text) return;
+  if (icon && !icon.innerHTML) icon.innerHTML = ico('zap', 12);
+  if (!rateLimitInfo) { text.textContent = '— / —'; fill.style.width = '0%'; return; }
+  const { remaining, limit, reset } = rateLimitInfo;
+  const pct = limit > 0 ? Math.max(0, Math.min(100, (remaining / limit) * 100)) : 0;
+  fill.style.width = pct + '%';
+  text.textContent = `${remaining.toLocaleString('en-US')} / ${limit.toLocaleString('en-US')}`;
+  widget.classList.remove('warn','danger');
+  if (pct < 10) widget.classList.add('danger'); else if (pct < 30) widget.classList.add('warn');
+  const resetStr = reset ? reset.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : '—';
+  const level = getRateLevel(remaining);
+  widget.title = `📊 استهلاك الحصة\nالمتبقي: ${remaining.toLocaleString('en-US')} من ${limit.toLocaleString('en-US')}\nالنسبة: ${pct.toFixed(1)}%\nالمستوى: ${level.label}\nيتجدد الساعة: ${resetStr}`;
+}
+function getRateLevel(remaining) { for (const lvl of RATE_LEVELS) { if (remaining >= lvl.min) return lvl; } return RATE_LEVELS[RATE_LEVELS.length - 1]; }
+function adjustSyncInterval() {
+  if (!rateLimitInfo) return;
+  const level = getRateLevel(rateLimitInfo.remaining);
+  if (level.interval === currentSyncInterval) return;
+  currentSyncInterval = level.interval;
+  if (!currentUser) return;
+  if (currentSyncInterval > 0) startPolling();
+  else stopPolling();
+}
+function maybeNotifyLowRate() {
+  if (!rateLimitInfo) return;
+  const now = Date.now();
+  if (now - lastRateNotificationAt < 30 * 60 * 1000) return;
+  const pct = rateLimitInfo.limit > 0 ? (rateLimitInfo.remaining / rateLimitInfo.limit) * 100 : 100;
+  if (pct < 10) { lastRateNotificationAt = now; addNotification('تنبيه', `استهلاك منخفض للحصة: ${rateLimitInfo.remaining} طلب متبقي`, 'warning', true); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DIALOG / TOAST / LOADING
+   ══════════════════════════════════════════════════════════════ */
+let dialogCallback = null;
+function showDialog(opts) {
+  return new Promise(resolve => {
+    dialogCallback = resolve;
+    const { type = 'info', title, message, okText, cancelText, showCancel = true, okClass } = opts;
+    const iconMap = { info:'info', warning:'warning', danger:'trash', success:'check', question:'info' };
+    const titleMap = { info:'تنبيه', warning:'تحذير', danger:'تأكيد الحذف', success:'تم بنجاح', question:'تأكيد' };
+    const iconEl = document.getElementById('dialogIcon');
+    iconEl.className = 'dialog-icon ' + (type === 'danger' ? 'danger' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info');
+    iconEl.innerHTML = ico(iconMap[type] || 'info', 34);
+    document.getElementById('dialogTitle').textContent = title || titleMap[type] || 'تنبيه';
+    document.getElementById('dialogMessage').textContent = message || '';
+    document.getElementById('dialogOkBtn').textContent = okText || 'موافق';
+    document.getElementById('dialogOkBtn').className = 'btn ' + (okClass || (type === 'danger' ? 'btn-danger' : type === 'success' ? 'btn-success' : 'btn-primary'));
+    const cancelBtn = document.getElementById('dialogCancelBtn');
+    cancelBtn.textContent = cancelText || 'إلغاء';
+    cancelBtn.style.display = showCancel ? '' : 'none';
+    document.getElementById('dialogBg').classList.add('active');
+  });
+}
+window.dialogResolve = function(r) {
+  document.getElementById('dialogBg').classList.remove('active');
+  if (dialogCallback) dialogCallback(r);
+  dialogCallback = null;
+};
+const dialog = {
+  alert: (msg, o = {}) => showDialog({ type: o.type || 'info', title: o.title, message: msg, showCancel: false, okText: o.okText || 'حسناً' }),
+  confirm: (msg, o = {}) => showDialog({ type: o.type || 'question', title: o.title, message: msg, okText: o.okText || 'تأكيد', showCancel: true, okClass: o.okClass }),
+  danger: (msg, o = {}) => showDialog({ type: 'danger', title: o.title || 'تأكيد الحذف', message: msg, okText: o.okText || 'نعم، احذف', showCancel: true })
+};
+function toast(msg, type = 'info') {
+  const icons = { success:'check', error:'x', info:'info', warning:'warning' };
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.innerHTML = `<span class="toast-icon">${ico(icons[type] || 'info', 14)}</span><span class="toast-msg">${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => el.classList.add('show'), 10);
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); }, 3200);
+}
+function showLoading(t = 'جاري التحميل...', pct = null) {
+  document.getElementById('loadingText').textContent = t;
+  const bar = document.getElementById('loadingBar');
+  if (bar) bar.style.width = (pct !== null ? pct : 0) + '%';
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+function setLoadingProgress(pct, txt) {
+  const bar = document.getElementById('loadingBar');
+  if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  if (txt) document.getElementById('loadingText').textContent = txt;
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+  const bar = document.getElementById('loadingBar');
+  if (bar) bar.style.width = '0%';
+}
+function setFieldError(fieldId, message) {
+  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
+  if (f) f.classList.add('field-error'); if (e) { e.textContent = message; e.classList.add('show'); }
+}
+function clearFieldError(fieldId) {
+  const f = document.getElementById(fieldId); const e = document.getElementById('err-' + fieldId);
+  if (f) f.classList.remove('field-error'); if (e) { e.textContent = ''; e.classList.remove('show'); }
+}
+function clearAllErrors(modalId) {
+  const modal = document.getElementById(modalId); if (!modal) return;
+  modal.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+  modal.querySelectorAll('.field-error-msg').forEach(el => { el.textContent = ''; el.classList.remove('show'); });
+}
+function focusFirstError(modalId) {
+  const modal = document.getElementById(modalId);
+  const first = modal?.querySelector('.field-error'); if (first) first.focus();
+}
+function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
+
+async function ensureJSZip() {
+  if (typeof JSZip !== 'undefined') return true;
+  return new Promise((resolve) => {
+    const existing = document.querySelector('script[data-jszip-loader]');
+    if (existing) { existing.addEventListener('load', () => resolve(typeof JSZip !== 'undefined')); existing.addEventListener('error', () => resolve(false)); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    script.setAttribute('data-jszip-loader', '1');
+    script.onload = () => resolve(typeof JSZip !== 'undefined');
+    script.onerror = () => resolve(false);
+    document.head.appendChild(script);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   THEME
+   ══════════════════════════════════════════════════════════════ */
+let _themeMediaListener = null;
+function initTheme() {
+  let saved = localStorage.getItem(THEME_KEY);
+  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateMetaThemeColor(saved);
+  updateThemeBtn();
+  if (window.matchMedia) {
+    if (_themeMediaListener) window.matchMedia('(prefers-color-scheme: dark)').removeEventListener?.('change', _themeMediaListener);
+    _themeMediaListener = (e) => {
+      if (!localStorage.getItem(THEME_KEY)) {
+        const t = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        updateMetaThemeColor(t); updateThemeBtn();
+      }
+    };
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', _themeMediaListener);
+  }
+}
+function updateMetaThemeColor(theme) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#070b15' : '#3654d4');
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem(THEME_KEY, next);
+  updateMetaThemeColor(next); updateThemeBtn();
+  const btn = document.getElementById('themeBtn');
+  if (btn) { btn.style.transform = 'rotate(360deg) scale(1.15)'; setTimeout(() => { btn.style.transform = ''; }, 350); }
+}
+function updateThemeBtn() {
+  const btn = document.getElementById('themeBtn'); if (!btn) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark ? ico('sun', 17) : ico('moon', 17);
+  btn.setAttribute('title', isDark ? 'الوضع النهاري' : 'الوضع الليلي');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LOGIN / LOGOUT / APP
+   ══════════════════════════════════════════════════════════════ */
 window.doLogin = async function () {
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value;
@@ -2973,6 +3407,7 @@ window.doLogin = async function () {
   try {
     setLoadingProgress(50, 'جاري التحميل...');
     await readAll();
+    await loadActivity();
     const meta = await readMeta();
     localMeta = meta;
     setLoadingProgress(80, 'جاري تسجيل الدخول...');
@@ -2984,12 +3419,32 @@ window.doLogin = async function () {
       return;
     }
 
-    const found = cache.users.find(x => x.username === u && x.password === p);
+    // ─── التحقق من كلمة المرور (يدعم الجديد والقديم) ───
+    let found = null;
+    for (const candidate of cache.users) {
+      if (candidate.username !== u) continue;
+      const ok = await Crypto.verifyPassword(p, candidate);
+      if (ok) { found = candidate; break; }
+    }
     if (!found) {
       errEl.textContent = MSG.authFail;
       errEl.classList.add('show');
       btn.disabled = false; loadEl.textContent = ''; hideLoading();
       return;
+    }
+
+    // ─── ترحيل تلقائي لكلمة المرور القديمة → Hashed ───
+    if (Crypto.needsMigration(found)) {
+      try {
+        const { passwordHash, passwordSalt, passwordAlgo } = await Crypto.hashPassword(p);
+        found.passwordHash = passwordHash;
+        found.passwordSalt = passwordSalt;
+        found.passwordAlgo = passwordAlgo;
+        delete found.password;
+        const idx = cache.users.findIndex(x => x.id === found.id);
+        if (idx > -1) cache.users[idx] = found;
+        persistKeys(['users']).catch(() => {});
+      } catch (e) { /* تجاهل */ }
     }
 
     hideKeyForever();
@@ -3019,8 +3474,11 @@ window.logout = async function (silent = false) {
   if (currentUser) logActivity('logout', `خروج: ${currentUser.username}`, '', 'info');
   try { await flushNotificationsSave(); } catch {}
   try { await flushActivitySave(); } catch {}
+  try { await SaveQueue.drain(); } catch (_) {}
   stopPolling(); stopSessionTimer();
-  currentUser = null; selectedOrderId = null; selectedReadyIds.clear(); SHAs = {}; ETags = {}; localMeta = null;
+  currentUser = null; selectedOrderId = null; selectedReadyIds.clear();
+  Storage.resetCache();
+  localMeta = null;
   currentSyncInterval = SYNC_INTERVAL;
   lastSyncTime = 0;
   document.getElementById('app').style.display = 'none';
@@ -3052,6 +3510,7 @@ function startApp() {
   addNotification('مرحباً', `أهلاً ${currentUser.username} (${rl.label})`, 'info', true);
   attachVisibilityHandler();
   attachOnlineHandlers();
+  setInterval(renderSaveQueueIndicator, 1000);
   toast(`أهلاً ${currentUser.username}`, 'success');
 }
 
@@ -3082,6 +3541,18 @@ function attachOnlineHandlers() {
   window.addEventListener('offline', () => { setOnline(false); });
 }
 
+function renderSaveQueueIndicator() {
+  const stats = SaveQueue.getStats();
+  const el = document.getElementById('saveQueueIndicator');
+  if (!el) return;
+  if (stats.pending === 0) { el.style.display = 'none'; return; }
+  el.style.display = 'inline-flex';
+  el.innerHTML = `${ico('sync', 12)}<span>${stats.pending} حفظ</span>`;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ORDER OPERATIONS
+   ══════════════════════════════════════════════════════════════ */
 window.addOrder = function () {
   if (!hasPerm('addOrder')) { toast(MSG.unauthorized, 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
@@ -3262,6 +3733,9 @@ window.deleteFromLog = async function (id) {
   try { await persistKeys(['log', 'activity']); renderLog(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   CUSTOMER SEARCH / DRIVERS
+   ══════════════════════════════════════════════════════════════ */
 function initCustomerSearch() {
   const input = document.getElementById('orderCustomer');
   const dropdown = document.getElementById('customerDropdown');
@@ -3356,6 +3830,9 @@ window.deleteBranch = async function (id) {
   try { await persistKeys(['branches', 'activity']); renderBranchesList(); populateBranchSelects(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   TRANSFER / RETURN / MOVE
+   ══════════════════════════════════════════════════════════════ */
 window.transferSingle = async function (id) {
   if (!hasPerm('transferSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.orders.find(x => x.id === id); if (!order) return;
@@ -3429,20 +3906,6 @@ window.moveReadyToLog = async function () {
   }
 };
 
-window.printReady = function () {
-  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
-  const visibleData = getReadyFilteredData();
-  if (!visibleData.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
-  const selectedInVisible = visibleData.filter(o => selectedReadyIds.has(o.id));
-  const data = selectedInVisible.length > 0 ? selectedInVisible : visibleData;
-  if (!data.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
-  const win = window.open('', '_blank');
-  win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
-  win.document.close();
-  logActivity('print-ready', `طباعة ${data.length}${selectedInVisible.length > 0 ? ' (محددة)' : ''}`, '', 'info');
-};
-window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
-
 window.returnReadyToEntry = async function (id) {
   if (!hasPerm('returnSingle')) { toast(MSG.unauthorized, 'error'); return; }
   const order = cache.ready.find(x => x.id === id);
@@ -3476,92 +3939,8 @@ window.returnReadyToEntry = async function (id) {
 };
 
 /* ══════════════════════════════════════════════════════════════
-   فتح تبويب في الخلفية + إغلاقه تلقائياً بعد 5 ثوان
+   WHATSAPP — فتح ذكي حسب المنصة
    ══════════════════════════════════════════════════════════════ */
-function openBackgroundTab(url, closeAfterMs = 5000) {
-  let win = null;
-  try { win = window.open(url, '_blank'); } catch (_) { win = null; }
-  if (!win) return null;
-  // محاولة إبقاء التبويب في الخلفية دون سرقة التركيز من النظام
-  try { win.blur(); } catch (_) {}
-  try { window.focus(); } catch (_) {}
-  // إغلاق تلقائي بعد المدة المحددة (افتراضياً 5 ثوان)
-  if (closeAfterMs > 0) {
-    setTimeout(() => { try { win.close(); } catch (_) {} }, closeAfterMs);
-  }
-  return win;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   WhatsApp — فتح مباشر بحسب المنصة
-   - Android / iOS: فتح التطبيق مباشرة (بدون تبويب)
-   - Windows: فتح التطبيق، وإن فشل يفتح Web في تبويب خلفي يُغلق بعد 5 ثوان
-   - Mac / Web: فتح Web في تبويب خلفي يُغلق بعد 5 ثوان
-   ══════════════════════════════════════════════════════════════ */
-function openWhatsApp(phone, message) {
-  phone = String(phone).replace(/[^\d]/g, '');
-  const text = encodeURIComponent(message);
-
-  const ua = navigator.userAgent;
-
-  const isAndroid = /Android/i.test(ua);
-  const isIOS = /iPhone|iPad|iPod/i.test(ua);
-  const isWindows = /Windows/i.test(ua);
-  const isMac = /Macintosh|Mac OS X/i.test(ua);
-
-  // 📱 Android
-  if (isAndroid) {
-    const appUrl =
-      `intent://send?phone=${phone}&text=${text}` +
-      `#Intent;scheme=whatsapp;package=com.whatsapp;end`;
-
-    window.location.href = appUrl;
-
-    setTimeout(() => {
-      openBackgroundTab(
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
-      );
-    }, 1800);
-
-    return;
-  }
-
-  // 🍎 iPhone / iPad
-  if (isIOS) {
-    window.location.href =
-      `whatsapp://send?phone=${phone}&text=${text}`;
-
-    setTimeout(() => {
-      openBackgroundTab(
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
-      );
-    }, 1800);
-
-    return;
-  }
-
-  // 💻 Windows
-  if (isWindows) {
-    const desktopUrl =
-      `whatsapp://send?phone=${phone}&text=${text}`;
-
-    window.location.href = desktopUrl;
-
-    setTimeout(() => {
-      openBackgroundTab(
-        `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
-      );
-    }, 2000);
-
-    return;
-  }
-
-  // 💻 Mac / الأجهزة الأخرى
-  openBackgroundTab(
-    `https://web.whatsapp.com/send?phone=${phone}&text=${text}`
-  );
-}
-
 function buildWhatsAppMessage(order) {
   const tpl = (templates.whatsapp?.message) || DEFAULT_TEMPLATES.whatsapp.message;
   return tpl
@@ -3580,17 +3959,50 @@ function normalizePhoneForWhatsApp(phone) {
   else if (/^0\d{9}$/.test(p)) p = '967' + p.substring(1);
   return p;
 }
+function openBackgroundTab(url, closeAfterMs = 5000) {
+  let win = null;
+  try { win = window.open(url, '_blank'); } catch (_) { win = null; }
+  if (!win) return null;
+  try { win.blur(); } catch (_) {}
+  try { window.focus(); } catch (_) {}
+  if (closeAfterMs > 0) {
+    setTimeout(() => { try { win.close(); } catch (_) {} }, closeAfterMs);
+  }
+  return win;
+}
+function openWhatsApp(phone, message) {
+  phone = String(phone).replace(/[^\d]/g, '');
+  const text = encodeURIComponent(message);
+  const ua = navigator.userAgent;
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isWindows = /Windows/i.test(ua);
+
+  if (isAndroid) {
+    const appUrl = `intent://send?phone=${phone}&text=${text}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+    window.location.href = appUrl;
+    setTimeout(() => { openBackgroundTab(`https://web.whatsapp.com/send?phone=${phone}&text=${text}`); }, 1800);
+    return;
+  }
+  if (isIOS) {
+    window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+    setTimeout(() => { openBackgroundTab(`https://web.whatsapp.com/send?phone=${phone}&text=${text}`); }, 1800);
+    return;
+  }
+  if (isWindows) {
+    window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+    setTimeout(() => { openBackgroundTab(`https://web.whatsapp.com/send?phone=${phone}&text=${text}`); }, 2000);
+    return;
+  }
+  openBackgroundTab(`https://web.whatsapp.com/send?phone=${phone}&text=${text}`);
+}
 function triggerWhatsAppNotification(order) {
   if (templates.whatsapp?.enabled === false) return;
   if (!hasPerm('sendWhatsApp')) return;
   const phone = normalizePhoneForWhatsApp(order.customerPhone);
-  if (!phone) {
-    toast('لا يوجد رقم هاتف للعميل لإرسال الإشعار', 'warning');
-    return;
-  }
+  if (!phone) { toast('لا يوجد رقم هاتف للعميل لإرسال الإشعار', 'warning'); return; }
   const message = buildWhatsAppMessage(order);
   logActivity('whatsapp-sent', `إرسال واتساب: ${order.invoice}`, `إلى: ${order.customer} (${order.customerPhone})`, 'success');
-  // ✅ فتح واتساب مباشرة بحسب الجهاز — بدون أي واجهة أو انتظار
   openWhatsApp(phone, message);
 }
 window.sendWhatsAppManually = function(orderId) {
@@ -3600,6 +4012,9 @@ window.sendWhatsAppManually = function(orderId) {
   triggerWhatsAppNotification(o);
 };
 
+/* ══════════════════════════════════════════════════════════════
+   RECEIPT STATUS
+   ══════════════════════════════════════════════════════════════ */
 window.changeReceiptStatus = async function (id, newStatus) {
   const o = cache.log.find(x => x.id === id);
   if (!o) { renderLog(); return; }
@@ -3607,28 +4022,14 @@ window.changeReceiptStatus = async function (id, newStatus) {
   const isOwner = currentUser?.role === ROLE_OWNER;
   const canRevert = hasPerm('revertReceiptStatus');
   if (current === newStatus) { renderLog(); return; }
-  if (current === RECEIPT_RECEIVED && !isOwner && !canRevert) {
-    toast('لا يمكن التراجع عن تأكيد الاستلام', 'error');
-    renderLog();
-    return;
-  }
-  if (newStatus === RECEIPT_RECEIVED && !isOwner && !hasPerm('editReceiptStatus')) {
-    toast(MSG.unauthorized, 'error');
-    renderLog();
-    return;
-  }
+  if (current === RECEIPT_RECEIVED && !isOwner && !canRevert) { toast('لا يمكن التراجع عن تأكيد الاستلام', 'error'); renderLog(); return; }
+  if (newStatus === RECEIPT_RECEIVED && !isOwner && !hasPerm('editReceiptStatus')) { toast(MSG.unauthorized, 'error'); renderLog(); return; }
   if (newStatus === RECEIPT_RECEIVED) {
-    const ok = await dialog.confirm(
-      `هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟`,
-      { title: 'تأكيد الاستلام', okText: 'نعم، تم الاستلام', type: 'success', okClass: 'btn-success' }
-    );
+    const ok = await dialog.confirm(`هل تم استلام الطلب "${o.invoice}" للعميل:\n\n"${o.customer}"؟`, { title: 'تأكيد الاستلام', okText: 'نعم، تم الاستلام', type: 'success', okClass: 'btn-success' });
     if (!ok) { renderLog(); return; }
   }
   if (newStatus === RECEIPT_NOT_RECEIVED && current === RECEIPT_RECEIVED) {
-    const ok = await dialog.confirm(
-      `إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟`,
-      { title: 'إلغاء الاستلام', okText: 'نعم، إلغاء', type: 'warning', okClass: 'btn-warning' }
-    );
+    const ok = await dialog.confirm(`إلغاء تأكيد استلام الطلب "${o.invoice}" للعميل "${o.customer}"؟`, { title: 'إلغاء الاستلام', okText: 'نعم، إلغاء', type: 'warning', okClass: 'btn-warning' });
     if (!ok) { renderLog(); return; }
   }
   const previous = current;
@@ -3637,26 +4038,13 @@ window.changeReceiptStatus = async function (id, newStatus) {
   o.receiptStatus = newStatus;
   o.receiptUpdatedAt = fmtDate();
   o.receiptUpdatedBy = currentUser.username;
-  logActivity(
-    'receipt-status',
-    newStatus === RECEIPT_RECEIVED ? `تأكيد استلام: ${o.invoice}` : `إلغاء استلام: ${o.invoice}`,
-    `العميل: ${o.customer}`,
-    newStatus === RECEIPT_RECEIVED ? 'success' : 'warning'
-  );
+  logActivity('receipt-status', newStatus === RECEIPT_RECEIVED ? `تأكيد استلام: ${o.invoice}` : `إلغاء استلام: ${o.invoice}`, `العميل: ${o.customer}`, newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
   try {
     await persistKeys(['log', 'activity']);
     renderLog();
-    addNotification(
-      newStatus === RECEIPT_RECEIVED ? 'تأكيد استلام' : 'إلغاء استلام',
-      `${o.invoice} — ${o.customer}`,
-      newStatus === RECEIPT_RECEIVED ? 'success' : 'warning',
-      true
-    );
+    addNotification(newStatus === RECEIPT_RECEIVED ? 'تأكيد استلام' : 'إلغاء استلام', `${o.invoice} — ${o.customer}`, newStatus === RECEIPT_RECEIVED ? 'success' : 'warning', true);
     toast(newStatus === RECEIPT_RECEIVED ? '✅ تم تأكيد الاستلام' : 'تم إلغاء الاستلام', newStatus === RECEIPT_RECEIVED ? 'success' : 'warning');
-    // 📱 فتح واتساب مباشرة عند تأكيد الاستلام
-    if (newStatus === RECEIPT_RECEIVED) {
-      setTimeout(() => triggerWhatsAppNotification(o), 400);
-    }
+    if (newStatus === RECEIPT_RECEIVED) { setTimeout(() => triggerWhatsAppNotification(o), 400); }
   } catch (e) {
     o.receiptStatus = previous;
     o.receiptUpdatedAt = previousAt;
@@ -3666,6 +4054,9 @@ window.changeReceiptStatus = async function (id, newStatus) {
   }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   PRINTING
+   ══════════════════════════════════════════════════════════════ */
 function buildPrintHTML(items, template, extra = {}) {
   const tpl = template;
   const replaceVars = (str) => String(str || '')
@@ -3674,102 +4065,326 @@ function buildPrintHTML(items, template, extra = {}) {
     .replace(/{user}/g, esc(currentUser.username))
     .replace(/{from}/g, extra.from || 'البداية')
     .replace(/{to}/g, extra.to || 'اليوم');
+
+  // ─── تعريف الأعمدة ───
   const cols = [];
-  if (tpl.showInvoice !== false)        cols.push({ key:'invoice',        header:'الفاتورة',      cls:'col-code',  weight: PRINT_COL_WEIGHTS.invoice,        cell:o => esc(o.invoice) });
-  if (tpl.showBranch !== false)         cols.push({ key:'branch',         header:'الفرع',         cls:'',          weight: PRINT_COL_WEIGHTS.branch,         cell:o => esc(o.branch || DEFAULT_BRANCH_NAME) });
-  if (tpl.showCustomer !== false)       cols.push({ key:'customer',       header:'العميل',        cls:'col-name',  weight: PRINT_COL_WEIGHTS.customer,       cell:o => esc(o.customer) });
-  if (tpl.showCustomerPhone !== false)  cols.push({ key:'customerPhone',  header:'هاتف العميل',   cls:'col-code',  weight: PRINT_COL_WEIGHTS.customerPhone,  cell:o => esc(o.customerPhone || '—') });
-  if (tpl.showLocation !== false)       cols.push({ key:'location',       header:'الموقع',        cls:'',          weight: PRINT_COL_WEIGHTS.location,       cell:o => esc(o.location) });
-  if (tpl.showStatus !== false)         cols.push({ key:'status',         header:'الحالة',        cls:'',          weight: PRINT_COL_WEIGHTS.status,         cell:o => esc(o.status) });
-  if (tpl.showApprovalDate !== false)   cols.push({ key:'approvalDate',   header:'الاعتماد',      cls:'col-code',  weight: PRINT_COL_WEIGHTS.approvalDate,   cell:o => esc(o.approvalDate || '—') });
-  if (tpl.showPay !== false)            cols.push({ key:'pay',            header:'الدفع',         cls:'',          weight: PRINT_COL_WEIGHTS.pay,            cell:o => esc(o.pay || '—') });
-  if (tpl.showDriver !== false)         cols.push({ key:'driver',         header:'الموصل',        cls:'col-name',  weight: PRINT_COL_WEIGHTS.driver,         cell:o => esc(o.driver || '—') });
-  if (tpl.showDriverPhone !== false)    cols.push({ key:'driverPhone',    header:'هاتف الموصل',   cls:'col-code',  weight: PRINT_COL_WEIGHTS.driverPhone,    cell:o => esc(o.driverPhone || '—') });
-  if (tpl.showNotes !== false)          cols.push({ key:'notes',          header:'ملاحظات',       cls:'col-notes', weight: PRINT_COL_WEIGHTS.notes,          cell:o => esc(o.notes || '—') });
-  if (tpl.showArchivedAt)               cols.push({ key:'archivedAt',     header:'تاريخ الترحيل', cls:'col-code',  weight: PRINT_COL_WEIGHTS.archivedAt,     cell:o => esc(o.archivedAt || '—') });
-  if (tpl.showReceiptStatus)            cols.push({ key:'receiptStatus',  header:'حالة الاستلام', cls:'',          weight: PRINT_COL_WEIGHTS.receiptStatus,  cell:o => esc(o.receiptStatus || RECEIPT_NOT_RECEIVED) });
-  const allCols = [{ key:'index', header:'#', cls:'col-num', weight: PRINT_COL_WEIGHTS.index, cell:null }].concat(cols);
+  if (tpl.showInvoice !== false)        cols.push({ key:'invoice',        header:'رقم الفاتورة',  cls:'col-code',  weight: 70, cell:o => esc(o.invoice) });
+  if (tpl.showBranch !== false)         cols.push({ key:'branch',         header:'الفرع',         cls:'',          weight: 75, cell:o => esc(o.branch || DEFAULT_BRANCH_NAME) });
+  if (tpl.showCustomer !== false)       cols.push({ key:'customer',       header:'العميل',        cls:'col-name',  weight: 105, cell:o => esc(o.customer) });
+  if (tpl.showCustomerPhone !== false)  cols.push({ key:'customerPhone',  header:'هاتف العميل',   cls:'col-code',  weight: 105, cell:o => esc(o.customerPhone || '—') });
+  if (tpl.showLocation !== false)       cols.push({ key:'location',       header:'الموقع',        cls:'col-name',  weight: 95, cell:o => esc(o.location) });
+  if (tpl.showStatus !== false)         cols.push({ key:'status',         header:'حالة الطلب',    cls:'',          weight: 70, cell:o => esc(o.status) });
+  if (tpl.showApprovalDate !== false)   cols.push({ key:'approvalDate',   header:'تاريخ الاعتماد', cls:'col-code', weight: 90, cell:o => esc(o.approvalDate || '—') });
+  if (tpl.showPay !== false)            cols.push({ key:'pay',            header:'الدفع',         cls:'',          weight: 55, cell:o => esc(o.pay || '—') });
+  if (tpl.showDriver !== false)         cols.push({ key:'driver',         header:'الموصل',        cls:'col-name',  weight: 95, cell:o => esc(o.driver || '—') });
+  if (tpl.showDriverPhone !== false)    cols.push({ key:'driverPhone',    header:'هاتف الموصل',   cls:'col-code',  weight: 105, cell:o => esc(o.driverPhone || '—') });
+  if (tpl.showNotes !== false)          cols.push({ key:'notes',          header:'ملاحظات',       cls:'col-notes', weight: 110, cell:o => esc(o.notes || '—') });
+  if (tpl.showArchivedAt)               cols.push({ key:'archivedAt',     header:'تاريخ الترحيل', cls:'col-code',  weight: 90, cell:o => esc(o.archivedAt || '—') });
+  if (tpl.showReceiptStatus)            cols.push({ key:'receiptStatus',  header:'حالة الاستلام', cls:'',          weight: 70, cell:o => esc(o.receiptStatus || RECEIPT_NOT_RECEIVED) });
+
+  const allCols = [{ key:'index', header:'#', cls:'col-num', weight: 25, cell:null }].concat(cols);
   const totalWeight = allCols.reduce((s, c) => s + c.weight, 0);
-  const colgroup = allCols.map(c => `<col style="width:${((c.weight / totalWeight) * 100).toFixed(3)}%">`).join('');
-  const headersHTML = allCols.map(c => `<th class="${c.cls}"><span class="fit-text">${esc(c.header)}</span></th>`).join('');
+
+  // ─── colgroup ───
+  const colgroup = allCols.map(c =>
+    `<col style="width:${((c.weight / totalWeight) * 100).toFixed(3)}%">`
+  ).join('');
+
+  // ─── headers ───
+  const headersHTML = allCols.map(c =>
+    `<th class="${c.cls}">${esc(c.header)}</th>`
+  ).join('');
+
+  // ─── rows ───
   const rowsHTML = items.map((o, i) => {
     const cells = allCols.map(c => {
       const content = c.cell ? c.cell(o) : String(i + 1);
-      if (c.cls === 'col-notes') return `<td class="${c.cls}">${content}</td>`;
-      return `<td class="${c.cls}"><span class="fit-text">${content}</span></td>`;
+      return `<td class="${c.cls}">${content}</td>`;
     }).join('');
     return `<tr>${cells}</tr>`;
   }).join('');
+
+  // ─── الأبعاد ───
   const paperKey = tpl.paperSize || 'A4';
   const paper = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
-  const baseFont = tpl.fontSize || 10;
-  const titleSize = baseFont + 5;
-  const metaSize = baseFont;
-  const footSize = baseFont;
-  const smallFont = +(baseFont * 0.92).toFixed(2);
-  const printableW = paper.w - 16;
-  const logoW = Math.min(templates.logoWidth || 180, printableW);
-  const logoH = templates.logoHeight || 40;
+  const baseFont = Math.max(9, Math.min(14, tpl.fontSize || 10));
+
+  // ═══ الخطوط والأحجام المحسوبة ═══
+  const titleSize   = baseFont + 6;      // عنوان بارز
+  const subtitleSize = baseFont + 1;     // السطر الفرعي
+  const headerSize  = baseFont;          // رأس الجدول
+  const bodySize    = baseFont;          // خلايا الجدول
+  const footerSize  = baseFont + 1;      // التذييل
+
+  // ─── الشعار ───
   const logoHTML = templates.logo
-    ? `<div class="print-logo"><img src="${templates.logo}" alt="" style="width:${logoW}mm;max-width:100%;height:auto;max-height:${logoH}mm;object-fit:contain;display:block;margin:0 auto;"></div>`
+    ? `<div class="print-logo"><img src="${templates.logo}" alt="" style="width:${templates.logoWidth || 180}mm;max-width:100%;height:auto;max-height:${templates.logoHeight || 40}mm;object-fit:contain;display:block;margin:0 auto;"></div>`
     : '';
-  return `<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><title>${esc(replaceVars(tpl.title))}</title>
-    <style>
-      @page { size: ${paper.w}mm ${paper.h}mm portrait; margin: 8mm; }
-      * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-      html, body { margin: 0; padding: 0; background: #fff; color: #000; font-family: Tahoma, Arial, sans-serif; }
-      .print-logo { text-align: center; margin: 0 0 4mm 0; }
-      h1 { font-size: ${titleSize}pt; color: #1d3193; margin: 0 0 2mm 0; text-align: center; font-weight: 700; line-height: 1.3; }
-      .meta { text-align: center; font-size: ${metaSize}pt; color: #475569; margin: 0 0 3mm 0; line-height: 1.4; }
-      table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: ${baseFont}pt; }
-      th, td { border: 1px solid #334155; padding: 3px 5px; vertical-align: middle; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: clip; }
-      thead { display: table-header-group; }
-      tfoot { display: table-footer-group; }
-      th { background: #1d3193; color: #fff; font-weight: 700; text-align: center; font-size: ${smallFont}pt; }
-      td { text-align: right; background: #fff; }
-      tbody tr:nth-child(even) td { background: #eef4ff; }
-      tbody tr { page-break-inside: avoid; break-inside: avoid; }
-      .fit-text { display: inline-block; white-space: nowrap; vertical-align: middle; transform-origin: right center; }
-      th .fit-text { transform-origin: center center; }
-      .col-num { text-align: center !important; font-weight: 600; color: #1d3193; }
-      .col-code { direction: ltr; text-align: center !important; font-family: 'Courier New', Consolas, monospace; }
-      .col-notes { text-align: right !important; white-space: normal !important; overflow-wrap: anywhere; line-height: 1.4; overflow: visible; }
-      .col-name { text-align: right !important; white-space: nowrap !important; }
-      tfoot td { border: none; padding-top: 6mm; text-align: center; font-size: ${footSize}pt; color: #334155; background: #fff !important; white-space: normal; overflow: visible; }
-    </style>
-    </head><body>
-    ${logoHTML}
-    <h1>${esc(replaceVars(tpl.title))}</h1>
-    <div class="meta">${esc(replaceVars(tpl.subtitle))}</div>
-    <table>
-      <colgroup>${colgroup}</colgroup>
-      <thead><tr>${headersHTML}</tr></thead>
-      <tbody>${rowsHTML}</tbody>
-      ${tpl.footer ? `<tfoot><tr><td colspan="${allCols.length}">${esc(replaceVars(tpl.footer))}</td></tr></tfoot>` : ''}
-    </table>
-    <script>
-      function fitPrintText() {
-        const table = document.querySelector('table'); if (!table) return;
-        const cells = table.querySelectorAll('thead th, tbody td:not(.col-notes)');
-        cells.forEach(cell => {
-          const text = cell.querySelector('.fit-text'); if (!text) return;
-          text.style.transform = 'none'; text.style.fontSize = '';
-          const base = parseFloat(getComputedStyle(text).fontSize) || ${baseFont} * 1.333;
-          const min = 5 * 1.333;
-          const available = Math.max(1, cell.clientWidth - 8);
-          let size = base; text.style.fontSize = size + 'px';
-          let guard = 120;
-          while (text.scrollWidth > available && size > min && guard-- > 0) { size -= 0.2; text.style.fontSize = size + 'px'; }
-          if (text.scrollWidth > available) {
-            const scale = available / Math.max(1, text.scrollWidth);
-            text.style.transform = 'scaleX(' + Math.max(0.08, scale).toFixed(4) + ')';
-          }
-        });
-      }
-      window.onload = () => setTimeout(() => { fitPrintText(); setTimeout(() => window.print(), 180); }, 350);
-    <\/script>
-    </body></html>`;
+
+  return `<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<title>${esc(replaceVars(tpl.title))}</title>
+<style>
+  /* ════════════════════════════════════════════
+     إعدادات الورقة
+     ════════════════════════════════════════════ */
+  @page {
+    size: ${paper.w}mm ${paper.h}mm portrait;
+    margin: 8mm 8mm 10mm 8mm;
+  }
+
+  /* ════════════════════════════════════════════
+     إعدادات عامة
+     ════════════════════════════════════════════ */
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    direction: rtl;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-size: ${bodySize}pt;
+    line-height: 1.4;
+  }
+
+  /* ════════════════════════════════════════════
+     الشعار
+     ════════════════════════════════════════════ */
+  .print-logo {
+    text-align: center;
+    margin: 0 0 5mm 0;
+    page-break-inside: avoid;
+  }
+  .print-logo img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ════════════════════════════════════════════
+     العنوان والسطر الفرعي
+     ════════════════════════════════════════════ */
+  h1.print-title {
+    font-size: ${titleSize}pt;
+    color: #1d3193;
+    margin: 0 0 3mm 0;
+    text-align: center;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+    page-break-inside: avoid;
+  }
+  .print-subtitle {
+    text-align: center;
+    font-size: ${subtitleSize}pt;
+    color: #475569;
+    margin: 0 0 5mm 0;
+    line-height: 1.5;
+    font-weight: 500;
+    page-break-inside: avoid;
+  }
+
+  /* ════════════════════════════════════════════
+     الجدول الرئيسي
+     ════════════════════════════════════════════ */
+  table.print-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: ${bodySize}pt;
+    page-break-inside: auto;
+  }
+
+  table.print-table thead {
+    display: table-header-group;
+  }
+  table.print-table tfoot {
+    display: table-footer-group;
+  }
+  table.print-table tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  table.print-table th {
+    background: #1d3193;
+    color: #fff;
+    font-weight: 700;
+    font-size: ${headerSize}pt;
+    text-align: center;
+    padding: 4mm 1.5mm;
+    border: 0.6px solid #1a2870;
+    line-height: 1.25;
+    vertical-align: middle;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  table.print-table td {
+    padding: 3mm 1.5mm;
+    border: 0.6px solid #64748b;
+    line-height: 1.4;
+    vertical-align: middle;
+    background: #fff;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  table.print-table tbody tr:nth-child(even) td {
+    background: #eef4ff;
+  }
+
+  /* ════════════════════════════════════════════
+     فئات الخلايا الخاصة
+     ════════════════════════════════════════════ */
+  .col-num {
+    text-align: center !important;
+    font-weight: 700;
+    color: #1d3193;
+    white-space: nowrap;
+  }
+  .col-code {
+    direction: ltr;
+    text-align: center !important;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: ${bodySize - 0.5}pt;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .col-name {
+    text-align: right !important;
+    white-space: normal;
+  }
+  .col-notes {
+    text-align: right !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.35;
+    font-size: ${bodySize - 0.3}pt;
+    color: #334155;
+  }
+
+  /* ════════════════════════════════════════════
+     التذييل (توقيعات)
+     ════════════════════════════════════════════ */
+  .print-footer {
+    margin-top: 8mm;
+    padding-top: 4mm;
+    text-align: center;
+    font-size: ${footerSize}pt;
+    color: #334155;
+    line-height: 1.7;
+    page-break-inside: avoid;
+    border-top: 0.8px dashed #94a3b8;
+  }
+
+  /* ════════════════════════════════════════════
+     منع كسر الصفوف
+     ════════════════════════════════════════════ */
+  .no-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ════════════════════════════════════════════
+     شاشة المعاينة
+     ════════════════════════════════════════════ */
+  @media screen {
+    body {
+      background: #e5e7eb;
+      padding: 15mm 10mm;
+    }
+    .print-container {
+      background: #fff;
+      width: ${paper.w}mm;
+      max-width: 100%;
+      min-height: ${paper.h}mm;
+      margin: 0 auto;
+      padding: 8mm 8mm 10mm 8mm;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+  }
+  @media print {
+    .print-container {
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="print-container">
+
+  ${logoHTML}
+
+  <h1 class="print-title">${esc(replaceVars(tpl.title))}</h1>
+
+  <div class="print-subtitle">${esc(replaceVars(tpl.subtitle))}</div>
+
+  <table class="print-table">
+    <colgroup>${colgroup}</colgroup>
+    <thead>
+      <tr>${headersHTML}</tr>
+    </thead>
+    <tbody>
+      ${rowsHTML}
+    </tbody>
+  </table>
+
+  ${tpl.footer ? `<div class="print-footer">${esc(replaceVars(tpl.footer))}</div>` : ''}
+
+</div>
+
+<script>
+  // إزالة الجدول الفارغ إذا لم توجد بيانات
+  window.addEventListener('DOMContentLoaded', function() {
+    var tbody = document.querySelector('table.print-table tbody');
+    if (tbody && tbody.children.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="99" style="text-align:center;padding:20mm 5mm;color:#94a3b8;font-size:12pt;">لا توجد بيانات للطباعة</td></tr>';
+    }
+  });
+  // طباعة تلقائية بعد تحميل الصور
+  window.addEventListener('load', function() {
+    setTimeout(function() { window.print(); }, 400);
+  });
+<\/script>
+
+</body>
+</html>`;
 }
+
+window.printReady = function () {
+  if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
+  const visibleData = getReadyFilteredData();
+  if (!visibleData.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
+  const selectedInVisible = visibleData.filter(o => selectedReadyIds.has(o.id));
+  const data = selectedInVisible.length > 0 ? selectedInVisible : visibleData;
+  if (!data.length) { toast('لا توجد طلبات للطباعة', 'error'); return; }
+  const win = window.open('', '_blank');
+  win.document.write(buildPrintHTML(data, templates.ready || DEFAULT_TEMPLATES.ready));
+  win.document.close();
+  logActivity('print-ready', `طباعة ${data.length}${selectedInVisible.length > 0 ? ' (محددة)' : ''}`, '', 'info');
+};
+window.exportReadyPDF = function () { printReady(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
 window.printLog = function () {
   if (!hasPerm('print')) { toast(MSG.unauthorized, 'error'); return; }
@@ -3784,6 +4399,9 @@ window.printLog = function () {
 };
 window.exportLogPDF = function () { printLog(); toast('اختر "حفظ كـ PDF"', 'info'); };
 
+/* ══════════════════════════════════════════════════════════════
+   TEMPLATES
+   ══════════════════════════════════════════════════════════════ */
 async function resizeImage(file, maxWidth = 1400) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -3919,6 +4537,9 @@ window.updateTemplate = function (key, field, value) {
 window.saveTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } cache.templates = templates; try { await persistKeys(['templates']); toast('تم الحفظ بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); } };
 window.resetTemplates = async function () { if (!hasPerm('editTemplates')) { toast(MSG.unauthorized, 'error'); return; } const ok = await dialog.confirm('استعادة القوالب الافتراضية؟', { type: 'warning' }); if (!ok) return; templates = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES)); renderTemplates(); toast('تمت الاستعادة بنجاح', 'info'); };
 
+/* ══════════════════════════════════════════════════════════════
+   CUSTOMER MODAL
+   ══════════════════════════════════════════════════════════════ */
 window.openCustomerModal = function () {
   if (!hasPerm('manageCustomers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('customerModal');
@@ -3979,6 +4600,9 @@ window.deleteCustomer = async function (id) {
   try { await persistKeys(['customers', 'activity']); renderCustomers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   USER MODAL — مع PBKDF2 password hashing
+   ══════════════════════════════════════════════════════════════ */
 window.openUserModal = function () {
   if (!hasPerm('manageUsers')) { toast(MSG.unauthorized, 'error'); return; }
   clearAllErrors('userModal');
@@ -4003,7 +4627,8 @@ window.editUser = function (id) {
   document.getElementById('userModalTitle').innerHTML = ico('edit', 20) + '<span>تعديل المستخدم</span>';
   document.getElementById('userId').value = id;
   document.getElementById('userName').value = u.username;
-  document.getElementById('userPass').value = u.password;
+  document.getElementById('userPass').value = '';
+  document.getElementById('userPass').placeholder = 'اتركه فارغاً للإبقاء على كلمة المرور';
   buildRoleSelect(u);
   document.getElementById('userRole').value = u.role;
   if (u.role === ROLE_OWNER) { tempPerms = {}; }
@@ -4093,10 +4718,8 @@ window.onUserRoleChange = function () {
   const isOwner = role === ROLE_OWNER;
   document.getElementById('permissionsGrid').style.display = isOwner ? 'none' : 'block';
   document.getElementById('permAdminNote').style.display = isOwner ? 'block' : 'none';
-  if (isOwner) {
-    tempPerms = {};
-    renderPermissionsGrid();
-  } else {
+  if (isOwner) { tempPerms = {}; renderPermissionsGrid(); }
+  else {
     const grantable = getGrantablePerms(role);
     const existing = { ...tempPerms };
     const newPerms = {};
@@ -4110,11 +4733,18 @@ function validateUserForm() {
   let valid = true;
   const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
-  const password = document.getElementById('userPass').value.trim();
+  const password = document.getElementById('userPass').value;
   if (!username) { setFieldError('userName', 'اسم المستخدم مطلوب'); valid = false; }
   else if (cache.users.find(u => u.username === username && u.id !== id)) { setFieldError('userName', 'الاسم مستخدم مسبقاً'); valid = false; }
-  if (!password) { setFieldError('userPass', 'كلمة المرور مطلوبة'); valid = false; }
-  else if (password.length < 4) { setFieldError('userPass', 'كلمة المرور يجب أن تكون 4 أحرف على الأقل'); valid = false; }
+  // في حالة التعديل: كلمة المرور اختيارية
+  if (!id) {
+    if (!password) { setFieldError('userPass', 'كلمة المرور مطلوبة'); valid = false; }
+    else if (password.length < 6) { setFieldError('userPass', 'كلمة المرور يجب أن تكون 6 أحرف على الأقل'); valid = false; }
+    else if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) { setFieldError('userPass', 'يجب أن تحتوي كلمة المرور على أحرف وأرقام'); valid = false; }
+  } else if (password) {
+    if (password.length < 6) { setFieldError('userPass', 'كلمة المرور يجب أن تكون 6 أحرف على الأقل'); valid = false; }
+    else if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) { setFieldError('userPass', 'يجب أن تحتوي كلمة المرور على أحرف وأرقام'); valid = false; }
+  }
   if (!valid) { focusFirstError('userModal'); toast('يرجى تصحيح الحقول المطلوبة', 'error'); }
   return valid;
 }
@@ -4123,7 +4753,7 @@ window.saveUser = async function () {
   if (!validateUserForm()) return;
   const id = document.getElementById('userId').value;
   const username = document.getElementById('userName').value.trim();
-  const password = document.getElementById('userPass').value.trim();
+  const password = document.getElementById('userPass').value;
   const role = document.getElementById('userRole').value;
   if (id) {
     const existing = cache.users.find(u => u.id === id);
@@ -4148,7 +4778,39 @@ window.saveUser = async function () {
     }
     if (permissions.manageUsers) permissions.tabUsers = true;
   }
-  const userData = { id: id || uid(), username, password, role, permissions };
+
+  // ─── تشفير كلمة المرور ───
+  const existingUser = id ? cache.users.find(u => u.id === id) : null;
+  let passwordFields = {};
+  try {
+    if (!id) {
+      const h = await Crypto.hashPassword(password);
+      passwordFields = h;
+    } else if (existingUser) {
+      if (!password) {
+        // احتفظ بكلمة المرور الحالية
+        if (existingUser.passwordHash) {
+          passwordFields = {
+            passwordHash: existingUser.passwordHash,
+            passwordSalt: existingUser.passwordSalt,
+            passwordAlgo: existingUser.passwordAlgo
+          };
+        } else {
+          passwordFields = { password: existingUser.password };
+        }
+      } else {
+        // كلمة مرور جديدة → شفّرها
+        const h = await Crypto.hashPassword(password);
+        passwordFields = h;
+      }
+    }
+  } catch (e) {
+    toast('تعذر تشفير كلمة المرور', 'error');
+    return;
+  }
+
+  const userData = { id: id || uid(), username, role, permissions, ...passwordFields };
+
   if (id) {
     const idx = cache.users.findIndex(u => u.id === id);
     if (idx > -1) cache.users[idx] = userData;
@@ -4175,6 +4837,9 @@ window.deleteUser = async function (id) {
   try { await persistKeys(['users', 'activity']); renderUsers(); toast('تم الحذف بنجاح', 'success'); } catch (e) { toast(e.message, 'error'); }
 };
 
+/* ══════════════════════════════════════════════════════════════
+   BACKUP / RESET / CSV
+   ══════════════════════════════════════════════════════════════ */
 function downloadBlob(blob, filename) {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
@@ -4188,15 +4853,32 @@ window.exportBackup = async function () {
     const dateStr = stamp.toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const zip = new JSZip();
     const dataFolder = zip.folder('data');
-    for (const key of DATA_KEYS) { const content = JSON.stringify(cache[key] || [], null, 2); dataFolder.file(`${key}.json`, content); }
+    dataFolder.file('orders.json', JSON.stringify(cache.orders || [], null, 2));
+    dataFolder.file('ready.json', JSON.stringify(cache.ready || [], null, 2));
+    dataFolder.file('log.json', JSON.stringify(cache.log || [], null, 2));
+    dataFolder.file('customers.json', JSON.stringify(cache.customers || [], null, 2));
+    dataFolder.file('notifications.json', JSON.stringify(cache.notifications || [], null, 2));
+    dataFolder.file('settings.json', JSON.stringify({
+      users: cache.users || [],
+      drivers: cache.drivers || [],
+      branches: cache.branches || [],
+      templates: templates || {}
+    }, null, 2));
     dataFolder.file('meta.json', JSON.stringify({ lastUpdate: new Date().toISOString(), version: 4 }, null, 2));
-    const info = { name: 'نظام إدارة الطلبات', createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', filesCount: DATA_KEYS.length + 1, files: DATA_KEYS.map(k => `${k}.json`) };
+    const activityFolder = dataFolder.folder('activity');
+    const byMonth = {};
+    (cache.activity || []).forEach(a => {
+      const m = a.month || getMonthKey(a.ts ? new Date(a.ts) : new Date());
+      if (!byMonth[m]) byMonth[m] = [];
+      byMonth[m].push(a);
+    });
+    Object.keys(byMonth).forEach(m => { activityFolder.file(`${m}.json`, JSON.stringify(byMonth[m], null, 2)); });
+    const info = { name: 'نظام إدارة الطلبات v3.5', createdAt: stamp.toISOString(), createdAtLocal: stamp.toLocaleString('ar-SA'), createdBy: currentUser?.username || 'unknown', structure: 'v5-professional' };
     zip.file('backup-info.json', JSON.stringify(info, null, 2));
-    zip.file('README.txt', `نسخة احتياطية\n=====================================\nالتاريخ: ${stamp.toLocaleString('ar-SA')}\nأنشئ بواسطة: ${currentUser?.username || 'unknown'}\n\n${DATA_KEYS.map(k => `  - data/${k}.json`).join('\n')}\n`);
     const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 9 } });
     downloadBlob(blob, `backup_${dateStr}.zip`);
     hideLoading();
-    logActivity('backup', `تصدير ${DATA_KEYS.length + 1} ملف`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
+    logActivity('backup', `تصدير ZIP (بنية احترافية)`, `${(blob.size / 1024).toFixed(1)} KB`, 'success');
     toast(`تم التصدير بنجاح (${(blob.size / 1024).toFixed(1)} KB)`, 'success');
   } catch (e) { hideLoading(); toast('تعذر تجهيز النسخة الاحتياطية', 'error'); }
 };
@@ -4224,6 +4906,9 @@ window.exportLogCSV = function () {
   toast('تم تصدير CSV بنجاح', 'success');
 };
 
+/* ══════════════════════════════════════════════════════════════
+   MODAL HELPERS & KEYBOARD
+   ══════════════════════════════════════════════════════════════ */
 window.openModal = id => document.getElementById(id).classList.add('active');
 window.closeModal = id => document.getElementById(id).classList.remove('active');
 window.getActiveModal = () => document.querySelector('.modal-bg.active');
@@ -4296,6 +4981,9 @@ window.addEventListener('keydown', e => {
 });
 document.getElementById('orderModal')?.addEventListener('click', e => { if (e.target.tagName === 'INPUT') e.target.classList.remove('field-error'); });
 
+/* ══════════════════════════════════════════════════════════════
+   BOOTSTRAP
+   ══════════════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
   updateKeyStatus();
@@ -4317,8 +5005,13 @@ window.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderRateLimitWidget();
 });
-window.addEventListener('beforeunload', () => {
+window.addEventListener('beforeunload', (e) => {
   if (!currentUser) return;
+  const stats = SaveQueue.getStats();
+  if (stats.pending > 0) {
+    e.preventDefault();
+    e.returnValue = 'لا يزال هناك حفظ جارٍ...';
+  }
   try { if (_notifSaveTimer) flushNotificationsSave(); } catch {}
   try { if (_activitySaveTimer) flushActivitySave(); } catch {}
 });
