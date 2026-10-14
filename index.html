@@ -1098,7 +1098,7 @@ const GITHUB_OWNER = 'omar2006200';
 const GITHUB_REPO  = 'Bajandouh';
 const APP_ID       = 'Bajandouh';
 const APP_BRANCH   = 'main';
-const APP_VERSION  = '4.0.0';
+const APP_VERSION  = '4.0.1';
 const SYNC_INTERVAL = 30000;
 const SYNC_INTERVAL_HIDDEN = 300000;
 const SYNC_THROTTLE_MS = 2000;
@@ -1379,6 +1379,9 @@ let statsFilter = 'all', statsFromDate = '', statsToDate = '';
 let featureFlags = { featureFuzzySearch: true, featureCustomFields: true, featureWorkGroups: true, featureTasks: true };
 let _groupSelectedOrders = new Set();
 
+/* ✅ علامة الإرجاع التلقائي من السجل */
+let _logNormalizationPending = false;
+
 let _orderSubmitLock = 0;
 let _customerSubmitLock = 0;
 let _driverSubmitLock = 0;
@@ -1458,15 +1461,11 @@ function zoomReset() { zoomLevel = 1; applyZoom(); }
 function encodeBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function decodeBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
 
-/* ══════════════════════════════════════════════════════════════
-   ✅ generateNextInvoice — اشتقاق من أعلى فاتورة فعلية
-   ══════════════════════════════════════════════════════════════ */
 function generateNextInvoice() {
   const s = invoiceSettings;
   const prefix = s.prefix || '';
   const digits = s.digits || 4;
 
-  // ✅ اشتق الرقم من أعلى فاتورة فعلية في كل القوائم
   let maxNum = 0;
   const allLists = [cache.orders, cache.ready, cache.transferred, cache.log];
   for (const list of allLists) {
@@ -1672,7 +1671,7 @@ const InFlight = (() => {
 })();
 
 /* ══════════════════════════════════════════════════════════════
-   STORAGE LAYER — مع حماية Race Condition
+   STORAGE LAYER
    ══════════════════════════════════════════════════════════════ */
 const Storage = (() => {
   const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
@@ -2394,6 +2393,35 @@ function applyFileData(k, data, wasPlain) {
     cache[k] = Array.isArray(data) ? data : [];
   }
 }
+
+/* ✅ إعادة أي طلب في السجل بحالته "لا" إلى "تم نقلها" تلقائياً */
+function normalizeLogStatuses() {
+  if (!Array.isArray(cache.log) || !cache.log.length) return false;
+  const toReturn = cache.log.filter(o => (o.receiptStatus || RECEIPT_NOT_RECEIVED) === RECEIPT_NOT_RECEIVED);
+  if (!toReturn.length) return false;
+  const idsToReturn = new Set(toReturn.map(o => o.id));
+  const now = fmtDate();
+  const user = currentUser?.username || 'system';
+  toReturn.forEach(o => {
+    const returned = { ...o };
+    returned.receiptStatus = RECEIPT_NOT_RECEIVED;
+    returned.returnedFromLogAt = now;
+    returned.returnedFromLogBy = user;
+    delete returned.archivedAt;
+    delete returned.archivedBy;
+    cache.transferred.push(returned);
+  });
+  cache.log = cache.log.filter(o => !idsToReturn.has(o.id));
+  _logNormalizationPending = true;
+  return true;
+}
+function scheduleLogNormalizationSave() {
+  setTimeout(async () => {
+    if (!currentUser) return;
+    try { await persistKeys(['log', 'transferred']); } catch (_) {}
+  }, 800);
+}
+
 function postProcessData() {
   cache.drivers = (cache.drivers || []).map(d => {
     if (typeof d === 'string') return { id: uid(), name: d, phone: '', methods: [...RECEIPT_METHODS] };
@@ -2470,6 +2498,9 @@ function postProcessData() {
     .map(f => ({ ...f, type: f.type || 'text', required: f.required === true, showInPrint: f.showInPrint !== false, options: Array.isArray(f.options) ? f.options : [] }));
   const validIds = new Set(cache.ready.map(o => o.id));
   Array.from(selectedReadyIds).forEach(id => { if (!validIds.has(id)) selectedReadyIds.delete(id); });
+
+  /* ✅ إعادة الطلبات "لا" من السجل إلى "تم نقلها" */
+  try { normalizeLogStatuses(); } catch (e) { console.warn('normalizeLogStatuses:', e); }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -2575,7 +2606,7 @@ async function flushActivitySave() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SYNC — مع حماية Race Condition
+   SYNC
    ══════════════════════════════════════════════════════════════ */
 async function syncPull(force = false) {
   if (syncing || !currentUser) return;
@@ -2615,11 +2646,21 @@ async function syncPull(force = false) {
         }
       }
       if (changedActivity.length) { await loadActivity(); didChange = true; }
-      if (didChange) postProcessData();
+      if (didChange) {
+        postProcessData();
+        if (_logNormalizationPending) {
+          _logNormalizationPending = false;
+          scheduleLogNormalizationSave();
+        }
+      }
     } else {
       const meta = await readMeta();
       if (!localMeta || meta.lastUpdate !== localMeta.lastUpdate) {
         localMeta = meta; await readAll(); await loadActivity(); didChange = true;
+        if (_logNormalizationPending) {
+          _logNormalizationPending = false;
+          scheduleLogNormalizationSave();
+        }
       }
     }
     if (didChange) {
@@ -2651,7 +2692,6 @@ function renderActive() {
   } catch (e) { console.warn('renderActive:', e); }
 }
 
-/* ✅ getCurrentInterval + startPolling */
 function getCurrentInterval() {
   if (currentSyncInterval <= 0) return 0;
   return document.hidden ? SYNC_INTERVAL_HIDDEN : currentSyncInterval;
@@ -3156,13 +3196,18 @@ window.resetLogFilters = function() {
   ['logSearch','logBranchFilter','logReceiptFilter','logMethodFilter','logFromDate','logToDate'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   renderLog();
 };
+
+/* ✅ receiptStatusCellLog — بدون disabled، يسمح بالتعديل دائماً للمصرح لهم */
 function receiptStatusCellLog(o) {
   const status = o.receiptStatus || RECEIPT_NOT_RECEIVED;
   const isDone = status === RECEIPT_RECEIVED;
   const canRevert = hasPerm('revertReceiptStatus');
   const isOwner = currentUser?.role === ROLE_OWNER;
   if (!canRevert && !isOwner) return isDone ? `<span class="badge badge-received">${ico('check', 11)} تم</span>` : `<span class="badge badge-not-received">لا</span>`;
-  return `<select class="receipt-select ${isDone ? 'is-done owner-locked' : ''}" onclick="event.stopPropagation()" onchange="changeReceiptStatusWithTransfer('${o.id}', this.value)" ${!isDone ? 'disabled' : ''}><option value="${RECEIPT_NOT_RECEIVED}" ${!isDone ? 'selected' : ''}>لا</option><option value="${RECEIPT_RECEIVED}" ${isDone ? 'selected' : ''}>تم</option></select>`;
+  return `<select class="receipt-select ${isDone ? 'is-done owner-locked' : ''}" onclick="event.stopPropagation()" onchange="changeReceiptStatusWithTransfer('${o.id}', this.value)">
+    <option value="${RECEIPT_NOT_RECEIVED}" ${!isDone ? 'selected' : ''}>لا</option>
+    <option value="${RECEIPT_RECEIVED}" ${isDone ? 'selected' : ''}>تم</option>
+  </select>`;
 }
 function renderLog() {
   const data = getLogFilteredData();
@@ -3403,7 +3448,7 @@ function renderUsers() {
     else if (canManage) actions = `<button class="btn btn-primary btn-sm" onclick="editUser('${u.id}')" title="تعديل">${ico('edit', 13)}</button><button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')" title="حذف">${ico('trash', 13)}</button>`;
     else actions = `<span class="badge badge-locked">${ico('lock', 10)} مقفل</span>`;
     const hashed = Crypto.isHashed(u);
-    return `<tr><td>${esc(u.username)}</td><td><span class="badge ${rl.cls}">${ico(rl.icon, 12)} ${rl.label}</span></td><td style="font-size:11.5px;color:var(--text-muted);">${permCount}${hashed ? ' مشفر' : ''}</td><td style="white-space:nowrap;">${actions}</td></tr>`;
+    return `<tr><td>${esc(u.username)}</td><td><span class="badge ${rl.cls}">${ico(rl.icon, 12)} ${rl.label}</span></td><td style="font-size:11.5px;color:var(--text-muted);">${permCount}${hashed ? '' : ''}</td><td style="white-space:nowrap;">${actions}</td></tr>`;
   }).join('');
 }
 function populateAllSelects() {
@@ -4193,7 +4238,6 @@ async function changeReceiptStatusWithTransfer(orderId, newStatus) {
 /* ══════════════════════════════════════════════════════════════
    ORDER MODAL
    ══════════════════════════════════════════════════════════════ */
-/* ✅ addOrder — async + syncPull قبل توليد رقم الفاتورة */
 window.addOrder = async function (skipSync = false) {
   if (!hasPerm('addOrder')) { toast(MSG.unauthorized, 'error'); return; }
   if (document.querySelector('.page.active')?.id !== 'page-entry') go('entry');
@@ -4210,7 +4254,6 @@ window.addOrder = async function (skipSync = false) {
   const branchSel = document.getElementById('orderBranch');
   if (branchSel && branchSel.options.length > 0) branchSel.selectedIndex = 0;
 
-  // ✅ مزامنة سريعة قبل توليد الرقم لضمان رؤية أحدث الفواتير
   if (!skipSync && currentUser) {
     try { await syncPull(true); } catch (_) {}
   }
@@ -4308,7 +4351,6 @@ function validateOrderForm() {
   if (!valid) { focusFirstError('orderModal'); toast('يرجى تعبئة الحقول المطلوبة', 'error'); }
   return valid;
 }
-/* ✅ saveOrder — إعادة حساب nextNumber من البيانات الفعلية */
 window.saveOrder = async function () {
   const now = Date.now();
   if (now - _orderSubmitLock < SUBMIT_LOCK_MS) { toast('جاري الحفظ، يرجى الانتظار...', 'warning'); return; }
@@ -4359,7 +4401,6 @@ window.saveOrder = async function () {
     cache.orders.push(data);
     logActivity('add-order', `طلب جديد: ${data.invoice}`, '', 'success');
   }
-  // ✅ إعادة حساب nextNumber من أعلى فاتورة فعلية (بعد إضافة الطلب الجديد)
   if (invoiceSettings.autoIncrement) {
     const prefix = invoiceSettings.prefix || '';
     let maxNum = 0;
@@ -5162,7 +5203,14 @@ window.go = function (page) {
     if (page === 'groups') { populateAllSelects(); renderGroups(); }
     if (page === 'ready') { populateAllSelects(); renderReady(); }
     if (page === 'transferred') { populateAllSelects(); renderTransferred(); }
-    if (page === 'log') { populateAllSelects(); renderLog(); }
+    if (page === 'log') {
+      populateAllSelects(); renderLog();
+      /* ✅ احفظ التغيير تلقائياً إذا حصل إرجاع من السجل */
+      if (_logNormalizationPending) {
+        _logNormalizationPending = false;
+        scheduleLogNormalizationSave();
+      }
+    }
     if (page === 'customers') renderCustomers();
     if (page === 'tasks') { populateAllSelects(); renderTasks(); }
     if (page === 'settings') { rebuildSettingsTabs(); renderSettings(); updateCurrentKeyInfo(); renderWhatsAppTemplates(); }
@@ -5238,6 +5286,11 @@ window.doLogin = async function () {
     loadEl.textContent = 'تم الدخول';
     hideLoading();
     startApp();
+    /* ✅ إذا كان هناك إرجاع تلقائي، احفظه */
+    if (_logNormalizationPending) {
+      _logNormalizationPending = false;
+      scheduleLogNormalizationSave();
+    }
   } catch (e) { errEl.textContent = e.message || MSG.connFail; errEl.classList.add('show'); hideLoading(); }
   finally { btn.disabled = false; }
 };
@@ -5251,6 +5304,7 @@ window.logout = async function (silent = false) {
   currentUser = null; selectedOrderId = null; selectedReadyIds.clear();
   Storage.resetCache(); localMeta = null;
   currentSyncInterval = SYNC_INTERVAL; lastSyncTime = 0;
+  _logNormalizationPending = false;
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginPass').value = ''; document.getElementById('loginLoading').textContent = '';
@@ -5295,7 +5349,6 @@ function startApp() {
   toast(`أهلاً ${currentUser.username}`, 'success');
 }
 
-/* ✅ Visibility + Online handlers محسّنة */
 let _visHandlerAttached = false;
 function attachVisibilityHandler() {
   if (_visHandlerAttached) return;
@@ -5693,7 +5746,7 @@ window.restoreDraft = function () {
   const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return;
   try {
     const d = JSON.parse(raw);
-    addOrder(true);  // ✅ skipSync لتجنب مزامنة مزدوجة
+    addOrder(true);
     document.getElementById('orderInvoice').value = d.invoice || '';
     if (d.branch) document.getElementById('orderBranch').value = d.branch;
     document.getElementById('orderCustomer').value = d.customer || '';
