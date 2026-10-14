@@ -1,4 +1,17 @@
 {
-  "lastUpdate": "2026-10-10T20:01:52.424Z",
-  "version": 4
+  "lastUpdate": "2026-10-14T10:49:36.922Z",
+  "version": 10,
+  "appVersion": "4.0.0",
+  "featureFlags": {
+    "featureFuzzySearch": true,
+    "featureCustomFields": true,
+    "featureWorkGroups": true,
+    "featureTasks": true
+  },
+  "invoiceSettings": {
+    "prefix": "",
+    "nextNumber": 535,
+    "digits": 3,
+    "autoIncrement": true
+  }
 }
