@@ -1,7 +1,7 @@
 {
-  "lastUpdate": "2026-10-14T17:53:47.272Z",
+  "lastUpdate": "2026-10-14T20:40:15.518Z",
   "version": 10,
-  "appVersion": "4.0.0",
+  "appVersion": "4.0.1",
   "featureFlags": {
     "featureFuzzySearch": true,
     "featureCustomFields": true,
