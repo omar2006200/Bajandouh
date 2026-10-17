@@ -1,7 +1,7 @@
 {
-  "lastUpdate": "2026-10-15T18:14:41.191Z",
+  "lastUpdate": "2026-10-17T06:03:34.302Z",
   "version": 10,
-  "appVersion": "4.0.1",
+  "appVersion": "4.0.3",
   "featureFlags": {
     "featureFuzzySearch": true,
     "featureCustomFields": true,
@@ -10,7 +10,7 @@
   },
   "invoiceSettings": {
     "prefix": "",
-    "nextNumber": 583,
+    "nextNumber": 584,
     "digits": 3,
     "autoIncrement": true
   }
