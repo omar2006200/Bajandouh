@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-10-26T09:16:54.218Z",
+  "lastUpdate": "2026-10-26T09:18:27.716Z",
   "version": 10,
   "appVersion": "4.0.4",
   "featureFlags": {
@@ -10,7 +10,7 @@
   },
   "invoiceSettings": {
     "prefix": "",
-    "nextNumber": 784,
+    "nextNumber": 785,
     "digits": 3,
     "autoIncrement": true
   }
