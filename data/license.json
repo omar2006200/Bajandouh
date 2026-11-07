@@ -2,7 +2,7 @@
   "version": 1,
   "globalExpiresAt": "2026-12-31T23:59:59Z",
   "licensees": {
-    "owner":  { "expiresAt": "2025-12-31T23:59:59Z", "role": "owner" },
+    "owner":  { "expiresAt": "2026-12-31T23:59:59Z", "role": "owner" },
     "ahmed":  { "expiresAt": "2025-06-30T23:59:59Z", "role": "manager" },
     "worker1": { "expiresAt": "2025-03-31T23:59:59Z", "role": "worker" }
   }
