@@ -3,7 +3,7 @@
   "globalExpiresAt": "2026-12-31T23:59:59Z",
   "licensees": {
     "1":  { "expiresAt": "2026-12-31T23:59:59Z", "role": "12345" },
-    "عمر باحسين":  { "expiresAt": "2026-07-30T23:59:59Z", "role": "7339" },
+    "عمر باحسين":  { "expiresAt": "2027-07-30T23:59:59Z", "role": "7339" },
     "worker1": { "expiresAt": "2025-03-31T23:59:59Z", "role": "worker" }
   }
 }
