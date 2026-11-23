@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwth5dycq7tpo",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1423",
+    "description": "العميل: اشواق عبدالله - منال عبدالله عبود باجويبر",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 07:22 PM",
+    "ts": 1795450968804,
+    "month": "2026-11"
+  },
+  {
     "id": "mwth4mrxjzl9a",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1369",
