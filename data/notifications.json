@@ -1,17 +1,45 @@
 [
   {
-    "id": "mwte3tbistg0p",
+    "id": "mwte36kmip2er",
     "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل احمد محمد محسن",
+    "message": "تم استلام الطلب للعميل علي محمد عقيل الكلالي",
     "type": "success",
     "time": "23/11/2026 05:57 PM",
-    "ts": 1795445856558,
-    "createdBy": "عمر باحسين",
+    "ts": 1795445827078,
+    "createdBy": "اشرف",
     "deletedBy": [],
     "readBy": [],
     "category": "delivery",
-    "orderId": "mwqlzk1lj6w2n",
-    "orderInvoice": "1379"
+    "orderId": "mwq6e4ab9e1w2",
+    "orderInvoice": "1360"
+  },
+  {
+    "id": "mwte33e4wffor",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل محمد عبدالقادر سالم بريكات",
+    "type": "success",
+    "time": "23/11/2026 05:57 PM",
+    "ts": 1795445822956,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwnakkzfgim5k",
+    "orderInvoice": "1343"
+  },
+  {
+    "id": "mwte2ztddxmc7",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام يوسف سهيل خديجه عوض عمر برعيه",
+    "type": "success",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445818321,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwn9kkm5gp2j6",
+    "orderInvoice": "1341"
   },
   {
     "id": "mwte2l65ukio7",
@@ -3408,39 +3436,5 @@
     "category": "delivery",
     "orderId": "mwbwbp5ji6por",
     "orderInvoice": "1179"
-  },
-  {
-    "id": "mwdrc0fbjqy4p",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام عبدالله العزي",
-    "type": "success",
-    "time": "12/11/2026 07:23 PM",
-    "ts": 1794500615207,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwaf5vji72u5e",
-    "orderInvoice": "1149"
-  },
-  {
-    "id": "mwdr2es7dbdhn",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام ابراهيم ابراهيم محمد احمد باجندوح",
-    "type": "success",
-    "time": "12/11/2026 07:16 PM",
-    "ts": 1794500167255,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mw9hbs1qo4mad",
-    "orderInvoice": "1139"
   }
 ]
