@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwte2l65ukio7",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام عبدالله العماري",
+    "type": "success",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445799341,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwt0rr1fcvgiw",
+    "orderInvoice": "1425"
+  },
+  {
     "id": "mwte2ckuvkjze",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام سعيد مسجد ثروه احمد محمد دعكيك",
@@ -3431,22 +3445,5 @@
     "category": "delivery",
     "orderId": "mwcdhq7u02x9d",
     "orderInvoice": "1187"
-  },
-  {
-    "id": "mwdocvndrghdm",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل سعيد صالح سعيد هلال",
-    "type": "success",
-    "time": "12/11/2026 06:00 PM",
-    "ts": 1794495616826,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwccq4u5qi3z5",
-    "orderInvoice": "1181"
   }
 ]
