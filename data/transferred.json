@@ -2279,5 +2279,28 @@
     "transferredBy": "اشرف",
     "waSentCount": 0,
     "receiptStatus": "لا"
+  },
+  {
+    "invoice": "1347",
+    "branch": "الرئيسي",
+    "customerId": "c148",
+    "customerPhone": "771198066",
+    "customer": "نور عادل جمعان هويدي",
+    "location": "شبام",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب الجعيدي",
+    "driverPhone": "لايوجد",
+    "notes": "كرتون وكيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "23/11/2026 04:58 PM",
+    "approvalDate": "23/11/2026 04:58 PM",
+    "id": "mwtbzjq8q5wsy",
+    "createdAt": "23/11/2026 04:58 PM",
+    "transferredAt": "23/11/2026 05:17 PM",
+    "transferredBy": "عمر باحسين",
+    "waSentCount": 0,
+    "receiptStatus": "لا"
   }
 ]
