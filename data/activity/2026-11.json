@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtil1u5pysnf",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1420",
+    "description": "العميل: سعيد صالح عبود باموسي - 771425685",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 08:02 PM",
+    "ts": 1795453379213,
+    "month": "2026-11"
+  },
+  {
     "id": "mwth5dycq7tpo",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1423",
