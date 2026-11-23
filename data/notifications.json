@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwtcnpxq61b24",
+    "title": "نقل طلبات",
+    "message": "تم نقل 1 طلب إلى قسم \"التي تم نقلها\"",
+    "type": "info",
+    "time": "23/11/2026 05:17 PM",
+    "ts": 1795443426062,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": null,
+    "orderInvoice": null
+  },
+  {
     "id": "mwtcblq6tshmi",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام صالح معتز باصلعه هند حاج باصلعه",
@@ -3324,22 +3338,5 @@
     "category": "delivery",
     "orderId": "mwawxw44toime",
     "orderInvoice": "1161"
-  },
-  {
-    "id": "mwc8pkdk6tqe3",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل وليد سعيد عوض خماسي",
-    "type": "success",
-    "time": "11/11/2026 05:54 PM",
-    "ts": 1794408868712,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwaxjc57hwm38",
-    "orderInvoice": "1166"
   }
 ]
