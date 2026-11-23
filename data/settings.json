@@ -308,9 +308,7 @@
         "manageFeatures": false,
         "manageInvoice": true
       },
-      "passwordHash": "a7b8e3599cb100dbe37205ef98e79376b9a9127c2f67973d12eacddcad6b12f6",
-      "passwordSalt": "7c0ce621de66308b57b8f31ebe497e78",
-      "passwordAlgo": "PBKDF2-SHA-256-100000"
+      "password": "7339"
     }
   ],
   "drivers": [
