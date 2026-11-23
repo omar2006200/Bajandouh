@@ -1544,26 +1544,18 @@ function searchCustomersList(list, query) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   ENCRYPTION
+   PLAIN TEXT DATA (NO ENCRYPTION)
    ══════════════════════════════════════════════════════════════ */
+function encryptText(text) { return String(text ?? ''); }
+// Read-only compatibility: decode old DAT:v3 files, but never create encrypted files.
 function deriveFixedKey() {
-  const s = APP_ID + '|secure|fixed|v3|schema';
-  const bytes = new TextEncoder().encode(s);
+  const bytes = new TextEncoder().encode(APP_ID + '|secure|fixed|v3|schema');
   const out = new Uint8Array(bytes.length);
   for (let i = 0; i < bytes.length; i++) out[i] = (bytes[i] ^ ((i * 37 + 13) & 0xFF)) & 0xFF;
   return out;
 }
-function encryptText(text) {
-  const keyBytes = deriveFixedKey();
-  const dataBytes = new TextEncoder().encode(text);
-  const result = new Uint8Array(dataBytes.length);
-  for (let i = 0; i < dataBytes.length; i++) result[i] = dataBytes[i] ^ keyBytes[i % keyBytes.length];
-  let binary = ''; const chunk = 8192;
-  for (let i = 0; i < result.length; i += chunk) binary += String.fromCharCode.apply(null, result.subarray(i, i + chunk));
-  return 'DAT:v3:' + btoa(binary);
-}
 function decryptText(encoded) {
-  if (!encoded || !encoded.startsWith('DAT:v3:')) return null;
+  if (!encoded || !encoded.startsWith('DAT:v3:')) return String(encoded ?? '');
   try {
     const binary = atob(encoded.substring(7));
     const dataBytes = new Uint8Array(binary.length);
@@ -1577,9 +1569,11 @@ function decryptText(encoded) {
 function isEncrypted(text) { return typeof text === 'string' && text.startsWith('DAT:v3:'); }
 
 /* ══════════════════════════════════════════════════════════════
-   CRYPTO
+   PASSWORD HANDLING (PLAIN TEXT STORAGE)
    ══════════════════════════════════════════════════════════════ */
 const Crypto = (() => {
+  // Legacy PBKDF2 verification is retained only so existing accounts can still log in.
+  // Newly created or changed passwords are stored as ordinary readable text.
   const ITERATIONS = 100000;
   const KEY_LEN = 32;
   const DIGEST = 'SHA-256';
@@ -1592,36 +1586,27 @@ const Crypto = (() => {
   function toHex(bytes) { return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(''); }
   function fromHex(hex) {
     const out = new Uint8Array(hex.length / 2);
-    for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i*2, 2), 16);
+    for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
     return out;
   }
-  async function hashPassword(password) {
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    const hash = await pbkdf2(password, salt);
-    return { passwordHash: toHex(hash), passwordSalt: toHex(salt), passwordAlgo: `PBKDF2-${DIGEST}-${ITERATIONS}` };
-  }
+  async function hashPassword(password) { return { password: String(password ?? '') }; }
   async function verifyPassword(password, user) {
-    if (user.password && !user.passwordHash) {
-      const a = String(password), b = String(user.password);
-      if (a.length !== b.length) return false;
-      let diff = 0;
-      for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-      return diff === 0;
-    }
+    const entered = String(password ?? '');
+    if (typeof user.password === 'string') return entered === user.password;
     if (!user.passwordHash || !user.passwordSalt) return false;
-    const algo = user.passwordAlgo || `PBKDF2-${DIGEST}-${ITERATIONS}`;
-    const m = algo.match(/PBKDF2-SHA-256-(\d+)/);
-    const iterations = m ? parseInt(m[1]) : ITERATIONS;
-    const salt = fromHex(user.passwordSalt);
-    const hash = await pbkdf2(password, salt, iterations);
-    const computed = toHex(hash);
-    if (computed.length !== user.passwordHash.length) return false;
-    let diff = 0;
-    for (let i = 0; i < computed.length; i++) diff |= computed.charCodeAt(i) ^ user.passwordHash.charCodeAt(i);
-    return diff === 0;
+    try {
+      const algo = user.passwordAlgo || `PBKDF2-${DIGEST}-${ITERATIONS}`;
+      const m = algo.match(/PBKDF2-SHA-256-(\d+)/);
+      const iterations = m ? parseInt(m[1], 10) : ITERATIONS;
+      const computed = toHex(await pbkdf2(entered, fromHex(user.passwordSalt), iterations));
+      if (computed.length !== user.passwordHash.length) return false;
+      let diff = 0;
+      for (let i = 0; i < computed.length; i++) diff |= computed.charCodeAt(i) ^ user.passwordHash.charCodeAt(i);
+      return diff === 0;
+    } catch { return false; }
   }
   function isHashed(user) { return !!(user && user.passwordHash && user.passwordSalt); }
-  function needsMigration(user) { return !!(user && user.password && !user.passwordHash); }
+  function needsMigration(user) { return !!(user && user.passwordHash && user.passwordSalt && !user.password); }
   return { hashPassword, verifyPassword, isHashed, needsMigration };
 })();
 
@@ -4983,15 +4968,11 @@ window.saveUser = async function () {
   }
   const existingUser = id ? cache.users.find(u => u.id === id) : null;
   let passwordFields = {};
-  try {
-    if (!id) { const h = await Crypto.hashPassword(password); passwordFields = h; }
-    else if (existingUser) {
-      if (!password) {
-        if (existingUser.passwordHash) passwordFields = { passwordHash: existingUser.passwordHash, passwordSalt: existingUser.passwordSalt, passwordAlgo: existingUser.passwordAlgo };
-        else passwordFields = { password: existingUser.password };
-      } else { const h = await Crypto.hashPassword(password); passwordFields = h; }
-    }
-  } catch (e) { toast('تعذر تشفير كلمة المرور', 'error'); return; }
+  if (!id) {
+    passwordFields = { password: String(password) };
+  } else if (existingUser) {
+    passwordFields = { password: password ? String(password) : String(existingUser.password ?? '') };
+  }
   const userData = { id: id || uid(), username, role, permissions, ...passwordFields };
   if (id) { const idx = cache.users.findIndex(u => u.id === id); if (idx > -1) cache.users[idx] = userData; logActivity('edit-user', `تعديل: ${username}`, `الدور: ${role}`, 'warning'); }
   else { cache.users.push(userData); logActivity('add-user', `إضافة: ${username}`, `الدور: ${role}`, 'success'); }
@@ -5404,14 +5385,13 @@ window.doLogin = async function () {
     for (const candidate of cache.users) { if (candidate.username !== u) continue; const ok = await Crypto.verifyPassword(p, candidate); if (ok) { found = candidate; break; } }
     if (!found) { errEl.textContent = MSG.authFail; errEl.classList.add('show'); btn.disabled = false; loadEl.textContent = ''; hideLoading(); return; }
     if (Crypto.needsMigration(found)) {
-      try {
-        const { passwordHash, passwordSalt, passwordAlgo } = await Crypto.hashPassword(p);
-        found.passwordHash = passwordHash; found.passwordSalt = passwordSalt; found.passwordAlgo = passwordAlgo;
-        delete found.password;
-        const idx = cache.users.findIndex(x => x.id === found.id);
-        if (idx > -1) cache.users[idx] = found;
-        persistKeys(['users']).catch(() => {});
-      } catch (e) {}
+      found.password = String(p);
+      delete found.passwordHash;
+      delete found.passwordSalt;
+      delete found.passwordAlgo;
+      const idx = cache.users.findIndex(x => x.id === found.id);
+      if (idx > -1) cache.users[idx] = found;
+      persistKeys(['users']).catch(() => {});
     }
     hideKeyForever();
     if (hasLegacyFiles && found.role === ROLE_OWNER) {
