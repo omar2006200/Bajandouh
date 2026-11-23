@@ -23930,5 +23930,32 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "23/11/2026 10:31 AM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1410",
+    "branch": "الرئيسي",
+    "customerId": "c157",
+    "customerPhone": "774079226",
+    "customer": "ام محمد الكثيري",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيسين",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 07:47 PM",
+    "approvalDate": "22/11/2026 07:47 PM",
+    "id": "mws2l47i0l0f3",
+    "createdAt": "22/11/2026 07:47 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 04:50 PM",
+    "receiptUpdatedBy": "اشرف",
+    "archivedAt": "23/11/2026 04:50 PM",
+    "archivedBy": "اشرف"
   }
 ]
