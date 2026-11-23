@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtbzjq8q1vt9",
+    "action": "add-order",
+    "title": "طلب جديد: 1347",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 04:58 PM",
+    "ts": 1795442298272,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtbxmz0aewix",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1352",
