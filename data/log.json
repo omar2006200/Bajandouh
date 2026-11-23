@@ -24582,5 +24582,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 07:22 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1423",
+    "branch": "الرئيسي",
+    "customerId": "mvibyjgne1eit",
+    "customerPhone": "739061460",
+    "customer": "اشواق عبدالله - منال عبدالله عبود باجويبر",
+    "location": "فوه",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 11:38 AM",
+    "approvalDate": "23/11/2026 11:38 AM",
+    "id": "mwt0jzmr36goo",
+    "createdAt": "23/11/2026 11:38 AM",
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 07:22 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 07:22 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
