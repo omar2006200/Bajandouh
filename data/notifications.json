@@ -78,7 +78,9 @@
     "ts": 1795445799341,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwt0rr1fcvgiw",
     "orderInvoice": "1425"
@@ -92,7 +94,9 @@
     "ts": 1795445788206,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws0137m4fre5",
     "orderInvoice": "1402"
