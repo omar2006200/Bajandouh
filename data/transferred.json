@@ -1932,28 +1932,5 @@
     "transferredBy": "اشرف",
     "waSentCount": 0,
     "receiptStatus": "لا"
-  },
-  {
-    "invoice": "1427",
-    "branch": "الرئيسي",
-    "customerId": "c15",
-    "customerPhone": "774969034",
-    "customer": "حمدي بن ناصر مروى فرج مرعي بن طالب",
-    "location": "المكلا",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "اشرف",
-    "updatedAt": "23/11/2026 12:23 PM",
-    "approvalDate": "23/11/2026 12:23 PM",
-    "id": "mwt26n00sjr42",
-    "createdAt": "23/11/2026 12:23 PM",
-    "transferredAt": "23/11/2026 04:50 PM",
-    "transferredBy": "اشرف",
-    "waSentCount": 0,
-    "receiptStatus": "لا"
   }
 ]
