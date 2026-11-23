@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtgbohv4yf81",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1416",
+    "description": "العميل: حسن خالد باقيس",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 06:59 PM",
+    "ts": 1795449582787,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtgbbtxphnhz",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1421",
