@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwtbojuo355od",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل متجر نور الكثيري",
+    "type": "success",
+    "time": "23/11/2026 04:49 PM",
+    "ts": 1795441785216,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwi2n93wp6ug2",
+    "orderInvoice": "1259"
+  },
+  {
     "id": "mwsy6h1jpf1if",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام عبيد عمر باموسى - الغليلة -774588012",
@@ -3351,22 +3365,5 @@
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
-  },
-  {
-    "id": "mwbr33ncroj0q",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام براهيم برعيه محفوظ عمر محفوظ برع",
-    "type": "success",
-    "time": "11/11/2026 09:41 AM",
-    "ts": 1794379267128,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "عمر باحسين"
-    ],
-    "category": "delivery",
-    "orderId": "mw9hohz3523a0",
-    "orderInvoice": "1140"
   }
 ]
