@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtbxmz0aewix",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1352",
+    "description": "العميل: احلام علي بلفخر",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 04:56 PM",
+    "ts": 1795442209164,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtbvwe7ltos4",
     "action": "move-transferred",
     "title": "نقل 1 طلب",
