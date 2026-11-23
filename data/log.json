@@ -24175,5 +24175,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 05:52 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1402",
+    "branch": "الرئيسي",
+    "customerId": "c55",
+    "customerPhone": "780874240",
+    "customer": "ام سعيد مسجد ثروه احمد محمد دعكيك",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 06:35 PM",
+    "approvalDate": "22/11/2026 06:35 PM",
+    "id": "mws0137m4fre5",
+    "createdAt": "22/11/2026 06:35 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 05:56 PM",
+    "receiptUpdatedBy": "اشرف",
+    "archivedAt": "23/11/2026 05:56 PM",
+    "archivedBy": "اشرف"
   }
 ]
