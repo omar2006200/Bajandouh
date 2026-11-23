@@ -1,17 +1,59 @@
 [
   {
-    "id": "mwte2rzhcjalz",
-    "title": "نقل طلبات",
-    "message": "تم نقل 1 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "23/11/2026 05:56 PM",
-    "ts": 1795445808173,
-    "createdBy": "عمر باحسين",
+    "id": "mwte33e4wffor",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل محمد عبدالقادر سالم بريكات",
+    "type": "success",
+    "time": "23/11/2026 05:57 PM",
+    "ts": 1795445822956,
+    "createdBy": "اشرف",
     "deletedBy": [],
     "readBy": [],
     "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
+    "orderId": "mwnakkzfgim5k",
+    "orderInvoice": "1343"
+  },
+  {
+    "id": "mwte2ztddxmc7",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام يوسف سهيل خديجه عوض عمر برعيه",
+    "type": "success",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445818321,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwn9kkm5gp2j6",
+    "orderInvoice": "1341"
+  },
+  {
+    "id": "mwte2l65ukio7",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام عبدالله العماري",
+    "type": "success",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445799341,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwt0rr1fcvgiw",
+    "orderInvoice": "1425"
+  },
+  {
+    "id": "mwte2ckuvkjze",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام سعيد مسجد ثروه احمد محمد دعكيك",
+    "type": "success",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445788206,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mws0137m4fre5",
+    "orderInvoice": "1402"
   },
   {
     "id": "mwtdxngik0seq",
@@ -3414,39 +3456,5 @@
     "category": "delivery",
     "orderId": "mw9hbs1qo4mad",
     "orderInvoice": "1139"
-  },
-  {
-    "id": "mwdpqsq2us68o",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل فاطمة محمد عبدالله القثمي",
-    "type": "success",
-    "time": "12/11/2026 06:39 PM",
-    "ts": 1794497945834,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwcdhq7u02x9d",
-    "orderInvoice": "1187"
-  },
-  {
-    "id": "mwdocvndrghdm",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل سعيد صالح سعيد هلال",
-    "type": "success",
-    "time": "12/11/2026 06:00 PM",
-    "ts": 1794495616826,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwccq4u5qi3z5",
-    "orderInvoice": "1181"
   }
 ]
