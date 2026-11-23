@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwth1n0m89r6n",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1387",
+    "description": "العميل: يوسف مطيع بن ماضي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 07:19 PM",
+    "ts": 1795450793926,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwth1gm0fmqsr",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1312",
+    "description": "العميل: يوسف مطيع بن ماضي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 07:19 PM",
+    "ts": 1795450785624,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtgzr6w9p7r5",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1427",
