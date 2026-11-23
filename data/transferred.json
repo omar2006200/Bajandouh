@@ -1953,10 +1953,12 @@
     "approvalDate": "22/11/2026 07:31 PM",
     "id": "mws20owi5q421",
     "createdAt": "22/11/2026 07:31 PM",
-    "waSentCount": 0,
+    "waSentCount": 1,
     "transferredAt": "23/11/2026 04:50 PM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "lastWaSentAt": "23/11/2026 05:05 PM",
+    "lastWaSentBy": "اشرف"
   },
   {
     "invoice": "1411",
