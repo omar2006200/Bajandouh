@@ -24663,5 +24663,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 08:03 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1406",
+    "branch": "الرئيسي",
+    "customerId": "muyem2o1vs66l",
+    "customerPhone": "781318081",
+    "customer": "ام جابر جابر زايد هادي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 07:07 PM",
+    "approvalDate": "22/11/2026 07:07 PM",
+    "id": "mws16c59t18zc",
+    "createdAt": "22/11/2026 07:07 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 09:00 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 09:00 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
