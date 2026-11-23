@@ -156,9 +156,7 @@
         "manageFeatures": false,
         "manageInvoice": true
       },
-      "passwordHash": "b92383892de0c7349b515a10f887a4262b831e8bfedd1c7a9aa78c7a5fccc6d6",
-      "passwordSalt": "07c3cc928bb14cb27cfb7dc6469cde6c",
-      "passwordAlgo": "PBKDF2-SHA-256-100000"
+      "password": "7834"
     },
     {
       "id": "muy1sxfnr8fyc",
