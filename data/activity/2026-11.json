@@ -1,5 +1,41 @@
 [
   {
+    "id": "mwtbomo1q01fp",
+    "action": "receipt-revert",
+    "title": "إلغاء استلام: 1259",
+    "description": "العميل: متجر نور الكثيري",
+    "type": "warning",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 04:49 PM",
+    "ts": 1795441788865,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtbojuon97s2",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1259",
+    "description": "العميل: متجر نور الكثيري",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 04:49 PM",
+    "ts": 1795441785216,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtblggxamgnz",
+    "action": "login",
+    "title": "تسجيل دخول: اشرف",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 04:47 PM",
+    "ts": 1795441640865,
+    "month": "2026-11"
+  },
+  {
     "id": "mwt5uznhihsgb",
     "action": "login",
     "title": "تسجيل دخول: المحل",
