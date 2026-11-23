@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwte2ckuldh9h",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1402",
+    "description": "العميل: ام سعيد مسجد ثروه احمد محمد دعكيك",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445788206,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtdxngiiwj2p",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1340",
