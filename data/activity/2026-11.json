@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtgzr6w9p7r5",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1427",
+    "description": "العميل: حمدي بن ناصر مروى فرج مرعي بن طالب",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 07:18 PM",
+    "ts": 1795450706024,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtgbohv4yf81",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1416",
