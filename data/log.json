@@ -23957,5 +23957,32 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "23/11/2026 04:50 PM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1278",
+    "branch": "الرئيسي",
+    "customerId": "mvrv26c9jwygt",
+    "customerPhone": "779350112",
+    "customer": "ام مناسك",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس ازرق",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "16/11/2026 06:59 PM",
+    "approvalDate": "16/11/2026 06:59 PM",
+    "id": "mwjg81rm22emo",
+    "createdAt": "16/11/2026 06:59 PM",
+    "waSentCount": 0,
+    "transferredAt": "17/11/2026 11:27 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 04:50 PM",
+    "receiptUpdatedBy": "اشرف",
+    "archivedAt": "23/11/2026 04:50 PM",
+    "archivedBy": "اشرف"
   }
 ]
