@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtdxngiiwj2p",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1340",
+    "description": "العميل: وجدان الجيلاني مروىمحمد حسين شبوه",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 05:52 PM",
+    "ts": 1795445569026,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtdw66ppq7pg",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1426",
