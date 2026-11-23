@@ -3353,22 +3353,5 @@
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
-  },
-  {
-    "id": "mwc63e2cwu9j8",
-    "title": "إلغاء استلام",
-    "message": "تم إلغاء استلام الطلب للعميل ام اشواق",
-    "type": "warning",
-    "time": "11/11/2026 04:41 PM",
-    "ts": 1794404474868,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mw7kjptbh10q2",
-    "orderInvoice": "1111"
   }
 ]
