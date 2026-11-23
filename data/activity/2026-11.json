@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwtdw66ppq7pg",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1426",
+    "description": "العميل: لينا انور عبداللاه البيتي",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 05:51 PM",
+    "ts": 1795445499985,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtdw4c6gdvah",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1260",
+    "description": "العميل: لينا انور عبداللاه البيتي",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 05:51 PM",
+    "ts": 1795445497590,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtcod002fdyd",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1347",
