@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtilbmrfoky8",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1414",
+    "description": "العميل: وهبي احمد سعيد عصعوص",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 08:03 PM",
+    "ts": 1795453391907,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtil1u5pysnf",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1420",
