@@ -24148,5 +24148,32 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "23/11/2026 05:51 PM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1340",
+    "branch": "الرئيسي",
+    "customerId": "c84",
+    "customerPhone": "",
+    "customer": "وجدان الجيلاني مروىمحمد حسين شبوه",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب باحاج",
+    "driverPhone": "لايوجد",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "19/11/2026 10:40 AM",
+    "approvalDate": "19/11/2026 10:40 AM",
+    "id": "mwn8q9em2d0o2",
+    "createdAt": "19/11/2026 10:40 AM",
+    "waSentCount": 0,
+    "transferredAt": "19/11/2026 12:10 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 05:52 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 05:52 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
