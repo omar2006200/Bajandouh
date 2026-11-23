@@ -1,5 +1,41 @@
 [
   {
+    "id": "mwtfgnm2vn2qg",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1382",
+    "description": "العميل: متجر فيوكه",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "23/11/2026 06:35 PM",
+    "ts": 1795448135306,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtfgcdvwa3ct",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1411",
+    "description": "العميل: ام علي جابر لطفي علي سعدالله جابر الشح",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "23/11/2026 06:35 PM",
+    "ts": 1795448120755,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtffgn7gqfv1",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "23/11/2026 06:34 PM",
+    "ts": 1795448079619,
+    "month": "2026-11"
+  },
+  {
     "id": "mwte81f8do6sy",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1307",
