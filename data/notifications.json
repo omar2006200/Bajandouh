@@ -148,7 +148,9 @@
     "ts": 1795448135307,
     "createdBy": "المحل",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwqnttzt9axw7",
     "orderInvoice": "1382"
@@ -162,7 +164,9 @@
     "ts": 1795448120755,
     "createdBy": "المحل",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws2xq7yu62hi",
     "orderInvoice": "1411"
