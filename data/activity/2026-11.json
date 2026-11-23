@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtkms8vcvkcf",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1406",
+    "description": "العميل: ام جابر جابر زايد هادي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 09:00 PM",
+    "ts": 1795456819327,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtk9ukseu09u",
     "action": "add-order",
     "title": "طلب جديد: 1439",
