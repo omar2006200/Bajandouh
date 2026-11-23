@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwte5g2t7ayrp",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1380",
+    "description": "العميل: عثمان عبدالكريم قاسم البجيري",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 05:58 PM",
+    "ts": 1795445932709,
+    "month": "2026-11"
+  },
+  {
     "id": "mwte4rr5oao6d",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1326",
