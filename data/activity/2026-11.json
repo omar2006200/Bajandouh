@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwth4mrxjzl9a",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1369",
+    "description": "العميل: عبدالعزيز باراس",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 07:22 PM",
+    "ts": 1795450933581,
+    "month": "2026-11"
+  },
+  {
     "id": "mwth1xkktmb0b",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1390",
