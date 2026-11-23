@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtcod002fdyd",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1347",
+    "description": "العميل: نور عادل جمعان هويدي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 05:17 PM",
+    "ts": 1795443455952,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtcnpxqbw3ym",
     "action": "move-transferred",
     "title": "نقل 1 طلب",
