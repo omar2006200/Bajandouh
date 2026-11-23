@@ -169,5 +169,24 @@
     "approvalDate": "23/11/2026 08:29 PM",
     "id": "mwtjjpem3gygk",
     "createdAt": "23/11/2026 08:29 PM"
+  },
+  {
+    "invoice": "1438",
+    "branch": "الرئيسي",
+    "customerId": "mv23xexazo3d0",
+    "customerPhone": "773505129",
+    "customer": "ام عبدالله الهندي",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:30 PM",
+    "approvalDate": "23/11/2026 08:30 PM",
+    "id": "mwtjkj8pin47c",
+    "createdAt": "23/11/2026 08:30 PM"
   }
 ]
