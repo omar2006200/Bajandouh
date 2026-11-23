@@ -1,45 +1,31 @@
 [
   {
-    "id": "mwte36kmip2er",
+    "id": "mwte4rr53ebwp",
     "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل علي محمد عقيل الكلالي",
+    "message": "تم استلام الطلب للعميل الضليعة عبدالرحمن العمودي",
     "type": "success",
-    "time": "23/11/2026 05:57 PM",
-    "ts": 1795445827078,
-    "createdBy": "اشرف",
+    "time": "23/11/2026 05:58 PM",
+    "ts": 1795445901185,
+    "createdBy": "عمر باحسين",
     "deletedBy": [],
     "readBy": [],
     "category": "delivery",
-    "orderId": "mwq6e4ab9e1w2",
-    "orderInvoice": "1360"
+    "orderId": "mwlv7zeptm7hu",
+    "orderInvoice": "1326"
   },
   {
-    "id": "mwte33e4wffor",
+    "id": "mwte3tbistg0p",
     "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل محمد عبدالقادر سالم بريكات",
+    "message": "تم استلام الطلب للعميل احمد محمد محسن",
     "type": "success",
     "time": "23/11/2026 05:57 PM",
-    "ts": 1795445822956,
-    "createdBy": "اشرف",
+    "ts": 1795445856558,
+    "createdBy": "عمر باحسين",
     "deletedBy": [],
     "readBy": [],
     "category": "delivery",
-    "orderId": "mwnakkzfgim5k",
-    "orderInvoice": "1343"
-  },
-  {
-    "id": "mwte2ztddxmc7",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام يوسف سهيل خديجه عوض عمر برعيه",
-    "type": "success",
-    "time": "23/11/2026 05:56 PM",
-    "ts": 1795445818321,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [],
-    "category": "delivery",
-    "orderId": "mwn9kkm5gp2j6",
-    "orderInvoice": "1341"
+    "orderId": "mwqlzk1lj6w2n",
+    "orderInvoice": "1379"
   },
   {
     "id": "mwte2l65ukio7",
@@ -3436,5 +3422,22 @@
     "category": "delivery",
     "orderId": "mwbwbp5ji6por",
     "orderInvoice": "1179"
+  },
+  {
+    "id": "mwdrc0fbjqy4p",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام عبدالله العزي",
+    "type": "success",
+    "time": "12/11/2026 07:23 PM",
+    "ts": 1794500615207,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [
+      "اشرف",
+      "1"
+    ],
+    "category": "delivery",
+    "orderId": "mwaf5vji72u5e",
+    "orderInvoice": "1149"
   }
 ]
