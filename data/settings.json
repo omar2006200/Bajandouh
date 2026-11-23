@@ -230,9 +230,7 @@
         "manageFeatures": false,
         "manageInvoice": false
       },
-      "passwordHash": "954686cb770f24a6ce328a9ee01793a2da0094820ccd8845d7f06df4cc825742",
-      "passwordSalt": "e3516cc236ab811c650df6b9b6d73e7b",
-      "passwordAlgo": "PBKDF2-SHA-256-100000"
+      "password": "1111"
     },
     {
       "id": "mv81mnkhl70d4",
@@ -548,7 +546,7 @@
   },
   "invoiceSettings": {
     "prefix": "",
-    "nextNumber": 1428,
+    "nextNumber": 1429,
     "digits": 3,
     "autoIncrement": true
   }
