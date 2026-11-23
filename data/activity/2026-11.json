@@ -1,14 +1,26 @@
 [
   {
-    "id": "mwte2iqwghfbq",
-    "action": "add-order",
-    "title": "طلب جديد: 1391",
-    "description": "",
+    "id": "mwte2l65e1kzi",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1425",
+    "description": "العميل: ام عبدالله العماري",
     "type": "success",
     "orderId": null,
-    "user": "عمر باحسين",
+    "user": "اشرف",
     "time": "23/11/2026 05:56 PM",
-    "ts": 1795445796200,
+    "ts": 1795445799341,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwte2ckuldh9h",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1402",
+    "description": "العميل: ام سعيد مسجد ثروه احمد محمد دعكيك",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 05:56 PM",
+    "ts": 1795445788206,
     "month": "2026-11"
   },
   {
