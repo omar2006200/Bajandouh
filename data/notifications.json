@@ -3400,23 +3400,5 @@
     "category": "delivery",
     "orderId": "mw3o1536h2f64",
     "orderInvoice": "1069"
-  },
-  {
-    "id": "mwg0vvqvfukny",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ابراهيم سالم القثمي",
-    "type": "success",
-    "time": "14/11/2026 09:26 AM",
-    "ts": 1794637591159,
-    "createdBy": "المحل",
-    "deletedBy": [],
-    "readBy": [
-      "اشرف",
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwcdnclwd73th",
-    "orderInvoice": "1191"
   }
 ]
