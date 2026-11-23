@@ -22,7 +22,9 @@
     "ts": 1795445499985,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwt0ta90mpvcm",
     "orderInvoice": "1426"
@@ -36,7 +38,9 @@
     "ts": 1795445497591,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwi2oztyif3kj",
     "orderInvoice": "1260"
@@ -78,7 +82,9 @@
     "ts": 1795442860734,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws1ky8bx8k4f",
     "orderInvoice": "1408"
@@ -92,7 +98,9 @@
     "ts": 1795442843060,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws20owi5q421",
     "orderInvoice": "1409"
@@ -134,7 +142,9 @@
     "ts": 1795441815542,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwjg81rm22emo",
     "orderInvoice": "1278"
@@ -148,7 +158,9 @@
     "ts": 1795441806910,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws2l47i0l0f3",
     "orderInvoice": "1410"
@@ -162,7 +174,9 @@
     "ts": 1795441800542,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
@@ -176,7 +190,9 @@
     "ts": 1795441788865,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwi2n93wp6ug2",
     "orderInvoice": "1259"
@@ -190,7 +206,9 @@
     "ts": 1795441785216,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwi2n93wp6ug2",
     "orderInvoice": "1259"
