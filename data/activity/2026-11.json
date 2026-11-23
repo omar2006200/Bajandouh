@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwtgbbtxphnhz",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1421",
+    "description": "العميل: عمر خالد سعيد بن عبدات",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 06:59 PM",
+    "ts": 1795449566372,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtfgnm2vn2qg",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1382",
