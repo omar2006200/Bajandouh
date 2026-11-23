@@ -24040,5 +24040,32 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "23/11/2026 05:07 PM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1408",
+    "branch": "الرئيسي",
+    "customerId": "mvdgw6pko48b9",
+    "customerPhone": "775785718",
+    "customer": "ام صالح معتز باصلعه هند حاج باصلعه",
+    "location": "الديس الشرقية",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 07:19 PM",
+    "approvalDate": "22/11/2026 07:19 PM",
+    "id": "mws1ky8bx8k4f",
+    "createdAt": "22/11/2026 07:19 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 05:07 PM",
+    "receiptUpdatedBy": "اشرف",
+    "archivedAt": "23/11/2026 05:07 PM",
+    "archivedBy": "اشرف"
   }
 ]
