@@ -3362,22 +3362,5 @@
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
-  },
-  {
-    "id": "mwbwfgjy7oq9r",
-    "title": "نقل طلبات",
-    "message": "تم نقل 5 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "11/11/2026 12:10 PM",
-    "ts": 1794388241806,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "عمر باحسين"
-    ],
-    "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
   }
 ]
