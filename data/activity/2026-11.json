@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwte81f8do6sy",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1307",
+    "description": "العميل: محمد احمد الجابري",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 06:00 PM",
+    "ts": 1795446053684,
+    "month": "2026-11"
+  },
+  {
     "id": "mwte6affm8f5e",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1383",
