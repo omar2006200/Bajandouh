@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwte6affm8f5e",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1383",
+    "description": "العميل: مريم العمودي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "23/11/2026 05:59 PM",
+    "ts": 1795445972043,
+    "month": "2026-11"
+  },
+  {
     "id": "mwte5g2t7ayrp",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1380",
