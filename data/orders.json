@@ -150,5 +150,24 @@
     "approvalDate": "23/11/2026 08:29 PM",
     "id": "mwtjjbrpwpz5t",
     "createdAt": "23/11/2026 08:29 PM"
+  },
+  {
+    "invoice": "1437",
+    "branch": "الرئيسي",
+    "customerId": "mw614zmbyvfaq",
+    "customerPhone": "779498105",
+    "customer": "ام نواف بن مخاشن",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:29 PM",
+    "approvalDate": "23/11/2026 08:29 PM",
+    "id": "mwtjjpem3gygk",
+    "createdAt": "23/11/2026 08:29 PM"
   }
 ]
