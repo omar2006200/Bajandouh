@@ -23984,5 +23984,31 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "23/11/2026 04:50 PM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1352",
+    "branch": "الرئيسي",
+    "customerId": "c27",
+    "customerPhone": "781331920",
+    "customer": "احلام علي بلفخر",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "23/11/2026 04:55 PM",
+    "approvalDate": "23/11/2026 04:55 PM",
+    "id": "mwtbvkwlho5io",
+    "createdAt": "23/11/2026 04:55 PM",
+    "transferredAt": "23/11/2026 04:55 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 04:56 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 04:56 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
