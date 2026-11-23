@@ -24636,5 +24636,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 08:02 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1414",
+    "branch": "الرئيسي",
+    "customerId": "c159",
+    "customerPhone": "",
+    "customer": "وهبي احمد سعيد عصعوص",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 08:16 PM",
+    "approvalDate": "22/11/2026 08:16 PM",
+    "id": "mws3mvz9mxqz6",
+    "createdAt": "22/11/2026 08:16 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 08:03 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 08:03 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
