@@ -24474,5 +24474,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 06:59 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1416",
+    "branch": "الرئيسي",
+    "customerId": "mwdbcnyzttv0s",
+    "customerPhone": "775879563",
+    "customer": "حسن خالد باقيس",
+    "location": "دوعن",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 08:19 PM",
+    "approvalDate": "22/11/2026 08:19 PM",
+    "id": "mws3qfr3a7rwr",
+    "createdAt": "22/11/2026 08:19 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 06:59 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 06:59 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
