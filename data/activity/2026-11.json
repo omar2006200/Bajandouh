@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwtbp792k4tke",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1278",
+    "description": "العميل: ام مناسك",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 04:50 PM",
+    "ts": 1795441815542,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwtbp0laku8b2",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1410",
+    "description": "العميل: ام محمد الكثيري",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "23/11/2026 04:50 PM",
+    "ts": 1795441806910,
+    "month": "2026-11"
+  },
+  {
     "id": "mwtbovoejl2gn",
     "action": "move-transferred",
     "title": "نقل 26 طلب",
