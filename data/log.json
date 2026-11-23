@@ -24528,5 +24528,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 07:18 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1312",
+    "branch": "الرئيسي",
+    "customerId": "mv6ed1vd8l3lx",
+    "customerPhone": "717867651",
+    "customer": "يوسف مطيع بن ماضي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "17/11/2026 08:17 PM",
+    "approvalDate": "17/11/2026 08:17 PM",
+    "id": "mwkyh23awxycy",
+    "createdAt": "17/11/2026 08:17 PM",
+    "waSentCount": 0,
+    "transferredAt": "18/11/2026 05:09 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "23/11/2026 07:19 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "23/11/2026 07:19 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
