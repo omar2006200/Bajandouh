@@ -16,7 +16,8 @@
     "updatedAt": "24/11/2026 11:29 AM",
     "approvalDate": "24/11/2026 11:29 AM",
     "id": "mwufo8oq6044i",
-    "createdAt": "24/11/2026 11:29 AM"
+    "createdAt": "24/11/2026 11:29 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1441",
@@ -35,7 +36,8 @@
     "updatedAt": "24/11/2026 11:30 AM",
     "approvalDate": "24/11/2026 11:30 AM",
     "id": "mwufqbrymekbm",
-    "createdAt": "24/11/2026 11:30 AM"
+    "createdAt": "24/11/2026 11:30 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1442",
@@ -54,7 +56,8 @@
     "updatedAt": "24/11/2026 11:32 AM",
     "approvalDate": "24/11/2026 11:32 AM",
     "id": "mwufsjq4ewhou",
-    "createdAt": "24/11/2026 11:32 AM"
+    "createdAt": "24/11/2026 11:32 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1445",
@@ -73,7 +76,8 @@
     "updatedAt": "24/11/2026 11:40 AM",
     "approvalDate": "24/11/2026 11:37 AM",
     "id": "mwufz5ltt9w1b",
-    "createdAt": "24/11/2026 11:37 AM"
+    "createdAt": "24/11/2026 11:37 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1444",
@@ -92,6 +96,26 @@
     "updatedAt": "24/11/2026 11:40 AM",
     "approvalDate": "24/11/2026 11:40 AM",
     "id": "mwug2g4eh841e",
-    "createdAt": "24/11/2026 11:40 AM"
+    "createdAt": "24/11/2026 11:40 AM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1446",
+    "branch": "الرئيسي",
+    "customerId": "c188",
+    "customerPhone": "773465216",
+    "customer": "عمر ابراهيم سبيت صحاليل",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 11:41 AM",
+    "approvalDate": "24/11/2026 11:41 AM",
+    "id": "mwug3h3ui2g9x",
+    "createdAt": "24/11/2026 11:41 AM"
   }
 ]
