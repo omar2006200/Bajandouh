@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwv04btiop7hb",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1445",
+    "description": "العميل: مجدي ابوبكر بن قاسم باعشن",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "24/11/2026 09:01 PM",
+    "ts": 1795543298262,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwv049mjs4v58",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1356",
+    "description": "العميل: مجدي ابوبكر بن قاسم باعشن",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "24/11/2026 09:01 PM",
+    "ts": 1795543295419,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuy0a9vl73nt",
     "action": "add-order",
     "title": "طلب جديد: 1460",
