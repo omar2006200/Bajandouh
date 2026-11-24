@@ -3383,22 +3383,5 @@
     "category": "delivery",
     "orderId": "mwg75lwkbxk8z",
     "orderInvoice": "1212"
-  },
-  {
-    "id": "mwhfzxot9qf2j",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام عافية",
-    "type": "success",
-    "time": "15/11/2026 09:17 AM",
-    "ts": 1794723440717,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mw83gls00wkup",
-    "orderInvoice": "1116"
   }
 ]
