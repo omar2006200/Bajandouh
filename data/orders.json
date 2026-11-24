@@ -56,7 +56,8 @@
     "updatedAt": "24/11/2026 07:10 PM",
     "approvalDate": "24/11/2026 07:10 PM",
     "id": "mwuw5af17n4a6",
-    "createdAt": "24/11/2026 07:10 PM"
+    "createdAt": "24/11/2026 07:10 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1457",
@@ -75,7 +76,8 @@
     "updatedAt": "24/11/2026 07:11 PM",
     "approvalDate": "24/11/2026 07:11 PM",
     "id": "mwuw6rjsgxt9r",
-    "createdAt": "24/11/2026 07:11 PM"
+    "createdAt": "24/11/2026 07:11 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1458",
@@ -94,7 +96,8 @@
     "updatedAt": "24/11/2026 07:12 PM",
     "approvalDate": "24/11/2026 07:12 PM",
     "id": "mwuw7gs23oa5v",
-    "createdAt": "24/11/2026 07:12 PM"
+    "createdAt": "24/11/2026 07:12 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1459",
@@ -113,6 +116,26 @@
     "updatedAt": "24/11/2026 07:14 PM",
     "approvalDate": "24/11/2026 07:14 PM",
     "id": "mwuwaycbhf48m",
-    "createdAt": "24/11/2026 07:14 PM"
+    "createdAt": "24/11/2026 07:14 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1460",
+    "branch": "الرئيسي",
+    "customerId": "mwuy03smgh1g3",
+    "customerPhone": "779230689",
+    "customer": "ام روى سالم لرضي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 08:02 PM",
+    "approvalDate": "24/11/2026 08:02 PM",
+    "id": "mwuy0a9v0hvss",
+    "createdAt": "24/11/2026 08:02 PM"
   }
 ]
