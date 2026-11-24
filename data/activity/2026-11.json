@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwuti7k5z99ns",
+    "action": "edit-transferred",
+    "title": "تعديل مُنقل: 1418",
+    "description": "",
+    "type": "warning",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:56 PM",
+    "ts": 1795532188613,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwut9kcubuiay",
+    "action": "invoice-settings",
+    "title": "تحديث إعدادات الفاتورة",
+    "description": "",
+    "type": "info",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:49 PM",
+    "ts": 1795531785293,
+    "month": "2026-11"
+  },
+  {
     "id": "mwurnebny9c8j",
     "action": "move-transferred",
     "title": "نقل 24 طلب",
