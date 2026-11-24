@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "invoice": "1440",
+    "branch": "الرئيسي",
+    "customerId": "mv6fos4g7xfvd",
+    "customerPhone": "770868696",
+    "customer": "ملهم جمال سعيد بافقاس",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 11:29 AM",
+    "approvalDate": "24/11/2026 11:29 AM",
+    "id": "mwufo8oq6044i",
+    "createdAt": "24/11/2026 11:29 AM"
+  }
+]
