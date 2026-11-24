@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwuwv56kzsdb1",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1424",
+    "description": "العميل: ام عمر باوزير",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "24/11/2026 07:30 PM",
+    "ts": 1795537830908,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuwayccpsm3q",
     "action": "add-order",
     "title": "طلب جديد: 1459",
