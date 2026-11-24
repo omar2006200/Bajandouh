@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwutjqjmeoyz1",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1438",
+    "description": "العميل: ام عبدالله الهندي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:57 PM",
+    "ts": 1795532259874,
+    "month": "2026-11"
+  },
+  {
     "id": "mwutjm4psr9jc",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1360",
