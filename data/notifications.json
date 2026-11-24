@@ -1,5 +1,33 @@
 [
   {
+    "id": "mwuvwl1fifxpc",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام محمد بابكير فاطمة عمر سالم باسيف",
+    "type": "success",
+    "time": "24/11/2026 07:03 PM",
+    "ts": 1795536218499,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwufsjq4ewhou",
+    "orderInvoice": "1442"
+  },
+  {
+    "id": "mwuvuvxmcyz8a",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام محمد بابكير فاطمة عمر سالم باسيف",
+    "type": "success",
+    "time": "24/11/2026 07:02 PM",
+    "ts": 1795536139306,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwufsjq4ewhou",
+    "orderInvoice": "1442"
+  },
+  {
     "id": "mwuvupuadrc7e",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام محمد مختار الفقي",
@@ -8,9 +36,7 @@
     "ts": 1795536131410,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [
-      "عمر باحسين"
-    ],
+    "readBy": [],
     "category": "delivery",
     "orderId": "mwuguwfxh8zxr",
     "orderInvoice": "1448"
@@ -24,9 +50,7 @@
     "ts": 1795536128386,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [
-      "عمر باحسين"
-    ],
+    "readBy": [],
     "category": "delivery",
     "orderId": "mwke7c7mhk06z",
     "orderInvoice": "1295"
@@ -40,9 +64,7 @@
     "ts": 1795534350953,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [
-      "عمر باحسين"
-    ],
+    "readBy": [],
     "category": "delivery",
     "orderId": "mwq7bqopm3k6w",
     "orderInvoice": "1367"
@@ -56,9 +78,7 @@
     "ts": 1795534348914,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [
-      "عمر باحسين"
-    ],
+    "readBy": [],
     "category": "delivery",
     "orderId": "mw63td4w8ymvk",
     "orderInvoice": "1087"
@@ -72,7 +92,9 @@
     "ts": 1795532259874,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwtjkj8pin47c",
     "orderInvoice": "1438"
@@ -86,7 +108,9 @@
     "ts": 1795532254153,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwq6e4ab9e1w2",
     "orderInvoice": "1360"
@@ -100,7 +124,9 @@
     "ts": 1795532240239,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwnakkzfgim5k",
     "orderInvoice": "1343"
@@ -114,7 +140,9 @@
     "ts": 1795532232154,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwn9kkm5gp2j6",
     "orderInvoice": "1341"
@@ -128,7 +156,9 @@
     "ts": 1795532217746,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwtjgbpez0uxx",
     "orderInvoice": "1435"
@@ -142,7 +172,9 @@
     "ts": 1795532192982,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwszpzq1ogkzo",
     "orderInvoice": "1418"
@@ -156,7 +188,9 @@
     "ts": 1795529071428,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
@@ -170,7 +204,9 @@
     "ts": 1795456819327,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mws16c59t18zc",
     "orderInvoice": "1406"
@@ -184,7 +220,9 @@
     "ts": 1795453391907,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mws3mvz9mxqz6",
     "orderInvoice": "1414"
@@ -198,7 +236,9 @@
     "ts": 1795453379214,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwt0ez8cmrha5",
     "orderInvoice": "1420"
@@ -212,7 +252,9 @@
     "ts": 1795450968804,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwt0jzmr36goo",
     "orderInvoice": "1423"
@@ -226,7 +268,9 @@
     "ts": 1795450933581,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwq7dm16im5b0",
     "orderInvoice": "1369"
@@ -240,7 +284,9 @@
     "ts": 1795450807604,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwrjjfiv9u60z",
     "orderInvoice": "1390"
@@ -254,7 +300,9 @@
     "ts": 1795450793927,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwrjdowm95wso",
     "orderInvoice": "1387"
@@ -268,7 +316,9 @@
     "ts": 1795450785625,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwkyh23awxycy",
     "orderInvoice": "1312"
@@ -282,7 +332,9 @@
     "ts": 1795450706024,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwt26n00sjr42",
     "orderInvoice": "1427"
@@ -296,7 +348,9 @@
     "ts": 1795449582788,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mws3qfr3a7rwr",
     "orderInvoice": "1416"
@@ -310,7 +364,9 @@
     "ts": 1795449566373,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwt0fvlxthxha",
     "orderInvoice": "1421"
@@ -325,7 +381,8 @@
     "createdBy": "المحل",
     "deletedBy": [],
     "readBy": [
-      "عمر باحسين"
+      "عمر باحسين",
+      "اشرف"
     ],
     "category": "delivery",
     "orderId": "mwqnttzt9axw7",
@@ -341,7 +398,8 @@
     "createdBy": "المحل",
     "deletedBy": [],
     "readBy": [
-      "عمر باحسين"
+      "عمر باحسين",
+      "اشرف"
     ],
     "category": "delivery",
     "orderId": "mws2xq7yu62hi",
@@ -356,7 +414,9 @@
     "ts": 1795446053684,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwkx52xnydpon",
     "orderInvoice": "1307"
@@ -370,7 +430,9 @@
     "ts": 1795445972043,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwqptc3ab7acz",
     "orderInvoice": "1383"
@@ -384,7 +446,9 @@
     "ts": 1795445932709,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwqmlu88r3adf",
     "orderInvoice": "1380"
@@ -398,7 +462,9 @@
     "ts": 1795445901185,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwlv7zeptm7hu",
     "orderInvoice": "1326"
@@ -412,7 +478,9 @@
     "ts": 1795445856558,
     "createdBy": "عمر باحسين",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "اشرف"
+    ],
     "category": "delivery",
     "orderId": "mwqlzk1lj6w2n",
     "orderInvoice": "1379"
@@ -3321,56 +3389,5 @@
     "category": "delivery",
     "orderId": "mwg7v6v1yi1z9",
     "orderInvoice": "1225"
-  },
-  {
-    "id": "mwhfy084p9b89",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام عبدالله صالح التميمي",
-    "type": "success",
-    "time": "15/11/2026 09:15 AM",
-    "ts": 1794723350692,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwg79n6ybe7ae",
-    "orderInvoice": "1215"
-  },
-  {
-    "id": "mwhfxn6kr8d97",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام محمد هاني بلخير",
-    "type": "success",
-    "time": "15/11/2026 09:15 AM",
-    "ts": 1794723333788,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwc62jberqq87",
-    "orderInvoice": "1176"
-  },
-  {
-    "id": "mwhfpyaoj0avc",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام وليد الجفري احمد نبيل احمد خرد",
-    "type": "success",
-    "time": "15/11/2026 09:09 AM",
-    "ts": 1794722974944,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwhfp3uv5181n",
-    "orderInvoice": "1240"
   }
 ]
