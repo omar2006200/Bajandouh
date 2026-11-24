@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwufyeu6hw6jg",
+    "action": "add-customer",
+    "title": "إضافة: ام عبدالله فوه",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "24/11/2026 11:37 AM",
+    "ts": 1795509429918,
+    "month": "2026-11"
+  },
+  {
     "id": "mwufsjq4g4fio",
     "action": "add-order",
     "title": "طلب جديد: 1442",
