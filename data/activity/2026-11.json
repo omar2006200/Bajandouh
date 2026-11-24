@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwutiu1dzxes1",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1435",
+    "description": "العميل: ام سالم العبكري",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:56 PM",
+    "ts": 1795532217745,
+    "month": "2026-11"
+  },
+  {
     "id": "mwutiaxi4n2hn",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1418",
