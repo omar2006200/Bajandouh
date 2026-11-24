@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwuxwa82i385a",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1349",
+    "description": "العميل: ابراهيم سالم القثمي",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 07:59 PM",
+    "ts": 1795539563714,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuwv56kzsdb1",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1424",
