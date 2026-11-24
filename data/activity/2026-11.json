@@ -1,38 +1,14 @@
 [
   {
-    "id": "mwuvuvxmj5uev",
+    "id": "mwuvusfoq6jfq",
     "action": "receipt-received",
-    "title": "تأكيد استلام: 1442",
-    "description": "العميل: ام محمد بابكير فاطمة عمر سالم باسيف",
+    "title": "تأكيد استلام: 1431",
+    "description": "العميل: شيماء صلاح مبارك غصان",
     "type": "success",
     "orderId": null,
-    "user": "اشرف",
+    "user": "عمر باحسين",
     "time": "24/11/2026 07:02 PM",
-    "ts": 1795536139306,
-    "month": "2026-11"
-  },
-  {
-    "id": "mwuvupuaktn9t",
-    "action": "receipt-received",
-    "title": "تأكيد استلام: 1448",
-    "description": "العميل: ام محمد مختار الفقي",
-    "type": "success",
-    "orderId": null,
-    "user": "اشرف",
-    "time": "24/11/2026 07:02 PM",
-    "ts": 1795536131410,
-    "month": "2026-11"
-  },
-  {
-    "id": "mwuvuniazdr05",
-    "action": "receipt-received",
-    "title": "تأكيد استلام: 1295",
-    "description": "العميل: ام محمد مختار الفقي",
-    "type": "success",
-    "orderId": null,
-    "user": "اشرف",
-    "time": "24/11/2026 07:02 PM",
-    "ts": 1795536128386,
+    "ts": 1795536134772,
     "month": "2026-11"
   },
   {
