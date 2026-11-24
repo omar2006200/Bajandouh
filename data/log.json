@@ -25122,5 +25122,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "24/11/2026 07:59 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1356",
+    "branch": "الرئيسي",
+    "customerId": "muv0z27fgrcui",
+    "customerPhone": "785169876",
+    "customer": "مجدي ابوبكر بن قاسم باعشن",
+    "location": "الشرج",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "19/11/2026 08:02 PM",
+    "approvalDate": "19/11/2026 08:02 PM",
+    "id": "mwnssg13ghkn6",
+    "createdAt": "19/11/2026 08:02 PM",
+    "waSentCount": 0,
+    "transferredAt": "21/11/2026 04:43 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "24/11/2026 09:01 PM",
+    "receiptUpdatedBy": "اشرف",
+    "archivedAt": "24/11/2026 09:01 PM",
+    "archivedBy": "اشرف"
   }
 ]
