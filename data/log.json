@@ -24744,5 +24744,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "24/11/2026 05:56 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1341",
+    "branch": "الرئيسي",
+    "customerId": "c75",
+    "customerPhone": "730504139",
+    "customer": "ام يوسف سهيل خديجه عوض عمر برعيه",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "19/11/2026 11:04 AM",
+    "approvalDate": "19/11/2026 11:04 AM",
+    "id": "mwn9kkm5gp2j6",
+    "createdAt": "19/11/2026 11:04 AM",
+    "transferredAt": "19/11/2026 12:10 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "waSentCount": 0,
+    "receiptUpdatedAt": "24/11/2026 05:57 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "24/11/2026 05:57 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
