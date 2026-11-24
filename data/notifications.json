@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwuw3774yx4gi",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل عائشه مراد عبدالله بامحيمود",
+    "type": "success",
+    "time": "24/11/2026 07:08 PM",
+    "ts": 1795536527152,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwqloln49mrvh",
+    "orderInvoice": "1377"
+  },
+  {
     "id": "mwuw35061sah1",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل عائشه مراد عبدالله بامحيمود",
