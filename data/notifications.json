@@ -3353,22 +3353,5 @@
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
-  },
-  {
-    "id": "mwgh9led43xah",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل حسن خالد باقيس",
-    "type": "success",
-    "time": "14/11/2026 05:05 PM",
-    "ts": 1794665104789,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwgh84zunilql",
-    "orderInvoice": "1196"
   }
 ]
