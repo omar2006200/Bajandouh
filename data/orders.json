@@ -117,5 +117,24 @@
     "approvalDate": "24/11/2026 11:41 AM",
     "id": "mwug3h3ui2g9x",
     "createdAt": "24/11/2026 11:41 AM"
+  },
+  {
+    "invoice": "1447",
+    "branch": "الرئيسي",
+    "customerId": "mvc4cjjmlvqnk",
+    "customerPhone": "735989038",
+    "customer": "محمد ماجد سليمان الجعيدي - خالد بن حترش",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 11:41 AM",
+    "approvalDate": "24/11/2026 11:41 AM",
+    "id": "mwug4hvxc2aix",
+    "createdAt": "24/11/2026 11:41 AM"
   }
 ]
