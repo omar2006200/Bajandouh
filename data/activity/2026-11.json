@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwuvxtmm1s4t1",
+    "action": "receipt-revert",
+    "title": "إلغاء استلام: 1442",
+    "description": "العميل: ام محمد بابكير فاطمة عمر سالم باسيف",
+    "type": "warning",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 07:04 PM",
+    "ts": 1795536276286,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwuvxcjwqr99s",
+    "action": "login",
+    "title": "تسجيل دخول: عمر باحسين",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 07:04 PM",
+    "ts": 1795536254156,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuvwl1fcnzpd",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1442",
