@@ -24690,5 +24690,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "23/11/2026 09:00 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1418",
+    "branch": "الرئيسي",
+    "customerId": "c154",
+    "customerPhone": "",
+    "customer": "همسة فجر اماني سالم محمد باوزير",
+    "location": "الغيل",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "عبدالله باوزير",
+    "driverPhone": "771317281",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "24/11/2026 05:56 PM",
+    "approvalDate": "23/11/2026 11:14 AM",
+    "id": "mwszpzq1ogkzo",
+    "createdAt": "23/11/2026 11:14 AM",
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "24/11/2026 05:56 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "24/11/2026 05:56 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
