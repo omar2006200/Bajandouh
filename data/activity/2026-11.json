@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwutj55mqfpb7",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1341",
+    "description": "العميل: ام يوسف سهيل خديجه عوض عمر برعيه",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:57 PM",
+    "ts": 1795532232154,
+    "month": "2026-11"
+  },
+  {
     "id": "mwutiu1dzxes1",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1435",
