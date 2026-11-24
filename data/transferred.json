@@ -2047,30 +2047,5 @@
     "transferredBy": "عمر باحسين",
     "waSentCount": 0,
     "receiptStatus": "لا"
-  },
-  {
-    "invoice": "0",
-    "branch": "الرئيسي",
-    "customerId": "c59",
-    "customerPhone": "73",
-    "customer": "ام محمد بابكير فاطمة عمر سالم باسيف",
-    "location": "",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "عمر باحسين",
-    "updatedAt": "24/11/2026 07:05 PM",
-    "approvalDate": "24/11/2026 11:32 AM",
-    "id": "mwufsjq4ewhou",
-    "createdAt": "24/11/2026 11:32 AM",
-    "waSentCount": 0,
-    "transferredAt": "24/11/2026 05:04 PM",
-    "transferredBy": "عمر باحسين",
-    "receiptStatus": "لا",
-    "receiptUpdatedAt": "24/11/2026 07:04 PM",
-    "receiptUpdatedBy": "عمر باحسين"
   }
 ]
