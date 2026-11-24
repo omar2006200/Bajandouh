@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwuvupuadrc7e",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام محمد مختار الفقي",
+    "type": "success",
+    "time": "24/11/2026 07:02 PM",
+    "ts": 1795536131410,
+    "createdBy": "اشرف",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwuguwfxh8zxr",
+    "orderInvoice": "1448"
+  },
+  {
     "id": "mwuvuniavc3ow",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام محمد مختار الفقي",
