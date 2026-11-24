@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwuvz49dm2zeb",
+    "action": "delete-transferred",
+    "title": "حذف مُنقل: 0",
+    "description": "",
+    "type": "danger",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 07:05 PM",
+    "ts": 1795536336721,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuvywpzvgh24",
     "action": "edit-transferred",
     "title": "تعديل مُنقل: 0",
