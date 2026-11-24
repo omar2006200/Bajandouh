@@ -116,7 +116,8 @@
     "updatedAt": "24/11/2026 11:41 AM",
     "approvalDate": "24/11/2026 11:41 AM",
     "id": "mwug3h3ui2g9x",
-    "createdAt": "24/11/2026 11:41 AM"
+    "createdAt": "24/11/2026 11:41 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1447",
@@ -135,6 +136,26 @@
     "updatedAt": "24/11/2026 11:41 AM",
     "approvalDate": "24/11/2026 11:41 AM",
     "id": "mwug4hvxc2aix",
-    "createdAt": "24/11/2026 11:41 AM"
+    "createdAt": "24/11/2026 11:41 AM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1448",
+    "branch": "الرئيسي",
+    "customerId": "mwke759kf8dp5",
+    "customerPhone": "733497098",
+    "customer": "ام محمد مختار الفقي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 12:02 PM",
+    "approvalDate": "24/11/2026 12:02 PM",
+    "id": "mwuguwfxh8zxr",
+    "createdAt": "24/11/2026 12:02 PM"
   }
 ]
