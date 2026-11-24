@@ -502,6 +502,28 @@
     "id": "mwui4f68lfmc8",
     "createdAt": "24/11/2026 12:37 PM",
     "transferredAt": "24/11/2026 12:38 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1453",
+    "branch": "الرئيسي",
+    "customerId": "c7",
+    "customerPhone": "738381138",
+    "customer": "سيف علي دعدع الخليفي",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 12:46 PM",
+    "approvalDate": "24/11/2026 12:46 PM",
+    "id": "mwuifk0l429ly",
+    "createdAt": "24/11/2026 12:46 PM",
+    "transferredAt": "24/11/2026 12:46 PM",
     "transferredBy": "اشرف"
   }
 ]
