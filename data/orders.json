@@ -176,6 +176,26 @@
     "updatedAt": "24/11/2026 12:24 PM",
     "approvalDate": "24/11/2026 12:24 PM",
     "id": "mwuhnw6cxmwxs",
-    "createdAt": "24/11/2026 12:24 PM"
+    "createdAt": "24/11/2026 12:24 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1450",
+    "branch": "الرئيسي",
+    "customerId": "mvck7aojb4203",
+    "customerPhone": "782415122",
+    "customer": "محمد عاشور سالم العاس",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 12:26 PM",
+    "approvalDate": "24/11/2026 12:26 PM",
+    "id": "mwuhq3cp2miht",
+    "createdAt": "24/11/2026 12:26 PM"
   }
 ]
