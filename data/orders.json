@@ -17,5 +17,24 @@
     "approvalDate": "24/11/2026 11:29 AM",
     "id": "mwufo8oq6044i",
     "createdAt": "24/11/2026 11:29 AM"
+  },
+  {
+    "invoice": "1441",
+    "branch": "الرئيسي",
+    "customerId": "c112",
+    "customerPhone": "777098345",
+    "customer": "افراح بن وبر",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس اصفر",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 11:30 AM",
+    "approvalDate": "24/11/2026 11:30 AM",
+    "id": "mwufqbrymekbm",
+    "createdAt": "24/11/2026 11:30 AM"
   }
 ]
