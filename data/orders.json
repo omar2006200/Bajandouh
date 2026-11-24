@@ -218,5 +218,24 @@
     "id": "mwuhs71rwez00",
     "createdAt": "24/11/2026 12:28 PM",
     "waSentCount": 0
+  },
+  {
+    "invoice": "1452",
+    "branch": "الرئيسي",
+    "customerId": "mwq7lihz8azrr",
+    "customerPhone": "784854908",
+    "customer": "ليلى حمود حسان مدهش",
+    "location": "تعيز",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس+سله",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 12:37 PM",
+    "approvalDate": "24/11/2026 12:37 PM",
+    "id": "mwui4f68lfmc8",
+    "createdAt": "24/11/2026 12:37 PM"
   }
 ]
