@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwuxwa83hoeln",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ابراهيم سالم القثمي",
+    "type": "success",
+    "time": "24/11/2026 07:59 PM",
+    "ts": 1795539563715,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwns0fca1zrbt",
+    "orderInvoice": "1349"
+  },
+  {
     "id": "mwuwv56kix9qr",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام عمر باوزير",
@@ -3378,22 +3392,5 @@
     "category": "delivery",
     "orderId": "mwcdjooknumb6",
     "orderInvoice": "1189"
-  },
-  {
-    "id": "mwhfzejy2e9ie",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام عبداللاه محمد",
-    "type": "success",
-    "time": "15/11/2026 09:16 AM",
-    "ts": 1794723415918,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwg76o5no5opz",
-    "orderInvoice": "1213"
   }
 ]
