@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwuvxtmndkfb2",
+    "title": "إلغاء استلام",
+    "message": "تم إلغاء استلام الطلب للعميل ام محمد بابكير فاطمة عمر سالم باسيف",
+    "type": "warning",
+    "time": "24/11/2026 07:04 PM",
+    "ts": 1795536276287,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwufsjq4ewhou",
+    "orderInvoice": "1442"
+  },
+  {
     "id": "mwuvwl1fifxpc",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام محمد بابكير فاطمة عمر سالم باسيف",
@@ -3372,22 +3386,5 @@
     "category": "delivery",
     "orderId": "mwg74qur3u0ih",
     "orderInvoice": "1211"
-  },
-  {
-    "id": "mwhfy8bwphyay",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل متجر ميم ستور مريم حسين سالم",
-    "type": "success",
-    "time": "15/11/2026 09:16 AM",
-    "ts": 1794723361196,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwg7v6v1yi1z9",
-    "orderInvoice": "1225"
   }
 ]
