@@ -206,7 +206,7 @@
     "customerPhone": "771173302",
     "customer": "متجر ام محمد اناقة بيتك /771173302",
     "location": "المكلا",
-    "status": "قيد التجهيز",
+    "status": "جاهز",
     "receiptMethod": "المحل",
     "driver": "عبدالرحمن باجندوح",
     "driverPhone": "733853185",
@@ -214,7 +214,7 @@
     "customData": {},
     "lastEditBy": "اشرف",
     "updatedAt": "24/11/2026 12:28 PM",
-    "approvalDate": "",
+    "approvalDate": "24/11/2026 12:28 PM",
     "id": "mwuhs71rwez00",
     "createdAt": "24/11/2026 12:28 PM"
   }
