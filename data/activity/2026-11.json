@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwutiaxi4n2hn",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1418",
+    "description": "العميل: همسة فجر اماني سالم محمد باوزير",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "24/11/2026 05:56 PM",
+    "ts": 1795532192982,
+    "month": "2026-11"
+  },
+  {
     "id": "mwuti7k5z99ns",
     "action": "edit-transferred",
     "title": "تعديل مُنقل: 1418",
