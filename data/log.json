@@ -24717,5 +24717,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "24/11/2026 05:56 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1435",
+    "branch": "الرئيسي",
+    "customerId": "mvp1pj0a6g8ha",
+    "customerPhone": "736376131",
+    "customer": "ام سالم العبكري",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:27 PM",
+    "approvalDate": "23/11/2026 08:27 PM",
+    "id": "mwtjgbpez0uxx",
+    "createdAt": "23/11/2026 08:27 PM",
+    "waSentCount": 0,
+    "transferredAt": "24/11/2026 05:04 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "24/11/2026 05:56 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "24/11/2026 05:56 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
