@@ -76,5 +76,24 @@
     "approvalDate": "24/11/2026 07:11 PM",
     "id": "mwuw6rjsgxt9r",
     "createdAt": "24/11/2026 07:11 PM"
+  },
+  {
+    "invoice": "1458",
+    "branch": "الرئيسي",
+    "customerId": "muwxlav0f3z17",
+    "customerPhone": "775073555",
+    "customer": "محمد عبدالله عاطف الكلدي - 775073555",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 07:12 PM",
+    "approvalDate": "24/11/2026 07:12 PM",
+    "id": "mwuw7gs23oa5v",
+    "createdAt": "24/11/2026 07:12 PM"
   }
 ]
