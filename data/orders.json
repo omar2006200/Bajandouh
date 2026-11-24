@@ -74,5 +74,24 @@
     "approvalDate": "24/11/2026 11:37 AM",
     "id": "mwufz5ltt9w1b",
     "createdAt": "24/11/2026 11:37 AM"
+  },
+  {
+    "invoice": "1444",
+    "branch": "الرئيسي",
+    "customerId": "mwufyeu5p9mzf",
+    "customerPhone": "772341113",
+    "customer": "ام عبدالله فوه",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 11:40 AM",
+    "approvalDate": "24/11/2026 11:40 AM",
+    "id": "mwug2g4eh841e",
+    "createdAt": "24/11/2026 11:40 AM"
   }
 ]
