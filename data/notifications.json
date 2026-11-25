@@ -1,5 +1,19 @@
 [
   {
+    "id": "mww8go7h3tve9",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل محمد عبدالله عاطف الكلدي - 775073555",
+    "type": "success",
+    "time": "25/11/2026 05:42 PM",
+    "ts": 1795617777293,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwuw7gs23oa5v",
+    "orderInvoice": "1458"
+  },
+  {
     "id": "mww6g75hddlaw",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل متجر اوليفيا سعيد احمد سعيد البعوض بن",
@@ -3362,22 +3376,5 @@
     "category": "delivery",
     "orderId": "mwgk8fw4wf7pq",
     "orderInvoice": "1231"
-  },
-  {
-    "id": "mwhwdvs3i9pxq",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل محمد ماجد سليمان الجعيدي - خالد بن حترش",
-    "type": "success",
-    "time": "15/11/2026 04:56 PM",
-    "ts": 1794750965283,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwgkl3mjmha6o",
-    "orderInvoice": "1234"
   }
 ]
