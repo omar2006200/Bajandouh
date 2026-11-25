@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwwbhxsfyo3ci",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام اشرف نسرين فؤاد باعباد",
+    "type": "success",
+    "time": "25/11/2026 07:07 PM",
+    "ts": 1795622875215,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwtk9uksp2csz",
+    "orderInvoice": "1439"
+  },
+  {
     "id": "mww8rpk7k91an",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل متجر روز ستور",
@@ -3357,22 +3371,5 @@
     "category": "delivery",
     "orderId": "mwafj2l9yzel7",
     "orderInvoice": "1152"
-  },
-  {
-    "id": "mwhyagun95u8q",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل خالد احمد محمد عتش",
-    "type": "success",
-    "time": "15/11/2026 05:49 PM",
-    "ts": 1794754165199,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwdbh216eijup",
-    "orderInvoice": "1200"
   }
 ]
