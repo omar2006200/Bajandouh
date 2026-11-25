@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwwe71ybwucce",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل منصور سعيد محمد بلبحيث",
+    "type": "success",
+    "time": "25/11/2026 08:23 PM",
+    "ts": 1795627406243,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwkz6ta58wggu",
+    "orderInvoice": "1315"
+  },
+  {
     "id": "mwwe6xoxtax9k",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل جوري عوض محسن محمد المصري",
