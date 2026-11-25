@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe5fqy4fo2q",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1452",
+    "description": "العميل: ليلى حمود حسان مدهش",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:22 PM",
+    "ts": 1795627330810,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe5a42o8kst",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1455",
