@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwvrjc88n4kwo",
+    "action": "add-customer",
+    "title": "إضافة: عمر الدقيل",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "25/11/2026 09:49 AM",
+    "ts": 1795589348264,
+    "month": "2026-11"
+  },
+  {
     "id": "mwvrhi8atu9vs",
     "action": "add-order",
     "title": "طلب جديد: 1465",
