@@ -1,5 +1,17 @@
 [
   {
+    "id": "mww6g75h2wb41",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1429",
+    "description": "العميل: متجر اوليفيا سعيد احمد سعيد البعوض بن",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "25/11/2026 04:46 PM",
+    "ts": 1795614395957,
+    "month": "2026-11"
+  },
+  {
     "id": "mww6fne62eg57",
     "action": "add-order",
     "title": "طلب جديد: 1482",
