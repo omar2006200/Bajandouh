@@ -1267,29 +1267,6 @@
     "receiptStatus": "لا"
   },
   {
-    "invoice": "1403",
-    "branch": "الرئيسي",
-    "customerId": "c92",
-    "customerPhone": "767",
-    "customer": "ام محمد باحكم هناء عبده مبارك علاو",
-    "location": "",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "عمر باحسين",
-    "updatedAt": "22/11/2026 06:58 PM",
-    "approvalDate": "22/11/2026 06:58 PM",
-    "id": "mws0tu90pigqr",
-    "createdAt": "22/11/2026 06:58 PM",
-    "waSentCount": 0,
-    "transferredAt": "23/11/2026 04:50 PM",
-    "transferredBy": "اشرف",
-    "receiptStatus": "لا"
-  },
-  {
     "invoice": "1404",
     "branch": "الرئيسي",
     "customerId": "mv44c5pqnk5hn",
@@ -2068,7 +2045,8 @@
     "createdAt": "25/11/2026 09:44 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1462",
@@ -2090,7 +2068,8 @@
     "createdAt": "25/11/2026 09:45 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1463",
@@ -2112,7 +2091,8 @@
     "createdAt": "25/11/2026 09:46 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1464",
@@ -2134,7 +2114,8 @@
     "createdAt": "25/11/2026 09:47 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1465",
@@ -2156,7 +2137,8 @@
     "createdAt": "25/11/2026 09:47 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1466",
@@ -2178,7 +2160,8 @@
     "createdAt": "25/11/2026 09:49 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1467",
@@ -2200,7 +2183,8 @@
     "createdAt": "25/11/2026 09:50 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1468",
@@ -2222,7 +2206,8 @@
     "createdAt": "25/11/2026 09:51 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1469",
@@ -2244,7 +2229,8 @@
     "createdAt": "25/11/2026 09:52 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1470",
@@ -2266,7 +2252,8 @@
     "createdAt": "25/11/2026 10:30 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1471",
@@ -2288,7 +2275,8 @@
     "createdAt": "25/11/2026 10:31 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1472",
@@ -2310,7 +2298,8 @@
     "createdAt": "25/11/2026 11:04 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1473",
@@ -2332,7 +2321,8 @@
     "createdAt": "25/11/2026 11:05 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1474",
@@ -2354,7 +2344,8 @@
     "createdAt": "25/11/2026 11:35 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1475",
@@ -2376,7 +2367,8 @@
     "createdAt": "25/11/2026 11:36 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1476",
@@ -2398,7 +2390,8 @@
     "createdAt": "25/11/2026 11:42 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1477",
@@ -2420,7 +2413,8 @@
     "createdAt": "25/11/2026 11:48 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1478",
@@ -2442,7 +2436,8 @@
     "createdAt": "25/11/2026 11:50 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1479",
@@ -2464,7 +2459,8 @@
     "createdAt": "25/11/2026 11:52 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   },
   {
     "invoice": "1480",
@@ -2486,6 +2482,7 @@
     "createdAt": "25/11/2026 11:56 AM",
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   }
 ]
