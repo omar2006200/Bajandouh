@@ -25529,5 +25529,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 08:22 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1287",
+    "branch": "الرئيسي",
+    "customerId": "mvj9qgdlsc6lo",
+    "customerPhone": "770677507",
+    "customer": "علوي البرك الحمودي",
+    "location": "حضرموت - سيئون",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب الجعيدي",
+    "driverPhone": "لايوجد",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "17/11/2026 10:02 AM",
+    "approvalDate": "17/11/2026 10:01 AM",
+    "id": "mwkcgsav7pro7",
+    "createdAt": "17/11/2026 10:01 AM",
+    "waSentCount": 0,
+    "transferredAt": "17/11/2026 11:27 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 08:22 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:22 PM",
+    "archivedBy": "المحل"
   }
 ]
