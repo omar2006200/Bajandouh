@@ -169,5 +169,24 @@
     "approvalDate": "25/11/2026 09:52 AM",
     "id": "mwvrnujyqbufq",
     "createdAt": "25/11/2026 09:52 AM"
+  },
+  {
+    "invoice": "1470",
+    "branch": "الرئيسي",
+    "customerId": "mv2jhjggdl8jz",
+    "customerPhone": "781294826",
+    "customer": "ام عيوش العكبري",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 10:30 AM",
+    "approvalDate": "25/11/2026 10:30 AM",
+    "id": "mwvt15j1oe73n",
+    "createdAt": "25/11/2026 10:30 AM"
   }
 ]
