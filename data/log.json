@@ -25176,5 +25176,32 @@
     "receiptUpdatedBy": "اشرف",
     "archivedAt": "24/11/2026 09:01 PM",
     "archivedBy": "اشرف"
+  },
+  {
+    "invoice": "1403",
+    "branch": "الرئيسي",
+    "customerId": "c92",
+    "customerPhone": "767",
+    "customer": "ام محمد باحكم هناء عبده مبارك علاو",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 06:58 PM",
+    "approvalDate": "22/11/2026 06:58 PM",
+    "id": "mws0tu90pigqr",
+    "createdAt": "22/11/2026 06:58 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 12:35 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 12:35 PM",
+    "archivedBy": "المحل"
   }
 ]
