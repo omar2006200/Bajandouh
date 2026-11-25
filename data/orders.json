@@ -40,26 +40,6 @@
     "waSentCount": 0
   },
   {
-    "invoice": "1459",
-    "branch": "الرئيسي",
-    "customerId": "mwuwaq6ekld0d",
-    "customerPhone": "770675381",
-    "customer": "متجر روز ستور",
-    "location": "الريدة الشرقية",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "اشرف",
-    "updatedAt": "24/11/2026 07:14 PM",
-    "approvalDate": "24/11/2026 07:14 PM",
-    "id": "mwuwaycbhf48m",
-    "createdAt": "24/11/2026 07:14 PM",
-    "waSentCount": 0
-  },
-  {
     "invoice": "1460",
     "branch": "الرئيسي",
     "customerId": "mwuy03smgh1g3",
