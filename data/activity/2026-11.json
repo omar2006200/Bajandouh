@@ -1,5 +1,17 @@
 [
   {
+    "id": "mww8rpk7gv838",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1459",
+    "description": "العميل: متجر روز ستور",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "25/11/2026 05:51 PM",
+    "ts": 1795618292263,
+    "month": "2026-11"
+  },
+  {
     "id": "mww8plfbh2dvr",
     "action": "whatsapp-sent",
     "title": "إرسال واتساب: 1459",
