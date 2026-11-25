@@ -1589,29 +1589,6 @@
     "receiptStatus": "لا"
   },
   {
-    "invoice": "1439",
-    "branch": "الرئيسي",
-    "customerId": "c13",
-    "customerPhone": "3346924",
-    "customer": "ام اشرف نسرين فؤاد باعباد",
-    "location": "",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "اشرف",
-    "updatedAt": "23/11/2026 08:50 PM",
-    "approvalDate": "23/11/2026 08:50 PM",
-    "id": "mwtk9uksp2csz",
-    "createdAt": "23/11/2026 08:50 PM",
-    "waSentCount": 0,
-    "transferredAt": "24/11/2026 05:04 PM",
-    "transferredBy": "عمر باحسين",
-    "receiptStatus": "لا"
-  },
-  {
     "invoice": "1440",
     "branch": "الرئيسي",
     "customerId": "mv6fos4g7xfvd",
@@ -2413,6 +2390,7 @@
     "createdAt": "25/11/2026 05:41 PM",
     "transferredAt": "25/11/2026 05:41 PM",
     "transferredBy": "عمر باحسين",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "waSentCount": 0
   }
 ]
