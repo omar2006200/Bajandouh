@@ -25257,5 +25257,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "25/11/2026 04:46 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1458",
+    "branch": "الرئيسي",
+    "customerId": "muwxlav0f3z17",
+    "customerPhone": "775073555",
+    "customer": "محمد عبدالله عاطف الكلدي - 775073555",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 07:12 PM",
+    "approvalDate": "24/11/2026 07:12 PM",
+    "id": "mwuw7gs23oa5v",
+    "createdAt": "24/11/2026 07:12 PM",
+    "waSentCount": 0,
+    "transferredAt": "25/11/2026 11:56 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 05:42 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 05:42 PM",
+    "archivedBy": "المحل"
   }
 ]
