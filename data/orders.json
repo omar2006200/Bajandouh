@@ -25,7 +25,7 @@
     "customerPhone": "778436800",
     "customer": "ام مبارك محمد  مقيطوف",
     "location": "الشحر",
-    "status": "قيد التجهيز",
+    "status": "جاهز",
     "receiptMethod": "موصل",
     "driver": "سامي حيدر",
     "driverPhone": "772974809",
@@ -33,7 +33,7 @@
     "customData": {},
     "lastEditBy": "اشرف",
     "updatedAt": "25/11/2026 11:56 AM",
-    "approvalDate": "",
+    "approvalDate": "25/11/2026 11:56 AM",
     "id": "mwvw2oe6wbdb1",
     "createdAt": "25/11/2026 11:56 AM"
   }
