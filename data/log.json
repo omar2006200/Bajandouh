@@ -25583,5 +25583,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 08:23 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1315",
+    "branch": "الرئيسي",
+    "customerId": "mvfja4wv4bjuc",
+    "customerPhone": "776073454",
+    "customer": "منصور سعيد محمد بلبحيث",
+    "location": "شبوه - عتق",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب باحاج",
+    "driverPhone": "لايوجد",
+    "notes": "مع حق العولقي",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "17/11/2026 08:37 PM",
+    "approvalDate": "17/11/2026 08:37 PM",
+    "id": "mwkz6ta58wggu",
+    "createdAt": "17/11/2026 08:37 PM",
+    "waSentCount": 0,
+    "transferredAt": "18/11/2026 05:09 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 08:23 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:23 PM",
+    "archivedBy": "المحل"
   }
 ]
