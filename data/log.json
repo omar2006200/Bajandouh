@@ -25230,5 +25230,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 04:26 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1429",
+    "branch": "الرئيسي",
+    "customerId": "c139",
+    "customerPhone": "",
+    "customer": "متجر اوليفيا سعيد احمد سعيد البعوض بن",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:21 PM",
+    "approvalDate": "23/11/2026 08:21 PM",
+    "id": "mwtj8upilgzw7",
+    "createdAt": "23/11/2026 08:21 PM",
+    "waSentCount": 0,
+    "transferredAt": "24/11/2026 05:04 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 04:46 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "25/11/2026 04:46 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
