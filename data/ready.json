@@ -86,5 +86,27 @@
     "waSentCount": 0,
     "transferredAt": "25/11/2026 09:49 AM",
     "transferredBy": "اشرف"
+  },
+  {
+    "invoice": "1460",
+    "branch": "الرئيسي",
+    "customerId": "mwuy03smgh1g3",
+    "customerPhone": "779230689",
+    "customer": "ام روى سالم لرضي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 08:02 PM",
+    "approvalDate": "24/11/2026 08:02 PM",
+    "id": "mwuy0a9v0hvss",
+    "createdAt": "24/11/2026 08:02 PM",
+    "waSentCount": 0,
+    "transferredAt": "25/11/2026 09:49 AM",
+    "transferredBy": "اشرف"
   }
 ]
