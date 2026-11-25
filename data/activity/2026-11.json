@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwvxh0k6avwkk",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1403",
+    "description": "العميل: ام محمد باحكم هناء عبده مبارك علاو",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 12:35 PM",
+    "ts": 1795599317526,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwvxe5joev5o7",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 12:33 PM",
+    "ts": 1795599184020,
+    "month": "2026-11"
+  },
+  {
     "id": "mwvw3r4qj90ob",
     "action": "move-transferred",
     "title": "نقل 27 طلب",
