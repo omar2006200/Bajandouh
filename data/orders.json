@@ -136,6 +136,26 @@
     "updatedAt": "24/11/2026 08:02 PM",
     "approvalDate": "24/11/2026 08:02 PM",
     "id": "mwuy0a9v0hvss",
-    "createdAt": "24/11/2026 08:02 PM"
+    "createdAt": "24/11/2026 08:02 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1461",
+    "branch": "الرئيسي",
+    "customerId": "c116",
+    "customerPhone": "772663032",
+    "customer": "متجر ايلا",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 09:44 AM",
+    "approvalDate": "25/11/2026 09:44 AM",
+    "id": "mwvrdqzmzl33a",
+    "createdAt": "25/11/2026 09:44 AM"
   }
 ]
