@@ -1,5 +1,19 @@
 [
   {
+    "id": "mww8fdlcr5lpm",
+    "title": "نقل طلبات",
+    "message": "تم نقل 1 طلب إلى قسم \"التي تم نقلها\"",
+    "type": "info",
+    "time": "25/11/2026 05:41 PM",
+    "ts": 1795617716880,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": null,
+    "orderInvoice": null
+  },
+  {
     "id": "mww8go7h3tve9",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل محمد عبدالله عاطف الكلدي - 775073555",
@@ -3363,22 +3377,5 @@
     "category": "delivery",
     "orderId": "mwg7gxa4ni67j",
     "orderInvoice": "1221"
-  },
-  {
-    "id": "mwhwe9himgsz3",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام ابراهيم  محمد باموسى",
-    "type": "success",
-    "time": "15/11/2026 04:56 PM",
-    "ts": 1794750983046,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwgk8fw4wf7pq",
-    "orderInvoice": "1231"
   }
 ]
