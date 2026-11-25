@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe54c9ucuxo",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1469",
+    "description": "العميل: ام يسلم-ديس المكلا نزهه فؤاد ابوبكر عباد-771509934",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:21 PM",
+    "ts": 1795627316025,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe4uibftvx2",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1471",
