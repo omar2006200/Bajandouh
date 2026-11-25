@@ -1905,10 +1905,12 @@
     "approvalDate": "24/11/2026 07:14 PM",
     "id": "mwuwaycbhf48m",
     "createdAt": "24/11/2026 07:14 PM",
-    "waSentCount": 0,
+    "waSentCount": 1,
     "transferredAt": "25/11/2026 11:56 AM",
     "transferredBy": "اشرف",
-    "receiptStatus": "لا"
+    "receiptStatus": "لا",
+    "lastWaSentAt": "25/11/2026 05:49 PM",
+    "lastWaSentBy": "عمر باحسين"
   },
   {
     "invoice": "1460",
