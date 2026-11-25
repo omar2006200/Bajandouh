@@ -1,5 +1,29 @@
 [
   {
+    "id": "mww5qyh75ud7v",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1468",
+    "description": "العميل: ام محمد بن جوهر",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 04:26 PM",
+    "ts": 1795613218315,
+    "month": "2026-11"
+  },
+  {
+    "id": "mww5qaof9qzr7",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 04:26 PM",
+    "ts": 1795613187471,
+    "month": "2026-11"
+  },
+  {
     "id": "mwvxh0k6avwkk",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1403",
