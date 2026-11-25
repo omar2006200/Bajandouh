@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwvxh0k6onmvr",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام محمد باحكم هناء عبده مبارك علاو",
+    "type": "success",
+    "time": "25/11/2026 12:35 PM",
+    "ts": 1795599317526,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mws0tu90pigqr",
+    "orderInvoice": "1403"
+  },
+  {
     "id": "mwvw3r4qmpht8",
     "title": "نقل طلبات",
     "message": "تم نقل 27 طلب إلى قسم \"التي تم نقلها\"",
@@ -3363,22 +3377,5 @@
     "category": "delivery",
     "orderId": "mw9i7fk3up786",
     "orderInvoice": "1142"
-  },
-  {
-    "id": "mwhg09kt6dl0d",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل احلام الديني",
-    "type": "success",
-    "time": "15/11/2026 09:17 AM",
-    "ts": 1794723456125,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwg7ckkkwz1np",
-    "orderInvoice": "1218"
   }
 ]
