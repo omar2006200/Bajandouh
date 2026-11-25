@@ -1,5 +1,33 @@
 [
   {
+    "id": "mwwe4prmysvi5",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام مبارك محمد  مقيطوف",
+    "type": "success",
+    "time": "25/11/2026 08:21 PM",
+    "ts": 1795627297138,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwvw2oe6wbdb1",
+    "orderInvoice": "1480"
+  },
+  {
+    "id": "mwwe4mj9h26bp",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل علي احمد محمد بن بريك",
+    "type": "success",
+    "time": "25/11/2026 08:21 PM",
+    "ts": 1795627292949,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mww8ewb0k6o78",
+    "orderInvoice": "1485"
+  },
+  {
     "id": "mwwe3v6raffd7",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام بشرى شحير عبدالله مبارك عبدالله الحيقي",
@@ -3350,22 +3378,5 @@
     "category": "delivery",
     "orderId": "mwbsxwju7cp70",
     "orderInvoice": "1170"
-  },
-  {
-    "id": "mwhydlessr6l7",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام حمدان",
-    "type": "success",
-    "time": "15/11/2026 05:51 PM",
-    "ts": 1794754311076,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwbswt96y7lcf",
-    "orderInvoice": "1169"
   }
 ]
