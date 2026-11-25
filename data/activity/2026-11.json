@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe3v6ryi1ht",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1258",
+    "description": "العميل: ام بشرى شحير عبدالله مبارك عبدالله الحيقي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:20 PM",
+    "ts": 1795627257507,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe3i8y0w4ac",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1205",
