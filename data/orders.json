@@ -77,5 +77,24 @@
     "approvalDate": "25/11/2026 05:48 PM",
     "id": "mww8nsnv3z0po",
     "createdAt": "25/11/2026 05:48 PM"
+  },
+  {
+    "invoice": "1487",
+    "branch": "الرئيسي",
+    "customerId": "mw61cik10qskd",
+    "customerPhone": "737743364",
+    "customer": "ام راكان احلام عوض بامحمود",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "25/11/2026 05:52 PM",
+    "approvalDate": "25/11/2026 05:52 PM",
+    "id": "mww8sghp6lkuj",
+    "createdAt": "25/11/2026 05:52 PM"
   }
 ]
