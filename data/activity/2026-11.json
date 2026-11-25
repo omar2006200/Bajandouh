@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe9wyhdy0sk",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1432",
+    "description": "العميل: فاطمة محمد عبدالله القثمي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:25 PM",
+    "ts": 1795627539737,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe95rfy401a",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1472",
