@@ -36,5 +36,24 @@
     "approvalDate": "25/11/2026 04:57 PM",
     "id": "mww6tyv9hncdt",
     "createdAt": "25/11/2026 04:57 PM"
+  },
+  {
+    "invoice": "1484",
+    "branch": "الرئيسي",
+    "customerId": "mv9phrangg7el",
+    "customerPhone": "732027277",
+    "customer": "فاطمه سعيد عبيد بامفلح",
+    "location": "المكلا",
+    "status": "قيد التجهيز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "25/11/2026 04:58 PM",
+    "approvalDate": "",
+    "id": "mww6viib9ao5w",
+    "createdAt": "25/11/2026 04:58 PM"
   }
 ]
