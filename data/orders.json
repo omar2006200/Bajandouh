@@ -195,5 +195,24 @@
     "approvalDate": "25/11/2026 09:46 AM",
     "id": "mwvrfufz3fawf",
     "createdAt": "25/11/2026 09:46 AM"
+  },
+  {
+    "invoice": "1464",
+    "branch": "الرئيسي",
+    "customerId": "c97",
+    "customerPhone": "",
+    "customer": "ام نور النهدي ايمان احمد سالمين بلعفير",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 09:47 AM",
+    "approvalDate": "25/11/2026 09:47 AM",
+    "id": "mwvrglsgnz3o9",
+    "createdAt": "25/11/2026 09:47 AM"
   }
 ]
