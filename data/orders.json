@@ -17,5 +17,24 @@
     "approvalDate": "25/11/2026 11:52 AM",
     "id": "mwvvyd8r1sufw",
     "createdAt": "25/11/2026 11:52 AM"
+  },
+  {
+    "invoice": "1480",
+    "branch": "الرئيسي",
+    "customerId": "mwvw2c4ltf13m",
+    "customerPhone": "778436800",
+    "customer": "ام مبارك محمد  مقيطوف",
+    "location": "الشحر",
+    "status": "قيد التجهيز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "الشحر",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 11:56 AM",
+    "approvalDate": "",
+    "id": "mwvw2oe6wbdb1",
+    "createdAt": "25/11/2026 11:56 AM"
   }
 ]
