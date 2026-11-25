@@ -25637,5 +25637,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 08:23 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1395",
+    "branch": "الرئيسي",
+    "customerId": "muz9aoqbnvvrn",
+    "customerPhone": "776497405",
+    "customer": "ام ابراهيم  محمد باموسى",
+    "location": "فوة",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "22/11/2026 11:40 AM",
+    "approvalDate": "22/11/2026 11:40 AM",
+    "id": "mwrl6sjbocmee",
+    "createdAt": "22/11/2026 11:40 AM",
+    "transferredAt": "22/11/2026 11:52 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "waSentCount": 0,
+    "receiptUpdatedAt": "25/11/2026 08:23 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:23 PM",
+    "archivedBy": "المحل"
   }
 ]
