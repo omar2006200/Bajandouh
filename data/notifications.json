@@ -3334,22 +3334,5 @@
     "category": "delivery",
     "orderId": "mwgjuki5ftt1y",
     "orderInvoice": "1230"
-  },
-  {
-    "id": "mwivhaxv7orpn",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام احمد وادي عمد",
-    "type": "success",
-    "time": "16/11/2026 09:18 AM",
-    "ts": 1794809911459,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1"
-    ],
-    "category": "delivery",
-    "orderId": "mwgm4caokk3wo",
-    "orderInvoice": "1238"
   }
 ]
