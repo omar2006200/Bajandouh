@@ -1,5 +1,29 @@
 [
   {
+    "id": "mww8go7h0pvej",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1458",
+    "description": "العميل: محمد عبدالله عاطف الكلدي - 775073555",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 05:42 PM",
+    "ts": 1795617777293,
+    "month": "2026-11"
+  },
+  {
+    "id": "mww8djzr8u39a",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 05:40 PM",
+    "ts": 1795617631863,
+    "month": "2026-11"
+  },
+  {
     "id": "mww71sjet0nu5",
     "action": "change-status",
     "title": "تغيير حالة: 1484",
