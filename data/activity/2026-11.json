@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe69u4k85ym",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1287",
+    "description": "العميل: علوي البرك الحمودي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:22 PM",
+    "ts": 1795627369804,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe5fqy4fo2q",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1452",
