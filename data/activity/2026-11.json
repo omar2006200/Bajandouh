@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwvw2c4lpgd7t",
+    "action": "add-customer",
+    "title": "إضافة: ام مبارك محمد  مقيطوف",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "25/11/2026 11:55 AM",
+    "ts": 1795596953061,
+    "month": "2026-11"
+  },
+  {
     "id": "mwvvyd8rsmf0m",
     "action": "add-order",
     "title": "طلب جديد: 1479",
