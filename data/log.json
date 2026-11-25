@@ -25556,5 +25556,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 08:22 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1282",
+    "branch": "الرئيسي",
+    "customerId": "mwjim72odqt1i",
+    "customerPhone": "781156473",
+    "customer": "جوري عوض محسن محمد المصري",
+    "location": "شبوه",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب باحاج",
+    "driverPhone": "لايوجد",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "16/11/2026 08:08 PM",
+    "approvalDate": "16/11/2026 08:08 PM",
+    "id": "mwjimt6fm4w2l",
+    "createdAt": "16/11/2026 08:06 PM",
+    "waSentCount": 0,
+    "transferredAt": "17/11/2026 11:27 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 08:23 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:23 PM",
+    "archivedBy": "المحل"
   }
 ]
