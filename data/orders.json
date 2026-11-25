@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "invoice": "1479",
+    "branch": "الرئيسي",
+    "customerId": "muy9jfbgzbsom",
+    "customerPhone": "771425685",
+    "customer": "سعيد صالح عبود باموسي - 771425685",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 11:52 AM",
+    "approvalDate": "25/11/2026 11:52 AM",
+    "id": "mwvvyd8r1sufw",
+    "createdAt": "25/11/2026 11:52 AM"
+  }
+]
