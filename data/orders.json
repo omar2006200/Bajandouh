@@ -58,24 +58,5 @@
     "id": "mww6viib9ao5w",
     "createdAt": "25/11/2026 04:58 PM",
     "waSentCount": 0
-  },
-  {
-    "invoice": "1485",
-    "branch": "الرئيسي",
-    "customerId": "mvrtq2x292agi",
-    "customerPhone": "773324724",
-    "customer": "علي احمد محمد بن بريك",
-    "location": "الشحر",
-    "status": "جاهز",
-    "receiptMethod": "موصل",
-    "driver": "سامي حيدر",
-    "driverPhone": "772974809",
-    "notes": "كرتون وسله",
-    "customData": {},
-    "lastEditBy": "عمر باحسين",
-    "updatedAt": "25/11/2026 05:41 PM",
-    "approvalDate": "25/11/2026 05:41 PM",
-    "id": "mww8ewb0k6o78",
-    "createdAt": "25/11/2026 05:41 PM"
   }
 ]
