@@ -25610,5 +25610,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "25/11/2026 08:23 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1316",
+    "branch": "الرئيسي",
+    "customerId": "c118",
+    "customerPhone": "776805923",
+    "customer": "احمد علي احمد العولقي",
+    "location": "شبوه -عتق",
+    "status": "جاهز",
+    "receiptMethod": "مكتب",
+    "driver": "مكتب باحاج",
+    "driverPhone": "لايوجد",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "17/11/2026 08:39 PM",
+    "approvalDate": "17/11/2026 08:39 PM",
+    "id": "mwkz9dr8wh3o0",
+    "createdAt": "17/11/2026 08:39 PM",
+    "waSentCount": 0,
+    "transferredAt": "18/11/2026 05:09 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 08:23 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:23 PM",
+    "archivedBy": "المحل"
   }
 ]
