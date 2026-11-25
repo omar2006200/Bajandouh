@@ -207,5 +207,24 @@
     "approvalDate": "25/11/2026 10:31 AM",
     "id": "mwvt2brikak2v",
     "createdAt": "25/11/2026 10:31 AM"
+  },
+  {
+    "invoice": "1472",
+    "branch": "الرئيسي",
+    "customerId": "c171",
+    "customerPhone": "",
+    "customer": "ام ابراهيم ابراهيم محمد احمد باجندوح",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 11:04 AM",
+    "approvalDate": "25/11/2026 11:04 AM",
+    "id": "mwvu7uw6j28pi",
+    "createdAt": "25/11/2026 11:04 AM"
   }
 ]
