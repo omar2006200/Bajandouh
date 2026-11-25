@@ -8,7 +8,9 @@
     "ts": 1795599317526,
     "createdBy": "المحل",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mws0tu90pigqr",
     "orderInvoice": "1403"
@@ -22,7 +24,9 @@
     "ts": 1795597019162,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": null,
     "orderInvoice": null
@@ -36,7 +40,9 @@
     "ts": 1795543298262,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwufz5ltt9w1b",
     "orderInvoice": "1445"
@@ -50,7 +56,9 @@
     "ts": 1795543295421,
     "createdBy": "اشرف",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwnssg13ghkn6",
     "orderInvoice": "1356"
