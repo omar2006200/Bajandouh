@@ -8,7 +8,9 @@
     "ts": 1795622875215,
     "createdBy": "المحل",
     "deletedBy": [],
-    "readBy": [],
+    "readBy": [
+      "عمر باحسين"
+    ],
     "category": "delivery",
     "orderId": "mwtk9uksp2csz",
     "orderInvoice": "1439"
