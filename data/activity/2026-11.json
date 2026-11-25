@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwwe7hmwqskxb",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1395",
+    "description": "العميل: ام ابراهيم  محمد باموسى",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:23 PM",
+    "ts": 1795627426568,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwwe776tj7c99",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1316",
+    "description": "العميل: احمد علي احمد العولقي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:23 PM",
+    "ts": 1795627413029,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe71ybh0yn5",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1315",
