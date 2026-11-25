@@ -116,6 +116,26 @@
     "updatedAt": "25/11/2026 06:36 PM",
     "approvalDate": "25/11/2026 06:36 PM",
     "id": "mwwae4zc2k40x",
-    "createdAt": "25/11/2026 06:36 PM"
+    "createdAt": "25/11/2026 06:36 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1489",
+    "branch": "الرئيسي",
+    "customerId": "mvp1llj4s70f3",
+    "customerPhone": "7729111411",
+    "customer": "متجر لبسي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "3اكياس+ سله صحون",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "25/11/2026 07:21 PM",
+    "approvalDate": "25/11/2026 07:21 PM",
+    "id": "mwwbyu3opkm0c",
+    "createdAt": "25/11/2026 07:21 PM"
   }
 ]
