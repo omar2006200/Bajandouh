@@ -1,5 +1,29 @@
 [
   {
+    "id": "mww6fffdjgnoc",
+    "action": "add-customer",
+    "title": "إضافة: صالح عبدالله صالح الجعيدي",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "25/11/2026 04:46 PM",
+    "ts": 1795614360025,
+    "month": "2026-11"
+  },
+  {
+    "id": "mww6c9rv9gb65",
+    "action": "login",
+    "title": "تسجيل دخول: عمر باحسين",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "25/11/2026 04:43 PM",
+    "ts": 1795614212731,
+    "month": "2026-11"
+  },
+  {
     "id": "mww5qyh75ud7v",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1468",
