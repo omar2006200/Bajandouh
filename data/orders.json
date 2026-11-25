@@ -157,5 +157,24 @@
     "approvalDate": "25/11/2026 09:44 AM",
     "id": "mwvrdqzmzl33a",
     "createdAt": "25/11/2026 09:44 AM"
+  },
+  {
+    "invoice": "1462",
+    "branch": "الرئيسي",
+    "customerId": "mv6af04u3pzqu",
+    "customerPhone": "739387446",
+    "customer": "صالح عوض بابقي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 09:45 AM",
+    "approvalDate": "25/11/2026 09:45 AM",
+    "id": "mwvremvkkka43",
+    "createdAt": "25/11/2026 09:45 AM"
   }
 ]
