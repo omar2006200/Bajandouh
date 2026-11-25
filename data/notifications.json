@@ -1,5 +1,19 @@
 [
   {
+    "id": "mww6g75hddlaw",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل متجر اوليفيا سعيد احمد سعيد البعوض بن",
+    "type": "success",
+    "time": "25/11/2026 04:46 PM",
+    "ts": 1795614395957,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwtj8upilgzw7",
+    "orderInvoice": "1429"
+  },
+  {
     "id": "mww5qyh7nniu2",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام محمد بن جوهر",
@@ -3365,22 +3379,5 @@
     "category": "delivery",
     "orderId": "mwgkl3mjmha6o",
     "orderInvoice": "1234"
-  },
-  {
-    "id": "mwhwdbal5r508",
-    "title": "نقل طلبات",
-    "message": "تم نقل 18 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "15/11/2026 04:55 PM",
-    "ts": 1794750938733,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
   }
 ]
