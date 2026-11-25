@@ -188,5 +188,24 @@
     "approvalDate": "25/11/2026 10:30 AM",
     "id": "mwvt15j1oe73n",
     "createdAt": "25/11/2026 10:30 AM"
+  },
+  {
+    "invoice": "1471",
+    "branch": "الرئيسي",
+    "customerId": "mv6woz8ie7egs",
+    "customerPhone": "770272827",
+    "customer": "زكريا جمعان سعيد جنبين",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 10:31 AM",
+    "approvalDate": "25/11/2026 10:31 AM",
+    "id": "mwvt2brikak2v",
+    "createdAt": "25/11/2026 10:31 AM"
   }
 ]
