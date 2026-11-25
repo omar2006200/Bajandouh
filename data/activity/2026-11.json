@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe5a42o8kst",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1455",
+    "description": "العميل: العنود القميشي ام ليان",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:22 PM",
+    "ts": 1795627323506,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwe54c9ucuxo",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1469",
