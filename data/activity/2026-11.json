@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwwe3i8y0w4ac",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1205",
+    "description": "العميل: ام عبدالله نواف",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "25/11/2026 08:20 PM",
+    "ts": 1795627240738,
+    "month": "2026-11"
+  },
+  {
     "id": "mwwd5fjfjj0qb",
     "action": "add-order",
     "title": "طلب جديد: 1493",
