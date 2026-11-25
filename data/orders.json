@@ -226,5 +226,24 @@
     "approvalDate": "25/11/2026 11:04 AM",
     "id": "mwvu7uw6j28pi",
     "createdAt": "25/11/2026 11:04 AM"
+  },
+  {
+    "invoice": "1473",
+    "branch": "الرئيسي",
+    "customerId": "c188",
+    "customerPhone": "773465216",
+    "customer": "عمر ابراهيم سبيت صحاليل",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "2 كرتون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 11:05 AM",
+    "approvalDate": "25/11/2026 11:05 AM",
+    "id": "mwvu9nctxs1rx",
+    "createdAt": "25/11/2026 11:05 AM"
   }
 ]
