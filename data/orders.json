@@ -1,25 +1,5 @@
 [
   {
-    "invoice": "1454",
-    "branch": "الرئيسي",
-    "customerId": "mv5goyz34a0xb",
-    "customerPhone": "781193807",
-    "customer": "ام طلال",
-    "location": "المكلا",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "اشرف",
-    "updatedAt": "24/11/2026 06:00 PM",
-    "approvalDate": "24/11/2026 06:00 PM",
-    "id": "mwutmwtwx03um",
-    "createdAt": "24/11/2026 06:00 PM",
-    "waSentCount": 0
-  },
-  {
     "invoice": "1455",
     "branch": "الرئيسي",
     "customerId": "mvz05hc2g8tr2",
