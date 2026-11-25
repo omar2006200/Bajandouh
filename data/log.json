@@ -25313,5 +25313,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "25/11/2026 05:51 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1205",
+    "branch": "الرئيسي",
+    "customerId": "mvc578bmhmrhv",
+    "customerPhone": "738432371",
+    "customer": "ام عبدالله نواف",
+    "location": "غيل باوزير",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "عبدالله باوزير",
+    "driverPhone": "771317281",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "12/11/2026 07:44 PM",
+    "approvalDate": "12/11/2026 07:44 PM",
+    "id": "mwds3c45j56ki",
+    "createdAt": "12/11/2026 07:44 PM",
+    "waSentCount": 0,
+    "transferredAt": "14/11/2026 12:51 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "25/11/2026 08:20 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "25/11/2026 08:20 PM",
+    "archivedBy": "المحل"
   }
 ]
