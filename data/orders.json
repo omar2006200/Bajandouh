@@ -56,6 +56,26 @@
     "updatedAt": "26/11/2026 07:16 PM",
     "approvalDate": "26/11/2026 07:16 PM",
     "id": "mwxr8qxhpkjt6",
-    "createdAt": "26/11/2026 07:16 PM"
+    "createdAt": "26/11/2026 07:16 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1509",
+    "branch": "الرئيسي",
+    "customerId": "c123",
+    "customerPhone": "771596075",
+    "customer": "عوض حاج عوض باصلعه",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "26/11/2026 07:52 PM",
+    "approvalDate": "26/11/2026 07:52 PM",
+    "id": "mwxsjqakup4vh",
+    "createdAt": "26/11/2026 07:52 PM"
   }
 ]
