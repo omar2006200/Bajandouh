@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxmhvt1xxv6q",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1392",
+    "description": "العميل: هشام محمد",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:03 PM",
+    "ts": 1795701814597,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmgz7pbpkyw",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1396",
