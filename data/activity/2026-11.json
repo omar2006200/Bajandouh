@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxlbfdgez6fa",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1465",
+    "description": "العميل: ام علي عبدالرحمن بامخرمه",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:30 PM",
+    "ts": 1795699833748,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxlapaienzra",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:29 PM",
+    "ts": 1795699799946,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxau0djw75cm",
     "action": "delete-order",
     "title": "حذف: 1501",
