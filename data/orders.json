@@ -131,5 +131,24 @@
     "approvalDate": "26/11/2026 11:04 AM",
     "id": "mwx9o8t8s7n6p",
     "createdAt": "26/11/2026 11:04 AM"
+  },
+  {
+    "invoice": "1503",
+    "branch": "الرئيسي",
+    "customerId": "c80",
+    "customerPhone": "770662178",
+    "customer": "ورده الكثيري",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 11:17 AM",
+    "approvalDate": "26/11/2026 11:17 AM",
+    "id": "mwxa4woezw00w",
+    "createdAt": "26/11/2026 11:17 AM"
   }
 ]
