@@ -25907,5 +25907,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:46 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1009",
+    "branch": "الرئيسي",
+    "customerId": "mvw4zob26cl0z",
+    "customerPhone": "736043767",
+    "customer": "ام كيان",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "03/11/2026 06:31 PM",
+    "approvalDate": "03/11/2026 06:31 PM",
+    "id": "mw0uioekcd6r2",
+    "createdAt": "03/11/2026 06:31 PM",
+    "waSentCount": 0,
+    "transferredAt": "04/11/2026 05:56 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:47 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:47 PM",
+    "archivedBy": "المحل"
   }
 ]
