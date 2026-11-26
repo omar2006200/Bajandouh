@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxqsziag2vhx",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل صالح عبدالله صالح الجعيدي",
+    "type": "success",
+    "time": "26/11/2026 07:04 PM",
+    "ts": 1795709051074,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mww6fne6q8vqt",
+    "orderInvoice": "1482"
+  },
+  {
     "id": "mwxqsoioongoh",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل عمار خالد عوض باحشوان متجر الوتين",
@@ -3271,23 +3285,5 @@
     "category": "delivery",
     "orderId": "mwkwiuy3m9rnz",
     "orderInvoice": "1303"
-  },
-  {
-    "id": "mwm775kv6b5ph",
-    "title": "نقل طلبات",
-    "message": "تم نقل 29 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "18/11/2026 05:09 PM",
-    "ts": 1795010991871,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1",
-      "المحل"
-    ],
-    "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
   }
 ]
