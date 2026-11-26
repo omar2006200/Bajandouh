@@ -26204,5 +26204,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:51 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1419",
+    "branch": "الرئيسي",
+    "customerId": "c24",
+    "customerPhone": "",
+    "customer": "متجر روزا عماد مسعد راجح عبده محمد ال",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس + سلة",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 11:31 AM",
+    "approvalDate": "23/11/2026 11:31 AM",
+    "id": "mwt0bci7v3f1x",
+    "createdAt": "23/11/2026 11:31 AM",
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:51 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:51 PM",
+    "archivedBy": "المحل"
   }
 ]
