@@ -17,5 +17,24 @@
     "approvalDate": "26/11/2026 10:13 AM",
     "id": "mwx7ut8ixch8m",
     "createdAt": "26/11/2026 10:13 AM"
+  },
+  {
+    "invoice": "1495",
+    "branch": "الرئيسي",
+    "customerId": "c174",
+    "customerPhone": "774093208",
+    "customer": "احمد انيس منى سالم فرج مرعي بن طالب",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "مهدي برعود",
+    "driverPhone": "772778249",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 10:15 AM",
+    "approvalDate": "26/11/2026 10:15 AM",
+    "id": "mwx7ws7zzdepp",
+    "createdAt": "26/11/2026 10:15 AM"
   }
 ]
