@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxln5kvwmtmw",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1506",
+    "description": "العميل: ام يحيى بفلح",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 04:39 PM",
+    "ts": 1795700380927,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxlll6ck2b6e",
     "action": "move-transferred",
     "title": "نقل 19 طلب",
