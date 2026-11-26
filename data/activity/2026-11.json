@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxm7qyihoq0l",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1450",
+    "description": "العميل: متجر ام محمد اناقة بيتك /771173302",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:55 PM",
+    "ts": 1795701341754,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxm7iffu6sp3",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1453",
+    "description": "العميل: سيف علي دعدع الخليفي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:55 PM",
+    "ts": 1795701330699,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm75mhvr12g",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1463",
