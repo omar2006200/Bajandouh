@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxm4nd6wv7kv",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1430",
+    "description": "العميل: ام احمد شهاب مهاء عبدالله محمد بامثقال",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:53 PM",
+    "ts": 1795701197130,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm3wvcrrvlw",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1422",
