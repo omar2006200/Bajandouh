@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqrc3v6efdt",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1378",
+    "description": "العميل: خالد سالم رجاء سالم عبيد سليم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:02 PM",
+    "ts": 1795708974091,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqr46g00d03",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1397",
