@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxme9q6mci17",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1451",
+    "description": "العميل: محمد عاشور سالم العاس",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:00 PM",
+    "ts": 1795701646014,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmdsx2hns1x",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1479",
