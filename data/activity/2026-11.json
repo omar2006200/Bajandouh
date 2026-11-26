@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxpijvnbtiye",
+    "action": "add-order",
+    "title": "طلب جديد: 01506",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 06:28 PM",
+    "ts": 1795706884643,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxpdzvbi9s2e",
+    "action": "login",
+    "title": "تسجيل دخول: عمر باحسين",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 06:24 PM",
+    "ts": 1795706672087,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmtqqqxr9zc",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1291",
