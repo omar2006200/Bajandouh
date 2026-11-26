@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqrki95pkb3",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1259",
+    "description": "العميل: متجر نور الكثيري",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:03 PM",
+    "ts": 1795708984977,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqrc3v6efdt",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1378",
