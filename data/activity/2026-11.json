@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxqsziawokfk",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1482",
+    "description": "العميل: صالح عبدالله صالح الجعيدي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:04 PM",
+    "ts": 1795709051074,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxqsoioydgtr",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1478",
+    "description": "العميل: عمار خالد عوض باحشوان متجر الوتين",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:03 PM",
+    "ts": 1795709036832,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqsdk0tntwj",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1447",
