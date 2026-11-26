@@ -1,5 +1,53 @@
 [
   {
+    "id": "mwxm75mhvr12g",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1463",
+    "description": "العميل: عمر خالد سعيد بن عبدات",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:55 PM",
+    "ts": 1795701314105,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxm6t7zadq61",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1467",
+    "description": "العميل: ام امير حبيبة عمر محمد احمد الجفري عم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:54 PM",
+    "ts": 1795701298031,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxm6ltmgwxkg",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1473",
+    "description": "العميل: عمر ابراهيم سبيت صحاليل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:54 PM",
+    "ts": 1795701288442,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxm6e8hxyfkn",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1475",
+    "description": "العميل: جمعان عوض حيتر",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:54 PM",
+    "ts": 1795701278609,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm4zb84vr1d",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1437",
