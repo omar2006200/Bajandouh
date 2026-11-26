@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxmgz7pbpkyw",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1396",
+    "description": "العميل: ام صلاح بلعفير",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:02 PM",
+    "ts": 1795701772357,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmgma6bbaie",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1389",
