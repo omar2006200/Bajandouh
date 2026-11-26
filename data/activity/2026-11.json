@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqirr5xvt4i",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1351",
+    "description": "العميل: ام سياف الحداد صابرين صالح باهميم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:56 PM",
+    "ts": 1795708574465,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxpvitpm5jsr",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1488",
