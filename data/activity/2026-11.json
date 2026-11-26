@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxau0djw75cm",
+    "action": "delete-order",
+    "title": "حذف: 1501",
+    "description": "",
+    "type": "danger",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "26/11/2026 11:37 AM",
+    "ts": 1795682224999,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxatrrv81hui",
     "action": "return-single",
     "title": "إرجاع: 1501",
