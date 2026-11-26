@@ -303,27 +303,6 @@
     "transferredBy": "اشرف"
   },
   {
-    "invoice": "1501",
-    "branch": "الرئيسي",
-    "customerId": "mvhpnkhbrajde",
-    "customerPhone": "770360586",
-    "customer": "عمر سالم محمد باوزير",
-    "location": "غيل باوزير",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "اشرف",
-    "updatedAt": "26/11/2026 11:01 AM",
-    "approvalDate": "26/11/2026 11:01 AM",
-    "id": "mwx9kquev12ce",
-    "createdAt": "26/11/2026 11:01 AM",
-    "transferredAt": "26/11/2026 11:36 AM",
-    "transferredBy": "اشرف"
-  },
-  {
     "invoice": "1502",
     "branch": "الرئيسي",
     "customerId": "mvhpnkhbrajde",
