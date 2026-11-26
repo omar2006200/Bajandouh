@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqr46g00d03",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1397",
+    "description": "العميل: ام ريان احمد محمد بارشيد",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:02 PM",
+    "ts": 1795708963816,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqqovcqxb0a",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1354",
