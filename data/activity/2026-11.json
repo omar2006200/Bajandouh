@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxlx3cgd1uf6",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1009",
+    "description": "العميل: ام كيان",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:47 PM",
+    "ts": 1795700844592,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxlw8f5jusut",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1304",
