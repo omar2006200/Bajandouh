@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxae0qp6pne4",
+    "action": "add-order",
+    "title": "طلب جديد: 1505",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "26/11/2026 11:24 AM",
+    "ts": 1795681478977,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxa7u3ad7nop",
     "action": "edit-order",
     "title": "تعديل: 1504",
