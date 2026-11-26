@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxpvitpuuwyc",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل سعيد صالح سعيد هلال",
+    "type": "success",
+    "time": "26/11/2026 06:38 PM",
+    "ts": 1795707489805,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwwae4zc2k40x",
+    "orderInvoice": "1488"
+  },
+  {
     "id": "mwxpvcbrwpv33",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل احمد انيس منى سالم فرج مرعي بن طالب",
