@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqtdnmw5skk",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1483",
+    "description": "العميل: ام فرح باوزير مروان محمد مبارك باوزير",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:04 PM",
+    "ts": 1795709069410,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqsziawokfk",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1482",
