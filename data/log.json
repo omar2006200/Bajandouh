@@ -26258,5 +26258,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:52 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1430",
+    "branch": "الرئيسي",
+    "customerId": "c64",
+    "customerPhone": "7",
+    "customer": "ام احمد شهاب مهاء عبدالله محمد بامثقال",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:22 PM",
+    "approvalDate": "23/11/2026 08:22 PM",
+    "id": "mwtj9qlgkjre0",
+    "createdAt": "23/11/2026 08:22 PM",
+    "waSentCount": 0,
+    "transferredAt": "24/11/2026 05:04 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:53 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:53 PM",
+    "archivedBy": "المحل"
   }
 ]
