@@ -26825,5 +26825,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "26/11/2026 05:12 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1456",
+    "branch": "الرئيسي",
+    "customerId": "c23",
+    "customerPhone": "776072272",
+    "customer": "عبدالله محمد عمر البيتي",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "24/11/2026 07:10 PM",
+    "approvalDate": "24/11/2026 07:10 PM",
+    "id": "mwuw5af17n4a6",
+    "createdAt": "24/11/2026 07:10 PM",
+    "waSentCount": 0,
+    "transferredAt": "25/11/2026 11:56 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 06:37 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 06:37 PM",
+    "archivedBy": "المحل"
   }
 ]
