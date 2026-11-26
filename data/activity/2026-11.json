@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxlzga98h9vi",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1338",
+    "description": "العميل: ام دعاء",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:49 PM",
+    "ts": 1795700954673,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxlyz2gm5f80",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1366",
