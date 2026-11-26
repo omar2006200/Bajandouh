@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxm1ulkdu26q",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1404",
+    "description": "العميل: محمد عرم ( مالك بن دهري",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:51 PM",
+    "ts": 1795701066536,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxm1gd8mnec2",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1400",
+    "description": "العميل: ام احمد الصيعري",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:50 PM",
+    "ts": 1795701048092,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm01e933vgd",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1375",
