@@ -1,5 +1,41 @@
 [
   {
+    "id": "mwxpuoc4i5qny",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1504",
+    "description": "العميل: سميه محمد الكثيري",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:37 PM",
+    "ts": 1795707450292,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxpug6lnnmwq",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1456",
+    "description": "العميل: عبدالله محمد عمر البيتي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:37 PM",
+    "ts": 1795707439725,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxpu5if4yrzi",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:37 PM",
+    "ts": 1795707425895,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxpngznx4tz6",
     "action": "add-order",
     "title": "طلب جديد: 1507",
