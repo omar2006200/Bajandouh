@@ -26771,5 +26771,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 05:05 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1328",
+    "branch": "الرئيسي",
+    "customerId": "c90",
+    "customerPhone": "",
+    "customer": "ام عبدالله بن عمرو صفاء حسين محسن الع",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "18/11/2026 11:57 AM",
+    "approvalDate": "18/11/2026 11:56 AM",
+    "id": "mwlw00bh99d31",
+    "createdAt": "18/11/2026 11:56 AM",
+    "transferredAt": "18/11/2026 05:09 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 05:06 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 05:06 PM",
+    "archivedBy": "المحل"
   }
 ]
