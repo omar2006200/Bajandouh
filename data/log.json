@@ -27500,5 +27500,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 07:02 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1354",
+    "branch": "الرئيسي",
+    "customerId": "mvhuz1z7j87wh",
+    "customerPhone": "776047332",
+    "customer": "ام رنا باعيسى منار عدنان بافنع",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "كيس تسليمه بيده",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "19/11/2026 07:49 PM",
+    "approvalDate": "19/11/2026 07:49 PM",
+    "id": "mwnsbu7eik5c5",
+    "createdAt": "19/11/2026 07:49 PM",
+    "waSentCount": 0,
+    "transferredAt": "21/11/2026 04:43 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 07:02 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 07:02 PM",
+    "archivedBy": "المحل"
   }
 ]
