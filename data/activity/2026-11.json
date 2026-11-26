@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxqsdk0tntwj",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1447",
+    "description": "العميل: محمد ماجد سليمان الجعيدي - خالد بن حترش",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:03 PM",
+    "ts": 1795709022624,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxqrx3cmaf3n",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1431",
+    "description": "العميل: شيماء صلاح مبارك غصان",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:03 PM",
+    "ts": 1795709001288,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqrki95pkb3",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1259",
