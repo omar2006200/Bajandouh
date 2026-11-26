@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxmddryn6jr9",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام سعيد فهد الكثيري",
+    "type": "success",
+    "time": "26/11/2026 05:00 PM",
+    "ts": 1795701604606,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwvvc0p3w54hv",
+    "orderInvoice": "1474"
+  },
+  {
     "id": "mwxm7qyitb7pa",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل متجر ام محمد اناقة بيتك /771173302",
@@ -3363,23 +3377,5 @@
     "category": "delivery",
     "orderId": "mwcdittpwo24g",
     "orderInvoice": "1188"
-  },
-  {
-    "id": "mwkcj9tzrzm2o",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل متجر كرز - احمد باشعيب",
-    "type": "success",
-    "time": "17/11/2026 10:03 AM",
-    "ts": 1794899022983,
-    "createdBy": "المحل",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwcd5bf6px4cq",
-    "orderInvoice": "1184"
   }
 ]
