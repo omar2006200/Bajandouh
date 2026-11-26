@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxtulpli18qc",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1470",
+    "description": "العميل: ام عيوش العكبري",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 08:29 PM",
+    "ts": 1795714165353,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxsjqakqsk25",
     "action": "add-order",
     "title": "طلب جديد: 1509",
