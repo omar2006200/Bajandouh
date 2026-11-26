@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxqwkdt71pne",
+    "action": "logout",
+    "title": "خروج: عمر باحسين",
+    "description": "",
+    "type": "info",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 07:06 PM",
+    "ts": 1795709218097,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxqvxhbkhp8q",
+    "action": "login",
+    "title": "تسجيل دخول: عمر باحسين",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 07:06 PM",
+    "ts": 1795709188415,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqtdnmw5skk",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1483",
