@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqohygqzjd8",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1277",
+    "description": "العميل: ام ماريا بامسعود - نسرين احمد سهل بامسعود",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:00 PM",
+    "ts": 1795708841704,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqoanqk8ts5",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1273",
