@@ -26231,5 +26231,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:51 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1422",
+    "branch": "الرئيسي",
+    "customerId": "mwt0imvq5l814",
+    "customerPhone": "776493344",
+    "customer": "ام انهار نزهه خالد محمد عبدالله بن سليم",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 11:37 AM",
+    "approvalDate": "23/11/2026 11:37 AM",
+    "id": "mwt0ituo9kw2h",
+    "createdAt": "23/11/2026 11:37 AM",
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:52 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:52 PM",
+    "archivedBy": "المحل"
   }
 ]
