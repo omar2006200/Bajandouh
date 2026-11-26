@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxqnm6xkh6qf",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1412",
+    "description": "العميل: ام مروى",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:00 PM",
+    "ts": 1795708800537,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxqnjkqv1ffk",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1137",
+    "description": "العميل: ام مروى",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:59 PM",
+    "ts": 1795708797146,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqmxe9hm2w2",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1121",
