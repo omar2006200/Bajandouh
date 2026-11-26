@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxpvcbrwpv33",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل احمد انيس منى سالم فرج مرعي بن طالب",
+    "type": "success",
+    "time": "26/11/2026 06:38 PM",
+    "ts": 1795707481383,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwx7ws7zzdepp",
+    "orderInvoice": "1495"
+  },
+  {
     "id": "mwxpv432juh64",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل اماني عمر  مبارك بن عويد",
@@ -3369,23 +3383,5 @@
     "category": "delivery",
     "orderId": "mwj0ecrztm5ci",
     "orderInvoice": "1271"
-  },
-  {
-    "id": "mwkcnyfkqrdsn",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل عوض مبروك اليزيدي",
-    "type": "success",
-    "time": "17/11/2026 10:07 AM",
-    "ts": 1794899241488,
-    "createdBy": "المحل",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1",
-      "اشرف"
-    ],
-    "category": "delivery",
-    "orderId": "mwhkun34krq9v",
-    "orderInvoice": "1248"
   }
 ]
