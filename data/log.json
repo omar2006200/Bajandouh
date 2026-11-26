@@ -26609,5 +26609,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 05:02 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1392",
+    "branch": "الرئيسي",
+    "customerId": "mwrk16a0qyxwh",
+    "customerPhone": "770748548",
+    "customer": "هشام محمد",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "22/11/2026 11:08 AM",
+    "approvalDate": "22/11/2026 11:08 AM",
+    "id": "mwrk1dlhhcuwl",
+    "createdAt": "22/11/2026 11:08 AM",
+    "transferredAt": "22/11/2026 11:52 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "waSentCount": 0,
+    "receiptUpdatedAt": "26/11/2026 05:03 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 05:03 PM",
+    "archivedBy": "المحل"
   }
 ]
