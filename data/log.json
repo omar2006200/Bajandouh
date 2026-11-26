@@ -26285,5 +26285,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:53 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1437",
+    "branch": "الرئيسي",
+    "customerId": "mw614zmbyvfaq",
+    "customerPhone": "779498105",
+    "customer": "ام نواف بن مخاشن",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "23/11/2026 08:30 PM",
+    "approvalDate": "23/11/2026 08:29 PM",
+    "id": "mwtjjpem3gygk",
+    "createdAt": "23/11/2026 08:29 PM",
+    "waSentCount": 0,
+    "transferredAt": "24/11/2026 05:04 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:53 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:53 PM",
+    "archivedBy": "المحل"
   }
 ]
