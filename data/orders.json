@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "invoice": "01506",
+    "branch": "الرئيسي",
+    "customerId": "c145",
+    "customerPhone": "737567524",
+    "customer": "ام ابراهيم بن ثابت",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كرتونين",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "26/11/2026 06:28 PM",
+    "approvalDate": "26/11/2026 06:28 PM",
+    "id": "mwxpijvng4wog",
+    "createdAt": "26/11/2026 06:28 PM"
+  }
+]
