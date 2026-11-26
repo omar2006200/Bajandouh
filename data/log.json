@@ -25853,5 +25853,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "26/11/2026 04:41 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1477",
+    "branch": "الرئيسي",
+    "customerId": "c89",
+    "customerPhone": "39995354",
+    "customer": "ام ريان محمد محسن بانبوع",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "25/11/2026 11:48 AM",
+    "approvalDate": "25/11/2026 11:48 AM",
+    "id": "mwvvtek5nvgof",
+    "createdAt": "25/11/2026 11:48 AM",
+    "transferredAt": "25/11/2026 11:56 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "waSentCount": 0,
+    "receiptUpdatedAt": "26/11/2026 04:46 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:46 PM",
+    "archivedBy": "المحل"
   }
 ]
