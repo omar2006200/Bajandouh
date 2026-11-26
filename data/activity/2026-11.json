@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqmxe9hm2w2",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1121",
+    "description": "العميل: عبدالله محمد صالح باغفار",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:59 PM",
+    "ts": 1795708768401,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqmnm1voiig",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1045",
