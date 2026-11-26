@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxqpomxgk8k1",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام رهف",
+    "type": "success",
+    "time": "26/11/2026 07:01 PM",
+    "ts": 1795708897017,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwluiku6ivvkx",
+    "orderInvoice": "1320"
+  },
+  {
     "id": "mwxqph54j4zjn",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل متجر عهد سوز عهدشاكر سعيد باشماخ",
@@ -3319,23 +3333,5 @@
     "category": "delivery",
     "orderId": "mwjgz6fh1ln6x",
     "orderInvoice": "1280"
-  },
-  {
-    "id": "mwkytxrb7m868",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام سالم الهيج علي سالم علي الهيج",
-    "type": "success",
-    "time": "17/11/2026 08:27 PM",
-    "ts": 1794936472103,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف",
-      "المحل"
-    ],
-    "category": "delivery",
-    "orderId": "mwizpfhs4tr6f",
-    "orderInvoice": "1266"
   }
 ]
