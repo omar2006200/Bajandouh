@@ -16,7 +16,8 @@
     "updatedAt": "26/11/2026 06:28 PM",
     "approvalDate": "26/11/2026 06:28 PM",
     "id": "mwxpijvng4wog",
-    "createdAt": "26/11/2026 06:28 PM"
+    "createdAt": "26/11/2026 06:28 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1507",
@@ -35,6 +36,26 @@
     "updatedAt": "26/11/2026 06:31 PM",
     "approvalDate": "26/11/2026 06:31 PM",
     "id": "mwxpngzndx55a",
-    "createdAt": "26/11/2026 06:31 PM"
+    "createdAt": "26/11/2026 06:31 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1508",
+    "branch": "الرئيسي",
+    "customerId": "c10",
+    "customerPhone": "376781",
+    "customer": "ام بسمه حنان سالم احمد شرحم",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيسين",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "26/11/2026 07:16 PM",
+    "approvalDate": "26/11/2026 07:16 PM",
+    "id": "mwxr8qxhpkjt6",
+    "createdAt": "26/11/2026 07:16 PM"
   }
 ]
