@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxly07sdidoq",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1314",
+    "description": "العميل: متجر كرز - احمد باشعيب",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:48 PM",
+    "ts": 1795700887192,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxlxsfq3df43",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1300",
+    "description": "العميل: ابراهيم خالد عوض باحشوان باطرفي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:47 PM",
+    "ts": 1795700877110,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxlx3cgd1uf6",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1009",
