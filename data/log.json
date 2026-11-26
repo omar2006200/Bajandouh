@@ -25799,5 +25799,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:30 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1506",
+    "branch": "الرئيسي",
+    "customerId": "mvcjb13aeka7h",
+    "customerPhone": "770562391",
+    "customer": "ام يحيى بفلح",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 11:36 AM",
+    "approvalDate": "26/11/2026 11:36 AM",
+    "id": "mwxat0mcx64y2",
+    "createdAt": "26/11/2026 11:36 AM",
+    "transferredAt": "26/11/2026 04:38 PM",
+    "transferredBy": "عمر باحسين",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:39 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "26/11/2026 04:39 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
