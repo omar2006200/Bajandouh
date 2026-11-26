@@ -27122,5 +27122,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 06:59 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1412",
+    "branch": "الرئيسي",
+    "customerId": "c129",
+    "customerPhone": "782239682",
+    "customer": "ام مروى",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 08:04 PM",
+    "approvalDate": "22/11/2026 08:04 PM",
+    "id": "mws3786vkguz5",
+    "createdAt": "22/11/2026 08:04 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 07:00 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 07:00 PM",
+    "archivedBy": "المحل"
   }
 ]
