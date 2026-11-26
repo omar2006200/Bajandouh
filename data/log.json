@@ -26933,5 +26933,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 06:38 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1488",
+    "branch": "الرئيسي",
+    "customerId": "mvc600tay4lzi",
+    "customerPhone": "770932266",
+    "customer": "سعيد صالح سعيد هلال",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كرتون",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "25/11/2026 06:36 PM",
+    "approvalDate": "25/11/2026 06:36 PM",
+    "id": "mwwae4zc2k40x",
+    "createdAt": "25/11/2026 06:36 PM",
+    "waSentCount": 0,
+    "transferredAt": "26/11/2026 04:38 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 06:38 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 06:38 PM",
+    "archivedBy": "المحل"
   }
 ]
