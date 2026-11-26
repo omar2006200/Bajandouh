@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxloy9d40hl8",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام راكان احلام عوض بامحمود",
+    "type": "success",
+    "time": "26/11/2026 04:41 PM",
+    "ts": 1795700464753,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mww8sghp6lkuj",
+    "orderInvoice": "1487"
+  },
+  {
     "id": "mwxln5kv23h63",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام يحيى بفلح",
@@ -3459,23 +3473,5 @@
     "category": "delivery",
     "orderId": "mwi4usij1jh8c",
     "orderInvoice": "1261"
-  },
-  {
-    "id": "mwjcb1yuazs9f",
-    "title": "نقل طلبات",
-    "message": "تم نقل 27 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "16/11/2026 05:09 PM",
-    "ts": 1794838173366,
-    "createdBy": "عمر باحسين",
-    "deletedBy": [],
-    "readBy": [
-      "1",
-      "اشرف",
-      "المحل"
-    ],
-    "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
   }
 ]
