@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxrz1vmwmdyp",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1454",
+    "description": "العميل: ام طلال",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:36 PM",
+    "ts": 1795711013698,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxr8qxhk4su5",
     "action": "add-order",
     "title": "طلب جديد: 1508",
