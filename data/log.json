@@ -26852,5 +26852,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 06:37 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1504",
+    "branch": "الرئيسي",
+    "customerId": "mv2jkt9b7qz8g",
+    "customerPhone": "733542023",
+    "customer": "سميه محمد الكثيري",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 11:19 AM",
+    "approvalDate": "26/11/2026 11:19 AM",
+    "id": "mwxa7jafdchqq",
+    "createdAt": "26/11/2026 11:19 AM",
+    "transferredAt": "26/11/2026 04:38 PM",
+    "transferredBy": "عمر باحسين",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 06:37 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 06:37 PM",
+    "archivedBy": "المحل"
   }
 ]
