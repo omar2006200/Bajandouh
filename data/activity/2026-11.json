@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqmcahlsa0g",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1497",
+    "description": "العميل: ام عبداللطيف باقحوم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:59 PM",
+    "ts": 1795708741049,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqkgzdh59ue",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1494",
