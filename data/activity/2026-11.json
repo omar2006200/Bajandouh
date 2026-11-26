@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxu2js0ecjl6",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1505",
+    "description": "العميل: فرج عمر فرج بامطرف",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 08:35 PM",
+    "ts": 1795714536096,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxtulpli18qc",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1470",
