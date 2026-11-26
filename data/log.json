@@ -26123,5 +26123,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:49 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1375",
+    "branch": "الرئيسي",
+    "customerId": "c34",
+    "customerPhone": "783826722",
+    "customer": "ام احمد ابراهيم",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "اربعه اكياس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "21/11/2026 07:00 PM",
+    "approvalDate": "21/11/2026 07:00 PM",
+    "id": "mwqlh9lvyjtji",
+    "createdAt": "21/11/2026 07:00 PM",
+    "waSentCount": 0,
+    "transferredAt": "22/11/2026 11:52 AM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:49 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:49 PM",
+    "archivedBy": "المحل"
   }
 ]
