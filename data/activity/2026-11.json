@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqkgzdh59ue",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1494",
+    "description": "العميل: ام محمد باشراحيل - سالم محمد باشراحيل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 06:57 PM",
+    "ts": 1795708653817,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqirr5xvt4i",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1351",
