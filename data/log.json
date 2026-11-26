@@ -26150,5 +26150,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 04:49 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1400",
+    "branch": "الرئيسي",
+    "customerId": "c134",
+    "customerPhone": "780546224",
+    "customer": "ام احمد الصيعري",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "22/11/2026 06:19 PM",
+    "approvalDate": "22/11/2026 06:18 PM",
+    "id": "mwrzf0zwfctry",
+    "createdAt": "22/11/2026 06:18 PM",
+    "waSentCount": 0,
+    "transferredAt": "23/11/2026 04:50 PM",
+    "transferredBy": "اشرف",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 04:50 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 04:50 PM",
+    "archivedBy": "المحل"
   }
 ]
