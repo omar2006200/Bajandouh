@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxqnuwx5jklq",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1183",
+    "description": "العميل: ام عمر احمد باصالح-770347474",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:00 PM",
+    "ts": 1795708811841,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqnm6xkh6qf",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1412",
