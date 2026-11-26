@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxloy9c1mbb0",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1487",
+    "description": "العميل: ام راكان احلام عوض بامحمود",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "26/11/2026 04:41 PM",
+    "ts": 1795700464752,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxln5kvwmtmw",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1506",
