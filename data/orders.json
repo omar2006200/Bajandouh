@@ -17,5 +17,24 @@
     "approvalDate": "26/11/2026 06:28 PM",
     "id": "mwxpijvng4wog",
     "createdAt": "26/11/2026 06:28 PM"
+  },
+  {
+    "invoice": "1507",
+    "branch": "الرئيسي",
+    "customerId": "mwxpn83og6axd",
+    "customerPhone": "736263417",
+    "customer": "خالد عبدالله باعطيه",
+    "location": "روكب",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "26/11/2026 06:31 PM",
+    "approvalDate": "26/11/2026 06:31 PM",
+    "id": "mwxpngzndx55a",
+    "createdAt": "26/11/2026 06:31 PM"
   }
 ]
