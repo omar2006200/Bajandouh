@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxm2d9xvobas",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1419",
+    "description": "العميل: متجر روزا عماد مسعد راجح عبده محمد ال",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:51 PM",
+    "ts": 1795701090741,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm1ulkdu26q",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1404",
