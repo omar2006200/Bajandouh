@@ -27797,5 +27797,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "26/11/2026 08:29 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1505",
+    "branch": "الرئيسي",
+    "customerId": "mv3waxf0y01rd",
+    "customerPhone": "776640316",
+    "customer": "فرج عمر فرج بامطرف",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 11:24 AM",
+    "approvalDate": "26/11/2026 11:24 AM",
+    "id": "mwxae0qp9rjwv",
+    "createdAt": "26/11/2026 11:24 AM",
+    "transferredAt": "26/11/2026 04:38 PM",
+    "transferredBy": "عمر باحسين",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "26/11/2026 08:35 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "26/11/2026 08:35 PM",
+    "archivedBy": "المحل"
   }
 ]
