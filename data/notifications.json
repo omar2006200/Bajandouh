@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxlzpaqo0q0t",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام سعيد - صفوان احمد بوداحس",
+    "type": "success",
+    "time": "26/11/2026 04:49 PM",
+    "ts": 1795700966354,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwq6flneog6f0",
+    "orderInvoice": "1361"
+  },
+  {
     "id": "mwxlzga9oki8g",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام دعاء",
