@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxqph54f5eo6",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1319",
+    "description": "العميل: متجر عهد سوز عهدشاكر سعيد باشماخ",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:01 PM",
+    "ts": 1795708887304,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxqp9fdhpmow",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1308",
+    "description": "العميل: احمد عثمان محمد العمودي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 07:01 PM",
+    "ts": 1795708877305,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxqp0yhk7pcg",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1305",
