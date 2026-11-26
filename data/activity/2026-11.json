@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxmlrd9s1fsa",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1328",
+    "description": "العميل: ام عبدالله بن عمرو صفاء حسين محسن الع",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:06 PM",
+    "ts": 1795701995469,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmk3j18lznl",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1372",
