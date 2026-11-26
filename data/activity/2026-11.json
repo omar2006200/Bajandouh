@@ -1,5 +1,17 @@
 [
   {
+    "id": "mwxm4zb84vr1d",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1437",
+    "description": "العميل: ام نواف بن مخاشن",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 04:53 PM",
+    "ts": 1795701212612,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxm4nd6wv7kv",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1430",
