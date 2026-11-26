@@ -1,5 +1,19 @@
 [
   {
+    "id": "mwxqoanq837k4",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام محمد بادكوك",
+    "type": "success",
+    "time": "26/11/2026 07:00 PM",
+    "ts": 1795708832246,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwj1896brfl56",
+    "orderInvoice": "1273"
+  },
+  {
     "id": "mwxqo41dk65x7",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل محمد حسن فرج باسواد",
