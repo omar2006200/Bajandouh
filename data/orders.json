@@ -76,6 +76,26 @@
     "updatedAt": "26/11/2026 07:52 PM",
     "approvalDate": "26/11/2026 07:52 PM",
     "id": "mwxsjqakup4vh",
-    "createdAt": "26/11/2026 07:52 PM"
+    "createdAt": "26/11/2026 07:52 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1510",
+    "branch": "الرئيسي",
+    "customerId": "mv22hw9z6p81s",
+    "customerPhone": "776866318",
+    "customer": "سامي ابوبكر احمد  باسلامة",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "",
+    "driverPhone": "",
+    "notes": "كيس بيده",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "26/11/2026 08:59 PM",
+    "approvalDate": "26/11/2026 08:59 PM",
+    "id": "mwxuxr5atn3hz",
+    "createdAt": "26/11/2026 08:59 PM"
   }
 ]
