@@ -4,9 +4,7 @@
       "id": "u1",
       "username": "1",
       "role": "مالك",
-      "passwordHash": "230fb6161c438c5b91f86fa8ba1c3d65120d6ad18b40b08d33ab87387dcb4909",
-      "passwordSalt": "baecf1d42850de667cbbadc71c298b68",
-      "passwordAlgo": "PBKDF2-SHA-256-100000"
+      "password": "12345"
     },
     {
       "id": "mulso1ti1c12o",
@@ -546,7 +544,7 @@
   },
   "invoiceSettings": {
     "prefix": "",
-    "nextNumber": 1429,
+    "nextNumber": 1508,
     "digits": 3,
     "autoIncrement": true
   }
