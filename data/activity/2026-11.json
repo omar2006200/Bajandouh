@@ -1,5 +1,41 @@
 [
   {
+    "id": "mwx8vku6yzj9w",
+    "action": "add-order",
+    "title": "طلب جديد: 1500",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "26/11/2026 10:42 AM",
+    "ts": 1795678938942,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwx8uimvk0lfn",
+    "action": "invoice-settings",
+    "title": "تحديث إعدادات الفاتورة",
+    "description": "",
+    "type": "info",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "26/11/2026 10:41 AM",
+    "ts": 1795678889431,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwx8uhbu23s9y",
+    "action": "invoice-settings",
+    "title": "تحديث إعدادات الفاتورة",
+    "description": "",
+    "type": "info",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "26/11/2026 10:41 AM",
+    "ts": 1795678887738,
+    "month": "2026-11"
+  },
+  {
     "id": "mwx8nglfitnt5",
     "action": "add-order",
     "title": "طلب جديد: 1498",
