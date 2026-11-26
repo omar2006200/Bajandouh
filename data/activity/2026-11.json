@@ -1,5 +1,29 @@
 [
   {
+    "id": "mwxmk3j18lznl",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1372",
+    "description": "العميل: ام خالد بن دهري ساميه صالح بن جوهر",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:05 PM",
+    "ts": 1795701917917,
+    "month": "2026-11"
+  },
+  {
+    "id": "mwxmjsz91d1ui",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1358",
+    "description": "العميل: ام عبداللطيف باقحوم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "26/11/2026 05:05 PM",
+    "ts": 1795701904245,
+    "month": "2026-11"
+  },
+  {
     "id": "mwxmiocemza8i",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1498",
