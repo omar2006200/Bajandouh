@@ -1,5 +1,19 @@
 [
   {
+    "id": "mx0jwvjfy37tx",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام حفصة بافقيه شفاء علوي عبدالاه البيتي",
+    "type": "success",
+    "time": "28/11/2026 06:14 PM",
+    "ts": 1795878873771,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mx07p29x04lud",
+    "orderInvoice": "1525"
+  },
+  {
     "id": "mx0jwknvbfkx3",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ندى سالمين بن هميم",
@@ -3421,23 +3435,5 @@
     "category": "delivery",
     "orderId": "mwmebo1x2euo0",
     "orderInvoice": "1334"
-  },
-  {
-    "id": "mwnpfls6maxwo",
-    "title": "تأكيد استلام",
-    "message": "تم استلام الطلب للعميل ام سعيد باتيس",
-    "type": "success",
-    "time": "19/11/2026 06:28 PM",
-    "ts": 1795102085382,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1",
-      "المحل"
-    ],
-    "category": "delivery",
-    "orderId": "mwmdl2tvm6loq",
-    "orderInvoice": "1331"
   }
 ]
