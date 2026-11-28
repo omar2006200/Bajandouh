@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0hjlwt2aceq",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1486",
+    "description": "العميل: علي محمود بن صديق",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "28/11/2026 05:08 PM",
+    "ts": 1795874895533,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0hjgfzti2vy",
     "action": "edit-transferred",
     "title": "تعديل مُنقل: 1486",
