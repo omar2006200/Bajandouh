@@ -285,5 +285,24 @@
     "approvalDate": "28/11/2026 08:07 PM",
     "id": "mx0ny5oyl8j0v",
     "createdAt": "28/11/2026 08:07 PM"
+  },
+  {
+    "invoice": "1546",
+    "branch": "الرئيسي",
+    "customerId": "mx0nzaj66dby7",
+    "customerPhone": "777903178",
+    "customer": "ام سعيد باعباد",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "2 اكياس 2 سلل صحون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 08:08 PM",
+    "approvalDate": "28/11/2026 08:08 PM",
+    "id": "mx0nzxc75o46l",
+    "createdAt": "28/11/2026 08:08 PM"
   }
 ]
