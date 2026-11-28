@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "invoice": "1530",
+    "branch": "الرئيسي",
+    "customerId": "c67",
+    "customerPhone": "770225101",
+    "customer": "ام سالم الدموني",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "28/11/2026 05:17 PM",
+    "approvalDate": "28/11/2026 05:17 PM",
+    "id": "mx0hvpemrym63",
+    "createdAt": "28/11/2026 05:17 PM"
+  }
+]
