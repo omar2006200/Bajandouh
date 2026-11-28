@@ -96,7 +96,8 @@
     "updatedAt": "28/11/2026 11:22 AM",
     "approvalDate": "28/11/2026 11:22 AM",
     "id": "mx056xbqf91yu",
-    "createdAt": "28/11/2026 11:22 AM"
+    "createdAt": "28/11/2026 11:22 AM",
+    "waSentCount": 0
   },
   {
     "invoice": "1516",
@@ -115,6 +116,26 @@
     "updatedAt": "28/11/2026 11:27 AM",
     "approvalDate": "28/11/2026 11:27 AM",
     "id": "mx05cw9pwcer9",
-    "createdAt": "28/11/2026 11:27 AM"
+    "createdAt": "28/11/2026 11:27 AM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1517",
+    "branch": "الرئيسي",
+    "customerId": "mx05haqvqqjf5",
+    "customerPhone": "781739875",
+    "customer": "ام الا نور عوض سعيد بن نويصر",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 11:31 AM",
+    "approvalDate": "28/11/2026 11:31 AM",
+    "id": "mx05i9uonnhtr",
+    "createdAt": "28/11/2026 11:31 AM"
   }
 ]
