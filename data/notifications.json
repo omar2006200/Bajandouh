@@ -1,5 +1,19 @@
 [
   {
+    "id": "mx0jxwfmvokf4",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل ام ابراهيم بن ثابت",
+    "type": "success",
+    "time": "28/11/2026 06:15 PM",
+    "ts": 1795878921586,
+    "createdBy": "المحل",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mx05s3fk0pxiu",
+    "orderInvoice": "1519"
+  },
+  {
     "id": "mx0jxunvdvh35",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل ام ابراهيم بن ثابت",
