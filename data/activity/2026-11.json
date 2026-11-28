@@ -1,5 +1,29 @@
 [
   {
+    "id": "mx058fhqc98zt",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1502",
+    "description": "العميل: عمر سالم محمد باوزير",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 11:23 AM",
+    "ts": 1795854218606,
+    "month": "2026-11"
+  },
+  {
+    "id": "mx057jrkhl5fr",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 11:22 AM",
+    "ts": 1795854177488,
+    "month": "2026-11"
+  },
+  {
     "id": "mx04ztp11jqcv",
     "action": "add-order",
     "title": "طلب جديد: 1514",
