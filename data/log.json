@@ -28364,5 +28364,32 @@
     "receiptUpdatedBy": "المحل",
     "archivedAt": "28/11/2026 09:51 PM",
     "archivedBy": "المحل"
+  },
+  {
+    "invoice": "1516",
+    "branch": "الرئيسي",
+    "customerId": "c130",
+    "customerPhone": "",
+    "customer": "السعر المناسب فاطمه عاشور احمد عبدالش",
+    "location": "",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "3 اكياس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 11:27 AM",
+    "approvalDate": "28/11/2026 11:27 AM",
+    "id": "mx05cw9pwcer9",
+    "createdAt": "28/11/2026 11:27 AM",
+    "waSentCount": 0,
+    "transferredAt": "28/11/2026 05:00 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "28/11/2026 09:51 PM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "28/11/2026 09:51 PM",
+    "archivedBy": "المحل"
   }
 ]
