@@ -16,6 +16,26 @@
     "updatedAt": "28/11/2026 05:17 PM",
     "approvalDate": "28/11/2026 05:17 PM",
     "id": "mx0hvpemrym63",
-    "createdAt": "28/11/2026 05:17 PM"
+    "createdAt": "28/11/2026 05:17 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1532",
+    "branch": "الرئيسي",
+    "customerId": "muwe49g3vp4i1",
+    "customerPhone": "734425800",
+    "customer": "أم قصي محمد  باكثير",
+    "location": "فوه المساكن",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "28/11/2026 07:53 PM",
+    "approvalDate": "28/11/2026 07:53 PM",
+    "id": "mx0ng8a9dpb1j",
+    "createdAt": "28/11/2026 07:53 PM"
   }
 ]
