@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0ju07v7kora",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1434",
+    "description": "العميل: محمد سالم باسنان",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:12 PM",
+    "ts": 1795878739867,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jtgq3v22az",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1114",
