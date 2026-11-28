@@ -190,5 +190,24 @@
     "approvalDate": "28/11/2026 08:02 PM",
     "id": "mx0nrne4jrxaf",
     "createdAt": "28/11/2026 08:02 PM"
+  },
+  {
+    "invoice": "1541",
+    "branch": "الرئيسي",
+    "customerId": "muwexf6ku2ui7",
+    "customerPhone": "739766701",
+    "customer": "هناء محمد عبدالله عوض الجمحي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 08:03 PM",
+    "approvalDate": "28/11/2026 08:03 PM",
+    "id": "mx0nsyovcqw5b",
+    "createdAt": "28/11/2026 08:03 PM"
   }
 ]
