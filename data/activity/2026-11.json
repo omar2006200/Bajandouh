@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0jtgq3v22az",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1114",
+    "description": "العميل: ام قصي بن الشيخ ابوبكر",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:11 PM",
+    "ts": 1795878714603,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jt5lxabjay",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1440",
