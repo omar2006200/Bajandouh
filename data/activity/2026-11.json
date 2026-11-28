@@ -1,5 +1,29 @@
 [
   {
+    "id": "mx0rnqcqx5u6u",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1516",
+    "description": "العميل: السعر المناسب فاطمه عاشور احمد عبدالش",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 09:51 PM",
+    "ts": 1795891884074,
+    "month": "2026-11"
+  },
+  {
+    "id": "mx0rngjnhcfvm",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1365",
+    "description": "العميل: ماجد سالم القثمي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 09:51 PM",
+    "ts": 1795891871363,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0psor0lxt9f",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1466",
