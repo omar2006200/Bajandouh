@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0psor0lxt9f",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1466",
+    "description": "العميل: عمر الدقيل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 08:59 PM",
+    "ts": 1795888756044,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0pnsadwujgj",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1511",
