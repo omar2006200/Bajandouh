@@ -1,5 +1,29 @@
 [
   {
+    "id": "mx0jxwfmjbqh6",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1519",
+    "description": "العميل: ام ابراهيم بن ثابت",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:15 PM",
+    "ts": 1795878921586,
+    "month": "2026-11"
+  },
+  {
+    "id": "mx0jxunvr9eob",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 01506",
+    "description": "العميل: ام ابراهيم بن ثابت",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:15 PM",
+    "ts": 1795878919291,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jwvjfw96qz",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1525",
