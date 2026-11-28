@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0jvmrfu2knb",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1513",
+    "description": "العميل: متجر فيوكه",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:13 PM",
+    "ts": 1795878815739,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0ju07v7kora",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1434",
