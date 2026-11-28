@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx05y124shinj",
+    "action": "add-order",
+    "title": "طلب جديد: 1521",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "28/11/2026 11:43 AM",
+    "ts": 1795855412956,
+    "month": "2026-11"
+  },
+  {
     "id": "mx05xj3ru4xk5",
     "action": "add-customer",
     "title": "إضافة: اماني رمضان خميس النمر",
