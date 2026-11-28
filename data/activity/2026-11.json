@@ -1,5 +1,29 @@
 [
   {
+    "id": "mx0jt5lxabjay",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1440",
+    "description": "العميل: ملهم جمال سعيد بافقاس",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:11 PM",
+    "ts": 1795878700197,
+    "month": "2026-11"
+  },
+  {
+    "id": "mx0jsnleytjp1",
+    "action": "login",
+    "title": "تسجيل دخول: المحل",
+    "description": "الدور: عامل",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:11 PM",
+    "ts": 1795878676850,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0hvpemn7e3v",
     "action": "add-order",
     "title": "طلب جديد: 1530",
