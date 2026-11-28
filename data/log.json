@@ -27849,6 +27849,34 @@
     "receiptUpdatedAt": "26/11/2026 09:02 PM",
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "26/11/2026 09:02 PM",
-    "archivedBy": "عمر باحسين"
+    "archivedBy": "عمر باحسين",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1502",
+    "branch": "الرئيسي",
+    "customerId": "mvhpnkhbrajde",
+    "customerPhone": "770360586",
+    "customer": "عمر سالم محمد باوزير",
+    "location": "غيل باوزير",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "عبدالله باوزير",
+    "driverPhone": "771317281",
+    "notes": "كرتون + سلة صحون",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "26/11/2026 11:04 AM",
+    "approvalDate": "26/11/2026 11:04 AM",
+    "id": "mwx9o8t8s7n6p",
+    "createdAt": "26/11/2026 11:04 AM",
+    "transferredAt": "26/11/2026 04:38 PM",
+    "transferredBy": "عمر باحسين",
+    "waSentCount": 0,
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "28/11/2026 11:23 AM",
+    "receiptUpdatedBy": "المحل",
+    "archivedAt": "28/11/2026 11:23 AM",
+    "archivedBy": "المحل"
   }
 ]
