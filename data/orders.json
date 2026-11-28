@@ -236,7 +236,8 @@
     "updatedAt": "28/11/2026 12:01 PM",
     "approvalDate": "28/11/2026 12:01 PM",
     "id": "mx06kiuizsz0v",
-    "createdAt": "28/11/2026 12:01 PM"
+    "createdAt": "28/11/2026 12:01 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1523",
@@ -255,7 +256,8 @@
     "updatedAt": "28/11/2026 12:01 PM",
     "approvalDate": "28/11/2026 12:01 PM",
     "id": "mx06kt5l3y2vb",
-    "createdAt": "28/11/2026 12:01 PM"
+    "createdAt": "28/11/2026 12:01 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1524",
@@ -274,7 +276,8 @@
     "updatedAt": "28/11/2026 12:30 PM",
     "approvalDate": "28/11/2026 12:30 PM",
     "id": "mx07n1kfwwkb9",
-    "createdAt": "28/11/2026 12:30 PM"
+    "createdAt": "28/11/2026 12:30 PM",
+    "waSentCount": 0
   },
   {
     "invoice": "1525",
@@ -293,6 +296,26 @@
     "updatedAt": "28/11/2026 12:32 PM",
     "approvalDate": "28/11/2026 12:32 PM",
     "id": "mx07p29x04lud",
-    "createdAt": "28/11/2026 12:32 PM"
+    "createdAt": "28/11/2026 12:32 PM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1526",
+    "branch": "الرئيسي",
+    "customerId": "mx05haqvqqjf5",
+    "customerPhone": "781739875",
+    "customer": "ام الا نور عوض سعيد بن نويصر",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 12:33 PM",
+    "approvalDate": "28/11/2026 12:33 PM",
+    "id": "mx07q2rk27ztq",
+    "createdAt": "28/11/2026 12:33 PM"
   }
 ]
