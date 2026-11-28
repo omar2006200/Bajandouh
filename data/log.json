@@ -27932,5 +27932,32 @@
     "receiptUpdatedBy": "عمر باحسين",
     "archivedAt": "28/11/2026 05:08 PM",
     "archivedBy": "عمر باحسين"
+  },
+  {
+    "invoice": "1509",
+    "branch": "الرئيسي",
+    "customerId": "c123",
+    "customerPhone": "771596075",
+    "customer": "عوض حاج عوض باصلعه",
+    "location": "الديس الشرقيه",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "",
+    "driverPhone": "772778249",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "28/11/2026 05:11 PM",
+    "approvalDate": "26/11/2026 07:52 PM",
+    "id": "mwxsjqakup4vh",
+    "createdAt": "26/11/2026 07:52 PM",
+    "waSentCount": 0,
+    "transferredAt": "28/11/2026 05:00 PM",
+    "transferredBy": "عمر باحسين",
+    "receiptStatus": "تم",
+    "receiptUpdatedAt": "28/11/2026 05:11 PM",
+    "receiptUpdatedBy": "عمر باحسين",
+    "archivedAt": "28/11/2026 05:11 PM",
+    "archivedBy": "عمر باحسين"
   }
 ]
