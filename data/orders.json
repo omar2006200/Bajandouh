@@ -197,5 +197,24 @@
     "approvalDate": "28/11/2026 11:41 AM",
     "id": "mx05vimg6392h",
     "createdAt": "28/11/2026 11:41 AM"
+  },
+  {
+    "invoice": "1521",
+    "branch": "الرئيسي",
+    "customerId": "mx05xj3roao26",
+    "customerPhone": "774103631",
+    "customer": "اماني رمضان خميس النمر",
+    "location": "الريدة الشرقية",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "الاستلاااااام بيكون  في المحل",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 11:43 AM",
+    "approvalDate": "28/11/2026 11:43 AM",
+    "id": "mx05y124xy5hw",
+    "createdAt": "28/11/2026 11:43 AM"
   }
 ]
