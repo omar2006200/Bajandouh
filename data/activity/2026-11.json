@@ -1,5 +1,29 @@
 [
   {
+    "id": "mx0jwvjfw96qz",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1525",
+    "description": "العميل: ام حفصة بافقيه شفاء علوي عبدالاه البيتي",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:14 PM",
+    "ts": 1795878873771,
+    "month": "2026-11"
+  },
+  {
+    "id": "mx0jwknvzjnht",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1527",
+    "description": "العميل: ندى سالمين بن هميم",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:14 PM",
+    "ts": 1795878859675,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jvmrfu2knb",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1513",
