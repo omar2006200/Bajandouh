@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "invoice": "1529",
+    "branch": "الرئيسي",
+    "customerId": "c35",
+    "customerPhone": "770401449",
+    "customer": "ام عبدالرحيم المسجدي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "عمر باحسين",
+    "updatedAt": "28/11/2026 05:06 PM",
+    "approvalDate": "28/11/2026 05:06 PM",
+    "id": "mx0hhr1uprtb1",
+    "createdAt": "28/11/2026 05:06 PM"
+  }
+]
