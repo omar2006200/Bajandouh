@@ -1,5 +1,19 @@
 [
   {
+    "id": "mx0hnmrxd1vyw",
+    "title": "تأكيد استلام",
+    "message": "تم استلام الطلب للعميل عوض حاج عوض باصلعه",
+    "type": "success",
+    "time": "28/11/2026 05:11 PM",
+    "ts": 1795875083277,
+    "createdBy": "عمر باحسين",
+    "deletedBy": [],
+    "readBy": [],
+    "category": "delivery",
+    "orderId": "mwxsjqakup4vh",
+    "orderInvoice": "1509"
+  },
+  {
     "id": "mx0hjlwt4jwd6",
     "title": "تأكيد استلام",
     "message": "تم استلام الطلب للعميل علي محمود بن صديق",
@@ -3445,23 +3459,5 @@
     "category": "delivery",
     "orderId": "mwmdjlpag6nnd",
     "orderInvoice": "1330"
-  },
-  {
-    "id": "mwnby1m9encd8",
-    "title": "نقل طلبات",
-    "message": "تم نقل 16 طلب إلى قسم \"التي تم نقلها\"",
-    "type": "info",
-    "time": "19/11/2026 12:10 PM",
-    "ts": 1795079431089,
-    "createdBy": "اشرف",
-    "deletedBy": [],
-    "readBy": [
-      "عمر باحسين",
-      "1",
-      "المحل"
-    ],
-    "category": "delivery",
-    "orderId": null,
-    "orderInvoice": null
   }
 ]
