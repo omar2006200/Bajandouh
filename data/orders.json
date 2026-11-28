@@ -209,5 +209,24 @@
     "approvalDate": "28/11/2026 08:03 PM",
     "id": "mx0nsyovcqw5b",
     "createdAt": "28/11/2026 08:03 PM"
+  },
+  {
+    "invoice": "1542",
+    "branch": "الرئيسي",
+    "customerId": "mv8ckbopg57zr",
+    "customerPhone": "774290321",
+    "customer": "منى عمر مبارك الخامر - أم هاجر ناصر",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 08:04 PM",
+    "approvalDate": "28/11/2026 08:04 PM",
+    "id": "mx0nu68ulkr0h",
+    "createdAt": "28/11/2026 08:04 PM"
   }
 ]
