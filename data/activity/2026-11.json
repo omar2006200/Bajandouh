@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx05uqppco43v",
+    "action": "add-customer",
+    "title": "إضافة: لطيفة احمد",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "28/11/2026 11:40 AM",
+    "ts": 1795855259581,
+    "month": "2026-11"
+  },
+  {
     "id": "mx05s3fkaokn7",
     "action": "add-order",
     "title": "طلب جديد: 1519",
