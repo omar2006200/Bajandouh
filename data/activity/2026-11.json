@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0pnsadwujgj",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1511",
+    "description": "العميل: مجدي ابوبكر بن قاسم باعشن",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 08:55 PM",
+    "ts": 1795888527349,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0nzxc7yxj2y",
     "action": "add-order",
     "title": "طلب جديد: 1546",
