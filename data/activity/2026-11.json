@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0hnmrxxbscq",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1509",
+    "description": "العميل: عوض حاج عوض باصلعه",
+    "type": "success",
+    "orderId": null,
+    "user": "عمر باحسين",
+    "time": "28/11/2026 05:11 PM",
+    "ts": 1795875083277,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0hngukcf0io",
     "action": "edit-transferred",
     "title": "تعديل مُنقل: 1509",
