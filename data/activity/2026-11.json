@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx056xbq6ns33",
+    "action": "add-order",
+    "title": "طلب جديد: 1515",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "28/11/2026 11:22 AM",
+    "ts": 1795854148406,
+    "month": "2026-11"
+  },
+  {
     "id": "mx058fhqc98zt",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1502",
