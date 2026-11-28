@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0nwldi85n5w",
+    "action": "add-customer",
+    "title": "إضافة: ام  حمزة محمد احمد باحاج",
+    "description": "",
+    "type": "success",
+    "orderId": null,
+    "user": "اشرف",
+    "time": "28/11/2026 08:06 PM",
+    "ts": 1795885579062,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0nv6il7658r",
     "action": "add-order",
     "title": "طلب جديد: 1543",
