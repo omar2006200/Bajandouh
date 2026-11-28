@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0jz8568lis2",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1528",
+    "description": "العميل: حسن ابراهيم خير بن دغر",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 06:16 PM",
+    "ts": 1795878983418,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jygw429idc",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1517",
