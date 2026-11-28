@@ -16,6 +16,26 @@
     "updatedAt": "28/11/2026 10:59 AM",
     "approvalDate": "28/11/2026 10:59 AM",
     "id": "mx04dx77i92v2",
-    "createdAt": "28/11/2026 10:59 AM"
+    "createdAt": "28/11/2026 10:59 AM",
+    "waSentCount": 0
+  },
+  {
+    "invoice": "1512",
+    "branch": "الرئيسي",
+    "customerId": "mvxfxiekvd3mg",
+    "customerPhone": "780839812",
+    "customer": "سعيد مبارك سعيد وصيلان",
+    "location": "الشحر",
+    "status": "جاهز",
+    "receiptMethod": "موصل",
+    "driver": "سامي حيدر",
+    "driverPhone": "772974809",
+    "notes": "",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 11:01 AM",
+    "approvalDate": "28/11/2026 11:01 AM",
+    "id": "mx04fi6s7vz48",
+    "createdAt": "28/11/2026 11:01 AM"
   }
 ]
