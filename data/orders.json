@@ -237,5 +237,24 @@
     "approvalDate": "28/11/2026 12:01 PM",
     "id": "mx06kiuizsz0v",
     "createdAt": "28/11/2026 12:01 PM"
+  },
+  {
+    "invoice": "1523",
+    "branch": "الرئيسي",
+    "customerId": "mv7s712tw4jc6",
+    "customerPhone": "781887371",
+    "customer": "ام سعيد بن طالب",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 12:01 PM",
+    "approvalDate": "28/11/2026 12:01 PM",
+    "id": "mx06kt5l3y2vb",
+    "createdAt": "28/11/2026 12:01 PM"
   }
 ]
