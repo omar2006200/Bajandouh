@@ -57,5 +57,24 @@
     "approvalDate": "28/11/2026 07:54 PM",
     "id": "mx0nhta3m93m4",
     "createdAt": "28/11/2026 07:54 PM"
+  },
+  {
+    "invoice": "1534",
+    "branch": "الرئيسي",
+    "customerId": "mvge5iwcho93s",
+    "customerPhone": "770361428",
+    "customer": "ام محمد عليو افراح عبدالله علي باعباد",
+    "location": "الحامي",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 07:56 PM",
+    "approvalDate": "28/11/2026 07:56 PM",
+    "id": "mx0nk7uia6cqa",
+    "createdAt": "28/11/2026 07:56 PM"
   }
 ]
