@@ -1,28 +1,5 @@
 [
   {
-    "invoice": "1114",
-    "branch": "الرئيسي",
-    "customerId": "c99",
-    "customerPhone": "781627040",
-    "customer": "ام قصي بن الشيخ ابوبكر",
-    "location": "المكلا",
-    "status": "جاهز",
-    "receiptMethod": "المحل",
-    "driver": "عبدالرحمن باجندوح",
-    "driverPhone": "733853185",
-    "notes": "كيس",
-    "customData": {},
-    "lastEditBy": "عمر باحسين",
-    "updatedAt": "08/11/2026 08:13 PM",
-    "approvalDate": "08/11/2026 08:13 PM",
-    "id": "mw83c6hiutcgm",
-    "createdAt": "08/11/2026 08:13 PM",
-    "waSentCount": 0,
-    "transferredAt": "09/11/2026 12:01 PM",
-    "transferredBy": "اشرف",
-    "receiptStatus": "لا"
-  },
-  {
     "invoice": "1128",
     "branch": "الرئيسي",
     "customerId": "mw906pu4wu768",
