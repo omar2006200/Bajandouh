@@ -95,5 +95,24 @@
     "approvalDate": "28/11/2026 07:57 PM",
     "id": "mx0nl498k3jsc",
     "createdAt": "28/11/2026 07:57 PM"
+  },
+  {
+    "invoice": "1536",
+    "branch": "الرئيسي",
+    "customerId": "mwkwin79m1qkd",
+    "customerPhone": "739796934",
+    "customer": "ام فهمي - عبدالرحيم ناصر عوض المحمدي",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 07:58 PM",
+    "approvalDate": "28/11/2026 07:58 PM",
+    "id": "mx0nmtlvck6x2",
+    "createdAt": "28/11/2026 07:58 PM"
   }
 ]
