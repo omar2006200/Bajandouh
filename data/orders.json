@@ -247,5 +247,24 @@
     "approvalDate": "28/11/2026 08:05 PM",
     "id": "mx0nv6ilqzzjb",
     "createdAt": "28/11/2026 08:05 PM"
+  },
+  {
+    "invoice": "1544",
+    "branch": "الرئيسي",
+    "customerId": "mx0nwldi3pe3m",
+    "customerPhone": "773681422",
+    "customer": "ام  حمزة محمد احمد باحاج",
+    "location": "المكلا",
+    "status": "جاهز",
+    "receiptMethod": "المحل",
+    "driver": "عبدالرحمن باجندوح",
+    "driverPhone": "733853185",
+    "notes": "كيس",
+    "customData": {},
+    "lastEditBy": "اشرف",
+    "updatedAt": "28/11/2026 08:06 PM",
+    "approvalDate": "28/11/2026 08:06 PM",
+    "id": "mx0nwrzpcnvlg",
+    "createdAt": "28/11/2026 08:06 PM"
   }
 ]
