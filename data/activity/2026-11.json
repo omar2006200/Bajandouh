@@ -1,5 +1,17 @@
 [
   {
+    "id": "mx0mich14momn",
+    "action": "receipt-received",
+    "title": "تأكيد استلام: 1523",
+    "description": "العميل: ام سعيد بن طالب",
+    "type": "success",
+    "orderId": null,
+    "user": "المحل",
+    "time": "28/11/2026 07:27 PM",
+    "ts": 1795883234725,
+    "month": "2026-11"
+  },
+  {
     "id": "mx0jz8568lis2",
     "action": "receipt-received",
     "title": "تأكيد استلام: 1528",
